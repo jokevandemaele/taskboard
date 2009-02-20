@@ -27,11 +27,16 @@ namespace :deploy do
     sudo "chown -R apache: #{deploy_to}"
   end
 
+  task :create_db_symlink do
+    sudo "ln -s #{deploy_to}/shared/db/production.sqlite3 #{deploy_to}/current/db/"
+  end
+
   [:start, :stop].each do |t|
     desc "#{t} task is a no-op with mod_rails"
     task t, :roles => :app do ; end
   end
 
   after "deploy:setup", "deploy:update_owner_group"
+  after "deploy:start", "deploy:create_db_symlink"
 end
 
