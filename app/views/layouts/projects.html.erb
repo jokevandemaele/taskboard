@@ -5,13 +5,13 @@
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <title>Agilar Taskboard - Projects: <%= controller.action_name %></title>
-  <%= stylesheet_link_tag 'scaffold', 'project' %>
+  <%= stylesheet_link_tag 'scaffold', 'taskboard' %>
   <%= javascript_include_tag :defaults -%>
 </head>
 <body>
 	<h1><%= 
 	unless @project.nil? 
-		@project.name 
+		"#{@project.name}'s Taskboard"
 	else 
 		"Agilar Taskboard" 
 	end  -%></h1>

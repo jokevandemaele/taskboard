@@ -1,19 +1,22 @@
 <div id="container">
-<table id="TaskBoard">
+<table>
+<tr>
 	<th>Story</th>
 	<th>Not started</th>
 	<th>In Progress</th>
 	<th>Finished</th>
+</tr>
 <% for story in @stories_by_priority %>
-	<tr id="story-<%= story.id %>">
+	<tr id="story-<%= story.id %>" class="<%= cycle('listing-even', 'listing-odd') %>">
 		<%= render :partial => "stories/story", :locals => { :story => story, :project => @project } %> 
 	</tr>
 <% end %>
-
+<tr id="table_footer">
+	<td colspan=3>
+	<%= link_to 'Product Backlog', :controller => "backlog", :project_id => @project.id -%> |
+	<%= link_to 'Add Story', new_story_path(:project => @project)%>
+	<td>
+</tr>
 
 </table>
-<hr />
-<%= link_to 'Add Story', new_story_path(:project => @project)%> |
-<%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Back', projects_path %>
 </div>

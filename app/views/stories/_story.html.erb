@@ -4,8 +4,8 @@
 			<ul>
 				<li>Priority: <%= story.priority %></li>
 				<li>Size: <%= story.size %></li>
-				<li>Requirement: <%= story.requirement %></li>
-				<li>How to demo: <%= story.how_to_demo %></li>
+				<li>Requirement:<br /> <%= story.requirement %></li>
+				<li>How to demo:<br /> <%= story.how_to_demo %></li>
 			</ul>
 			<%= image_tag 'task_add.png', :alt => 'Add Task' ,:style => "vertical-align: middle;" -%>
 			<%= link_to 'Add Task', new_task_path(:story => story) %>
