@@ -1,0 +1,19 @@
+<div id="container">
+<table id="TaskBoard">
+	<th>Story</th>
+	<th>To Start</th>
+	<th>In Production</th>
+	<th>Finished</th>
+<% for story in @stories_by_importance %>
+	<tr id="story-<%= story.id %>">
+		<%= render :partial => "stories/story", :locals => { :story => story, :project => @project } %> 
+	</tr>
+<% end %>
+
+
+</table>
+<hr />
+<%= link_to 'Add Story', new_story_path(:project => @project)%> |
+<%= link_to 'Edit', edit_project_path(@project) %> |
+<%= link_to 'Back', projects_path %>
+</div>

@@ -1,0 +1,51 @@
+#TaskBoard {
+	width: 100%;
+	border-spacing: 0px;
+	background:transparent;
+	padding: 10px;
+}
+
+#TaskBoard th{
+	background: white;
+	width: 15%;
+	border: 2px solid #245a78;
+	font-size: 20px;
+	text-align: left;
+	padding-left: 5px;
+}
+
+#TaskBoard td{
+	padding-left: 10px;
+}
+
+
+#TaskBoard td, th, tr {
+	border: 2px solid #245a78;
+	
+
+}
+
+#TaskBoard .story {
+	border-left: none;
+}
+#container {
+	width: 100%;
+	background: url(/images/taskboard_background.png) repeat-x top
+}
+
+/* Task Style */
+.task {
+	background: url(/images/task.png) no-repeat;
+	width: 250px;
+	height: 200px;
+}
+
+.task h1 {
+	padding-top: 5px;
+	padding-left: 5px;
+	font-size: 15px;
+}
+
+.task p {
+	padding-left: 5px;
+}

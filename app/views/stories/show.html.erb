@@ -1,0 +1,33 @@
+<p>
+  <b>Name:</b>
+  <%=h @story.name %>
+</p>
+
+<p>
+  <b>Project:</b>
+  <%=h @story.project_id %>
+</p>
+
+<p>
+  <b>Importance:</b>
+  <%=h @story.importance %>
+</p>
+
+<p>
+  <b>Estimate:</b>
+  <%=h @story.estimate %>
+</p>
+
+<p>
+  <b>How to demo:</b>
+  <%=h @story.how_to_demo %>
+</p>
+
+<p>
+  <b>Notes:</b>
+  <%=h @story.notes %>
+</p>
+
+
+<%= link_to 'Edit', edit_story_path(@story) %> |
+<%= link_to 'Back', stories_path %>

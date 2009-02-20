@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  project_id: 1
+  importance: 1
+  estimate: 1
+  how_to_demo: MyText
+  notes: MyText
+
+two:
+  name: MyString
+  project_id: 1
+  importance: 1
+  estimate: 1
+  how_to_demo: MyText
+  notes: MyText

@@ -1,0 +1,5 @@
+<% for task in tasks %>
+	<% if task.status == status %>
+		<%= render :partial => "tasks/task", :locals => { :task => task } %> 
+	<% end %>
+<% end %>
