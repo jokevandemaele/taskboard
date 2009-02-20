@@ -2,28 +2,25 @@
 		<div class="story" id="story-<%= story.id -%>">
 			<h3><%= story.name %></h3>
 			<ul>
-				<li>Importance: <%= story.importance %></li>
-				<li>Estimate: <%= story.estimate %></li>
+				<li>Priority: <%= story.priority %></li>
+				<li>Size: <%= story.size %></li>
+				<li>Requirement: <%= story.requirement %></li>
 				<li>How to demo: <%= story.how_to_demo %></li>
-				<li>Notes: <%= story.notes %></li>
 			</ul>
 			<%= image_tag 'task_add.png', :alt => 'Add Task' ,:style => "vertical-align: middle;" -%>
 			<%= link_to 'Add Task', new_task_path(:story => story) %>
-
-			<h3>Tasks</h3>
-				<%= render :partial => "tasks/tasks_by_status", :locals => { :tasks => story.tasks, :status => 'undefined' } %> 
 		</div>
 	</td>
-	<td id="to_start-<%= story.id %>">
-		<%= render :partial => "tasks/tasks_by_status", :locals => { :tasks => story.tasks, :status => 'to_start' } %> 
+	<td id="not_started-<%= story.id %>">
+		<%= render :partial => "tasks/tasks_by_status", :locals => { :tasks => story.tasks, :status => 'not_started' } %> 
 	</td>
-	<td id="in_production-<%= story.id %>">
-		<%= render :partial => "tasks/tasks_by_status", :locals => { :tasks => story.tasks, :status => 'in_production' } %> 
+	<td id="in_progress-<%= story.id %>">
+		<%= render :partial => "tasks/tasks_by_status", :locals => { :tasks => story.tasks, :status => 'in_progress' } %> 
 	</td>
 	<td id="finished-<%= story.id %>">
 		<%= render :partial => "tasks/tasks_by_status", :locals => { :tasks => story.tasks, :status => 'finished' } %> 
 	</td>
-<%= drop_receiving_element("story-#{story.id}", :accept => "task", :with   => "'task=' + (element.id.split('-').last()) + '&status=undefined'", :url => { :action=>:update_task}) %>
-<%= drop_receiving_element("to_start-#{story.id}", :accept => "task", :with   => "'task=' + (element.id.split('-').last()) + '&status=to_start'", :url => { :action=>:update_task}) %>
-<%= drop_receiving_element("in_production-#{story.id}", :accept => "task", :with   => "'task=' + (element.id.split('-').last()) + '&status=in_production'", :url => { :action=>:update_task}) %>
+	
+<%= drop_receiving_element("not_started-#{story.id}", :accept => "task", :with   => "'task=' + (element.id.split('-').last()) + '&status=not_started'", :url => { :action=>:update_task}) %>
+<%= drop_receiving_element("in_progress-#{story.id}", :accept => "task", :with   => "'task=' + (element.id.split('-').last()) + '&status=in_progress'", :url => { :action=>:update_task}) %>
 <%= drop_receiving_element("finished-#{story.id}", :accept => "task", :with   => "'task=' + (element.id.split('-').last()) + '&status=finished'", :url => { :action=>:update_task}) %>

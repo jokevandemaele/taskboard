@@ -4,20 +4,20 @@
   <tr>
     <th>Name</th>
     <th>Project</th>
-    <th>Importance</th>
-    <th>Estimate</th>
+    <th>Priority</th>
+    <th>Size</th>
+    <th>Requirement</th>
     <th>How to demo</th>
-    <th>Notes</th>
   </tr>
 
 <% for story in @stories %>
   <tr>
     <td><%=h story.name %></td>
     <td><%=h story.project.name %></td>
-    <td><%=h story.importance %></td>
-    <td><%=h story.estimate %></td>
+    <td><%=h story.priority %></td>
+    <td><%=h story.size %></td>
+    <td><%=h story.requirement %></td>
     <td><%=h story.how_to_demo %></td>
-    <td><%=h story.notes %></td>
     <td><%= link_to 'Show', story %></td>
     <td><%= link_to 'Edit', edit_story_path(story) %></td>
     <td><%= link_to 'Destroy', story, :confirm => 'Are you sure?', :method => :delete %></td>

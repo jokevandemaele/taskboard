@@ -1,10 +1,10 @@
 <div id="container">
 <table id="TaskBoard">
 	<th>Story</th>
-	<th>To Start</th>
-	<th>In Production</th>
+	<th>Not started</th>
+	<th>In Progress</th>
 	<th>Finished</th>
-<% for story in @stories_by_importance %>
+<% for story in @stories_by_priority %>
 	<tr id="story-<%= story.id %>">
 		<%= render :partial => "stories/story", :locals => { :story => story, :project => @project } %> 
 	</tr>

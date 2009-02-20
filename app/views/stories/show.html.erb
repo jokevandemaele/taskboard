@@ -9,13 +9,18 @@
 </p>
 
 <p>
-  <b>Importance:</b>
-  <%=h @story.importance %>
+  <b>Priority:</b>
+  <%=h @story.priority %>
 </p>
 
 <p>
-  <b>Estimate:</b>
-  <%=h @story.estimate %>
+  <b>Size:</b>
+  <%=h @story.size %>
+</p>
+
+<p>
+  <b>Requirement:</b>
+  <%=h @story.requirement %>
 </p>
 
 <p>
@@ -23,10 +28,6 @@
   <%=h @story.how_to_demo %>
 </p>
 
-<p>
-  <b>Notes:</b>
-  <%=h @story.notes %>
-</p>
 
 
 <%= link_to 'Edit', edit_story_path(@story) %> |

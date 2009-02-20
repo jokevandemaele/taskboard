@@ -48,7 +48,6 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(params[:task])
     @task.story = Story.find(params[:story_id])
-    @task.status = 'to_start'
     respond_to do |format|
       if @task.save
         flash[:notice] = 'Task was successfully created.'

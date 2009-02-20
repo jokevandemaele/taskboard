@@ -10,20 +10,21 @@
 	width: 15%;
 	border: 2px solid #245a78;
 	font-size: 20px;
-	text-align: left;
+	text-align: center;
 	padding-left: 5px;
 }
 
 #TaskBoard td{
 	padding-left: 10px;
+	padding-bottom: 10px;
+	padding-top: 0px;
 }
 
 
 #TaskBoard td, th, tr {
 	border: 2px solid #245a78;
-	
-
 }
+
 
 #TaskBoard .story {
 	border-left: none;
@@ -35,8 +36,9 @@
 
 /* Task Style */
 .task {
+	margin: 0 auto;
 	background: url(/images/task.png) no-repeat;
-	width: 250px;
+	width: 200px;
 	height: 200px;
 }
 

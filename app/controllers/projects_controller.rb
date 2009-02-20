@@ -14,7 +14,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1.xml
   def show
     @project = Project.find(params[:id])
-    @stories_by_importance = Story.find(:all, :conditions => "project_id = #{@project.id}", :order => "importance DESC")
+    @stories_by_priority = Story.find(:all, :conditions => "project_id = #{@project.id}", :order => "priority DESC")
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @project }
