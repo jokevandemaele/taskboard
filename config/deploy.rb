@@ -36,7 +36,7 @@ namespace :deploy do
     task t, :roles => :app do ; end
   end
 
-  after "deploy:setup", "deploy:update_owner_group"
+  #after "deploy:setup", "deploy:update_owner_group"
   after "deploy:start", "deploy:create_db_symlink"
 end
 
