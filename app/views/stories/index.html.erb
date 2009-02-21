@@ -1,5 +1,5 @@
-<h1>Listing stories</h1>
-
+<h1>Stories</h1>
+<hr />
 <table>
   <tr>
     <th>Name</th>
@@ -11,20 +11,26 @@
   </tr>
 
 <% for story in @stories %>
-  <tr>
-    <td><%=h story.name %></td>
+  <tr class="<%= cycle('listing-even', 'listing-odd') %>">
+    <td>
+		<%=h story.name %><br />
+		[
+		<%= link_to 'Show', story %> |
+	    <%= link_to 'Edit', edit_story_path(story) %> |
+	    <%= link_to 'Destroy', story, :confirm => 'Are you sure?', :method => :delete %>
+	    ]
+	</td>
     <td><%=h story.project.name %></td>
     <td><%=h story.priority %></td>
     <td><%=h story.size %></td>
     <td><%=h story.requirement %></td>
     <td><%=h story.how_to_demo %></td>
-    <td><%= link_to 'Show', story %></td>
-    <td><%= link_to 'Edit', edit_story_path(story) %></td>
-    <td><%= link_to 'Destroy', story, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
+
+<tr id="table_footer">
+	<td colspan=6>
+		<%= link_to 'New story', new_story_path %>
+	</td>
+</tr>
 </table>
-
-<br />
-
-<%= link_to 'New story', new_story_path %>

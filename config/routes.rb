@@ -1,4 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :statustags
+
+  map.resources :nametags
+
   map.resources :projects
 
   map.resources :tasks

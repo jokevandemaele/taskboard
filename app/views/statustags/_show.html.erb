@@ -1,0 +1,4 @@
+<div id="statustag-<%= statustag.id %>" class="statustag statustag-<%= statustag.color %>" style="position: absolute; top: <%= statustag.relative_position_y %>px; left: <%= statustag.relative_position_x %>px;">
+	<%= statustag.status -%>
+</div>
+<%= draggable_element "statustag-#{statustag.id}", :revert => '"failure"'%>

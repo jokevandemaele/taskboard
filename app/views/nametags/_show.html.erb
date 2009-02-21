@@ -1,0 +1,4 @@
+<div id="nametag-<%= nametag.id %>" class="nametag nametag-<%= nametag.color %>" style="position: absolute; top: <%= nametag.relative_position_y %>px; left: <%= nametag.relative_position_x %>px; ">
+	<%= nametag.name -%>
+</div>
+<%= draggable_element "nametag-#{nametag.id}", :revert => '"failure"'%>

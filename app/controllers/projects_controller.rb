@@ -86,8 +86,35 @@ class ProjectsController < ApplicationController
   def update_task
     @task = Task.find(params[:task])
     @task.status = params[:status]
+    @task.relative_position_x = params[:x]
+    @task.relative_position_y = params[:y]
     @task.save
 
+    render :update do |page|
+      page.replace_html "story-#{@task.story_id}", :partial => "stories/show", :locals => { :story => @task.story, :project => @task.story.project_id } 
+    end
+  end
+
+  def update_statustag
+    @task = Task.find(params[:task])
+    @tag = Statustag.find(params[:id])
+    @tag.relative_position_x = params[:x]
+    @tag.relative_position_y = params[:y]
+    @tag.task = @task
+    @tag.save
+    render :update do |page|
+      page.replace_html "story-#{@task.story_id}", :partial => "stories/story", :locals => { :story => @task.story, :project => @task.story.project_id } 
+    end
+  end
+
+  def update_nametag
+    @task = Task.find(params[:task])
+    @tag = Nametag.find(params[:id])
+    @tag.relative_position_x = params[:x]
+    @tag.relative_position_y = params[:y]
+    @tag.task = @task
+    @tag.save
+    
     render :update do |page|
       page.replace_html "story-#{@task.story_id}", :partial => "stories/story", :locals => { :story => @task.story, :project => @task.story.project_id } 
     end

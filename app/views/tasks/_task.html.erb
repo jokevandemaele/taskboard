@@ -1,8 +1,30 @@
-<div class="task" id="task-<%= task.id -%>" >
+<div class="task" id="task-<%= task.id -%>">
 	<h1><%=h task.name -%></h1>
-	<p><%=h task.description %></p>
+	<div class="task-description"><%=h task.description %></div>
 	<% #image_tag 'task_delete.png', :alt => 'delete task', :style => "position:absolute; top: 167px; left: 169px" %>
 	<% #image_tag 'task_edit.png', :alt => 'edit task', :style => "position:absolute; top: 167px; left: 140px" %>
+
+	<% for nametag in task.nametags %>
+		<%= render :partial => "nametags/show", :locals => { :nametag => nametag } %> 
+	<% end %>
+
+	<% for statustag in task.statustags %>
+		<%= render :partial => "statustags/show", :locals => { :statustag => statustag } %> 
+	<% end %>
+	<%= task.relative_position_x -%>
+	<%= task.relative_position_x -%>
 </div>
+<%= drop_receiving_element("task-#{task.id}", 
+	:accept => "nametag", 
+	:with   => "'id=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ ($(element).cumulativeOffset().left - $('task-#{task.id}').cumulativeOffset().left)+ '&y='+ ($(element).cumulativeOffset().top - $('task-#{task.id}').cumulativeOffset().top)", 
+	:url => { :action=>:update_nametag }
+	) 
+%>
+<%= drop_receiving_element("task-#{task.id}", 
+	:accept => "statustag", 
+	:with   => "'id=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ ($(element).cumulativeOffset().left - $('task-#{task.id}').cumulativeOffset().left)+ '&y='+ ($(element).cumulativeOffset().top - $('task-#{task.id}').cumulativeOffset().top)", 
+	:url => { :action=>:update_statustag }) 
+%>
+
 <%= draggable_element "task-#{task.id}", :revert => '"failure"'%>
 

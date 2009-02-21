@@ -1,0 +1,29 @@
+<h1>Listing statustags</h1>
+
+<table>
+  <tr>
+    <th>Status</th>
+    <th>Task</th>
+    <th>Color</th>
+  </tr>
+
+<% for statustag in @statustags %>
+  <tr class="<%= cycle('listing-even', 'listing-odd') %>">
+    <td>
+		<%=h statustag.status %>
+		[
+		<%= link_to 'Show', statustag %> | 
+	    <%= link_to 'Edit', edit_statustag_path(statustag) %> | 
+	    <%= link_to 'Destroy', statustag, :confirm => 'Are you sure?', :method => :delete %>
+	    ]
+	</td>
+    <td><%=h statustag.task_id %></td>
+    <td><%=h statustag.color %></td>
+  </tr>
+<% end %>
+<tr id="table_footer">
+	<td colspan=3>
+		<%= link_to 'New statustag', new_statustag_path %>
+	</td>
+</tr>
+</table>

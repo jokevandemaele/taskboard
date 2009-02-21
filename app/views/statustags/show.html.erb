@@ -1,0 +1,13 @@
+<p>
+  <b>Status:</b>
+  <%=h @statustag.status %>
+</p>
+
+<p>
+  <b>Task:</b>
+  <%=h @statustag.task_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_statustag_path(@statustag) %> |
+<%= link_to 'Back', statustags_path %>

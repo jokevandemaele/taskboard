@@ -1,0 +1,24 @@
+<h1>Editing statustag</h1>
+
+<% form_for(@statustag) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :status %><br />
+    <%= f.text_field :status %>
+  </p>
+  <p>
+    <%= f.label :task_id %><br />
+    <%= f.text_field :task_id %>
+  </p>
+  <p>
+    <%= f.label :color %><br />
+    <%= f.text_field :color %>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @statustag %> |
+<%= link_to 'Back', statustags_path %>

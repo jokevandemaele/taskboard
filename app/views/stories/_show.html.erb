@@ -1,0 +1,47 @@
+	<td style="story">
+		<div class="story" id="story-<%= story.id -%>">
+			<h3><%= story.name %></h3>
+			<ul>
+				<li>Priority: <%= story.priority %></li>
+				<li>Size: <%= story.size %></li>
+				<li>Requirement:<br /> <%= story.requirement %></li>
+				<li>How to demo:<br /> <%= story.how_to_demo %></li>
+			</ul>
+			<p><%= image_tag 'task_add.png', :alt => 'Add Task' ,:style => "vertical-align: middle;" -%>
+			<%= link_to 'Add Task', new_task_path(:story => story) %></p>
+			<% if story.tasks.count > 0 %>
+				<p><%= image_tag 'nametag_add.png', :alt => "Add Nametag", :style => "vertical-align: middle;"-%>
+				<%= link_to 'Add Nametag', new_nametag_path(:story => story) %></p>
+				<p><%= image_tag 'statustag_add.png', :alt => "Add Statustag", :style => "vertical-align: middle;"-%>
+				<%= link_to 'Add Statustag', new_statustag_path(:story => story) %></p>
+			<% end %>
+			
+		</div>
+	</td>
+	<td id="not_started-<%= story.id %>">
+		<%= render :partial => "tasks/tasks_by_status", :locals => { :tasks => story.tasks, :status => 'not_started' } %> 
+	</td>
+	<td id="in_progress-<%= story.id %>">
+		<%= render :partial => "tasks/tasks_by_status", :locals => { :tasks => story.tasks, :status => 'in_progress' } %> 
+	</td>
+	<td id="finished-<%= story.id %>">
+		<%= render :partial => "tasks/tasks_by_status", :locals => { :tasks => story.tasks, :status => 'finished' } %> 
+	</td>
+	
+<%= drop_receiving_element("not_started-#{story.id}", 
+	:accept => "task", 
+	:with   => "'task=' + (element.id.split('-').last()) + '&status=not_started' + '&x='+ ($(element).cumulativeOffset().left - $('not_started-#{story.id}').cumulativeOffset().left)+ '&y='+ ($(element).cumulativeOffset().top - $('not_started-#{story.id}').cumulativeOffset().top)", 
+	:url => { :action=>:update_task}) 
+%>
+
+<%= drop_receiving_element("in_progress-#{story.id}", 
+	:accept => "task", 
+	:with   => "'task=' + (element.id.split('-').last()) + '&status=in_progress' + '&x='+ ($(element).cumulativeOffset().left - $('in_progress-#{story.id}').cumulativeOffset().left)+ '&y='+ ($(element).cumulativeOffset().top - $('in_progress-#{story.id}').cumulativeOffset().top)", 
+	:url => { :action=>:update_task}) 
+%>
+
+<%= drop_receiving_element("finished-#{story.id}", 
+	:accept => "task", 
+	:with   => "'task=' + (element.id.split('-').last()) + '&status=finished' + '&x='+ ($(element).cumulativeOffset().left - $('finished-#{story.id}').cumulativeOffset().left)+ '&y='+ ($(element).cumulativeOffset().top - $('finished-#{story.id}').cumulativeOffset().top)", 
+	:url => { :action=>:update_task}) 
+%>

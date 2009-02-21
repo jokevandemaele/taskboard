@@ -1,0 +1,26 @@
+<table>
+  <tr>
+    <th>Task</th>
+    <th>Name</th>
+    <th>Color</th>
+  </tr>
+
+<% for nametag in @nametags %>
+  <tr class="<%= cycle('listing-even', 'listing-odd') %>">
+    <td>
+	<%=h nametag.name %><br />
+	[
+	<%= link_to 'Show', nametag %> | 
+    <%= link_to 'Edit', edit_nametag_path(nametag) %> | 
+    <%= link_to 'Destroy', nametag, :confirm => 'Are you sure?', :method => :delete %>
+    ]</td>
+    <td><%=h nametag.task.name %></td>
+    <td><%=h nametag.color %></td>
+  </tr>
+<% end %>
+<tr id="table_footer">
+	<td colspan=3>
+		<%= link_to 'New nametag', new_nametag_path %>
+	</td>
+</tr>
+</table>

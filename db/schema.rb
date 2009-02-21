@@ -9,12 +9,32 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090219231726) do
+ActiveRecord::Schema.define(:version => 20090220175323) do
+
+  create_table "nametags", :force => true do |t|
+    t.string   "name"
+    t.integer  "task_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "color"
+    t.integer  "relative_position_x"
+    t.integer  "relative_position_y"
+  end
 
   create_table "projects", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "statustags", :force => true do |t|
+    t.string   "status"
+    t.integer  "task_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "color"
+    t.integer  "relative_position_x"
+    t.integer  "relative_position_y"
   end
 
   create_table "stories", :force => true do |t|
@@ -32,9 +52,11 @@ ActiveRecord::Schema.define(:version => 20090219231726) do
     t.string   "name"
     t.integer  "story_id"
     t.text     "description"
-    t.string   "status",      :default => "not_started"
+    t.string   "status",              :default => "not_started"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "relative_position_x"
+    t.integer  "relative_position_y"
   end
 
 end
