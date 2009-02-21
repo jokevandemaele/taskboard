@@ -11,8 +11,6 @@
 	<% for statustag in task.statustags %>
 		<%= render :partial => "statustags/show", :locals => { :statustag => statustag } %> 
 	<% end %>
-	<%= task.relative_position_x -%>
-	<%= task.relative_position_x -%>
 </div>
 <%= drop_receiving_element("task-#{task.id}", 
 	:accept => "nametag", 
