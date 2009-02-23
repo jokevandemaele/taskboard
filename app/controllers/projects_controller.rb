@@ -119,5 +119,4 @@ class ProjectsController < ApplicationController
       page.replace_html "story-#{@task.story_id}", :partial => "stories/story", :locals => { :story => @task.story, :project => @task.story.project_id } 
     end
   end
-
 end

@@ -1,9 +1,12 @@
+body{
+	margin: 0;
+}
 table {
-	border-right: 1px solid #162d50;
-	border-top: 1px solid #162d50;
-	border-bottom: 1px solid #162d50;
+	width: 100%;
+	border-right: 4px solid #162d50;
+	border-top: 4px solid #162d50;
+	border-bottom: 4px solid #162d50;
 	margin: 0 auto;
-	width: 70%;
 	border-spacing: 0px;
 }
 
@@ -25,11 +28,11 @@ table th{
 	text-align: center;
 	background: url(/images/taskboard_th_background.png) repeat-x;
 	padding: 10px;
-	border-left: 1px solid #162d50;
+	border-left: 4px solid #162d50;
 
 }
 table td{
-	border-left: 1px solid #162d50;
+	border-left: 4px solid #162d50;
 	padding: 15px;
 }
 .listing-even {
@@ -71,6 +74,22 @@ body {
 .listing-table{
 	width: 100%;
 	border: 2px solid black;
+}
+/* Menu Style */
+#menu_statustags {
+	position: relative; top: 10px; left: 20px;
+	float: left;
+	border: none;
+	width: 10px;
+	height: 10px;
+	padding: 0px;
+	margin: 0;
+}
+
+#menu_statustags td, #menu_statustags tr{
+	border: 2px solid white;
+	margin: 0;
+	padding: 0;
 }
 
 /* Nametags and Statustags Style */

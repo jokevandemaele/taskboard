@@ -8,14 +8,7 @@
   <%= stylesheet_link_tag 'scaffold', 'taskboard' %>
   <%= javascript_include_tag :defaults -%>
 </head>
-<body>
-	<h1><%= 
-	unless @project.nil? 
-		"#{@project.name}'s Taskboard"
-	else 
-		"Agilar Taskboard" 
-	end  -%></h1>
-<hr />
+<body scroll=no>
 <p style="color: green"><%= flash[:notice] %></p>
 
 <%= yield  %>
