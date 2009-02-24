@@ -3,7 +3,7 @@
 	<%= hidden_field_tag(:story_id, "#{story.id}") %>
 	<%= hidden_field_tag(:status, "#{status}") %>
 	<%= f.text_field :name, :value => "Enter Task Here", :id => "form-add-task-task_name" -%>
-	<% # f.text_area :description, :value => "Description", :id => "form-add-task-task_description", :cols => "20", :rows => "3" -%>
+	<%= f.text_area :description, :value => "Description", :id => "form-add-task-task_description", :cols => "20", :rows => "3" -%>
 	<%= f.submit "Create Task" %>
 	<%= button_to_function "Cancel", "Effect.Fade($('form-add-task'), { duration: 0.3 });" %>
 	<% end -%>

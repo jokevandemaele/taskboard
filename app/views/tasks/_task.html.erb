@@ -1,6 +1,7 @@
 	<td class="task-list-item">
 		<div class="task" id="task-<%= task.id -%>">
 			<p class="task-label"><%=h task.name -%></p>
+			<p><%=h task.description -%></p>
 
 			<% for nametag in task.nametags %>
 				<%= render :partial => "nametags/show", :locals => { :nametag => nametag } %> 
