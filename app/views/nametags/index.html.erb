@@ -14,7 +14,7 @@
     <%= link_to 'Edit', edit_nametag_path(nametag) %> | 
     <%= link_to 'Destroy', nametag, :confirm => 'Are you sure?', :method => :delete %>
     ]</td>
-    <td><%=h nametag.task.name %></td>
+    <td><%=h nametag.task %></td>
     <td><%=h nametag.color %></td>
   </tr>
 <% end %>

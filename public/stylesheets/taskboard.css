@@ -1,6 +1,8 @@
 body{
 	margin: 0;
+	background: url(/images/taskboard_background.png) repeat-x;
 }
+
 table {
 	width: 100%;
 	border-right: 4px solid #162d50;
@@ -29,7 +31,6 @@ table th{
 	background: url(/images/taskboard_th_background.png) repeat-x;
 	padding: 10px;
 	border-left: 4px solid #162d50;
-
 }
 table td{
 	border-left: 4px solid #162d50;
@@ -45,37 +46,40 @@ table td{
 #container {
 	width: 100%;
 }
-/* Story Style */
-.story{	margin: 0 auto;	width: 90%;	margin-bottom: 15px;}
+
 /* Task Style */
 .task {
 	margin: 0 auto;
 	background: url(/images/task.png) no-repeat;
-	width: 200px;
-	height: 200px;
-	padding: 5px;
-}
-.task-description {
-	/* overflow: auto;*/
-}
-.task h1 {
-	padding-top: 5px;
-	padding-left: 5px;
-	font-size: 15px;
+	width: 100px;
+	height: 100px;
 }
 
-.task p {
+.task-label{
+	margin-top: 0;
 	padding-left: 5px;
+	padding-top: 2px;
+	font-size: 14px;
+	font-weight: bold;
+}
+/* Task List Style */
+.task-list, .task-list-item{
+	border: none;
+	margin: 0;
+	padding: 1px;
+	
 }
 
-body {
-	background: url(/images/taskboard_background.png) repeat-x;
-}
+
+
 .listing-table{
 	width: 100%;
 	border: 2px solid black;
 }
 /* Menu Style */
+#taskboard_menu {
+	z-index: 100;
+}
 #menu_statustags {
 	position: relative; top: 10px; left: 20px;
 	float: left;
@@ -92,51 +96,95 @@ body {
 	padding: 0;
 }
 
+
+/* Menu - Add Task */
+#form-add-task{
+	position:absolute; 
+	margin: 0 auto; 
+	z-index: 10; 
+	background: url('/images/task_add.png') no-repeat left; 
+	width: 200px; 
+	height: 200px;
+}
+#form-add-task-task_name {
+	margin: auto 0;
+	width: 180px;
+	margin-top: 0;
+	padding-left: 5px;
+	padding-top: 2px;
+	font-size: 14px;
+	font-weight: bold;
+	background: none; 
+	border: none; 
+}
+#form-add-task-task_description{
+	background: none; 
+	border: none; 
+	font-size: 12px; 
+	padding: 5px;
+}
+
+/* Story Card Style */
+/* Story Style */
+.story{
+	height: 145px;
+	border: 2px solid black;
+	margin: 0px;
+	width: 300px;
+}
+.story-field {
+	background: white;
+	border: 1px solid black;
+}
+.story-number-field, .story-text-field, .story-field-label, .story-field-title {
+	margin: 0;
+}
+
+.story-number-field {
+	padding: 5px;
+	font-size: 20px;
+	width: 40px;
+	height: 20px;
+	text-align: center;
+}
+.story-text-field {
+	overflow: auto;
+	font-size: 10px;
+	height: 40px;
+	padding-left: 4px;
+}
+.story-left-column {
+	float:left;
+	width: 215px;
+	margin-left: 10px;
+	margin-right: 10px;
+
+}
+.story-right-column {
+	position: relative;
+	top: 17px;
+	float:right;
+	margin-right: 10px;
+}
+
 /* Nametags and Statustags Style */
-.nametag, .statustag {
+.nametag, {
 	width: 127px;
 	height: 24px;
 	font-size: 10px;
 	text-align: center;
 }
-.nametag-1, .statustag-1 { background: url(/images/tags/01.png) no-repeat;}
-.nametag-2, .statustag-2 { background: url(/images/tags/02.png) no-repeat;}
-.nametag-3, .statustag-3 { background: url(/images/tags/03.png) no-repeat;}
-.nametag-4, .statustag-4 { background: url(/images/tags/04.png) no-repeat;}
-.nametag-5, .statustag-5 { background: url(/images/tags/05.png) no-repeat;}
-.nametag-6, .statustag-6 { background: url(/images/tags/06.png) no-repeat;}
-.nametag-7, .statustag-7 { background: url(/images/tags/07.png) no-repeat;}
-.nametag-8, .statustag-8 { background: url(/images/tags/08.png) no-repeat;}
-.nametag-9, .statustag-9 { background: url(/images/tags/09.png) no-repeat;}
-.nametag-10, .statustag-10 { background: url(/images/tags/10.png) no-repeat;}
-.nametag-11, .statustag-11 { background: url(/images/tags/11.png) no-repeat;}
-.nametag-12, .statustag-12 { background: url(/images/tags/12.png) no-repeat;}
-.nametag-13, .statustag-13 { background: url(/images/tags/13.png) no-repeat;}
-.nametag-14, .statustag-14 { background: url(/images/tags/14.png) no-repeat;}
-.nametag-15, .statustag-15 { background: url(/images/tags/15.png) no-repeat;}
-.nametag-16, .statustag-16 { background: url(/images/tags/16.png) no-repeat;}
-.nametag-17, .statustag-17 { background: url(/images/tags/17.png) no-repeat;}
-.nametag-18, .statustag-18 { background: url(/images/tags/18.png) no-repeat;}
-.nametag-19, .statustag-19 { background: url(/images/tags/19.png) no-repeat;}
-.nametag-20, .statustag-20 { background: url(/images/tags/20.png) no-repeat;}
-.nametag-21, .statustag-21 { background: url(/images/tags/21.png) no-repeat;}
-.nametag-22, .statustag-22 { background: url(/images/tags/22.png) no-repeat;}
-.nametag-23, .statustag-23 { background: url(/images/tags/23.png) no-repeat;}
-.nametag-24, .statustag-24 { background: url(/images/tags/24.png) no-repeat;}
-.nametag-25, .statustag-25 { background: url(/images/tags/25.png) no-repeat;}
-.nametag-26, .statustag-26 { background: url(/images/tags/26.png) no-repeat;}
-.nametag-27, .statustag-27 { background: url(/images/tags/27.png) no-repeat;}
-.nametag-28, .statustag-28 { background: url(/images/tags/28.png) no-repeat;}
-.nametag-29, .statustag-29 { background: url(/images/tags/29.png) no-repeat;}
-.nametag-30, .statustag-30 { background: url(/images/tags/30.png) no-repeat;}
-.nametag-31, .statustag-31 { background: url(/images/tags/31.png) no-repeat;}
-.nametag-32, .statustag-32 { background: url(/images/tags/32.png) no-repeat;}
-.nametag-33, .statustag-33 { background: url(/images/tags/33.png) no-repeat;}
-.nametag-34, .statustag-34 { background: url(/images/tags/34.png) no-repeat;}
-.nametag-35, .statustag-35 { background: url(/images/tags/35.png) no-repeat;}
-.nametag-36, .statustag-36 { background: url(/images/tags/36.png) no-repeat;}
-.nametag-37, .statustag-37 { background: url(/images/tags/37.png) no-repeat;}
-.nametag-38, .statustag-38 { background: url(/images/tags/38.png) no-repeat;}
-.nametag-39, .statustag-39 { background: url(/images/tags/39.png) no-repeat;}
-.nametag-40, .statustag-40 { background: url(/images/tags/40.png) no-repeat;}
-.nametag-41, .statustag-41 { background: url(/images/tags/41.png) no-repeat;}
+.statustag {
+	width: 71px;
+	height: 53px;
+	z-index: 20;
+}
+
+.statustag-blocked {background: url('/images/tags/status/statustag_blocked.png') left no-repeat transparent;}
+.statustag-high_priority { background: url('/images/tags/status/statustag_high_priority.png') left no-repeat transparent;}
+.statustag-waiting { background: url('/images/tags/status/statustag_waiting.png') left no-repeat transparent;}
+.statustag-delegated { background: url('/images/tags/status/statustag_delegated.png') left no-repeat transparent;}
+.statustag-bug { background: url('/images/tags/status/statustag_bug.png') left no-repeat transparent;}
+.statustag-please_analyze { background: url('/images/tags/status/statustag_please_analyze.png') left no-repeat transparent;}
+.statustag-please_test { background: url('/images/tags/status/statustag_please_test.png') left no-repeat transparent;}
+.statustag-done { background: url('/images/tags/status/statustag_done.png') left no-repeat transparent;}

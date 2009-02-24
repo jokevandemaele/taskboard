@@ -1,5 +1,23 @@
-<% for task in tasks %>
-	<% if task.status == status %>
-		<%= render :partial => "tasks/task", :locals => { :task => task } %> 
+<%	column = 0 %>
+<%	row = 0	%>
+<% if defined? new_task %>
+	<script>
+		Effect.Fade($('form-add-task'), { duration: 0.3 });
+	</script>
+<% end %>
+
+<table class="task-list">
+	<tr>
+<% for task in tasks -%>
+	<% if task.status == status -%>
+		<%= render :partial => "tasks/task", :locals => { :task => task, :row => row, :column => column } %> 
+		<%
+		 if column < 2
+			column += 1
+		else
+			column = 0
+		end -%>
+
 	<% end %>
 <% end %>
+</table>

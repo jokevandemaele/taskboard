@@ -48,14 +48,13 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(params[:task])
     @task.story = Story.find(params[:story_id])
+    @task.status = params[:status]
+    
     respond_to do |format|
       if @task.save
-        flash[:notice] = 'Task was successfully created.'
-        format.html { redirect_to(:controller => :projects, :action => :show , :id => @task.story.project_id) }
-        format.xml  { render :xml => @task, :status => :created, :location => @task }
+        format.html { render :partial => "tasks/tasks_by_status", :locals => { :tasks => @task.story.tasks, :status => @task.status, :new_task => true } }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @task.errors, :status => :unprocessable_entity }
       end
     end
   end

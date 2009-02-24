@@ -1,0 +1,20 @@
+<tr>
+	<td><%= image_tag 'tags/status/statustag_please_analyze.png' , :border => 0, :id => "add-status-please_analyze", :class => "add_status" -%></td>
+	<td><%= image_tag 'tags/status/statustag_please_test.png' , :border => 0, :id => "add-status-please_test", :class => "add_status" -%></td>
+	<td><%= image_tag 'tags/status/statustag_done.png' , :border => 0, :id => "add-status-done", :class => "add_status" -%></td>
+	<td><%= image_tag 'tags/status/statustag_blocked.png' , :border => 0, :id => "add-status-blocked", :class => "add_status" -%></td>
+</tr>                                        
+<tr>                                         
+	<td><%= image_tag 'tags/status/statustag_high_priority.png' , :border => 0, :id => "add-status-hight_priority", :class => "add_status" -%></td>
+	<td><%= image_tag 'tags/status/statustag_waiting.png' , :border => 0, :id => "add-status-waiting", :class => "add_status" -%></td>
+	<td><%= image_tag 'tags/status/statustag_delegated.png' , :border => 0, :id => "add-status-delegated", :class => "add_status" -%></td>
+	<td><%= image_tag 'tags/status/statustag_bug.png' , :border => 0, :id => "add-status-bug", :class => "add_status" -%></td>
+</tr>
+<%= draggable_element "add-status-please_analyze", :revert => '"failure"'%>
+<%= draggable_element "add-status-please_test", :revert => '"failure"'%>
+<%= draggable_element "add-status-done", :revert => '"failure"'%>
+<%= draggable_element "add-status-blocked", :revert => '"failure"'%>
+<%= draggable_element "add-status-hight_priority", :revert => '"failure"'%>
+<%= draggable_element "add-status-waiting", :revert => '"failure"'%>
+<%= draggable_element "add-status-delegated", :revert => '"failure"'%>
+<%= draggable_element "add-status-bug", :revert => '"failure"'%>

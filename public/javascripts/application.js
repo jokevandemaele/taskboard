@@ -20,3 +20,15 @@ function collapseMenu(){
 	$('taskboard_menu_space').hide();
 	Effect.Appear($('taskboard_menu_expand'), { duration: 0.4 });
 }
+
+function x(element){
+	return $(element).cumulativeOffset().left
+}
+
+function y(element){
+	return $(element).cumulativeOffset().top
+}
+
+function timedRefresh(timeoutPeriod) {
+	setTimeout("location.reload(true);",timeoutPeriod);
+}
