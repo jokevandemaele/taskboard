@@ -50,9 +50,9 @@ table td{
 /* Task Style */
 .task {
 	margin: 0 auto;
-	background: url(/images/task_add.png) no-repeat;
-	width: 200px;
-	height: 200px;
+	background: url(/images/task.png) no-repeat;
+	width: 180px;
+	height: 180px;
 }
 
 .task-label{
