@@ -31,12 +31,16 @@ namespace :deploy do
     sudo "ln -s #{deploy_to}/shared/db/production.sqlite3 #{deploy_to}/current/db/"
   end
 
+  task :rake_db_migrate do
+    run "cd #{current_path}/ && rake RAILS_ENV=\"production\" db:migrate"
+  end
+
   [:start, :stop].each do |t|
     desc "#{t} task is a no-op with mod_rails"
     task t, :roles => :app do ; end
   end
 
   #after "deploy:setup", "deploy:update_owner_group"
-  after "deploy:start", "deploy:create_db_symlink"
+  after "deploy:start", "deploy:create_db_symlink", "deploy:rake_db_migrate"
 end
 
