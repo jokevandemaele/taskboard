@@ -9,10 +9,24 @@
 		<h3><%= project.name -%></h3>
 		<ul>
 			<li>Stories: <%= project.stories.count %></li>
+			<li>Teams:
+				<ul>
+					<% for team in project.teams %>
+					<li>
+						<%= team.name %> 
+						[
+						<%= link_to 'Remove', :action => 'delete_team_to_project_relation', :id => project, :team_id => team.id, :confirm => 'Are you sure?', :method => :delete %>
+						]
+					</li>
+					<% end %>
+				</ul>
 		</ul>
+		
 		[ 
 		<%= link_to 'Taskboard', project_path(project) %> | 
-		<%= link_to 'Edit', edit_project_path(project) %> | 
+		<%= link_to 'Edit', edit_project_path(project) %> |
+        	<%= link_to 'Add Team', :action => 'add_team_to_project', :id => project %> | 
+ 
 		<%= link_to 'Destroy', project, :confirm => 'Are you sure?', :method => :delete %>
 		]
 	</td>
@@ -20,7 +34,10 @@
 <% end %>
 <tr id="table_footer">
 	<td>
-		<%= link_to 'New project', new_project_path %>
+		<%= link_to 'New project', new_project_path %> | 
+		<%= link_to 'Manage Teams', teams_path %> | 
+		<%= link_to 'Manage Members', members_path %>
+
 	</td>
 </tr>
 </table>

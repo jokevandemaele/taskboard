@@ -1,0 +1,29 @@
+
+<h1>Editing member</h1>
+
+<% form_for(@member) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :color %><br />
+    <%= select_tag_for_nametag_color :color %>
+  </p>
+  <p>
+    <%= f.label :username %><br />
+    <%= f.text_field :username %>
+  </p>
+  <p>
+    <%= f.label :password %><br />
+    <%= f.text_field :password %>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @member %> |
+<%= link_to 'Back', members_path %>

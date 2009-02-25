@@ -1,0 +1,5 @@
+<% remote_form_for member do |f| %>
+ <%= select_tag(:member_id, options_for_select(members)) -%>
+ <%= f.submit "Add" %>
+<% end %>
+

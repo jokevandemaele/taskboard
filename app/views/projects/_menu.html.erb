@@ -17,6 +17,11 @@
 		:url => { :action=>:destroy_statustag}) 
 	%>
 	<%= drop_receiving_element("trash", 
+		:accept => "nametag", 
+		:with   => "'nametag=' + (element.id.split('-').last())", 
+		:url => { :action=>:destroy_nametag}) 
+	%>
+	<%= drop_receiving_element("trash", 
 		:accept => "form-add-task"
 		) 
 	%>
@@ -28,6 +33,9 @@
 		<%= render :partial => "menu_statustags" %> 
 	</table>
 	
+	<table id="menu_nametags">
+		<%= render :partial => "menu_nametags", :locals => { :members => members } %> 
+	</table>
 
 </div>
 
@@ -35,7 +43,7 @@
 	<a href="#" onClick="expandMenu();"><%= image_tag('menu_expand.png', :border => 0, :style => "position: relative; top: 11px; left: 14px;")-%></a>
 </div>
 <script>
-	collapseMenu();
+	expandMenu();
 	keepDivOnTop("taskboard_menu_expand");
 	keepDivOnTop("taskboard_menu");
 </script>

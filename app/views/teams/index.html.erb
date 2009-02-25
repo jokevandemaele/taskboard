@@ -1,0 +1,46 @@
+<h1>Listing teams</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Color</th>
+    <th>Members</th>
+  </tr>
+
+<% for team in @teams %>
+  <tr class="<%= cycle('listing-even', 'listing-odd') %>">
+    <td>
+      <%=h team.name %><br />
+      [ 
+        <%= link_to 'Show', team %> | 
+        <%= link_to 'Edit', edit_team_path(team) %> |
+        <%= link_to 'Add Member', :action => 'add_member_to_team', :id => team %> | 
+        <%= link_to 'Destroy', team, :confirm => 'Are you sure?', :method => :delete %>
+     ] 
+    </td>
+    <td><%=h team.color %></td>
+    <td>
+      <% for member in team.members do %>
+      <p>
+        <%=h member.name -%> 
+        [ 
+          <%= link_to 'Remove', :action => 'delete_member_to_team_relation', :id => team, :member_id => member.id, :confirm => 'Are you sure?', :method => :delete %>
+        ]
+      </p>
+      <% end -%>
+    </td>
+
+  </tr>
+<% end %>
+<tr id="table_footer">
+  <td colspan=3>
+    <%= link_to 'New team', new_team_path %> |
+    <%= link_to 'Manage Members', members_path %> | 
+    <%= link_to 'Manage Projects', projects_path %>
+  </td>
+</tr>
+</table>
+
+<br />
+
+

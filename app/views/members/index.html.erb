@@ -1,0 +1,37 @@
+<h1>Listing members</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Color</th>
+    <th>Username</th>
+    <th>Password</th>
+  </tr>
+
+<% for member in @members %>
+  <tr class="<%= cycle('listing-even', 'listing-odd') %>">
+    <td>
+	<%=h member.name %><br />
+    	[
+	<%= link_to 'Show', member %> | 
+	<%= link_to 'Edit', edit_member_path(member) %> |
+	<%= link_to 'Destroy', member, :confirm => 'Are you sure?', :method => :delete %>
+	]
+    </td>
+    <td><%=h member.color %></td>
+    <td><%=h member.username %></td>
+    <td><%=h member.password %></td>
+  </tr>
+<% end %>
+<tr id="table_footer">
+  <td colspan=4>
+    <%= link_to 'New member', new_member_path %> | 
+    <%= link_to 'Manage Teams', teams_path %> |
+    <%= link_to 'Manage Projects', projects_path %>
+  </td>
+</tr>
+</table>
+
+<br />
+
+

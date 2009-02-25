@@ -15,6 +15,8 @@ class ProjectsController < ApplicationController
   def show
     @project = Project.find(params[:id])
     @stories_by_priority = Story.find(:all, :conditions => "project_id = #{@project.id}", :order => "priority DESC")
+    @members = @project.members
+
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @project }
@@ -157,6 +159,21 @@ class ProjectsController < ApplicationController
     end
   end
   
+  def add_nametag
+    @task = Task.find(params[:task])
+    @member = Member.find(params[:member])
+    @tag = Nametag.new
+    @tag.relative_position_x = params[:x]
+    @tag.relative_position_y = params[:y]
+    @tag.task = @task
+    @tag.member = @member
+    @tag.save
+    render :update do |page|
+      page.replace_html "#{@task.status}-#{@task.story_id}", :partial => "tasks/tasks_by_status", :locals => { :tasks => @task.story.tasks, :status => @task.status } 
+      page.replace_html "menu_nametags", :partial => "menu_nametags", :locals => { :members => @task.story.project.members }
+    end
+  end
+
   def update_nametag
     @task = Task.find(params[:task])
     @tag = Nametag.find(params[:id])
@@ -164,9 +181,53 @@ class ProjectsController < ApplicationController
     @tag.relative_position_y = params[:y]
     @tag.task = @task
     @tag.save
+    render :update do |page|
+      page.replace_html "dummy-for-actions", :partial => "empty_dummy", :locals => { :tasks => @task.story.tasks, :status => @task.status } 
+    end
+  end
+
+  def destroy_nametag
+    @tag = Nametag.find(params[:nametag])
+    id = @tag.task.id
+    old_status = @tag.task.status
+    story = @tag.task.story
+    story_id = @tag.task.story_id
+    @tag.destroy
     
     render :update do |page|
-      page.replace_html "story-#{@task.story_id}", :partial => "stories/story", :locals => { :story => @task.story, :project => @task.story.project_id } 
+      page.replace_html "#{old_status}-#{story_id}", :partial => "tasks/tasks_by_status", :locals => { :tasks => story.tasks, :status => old_status } 
+    end
+  end
+
+
+  def add_team_to_project
+    @project = Project.find(params[:id])
+    @teams = Team.find(:all).collect { |team| [team.name, team.id] }
+  end
+
+  def create_team_to_project_relation
+    @project = Project.find(params[:id])
+    @team = Team.find(params[:team_id])
+    if !@project.teams.exists?(@team)
+      @project.teams << @team
+      @project.save
+    end
+    respond_to do |format|
+      format.html { redirect_to(projects_url) }
+      format.xml  { head :ok }
+    end
+  end
+
+  def delete_team_to_project_relation
+    @project = Project.find(params[:id])
+    @team = Team.find(params[:team_id])
+    if @project.teams.exists?(@team)
+      @project.teams.delete(@team)
+      @project.save
+    end
+    respond_to do |format|
+      format.html { redirect_to(projects_url) }
+      format.xml  { head :ok }
     end
   end
 end

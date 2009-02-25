@@ -28,6 +28,18 @@
 	:url => { :action=>:update_statustag }) 
 %>
 
+
+<%= drop_receiving_element("task-#{task.id}", 
+	:accept => "add_nametag", 
+	:with   => "'member=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ (x($(element)) - x($('task-#{task.id}'))) + '&y='+ (y($(element))-y($('task-#{task.id}')))", 
+	:url => { :action=>:add_nametag }) 
+%>
+<%= drop_receiving_element("task-#{task.id}", 
+	:accept => "nametag", 
+	:with   => "'id=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ (x($(element)) - x($('task-#{task.id}'))) + '&y='+ (y($(element))-y($('task-#{task.id}')))", 
+	:url => { :action=>:update_nametag }) 
+%>
+
 <%= draggable_element "task-#{task.id}", :revert => '"failure"'%>
 <%=
 if column < 2
