@@ -1,0 +1,3 @@
+<%= form_tag "/projects/create_team_to_project_relation/#{@project.id}" %>
+<%= select_tag(:team_id, options_for_select(@teams))%>
+<%= submit_tag 'Add Team' %>
