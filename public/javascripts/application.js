@@ -32,3 +32,14 @@ function y(element){
 function timedRefresh(timeoutPeriod) {
 	setTimeout("location.reload(true);",timeoutPeriod);
 }
+
+function flip(id,side){
+	if(side == 'back'){
+		$(id).hide();
+		$(id + '-back').show();
+	}else{
+		$(id + '-back').hide();
+		$(id).show();
+	}
+}
+

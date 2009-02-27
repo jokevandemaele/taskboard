@@ -9,9 +9,11 @@
 	<th>Finished</th>
 </tr>
 <% for story in @stories_by_priority %>
-	<tr id="story-<%= story.id %>" class="<%= cycle('listing-even', 'listing-odd') %>">
-		<%= render :partial => "stories/show", :locals => { :story => story, :project => @project } %> 
-	</tr>
+	<% if story.priority != -1 -%>
+		<tr id="story-<%= story.id %>" class="<%= cycle('listing-even', 'listing-odd') %>">
+			<%= render :partial => "stories/show", :locals => { :story => story, :project => @project } %> 
+		</tr>
+	<% end -%>
 <% end %>
 <tr id="table_footer">
 	<td colspan=3>

@@ -112,6 +112,9 @@ class ProjectsController < ApplicationController
     @task.status = params[:status]
     @task.relative_position_x = params[:x]
     @task.relative_position_y = params[:y]
+    if(@task.status == 'finished')
+	@task.remove_tags
+    end
     @task.save
 
     render :update do |page|

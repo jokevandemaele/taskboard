@@ -1,45 +1,59 @@
 	<td class="task-list-item">
 		<div class="task" id="task-<%= task.id -%>">
-			<p class="task-label"><%=h task.name -%></p>
-			<p><%=h task.description -%></p>
+			<a href="#" onClick="flip('task-<%= task.id -%>','back')">
+				<%= image_tag 'task_flip.png', :alt => 'Flip', :class => 'flip-image' -%>
+			</a>
+			<div class="task-container-table">	
+			<div class="task-container-cell">	
+				<p class="task-name"><%=h task.name -%></p>
 
-			<% for nametag in task.nametags %>
-				<%= render :partial => "nametags/show", :locals => { :nametag => nametag } %> 
-			<% end %>
-
-			<% for statustag in task.statustags %>
-				<%= render :partial => "statustags/show", :locals => { :statustag => statustag } %> 
-			<% end %>
+				<% for nametag in task.nametags %>
+					<%= render :partial => "nametags/show", :locals => { :nametag => nametag } %> 
+				<% end %>
+				<% for statustag in task.statustags %>
+					<%= render :partial => "statustags/show", :locals => { :statustag => statustag } %> 
+				<% end %>
+			</div>
+			</div>
 		</div>
-<%= drop_receiving_element("task-#{task.id}", 
-	:accept => "create_nametag", 
-	:with   => "'id=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ ($(element).cumulativeOffset().left - $('task-#{task.id}').cumulativeOffset().left)+ '&y='+ ($(element).cumulativeOffset().top - $('task-#{task.id}').cumulativeOffset().top)", 
-	:url => { :action=>:update_nametag }
-	) 
-%>
-<%= drop_receiving_element("task-#{task.id}", 
-	:accept => "add_status", 
-	:with   => "'status=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ (x($(element)) - x($('task-#{task.id}'))) + '&y='+ (y($(element))-y($('task-#{task.id}')))", 
-	:url => { :action=>:add_statustag }) 
-%>
-<%= drop_receiving_element("task-#{task.id}", 
-	:accept => "statustag", 
-	:with   => "'id=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ (x($(element)) - x($('task-#{task.id}'))) + '&y='+ (y($(element))-y($('task-#{task.id}')))", 
-	:url => { :action=>:update_statustag }) 
-%>
+
+		<div class="task task-back" id="task-<%= task.id -%>-back" style="display: none">
+			<a href="#" onClick="flip('task-<%= task.id -%>','front')">
+				<%= image_tag 'task_flip.png', :alt => 'Flip', :class => 'flip-image' -%>
+			</a>
+			<p class="task-description"><%=h task.description -%></p>
+		</div>
+
+<% if task.status != 'finished' %>
+	<%= drop_receiving_element("task-#{task.id}", 
+		:accept => "create_nametag", 
+		:with   => "'id=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ ($(element).cumulativeOffset().left - $('task-#{task.id}').cumulativeOffset().left)+ '&y='+ ($(element).cumulativeOffset().top - $('task-#{task.id}').cumulativeOffset().top)", 
+		:url => { :action=>:update_nametag }
+		) 
+	%>
+	<%= drop_receiving_element("task-#{task.id}", 
+		:accept => "add_status", 
+		:with   => "'status=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ (x($(element)) - x($('task-#{task.id}'))) + '&y='+ (y($(element))-y($('task-#{task.id}')))", 
+		:url => { :action=>:add_statustag }) 
+	%>
+	<%= drop_receiving_element("task-#{task.id}", 
+		:accept => "statustag", 
+		:with   => "'id=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ (x($(element)) - x($('task-#{task.id}'))) + '&y='+ (y($(element))-y($('task-#{task.id}')))", 
+		:url => { :action=>:update_statustag }) 
+	%>
 
 
-<%= drop_receiving_element("task-#{task.id}", 
-	:accept => "add_nametag", 
-	:with   => "'member=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ (x($(element)) - x($('task-#{task.id}'))) + '&y='+ (y($(element))-y($('task-#{task.id}')))", 
-	:url => { :action=>:add_nametag }) 
-%>
-<%= drop_receiving_element("task-#{task.id}", 
-	:accept => "nametag", 
-	:with   => "'id=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ (x($(element)) - x($('task-#{task.id}'))) + '&y='+ (y($(element))-y($('task-#{task.id}')))", 
-	:url => { :action=>:update_nametag }) 
-%>
-
+	<%= drop_receiving_element("task-#{task.id}", 
+		:accept => "add_nametag", 
+		:with   => "'member=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ (x($(element)) - x($('task-#{task.id}'))) + '&y='+ (y($(element))-y($('task-#{task.id}')))", 
+		:url => { :action=>:add_nametag }) 
+	%>
+	<%= drop_receiving_element("task-#{task.id}", 
+		:accept => "nametag", 
+		:with   => "'id=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ (x($(element)) - x($('task-#{task.id}'))) + '&y='+ (y($(element))-y($('task-#{task.id}')))", 
+		:url => { :action=>:update_nametag }) 
+	%>
+<% end %>
 <%= draggable_element "task-#{task.id}", :revert => '"failure"'%>
 <%=
 if column < 2

@@ -54,14 +54,47 @@ table td{
 	width: 180px;
 	height: 180px;
 }
-
-.task-label{
-	margin-top: 0;
-	padding-left: 5px;
-	padding-top: 2px;
-	font-size: 14px;
-	font-weight: bold;
+.task-container-table {
+	display: table;
+	position:absolute;
+	top: 0px;
+	width: 178px;
+	height: 178px;
+	background:transparent	;
+	margin: 0 auto;
 }
+.task-container-cell {
+	display: table-cell;
+	vertical-align: middle;
+	margin: 0 auto;
+}
+
+.flip-image {
+	position:relative;
+	left: 152px;
+	top: 152px;
+	border: none;
+	z-index:1;
+}	
+.task-name{
+	width: 100%;
+	margin-top: 0;
+	font-size: 18px;
+	font-weight: bold;
+	text-align: center;
+}
+
+.task-description{
+	position: relative;
+	top: -22px;
+	left: 10px;
+	width: 158px;
+	height: 138px;
+	margin: 0;
+	font-size: 12px;
+	overflow: auto;
+}
+
 /* Task List Style */
 .task-list, .task-list-item{
 	border: none;
@@ -74,6 +107,7 @@ table td{
 	width: 100%;
 	border: 2px solid black;
 }
+
 /* Menu Style */
 #taskboard_menu {
 	z-index: 100;
