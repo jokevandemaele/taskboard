@@ -4,9 +4,10 @@
 (document.getElementById) ? dom = true : dom = false;
 
 function keepDivOnTop(div) {
-  if (dom && !document.all) {document.getElementById(div).style.top = window.pageYOffset + (window.innerHeight - (window.innerHeight)) + "px";}
-  if (document.all) {document.all[div].style.top = document.documentElement.scrollTop + (document.documentElement.clientHeight - (document.documentElement.clientHeight-y1)) + "px";}
-  window.setTimeout("keepDivOnTop('"+div+"')", 10); 
+	$(div).style.top = window.pageYOffset + (window.innerHeight - (window.innerHeight)) + "px";
+	$(div).style.left = window.pageXOffset + (window.innerWidth - (window.innerWidth)) + "px";
+
+	window.setTimeout("keepDivOnTop('"+div+"')", 10); 
 }
 
 function expandMenu(){
