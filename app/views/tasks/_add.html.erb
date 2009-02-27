@@ -1,14 +1,48 @@
-<div id="form-add-task">
-<%	remote_form_for @task, :update => {:success => "#{status}-#{story.id}"} do |f| %>
-	<%= hidden_field_tag(:story_id, "#{story.id}") %>
-	<%= hidden_field_tag(:status, "#{status}") %>
-	<%= f.text_field :name, :value => "Enter Task Here", :id => "form-add-task-task_name" -%>
-	<%= f.text_area :description, :value => "Description", :id => "form-add-task-task_description", :cols => "20", :rows => "3" -%>
-	<%= f.submit "Create Task" %>
-	<%= button_to_function "Cancel", "Effect.Fade($('form-add-task'), { duration: 0.3 });" %>
-	<% end -%>
-</div>
-<%= draggable_element "form-add-task" -%>
 <script>
-	new Effect.Move('form-add-task', { x: <%= x %>, y: <%= y %>, mode: 'absolute', duration: 0});
+$('adder-container').show();
+Effect.ScrollTo($('adder-container'), {duration:0.3});
 </script>
+<div id="form-add-task" style="position: absolute; top: 0px; left: 0px; display: none;" >
+
+	<%	remote_form_for @task, :update => {:success => "#{status}-#{story.id}"} do |f| %>
+		<%= button_to_function "Cancel", "cancel($('form-add-task'));", :id => "form-add-task-cancel"-%>
+		<%= f.submit "Save", :id => "form-add-task-submit" -%>
+
+		<div id="form-add-task-fields" style="margin: 0px;">	
+			<a href="#" onClick="flip('form-add-task-fields','back');" >
+				<%= image_tag 'task_flip.png', 
+					:alt => 'Flip', 
+					:class => 'flip-task-image', 
+					:style => "position: absolute; top: 152px; left: 152px;" -%>
+			</a>
+			<div class="task-container-table">	
+			<div class="task-container-cell">	
+				<%= f.text_field :name, 
+					:value => "Enter Task Here", 
+					:id => "form-add-task-task_name" 
+				-%>
+			</div>
+			</div>
+		</div>
+		<div id="form-add-task-fields-back" style="display:none; position: relative; top: -22px; left: 0;  margin: 0px;">
+			<a href="#" onClick="flip('form-add-task-fields','front');">
+				<%= image_tag 'task_flip.png', 
+					:alt => 'Flip', :class => 'flip-task-image', 
+					:style => "position: absolute; top: 149px; left: 152px;" -%>
+			</a>
+		<%= f.text_area :description, 
+			:value => "Description", 
+			:id => "form-add-task-task_description", 
+			:cols => "22", :rows => "8", 
+			:style => "" -%>
+		</div>
+
+		<%= hidden_field_tag(:story_id, "#{story.id}") %>
+		<%= hidden_field_tag(:status, "#{status}") %>
+
+		<% end -%>
+</div>
+	<script>
+		centerTo($('form-add-task'),$('adder-container'));
+		Effect.Appear($('form-add-task'));
+	</script>

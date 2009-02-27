@@ -14,7 +14,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1.xml
   def show
     @project = Project.find(params[:id])
-    @stories_by_priority = Story.find(:all, :conditions => "project_id = #{@project.id}", :order => "priority DESC")
+    @stories_by_priority = @project.stories_in_progress
     @members = @project.members
 
     respond_to do |format|

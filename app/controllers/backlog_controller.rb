@@ -1,8 +1,7 @@
 class BacklogController < ApplicationController
   def index
-    if params[:project_id]
-      @project = Project.find(params[:project_id])
-    end
+      @project = Project.find(params[:project])
+      @stories = @project.stories_by_priority
   end
 
 end

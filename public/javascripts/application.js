@@ -4,8 +4,8 @@
 (document.getElementById) ? dom = true : dom = false;
 
 function keepDivOnTop(div) {
-	$(div).style.top = window.pageYOffset + (window.innerHeight - (window.innerHeight)) + "px";
-	$(div).style.left = window.pageXOffset + (window.innerWidth - (window.innerWidth)) + "px";
+	$(div).style.top = window.pageYOffset + "px";
+	$(div).style.left = window.pageXOffset + "px";
 
 	window.setTimeout("keepDivOnTop('"+div+"')", 10); 
 }
@@ -44,3 +44,12 @@ function flip(id,side){
 	}
 }
 
+function centerTo(element, center_to){
+	new Effect.Move(element, { x: ((center_to.getWidth() - element.getWidth()) / 2) , y: ((center_to.getHeight() - element.getHeight()) / 2), mode: 'absolute', duration: 0});
+
+}
+
+function cancel(element){
+	Effect.Fade(element, { duration: 0.3 }); 
+	$('adder-container').hide();
+}

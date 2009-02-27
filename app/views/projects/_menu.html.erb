@@ -1,11 +1,36 @@
-<div id="taskboard_menu_space" style="background: transparent; height: 123px; width: 100%;">
+<div id="taskboard_menu_space">
 </div>
 
-<div id="taskboard_menu" style="display: none; position:absolute; top: 0px; left: 0px; z-index: 9; background: url('/images/menu_expanded_background.png') repeat-x white; width: 100%; height: 136px;">
+<div id="taskboard_menu">
 
 	<a href="#" onClick="collapseMenu();"><%= image_tag 'menu_collapse.png', :border => 0, :style => "float:left;" -%></a>
 
-	<%= image_tag 'menu_trash.png' , :border => 0, :style => "float:left; position: relative; top: 20px;", :id => 'trash'  -%>
+	<%= link_to image_tag('menu_product_backlog.png', 
+			:border => 0, 
+			:id => "taskboard_menu_product_backlog_image"), 
+		:controller => "backlog", 
+		:project => @project.id 
+	-%>
+
+
+	<%= image_tag 'menu_task_add.png' , 
+		:border => 0 ,
+		:id => 'taskboard_menu_task_add', 
+		:class => "task-add" 
+	-%>
+	<%= draggable_element "taskboard_menu_task_add", :revert => 'true'%>
+	
+	<div style="float: left">
+	<table id="menu_statustags" >
+		<%= render :partial => "menu_statustags" %> 
+	</table>
+	</div>
+	<div id="menu_nametags">
+		<%= render :partial => "menu_nametags", :locals => { :members => members } %> 
+	</div>
+
+
+	<%= image_tag 'menu_trash.png' , :border => 0, :id => 'trash' -%>
 	<%= drop_receiving_element("trash", 
 		:accept => "task", 
 		:with   => "'task=' + (element.id.split('-').last())", 
@@ -25,17 +50,6 @@
 		:accept => "form-add-task"
 		) 
 	%>
-
-	<%= image_tag 'menu_task_add.png' , :border => 0 , :style => "float:left;position: relative; top: 30px; left: 10px;", :id => "task-add", :class => "task-add" -%>
-	<%= draggable_element "task-add", :revert => 'true'%>
-	
-	<table id="menu_statustags">
-		<%= render :partial => "menu_statustags" %> 
-	</table>
-	
-	<table id="menu_nametags">
-		<%= render :partial => "menu_nametags", :locals => { :members => members } %> 
-	</table>
 
 </div>
 

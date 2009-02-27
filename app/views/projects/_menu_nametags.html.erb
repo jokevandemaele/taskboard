@@ -1,14 +1,7 @@
-<% count = 0 -%>
-<tr>
 <% for member in members -%>
-  <% if count == 3 -%>
-	</tr>    
-	<tr>
-    	<% count = 0 -%>
-  <% end -%>
-  			<td>
-    				<div id="add-nametag-<%= member.id -%>" class="add_nametag nametag nametag_<%= member.color %>"><%= member.name %></div>
-    				<%= draggable_element "add-nametag-#{member.id}", :revert => '"failure"' -%>
-  			</td>
-    <% count += 1 -%>
-<% end -%>
+<div id="add-nametag-<%= member.id -%>" class="add_nametag" style="float: left;">
+	<%= image_tag 'default_av.png' %>
+	<div class="menu_nametag nametag nametag_<%= member.color %>"><%= member.name %></div>
+</div>
+<%= draggable_element "add-nametag-#{member.id}", :revert => '"failure"' -%>
+<% end %>

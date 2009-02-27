@@ -1,21 +1,17 @@
 <table>
   <tr>
     <th>Task</th>
-    <th>Name</th>
     <th>Member</th>
   </tr>
 
 <% for nametag in @nametags %>
   <tr class="<%= cycle('listing-even', 'listing-odd') %>">
     <td>
-	<%=h nametag.name %><br />
+	<%=h nametag.task.name %><br />
 	[
-	<%= link_to 'Show', nametag %> | 
-    <%= link_to 'Edit', edit_nametag_path(nametag) %> | 
     <%= link_to 'Destroy', nametag, :confirm => 'Are you sure?', :method => :delete %>
     ]</td>
-    <td><%=h nametag.task.name %></td>
-    <td><%=h nametag.member %></td>
+    <td><%=h nametag.member.name %></td>
   </tr>
 <% end %>
 <tr id="table_footer">

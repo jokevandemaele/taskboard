@@ -88,4 +88,39 @@ class StoriesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  def start_story
+    @story = Story.find(params[:id])
+    @story.status = 'in_progress'
+    @story.save
+    respond_to do |format|
+      format.html { redirect_to :controller => 'backlog', :project => params[:project]}
+      format.xml  { head :ok }
+    end
+  end
+
+  def stop_story
+    @story = Story.find(params[:id])
+    @story.status = 'not_started'
+    if params[:priority]
+      @story.priority = params[:priority]
+    end
+    @story.save
+    respond_to do |format|
+      format.html { redirect_to :controller => 'backlog', :project => params[:project]}
+      format.xml  { head :ok }
+    end
+  end
+
+  def finish_story
+    @story = Story.find(params[:id])
+    @story.status = 'finished'
+    @story.priority = -1
+    @story.save
+    respond_to do |format|
+      format.html { redirect_to :controller => 'backlog', :project => params[:project]}
+      format.xml  { head :ok }
+    end
+  end
+
 end

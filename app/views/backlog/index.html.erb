@@ -1,35 +1,41 @@
-<h1><%= @project.name %>'s Product Backlog</h1>
-<hr>
 <table>
   <tr>
     <th>Name</th>
-    <th>Project</th>
     <th>Priority</th>
     <th>Size</th>
     <th>Requirement</th>
     <th>How to demo</th>
   </tr>
 
-<% for story in @project.stories %>
-  <tr class="<%= cycle('listing-even', 'listing-odd') %>">
+<% for story in @stories %>
+  <tr class="story-<%= story.status -%>">
     <td>
-		<%=h story.name %><br />
-		[
-		<%= link_to 'Show', story %> | 
-		<%= link_to 'Edit', edit_story_path(story) %> | 
-	    <%= link_to 'Destroy', story, :confirm => 'Are you sure?', :method => :delete %>
-	    ]
-	</td>
-    <td><%=h story.project.name %></td>
-    <td><%=h story.priority %></td>
-    <td><%=h story.size %></td>
-    <td><%=h story.requirement %></td>
-    <td><%=h story.how_to_demo %></td>
+	<%=h story.name %><br />
+	[
+	<% if story.status == 'not_started' -%>
+		<%= link_to 'Start', :controller => 'stories', :action => 'start_story', :id => story.id, :project => @project.id -%> |  
+	<% end %>  
+	<% if story.status == 'in_progress' -%>
+		<%= link_to 'Stop', :controller => 'stories', :action => 'stop_story', :id => story.id, :project => @project.id -%> |  
+	<% end -%>  
+	<% if story.status != 'finished' -%>
+		<%= link_to 'Finish', :controller => 'stories', :action => 'finish_story', :id => story.id, :project => @project.id -%> 
+	<% end %>
+	<% if story.status == 'finished' -%>
+		<%= link_to 'Not Started', :controller => 'stories', :action => 'stop_story', :id => story.id, :project => @project.id, :priority => 0 -%>
+	<% end %>
+	]
+    </td>
+    <td class="priority-cell"><%=h story.priority %></td>
+    <td class="size-cell"><%=h story.size %></td>
+    <td><%=h truncate(story.requirement) %></td>
+    <td><%=h truncate(story.how_to_demo) %></td>
   </tr>
 <% end %>
 <tr id="table_footer">
 	<td colspan=6>
 		<%= link_to 'Product Taskboard', :controller => "projects", :action => 'show', :id => @project.id -%> |
+		<%= link_to 'Manage Stories', :controller => "stories", :project => @project.id -%> |
 		<%= link_to 'New story', new_story_path %>
 	</td>
 </tr>

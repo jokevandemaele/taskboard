@@ -69,7 +69,7 @@ table td{
 	margin: 0 auto;
 }
 
-.flip-image {
+.flip-task-image {
 	position:relative;
 	left: 152px;
 	top: 152px;
@@ -110,27 +110,40 @@ table td{
 
 /* Menu Style */
 #taskboard_menu {
+	position:absolute; 
+	top: 0px; 
+	left: 0px; 
+	background: url('/images/menu_expanded_background.png') repeat-x white; 
+	width: 100%; 
+	height: 136px;
 	z-index: 100;
 }
-#menu_nametags {
-	width: 272px;
-	border: none;
+
+#taskboard_menu_space {background: transparent; height: 136px; width: 100%;}
+
+#taskboard_menu_product_backlog_image {
+	float:left; 
 	position: relative;
-	top: 10px; left: -200px;	
-	
+	border: none;
+	top: 7px;
+	left: 14px;		
 }
-#menu_nametags td {
-	width: 88px;
-	height: 24px;
+
+#taskboard_menu_task_add {
+	float: left;	
+	top:7px;
+	left: 34px;
 }
 #menu_statustags {
-	position: relative; top: 10px; left: 20px;
-	float: left;
+	position: relative; 
+	top: 10px; 
+	left: 65px;
 	border: none;
 	width: 10px;
 	height: 10px;
 	padding: 0px;
 	margin: 0;
+	
 }
 
 #menu_statustags td, #menu_statustags tr, #menu_nametags td, #menu_nametags tr{
@@ -139,76 +152,164 @@ table td{
 	padding: 0;
 }
 
+#menu_nametags {
+	float:left;
+	position: relative;
+	top: 12px;
+	left: 100px;
+}
+.menu_nametag {
+	position: relative;
+	left: 0px;
+	top: 0px;
+}
+.add_nametag {
+	margin-right: 10px;
+}
+#trash {
+	float:right; 
+	position: relative; 
+	top: 14px;
+}
 
 /* Menu - Add Task */
+
 #form-add-task{
-	position:absolute; 
+	position: absolute;
 	margin: 0 auto; 
-	z-index: 10; 
-	background: url('/images/task_add.png') no-repeat left; 
-	width: 200px; 
-	height: 200px;
+	z-index: 101; 
+	background: url('/images/task.png') no-repeat left; 
+	width: 180px; 
+	height: 180px;
 }
 #form-add-task-task_name {
-	margin: auto 0;
-	width: 180px;
-	margin-top: 0;
-	padding-left: 5px;
-	padding-top: 2px;
-	font-size: 14px;
+	width: 100%;
+	font-size: 18px;
 	font-weight: bold;
 	background: none; 
 	border: none; 
+	text-align: center;
 }
 #form-add-task-task_description{
 	background: none; 
 	border: none; 
 	font-size: 12px; 
-	padding: 5px;
+	position: absolute; 
+	top:0px; 
+	left: 2px;
+}
+#form-add-task-submit{
+	position:absolute;
+	left: 85px;
+	top: 148px;
+	z-index: 130;
+}
+
+#form-add-task-cancel{
+	position:relative;
+	left: 12px;
+	top: 148px;
+	z-index: 130;
 }
 
 /* Story Card Style */
 /* Story Style */
-.story{
-	height: 145px;
-	border: 2px solid black;
-	margin: 0px;
-	width: 300px;
-}
-.story-field {
+.story-td {
 	background: white;
-	border: 1px solid black;
 }
-.story-number-field, .story-text-field, .story-field-label, .story-field-title {
-	margin: 0;
+.story{
+	width: 180px;
+	height: 360px;
+	background: url('/images/story.png') no-repeat left; 
 }
 
+.story-field-label, .story-field-title {
+	position: relative;
+	text-align: center;
+	width: 176px;
+
+}
 .story-number-field {
-	padding: 5px;
-	font-size: 20px;
-	width: 40px;
-	height: 20px;
+	width: 117px;
+	height: 48px;
+	position:relative;
+}
+
+.story-field-title {
+	font-size: 25px;
+	font-weight: bold;
+	top: 20px;
+}
+.story-field-table {
+	display: table;
+	position: relative;
+	top: 10px;
+	left: 30px;
+}
+.story-field-cell {
+	display: table-cell;
+	vertical-align: middle;
+	width: 118px;
+	height: 48px;
+	border: 4px solid black;
+	background: white;
+	padding: 0px;
+	margin: 0px;
+}
+
+.story-field-label-priority, .story-field-label-size {
+	top: 20px;
+}
+
+.story-number-field-priority, .story-number-field-size {
+	margin: 0px;	
+	font-size: 40px;
 	text-align: center;
 }
+.story-field-back-label{
+	position: relative;
+	text-align: center;
+	width: 176px;
+}
+
+.story-text-field{
+	overflow: auto;
+	position:relative;
+	left: 10px;
+}
+
+.story-field-label-requirement{
+	top: -30px;
+}
+
+.story-text-field-requirement{
+	top: -35px;
+}
+
+.story-field-label-howto{
+	top: -35px;
+}
+
+.story-text-field-howto{
+	top: -35px;
+}
+
 .story-text-field {
 	overflow: auto;
-	font-size: 10px;
-	height: 40px;
-	padding-left: 4px;
+	width: 147px;
+	height: 124px;	
+	border: 4px solid black;	
+	background: white;
 }
-.story-left-column {
-	float:left;
-	width: 215px;
-	margin-left: 10px;
-	margin-right: 10px;
 
-}
-.story-right-column {
-	position: relative;
-	top: 17px;
-	float:right;
-	margin-right: 10px;
-}
+.flip-story-image {
+	position:relative;
+	left: 152px;
+	top: 332px;
+	border: none;
+	z-index:1;
+}	
+
 
 /* Nametags and Statustags Style */
 .nametag {
@@ -216,6 +317,7 @@ table td{
 	height: 24px;
 	font-size: 10px;
 	text-align: center;
+	font-weight: bold;
 }
 .nametag_1 {background: url('/images/tags/1.png') left no-repeat transparent;}
 .nametag_2 {background: url('/images/tags/2.png') left no-repeat transparent;}

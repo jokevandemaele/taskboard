@@ -1,18 +1,34 @@
-	<td class="story_td">
-		<div class="story" id="story-<%= story.id -%>">
+	<td class="story-td">
+		<div class="story" id="storycard-<%= story.id -%>">
+			<a href="#" onClick="flip('storycard-<%= story.id -%>','back')">
+				<%= image_tag 'story_flip.png', :alt => 'Flip', :class => 'flip-story-image' -%>
+			</a>
 			<div class="story-left-column">
 				<p class="story-field-title"><%= story.name %></p>
-				<p class="story-field-label">Requirement:</p>
-				<p class="story-field story-text-field"><%= story.requirement %></p>
-				<p class="story-field-label">How to demo:</p>
-				<p class="story-field story-text-field"><%= story.how_to_demo %></p>
+				<p class="story-field-label story-field-label-priority">Priority:</p>
+				<div class="story-field-table">								
+				<div class="story-field-cell">
+					<p class="story-number-field-priority"><%= story.priority %></p>
+				</div>
+				</div>
+				
+				<p class="story-field-label story-field-label-size">Size:</p>
+				<div class="story-field-table">								
+				<div class="story-field-cell">
+					<p class="story-number-field-size"><%= story.size %></p>
+				</div>
+				</div>
+
 			</div>
-			<div class="story-right-column">
-				<p class="story-field-label">Priority:</p>
-				<p class="story-field story-number-field"><%= story.priority %></p>
-				<p class="story-field-label">Size:</p>
-				<p class="story-field story-number-field"><%= story.size %></p>
-			</div>
+		</div>
+		<div class="story" id="storycard-<%= story.id -%>-back" style="display:none;">
+			<a href="#" onClick="flip('storycard-<%= story.id -%>','front')">
+				<%= image_tag 'story_flip.png', :alt => 'Flip', :class => 'flip-story-image' -%>
+			</a>
+			<p class="story-field-back-label story-field-label-requirement">Requirement:</p>
+			<p class="story-field story-text-field story-text-field-requirement"><%= story.requirement %></p>
+			<p class="story-field-back-label story-field-label-howto">How to demo:</p>
+			<p class="story-field story-text-field story-text-field-howto"><%= story.how_to_demo %></p>
 		</div>
 	</td>
 	<td id="not_started-<%= story.id %>">
@@ -32,7 +48,7 @@
 %>
 <%= drop_receiving_element("not_started-#{story.id}", 
 	:accept => "task-add", 
-	:with   => "'status=not_started' + '&story=#{story.id}' + '&x='+x($(element)) +'&y='+y(element)",
+	:with   => "'status=not_started' + '&story=#{story.id}'",
 	:url => { :action=>:show_new_task}) 
 %>
 

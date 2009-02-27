@@ -1,12 +1,12 @@
 <%= render :partial => "menu" , :locals => { :members => @members }-%> 
-<% # render :partial => "adder" -%>
+<%= render :partial => "adder" -%>
 <div id="container">
 <table>
 <tr>
-	<th>Story</th>
-	<th>Not started</th>
-	<th>In Progress</th>
-	<th>Finished</th>
+	<th style="width: 190px">Story</th>
+	<th style="width: 25%">Not started</th>
+	<th style="width: 100%">In Progress</th>
+	<th style="width: 25%">Finished</th>
 </tr>
 <% for story in @stories_by_priority %>
 	<% if story.priority != -1 -%>
@@ -15,13 +15,6 @@
 		</tr>
 	<% end -%>
 <% end %>
-<tr id="table_footer">
-	<td colspan=3>
-	[ <%= link_to 'Product Backlog', :controller => "backlog", :project_id => @project.id -%> |
-	<%= link_to 'Add Story', new_story_path(:project => @project)%>
-	]
-	<td>
-</tr>
 </table>
 </div>
 <div id="dummy-for-actions">

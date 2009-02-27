@@ -1,7 +1,7 @@
 	<td class="task-list-item">
 		<div class="task" id="task-<%= task.id -%>">
 			<a href="#" onClick="flip('task-<%= task.id -%>','back')">
-				<%= image_tag 'task_flip.png', :alt => 'Flip', :class => 'flip-image' -%>
+				<%= image_tag 'task_flip.png', :alt => 'Flip', :class => 'flip-task-image' -%>
 			</a>
 			<div class="task-container-table">	
 			<div class="task-container-cell">	
@@ -19,7 +19,7 @@
 
 		<div class="task task-back" id="task-<%= task.id -%>-back" style="display: none">
 			<a href="#" onClick="flip('task-<%= task.id -%>','front')">
-				<%= image_tag 'task_flip.png', :alt => 'Flip', :class => 'flip-image' -%>
+				<%= image_tag 'task_flip.png', :alt => 'Flip', :class => 'flip-task-image' -%>
 			</a>
 			<p class="task-description"><%=h task.description -%></p>
 		</div>
@@ -45,7 +45,7 @@
 
 	<%= drop_receiving_element("task-#{task.id}", 
 		:accept => "add_nametag", 
-		:with   => "'member=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ (x($(element)) - x($('task-#{task.id}'))) + '&y='+ (y($(element))-y($('task-#{task.id}')))", 
+		:with   => "'member=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ (x($(element)) - x($('task-#{task.id}'))) + '&y=' + (y($(element))-y($('task-#{task.id}'))+88)", 
 		:url => { :action=>:add_nametag }) 
 	%>
 	<%= drop_receiving_element("task-#{task.id}", 
