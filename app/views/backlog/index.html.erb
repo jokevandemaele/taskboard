@@ -1,3 +1,6 @@
+<%= render :partial => "menu", :locals => { :project => @project}-%> 
+<%= render :partial => "projects/adder" -%>
+
 <table>
   <tr>
     <th>Name</th>
@@ -10,7 +13,7 @@
 <% for story in @stories %>
   <tr class="story-<%= story.status -%>">
     <td>
-	<%=h story.name %><br />
+	(<%=h story.realid %>) <%=h story.name %><br />
 	[
 	<% if story.status == 'not_started' -%>
 		<%= link_to 'Start', :controller => 'stories', :action => 'start_story', :id => story.id, :project => @project.id -%> |  
@@ -19,14 +22,20 @@
 		<%= link_to 'Stop', :controller => 'stories', :action => 'stop_story', :id => story.id, :project => @project.id -%> |  
 	<% end -%>  
 	<% if story.status != 'finished' -%>
-		<%= link_to 'Finish', :controller => 'stories', :action => 'finish_story', :id => story.id, :project => @project.id -%> 
+		<%= link_to 'Finish', :controller => 'stories', :action => 'finish_story', :id => story.id, :project => @project.id -%> |
+		<%= link_to_remote "Edit", :url => {:controller => 'stories', :action => 'show_form', :project => story.project.id, :story => story } %>
 	<% end %>
 	<% if story.status == 'finished' -%>
 		<%= link_to 'Not Started', :controller => 'stories', :action => 'stop_story', :id => story.id, :project => @project.id, :priority => 0 -%>
 	<% end %>
 	]
     </td>
-    <td class="priority-cell"><%=h story.priority %></td>
+    <td class="priority-cell"><span class="priority-edit" id="priority-<%= story.id %>">
+	<% if story.priority != -1 %>
+		<%= render :partial => 'stories/edit_priority_link', :locals => {:story => story}-%></span></td>
+    	<% else %>
+		<%= story.priority %>
+	<% end %>
     <td class="size-cell"><%=h story.size %></td>
     <td><%=h truncate(story.requirement) %></td>
     <td><%=h truncate(story.how_to_demo) %></td>
@@ -36,9 +45,10 @@
 	<td colspan=6>
 		<%= link_to 'Product Taskboard', :controller => "projects", :action => 'show', :id => @project.id -%> |
 		<%= link_to 'Manage Stories', :controller => "stories", :project => @project.id -%> |
-		<%= link_to 'New story', new_story_path %>
+		<%= link_to 'New story', :controller => "stories", :action => "new", :project => @project.id %>
 	</td>
 </tr>
 </table>
-
+<div id="dummy-for-actions">
+</div>
 

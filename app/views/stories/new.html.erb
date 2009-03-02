@@ -12,6 +12,10 @@
 	%> 
   </p>
   <p>
+    ID<br />
+    <%= f.text_field :realid, :value => next_realid(@last_realid) %>
+  </p>
+  <p>
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </p>

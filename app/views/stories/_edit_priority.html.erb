@@ -1,0 +1,4 @@
+<% remote_form_for story, :url => { :action => 'update_priority', :id => story.id }, :update => {:success => "priority-#{story.id}"} do |f| %>
+	<%= hidden_field_tag :story_id, story.id -%>
+	<%= f.text_field :priority, :size => 2 -%>
+<% end %>

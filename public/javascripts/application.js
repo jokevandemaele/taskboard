@@ -10,16 +10,16 @@ function keepDivOnTop(div) {
 	window.setTimeout("keepDivOnTop('"+div+"')", 10); 
 }
 
-function expandMenu(){
-	$('taskboard_menu_expand').hide();
-	$('taskboard_menu_space').show();
-	Effect.Appear($('taskboard_menu'), { duration: 0.4 });
+function expandMenu(application){
+	$(application+'_menu_expand').hide();
+	$(application+'_menu_space').show();
+	Effect.Appear($(application+'_menu'), { duration: 0.4 });
 }
 
-function collapseMenu(){
-	Effect.Fade($('taskboard_menu'), { duration: 0.4 });
-	$('taskboard_menu_space').hide();
-	Effect.Appear($('taskboard_menu_expand'), { duration: 0.4 });
+function collapseMenu(application){
+	Effect.Fade($(application+'_menu'), { duration: 0.4 });
+	$(application+'_menu_space').hide();
+	Effect.Appear($(application+'_menu_expand'), { duration: 0.4 });
 }
 
 function x(element){

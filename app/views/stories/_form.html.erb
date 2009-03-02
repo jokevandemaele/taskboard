@@ -1,0 +1,31 @@
+<script>
+$('adder-container').show();
+Effect.ScrollTo($('adder-container'), {duration:0.3});
+</script>
+<div id="form-add-story" style="position: absolute; top: 0px; left: 0px; display: none; z-index: 100; background: white; padding: 10px; border: 5px solid #3771c8;">
+<% remote_form_for story, :update => { :success => 'dummy-for-actions' } do |f| %>
+  <%= f.error_messages %>
+	<%= unless @project.nil?
+ 		project.name
+		hidden_field_tag(:project_id, "#{@project.id}")
+		else 
+		    select_tag(:project_id, options_for_select(@projects))
+		end
+	%> 
+    ID <%= f.text_field :realid, :value => next_realid(@last_realid), :size => 3 %><br />
+    <%= f.label :name %> <%= f.text_field :name %><br />
+    <%= f.label :priority %> <%= f.text_field :priority, :size => 3 %><br />
+    <%= f.label :size %> <%= f.text_field :size, :size => 3 %><br />
+    <%= f.label :requirement %><br />
+    <%= f.text_area :requirement, :rows => 2 %><br />
+    <%= f.label :how_to_demo %><br />
+    <%= f.text_area :how_to_demo, :rows => 2 %><br />
+    <%= button_to_function "Cancel", "cancel($('form-add-story'));", :id => "form-add-story-cancel"-%>
+    <%= hidden_field_tag(:dynamic, "true") %>
+
+    <%= f.submit "Save", :id => "form-add-story-submit" -%>
+<% end %>
+<script>
+	centerTo($('form-add-story'),$('adder-container'));
+	Effect.Appear($('form-add-story'));
+</script>

@@ -1,0 +1,47 @@
+<div id="backlog_menu_space">
+</div>
+
+<div id="backlog_menu">
+
+	<a href="#" onClick="collapseMenu('backlog');"><%= image_tag 'menu_collapse.png', :border => 0, :style => "float:left;" -%></a>
+
+	<%= link_to image_tag('menu_taskboard.png', 
+			:border => 0, 
+			:id => "backlog_menu_taskboard_image"), 
+		:controller => "projects",
+		:action => "show",
+		:id => project.id
+	-%>
+	
+	<%= image_tag 'menu_trash.png' , :border => 0, :id => 'trash' -%>
+	<%= drop_receiving_element("trash", 
+		:accept => "task", 
+		:with   => "'task=' + (element.id.split('-').last())", 
+		:url => { :action=>:destroy_task}) 
+	%>
+	<%= drop_receiving_element("trash", 
+		:accept => "statustag", 
+		:with   => "'statustag=' + (element.id.split('-').last())", 
+		:url => { :action=>:destroy_statustag}) 
+	%>
+	<%= drop_receiving_element("trash", 
+		:accept => "nametag", 
+		:with   => "'nametag=' + (element.id.split('-').last())", 
+		:url => { :action=>:destroy_nametag}) 
+	%>
+	<%= drop_receiving_element("trash", 
+		:accept => "form-add-task"
+		) 
+	%>
+	<%= link_to_remote "create story", :url => {:controller => 'stories', :action => 'show_form', :project => project.id } %>
+	
+</div>
+
+<div id="backlog_menu_expand" style="position:absolute; top: 0px; left: 0px; z-index: 9; background: url('/images/menu_collapsed_background.png') left no-repeat transparent; height: 61px;width: 69px;">
+	<a href="#" onClick="expandMenu('backlog');"><%= image_tag('menu_expand.png', :border => 0, :style => "position: relative; top: 11px; left: 14px;")-%></a>
+</div>
+<script>
+	expandMenu('backlog');
+	keepDivOnTop("backlog_menu_expand");
+	keepDivOnTop("backlog_menu");
+</script>

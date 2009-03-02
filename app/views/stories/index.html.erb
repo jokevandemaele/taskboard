@@ -13,7 +13,7 @@
 <% for story in @stories %>
   <tr class="<%= cycle('listing-even', 'listing-odd') %>">
     <td>
-		<%=h story.name %><br />
+		(<%=h story.realid -%>) <%=h story.name %><br />
 		[
 		<%= link_to 'Show', story %> |
 	    <%= link_to 'Edit', edit_story_path(story) %> |
