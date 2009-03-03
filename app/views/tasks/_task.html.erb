@@ -1,8 +1,5 @@
 	<td class="task-list-item">
 		<div class="task" id="task-<%= task.id -%>">
-			<a href="#" onClick="flip('task-<%= task.id -%>','back')">
-				<%= image_tag 'task_flip.png', :alt => 'Flip', :class => 'flip-task-image' -%>
-			</a>
 			<div class="task-container-table">	
 			<div class="task-container-cell">	
 				<p class="task-name"><%=h task.name -%></p>
@@ -15,13 +12,16 @@
 				<% end %>
 			</div>
 			</div>
+			<a href="#" onClick="flip('task-<%= task.id -%>','back')">
+				<%= image_tag 'task_flip.png', :alt => 'Flip', :class => 'flip-task-image' -%>
+			</a>
 		</div>
 
 		<div class="task task-back" id="task-<%= task.id -%>-back" style="display: none">
-			<a href="#" onClick="flip('task-<%= task.id -%>','front')">
-				<%= image_tag 'task_flip.png', :alt => 'Flip', :class => 'flip-task-image' -%>
+			<div class="task-description"><%=h task.description -%></div>
+			<a id="image-link-back" href="#" onClick="flip('task-<%= task.id -%>','front')">
+				<%= image_tag 'task_flip.png', :alt => 'Flip', :class => 'flip-task-image-back' -%>
 			</a>
-			<p class="task-description"><%=h task.description -%></p>
 		</div>
 
 <% if task.status != 'finished' %>
@@ -34,24 +34,24 @@
 	<%= drop_receiving_element("task-#{task.id}", 
 		:accept => "add_status", 
 		:with   => "'status=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ (x($(element)) - x($('task-#{task.id}'))) + '&y='+ (y($(element))-y($('task-#{task.id}')))", 
-		:url => { :action=>:add_statustag }) 
+		:url => { :controller => 'projects', :action=>:add_statustag }) 
 	%>
 	<%= drop_receiving_element("task-#{task.id}", 
 		:accept => "statustag", 
 		:with   => "'id=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ (x($(element)) - x($('task-#{task.id}'))) + '&y='+ (y($(element))-y($('task-#{task.id}')))", 
-		:url => { :action=>:update_statustag }) 
+		:url => { :controller => 'projects', :action=>:update_statustag }) 
 	%>
 
 
 	<%= drop_receiving_element("task-#{task.id}", 
 		:accept => "add_nametag", 
 		:with   => "'member=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ (x($(element)) - x($('task-#{task.id}'))) + '&y=' + (y($(element))-y($('task-#{task.id}'))+88)", 
-		:url => { :action=>:add_nametag }) 
+		:url => { :controller => 'projects', :action=>:add_nametag }) 
 	%>
 	<%= drop_receiving_element("task-#{task.id}", 
 		:accept => "nametag", 
 		:with   => "'id=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ (x($(element)) - x($('task-#{task.id}'))) + '&y='+ (y($(element))-y($('task-#{task.id}')))", 
-		:url => { :action=>:update_nametag }) 
+		:url => { :controller => 'projects', :action=>:update_nametag }) 
 	%>
 <% end %>
 <%= draggable_element "task-#{task.id}", :revert => '"failure"'%>

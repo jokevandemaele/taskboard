@@ -80,6 +80,8 @@ class TasksController < ApplicationController
   # DELETE /tasks/1.xml
   def destroy
     @task = Task.find(params[:id])
+    @task.nametags.each {|nametag| nametag.destroy }
+    @task.statustags.each {|statustag| statustag.destroy }
     @task.destroy
 
     respond_to do |format|

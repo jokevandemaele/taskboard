@@ -64,7 +64,7 @@ table td{
 
 /* Menu Style */
 #backlog_menu {
-	position:absolute; 
+	position:fixed; 
 	top: 0px; 
 	left: 0px; 
 	background: url('/images/menu_expanded_background.png') repeat-x white; 
@@ -83,22 +83,19 @@ table td{
 	left: 14px;		
 }
 
-#backlog_menu_task_add {
+#backlog_menu_story_add_image {	
 	float: left;	
-	top:7px;
+	position: relative;
+	top:10px;
 	left: 34px;
 }
-#menu_statustags {
-	position: relative; 
-	top: 10px; 
-	left: 65px;
-	border: none;
-	width: 10px;
-	height: 10px;
-	padding: 0px;
-	margin: 0;
-	
+#backlog_menu_manage_teams_image{	
+	float: left;	
+	position: relative;
+	top:10px;
+	left: 54px;
 }
+
 
 #trash {
 	float:right; 

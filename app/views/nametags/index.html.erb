@@ -7,7 +7,7 @@
 <% for nametag in @nametags %>
   <tr class="<%= cycle('listing-even', 'listing-odd') %>">
     <td>
-	<%=h nametag.task.name %><br />
+	<%=h nametag.task_id %><br />
 	[
     <%= link_to 'Destroy', nametag, :confirm => 'Are you sure?', :method => :delete %>
     ]</td>

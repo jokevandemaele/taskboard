@@ -2,7 +2,7 @@
 $('adder-container').show();
 Effect.ScrollTo($('adder-container'), {duration:0.3});
 </script>
-<div id="form-add-task" style="position: absolute; top: 0px; left: 0px; display: none;" >
+<div id="form-add-task" style="position: fixed; top: 0px; left: 0px; display: none;" >
 
 	<%	remote_form_for @task, :update => {:success => "#{status}-#{story.id}"} do |f| %>
 		<%= button_to_function "Cancel", "cancel($('form-add-task'));", :id => "form-add-task-cancel"-%>

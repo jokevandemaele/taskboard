@@ -14,21 +14,20 @@
   <tr class="story-<%= story.status -%>">
     <td>
 	(<%=h story.realid %>) <%=h story.name %><br />
-	[
-	<% if story.status == 'not_started' -%>
-		<%= link_to 'Start', :controller => 'stories', :action => 'start_story', :id => story.id, :project => @project.id -%> |  
-	<% end %>  
-	<% if story.status == 'in_progress' -%>
-		<%= link_to 'Stop', :controller => 'stories', :action => 'stop_story', :id => story.id, :project => @project.id -%> |  
-	<% end -%>  
 	<% if story.status != 'finished' -%>
+		[
+		<% if story.status == 'not_started' -%>
+			<%= link_to 'Start', :controller => 'stories', :action => 'start_story', :id => story.id, :project => @project.id -%> |  
+		<% end %>  
+		<% if story.status == 'in_progress' -%>
+			<%= link_to 'Stop', :controller => 'stories', :action => 'stop_story', :id => story.id, :project => @project.id -%> |  
+		<% end -%>  
 		<%= link_to 'Finish', :controller => 'stories', :action => 'finish_story', :id => story.id, :project => @project.id -%> |
 		<%= link_to_remote "Edit", :url => {:controller => 'stories', :action => 'show_form', :project => story.project.id, :story => story } %>
-	<% end %>
-	<% if story.status == 'finished' -%>
-		<%= link_to 'Not Started', :controller => 'stories', :action => 'stop_story', :id => story.id, :project => @project.id, :priority => 0 -%>
-	<% end %>
-	]
+		]
+	<% else %>
+	  [ Date Finished: <%= "#{story.updated_at.month}/#{story.updated_at.day}/#{story.updated_at.year}" %> ]
+	<% end %> 
     </td>
     <td class="priority-cell"><span class="priority-edit" id="priority-<%= story.id %>">
 	<% if story.priority != -1 %>

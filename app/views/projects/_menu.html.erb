@@ -53,11 +53,9 @@
 
 </div>
 
-<div id="taskboard_menu_expand" style="position:absolute; top: 0px; left: 0px; z-index: 9; background: url('/images/menu_collapsed_background.png') left no-repeat transparent; height: 61px;width: 69px;">
+<div id="taskboard_menu_expand">
 	<a href="#" onClick="expandMenu('taskboard');"><%= image_tag('menu_expand.png', :border => 0, :style => "position: relative; top: 11px; left: 14px;")-%></a>
 </div>
 <script>
 	expandMenu('taskboard');
-	keepDivOnTop("taskboard_menu_expand");
-	keepDivOnTop("taskboard_menu");
 </script>

@@ -5,7 +5,7 @@ class Project < ActiveRecord::Base
 	
   # stories_by_priority: return all project's stories order by priority (highest on top)
   def stories_by_priority
-    return Story.all(:all, :conditions => "project_id = #{self.id}", :order => "priority DESC")
+    return Story.all(:all, :conditions => "project_id = #{self.id}", :order => "priority DESC, updated_at DESC")
   end
 
   def stories_in_progress

@@ -1,6 +1,7 @@
 class Story < ActiveRecord::Base
   belongs_to :project
-  has_many :tasks
+  has_many :tasks, :dependent => :destroy
+
   validates_uniqueness_of :realid
 
   def self.last_realid(project_id)
@@ -38,4 +39,5 @@ class Story < ActiveRecord::Base
 		return initials.upcase
 	end
   end
+
 end

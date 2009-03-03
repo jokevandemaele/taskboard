@@ -3,5 +3,4 @@ class BacklogController < ApplicationController
       @project = Project.find(params[:project])
       @stories = @project.stories_by_priority
   end
-
 end

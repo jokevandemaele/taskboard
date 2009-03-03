@@ -76,6 +76,22 @@ table td{
 	border: none;
 	z-index:1;
 }	
+
+#image-link-back {
+	position:relative;
+	left: 152px;
+	top: 14px;
+	border: none;
+	z-index:1;
+}	
+.flip-task-image-back{	border: none;
+	z-index:1;
+}
+{
+	position:relative;
+	left: 152px;
+	top: 14px;
+}
 .task-name{
 	width: 100%;
 	margin-top: 0;
@@ -86,13 +102,14 @@ table td{
 
 .task-description{
 	position: relative;
-	top: -22px;
+	top: 2px;
 	left: 10px;
 	width: 158px;
 	height: 138px;
 	margin: 0;
 	font-size: 12px;
 	overflow: auto;
+
 }
 
 /* Task List Style */
@@ -110,7 +127,7 @@ table td{
 
 /* Menu Style */
 #taskboard_menu {
-	position:absolute; 
+	position:fixed; 
 	top: 0px; 
 	left: 0px; 
 	background: url('/images/menu_expanded_background.png') repeat-x white; 
@@ -118,6 +135,17 @@ table td{
 	height: 136px;
 	z-index: 100;
 }
+
+#taskboard_menu_expand {
+	position:fixed; 
+	top: 0px;
+	left: 0px;
+	z-index: 9; 
+	background: url('/images/menu_collapsed_background.png') left no-repeat transparent;
+	height: 61px;
+	width: 69px;
+}
+
 
 #taskboard_menu_space {background: transparent; height: 136px; width: 100%;}
 
@@ -236,7 +264,7 @@ table td{
 }
 
 .story-field-title {
-	font-size: 25px;
+	font-size: 20px;
 	font-weight: bold;
 	top: 20px;
 }
