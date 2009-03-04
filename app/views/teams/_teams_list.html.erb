@@ -1,0 +1,31 @@
+<% for team in teams %>
+	<div id="team-<% team.id %>" class="team">
+		<div class="team_card">
+			<%= team.name -%>
+		</div>
+		<div class="team_paginate">
+			<%= image_tag "less.png", :alt => "more", :class => "less" %>
+			<%= image_tag "more.png", :alt => "more", :class => "more" %>
+		</div>
+		<% count = 0 %>
+		<table>
+		  <tr>
+		<% for member in team.members %>
+			<td><%= render :partial => "members/show_with_picture", 
+				:locals => { :id_text => "team-#{team.id}-member", 
+					:class_text => "team_member", 
+					:member_name_class => "team_member",
+					:member => member } -%>
+			</td>
+		<% if count == 2 %>
+		  </tr>
+		  <tr>
+		  <% count = 0 %>
+		<% else -%>
+		  <% count += 1 %>
+		<% end -%>
+		<% end -%>
+		  </tr>	
+		</table>
+	</div>
+<% end %>

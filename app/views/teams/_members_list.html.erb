@@ -1,0 +1,13 @@
+<div id="members-list">
+	<%= text_field_tag "search-member", "Search For...", :onClick => "this.clear();", :autocomplete => "off" -%><br />
+	<%= image_tag "less.png", :alt => "more", :class => "less" %>
+	<%= image_tag "more.png", :alt => "more", :class => "more" %>
+	<% for member in members%>
+		<%= render :partial => "members/show_with_picture", 
+			:locals => { :id_text => "add-member", 
+				:class_text => "add_member", 
+				:member_name_class => "",
+				:member => member } -%>
+		<%= draggable_element "add-member-#{member.id}", :revert => "'failure'" -%>
+	<% end %>
+</div>

@@ -1,7 +1,8 @@
 <% for member in members -%>
-<div id="add-nametag-<%= member.id -%>" class="add_nametag" style="float: left;">
-	<%= image_tag 'default_av.png' %>
-	<div class="menu_nametag nametag nametag_<%= member.color %>"><%= member.name %></div>
-</div>
+		<%= render :partial => "members/show_with_picture", 
+			:locals => { :id_text => "nametag", 
+				:class_text => "add_nametag",
+				:member_name_class => "menu_nametag nametag nametag_#{ member.color }",
+				:member => member } -%>
 <%= draggable_element "add-nametag-#{member.id}", :revert => '"failure"' -%>
 <% end %>
