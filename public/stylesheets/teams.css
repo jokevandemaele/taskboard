@@ -1,0 +1,34 @@
+/* Team Style */
+.team {
+	margin: 10px;
+	float: left;
+	border: 5px solid #3771c8;
+	width: 308px;
+	height: 337px;
+}
+
+.team_card {
+	margin: 5px;
+	background: #d5e5ff;
+	height: 23px;
+	text-align: right;	
+	font-size: 16px;
+	padding-right: 5px;
+}
+.team_paginate {
+	width: 100%;
+	height: 60px;
+}
+.team_member{
+	font-weight: bold;
+	float: left;
+	width: 88px;
+	text-align: center;
+}
+
+.member-edit {
+	border: none;
+	position: relative;
+	top: -37px;
+	left: 25px;
+}
