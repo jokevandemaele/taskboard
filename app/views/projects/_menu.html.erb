@@ -1,13 +1,13 @@
-<div id="taskboard_menu_space">
+<div id="menu_space">
 </div>
 
-<div id="taskboard_menu">
+<div id="menu">
 
 	<a href="#" onClick="collapseMenu('taskboard');"><%= image_tag 'menu_collapse.png', :border => 0, :style => "float:left;" -%></a>
 
 	<%= link_to image_tag('menu_product_backlog.png', 
 			:border => 0, 
-			:id => "taskboard_menu_product_backlog_image"), 
+			:id => "menu_product_backlog_image"), 
 		:controller => "backlog", 
 		:project => @project.id 
 	-%>
@@ -53,7 +53,7 @@
 
 </div>
 
-<div id="taskboard_menu_expand">
+<div id="menu_expand">
 	<a href="#" onClick="expandMenu('taskboard');"><%= image_tag('menu_expand.png', :border => 0, :style => "position: relative; top: 11px; left: 14px;")-%></a>
 </div>
 <script>

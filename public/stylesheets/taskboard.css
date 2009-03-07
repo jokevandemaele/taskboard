@@ -87,11 +87,6 @@ table td{
 .flip-task-image-back{	border: none;
 	z-index:1;
 }
-{
-	position:relative;
-	left: 152px;
-	top: 14px;
-}
 .task-name{
 	width: 100%;
 	margin-top: 0;
@@ -123,81 +118,6 @@ table td{
 .listing-table{
 	width: 100%;
 	border: 2px solid black;
-}
-
-/* Menu Style */
-#taskboard_menu {
-	position:fixed; 
-	top: 0px; 
-	left: 0px; 
-	background: url('/images/menu_expanded_background.png') repeat-x white; 
-	width: 100%; 
-	height: 136px;
-	z-index: 100;
-}
-
-#taskboard_menu_expand {
-	position:fixed; 
-	top: 0px;
-	left: 0px;
-	z-index: 9; 
-	background: url('/images/menu_collapsed_background.png') left no-repeat transparent;
-	height: 61px;
-	width: 69px;
-}
-
-
-#taskboard_menu_space {background: transparent; height: 136px; width: 100%;}
-
-#taskboard_menu_product_backlog_image {
-	float:left; 
-	position: relative;
-	border: none;
-	top: 7px;
-	left: 14px;		
-}
-
-#taskboard_menu_task_add {
-	float: left;	
-	top:7px;
-	left: 34px;
-}
-#menu_statustags {
-	position: relative; 
-	top: 10px; 
-	left: 65px;
-	border: none;
-	width: 10px;
-	height: 10px;
-	padding: 0px;
-	margin: 0;
-	
-}
-
-#menu_statustags td, #menu_statustags tr, #menu_nametags td, #menu_nametags tr{
-	border: 2px solid white;
-	margin: 0;
-	padding: 0;
-}
-
-#menu_nametags {
-	float:left;
-	position: relative;
-	top: 12px;
-	left: 100px;
-}
-.menu_nametag {
-	position: relative;
-	left: 0px;
-	top: 0px;
-}
-.add_nametag {
-	margin-right: 10px;
-}
-#trash {
-	float:right; 
-	position: relative; 
-	top: 14px;
 }
 
 /* Menu - Add Task */

@@ -1,7 +1,5 @@
-<div id="empty-space" style="width: 100%; height: 160px;">
-</div>
 <%= render :partial => "menu", :locals => { :project => @project}-%> 
 <%= render :partial => "projects/adder" -%>
-<%= render :partial => "members_list", :locals => { :members => @members }%>
-<%= render :partial => "teams_list", :locals => { :teams => @teams }%>
-
+<%= render :partial => "teams_list", :locals => { :teams => @teams, :project => @project }%>
+<div id="dummy-for-actions">
+</div>

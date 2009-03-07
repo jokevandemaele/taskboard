@@ -1,13 +1,22 @@
 <div id="members-list">
-	<%= text_field_tag "search-member", "Search For...", :onClick => "this.clear();", :autocomplete => "off" -%><br />
-	<%= image_tag "less.png", :alt => "more", :class => "less" %>
-	<%= image_tag "more.png", :alt => "more", :class => "more" %>
+	<a href="javascript:members_slider.prev();"><%= image_tag "less.png", :alt => "more", :class => "less", :style => "position:relative; top: 43px; left: 10px; border: none;" %></a>
+	<a href="javascript:members_slider.next();"><%= image_tag "more.png", :alt => "more", :class => "more", :style => "position:relative; top: 43px; left: -10px; border: none;" %></a>
+	<div id="member-list-faces" style="width: 680px; height: 126px; position: relative; top: 0px; left:60px;">	
+	<% member_count = 0 -%>
 	<% for member in members%>
-		<%= render :partial => "members/show_with_picture", 
-			:locals => { :id_text => "add-member", 
-				:class_text => "add_member", 
-				:member_name_class => "",
-				:member => member } -%>
-		<%= draggable_element "add-member-#{member.id}", :revert => "'failure'" -%>
+		<div id="member-list-<%= member_count %>">
+			<%= render :partial => "members/show_with_picture", 
+				:locals => { :id_text => "add-member", 
+					:class_text => "add_member", 
+					:member_name_class => "add_member",
+					:member => member,
+					:edit => true } -%>
+			<%= draggable_element "add-member-#{member.id}", :revert => "true" -%>
+			<% member_count += 1 -%>
+		</div>	
 	<% end %>
+	<script>
+		members_slider = new Slider('member-list',<%= members.count -%>,6);
+	</script>
+	</div>
 </div>

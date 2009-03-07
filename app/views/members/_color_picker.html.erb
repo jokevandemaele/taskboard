@@ -1,0 +1,5 @@
+<div id="add_member_color_picker" style = "float:left; position: absolute: top: 0px; left: 0px; ">
+<% 1.upto 41 do |color| %>
+	<input type="radio" onClick="$('member_color').value = '<%= color-%>'"><%= image_tag "tags/#{color}.png" %><br />
+<% end %>
+</div>

@@ -1,0 +1,23 @@
+		<% count = 0 %>
+		  <tr>
+		<% for member in team.members %>
+			<td>
+				<%= render :partial => "members/show_with_picture", 
+					:locals => { :id_text => "team-#{team.id}-member", 
+					:class_text => "team_member", 
+					:member_name_class => "team_member",
+					:member => member,
+					:edit => false } -%>
+				<%= draggable_element "team-#{team.id}-member-#{member.id}", :revert => "'failure'" -%>
+
+			</td>
+		<% if count == 2 %>
+		  </tr>
+		  <tr>
+		  <% count = 0 %>
+		<% else -%>
+		  <% count += 1 %>
+		<% end -%>
+		<% end -%>
+		  </tr>	
+

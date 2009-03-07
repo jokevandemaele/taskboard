@@ -1,0 +1,24 @@
+<script>
+$('adder-container').show();
+</script>
+<div id="form-add-member" style="position: fixed; top: 0px; left: 0px; display: none; z-index: 100; background: white; padding: 10px; border: 5px solid #3771c8;">
+<% remote_form_for member, :update => { :success => 'dummy-for-actions' } do |f| %>
+  <%= f.error_messages %>
+    <%= f.label :name %> <%= f.text_field :name %><br />
+    <%= f.label :color %> <%= f.text_field :color, :size => 5 %><br /> 
+
+    <%= f.label :username %> <%= f.text_field :username %><br />
+    <%= f.label :password %> <%= f.text_field :password %><br />
+
+    <%= button_to_function "Cancel", "cancel($('form-add-member'));", :id => "form-add-member-cancel"-%>
+    <%= hidden_field_tag(:dynamic, "true") %>
+
+    <%= f.submit "Save", :id => "form-add-member-submit" -%>
+<% end %>
+<script>
+	centerTo($('form-add-member'),$('adder-container'));
+	Effect.Appear($('form-add-member'));
+</script>
+<% # render :partial => 'color_picker' -%>
+</div>
+

@@ -1,5 +1,10 @@
 <div id="<%= id_text -%>-<%= member.id -%>" class="<%= class_text %>" style="float: left;">
 	<%= image_tag 'default_av.png' %>
-	<div class="<%= member_name_class -%>"><%= member.name %></div>
-</div>
+	<div class="<%= member_name_class -%> .slide_item"><%= member.formatted_nametag %></div>
+	<% if edit -%>	
+		<%= link_to_remote image_tag('member_edit.png', :class => "member-edit"),
+			:url => {:controller => 'members', :action => 'show_form', :member => member },
+			:hover => 'member_edit_hover.png', :class => 'member-edit' -%>
+	<% end -%>	
+	</div>
 

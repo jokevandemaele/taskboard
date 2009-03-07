@@ -42,15 +42,20 @@ class MembersController < ApplicationController
   # POST /members.xml
   def create
     @member = Member.new(params[:member])
-    @member.color = params[:color]
-    respond_to do |format|
-      if @member.save
-        flash[:notice] = 'Member was successfully created.'
-        format.html { redirect_to(@member) }
-        format.xml  { render :xml => @member, :status => :created, :location => @member }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @member.errors, :status => :unprocessable_entity }
+
+    if(params[:dynamic])
+      @member.save
+      render :inline => "<script>location.reload(true);</script>"
+    else
+      respond_to do |format|
+        if @member.save
+          flash[:notice] = 'Member was successfully created.'
+          format.html { redirect_to(@member) }
+          format.xml  { render :xml => @member, :status => :created, :location => @member }
+        else
+          format.html { render :action => "new" }
+          format.xml  { render :xml => @member.errors, :status => :unprocessable_entity }
+        end
       end
     end
   end
@@ -59,15 +64,20 @@ class MembersController < ApplicationController
   # PUT /members/1.xml
   def update
     @member = Member.find(params[:id])
-    @member.color = params[:color]
-    respond_to do |format|
-      if @member.update_attributes(params[:member])
-        flash[:notice] = 'Member was successfully updated.'
-        format.html { redirect_to(@member) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @member.errors, :status => :unprocessable_entity }
+
+    if(params[:dynamic])
+      @member.update_attributes(params[:member])
+      render :inline => "<script>location.reload(true);</script>"
+    else
+      respond_to do |format|
+        if @member.update_attributes(params[:member])
+          flash[:notice] = 'Member was successfully updated.'
+          format.html { redirect_to(@member) }
+          format.xml  { head :ok }
+        else
+          format.html { render :action => "edit" }
+          format.xml  { render :xml => @member.errors, :status => :unprocessable_entity }
+        end
       end
     end
   end
@@ -83,4 +93,17 @@ class MembersController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  def show_form
+    if(params[:member])
+	@member = Member.find(params[:member])
+    else
+	@member = Member.new
+    end
+
+    render :update do |page|
+	page.replace_html "dummy-for-actions", :partial => 'form', :locals => { :member => @member }
+    end
+  end
+
 end

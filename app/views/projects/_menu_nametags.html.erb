@@ -1,8 +1,9 @@
 <% for member in members -%>
 		<%= render :partial => "members/show_with_picture", 
-			:locals => { :id_text => "nametag", 
+			:locals => { :id_text => "add-nametag", 
 				:class_text => "add_nametag",
 				:member_name_class => "menu_nametag nametag nametag_#{ member.color }",
-				:member => member } -%>
+				:member => member,
+				:edit => false } -%>
 <%= draggable_element "add-nametag-#{member.id}", :revert => '"failure"' -%>
 <% end %>

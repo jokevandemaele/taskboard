@@ -1,0 +1,31 @@
+<script>
+$('adder-container').show();
+</script>
+<div id="form-add-team" style="position: fixed; top: 0px; left: 0px; display: none; z-index: 100; background: white; padding: 10px; border: 5px solid #3771c8;">
+<% remote_form_for team, :update => { :success => 'dummy-for-actions' } do |f| %>
+  <%= f.error_messages %>
+	<%= unless @project.nil?
+ 		project.name
+		hidden_field_tag(:project_id, "#{@project.id}")
+		else 
+		    select_tag(:project_id, options_for_select(@projects))
+		end
+	%> 
+    <%= f.label :name %> <%= f.text_field :name %><br />
+    <%= f.label :color %> <%= f.text_field :color, :size => 5, :style => "border: 1px solid black;" %><br />
+    <script>
+	setColor('team_color', $('team_color').value);
+    </script>
+    <%= render :partial => 'color_picker', :locals => {:picker => "team_color" } -%>
+
+    <%= button_to_function "Cancel", "cancel($('form-add-team'));", :id => "form-add-team-cancel"-%>
+
+    <%= hidden_field_tag(:dynamic, "true") %>
+
+    <%= f.submit "Save", :id => "form-add-team-submit" -%>
+<% end %>
+<script>
+	centerTo($('form-add-team'),$('adder-container'));
+	Effect.Appear($('form-add-team'));
+</script>
+</div>

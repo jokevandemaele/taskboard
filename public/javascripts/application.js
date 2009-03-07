@@ -10,16 +10,16 @@ function keepDivOnTop(div) {
 	window.setTimeout("keepDivOnTop('"+div+"')", 10); 
 }
 
-function expandMenu(application){
-	$(application+'_menu_expand').hide();
-	$(application+'_menu_space').show();
-	Effect.Appear($(application+'_menu'), { duration: 0.4 });
+function expandMenu(){
+	$('menu_expand').hide();
+	$('menu_space').show();
+	Effect.Appear($('menu'), { duration: 0.4 });
 }
 
 function collapseMenu(application){
-	Effect.Fade($(application+'_menu'), { duration: 0.4 });
-	$(application+'_menu_space').hide();
-	Effect.Appear($(application+'_menu_expand'), { duration: 0.4 });
+	Effect.Fade($('menu'), { duration: 0.4 });
+	$('menu_space').hide();
+	Effect.Appear($('menu_expand'), { duration: 0.4 });
 }
 
 function x(element){
@@ -53,3 +53,9 @@ function cancel(element){
 	Effect.Fade(element, { duration: 0.3 }); 
 	$('adder-container').hide();
 }
+
+function setColor(id,color){
+	$(id).value = color;
+	$(id).setStyle({ background: '#'+color, color: '#'+color});
+}
+
