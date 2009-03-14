@@ -1,13 +1,7 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  name: MyString
-  color: 1
-  username: MyString
-  password: MyString
-
-two:
-  name: MyString
-  color: 1
-  username: MyString
-  password: MyString
+dfaraday:
+  name: Daniel Faraday
+  color: 808000
+  username: dfaraday
+  hashed_password: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3 # test

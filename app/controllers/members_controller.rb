@@ -1,4 +1,6 @@
 class MembersController < ApplicationController
+  before_filter :login_required, :except => [:login, :logout]
+
   # GET /members
   # GET /members.xml
   def index
@@ -42,7 +44,7 @@ class MembersController < ApplicationController
   # POST /members.xml
   def create
     @member = Member.new(params[:member])
-
+  
     if(params[:dynamic])
       @member.save
       render :inline => "<script>location.reload(true);</script>"
@@ -64,10 +66,14 @@ class MembersController < ApplicationController
   # PUT /members/1.xml
   def update
     @member = Member.find(params[:id])
-
     if(params[:dynamic])
       @member.update_attributes(params[:member])
-      render :inline => "<script>location.reload(true);</script>"
+      if @member.save
+        render :inline => "<script>location.reload(true);</script>"
+      else
+        flash[:notice] = "Username Already Taken"
+        render :inline => "<script>location.reload(true);</script>"
+      end
     else
       respond_to do |format|
         if @member.update_attributes(params[:member])
@@ -96,14 +102,34 @@ class MembersController < ApplicationController
 
   def show_form
     if(params[:member])
-	@member = Member.find(params[:member])
+	    @member = Member.find(params[:member])
     else
-	@member = Member.new
+	    @member = Member.new
     end
 
     render :update do |page|
-	page.replace_html "dummy-for-actions", :partial => 'form', :locals => { :member => @member }
+	    page.replace_html "dummy-for-actions", :partial => 'form', :locals => { :member => @member }
+    end
+  end
+  
+  def login
+    if request.post?
+      session[:member] = Member.authenticate(params[:member][:username], params[:member][:password])
+      if session[:member]
+        redirect_to_stored
+      else
+        flash[:notice] = "Access Denied"
+      end
     end
   end
 
+  def logout
+    session[:member] = nil
+    if(request.referer)
+      redirect_to(request.referer)
+    else
+      redirect_to(projects_url)
+    end
+  end
 end
+

@@ -1,9 +1,8 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  status: MyString
+  status: Status One
   task_id: 1
-
-two:
-  status: MyString
-  task_id: 1
+  color: 1
+  relative_position_x: 100
+  relative_position_y: 100

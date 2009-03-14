@@ -1,9 +1,22 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  name: MyString
+  name: 
   task_id: 1
+  relative_position_x: 100
+  relative_position_y: 20
+  member_id: 1
 
 two:
-  name: MyString
-  task_id: 1
+  name: 
+  task_id: 2
+  relative_position_x: 100
+  relative_position_y: 200
+  member_id: 2
+
+three:
+  name: 
+  task_id: 2
+  relative_position_x: 100
+  relative_position_y: 220
+  member_id: 1

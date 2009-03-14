@@ -1,4 +1,6 @@
 class TeamsController < ApplicationController
+  #before_filter :login_required
+
   # GET /teams
   # GET /teams.xml
   def index

@@ -40,13 +40,6 @@
     <td><%=h truncate(story.how_to_demo) %></td>
   </tr>
 <% end %>
-<tr id="table_footer">
-	<td colspan=6>
-		<%= link_to 'Product Taskboard', :controller => "projects", :action => 'show', :id => @project.id -%> |
-		<%= link_to 'Manage Stories', :controller => "stories", :project => @project.id -%> |
-		<%= link_to 'New story', :controller => "stories", :action => "new", :project => @project.id %>
-	</td>
-</tr>
 </table>
 <div id="dummy-for-actions">
 </div>

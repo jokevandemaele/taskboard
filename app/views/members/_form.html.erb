@@ -8,7 +8,7 @@ $('adder-container').show();
     <%= f.label :color %> <%= f.text_field :color, :size => 5 %><br /> 
 
     <%= f.label :username %> <%= f.text_field :username %><br />
-    <%= f.label :password %> <%= f.text_field :password %><br />
+    <%= f.label :password %> <%= f.password_field :password %><br />
 
     <%= button_to_function "Cancel", "cancel($('form-add-member'));", :id => "form-add-member-cancel"-%>
     <%= hidden_field_tag(:dynamic, "true") %>

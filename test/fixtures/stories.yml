@@ -1,17 +1,32 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  name: MyString
+  name: NotStartedStory
   project_id: 1
-  importance: 1
-  estimate: 1
-  how_to_demo: MyText
-  notes: MyText
+  priority: 10
+  size: 100
+  how_to_demo: DemoLikeThat
+  requirement: Requirement
+  status: not_started
+  realid: TS101
 
 two:
-  name: MyString
+  name: InProgressStory
   project_id: 1
-  importance: 1
-  estimate: 1
-  how_to_demo: MyText
-  notes: MyText
+  priority: 100
+  size: 100
+  how_to_demo: DemoLikeThat
+  requirement: Requirement
+  status: in_progress
+  realid: TS101
+
+three:
+  name: DoneStory
+  project_id: 1
+  priority: -1
+  size: 100
+  how_to_demo: DemoLikeThat
+  requirement: Requirement
+  status: finished
+  realid: TS101
+
