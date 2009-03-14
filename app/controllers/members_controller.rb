@@ -1,5 +1,5 @@
 class MembersController < ApplicationController
-  before_filter :login_required, :except => [:login, :logout]
+  #before_filter :login_required, :except => [:login, :logout]
 
   # GET /members
   # GET /members.xml
