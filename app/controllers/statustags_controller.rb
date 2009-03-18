@@ -1,5 +1,5 @@
 class StatustagsController < ApplicationController
-  #before_filter :login_required
+  before_filter :login_required
   # GET /statustags
   # GET /statustags.xml
   def index
