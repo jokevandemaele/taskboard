@@ -34,17 +34,17 @@
 	<%= drop_receiving_element("trash", 
 		:accept => "task", 
 		:with   => "'task=' + (element.id.split('-').last())", 
-		:url => { :action=>:destroy_task}) 
+		:url => { :controller => :tasks, :action=>:destroy_task}) 
 	%>
 	<%= drop_receiving_element("trash", 
 		:accept => "statustag", 
 		:with   => "'statustag=' + (element.id.split('-').last())", 
-		:url => { :action=>:destroy_statustag}) 
+		:url => { :controller => :statustags, :action=>:destroy_statustag}) 
 	%>
 	<%= drop_receiving_element("trash", 
 		:accept => "nametag", 
 		:with   => "'nametag=' + (element.id.split('-').last())", 
-		:url => { :action=>:destroy_nametag}) 
+		:url => { :controller => :nametags, :action=>:destroy_nametag}) 
 	%>
 	<%= drop_receiving_element("trash", 
 		:accept => "form-add-task"

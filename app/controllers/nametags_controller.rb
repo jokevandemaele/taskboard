@@ -92,4 +92,46 @@ class NametagsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  # These functions are used by the taskboard. TODO: See how to avoid them
+  def add_nametag
+    @task = Task.find(params[:task])
+    @member = Member.find(params[:member])
+    @tag = Nametag.new
+    @tag.relative_position_x = params[:x]
+    @tag.relative_position_y = params[:y]
+    @tag.task = @task
+    @tag.member = @member
+    @tag.save
+    render :update do |page|
+      page.replace_html "#{@task.status}-#{@task.story_id}", :partial => "tasks/tasks_by_status", :locals => { :tasks => @task.story.tasks, :status => @task.status } 
+      page.replace_html "menu_nametags", :partial => "taskboard/menu_nametags", :locals => { :members => @task.story.project.members }
+    end
+  end
+
+  def update_nametag
+    @task = Task.find(params[:task])
+    @tag = Nametag.find(params[:id])
+    @tag.relative_position_x = params[:x]
+    @tag.relative_position_y = params[:y]
+    @tag.task = @task
+    @tag.save
+    render :update do |page|
+      page.replace_html "dummy-for-actions", :partial => "empty_dummy", :locals => { :tasks => @task.story.tasks, :status => @task.status } 
+    end
+  end
+
+  def destroy_nametag
+    @tag = Nametag.find(params[:nametag])
+    id = @tag.task.id
+    old_status = @tag.task.status
+    story = @tag.task.story
+    story_id = @tag.task.story_id
+    @tag.destroy
+    
+    render :update do |page|
+      page.replace_html "#{old_status}-#{story_id}", :partial => "tasks/tasks_by_status", :locals => { :tasks => story.tasks, :status => old_status } 
+    end
+  end
+  
 end

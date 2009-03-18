@@ -90,4 +90,44 @@ class TasksController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  # These functions are used by the taskboard. TODO: See how to avoid them
+  def destroy_task
+    @task = Task.find(params[:task])
+    id = @task.id
+    old_status = @task.status
+    story = @task.story
+    story_id = @task.story_id
+    @task.destroy
+    
+    render :update do |page|
+      page.replace_html "#{old_status}-#{story_id}", :partial => "tasks/tasks_by_status", :locals => { :tasks => story.tasks, :status => old_status } 
+    end
+  end
+
+  def show_form
+    @story = Story.find(params[:story])
+    @task = Task.new
+    render :update do |page|
+      page.replace_html "dummy-for-actions", :partial => 'tasks/form', :locals => { :task => @task, :story => @story, :status => params[:status], :x => params[:x],:y => params[:y] }
+    end
+  end
+
+  def update_task
+    @task = Task.find(params[:task])
+    old_status = @task.status
+    @task.status = params[:status]
+    @task.relative_position_x = params[:x]
+    @task.relative_position_y = params[:y]
+    if(@task.status == 'finished')
+	@task.remove_tags
+    end
+    @task.save
+
+    render :update do |page|
+      page.replace_html "#{params[:status]}-#{@task.story_id}", :partial => "tasks/tasks_by_status", :locals => { :tasks => @task.story.tasks, :status => params[:status] } 
+      page.replace_html "#{old_status}-#{@task.story_id}", :partial => "tasks/tasks_by_status", :locals => { :tasks => @task.story.tasks, :status => old_status } 
+    end
+  end
+
 end

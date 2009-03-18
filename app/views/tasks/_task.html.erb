@@ -28,30 +28,30 @@
 	<%= drop_receiving_element("task-#{task.id}", 
 		:accept => "create_nametag", 
 		:with   => "'id=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ ($(element).cumulativeOffset().left - $('task-#{task.id}').cumulativeOffset().left)+ '&y='+ ($(element).cumulativeOffset().top - $('task-#{task.id}').cumulativeOffset().top)", 
-		:url => { :action=>:update_nametag }
+		:url => { :controller => :nametags, :action=>:update_nametag }
 		) 
 	%>
 	<%= drop_receiving_element("task-#{task.id}", 
 		:accept => "add_status", 
 		:with   => "'status=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ (x($(element)) - x($('task-#{task.id}'))) + '&y='+ (y($(element))-y($('task-#{task.id}')))", 
-		:url => { :controller => 'projects', :action=>:add_statustag }) 
+		:url => { :controller => :statustags, :action=>:add_statustag }) 
 	%>
 	<%= drop_receiving_element("task-#{task.id}", 
 		:accept => "statustag", 
 		:with   => "'id=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ (x($(element)) - x($('task-#{task.id}'))) + '&y='+ (y($(element))-y($('task-#{task.id}')))", 
-		:url => { :controller => 'projects', :action=>:update_statustag }) 
+		:url => { :controller => :statustags, :action=>:update_statustag }) 
 	%>
 
 
 	<%= drop_receiving_element("task-#{task.id}", 
 		:accept => "add_nametag", 
 		:with   => "'member=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ (x($(element)) - x($('task-#{task.id}'))) + '&y=' + (y($(element))-y($('task-#{task.id}'))+88)", 
-		:url => { :controller => 'projects', :action=>:add_nametag }) 
+		:url => { :controller => :nametags, :action=>:add_nametag }) 
 	%>
 	<%= drop_receiving_element("task-#{task.id}", 
 		:accept => "nametag", 
 		:with   => "'id=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ (x($(element)) - x($('task-#{task.id}'))) + '&y='+ (y($(element))-y($('task-#{task.id}')))", 
-		:url => { :controller => 'projects', :action=>:update_nametag }) 
+		:url => { :controller => :nametags, :action=>:update_nametag }) 
 	%>
 <% end %>
 <%= draggable_element "task-#{task.id}", :revert => '"failure"'%>

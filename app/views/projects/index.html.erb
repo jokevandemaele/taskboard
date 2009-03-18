@@ -23,7 +23,7 @@
 		</ul>
 		
 		[ 
-		<%= link_to 'Taskboard', project_path(project) %> | 
+		<%= link_to 'Taskboard', :controller => 'taskboard', :action => 'show', :id => project.id %> | 
 		<%= link_to 'Edit', edit_project_path(project) %> |
         	<%= link_to 'Add Team', :action => 'add_team_to_project', :id => project %> | 
  
