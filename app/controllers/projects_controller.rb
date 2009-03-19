@@ -15,13 +15,8 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.xml
   def show
-    @project = Project.find(params[:id])
-    @stories_by_priority = @project.stories_in_progress
-    @members = @project.members
-
     respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @project }
+      format.html { redirect_to(taskboard_url) }
     end
   end
 
