@@ -19,7 +19,8 @@ Effect.ScrollTo($('adder-container'), {duration:0.3});
 			<div class="task-container-cell">	
 				<%= f.text_field :name, 
 					:value => "Enter Task Here", 
-					:id => "form-add-task-task_name" 
+					:id => "form-add-task-task_name",
+					:onClick => "this.clear();"
 				-%>
 			</div>
 			</div>
@@ -34,7 +35,8 @@ Effect.ScrollTo($('adder-container'), {duration:0.3});
 			:value => "Description", 
 			:id => "form-add-task-task_description", 
 			:cols => "22", :rows => "8", 
-			:style => "" -%>
+			:onClick => "this.clear();"
+			-%>
 		</div>
 
 		<%= hidden_field_tag(:story_id, "#{story.id}") %>

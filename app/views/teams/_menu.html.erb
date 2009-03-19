@@ -2,7 +2,6 @@
 </div>
 <div id="menu">
 	<a href="#" onClick="collapseMenu('backlog');"><%= image_tag 'menu_collapse.png', :border => 0, :style => "float:left;" -%></a>
-
 	<%= link_to image_tag('menu_taskboard.png', 
 			:border => 0, 
 			:id => "menu_taskboard_image"), 
@@ -13,10 +12,10 @@
 	<%= link_to image_tag('menu_product_backlog.png', 
 			:border => 0, 
 			:id => "menu_product_backlog_image"), 
-		:controller => "backlog", 
-		:project => @project.id 
+		:controller => "backlog",
+		:action => "show",
+		:id => @project.id 
 	-%>
-
 	<%= link_to_remote image_tag('menu_add_team.png',
 				:border => 0,
 				:id => "menu_add_team_image"),

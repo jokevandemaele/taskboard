@@ -12,14 +12,14 @@
 				<% end %>
 			</div>
 			</div>
-			<a href="#" onClick="flip('task-<%= task.id -%>','back')">
+			<a href="javascript:flip('task-<%= task.id -%>','back')">
 				<%= image_tag 'task_flip.png', :alt => 'Flip', :class => 'flip-task-image' -%>
 			</a>
 		</div>
 
 		<div class="task task-back" id="task-<%= task.id -%>-back" style="display: none">
 			<div class="task-description"><%=h task.description -%></div>
-			<a id="image-link-back" href="#" onClick="flip('task-<%= task.id -%>','front')">
+			<a id="image-link-back" href="javascript:flip('task-<%= task.id -%>','front')" >
 				<%= image_tag 'task_flip.png', :alt => 'Flip', :class => 'flip-task-image-back' -%>
 			</a>
 		</div>

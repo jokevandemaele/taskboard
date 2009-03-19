@@ -4,11 +4,13 @@ class TeamsController < ApplicationController
   # GET /teams
   # GET /teams.xml
   def index
-    @teams = Team.all()
     @members = Member.all()
 
     if(params[:project])
-	@project = Project.find(params[:project])
+	    @project = Project.find(params[:project])
+	    @teams = @project.teams
+    else
+      @teams = Team.all()
     end
 
     respond_to do |format|

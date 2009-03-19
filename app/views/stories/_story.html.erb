@@ -11,7 +11,7 @@
 			<%= link_to 'Add Task', new_task_path(:story => story) %>
 		</div>
 	</td>
-	<td id="not_started-<%= story.id %>">
+	<td id="not_started-<%= story.id %>" >
 		<%= render :partial => "tasks/tasks_by_status", :locals => { :tasks => story.tasks, :status => 'not_started' } %> 
 	</td>
 	<td id="in_progress-<%= story.id %>">

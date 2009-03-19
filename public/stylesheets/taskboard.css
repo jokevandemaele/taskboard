@@ -1,13 +1,9 @@
 body{
 	margin: 0;
-	background: url(/images/taskboard_background.png) repeat-x;
 }
 
 table {
 	width: 100%;
-	border-right: 4px solid #162d50;
-	border-top: 4px solid #162d50;
-	border-bottom: 4px solid #162d50;
 	margin: 0 auto;
 	border-spacing: 0px;
 }
@@ -28,25 +24,22 @@ table th{
 	width: 15%;
 	font-size: 20px;
 	text-align: center;
-	background: url(/images/taskboard_th_background.png) repeat-x;
+	background: white;
 	padding: 10px;
-	border-left: 4px solid #162d50;
 }
 table td{
-	border-left: 4px solid #162d50;
 	padding: 15px;
-}
-.listing-even {
-	background: #d7e3f4;
-}
-.listing-odd {
-	background: #afc6e9;
 }
 
 #container {
 	width: 100%;
 }
-
+.listing-even {
+	background: #d7e2f4;
+}
+.listing-odd {
+	background: #afc6e9;
+}
 /* Task Style */
 .task {
 	margin: 0 auto;
@@ -137,6 +130,7 @@ table td{
 	background: none; 
 	border: none; 
 	text-align: center;
+	color: #4d4d4d;
 }
 #form-add-task-task_description{
 	background: none; 
@@ -167,98 +161,47 @@ table td{
 }
 .story{
 	width: 180px;
-	height: 360px;
+	height: 188px;
 	background: url('/images/story.png') no-repeat left; 
 }
-
-.story-field-label, .story-field-title {
-	position: relative;
-	text-align: center;
-	width: 176px;
-
-}
-.story-number-field {
-	width: 117px;
-	height: 48px;
-	position:relative;
-}
-
-.story-field-title {
-	font-size: 20px;
+.story-field-realid{
 	font-weight: bold;
-	top: 20px;
+	position:relative;
+	top:20px;
+	text-align: right;
+	padding-right: 10px;
 }
-.story-field-table {
-	display: table;
-	position: relative;
-	top: 10px;
-	left: 30px;
-}
-.story-field-cell {
-	display: table-cell;
-	vertical-align: middle;
-	width: 118px;
-	height: 48px;
-	border: 4px solid black;
-	background: white;
-	padding: 0px;
-	margin: 0px;
-}
-
-.story-field-label-priority, .story-field-label-size {
-	top: 20px;
-}
-
-.story-number-field-priority, .story-number-field-size {
-	margin: 0px;	
-	font-size: 40px;
+.story-field-name {
+	position:relative;
+	top:5px;
+	font-size: 18px;
 	text-align: center;
 }
-.story-field-back-label{
-	position: relative;
+.story-field-label-priority {
+	padding-top: 5px;
+	margin: 0;
 	text-align: center;
-	width: 176px;
-}
-
-.story-text-field{
-	overflow: auto;
 	position:relative;
-	left: 10px;
+	top: -10px;
 }
-
-.story-field-label-requirement{
-	top: -30px;
+.story-field-number-priority {
+	font-size: 24px;
+	font-weight: bold;
+	position: relative;
+	top: -25px;
+	text-align: center;
 }
-
-.story-text-field-requirement{
-	top: -35px;
-}
-
-.story-field-label-howto{
-	top: -35px;
-}
-
-.story-text-field-howto{
-	top: -35px;
-}
-
-.story-text-field {
-	overflow: auto;
-	width: 147px;
-	height: 124px;	
-	border: 4px solid black;	
-	background: white;
-}
-
-.flip-story-image {
+.story-field-label-size{
+	text-align: center;
 	position:relative;
-	left: 152px;
-	top: 332px;
-	border: none;
-	z-index:1;
-}	
-
-
+	top: -45px;	
+}
+.story-field-number-size {
+	text-align: center;
+	position:relative;
+	top: -63px;
+	font-size: 18px;	
+}
 /* Nametags and Statustags Style */
 .nametag {
 	width: 88px;

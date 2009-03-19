@@ -1,44 +1,25 @@
 	<td class="story-td">
 		<div class="story" id="storycard-<%= story.id -%>">
-			<a href="#" onClick="flip('storycard-<%= story.id -%>','back')">
-				<%= image_tag 'story_flip.png', :alt => 'Flip', :class => 'flip-story-image' -%>
-			</a>
 			<div class="story-left-column">
-				<p class="story-field-title"><%= story.realid %></p>
-				<p class="story-field-title"><%= story.name %></p>
-				<p class="story-field-label story-field-label-priority">Priority:</p>
-				<div class="story-field-table">								
-				<div class="story-field-cell">
-					<p class="story-number-field-priority"><%= story.priority %></p>
-				</div>
-				</div>
-				
-				<p class="story-field-label story-field-label-size">Size:</p>
-				<div class="story-field-table">								
-				<div class="story-field-cell">
-					<p class="story-number-field-size"><%= story.size %></p>
-				</div>
-				</div>
-
+				<p class="story-field-realid"><%= story.realid %></p>
+				<p class="story-field-name"><%= story.name[0..30] %><%= 
+				if(story.name.size > 30) 
+					"..."
+				end %></p>
+				<p class="story-field-label-priority">Priority:</p>
+				<p class="story-field-number-priority"><%= story.priority %></p>
+				<p class="story-field-label-size">Size:</p>
+				<p class="story-field-number-size"><%= story.size %></p>
 			</div>
 		</div>
-		<div class="story" id="storycard-<%= story.id -%>-back" style="display:none;">
-			<a href="#" onClick="flip('storycard-<%= story.id -%>','front')">
-				<%= image_tag 'story_flip.png', :alt => 'Flip', :class => 'flip-story-image' -%>
-			</a>
-			<p class="story-field-back-label story-field-label-requirement">Requirement:</p>
-			<p class="story-field story-text-field story-text-field-requirement"><%= story.requirement %></p>
-			<p class="story-field-back-label story-field-label-howto">How to demo:</p>
-			<p class="story-field story-text-field story-text-field-howto"><%= story.how_to_demo %></p>
-		</div>
 	</td>
-	<td id="not_started-<%= story.id %>">
+	<td id="not_started-<%= story.id %>" style="<%= taskboard_border_style(@color, [ "left", "bottom"]) %>">
 		<%= render :partial => "tasks/tasks_by_status", :locals => { :tasks => story.tasks, :status => 'not_started' } %> 
 	</td>
-	<td id="in_progress-<%= story.id %>">
+	<td id="in_progress-<%= story.id %>" style="<%= taskboard_border_style(@color, [ "left", "bottom"]) %>">
 		<%= render :partial => "tasks/tasks_by_status", :locals => { :tasks => story.tasks, :status => 'in_progress' } %> 
 	</td>
-	<td id="finished-<%= story.id %>">
+	<td id="finished-<%= story.id %>" style="<%= taskboard_border_style(@color, [ "left", "right", "bottom"]) %>">
 		<%= render :partial => "tasks/tasks_by_status", :locals => { :tasks => story.tasks, :status => 'finished' } %> 
 	</td>
 	

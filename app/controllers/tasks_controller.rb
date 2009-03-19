@@ -50,6 +50,9 @@ class TasksController < ApplicationController
     @task = Task.new(params[:task])
     @task.story = Story.find(params[:story_id])
     @task.status = params[:status]
+    if params[:task][:description] == "Description"
+      @task.description = ""
+    end
     
     respond_to do |format|
       if @task.save

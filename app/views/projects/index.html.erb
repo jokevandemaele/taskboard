@@ -23,9 +23,11 @@
 		</ul>
 		
 		[ 
-		<%= link_to 'Taskboard', :controller => 'taskboard', :action => 'show', :id => project.id %> | 
+		<%= link_to 'Taskboard', :controller => :taskboard, :action => :show, :id => project.id %> | 
+		<%= link_to 'Backlog', :controller => :backlog, :action => :show, :id => project.id %> | 
+		<%= link_to 'Manage Teams', :controller => :teams, :project => project.id %> | 
 		<%= link_to 'Edit', edit_project_path(project) %> |
-        	<%= link_to 'Add Team', :action => 'add_team_to_project', :id => project %> | 
+
  
 		<%= link_to 'Destroy', project, :confirm => 'Are you sure?', :method => :delete %>
 		]
@@ -34,10 +36,7 @@
 <% end %>
 <tr id="table_footer">
 	<td>
-		<%= link_to 'New project', new_project_path %> | 
-		<%= link_to 'Manage Teams', teams_path %> | 
-		<%= link_to 'Manage Members', members_path %>
-
+		<%= link_to 'New project', new_project_path %>
 	</td>
 </tr>
 </table>
