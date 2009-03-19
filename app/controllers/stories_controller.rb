@@ -106,7 +106,7 @@ class StoriesController < ApplicationController
     @story.status = 'in_progress'
     @story.save
     respond_to do |format|
-      format.html { redirect_to :controller => 'backlog', :project => params[:project]}
+      format.html { redirect_to :controller => :backlog, :action => :show, :id => params[:project] }
       format.xml  { head :ok }
     end
   end
@@ -130,7 +130,7 @@ class StoriesController < ApplicationController
     end
     @story.save
     respond_to do |format|
-      format.html { redirect_to :controller => 'backlog', :project => params[:project]}
+      format.html { redirect_to :controller => :backlog, :action => :show, :id => params[:project] }
       format.xml  { head :ok }
     end
   end
@@ -141,7 +141,7 @@ class StoriesController < ApplicationController
     @story.priority = -1
     @story.save
     respond_to do |format|
-      format.html { redirect_to :controller => 'backlog', :project => params[:project]}
+      format.html { redirect_to :controller => :backlog, :action => :show, :id => params[:project] }
       format.xml  { head :ok }
     end
   end

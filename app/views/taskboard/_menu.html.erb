@@ -45,7 +45,7 @@
 	<%= drop_receiving_element("trash", 
 		:accept => "nametag", 
 		:with   => "'nametag=' + (element.id.split('-').last())", 
-		:url => { :controller => :nametags, :action=>:destroy_nametag}) 
+		:url => { :controller => :nametags, :action => :destroy_nametag }) 
 	%>
 	<%= drop_receiving_element("trash", 
 		:accept => "form-add-task"

@@ -33,7 +33,7 @@
 	%>
 	<%= drop_receiving_element("task-#{task.id}", 
 		:accept => "add_status", 
-		:with   => "'status=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ (x($(element)) - x($('task-#{task.id}'))) + '&y='+ (y($(element))-y($('task-#{task.id}')))", 
+		:with   => "'status=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ (x($(element)) - x($('task-#{task.id}')) + window.pageXOffset) + '&y='+ (y($(element))-y($('task-#{task.id}')) + window.pageYOffset)", 
 		:url => { :controller => :statustags, :action=>:add_statustag }) 
 	%>
 	<%= drop_receiving_element("task-#{task.id}", 
@@ -45,7 +45,7 @@
 
 	<%= drop_receiving_element("task-#{task.id}", 
 		:accept => "add_nametag", 
-		:with   => "'member=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ (x($(element)) - x($('task-#{task.id}'))) + '&y=' + (y($(element))-y($('task-#{task.id}'))+88)", 
+		:with   => "'member=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ (x($(element)) - x($('task-#{task.id}'))) + '&y=' + (y($(element))-y($('task-#{task.id}'))+ 88 + window.pageYOffset) ", 
 		:url => { :controller => :nametags, :action=>:add_nametag }) 
 	%>
 	<%= drop_receiving_element("task-#{task.id}", 
