@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090311102333) do
+ActiveRecord::Schema.define(:version => 20090320133115) do
 
   create_table "members", :force => true do |t|
     t.string   "name"
@@ -18,6 +18,11 @@ ActiveRecord::Schema.define(:version => 20090311102333) do
     t.string   "hashed_password"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "members_roles", :id => false, :force => true do |t|
+    t.integer "member_id"
+    t.integer "role_id"
   end
 
   create_table "members_teams", :id => false, :force => true do |t|
@@ -44,6 +49,12 @@ ActiveRecord::Schema.define(:version => 20090311102333) do
   create_table "projects_teams", :id => false, :force => true do |t|
     t.integer "project_id"
     t.integer "team_id"
+  end
+
+  create_table "roles", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "statustags", :force => true do |t|

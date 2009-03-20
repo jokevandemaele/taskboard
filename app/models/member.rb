@@ -3,6 +3,7 @@ require 'digest/sha1'
 class Member < ActiveRecord::Base
   # Relations
   has_and_belongs_to_many :teams
+  has_and_belongs_to_many :roles
   has_many :nametags
 
   #Validations
@@ -10,8 +11,6 @@ class Member < ActiveRecord::Base
   validates_length_of :username, :within => 3..40
   validates_length_of :password, :within => 1..40
   validates_presence_of :name, :username, :password
-  #validates_confirmation_of :password
-
   #validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => "Invalid email"
 
   attr_accessor :password, :password_confirmation
@@ -25,7 +24,6 @@ class Member < ActiveRecord::Base
   # authenticate: this method is used when a visitor tryies to login
   def self.authenticate(username, password)
     member = Member.first :conditions => "username = '#{username}'"
-    logger.error("------------------------ FOUND: #{member.inspect} -----------------------")
     return nil if member.nil?
     return member if Member.encrypt(password)==member.hashed_password
   end

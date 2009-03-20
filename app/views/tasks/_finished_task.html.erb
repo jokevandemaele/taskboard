@@ -1,0 +1,27 @@
+	<td class="task-list-item" id="td-task-<%= task.id -%>">
+		<div class="task" id="task-<%= task.id -%>">
+			<div class="task-container-table">	
+			<div class="task-container-cell">	
+				<p class="task-name"><%=h task.name -%></p>
+
+				<% for nametag in task.nametags %>
+					<%= render :partial => "nametags/show", :locals => { :nametag => nametag } %> 
+				<% end %>
+				<% for statustag in task.statustags %>
+					<%= render :partial => "statustags/show", :locals => { :statustag => statustag } %> 
+				<% end %>
+			</div>
+			</div>
+			<a href="javascript:flip('task-<%= task.id -%>','back')">
+				<%= image_tag 'task_flip.png', :alt => 'Flip', :class => 'flip-task-image' -%>
+			</a>
+		</div>
+
+		<div class="task task-back" id="task-<%= task.id -%>-back" style="display: none">
+			<div class="task-description"><%=h task.description -%></div>
+			<a id="image-link-back" href="javascript:flip('task-<%= task.id -%>','front')" >
+				<%= image_tag 'task_flip.png', :alt => 'Flip', :class => 'flip-task-image-back' -%>
+			</a>
+		</div>
+	</td>
+<%= draggable_element "task-#{task.id}", :revert => '"failure"'%>

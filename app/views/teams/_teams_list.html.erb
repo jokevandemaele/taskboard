@@ -4,12 +4,12 @@
 			<%= team.name -%> (<%= team.members.count -%>) [ <%= link_to_remote 'edit', :url => { :action => 'show_form', :team => team.id, :project => project.id } -%> ]
 		</div>
 		<div class="team_paginate">
-			<%= image_tag "less.png", :alt => "more", :class => "less" %>
-			<%= image_tag "more.png", :alt => "more", :class => "more" %>
+			<a href="javascript:team_<%= team.id -%>_members_slider.prev();"><%= image_tag "less.png", :id => "team_#{team.id}_members_slider_prev", :alt => "more", :class => "less", :style => "border: none;" -%></a>
+			<a href="javascript:team_<%= team.id -%>_members_slider.next();"><%= image_tag "more.png", :id => "team_#{team.id}_members_slider_next", :alt => "more", :class => "more", :style => "border: none;" -%></a>
 		</div>
-		<table id="team-members-list-<%= team.id %>">
+		<div id="team-members-list-<%= team.id %>">
 			<%= render :partial => 'team_members_list', :locals => {:team => team } -%>
-		</table>
+		</div>
 	</div>
 	<%= drop_receiving_element("team-#{team.id}", 
 		:accept => "add_member", 

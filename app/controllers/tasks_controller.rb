@@ -128,8 +128,8 @@ class TasksController < ApplicationController
     @task.save
 
     render :update do |page|
-      page.replace_html "#{params[:status]}-#{@task.story_id}", :partial => "tasks/tasks_by_status", :locals => { :tasks => @task.story.tasks, :status => params[:status] } 
-      page.replace_html "#{old_status}-#{@task.story_id}", :partial => "tasks/tasks_by_status", :locals => { :tasks => @task.story.tasks, :status => old_status } 
+      page.replace_html "#{params[:status]}-#{@task.story_id}", :partial => "tasks/tasks_by_status", :locals => { :story => @task.story, :tasks => @task.story.tasks, :status => params[:status] } 
+      page.replace_html "#{old_status}-#{@task.story_id}", :partial => "tasks/tasks_by_status", :locals => { :story => @task.story, :tasks => @task.story.tasks, :status => old_status } 
     end
   end
 

@@ -1,23 +1,15 @@
-		<% count = 0 %>
-		  <tr>
+		<% team_members_list = Array.new %>
 		<% for member in team.members %>
-			<td>
 				<%= render :partial => "members/show_with_picture", 
 					:locals => { :id_text => "team-#{team.id}-member", 
 					:class_text => "team_member", 
 					:member_name_class => "team_member",
 					:member => member,
 					:edit => false } -%>
-				<%= draggable_element "team-#{team.id}-member-#{member.id}", :revert => "'failure'" -%>
-
-			</td>
-		<% if count == 2 %>
-		  </tr>
-		  <tr>
-		  <% count = 0 %>
-		<% else -%>
-		  <% count += 1 %>
-		<% end -%>
-		<% end -%>
-		  </tr>	
-
+			<% team_members_list << "team-#{team.id}-member-#{member.id}" -%>
+			<%= draggable_element "team-#{team.id}-member-#{member.id}", :revert => "'failure'" -%>
+		<% end %>
+		<script>
+			team_<%= team.id -%>_members_slider = new Slider(<%= team_members_list.to_json %>,6,"team_<%= team.id -%>_members_slider");
+		</script>
+		
