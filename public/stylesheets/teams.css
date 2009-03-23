@@ -23,6 +23,7 @@
 	font-weight: bold;
 	float: left;
 	width: 88px;
+	height: 110px;
 	text-align: center;
 	padding: 5px;
 }
@@ -30,6 +31,7 @@
 .member-edit {
 	border: none;
 	position: relative;
-	top: -37px;
-	left: 25px;
+	top: 5px;
+	left: 23px;
+	z-index: 10;
 }

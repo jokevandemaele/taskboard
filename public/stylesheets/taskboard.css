@@ -203,6 +203,11 @@ table td{
 	font-size: 18px;	
 }
 /* Nametags and Statustags Style */
+.add_nametag {
+	width: 88px;
+	height: 110px;
+	text-align: center;
+}
 .nametag {
 	width: 88px;
 	height: 24px;

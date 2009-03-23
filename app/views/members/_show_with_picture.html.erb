@@ -1,10 +1,14 @@
 <div id="<%= id_text -%>-<%= member.id -%>" class="<%= class_text %>" style="float: left;">
-	<%= image_tag 'default_av.png' %>
-	<div class="<%= member_name_class -%> .slide_item"><%= member.formatted_nametag %></div>
-	<% if edit -%>	
+	<% if edit -%>
 		<%= link_to_remote image_tag('member_edit.png', :class => "member-edit"),
 			:url => {:controller => 'members', :action => 'show_form', :member => member },
 			:hover => 'member_edit_hover.png', :class => 'member-edit' -%>
-	<% end -%>	
+	<% end -%><br />
+	<% member.roles.each do |role| %>
+		<%= image_tag('role_product_owner.png', :alt => "Product Owner", :style => "position: relative; top: #{50 - ((edit) ? 0 : 8)}px; left:0px; z-index: 10;") if role.id == 2 %>
+		<%= image_tag('role_scrum_master.png', :alt => "Scrum Master", :style => "position: relative; top: #{50 - ((edit) ? 0 : 8)}px; left:0px; z-index: 10;") if role.id == 3 %>
+	<% end %>
+	<%= image_tag 'default_av.png', :style => "position:absolute; top: 0px; left: 0px;" %>
+	<div class="<%= member_name_class -%> .slide_item" style = "position:absolute; top: 88px;"><%= member.formatted_nametag %></div>
 	</div>
 

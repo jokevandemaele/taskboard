@@ -68,6 +68,20 @@ class MembersController < ApplicationController
     @member = Member.find(params[:id])
     if(params[:dynamic])
       @member.update_attributes(params[:member])
+      @roles = Role.all
+
+      if params[:roles].nil?
+        @member.roles.each {|role| @member.roles.delete(role)}
+      else
+        @roles.each do |role|
+          if params[:roles].include?("#{role.id}")
+            @member.roles << role if !@member.roles.include?(role)
+          else
+            @member.roles.delete(role)
+          end
+        end
+      end
+
       if @member.save
         render :inline => "<script>location.reload(true);</script>"
       else
@@ -107,6 +121,10 @@ class MembersController < ApplicationController
 	    @member = Member.new
     end
 
+    @roles = Role.all
+    @roles_selected = Array.new
+    @roles.each { |role| @roles_selected << role.id if (@member.roles.include?(role)) }
+    
     render :update do |page|
 	    page.replace_html "dummy-for-actions", :partial => 'form', :locals => { :member => @member }
     end

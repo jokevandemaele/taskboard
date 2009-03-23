@@ -10,9 +10,14 @@ $('adder-container').show();
     <%= f.label :username %> <%= f.text_field :username %><br />
     <%= f.label :password %> <%= f.password_field :password %><br />
 
+	<% if !@roles.nil? %>
+			<%= f.label :roles -%><br />
+		    <%= select_tag(:roles, 
+			options_from_collection_for_select(@roles, "id", "name", @roles_selected), :multiple => true, :style => "width: 100%;") -%><br />
+	<% end -%> 
+	<br />
     <%= button_to_function "Cancel", "cancel($('form-add-member'));", :id => "form-add-member-cancel"-%>
     <%= hidden_field_tag(:dynamic, "true") %>
-
     <%= f.submit "Save", :id => "form-add-member-submit" -%>
 <% end %>
 <script>
