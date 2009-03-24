@@ -50,6 +50,12 @@ class TeamsController < ApplicationController
   # POST /teams.xml
   def create
     @team = Team.new(params[:team])
+    if params[:project_id]
+        @project = Project.find(params[:project_id])
+        @project.teams << @team
+        @project.save
+    end
+
     if(params[:dynamic])
       @team.save
       render :inline => "<script>location.reload(true);</script>"
