@@ -2,8 +2,8 @@
 		<div class="story" id="storycard-<%= story.id -%>">
 			<div class="story-left-column">
 				<p class="story-field-realid"><%= story.realid %></p>
-				<p class="story-field-name"><%= story.name[0..30] %><%= 
-				if(story.name.size > 30) 
+				<p class="story-field-name"><%= story.name[0..20] %><%= 
+				if(story.name.size > 20) 
 					"..."
 				end %></p>
 				<p class="story-field-label-priority">Priority:</p>

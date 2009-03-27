@@ -112,8 +112,8 @@ class StoriesController < ApplicationController
   end
 
   def edit_priority
-	@story = Story.find(params[:id])
-        render :partial => "edit_priority", :locals => {:story => @story }
+	  @story = Story.find(params[:id])
+    render :partial => "edit_priority", :locals => {:story => @story }
   end
 
   def update_priority

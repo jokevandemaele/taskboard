@@ -1,0 +1,12 @@
+<%	remote_form_for @task, :update => {:success => "task-#{task.id}-name"} do |f| %>
+				<%= f.text_field :name, 
+					:value => @task.name, 
+					:class => "form-task-task_name",
+					:id => "edit-task-#{task.id}-name",
+					:onFocus => "this.select();"
+				-%>
+				<input type="hidden" name="only_name" value="true">
+<% end -%>
+<script>
+$('edit-task-<%= task.id -%>-name').focus();
+</script>

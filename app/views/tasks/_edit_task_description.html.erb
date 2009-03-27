@@ -1,0 +1,19 @@
+<%	remote_form_for @task, :update => {:success => "task-#{task.id}-description"} do |f| %>
+				<%= f.text_area :description, 
+					:value => @task.description, 
+					:class => "form-task-task_description",
+					:id => "edit-task-#{task.id}-description",
+					:cols => "22", :rows => "10", 
+					:onFocus => "this.select();"
+				-%>
+				<input type="submit" style="position: relative; top: 110px;" value="Update" >
+
+				<%= hidden_field_tag(:story_id, "#{story.id}") %>
+				<%= hidden_field_tag(:status, "#{status}") %>
+
+				<input type="hidden" name="only_description" value="true">
+				
+<% end -%>
+<script>
+$('edit-task-<%= task.id -%>-description').focus();
+</script>

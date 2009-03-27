@@ -96,8 +96,6 @@ table td{
 	height: 138px;
 	margin: 0;
 	font-size: 12px;
-	overflow: auto;
-
 }
 
 /* Task List Style */
@@ -123,6 +121,15 @@ table td{
 	width: 180px; 
 	height: 180px;
 }
+.form-task-task_name{
+	width: 100%;
+	font-size: 18px;
+	font-weight: bold;
+	background: none; 
+	border: none; 
+	text-align: center;
+	color: #4d4d4d;	
+}
 #form-add-task-task_name {
 	width: 100%;
 	font-size: 18px;
@@ -131,6 +138,15 @@ table td{
 	border: none; 
 	text-align: center;
 	color: #4d4d4d;
+}
+.form-task-task_description{
+	background: transparent; 
+	border: none; 
+	font-size: 12px; 
+	position: absolute; 
+	top:0px; 
+	left: 2px;
+	overflow: hidden;
 }
 #form-add-task-task_description{
 	background: none; 
@@ -172,6 +188,8 @@ table td{
 	padding-right: 10px;
 }
 .story-field-name {
+	width: 160px;
+	margin: 0 auto;
 	position:relative;
 	top:5px;
 	font-size: 18px;
@@ -182,24 +200,24 @@ table td{
 	margin: 0;
 	text-align: center;
 	position:relative;
-	top: -10px;
+	top: 10px;
 }
 .story-field-number-priority {
 	font-size: 24px;
 	font-weight: bold;
 	position: relative;
-	top: -25px;
+	top: -5px;
 	text-align: center;
 }
 .story-field-label-size{
 	text-align: center;
 	position:relative;
-	top: -45px;	
+	top: -25px;	
 }
 .story-field-number-size {
 	text-align: center;
 	position:relative;
-	top: -63px;
+	top: -43px;
 	font-size: 18px;	
 }
 /* Nametags and Statustags Style */

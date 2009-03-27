@@ -70,11 +70,15 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.update_attributes(params[:task])
-        flash[:notice] = 'Task was successfully updated.'
-        format.html { redirect_to(@task) }
-        format.xml  { head :ok }
+        if(params[:task][:name])
+          format.html { render :inline => "#{@task.name}" }
+        else
+          if(params[:task][:description])
+            format.html { render :inline => "#{@task.description}" }
+          end
+        end
       else
-        format.html { render :action => "edit" }
+        format.html { render :action => "error" }
         format.xml  { render :xml => @task.errors, :status => :unprocessable_entity }
       end
     end
@@ -113,6 +117,22 @@ class TasksController < ApplicationController
     @task = Task.new
     render :update do |page|
       page.replace_html "dummy-for-actions", :partial => 'tasks/form', :locals => { :task => @task, :story => @story, :status => params[:status], :x => params[:x],:y => params[:y] }
+    end
+  end
+
+  def show_edit_task_name_form
+    @story = Story.find(params[:story])
+    @task = Task.find(params[:id])
+    render :update do |page|
+      page.replace_html "task-#{@task.id}-name", :partial => 'tasks/edit_task_name', :locals => { :task => @task, :story => @story, :status => params[:status], :x => params[:x],:y => params[:y] }
+    end
+  end
+
+  def show_edit_task_description_form
+    @story = Story.find(params[:story])
+    @task = Task.find(params[:id])
+    render :update do |page|
+      page.replace_html "task-#{@task.id}-description", :partial => 'tasks/edit_task_description', :locals => { :task => @task, :story => @story, :status => params[:status], :x => params[:x],:y => params[:y] }
     end
   end
 
