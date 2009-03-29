@@ -2,37 +2,19 @@ class MembersController < ApplicationController
   before_filter :login_required, :except => [:login, :logout]
 
   # GET /members
-  # GET /members.xml
   def index
     @members = Member.find(:all)
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @members }
-    end
   end
 
   # GET /members/1
-  # GET /members/1.xml
   def show
     @member = Member.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @member }
-    end
   end
 
   # GET /members/new
-  # GET /members/new.xml
   def new
     @member = Member.new
     @team = params[:team] if params[:team]
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @member }
-    end
   end
 
   # GET /members/1/edit
@@ -41,29 +23,41 @@ class MembersController < ApplicationController
   end
 
   # POST /members
-  # POST /members.xml
   def create
     @member = Member.new(params[:member])
   
     if(params[:dynamic])
-      @member.save
-      render :inline => "<script>location.reload(true);</script>"
-    else
-      respond_to do |format|
-        if @member.save
-          flash[:notice] = 'Member was successfully created.'
-          format.html { redirect_to(@member) }
-          format.xml  { render :xml => @member, :status => :created, :location => @member }
-        else
-          format.html { render :action => "new" }
-          format.xml  { render :xml => @member.errors, :status => :unprocessable_entity }
+      if @member.save
+        if(params[:picture_file])
+          added = @member.add_picture(params[:picture_file])
+          if( added == "ok")
+            render :inline => "<script>window.parent.location.reload(true);</script>"
+          else
+            render :inline => "<script>window.parent.location.reload(true);</script>"
+          end
         end
+      else
+        render :inline => "Error adding member"
+      end
+    else
+      if @member.save
+        if(params[:picture_file])
+          added = @member.add_picture(params[:picture_file])
+          if( added == "ok")
+            render :inline => "<script>window.parent.location.reload(true);</script>"
+          else
+            # Add error handling and report
+            render :inline => "<script>window.parent.location.reload(true);</script>"
+          end
+        end
+        redirect_to(@member)
+      else
+        render :action => "new"
       end
     end
   end
 
   # PUT /members/1
-  # PUT /members/1.xml
   def update
     @member = Member.find(params[:id])
     if(params[:dynamic])
@@ -83,37 +77,40 @@ class MembersController < ApplicationController
       end
 
       if @member.save
-        render :inline => "<script>location.reload(true);</script>"
+        if(params[:picture_file])
+          added = @member.add_picture(params[:picture_file])
+          if( added == "ok")
+            render :inline => "<script>window.parent.location.reload(true);</script>"
+          else
+            # Add error handling and report
+            render :inline => "<script>window.parent.location.reload(true);</script>"
+          end
+        end
+        #redirect_to(:controller => :teams, :project => params[:project])
       else
-        flash[:notice] = "Username Already Taken"
-        render :inline => "<script>location.reload(true);</script>"
+        render :inline => "username already taken"
       end
     else
-      respond_to do |format|
-        if @member.update_attributes(params[:member])
-          flash[:notice] = 'Member was successfully updated.'
-          format.html { redirect_to(@member) }
-          format.xml  { head :ok }
-        else
-          format.html { render :action => "edit" }
-          format.xml  { render :xml => @member.errors, :status => :unprocessable_entity }
-        end
+      if @member.update_attributes(params[:member])
+        redirect_to(@member)
+      else
+        render :action => "edit"
       end
     end
   end
 
   # DELETE /members/1
-  # DELETE /members/1.xml
   def destroy
     @member = Member.find(params[:id])
     @member.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(members_url) }
-      format.xml  { head :ok }
+    if(params[:dynamic])
+      render :inline => "<script>location.reload(true);</script>"
+    else
+      redirect_to(members_url)
     end
   end
 
+  # Member form, used to display the partial of the member's form when adding or editing them.
   def show_form
     if(params[:member])
 	    @member = Member.find(params[:member])
@@ -126,7 +123,7 @@ class MembersController < ApplicationController
     @roles.each { |role| @roles_selected << role.id if (@member.roles.include?(role)) }
     
     render :update do |page|
-	    page.replace_html "dummy-for-actions", :partial => 'form', :locals => { :member => @member }
+	    page.replace_html "dummy-for-actions", :partial => 'form', :locals => { :member => @member, :project => params[:project] }
     end
   end
   
@@ -147,6 +144,16 @@ class MembersController < ApplicationController
       redirect_to(request.referer)
     else
       redirect_to(projects_url)
+    end
+  end
+
+  def delete_member
+    @member = Member.find(params[:id])
+    @member.destroy
+    @members = Member.all()
+    
+    render :update do |page| 
+      page.replace_html "members-list", :partial => "teams/members_list", :locals => { :members => @members, :project => params[:project] }
     end
   end
 end

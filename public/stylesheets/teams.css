@@ -25,13 +25,14 @@
 	width: 88px;
 	height: 110px;
 	text-align: center;
-	padding: 5px;
+	text-align: center;
+	margin: 5px;
 }
 
 .member-edit {
 	border: none;
-	position: relative;
-	top: 5px;
-	left: 23px;
+	position: absolute;
+	top: 64px;
+	left: 45px;
 	z-index: 10;
 }

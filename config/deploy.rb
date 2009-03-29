@@ -31,6 +31,10 @@ namespace :deploy do
     sudo "ln -s #{deploy_to}/shared/db/production.sqlite3 #{deploy_to}/current/db/"
   end
 
+  task :create_member_pictures_symlink do
+    sudo "ln -s #{deploy_to}/shared/images/members #{deploy_to}/current/public/images/"
+  end
+
   task :rake_db_migrate do
     run "cd #{current_path}/ && rake RAILS_ENV=\"production\" db:migrate"
   end
@@ -41,6 +45,6 @@ namespace :deploy do
   end
 
   #after "deploy:setup", "deploy:update_owner_group"
-  after "deploy:start", "deploy:create_db_symlink", "deploy:rake_db_migrate"
+  after "deploy:update", "deploy:create_db_symlink", "deploy:rake_db_migrate", "deploy:create_member_pictures_symlink"
 end
 

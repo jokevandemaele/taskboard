@@ -2,22 +2,36 @@
 $('adder-container').show();
 </script>
 <div id="form-add-member" style="position: fixed; top: 0px; left: 0px; display: none; z-index: 100; background: white; padding: 10px; border: 5px solid #3771c8;">
-<% remote_form_for member, :update => { :success => 'dummy-for-actions' } do |f| %>
-  <%= f.error_messages %>
+<% form_for member, :html => { :multipart => true, :target => "upload_frame" } do |f| %>
+	<div id="information"></div>
+	<iframe id="upload_frame" name="upload_frame" style="display:none;"></iframe>
     <%= f.label :name %> <%= f.text_field :name %><br />
     <%= f.label :color %> <%= f.text_field :color, :size => 5 %><br /> 
 
     <%= f.label :username %> <%= f.text_field :username %><br />
-    <%= f.label :password %> <%= f.password_field :password %><br />
+	<% if member.id %>
+		<%= f.label :password %> <span id="password_field">
+			<span style="text-decoration: underline;cursor:pointer;" onClick="javascript:$('password_field').innerHTML = '<input type=password size=30 name=member[password] id=member_password />'">change password</span>
+			</span><br />
+   	<% else %>
+		<%= f.label :password %> <%= f.password_field :password %><br />
+	<% end %>
+
+		
+
+	<%= label :member, :picture %> 
+	<%= file_field_tag :picture_file %><br/>
+	<strong>INFO:</strong>The picture should be a .jpg, .png, or .gif and will be scaled to 88x88 pixels<br />
 
 	<% if !@roles.nil? %>
 			<%= f.label :roles -%><br />
 		    <%= select_tag(:roles, 
 			options_from_collection_for_select(@roles, "id", "name", @roles_selected), :multiple => true, :style => "width: 100%;") -%><br />
-	<% end -%> 
+	<% end -%>
 	<br />
     <%= button_to_function "Cancel", "cancel($('form-add-member'));", :id => "form-add-member-cancel"-%>
     <%= hidden_field_tag(:dynamic, "true") %>
+    <%= hidden_field_tag(:project, project) %>
     <%= f.submit "Save", :id => "form-add-member-submit" -%>
 <% end %>
 <script>
@@ -26,4 +40,3 @@ $('adder-container').show();
 </script>
 <% # render :partial => 'color_picker' -%>
 </div>
-

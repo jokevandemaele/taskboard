@@ -13,7 +13,7 @@
 	</div>
 	<%= drop_receiving_element("team-#{team.id}", 
 		:accept => "add_member", 
-		:with   => "'member=' + (element.id.split('-').last())+ '&team=#{team.id}'", 
+		:with   => "'member=' + (element.id.split('-').last())+ '&team=#{team.id}&project=#{project.id}'", 
 		:url => { :controller => 'teams', :action=>:add_member }) 
 	%>
 
