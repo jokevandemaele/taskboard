@@ -30,7 +30,6 @@
 		<%= render :partial => "menu_nametags", :locals => { :members => members } %> 
 	</div>
 
-
 	<%= image_tag 'menu_trash.png' , :border => 0, :id => 'trash' -%>
 	<%= drop_receiving_element("trash", 
 		:accept => "task", 
@@ -51,6 +50,8 @@
 		:accept => "form-add-task"
 		) 
 	%>
+
+	<%= render :partial => "members/member_info", :locals => { :member => session[:member] } -%>
 
 </div>
 

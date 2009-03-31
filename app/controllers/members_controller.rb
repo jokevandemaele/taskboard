@@ -25,7 +25,20 @@ class MembersController < ApplicationController
   # POST /members
   def create
     @member = Member.new(params[:member])
-  
+    @roles = Role.all
+
+    if params[:roles].nil?
+      @member.roles.each {|role| @member.roles.delete(role)}
+    else
+      @roles.each do |role|
+        if params[:roles].include?("#{role.id}")
+          @member.roles << role if !@member.roles.include?(role)
+        else
+          @member.roles.delete(role)
+        end
+      end
+    end
+    
     if(params[:dynamic])
       if @member.save
         if(params[:picture_file])

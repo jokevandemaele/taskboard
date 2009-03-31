@@ -1,7 +1,11 @@
 <% for team in teams %>
 	<div id="team-<%= team.id %>" class="team" style="border-color: #<%= team.color %>">
 		<div class="team_card">
-			<%= team.name -%> (<%= team.members.count -%>) [ <%= link_to_remote 'edit', :url => { :action => 'show_form', :team => team.id, :project => project.id } -%> ]
+			<%= team.name -%> (<%= team.members.count -%>) 
+			[ 
+				<%= link_to_remote 'edit', :url => { :action => 'show_form', :team => team.id, :project => project.id } -%> |  
+				<%= link_to_remote "delete", :url => {:controller => :teams, :action => :destroy, :id => team.id}, :confirm => 'Are you sure?', :method => :delete, :complete => "location.reload(true);" -%>
+			]
 		</div>
 		<div class="team_paginate">
 			<a href="javascript:team_<%= team.id -%>_members_slider.prev();"><%= image_tag "less.png", :id => "team_#{team.id}_members_slider_prev", :alt => "more", :class => "less", :style => "border: none;" -%></a>

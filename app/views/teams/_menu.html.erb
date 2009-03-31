@@ -56,7 +56,9 @@
 		:with   => "'id=' + (element.id.split('-').last()) + 'project=#{@project.id}'", 
 		:url => { :controller => :members, :action => :delete_member, :dynamic => true }) 
 	%>
-
+	
+	<%= render :partial => "members/member_info", :locals => { :member => session[:member] } -%>
+	
 </div>
 
 <div id="menu_expand" style="position:absolute; top: 0px; left: 0px; z-index: 9; background: url('/images/menu_collapsed_background.png') left no-repeat transparent; height: 61px;width: 69px;">

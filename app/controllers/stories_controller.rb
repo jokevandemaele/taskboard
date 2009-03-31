@@ -67,8 +67,11 @@ class StoriesController < ApplicationController
   def destroy
     @story = Story.find(params[:id])
     @story.destroy
-
-    redirect_to(stories_url)
+    if(params[:dynamic])
+      render :inline => "<script>location.reload(true);</script>"
+    else
+      redirect_to(stories_url)
+    end
   end
 
   def start_story

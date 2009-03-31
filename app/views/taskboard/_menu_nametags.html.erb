@@ -4,6 +4,7 @@
 				:class_text => "add_nametag",
 				:member_name_class => "menu_nametag nametag nametag_#{ member.color }",
 				:member => member,
-				:edit => false } -%>
+				:edit => false,
+				:highlight_loged_member => true} -%>
 <%= draggable_element "add-nametag-#{member.id}", :revert => '"failure"' -%>
 <% end %>
