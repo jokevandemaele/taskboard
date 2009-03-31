@@ -8,6 +8,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1
   def show
+    redirect_to(:controller => :taskboard, :action => :show, :id => params[:id])
   end
 
   # GET /projects/new

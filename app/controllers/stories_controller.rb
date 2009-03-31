@@ -33,8 +33,11 @@ class StoriesController < ApplicationController
     @project = Project.find(params[:project_id])
     @story.project = @project
     if(params[:dynamic])
-	    @story.save
-	    render :inline => "<script>location.reload(true);</script>"
+	    if(!@story.save)
+	      render :inline => "Error #{@story.errors.inspect}"
+      else
+        render :inline => "<script>location.reload(true);</script>"
+      end
     else
       if @story.save
         redirect_to(:controller => :projects, :action => :show , :id => @story.project_id)
@@ -95,7 +98,6 @@ class StoriesController < ApplicationController
     end
     @story.save
     redirect_to :controller => :backlog, :action => :show, :id => params[:project]
-    end
   end
 
   def finish_story
