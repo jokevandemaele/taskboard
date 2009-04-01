@@ -1,6 +1,6 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+# Read about fixtures at http://ar.rubyonrails.rg/classes/Fixtures.html
 
-one:
+NotStartedStory:
   name: NotStartedStory
   project_id: 1
   priority: 10
@@ -10,7 +10,7 @@ one:
   status: not_started
   realid: TS101
 
-two:
+InProgressStory:
   name: InProgressStory
   project_id: 1
   priority: 100
@@ -20,7 +20,7 @@ two:
   status: in_progress
   realid: TS101
 
-three:
+DoneStory:
   name: DoneStory
   project_id: 1
   priority: -1

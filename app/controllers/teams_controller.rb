@@ -75,15 +75,6 @@ class TeamsController < ApplicationController
     redirect_to(teams_url)
   end
 
-  def manage_members
-    @team = Team.find(params[:id])
-  end
-
-  def add_member_to_team
-    @team = Team.find(params[:id])
-    @members = Member.find(:all).collect { |project| [project.name, project.id] }
-  end
-
   def add_member
     @team = Team.find(params[:team])
     @member = Member.find(params[:member])

@@ -4,7 +4,7 @@ class Task < ActiveRecord::Base
   has_many :statustags, :dependent => :delete_all
 
   def remove_tags
-    self.statustags.each { |tag| tag.destroy }
-    self.nametags.each { |tag| tag.destroy }
+    self.statustags.clear
+    self.nametags.clear
   end
 end

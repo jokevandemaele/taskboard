@@ -2,6 +2,24 @@
 
 dfaraday:
   name: Daniel Faraday
-  color: 808000
+  color: 20
   username: dfaraday
   hashed_password: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3 # test
+
+jburke:
+    name: Juliet Burke
+    color: 1
+    username: jburke
+    hashed_password: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3 # test
+
+cpace:
+    name: Charlie Pace
+    color: 7
+    username: cpace
+    hashed_password: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3 # test
+
+clittleton:
+    name: Claire Littleton
+    color: 9
+    username: clittleton
+    hashed_password: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3 # test
