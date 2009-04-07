@@ -1,0 +1,22 @@
+<h1>Listing organizations</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+  </tr>
+
+<% for organization in @organizations %>
+  <tr>
+    <td><%=h organization.name %></td>
+    <td><%= link_to 'Show', organization %></td>
+    <td><%= link_to 'Edit', edit_organization_path(organization) %></td>
+    <td><%= link_to 'Destroy', organization, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+<div id="dummy-for-actions">
+</div>
+<%= link_to_remote 'New organization', :url => {:action => :show_form} -%>
+<hr />

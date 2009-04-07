@@ -1,6 +1,12 @@
 class Project < ActiveRecord::Base
+  # Associations
+  belongs_to :organization
   has_many :stories
   has_and_belongs_to_many :teams
+  
+  # Named Scopes
+  # Free projects are projects that doesn't have an organization assigned
+  named_scope :free, :conditions => { :organization_id => 0 }
   
   # stories_by_priority: return all project's stories ordered by priority (highest on top)
   def stories_by_priority
