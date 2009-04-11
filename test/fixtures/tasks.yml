@@ -1,17 +1,25 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  name: Task One
-  story_id: 1
-  description: This is a test task
-  status: not_started
-  relative_position_x: 100
-  relative_position_y: 101
+NotStartedTask1:
+    name: NotStartedTask1
+    story_id: 1
+    description: 
+    status: not_started
+    relative_position_x: 100
+    relative_position_y: 101
 
-two:
-  name: Task 2
-  story_id: 1
-  description: This is a test task
-  status: not_started
-  relative_position_x: 100
-  relative_position_y: 101
+NotStartedTask2:
+    name: NotStartedTask2
+    story_id: 1
+    description: 
+    status: not_started
+    relative_position_x: 100
+    relative_position_y: 101
+
+InProgressTask1:
+    name: InProgressTask1
+    story_id: 1
+    description: 
+    status: in_progress
+    relative_position_x: 100
+    relative_position_y: 101

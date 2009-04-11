@@ -14,13 +14,13 @@
 		</div>
 	</td>
 	<td id="not_started-<%= story.id %>" style="<%= taskboard_border_style(@color, [ "left", "bottom"]) %>">
-		<%= render :partial => "tasks/tasks_by_status", :locals => { :tasks => story.tasks, :status => 'not_started' } %> 
+		<%= render :partial => "tasks/tasks_by_status", :locals => { :tasks => story.tasks.not_started } %> 
 	</td>
 	<td id="in_progress-<%= story.id %>" style="<%= taskboard_border_style(@color, [ "left", "bottom"]) %>">
-		<%= render :partial => "tasks/tasks_by_status", :locals => { :tasks => story.tasks, :status => 'in_progress' } %> 
+		<%= render :partial => "tasks/tasks_by_status", :locals => { :tasks => story.tasks.in_progress } %> 
 	</td>
 	<td id="finished-<%= story.id %>" style="<%= taskboard_border_style(@color, [ "left", "right", "bottom"]) %>">
-		<%= render :partial => "tasks/tasks_by_status", :locals => { :story => story, :tasks => story.tasks, :status => 'finished' } %> 
+		<%= render :partial => "tasks/tasks_by_status", :locals => { :tasks => story.tasks.finished } %> 
 	</td>
 	
 <%= drop_receiving_element("not_started-#{story.id}", 

@@ -115,13 +115,34 @@ class TasksController < ApplicationController
     @task.relative_position_x = params[:x]
     @task.relative_position_y = params[:y]
     if(@task.status == 'finished')
-	@task.remove_tags
+	    @task.remove_tags
     end
     @task.save
+    
+    # This will be necessary for the update
+    if @task.status == 'not_started'
+      @new_status_tasks = @task.story.tasks.not_started
+    end
+    if @task.status == "in_progress"
+      @new_status_tasks = @task.story.tasks.in_progress
+    end
+    if @task.status == "finished"
+      @new_status_tasks = @task.story.tasks.finished
+    end
+    
+    if old_status == 'not_started'
+      @old_status_tasks = @task.story.tasks.not_started
+    end
+    if old_status == "in_progress"
+      @old_status_tasks = @task.story.tasks.in_progress
+    end
+    if old_status == "finished"
+      @old_status_tasks = @task.story.tasks.finished
+    end
 
     render :update do |page|
-      page.replace_html "#{params[:status]}-#{@task.story_id}", :partial => "tasks/tasks_by_status", :locals => { :story => @task.story, :tasks => @task.story.tasks, :status => params[:status] } 
-      page.replace_html "#{old_status}-#{@task.story_id}", :partial => "tasks/tasks_by_status", :locals => { :story => @task.story, :tasks => @task.story.tasks, :status => old_status } 
+        page.replace_html "#{@task.status}-#{@task.story_id}", :partial => "tasks/tasks_by_status", :locals => { :story => @task.story, :tasks => @new_status_tasks } 
+        page.replace_html "#{old_status}-#{@task.story_id}", :partial => "tasks/tasks_by_status", :locals => { :story => @task.story, :tasks => @old_status_tasks } 
     end
   end
 

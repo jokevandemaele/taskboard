@@ -7,7 +7,7 @@ class CreateOrganizations < ActiveRecord::Migration
     end
 
     # Add project -> organization relation
-    add_column :projects, :organization_id, :integer, :default => 0
+    add_column :projects, :organization_id, :integer, :default => nil
     
     # Add member -> organization relation
     create_table :members_organizations, :id => false do |t| 

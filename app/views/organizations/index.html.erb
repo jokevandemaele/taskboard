@@ -1,22 +1,37 @@
-<h1>Listing organizations</h1>
+<%= render :partial => "menu", :locals => { }-%> 
+<%= render :partial => "taskboard/adder" -%>
 
-<table>
-  <tr>
-    <th>Name</th>
-  </tr>
-
-<% for organization in @organizations %>
-  <tr>
-    <td><%=h organization.name %></td>
-    <td><%= link_to 'Show', organization %></td>
-    <td><%= link_to 'Edit', edit_organization_path(organization) %></td>
-    <td><%= link_to 'Destroy', organization, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+<% for organization in @organizations -%>
+	<div id="organization-<%= organization.id %>" style="border: 2px solid black; width: 90%; margin: 0 auto; margin-bottom: 10px; padding: 0;">
+		<h2 style="margin: 5px;"><%= organization.name %></h2>
+	    <p style="margin: 5px;">
+		[ 
+		<%= link_to 'Edit', edit_organization_path(organization) %> | 
+	    <%= link_to 'Destroy', organization, :confirm => 'Are you sure?', :method => :delete %> 
+		]
+		</p>
+		
+		<hr style="color: black; border: 1px solid black;"/>
+		<h3 style="margin: 5px;">Projects</h3>
+		<ul>
+		<% for project in organization.projects -%>
+			<li><%= project.name %> [ <%= link_to_remote 'Remove', :url => {:action => :remove_project, :organization => organization, :project => project.id } -%> ]</li>
+		<% end -%>
+		</ul>
+		<div id="add-project-actions">
+		</div>
+		<p style="margin: 5px;">[ <%= link_to_remote 'Add project', :url => {:action => :add_project_form, :organization => organization} -%> ]</p>
+		
+		<hr style="color: black; border: 1px solid black;"/>
+		<h3 style="margin: 5px;">Members</h3>
+		<ul>
+		<% for member in organization.members -%>
+			<li><%= member.name %> [ <%= link_to_remote 'Remove', :url => {:action => :remove_member, :organization => organization, :member => member.id } -%> ]</li>
+		<% end -%>
+		</ul>
+		<p style="margin: 5px;">[ <%= link_to_remote 'Add member', :url => {:action => :add_member_form, :organization => organization} -%> ]</p>		
+		
+	</div>
 <% end %>
-</table>
-
-<br />
 <div id="dummy-for-actions">
 </div>
-<%= link_to_remote 'New organization', :url => {:action => :show_form} -%>
-<hr />

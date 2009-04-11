@@ -1,0 +1,15 @@
+<script>
+$('adder-container').show();
+</script>
+<div id="form-add-project" style="position: fixed; top: 0px; left: 0px; display: none; z-index: 100; background: white; padding: 10px; border: 5px solid #3771c8;">
+<%= form_remote_tag :url => { :action => :add_project } %>
+	<%= collection_select :organization, :projects, @projects, :id, :name %>
+	<%= submit_tag "Add"%>
+	<input type=hidden name="organization[id]" value="<%= organization.id -%>">
+</form>
+</div>
+<script>
+	centerTo($('form-add-project'),$('adder-container'));
+	Effect.Appear($('form-add-project'));
+</script>
+</div>

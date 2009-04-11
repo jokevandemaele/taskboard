@@ -5,18 +5,17 @@
 		cancel($('form-add-task'));
 	</script>
 <% end %>
-
-<table class="task-list">
-	<tr>
-		<% if status == 'finished' 
-			task_list_slider = Array.new
-		-%>
-			<td>
-				<a href="javascript:finished_<%= story.id %>_slider.prev();"><%= image_tag "less.png", :id => "finished_#{story.id}_slider_prev", :alt => "less", :class => "less", :style => "border: none; display: none;" %></a>
-			</td>
-		<% end -%>
-<% for task in tasks -%>
-	<% if task.status == status -%>
+<% if !(tasks.empty?) -%>
+	<table class="task-list">
+		<tr>
+			<% if tasks.first.status == 'finished' 
+				task_list_slider = Array.new
+			-%>
+				<td>
+					<a href="javascript:finished_<%= tasks.first.story.id %>_slider.prev();"><%= image_tag "less.png", :id => "finished_#{tasks.first.story.id}_slider_prev", :alt => "less", :class => "less", :style => "border: none; display: none;" %></a>
+				</td>
+			<% end -%>
+	<% for task in tasks -%>
 		<% 	if task.status != 'finished'%>
 			<%= render :partial => "tasks/task", :locals => { :task => task, :row => row, :column => column } %> 
 			<%
@@ -30,14 +29,14 @@
 			<% task_list_slider << "td-task-#{task.id}" -%>
 		<% end -%>
 	<% end %>
+			<% if tasks.first.status == 'finished' -%>
+				<td>
+					<a href="javascript:finished_<%= tasks.first.story.id %>_slider.next();"><%= image_tag "more.png",  :id => "finished_#{tasks.first.story.id}_slider_next", :alt => "more", :class => "less", :style => "border: none; display: none;" %></a>
+				</td>
+				<script>
+					finished_<%= tasks.first.story.id %>_slider = new Slider(<%= task_list_slider.to_json %>,3,"finished_<%= tasks.first.story.id %>_slider");
+				</script>
+			<% end -%>
+		</tr>
+	</table>
 <% end %>
-		<% if status == 'finished' -%>
-			<td>
-				<a href="javascript:finished_<%= story.id %>_slider.next();"><%= image_tag "more.png",  :id => "finished_#{story.id}_slider_next", :alt => "more", :class => "less", :style => "border: none; display: none;" %></a>
-			</td>
-			<script>
-				finished_<%= story.id %>_slider = new Slider(<%= task_list_slider.to_json %>,3,"finished_<%= story.id %>_slider");
-			</script>
-		<% end -%>
-	</tr>
-</table>

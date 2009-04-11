@@ -23,3 +23,15 @@ clittleton:
     color: 9
     username: clittleton
     hashed_password: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3 # test
+
+mdawson:
+    name: Michael Dawson
+    color: 2
+    username: mdawson
+    hashed_password: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3 # test
+
+mfaraday:
+    name: Michael Faraday
+    color: 4
+    username: mfaraday
+    hashed_password: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3 # test

@@ -6,7 +6,7 @@ class Project < ActiveRecord::Base
   
   # Named Scopes
   # Free projects are projects that doesn't have an organization assigned
-  named_scope :free, :conditions => { :organization_id => 0 }
+  named_scope :free, :conditions => { :organization_id => nil }
   
   # stories_by_priority: return all project's stories ordered by priority (highest on top)
   def stories_by_priority

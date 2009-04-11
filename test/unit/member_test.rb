@@ -87,7 +87,7 @@ class MemberTest < ActiveSupport::TestCase
   
   # Test the format of nametags
   def test_nametag_format
-    assert_equal "DANIEL", members(:dfaraday).formatted_nametag
-    # assert_equal "FRANCISCO T", members(:nictuku).formatted_nametag
+    assert_equal "CHARLIE", members(:cpace).formatted_nametag
+    assert_equal "MICHAEL F", members(:mfaraday).formatted_nametag
   end
 end

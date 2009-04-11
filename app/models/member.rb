@@ -4,6 +4,7 @@ class Member < ActiveRecord::Base
   # Relations
   has_and_belongs_to_many :teams
   has_and_belongs_to_many :roles
+  has_and_belongs_to_many :organizations
   has_many :nametags, :dependent => :destroy
 
   #Validations
@@ -30,8 +31,18 @@ class Member < ActiveRecord::Base
 
   # formated_nametags: this method is used to return the correct name of a member to display in it's nametag
   def formatted_nametag
-	  @names = name.split()
-  	return @names[0].upcase
+    members = Member.all()
+    names = name.split()
+    name = names[0]
+    members = members - [self]
+    members.each do 
+    |member|
+    member_nametag = member.name.split()
+      if member_nametag[0] == names[0] && names.length > 1
+        name = "#{names[0]} #{names[1][0,1]}"
+      end
+    end
+    return name.upcase()[0..8]
   end
   
   def add_picture(picture_file)

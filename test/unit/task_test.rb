@@ -4,6 +4,20 @@ class TaskTest < ActiveSupport::TestCase
   self.use_instantiated_fixtures = true
   fixtures :stories
   
+  # named_scope's
+  test "named scope - not_started" do
+    assert Task.not_started.size == 2
+  end
+
+  test "named scope - in_progress" do
+    assert Task.in_progress.size == 1
+  end
+
+  test "named scope - finished" do
+    assert Task.finished.empty?
+  end
+  
+  
   # Remove tags => With no tags
   test "remove tags - no tags" do
     t = Task.new
