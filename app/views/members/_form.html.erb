@@ -1,7 +1,7 @@
 <script>
 $('adder-container').show();
 </script>
-<div id="form-add-member" style="position: fixed; top: 0px; left: 0px; display: none; z-index: 100; background: white; padding: 10px; border: 5px solid #3771c8;">
+<div id="form-add-member" class="dynamic-form" style="display: none;">
 <% form_for member, :html => { :multipart => true, :target => "upload_frame" } do |f| %>
 	<div id="information"></div>
 	<iframe id="upload_frame" name="upload_frame" style="display:none;"></iframe>

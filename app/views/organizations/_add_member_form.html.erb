@@ -6,6 +6,8 @@ $('adder-container').show();
 	<%= collection_select :organization, :members, @members, :id, :name %>
 	<%= submit_tag "Add"%>
 	<input type=hidden name="organization[id]" value="<%= organization.id -%>">
+	<%= button_to_function "Cancel", "cancel($('form-add-member'));", :id => "form-add-member-cancel"-%>
+    
 </form>
 </div>
 <script>

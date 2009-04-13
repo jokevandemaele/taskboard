@@ -12,4 +12,18 @@ class Task < ActiveRecord::Base
     self.statustags.clear
     self.nametags.clear
   end
+  
+  def self.tasks_by_status(story,status)
+    @tasks = []
+    if(status == "in_progress")
+      @tasks = story.tasks.in_progress
+    end
+    if(status == "not_started")
+      @tasks = story.tasks.not_started
+    end
+    if(status == "finished")
+      @tasks = story.tasks.finished
+    end
+    return @tasks
+  end
 end

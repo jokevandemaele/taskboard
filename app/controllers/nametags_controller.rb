@@ -72,8 +72,10 @@ class NametagsController < ApplicationController
     @tag.task = @task
     @tag.member = @member
     @tag.save
+
     render :update do |page|
-      page.replace_html "#{@task.status}-#{@task.story_id}", :partial => "tasks/tasks_by_status", :locals => { :tasks => @task.story.tasks, :status => @task.status } 
+      @tasks = Task.tasks_by_status(@task.story,@task.status)
+      page.replace_html "#{@task.status}-#{@task.story_id}", :partial => "tasks/tasks_by_status", :locals => { :tasks => @tasks  } 
       page.replace_html "menu_nametags", :partial => "taskboard/menu_nametags", :locals => { :members => @task.story.project.members }
     end
   end
@@ -86,7 +88,7 @@ class NametagsController < ApplicationController
     @tag.task = @task
     @tag.save
     render :update do |page|
-      page.replace_html "dummy-for-actions", :partial => "empty_dummy", :locals => { :tasks => @task.story.tasks, :status => @task.status } 
+      page.replace_html "dummy-for-actions", :partial => "taskboard/empty_dummy", :locals => { :tasks => @task.story.tasks, :status => @task.status } 
     end
   end
 
@@ -99,7 +101,8 @@ class NametagsController < ApplicationController
     @tag.destroy
     
     render :update do |page|
-      page.replace_html "#{old_status}-#{story_id}", :partial => "tasks/tasks_by_status", :locals => { :tasks => story.tasks, :status => old_status } 
+      @tasks = Task.tasks_by_status(story,old_status)
+      page.replace_html "#{old_status}-#{story_id}", :partial => "tasks/tasks_by_status", :locals => { :tasks => @tasks } 
     end
   end
   

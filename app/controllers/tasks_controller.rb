@@ -37,7 +37,8 @@ class TasksController < ApplicationController
     end
     
     if @task.save
-      render :partial => "tasks/tasks_by_status", :locals => { :tasks => @task.story.tasks, :status => @task.status, :new_task => true }
+      @tasks = Task.tasks_by_status(@task.story,params[:status])
+      render :partial => "tasks/tasks_by_status", :locals => { :tasks => @tasks, :new_task => true }
     else
       render :action => "new"
     end
@@ -79,8 +80,9 @@ class TasksController < ApplicationController
     story_id = @task.story_id
     @task.destroy
     
+    @tasks = Task.tasks_by_status(story,old_status)
     render :update do |page|
-      page.replace_html "#{old_status}-#{story_id}", :partial => "tasks/tasks_by_status", :locals => { :tasks => story.tasks, :status => old_status } 
+      page.replace_html "#{old_status}-#{story_id}", :partial => "tasks/tasks_by_status", :locals => { :tasks => @tasks } 
     end
   end
 
@@ -120,29 +122,12 @@ class TasksController < ApplicationController
     @task.save
     
     # This will be necessary for the update
-    if @task.status == 'not_started'
-      @new_status_tasks = @task.story.tasks.not_started
-    end
-    if @task.status == "in_progress"
-      @new_status_tasks = @task.story.tasks.in_progress
-    end
-    if @task.status == "finished"
-      @new_status_tasks = @task.story.tasks.finished
-    end
-    
-    if old_status == 'not_started'
-      @old_status_tasks = @task.story.tasks.not_started
-    end
-    if old_status == "in_progress"
-      @old_status_tasks = @task.story.tasks.in_progress
-    end
-    if old_status == "finished"
-      @old_status_tasks = @task.story.tasks.finished
-    end
+    @new_status_tasks = Task.tasks_by_status(@task.story,@task.status)
+    @old_status_tasks = Task.tasks_by_status(@task.story,old_status)
 
     render :update do |page|
-        page.replace_html "#{@task.status}-#{@task.story_id}", :partial => "tasks/tasks_by_status", :locals => { :story => @task.story, :tasks => @new_status_tasks } 
-        page.replace_html "#{old_status}-#{@task.story_id}", :partial => "tasks/tasks_by_status", :locals => { :story => @task.story, :tasks => @old_status_tasks } 
+        page.replace_html "#{@task.status}-#{@task.story_id}", :partial => "tasks/tasks_by_status", :locals => { :tasks => @new_status_tasks  } 
+        page.replace_html "#{old_status}-#{@task.story_id}", :partial => "tasks/tasks_by_status", :locals => { :tasks => @old_status_tasks } 
     end
   end
 

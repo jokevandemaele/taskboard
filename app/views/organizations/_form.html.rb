@@ -1,7 +1,7 @@
 <script>
 $('adder-container').show();
 </script>
-<div id="form-add-organization" style="position: fixed; top: 0px; left: 0px; display: none; z-index: 100; background: white; padding: 10px; border: 5px solid #3771c8;">
+<div id="form-add-organization" class="dynamic-form" style="display: none;">
 
 <% remote_form_for @organization, :update => "dummy-for-actions" do |f| %>
   <%= f.error_messages %>
@@ -12,6 +12,8 @@ $('adder-container').show();
   </p>
   <p>
     <%= f.submit "Create" %>
+    <%= button_to_function "Cancel", "cancel($('form-add-organization'));", :id => "form-add-organization-cancel"-%>
+    
   </p>
 <% end %>
 <script>

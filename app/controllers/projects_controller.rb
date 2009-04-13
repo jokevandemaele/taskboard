@@ -3,7 +3,6 @@ class ProjectsController < ApplicationController
 
   # GET /projects
   def index
-    @projects = Project.find(:all)
   end
 
   # GET /projects/1

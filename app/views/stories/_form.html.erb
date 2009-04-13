@@ -2,7 +2,7 @@
 $('adder-container').show();
 Effect.ScrollTo($('adder-container'), {duration:0.3});
 </script>
-<div id="form-add-story" style="position: fixed; top: 0px; left: 0px; display: none; z-index: 100; background: white; padding: 10px; border: 5px solid #3771c8;">
+<div id="form-add-story" class="dynamic-form" style="display: none;">
 <% remote_form_for story, :update => { :success => 'dummy-for-actions' } do |f| %>
   <%= f.error_messages %>
 	<%= unless @project.nil?

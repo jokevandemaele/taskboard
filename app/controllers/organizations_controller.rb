@@ -101,8 +101,8 @@ class OrganizationsController < ApplicationController
 
 
   def add_member_form
-    @members = Member.all
     @organization = Organization.find(params[:organization])
+    @members = Member.all - @organization.members
     render :update do |page|
     		page.replace_html "dummy-for-actions", 
     			:partial => 'add_member_form', 
@@ -128,7 +128,7 @@ class OrganizationsController < ApplicationController
     @organization = Organization.find(params[:organization])
     
     @organization.members.delete @member
-    if @organization.saves
+    if @organization.save
       render :update do |page|
         page.replace_html "dummy-for-actions", "<script>location.reload(true)</script>"
       end
