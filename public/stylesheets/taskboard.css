@@ -232,6 +232,7 @@ table td{
 	font-size: 10px;
 	text-align: center;
 	font-weight: bold;
+	z-index: 2;
 }
 .nametag_1 {background: url('/images/tags/1.png') left no-repeat transparent;}
 .nametag_2 {background: url('/images/tags/2.png') left no-repeat transparent;}

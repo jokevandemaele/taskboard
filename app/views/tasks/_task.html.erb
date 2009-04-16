@@ -3,12 +3,15 @@
 			<div class="task-container-table">	
 			<div class="task-container-cell">	
 				<p class="task-name" id="task-<%= task.id -%>-name" onDblClick="<%= remote_function(:url => { :controller => :tasks, :action => :show_edit_task_name_form, :id => task.id, :story => task.story.id}) %>;")><%=h task.name -%></p>
+
 				<% for nametag in task.nametags %>
-					<%= render :partial => "nametags/show", :locals => { :nametag => nametag } %> 
+					<%= render :partial => nametag -%>
 				<% end %>
+
 				<% for statustag in task.statustags %>
-					<%= render :partial => "statustags/show", :locals => { :statustag => statustag } %> 
+					<%= render :partial => statustag %> 
 				<% end %>
+
 			</div>
 			</div>
 			<a href="javascript:flip('task-<%= task.id -%>','back')">
@@ -33,24 +36,26 @@
 	<%= drop_receiving_element("task-#{task.id}", 
 		:accept => "add_status", 
 		:with   => "'status=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ (x($(element)) - x($('task-#{task.id}')) + window.pageXOffset) + '&y='+ (y($(element))-y($('task-#{task.id}')) + window.pageYOffset)", 
-		:url => { :controller => :statustags, :action=>:add_statustag }) 
+		:url => { :controller => :statustags }) 
 	%>
 	<%= drop_receiving_element("task-#{task.id}", 
 		:accept => "statustag", 
 		:with   => "'id=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ (x($(element)) - x($('task-#{task.id}'))) + '&y='+ (y($(element))-y($('task-#{task.id}')))", 
-		:url => { :controller => :statustags, :action=>:update_statustag }) 
+		:url => { :controller => :statustags, :action=>:update },
+		:method => :put ) 
 	%>
 
 
 	<%= drop_receiving_element("task-#{task.id}", 
 		:accept => "add_nametag", 
 		:with   => "'member=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ (x($(element)) - x($('task-#{task.id}'))) + '&y=' + (y($(element))-y($('task-#{task.id}'))+ 88 + window.pageYOffset) ", 
-		:url => { :controller => :nametags, :action=>:add_nametag }) 
+		:url => { :controller => :nametags }) 
 	%>
 	<%= drop_receiving_element("task-#{task.id}", 
 		:accept => "nametag", 
-		:with   => "'id=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ (x($(element)) - x($('task-#{task.id}'))) + '&y='+ (y($(element))-y($('task-#{task.id}')))", 
-		:url => { :controller => :nametags, :action=>:update_nametag }) 
+		:with   => "'tagid=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ (x($(element)) - x($('task-#{task.id}'))) + '&y='+ (y($(element))-y($('task-#{task.id}')))", 
+		:url => { :controller => :nametags, :action => :update },
+		:method => :put)
 	%>
 <% end %>
 <%= draggable_element "task-#{task.id}", :revert => '"failure"'%>
