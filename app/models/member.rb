@@ -4,7 +4,7 @@ class Member < ActiveRecord::Base
   # Relations
   has_and_belongs_to_many :teams
   has_and_belongs_to_many :roles
-  has_and_belongs_to_many :organizations
+  has_many :organization_memberships
   has_many :nametags, :dependent => :destroy
 
   #Validations
@@ -15,6 +15,21 @@ class Member < ActiveRecord::Base
   #validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => "Invalid email"
 
   attr_accessor :password, :password_confirmation
+  
+  #see if the user admins an organization
+  def admins?(organization)
+    organization = OrganizationMembership.first(:conditions => ["member_id = ? and organization_id = ?", id, organization.id])
+    return organization.admin?
+  end
+  
+  # returns all the projects that the user belongs to
+  def projects
+    projects = []
+    for team in teams
+      projects.concat team.projects
+    end
+    return projects
+  end
   
   # password: this method encrypts the plain text password to store it in the database
   def password=(pass)
@@ -79,6 +94,7 @@ class Member < ActiveRecord::Base
       return default_file_name
     end
   end
+  
 protected
 
   # Auxiliary Functions

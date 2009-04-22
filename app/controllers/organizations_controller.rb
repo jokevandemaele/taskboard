@@ -112,10 +112,15 @@ class OrganizationsController < ApplicationController
   
   def add_member
     @organization = Organization.find(params[:organization][:id])
+    
     if params[:organization][:members]
       @member = Member.find(params[:organization][:members])
-      @organization.members << @member
-      if @organization.save
+      @membership = OrganizationMembership.new
+      @membership.member = @member
+      @membership.organization = @organization
+      @membership.admin = nil
+      
+      if @membership.save
         render :update do |page|
           page.replace_html "dummy-for-actions", "<script>location.reload(true)</script>"
         end
@@ -124,15 +129,34 @@ class OrganizationsController < ApplicationController
   end
   
   def remove_member
-    @member = Member.find(params[:member])
-    @organization = Organization.find(params[:organization])
-    
-    @organization.members.delete @member
-    if @organization.save
-      render :update do |page|
-        page.replace_html "dummy-for-actions", "<script>location.reload(true)</script>"
-      end
+    # TODO: This leaves the membership in the database, only removes the organization, see if there is a way to enhance this
+    @organization = Organization.find params[:organization]
+    @membership = OrganizationMembership.first(:conditions => ["member_id = ? and organization_id = ?", params[:member], params[:organization]])
+    @membership.destroy
+    render :update do |page|
+      page.replace_html "dummy-for-actions", "<script>location.reload(true)</script>"
     end
+  end
+  
+  def remove_admin
+    @membership = OrganizationMembership.find(params[:membership])
+    @membership.admin = nil
+    @membership.save
+    render :update do |page|
+      page.replace_html "dummy-for-actions", "<script>location.reload(true)</script>"
+    end
+    
+  end
+  
+  def make_admin
+    @membership = OrganizationMembership.find(params[:membership])
+    logger.error(@membership.inspect)
+    @membership.admin = true
+    @membership.save
+    render :update do |page|
+      page.replace_html "dummy-for-actions", "<script>location.reload(true)</script>"
+    end
+    
   end
 
 end

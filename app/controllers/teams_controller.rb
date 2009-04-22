@@ -3,12 +3,13 @@ class TeamsController < ApplicationController
 
   # GET /teams
   def index
-    @members = Member.all()
 
     if(params[:project])
 	    @project = Project.find(params[:project])
 	    @teams = @project.teams
+      @members = @project.organization.members
     else
+      @members = Member.all()
       @teams = Team.all()
     end
   end

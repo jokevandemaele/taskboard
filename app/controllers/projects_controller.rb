@@ -3,7 +3,8 @@ class ProjectsController < ApplicationController
 
   # GET /projects
   def index
-    @projects = Project.all
+    @projects = current_member.projects
+    logger.error (@projects.inspect)
   end
 
   # GET /projects/1

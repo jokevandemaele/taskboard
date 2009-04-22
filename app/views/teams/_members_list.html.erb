@@ -5,7 +5,7 @@
 		member_count = 0 
 		member_id_list = Array.new
 	-%>
-	<% for member in members%>
+	<% for member in members %>
 		<div id="member-list-<%= member_count %>">
 			<%= render :partial => "members/show_with_picture", 
 				:locals => { :id_text => "add-member", 

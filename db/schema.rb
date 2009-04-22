@@ -9,16 +9,10 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090403161045) do
+ActiveRecord::Schema.define(:version => 20090422140711) do
 
-  create_table "members", :force => true do |t|
-    t.string   "name"
-    t.string   "color"
-    t.string   "username"
-    t.string   "hashed_password"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+# Could not dump table "members" because of following StandardError
+#   Unknown type 'bool' for column 'admin'
 
   create_table "members_organizations", :id => false, :force => true do |t|
     t.integer "member_id"
@@ -45,6 +39,14 @@ ActiveRecord::Schema.define(:version => 20090403161045) do
     t.integer  "member_id"
   end
 
+  create_table "organization_memberships", :force => true do |t|
+    t.integer  "organization_id"
+    t.integer  "member_id"
+    t.boolean  "admin"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "organizations", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -64,6 +66,14 @@ ActiveRecord::Schema.define(:version => 20090403161045) do
     t.datetime "updated_at"
   end
 
+  create_table "project_memberships", :force => true do |t|
+    t.integer  "project_id"
+    t.integer  "member_id"
+    t.boolean  "product_owner"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "projects", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -74,6 +84,17 @@ ActiveRecord::Schema.define(:version => 20090403161045) do
   create_table "projects_teams", :id => false, :force => true do |t|
     t.integer "project_id"
     t.integer "team_id"
+  end
+
+  create_table "rights", :force => true do |t|
+    t.string "name"
+    t.string "controller"
+    t.string "action"
+  end
+
+  create_table "rights_roles", :id => false, :force => true do |t|
+    t.integer "right_id"
+    t.integer "role_id"
   end
 
   create_table "roles", :force => true do |t|

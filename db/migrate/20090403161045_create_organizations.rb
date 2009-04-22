@@ -12,7 +12,7 @@ class CreateOrganizations < ActiveRecord::Migration
     # Add member -> organization relation
     create_table :members_organizations, :id => false do |t| 
       t.integer :member_id  
-      t.integer :organization_id 
+      t.integer :organization_id
     end
   end
 
