@@ -21,6 +21,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :taskboard
 
+  map.resources :backlog
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:
@@ -32,6 +33,7 @@ ActionController::Routing::Routes.draw do |map|
   # This route can be invoked with purchase_url(:id => product.id)
   map.login '/login', :controller => 'members', :action => 'login'
   map.logout '/logout', :controller => 'members', :action => 'logout'
+  map.access_denied '/access_denied', :controller => 'members', :action => "access_denied"
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   map.resources :products
 

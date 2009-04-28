@@ -29,11 +29,11 @@ namespace :deploy do
   end
 
   task :create_db_symlink do
-    sudo "ln -s #{deploy_to}/shared/db/production.sqlite3 #{deploy_to}/current/db/"
+    run "ln -s #{deploy_to}/shared/db/production.sqlite3 #{deploy_to}/current/db/"
   end
 
   task :create_member_pictures_symlink do
-    sudo "ln -s #{deploy_to}/shared/images/members #{deploy_to}/current/public/images/"
+    run "ln -s #{deploy_to}/shared/images/members #{deploy_to}/current/public/images/"
   end
 
   task :rake_db_migrate do

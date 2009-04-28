@@ -1,5 +1,7 @@
 class RolesController < ApplicationController
   before_filter :login_required
+  before_filter :check_permissions
+    
   # GET /roles
   def index
     @roles = Role.find(:all)

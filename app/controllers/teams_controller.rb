@@ -1,6 +1,7 @@
 class TeamsController < ApplicationController
   before_filter :login_required
-
+  before_filter :check_permissions
+  
   # GET /teams
   def index
 
@@ -86,7 +87,7 @@ class TeamsController < ApplicationController
     end
     render :update do |page|
       page.replace_html "team-members-list-#{@team.id}", :partial => 'team_members_list', :locals => { :team => @team }
-      page.replace_html "members-list", :partial => "teams/members_list", :locals => { :members => @members, :project => params[:project] }
+      page.replace_html "members-list", :partial => "teams/members_list", :locals => { :members => @team.projects.first.organization.members, :project => params[:project] }
     end
   end
 

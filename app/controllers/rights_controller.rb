@@ -1,4 +1,6 @@
 class RightsController < ApplicationController
+  before_filter :check_permissions
+  
   # GET /rights
   # GET /rights.xml
   def index

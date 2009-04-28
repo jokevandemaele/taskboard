@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
   before_filter :login_required
-
+  before_filter :check_permissions
+  
   # GET /tasks
   def index
     @tasks = Task.find(:all)

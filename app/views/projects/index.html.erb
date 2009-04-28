@@ -1,8 +1,11 @@
 <table>
   <tr>
-    <th>Project</th>
+    <th>Projects</th>
   </tr>
-
+<% if @projects.empty? %>
+	<tr><td style="text-align: center">You don't have projects assigned, contact the system administrator<br /><%= link_to "Logout", :controller => :logout %>
+	</td></tr>
+<% end %>
 <% for project in @projects %>
   <tr class="<%= cycle('listing-even', 'listing-odd') %>">
     <td>
@@ -14,9 +17,11 @@
 					<% for team in project.teams %>
 					<li>
 						<%= team.name %> 
+						<% if @member.admins?(project.organization)%>
 						[
 :						<%= link_to 'Remove', :action => 'delete_team_to_project_relation', :id => project, :team_id => team.id, :confirm => 'Are you sure?', :method => :delete %>
 						]
+						<% end %>
 					</li>
 					<% end %>
 				</ul>
@@ -34,10 +39,12 @@
 	</td>
   </tr>
 <% end %>
+<% if @member.admin? %>
 <tr id="table_footer">
 	<td>
 		<%= link_to 'New project', new_project_path %>
 	</td>
 </tr>
+<% end %>
 </table>
 

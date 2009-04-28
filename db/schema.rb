@@ -11,8 +11,15 @@
 
 ActiveRecord::Schema.define(:version => 20090422140711) do
 
-# Could not dump table "members" because of following StandardError
-#   Unknown type 'bool' for column 'admin'
+  create_table "members", :force => true do |t|
+    t.string   "name"
+    t.string   "color"
+    t.string   "username"
+    t.string   "hashed_password"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "admin"
+  end
 
   create_table "members_organizations", :id => false, :force => true do |t|
     t.integer "member_id"

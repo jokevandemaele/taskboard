@@ -23,17 +23,12 @@ namespace :deploy do
      run "touch #{current_path}/tmp/restart.txt"
    end
 
-  desc "Change owner group for created directories"
-  task :update_owner_group do
-    sudo "chown -R apache: #{deploy_to}"
-  end
-
   task :create_db_symlink do
-    sudo "ln -s #{deploy_to}/shared/db/production.sqlite3 #{deploy_to}/current/db/"
+    run "ln -s #{deploy_to}/shared/db/production.sqlite3 #{deploy_to}/current/db/"
   end
 
   task :create_member_pictures_symlink do
-    sudo "ln -s #{deploy_to}/shared/images/members #{deploy_to}/current/public/images/"
+    run "ln -s #{deploy_to}/shared/images/members #{deploy_to}/current/public/images/"
   end
 
   task :rake_db_migrate do

@@ -1,6 +1,7 @@
 class MembersController < ApplicationController
   before_filter :login_required, :except => [:login, :logout]
-
+  before_filter :check_permissions, :except => [:login, :logout, :access_denied]
+    
   # GET /members
   def index
     @members = Member.find(:all)
@@ -41,6 +42,12 @@ class MembersController < ApplicationController
     
     if(params[:dynamic])
       if @member.save
+        @project = Project.find(params[:project])
+        @membership = OrganizationMembership.new
+        @membership.organization = @project.organization
+        @membership.member = @member
+        @membership.save
+        
         if(params[:picture_file])
           added = @member.add_picture(params[:picture_file])
           if( added == "ok")
@@ -160,6 +167,9 @@ class MembersController < ApplicationController
     end
   end
 
+  def access_denied
+  end
+  
   def delete_member
     @member = Member.find(params[:id])
     @member.destroy
@@ -167,6 +177,24 @@ class MembersController < ApplicationController
     
     render :update do |page| 
       page.replace_html "members-list", :partial => "teams/members_list", :locals => { :members => @members, :project => params[:project] }
+    end
+  end
+
+  def make_sysadmin
+    @member = Member.find(params[:id])
+    @member.admin = true
+    @member.save
+    render :update do |page|
+      page.replace_html "dummy-for-actions", "<script>location.reload(true)</script>"
+    end
+  end
+
+  def remove_sysadmin
+    @member = Member.find(params[:id])
+    @member.admin = nil
+    @member.save
+    render :update do |page|
+      page.replace_html "dummy-for-actions", "<script>location.reload(true)</script>"
     end
   end
 end

@@ -1,10 +1,16 @@
 class ProjectsController < ApplicationController
   before_filter :login_required
-
+  before_filter :check_permissions, :except => [:index]
+  
   # GET /projects
   def index
     @projects = current_member.projects
+    @member = current_member
     logger.error (@projects.inspect)
+    @admins = @member.admin?
+    if @projects.length == 1
+      redirect_to :controller => :taskboard, :action => :show, :id => @projects.first.id
+    end
   end
 
   # GET /projects/1

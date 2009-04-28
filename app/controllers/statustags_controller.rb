@@ -1,5 +1,7 @@
 class StatustagsController < ApplicationController
   before_filter :login_required
+  before_filter :check_permissions
+  
   # POST /statustags
   def create
     if request.xhr?

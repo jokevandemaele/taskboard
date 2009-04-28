@@ -1,27 +1,39 @@
-<h1>Listing members</h1>
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Color</th>
-    <th>Username</th>
-    <th>Password</th>
-  </tr>
-
 <% for member in @members %>
-  <tr class="<%= cycle('listing-even', 'listing-odd') %>">
-    <td>
-	<%=h member.name %><br />
+<div id="member-<%= member.id %>" class="member">
+	<%= image_tag member.show_picture, :style => "float: right;" %>
+	<h1><%=h member.name %> <% if member.admin? %>(Admin)<% end %></h1>
+
+	<p>Organizations: </p>
+	<ul>
+		<% for organization in member.organizations %>
+		<li><%= organization.name %></li>
+		<% end %>
+	</ul>
+
+	<p>Teams: </p>
+	<ul>
+		<% for team in member.teams %>
+		<li><%= team.name %> (<%= team.projects.first.name unless !team.projects.first  %>)</li>
+		<% end %>
+	</ul>
+	<p>Roles: </p>
+	<ul>
+		<% for role in member.roles %>
+		<li><%= role.name %></li>
+		<% end %>
+	</ul>
+
     	[
-	<%= link_to 'Show', member %> | 
-	<%= link_to 'Edit', edit_member_path(member) %> |
-	<%= link_to 'Destroy', member, :confirm => 'Are you sure?', :method => :delete %>
-	]
-    </td>
-    <td><%=h member.color %></td>
-    <td><%=h member.username %></td>
-    <td><%=h member.password %></td>
-  </tr>
+		<% if member.admin? %>
+			<%= link_to_remote 'Remove System Admin', :url => {:action => :remove_sysadmin, :id => member.id }%> |
+		<% else %>
+			<%= link_to_remote 'Make System Admin', :url => {:action => :make_sysadmin, :id => member.id }%> | 
+		<% end %>
+		<%= link_to 'Show', member %> | 
+		<%= link_to 'Edit', edit_member_path(member) %> |
+		<%= link_to 'Destroy', member, :confirm => 'Are you sure?', :method => :delete %>
+		]
+</div>
 <% end %>
 <tr id="table_footer">
   <td colspan=4>
@@ -29,9 +41,5 @@
     <%= link_to 'Manage Teams', teams_path %> |
     <%= link_to 'Manage Projects', projects_path %>
   </td>
-</tr>
-</table>
-
-<br />
-
+<div id="dummy-for-actions"></div>
 

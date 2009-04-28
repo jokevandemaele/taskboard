@@ -1,6 +1,7 @@
 class NametagsController < ApplicationController
   before_filter :login_required
-
+  before_filter :check_permissions
+  
   # POST /nametags
   def create
     if request.xhr?

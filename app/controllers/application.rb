@@ -13,6 +13,47 @@ class ApplicationController < ActionController::Base
   # from your application log (in this case, all fields with names like "password"). 
   # filter_parameter_logging :password
   
+  def check_permissions
+    return true
+    @member = session[:member]
+    # If user is sysadmin allow everything
+    if @member.admin?
+      return true
+    end
+    
+    @path = request.path_parameters
+    # Organizations controller can be accessible only if user is admin of that organization
+    if @path[:controller] == "organizations"
+      @organization = Organization.find(@path[:id])
+      if @member.admins?(@organization)
+        return true
+      else
+        redirect_to :controller => :members, :action => :access_denied
+      end
+    end
+
+    # Taskboard and backlog can be accessible only if the member belogs to the project
+    if ((@path[:controller] == "taskboard")||(@path[:controller] == "backlog"))
+      @proj = Project.find(params[:id])
+      logger.error(@proj.inspect)
+      if !(@member.projects.include? @proj)
+        redirect_to :controller => :members, :action => :access_denied
+      end
+    end
+    
+    # Manage Teams could only be accessed by organization admin
+    if @path[:controller] == "teams"
+      @proj = Project.find(params[:project])
+      @organization = @proj.organization
+      logger.error("Administra: ?",@member.admins?(@organization))
+      if @member.admins?(@organization)
+        return true
+      else
+        redirect_to :controller => :members, :action => :access_denied
+      end
+    end
+  end
+  
   def login_required
     if session[:member]
       return true

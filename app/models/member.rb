@@ -5,6 +5,7 @@ class Member < ActiveRecord::Base
   has_and_belongs_to_many :teams
   has_and_belongs_to_many :roles
   has_many :organization_memberships
+  has_many :organizations, :through => :organization_memberships
   has_many :nametags, :dependent => :destroy
 
   #Validations
@@ -19,7 +20,11 @@ class Member < ActiveRecord::Base
   #see if the user admins an organization
   def admins?(organization)
     organization = OrganizationMembership.first(:conditions => ["member_id = ? and organization_id = ?", id, organization.id])
-    return organization.admin?
+    if organization
+      return organization.admin?
+    else
+      return admin?
+    end
   end
   
   # returns all the projects that the user belongs to
