@@ -14,7 +14,6 @@ class ApplicationController < ActionController::Base
   # filter_parameter_logging :password
   
   def check_permissions
-    return true
     @member = session[:member]
     # If user is sysadmin allow everything
     if @member.admin?
@@ -52,6 +51,12 @@ class ApplicationController < ActionController::Base
         redirect_to :controller => :members, :action => :access_denied
       end
     end
+    
+    # Members could only be accessed by sysadmin
+    if @path[:controller] == "members"
+      redirect_to :controller => :members, :action => :access_denied
+    end
+    
   end
   
   def login_required

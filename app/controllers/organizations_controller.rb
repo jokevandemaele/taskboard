@@ -4,8 +4,11 @@ class OrganizationsController < ApplicationController
   
   def index
     @member = session[:member]
-    @organizations = @member.organizations
-    
+    if @member.admin?
+      @organizations = Organization.all
+    else
+      @organizations = @member.organizations    
+    end
   end
 
   def show

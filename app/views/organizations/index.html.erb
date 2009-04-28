@@ -17,7 +17,7 @@
 		<h3 style="margin: 5px;">Projects</h3>
 		<ul>
 		<% for project in organization.projects -%>
-			<li><%= project.name %> <% if @admins %>[ <%= link_to_remote 'Remove', :url => {:action => :remove_project, :organization => organization, :project => project.id } -%> ] <% end %></li>
+			<li><%= link_to project.name, :controller => :taskboard, :id => project.id, :action => :show %> <% if @admins %>[ <%= link_to_remote 'Remove', :url => {:action => :remove_project, :organization => organization, :project => project.id } -%> ] <% end %></li>
 		<% end -%>
 		</ul>
 		<div id="add-project-actions">

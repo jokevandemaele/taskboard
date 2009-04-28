@@ -23,7 +23,7 @@ class Member < ActiveRecord::Base
     if organization
       return organization.admin?
     else
-      return admin?
+      return self.admin?
     end
   end
   
