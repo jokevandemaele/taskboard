@@ -60,6 +60,10 @@ class ApplicationController < ActionController::Base
   end
   
   def login_required
+    
+    #render :inline, "<h1>Site under maintenance, plase come back later.</h1>"
+    #return false
+    
     if session[:member]
       return true
     end
