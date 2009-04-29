@@ -61,7 +61,7 @@ class ApplicationController < ActionController::Base
   
   def login_required
     
-    #render :inline, "<h1>Site under maintenance, plase come back later.</h1>"
+    #render :inline => "<center><img src=\"http://localhost:3000/images/login/login_logo.png\" alt=\"Agilar Taskboard\"/><br /><h1>Site under maintenance, plase come back later.</h1></center>"
     #return false
     
     if session[:member]
