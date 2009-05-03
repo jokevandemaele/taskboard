@@ -113,10 +113,13 @@ class TasksController < ApplicationController
 
   def update_task
     @task = Task.find(params[:task])
+    @story = Story.find(params[:story])
     old_status = @task.status
+    old_story = @task.story
     @task.status = params[:status]
     @task.relative_position_x = params[:x]
     @task.relative_position_y = params[:y]
+    @task.story = @story
     if(@task.status == 'finished')
 	    @task.remove_tags
     end
@@ -124,11 +127,11 @@ class TasksController < ApplicationController
     
     # This will be necessary for the update
     @new_status_tasks = Task.tasks_by_status(@task.story,@task.status)
-    @old_status_tasks = Task.tasks_by_status(@task.story,old_status)
+    @old_status_tasks = Task.tasks_by_status(old_story,old_status)
 
     render :update do |page|
         page.replace_html "#{@task.status}-#{@task.story_id}", :partial => "tasks/tasks_by_status", :locals => { :tasks => @new_status_tasks  } 
-        page.replace_html "#{old_status}-#{@task.story_id}", :partial => "tasks/tasks_by_status", :locals => { :tasks => @old_status_tasks } 
+        page.replace_html "#{old_status}-#{old_story.id}", :partial => "tasks/tasks_by_status", :locals => { :tasks => @old_status_tasks } 
     end
   end
 
