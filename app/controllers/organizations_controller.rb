@@ -72,7 +72,8 @@ class OrganizationsController < ApplicationController
 
   def add_project_form
     @projects = Project.free
-    @organization = Organization.find(params[:organization])
+    logger.error("Projects: ?",@projects)
+    @organization = Organization.find(params[:id])
     render :update do |page|
     		page.replace_html "dummy-for-actions", 
     			:partial => 'add_project_form', 

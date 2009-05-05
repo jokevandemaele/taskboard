@@ -39,7 +39,7 @@
 	</td>
   </tr>
 <% end %>
-<% if @member.admin? %>
+<% if @member.admins_any_organization? -%>
 <tr id="table_footer">
 	<td>
 		<%= link_to 'New project', new_project_path %>

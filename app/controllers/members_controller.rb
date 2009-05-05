@@ -1,6 +1,6 @@
 class MembersController < ApplicationController
   before_filter :login_required, :except => [:login, :logout]
-  before_filter :check_permissions, :except => [:login, :logout, :access_denied]
+  before_filter :check_permissions, :except => [:login, :logout, :access_denied, :show_form]
     
   # GET /members
   def index

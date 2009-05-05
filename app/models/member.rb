@@ -26,6 +26,14 @@ class Member < ActiveRecord::Base
       return self.admin?
     end
   end
+
+  #see if the user admins an organization
+  def admins_any_organization?
+    memberships = OrganizationMembership.all(:conditions => ["member_id = ?", id])
+    logger.error(memberships.inspect)
+    memberships.each { |membership| return membership.admin? if membership.admin? }
+    return self.admin?
+  end
   
   # returns all the projects that the user belongs to
   def projects

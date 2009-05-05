@@ -31,10 +31,10 @@ class ProjectsController < ApplicationController
   # POST /projects
   def create
     @project = Project.new(params[:project])
-
+    @project.organization_id = nil
     if @project.save
       flash[:notice] = 'Project was successfully created.'
-      redirect_to(@project)
+      redirect_to(organizations_path)
     else
       render :action => "new"
     end

@@ -2,6 +2,12 @@
 # Likewise, all the methods added will be available for all controllers.
 
 class ApplicationController < ActionController::Base
+  # Use the ExepctionNotifiable plugin to send a mail when an error is thrown.
+  include ExceptionNotifiable
+  ExceptionNotifier.exception_recipients = %w(nictuku@gmail.com)
+  ExceptionNotifier.sender_address = %("Taskboard Error" <taskboard-error@agilar.com>)
+  ExceptionNotifier.email_prefix = "[TASKBOARD-ERROR] "
+  
   helper :all # include all helpers, all the time
 
   # See ActionController::RequestForgeryProtection for details
@@ -23,7 +29,14 @@ class ApplicationController < ActionController::Base
     @path = request.path_parameters
     # Organizations controller can be accessible only if user is admin of that organization
     if @path[:controller] == "organizations"
-      @organization = Organization.find(@path[:id])
+      # This is needed because show_form recieves the organization as :organization not as :id, change that.
+      if defined?(params[:organization][:id])
+        id = params[:organization][:id]
+      else
+        id = @path[:id]
+      end
+      
+      @organization = Organization.find(id)
       if @member.admins?(@organization)
         return true
       else
@@ -31,10 +44,12 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    # Taskboard and backlog can be accessible only if the member belogs to the project
+    # Taskboard and backlog can be accessible only if the member belogs to the project and by organization admin
     if ((@path[:controller] == "taskboard")||(@path[:controller] == "backlog"))
       @proj = Project.find(params[:id])
-      logger.error(@proj.inspect)
+      if (@member.admins?(@proj.organization))
+        return true
+      end
       if !(@member.projects.include? @proj)
         redirect_to :controller => :members, :action => :access_denied
       end
@@ -52,11 +67,22 @@ class ApplicationController < ActionController::Base
       end
     end
     
-    # Members could only be accessed by sysadmin
+    # Members could only be accessed by sysadmin or if the user is the admin of the organization
     if @path[:controller] == "members"
+      if params[:project]
+        project = Project.find(params[:project])
+      else
+        project = Project.new
+      end 
+
+      if params[:project] && @member.admins?(project.organization)
+        return true
+      end
+      if @member.id == params[:id]
+        return true
+      end
       redirect_to :controller => :members, :action => :access_denied
     end
-    
   end
   
   def login_required
