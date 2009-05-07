@@ -136,9 +136,11 @@ class OrganizationsController < ApplicationController
   end
   
   def remove_member
-    # TODO: This leaves the membership in the database, only removes the organization, see if there is a way to enhance this
     @organization = Organization.find params[:organization]
     @membership = OrganizationMembership.first(:conditions => ["member_id = ? and organization_id = ?", params[:member], params[:organization]])
+    @member = @membership.member
+    # We assume that the team has only one project, that's why .first is enough and we don't have to iterate.
+    @member.teams.each { |team| team.members.delete(@member) if team.projects.first.organization == @organization }
     @membership.destroy
     render :update do |page|
       page.replace_html "dummy-for-actions", "<script>location.reload(true)</script>"
