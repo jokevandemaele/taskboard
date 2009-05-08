@@ -6,7 +6,6 @@ class ProjectsController < ApplicationController
   def index
     @projects = current_member.projects
     @member = current_member
-    logger.error (@projects.inspect)
     @admins = @member.admin?
     if @projects.length == 1
       redirect_to :controller => :taskboard, :action => :show, :id => @projects.first.id

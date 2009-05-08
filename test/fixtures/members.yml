@@ -1,37 +1,44 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 dfaraday:
+  id: 1
   name: Daniel Faraday
   color: 20
   username: dfaraday
   hashed_password: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3 # test
+  admin: false
 
 jburke:
     name: Juliet Burke
     color: 1
     username: jburke
     hashed_password: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3 # test
+    admin: false
 
 cpace:
     name: Charlie Pace
     color: 7
     username: cpace
     hashed_password: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3 # test
+    admin: false
 
 clittleton:
     name: Claire Littleton
     color: 9
     username: clittleton
     hashed_password: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3 # test
+    admin: true
 
 mdawson:
     name: Michael Dawson
     color: 2
     username: mdawson
     hashed_password: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3 # test
+    admin: false
 
 mfaraday:
     name: Michael Faraday
     color: 4
     username: mfaraday
     hashed_password: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3 # test
+    admin: false

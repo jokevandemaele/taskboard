@@ -1,0 +1,20 @@
+Project
+	name:string
+	Stories (has many)
+		name:string
+		project_id:integer
+		importance:integer 
+		estimate:integer
+		how_to_demo:text
+		notes:text
+		Tasks (has many)
+			story_id :integer
+			name:string
+			description:text
+			status:string (undefined, to_start, in_production, finished)
+			Nametags (has many)
+				name:string
+				task_id:integer
+			Statustags (has many)
+				status:string
+				task_id:integer

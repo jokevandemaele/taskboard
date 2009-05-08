@@ -1,0 +1,2980 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1024px"
+   height="768px"
+   id="svg3588"
+   sodipodi:version="0.32"
+   inkscape:version="0.46"
+   sodipodi:docname="admin-members-design.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape">
+  <defs
+     id="defs3590">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient3155">
+      <stop
+         style="stop-color:#aaccff;stop-opacity:1;"
+         offset="0"
+         id="stop3157" />
+      <stop
+         style="stop-color:#aaccff;stop-opacity:0;"
+         offset="1"
+         id="stop3159" />
+    </linearGradient>
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 384 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="1024 : 384 : 1"
+       inkscape:persp3d-origin="512 : 256 : 1"
+       id="perspective3596" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3155"
+       id="linearGradient3161"
+       x1="372"
+       y1="34"
+       x2="384"
+       y2="608"
+       gradientUnits="userSpaceOnUse" />
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       id="perspective12018" />
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       id="perspective11408" />
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient4448">
+      <stop
+         style="stop-color:#b7c4c8;stop-opacity:1;"
+         offset="0"
+         id="stop4450" />
+      <stop
+         style="stop-color:#b7c4c8;stop-opacity:0;"
+         offset="1"
+         id="stop4452" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient3777">
+      <stop
+         style="stop-color:#e6e6e6;stop-opacity:1;"
+         offset="0"
+         id="stop3779" />
+      <stop
+         style="stop-color:#e6e6e6;stop-opacity:0;"
+         offset="1"
+         id="stop3781" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3769">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop3771" />
+      <stop
+         style="stop-color:#000000;stop-opacity:0;"
+         offset="1"
+         id="stop3773" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient4391">
+      <stop
+         id="stop4393"
+         offset="0"
+         style="stop-color:#fff48f;stop-opacity:1;" />
+      <stop
+         id="stop4395"
+         offset="1"
+         style="stop-color:#ffffc3;stop-opacity:1;" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3848">
+      <stop
+         style="stop-color:#bc5fd3;stop-opacity:1;"
+         offset="0"
+         id="stop3850" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1"
+         id="stop3852" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3840">
+      <stop
+         style="stop-color:#e580ff;stop-opacity:1;"
+         offset="0"
+         id="stop3842" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1"
+         id="stop3844" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3832">
+      <stop
+         style="stop-color:#aa87de;stop-opacity:1;"
+         offset="0"
+         id="stop3834" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1"
+         id="stop3836" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3824">
+      <stop
+         style="stop-color:#ccaaff;stop-opacity:1;"
+         offset="0"
+         id="stop3826" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1"
+         id="stop3828" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3816">
+      <stop
+         style="stop-color:#9955ff;stop-opacity:1;"
+         offset="0"
+         id="stop3818" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1"
+         id="stop3820" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3808">
+      <stop
+         style="stop-color:#8787de;stop-opacity:1;"
+         offset="0"
+         id="stop3810" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1"
+         id="stop3812" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3800">
+      <stop
+         style="stop-color:#5f5fd3;stop-opacity:1;"
+         offset="0"
+         id="stop3802" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1"
+         id="stop3804" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3786">
+      <stop
+         style="stop-color:#5f8dd3;stop-opacity:1;"
+         offset="0"
+         id="stop3788" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1"
+         id="stop3790" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3778">
+      <stop
+         style="stop-color:#214478;stop-opacity:1;"
+         offset="0"
+         id="stop3780" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1"
+         id="stop3782" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3770">
+      <stop
+         style="stop-color:#5599ff;stop-opacity:1;"
+         offset="0"
+         id="stop3772" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1"
+         id="stop3774" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3762">
+      <stop
+         style="stop-color:#0044aa;stop-opacity:1;"
+         offset="0"
+         id="stop3764" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1"
+         id="stop3766" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3754">
+      <stop
+         style="stop-color:#87cdde;stop-opacity:1;"
+         offset="0"
+         id="stop3756" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1"
+         id="stop3758" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3746">
+      <stop
+         style="stop-color:#216778;stop-opacity:1;"
+         offset="0"
+         id="stop3748" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1"
+         id="stop3750" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3738">
+      <stop
+         style="stop-color:#80e5ff;stop-opacity:1;"
+         offset="0"
+         id="stop3740" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1"
+         id="stop3742" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3730">
+      <stop
+         style="stop-color:#0088aa;stop-opacity:1;"
+         offset="0"
+         id="stop3732" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1"
+         id="stop3734" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3722">
+      <stop
+         style="stop-color:#6f918a;stop-opacity:1;"
+         offset="0"
+         id="stop3724" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1"
+         id="stop3726" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3714">
+      <stop
+         style="stop-color:#87decd;stop-opacity:1;"
+         offset="0"
+         id="stop3716" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1"
+         id="stop3718" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3706">
+      <stop
+         style="stop-color:#87decd;stop-opacity:1;"
+         offset="0"
+         id="stop3708" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1"
+         id="stop3710" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3698">
+      <stop
+         style="stop-color:#2ca089;stop-opacity:1;"
+         offset="0"
+         id="stop3700" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1"
+         id="stop3702" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3690">
+      <stop
+         style="stop-color:#6f916f;stop-opacity:1;"
+         offset="0"
+         id="stop3692" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1"
+         id="stop3694" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3682">
+      <stop
+         style="stop-color:#217821;stop-opacity:1;"
+         offset="0"
+         id="stop3684" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1"
+         id="stop3686" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3674">
+      <stop
+         style="stop-color:#aade87;stop-opacity:1;"
+         offset="0"
+         id="stop3676" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1"
+         id="stop3678" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3666">
+      <stop
+         style="stop-color:#5aa02c;stop-opacity:1;"
+         offset="0"
+         id="stop3668" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1"
+         id="stop3670" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3658">
+      <stop
+         style="stop-color:#cdde87;stop-opacity:1;"
+         offset="0"
+         id="stop3660" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1"
+         id="stop3662" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3650">
+      <stop
+         style="stop-color:#abc837;stop-opacity:1;"
+         offset="0"
+         id="stop3652" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1"
+         id="stop3654" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3642">
+      <stop
+         style="stop-color:#ddff55;stop-opacity:1;"
+         offset="0"
+         id="stop3644" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1"
+         id="stop3646" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3634">
+      <stop
+         style="stop-color:#88aa00;stop-opacity:1;"
+         offset="0"
+         id="stop3636" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1"
+         id="stop3638" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3626">
+      <stop
+         style="stop-color:#decd87;stop-opacity:1;"
+         offset="0"
+         id="stop3628" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1"
+         id="stop3630" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3618">
+      <stop
+         style="stop-color:#99873d;stop-opacity:1;"
+         offset="0"
+         id="stop3620" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1"
+         id="stop3622" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3610">
+      <stop
+         style="stop-color:#ffdd55;stop-opacity:1;"
+         offset="0"
+         id="stop3612" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1"
+         id="stop3614" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3602">
+      <stop
+         style="stop-color:#8c761d;stop-opacity:1;"
+         offset="0"
+         id="stop3604" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1"
+         id="stop3606" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3594">
+      <stop
+         style="stop-color:#c8beb7;stop-opacity:1;"
+         offset="0"
+         id="stop3596" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1"
+         id="stop3598" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3586">
+      <stop
+         style="stop-color:#6c5d53;stop-opacity:1;"
+         offset="0"
+         id="stop3588" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1"
+         id="stop3590" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3578">
+      <stop
+         style="stop-color:#d38d5f;stop-opacity:1;"
+         offset="0"
+         id="stop3580" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1"
+         id="stop3582" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3570">
+      <stop
+         style="stop-color:#a05a2c;stop-opacity:1;"
+         offset="0"
+         id="stop3572" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1"
+         id="stop3574" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3562">
+      <stop
+         style="stop-color:#ffb380;stop-opacity:1;"
+         offset="0"
+         id="stop3564" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1"
+         id="stop3566" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3554">
+      <stop
+         style="stop-color:#d45500;stop-opacity:1;"
+         offset="0"
+         id="stop3556" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1"
+         id="stop3558" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3546">
+      <stop
+         style="stop-color:#ac9393;stop-opacity:1;"
+         offset="0"
+         id="stop3548" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1"
+         id="stop3550" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3538">
+      <stop
+         style="stop-color:#916f6f;stop-opacity:1;"
+         offset="0"
+         id="stop3540" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1"
+         id="stop3542" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3530">
+      <stop
+         style="stop-color:#de8787;stop-opacity:1;"
+         offset="0"
+         id="stop3532" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1"
+         id="stop3534" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3522">
+      <stop
+         style="stop-color:#c83737;stop-opacity:1;"
+         offset="0"
+         id="stop3524" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1"
+         id="stop3526" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3510">
+      <stop
+         style="stop-color:#ff5555;stop-opacity:1;"
+         offset="0"
+         id="stop3512" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1"
+         id="stop3514" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3502">
+      <stop
+         style="stop-color:#d40000;stop-opacity:1;"
+         offset="0"
+         id="stop3504" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1"
+         id="stop3506" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient4734">
+      <stop
+         style="stop-color:#95c3d8;stop-opacity:1;"
+         offset="0"
+         id="stop4736" />
+      <stop
+         style="stop-color:#95c3d8;stop-opacity:0;"
+         offset="1"
+         id="stop4738" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3212">
+      <stop
+         style="stop-color:#358e00;stop-opacity:1;"
+         offset="0"
+         id="stop3214" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1"
+         id="stop3216" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient2385">
+      <stop
+         style="stop-color:#ffe482;stop-opacity:1;"
+         offset="0"
+         id="stop2387" />
+      <stop
+         style="stop-color:#ffffc3;stop-opacity:1;"
+         offset="1"
+         id="stop2389" />
+    </linearGradient>
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_y="6.1230318e-14 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       id="perspective10" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2385"
+       id="linearGradient3222"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-56.149911,-51.309747)"
+       x1="220"
+       y1="286.64789"
+       x2="221.42857"
+       y2="65.219322" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4734"
+       id="linearGradient4740"
+       x1="469.89648"
+       y1="48.990582"
+       x2="470.6124"
+       y2="453.78162"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2385"
+       id="linearGradient4895"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-56.149911,-51.309747)"
+       x1="220"
+       y1="286.64789"
+       x2="221.42857"
+       y2="65.219322" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2385"
+       id="linearGradient4903"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-56.149911,-51.309747)"
+       x1="220"
+       y1="286.64789"
+       x2="221.42857"
+       y2="65.219322" />
+    <inkscape:perspective
+       id="perspective3401"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2385"
+       id="linearGradient3467"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-56.149911,-51.309747)"
+       x1="220"
+       y1="286.64789"
+       x2="221.42857"
+       y2="65.219322" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2385"
+       id="linearGradient3475"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-56.149911,-51.309747)"
+       x1="220"
+       y1="286.64789"
+       x2="221.42857"
+       y2="65.219322" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2385"
+       id="linearGradient3483"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-56.149911,-51.309747)"
+       x1="220"
+       y1="286.64789"
+       x2="221.42857"
+       y2="65.219322" />
+    <inkscape:perspective
+       id="perspective4117"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2385"
+       id="linearGradient4156"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.1808467,0,0,0.213379,-951.80901,91.742807)"
+       x1="220"
+       y1="286.64789"
+       x2="221.42857"
+       y2="65.219322" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3658"
+       id="linearGradient4497"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.1971025,0,0,0.2260749,-370.50236,248.25376)"
+       x1="316.39655"
+       y1="65.219322"
+       x2="316.39655"
+       y2="521.95764" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3658"
+       id="linearGradient4509"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.1971025,0,0,0.2260749,-370.50236,248.25376)"
+       x1="316.39655"
+       y1="65.219322"
+       x2="316.39655"
+       y2="521.95764" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3658"
+       id="linearGradient4517"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.1971025,0,0,0.2260749,-370.50236,248.25376)"
+       x1="316.39655"
+       y1="65.219322"
+       x2="316.39655"
+       y2="521.95764" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2385"
+       id="linearGradient4194"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.1971025,0,0,0.2260749,-165.37574,91.696592)"
+       x1="220"
+       y1="286.64789"
+       x2="221.42857"
+       y2="65.219322" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2385"
+       id="linearGradient4210"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.1971025,0,0,0.2260749,-165.37574,91.696592)"
+       x1="220"
+       y1="286.64789"
+       x2="221.42857"
+       y2="65.219322" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2385"
+       id="linearGradient4220"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.1971025,0,0,0.2260749,-165.37574,91.696592)"
+       x1="220"
+       y1="286.64789"
+       x2="221.42857"
+       y2="65.219322" />
+    <inkscape:perspective
+       id="perspective2991"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3731"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2385"
+       id="linearGradient4459"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.4925723,0,0,0.5811808,322.55476,-22.687242)"
+       x1="220"
+       y1="286.64789"
+       x2="221.42857"
+       y2="65.219322" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2385"
+       id="linearGradient4487"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.4925723,0,0,0.5811808,322.55476,179.37754)"
+       x1="220"
+       y1="286.64789"
+       x2="221.42857"
+       y2="65.219322" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2385"
+       id="linearGradient4514"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.4925723,0,0,0.5811808,322.55476,179.37754)"
+       x1="220"
+       y1="286.64789"
+       x2="221.42857"
+       y2="65.219322" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2385"
+       id="linearGradient4520"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.4925723,0,0,0.5811808,322.55476,179.37754)"
+       x1="220"
+       y1="286.64789"
+       x2="221.42857"
+       y2="65.219322" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2385"
+       id="linearGradient4522"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.4925723,0,0,0.5811808,322.55476,179.37754)"
+       x1="220"
+       y1="286.64789"
+       x2="221.42857"
+       y2="65.219322" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2385"
+       id="linearGradient4525"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.4925723,0,0,0.5811808,322.55476,177.37754)"
+       x1="220"
+       y1="262.55899"
+       x2="221.42857"
+       y2="65.219322" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4391"
+       id="linearGradient4528"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(-0.4925723,0,0,-0.5811808,722.41822,586.31633)"
+       x1="220"
+       y1="286.64789"
+       x2="221.42857"
+       y2="65.219322" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2385"
+       id="linearGradient4534"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.4925723,0,0,0.5811808,324.52505,179.63749)"
+       x1="220"
+       y1="286.64789"
+       x2="221.42857"
+       y2="65.219322" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2385"
+       id="linearGradient4563"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.4925723,0,0,0.5811808,322.55476,177.37754)"
+       x1="220"
+       y1="262.55899"
+       x2="221.42857"
+       y2="65.219322" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4391"
+       id="linearGradient4565"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(-0.4925723,0,0,-0.5811808,722.41822,586.31633)"
+       x1="220"
+       y1="286.64789"
+       x2="221.42857"
+       y2="65.219322" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4391"
+       id="linearGradient4568"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(-0.4925723,0,0,-0.5811808,700.40336,589.81544)"
+       x1="220"
+       y1="286.64789"
+       x2="221.42857"
+       y2="65.219322" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2385"
+       id="linearGradient4572"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.4925723,0,0,0.5811808,300.5399,180.87665)"
+       x1="220"
+       y1="262.55899"
+       x2="221.42857"
+       y2="65.219322" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2385"
+       id="linearGradient4601"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.4925723,0,0,0.5811808,300.5399,180.87665)"
+       x1="220"
+       y1="262.55899"
+       x2="221.42857"
+       y2="65.219322" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3594"
+       id="linearGradient6497"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.4925723,0,0,1.1623616,-886.5177,190.78489)"
+       x1="541.56073"
+       y1="325.58725"
+       x2="49.163891"
+       y2="73.736046" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3594"
+       id="linearGradient6526"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.48708,0,0,1.1644623,-1086.1489,189.99845)"
+       x1="708.71045"
+       y1="400.89371"
+       x2="49.163891"
+       y2="73.736046" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3777"
+       id="linearGradient5540"
+       gradientUnits="userSpaceOnUse"
+       x1="-317.9498"
+       y1="408.87451"
+       x2="-249.49959"
+       y2="525.47369" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3777"
+       id="linearGradient5543"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.9263289,0,0,0.9263289,-21.121034,35.343802)"
+       x1="-317.9498"
+       y1="408.87451"
+       x2="-249.49959"
+       y2="525.47369" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2385"
+       id="linearGradient6136"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.1971025,0,0,0.2260749,-165.37574,91.696592)"
+       x1="220"
+       y1="286.64789"
+       x2="221.42857"
+       y2="65.219322" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2385"
+       id="linearGradient6142"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.275278,0,0,0.3157415,-888.36717,71.03766)"
+       x1="220"
+       y1="286.64789"
+       x2="221.42857"
+       y2="65.219322" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2385"
+       id="linearGradient6153"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.275278,0,0,0.3157415,-888.36717,71.03766)"
+       x1="220"
+       y1="286.64789"
+       x2="221.42857"
+       y2="65.219322" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3777"
+       id="linearGradient6229"
+       gradientUnits="userSpaceOnUse"
+       x1="-317.9498"
+       y1="408.87451"
+       x2="-249.49959"
+       y2="525.47369"
+       gradientTransform="matrix(0.8517948,0,0,0.8517948,-738.26145,-276.71271)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3777"
+       id="linearGradient6232"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.7890421,0,0,0.7890421,-756.25224,-246.60704)"
+       x1="-317.9498"
+       y1="408.87451"
+       x2="-249.49959"
+       y2="525.47369" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2385"
+       id="linearGradient6325"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.2490777,0,0,0.28569,-889.84887,71.90615)"
+       x1="220"
+       y1="286.64789"
+       x2="221.42857"
+       y2="65.219322" />
+    <inkscape:perspective
+       id="perspective7121"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2385"
+       id="linearGradient5623"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.2609974,0,0,0.2993618,-266.14932,780.20626)"
+       x1="220"
+       y1="286.64789"
+       x2="221.42857"
+       y2="65.219322" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2385"
+       id="linearGradient5639"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.2609974,0,0,0.2993618,-266.14932,780.20626)"
+       x1="220"
+       y1="286.64789"
+       x2="221.42857"
+       y2="65.219322" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2385"
+       id="linearGradient5647"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.2609974,0,0,0.2993618,-266.14932,780.20626)"
+       x1="220"
+       y1="286.64789"
+       x2="221.42857"
+       y2="65.219322" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2385"
+       id="linearGradient5845"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.2609974,0,0,0.2993618,-266.14932,780.20626)"
+       x1="220"
+       y1="286.64789"
+       x2="221.42857"
+       y2="65.219322" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2385"
+       id="linearGradient5902"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.2609974,0,0,0.2993618,-266.14932,780.20626)"
+       x1="220"
+       y1="286.64789"
+       x2="221.42857"
+       y2="65.219322" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2385"
+       id="linearGradient4987"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.2609974,0,0,0.2993618,-266.14932,780.20626)"
+       x1="220"
+       y1="286.64789"
+       x2="221.42857"
+       y2="65.219322" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3594"
+       id="linearGradient5810"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.4870799,0,0,0.5822312,-3.7269828,1307.0625)"
+       x1="708.71045"
+       y1="400.89371"
+       x2="49.163891"
+       y2="73.736046" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3594"
+       id="linearGradient5812"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(-0.4925723,0,0,-0.5811808,700.40336,589.81544)"
+       x1="220"
+       y1="286.64789"
+       x2="221.42857"
+       y2="65.219322" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3650"
+       id="linearGradient3468"
+       gradientUnits="userSpaceOnUse"
+       x1="433.40979"
+       y1="533.71588"
+       x2="433.40979"
+       y2="581.82458" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3650"
+       id="linearGradient3474"
+       gradientUnits="userSpaceOnUse"
+       x1="433.40979"
+       y1="533.71588"
+       x2="433.40979"
+       y2="581.82458" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3594"
+       id="linearGradient3725"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.4870799,0,0,0.5822312,-3.7269828,1307.0625)"
+       x1="708.71045"
+       y1="400.89371"
+       x2="49.163891"
+       y2="73.736046" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3594"
+       id="linearGradient3727"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(-0.4925723,0,0,-0.5811808,700.40336,589.81544)"
+       x1="220"
+       y1="286.64789"
+       x2="221.42857"
+       y2="65.219322" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3650"
+       id="linearGradient3580"
+       gradientUnits="userSpaceOnUse"
+       x1="433.40979"
+       y1="533.71588"
+       x2="433.40979"
+       y2="581.82458" />
+    <inkscape:perspective
+       id="perspective3670"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4448"
+       id="linearGradient4454"
+       x1="221.5"
+       y1="1684.5"
+       x2="221.5"
+       y2="1569"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0099867,0,0,1.0161259,212.71306,-1427.3017)" />
+    <inkscape:perspective
+       id="perspective4502"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4448"
+       id="linearGradient4647"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0099867,0,0,1.0161259,212.71306,-1427.3017)"
+       x1="221.5"
+       y1="1684.5"
+       x2="221.5"
+       y2="1569" />
+    <inkscape:perspective
+       id="perspective4428"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4281"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4666"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4973"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective5068"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective5141"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective5510"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective5611"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective5830"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective5914"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective5981"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective6048"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective6115"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective5266"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective8453"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3109"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       sodipodi:type="inkscape:persp3d" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1"
+     inkscape:cx="385.25184"
+     inkscape:cy="254.261"
+     inkscape:current-layer="g4463"
+     inkscape:document-units="px"
+     showgrid="false"
+     inkscape:window-width="1680"
+     inkscape:window-height="1006"
+     inkscape:window-x="0"
+     inkscape:window-y="0" />
+  <metadata
+     id="metadata3593">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer">
+    <rect
+       style="fill:#f1f6ff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       id="rect3598"
+       width="1024"
+       height="1327.1954"
+       x="0"
+       y="0" />
+    <rect
+       style="fill:url(#linearGradient3161);fill-opacity:1;stroke:none"
+       id="rect4370"
+       width="1024"
+       height="715.06409"
+       x="0"
+       y="0" />
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+       x="-1773.4103"
+       y="-99.439034"
+       id="text6318"><tspan
+         y="-99.439034"
+         x="-1773.4103"
+         sodipodi:role="line"
+         id="tspan6320" /></text>
+    <rect
+       style="opacity:1;fill:#d5e5ff;fill-opacity:1;stroke:#0c82eb;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect3955"
+       width="1001.2899"
+       height="128.02673"
+       x="8.4719219"
+       y="13.732674"
+       ry="13"
+       rx="13" />
+    <g
+       id="g3399"
+       transform="matrix(0.7579487,0,0,0.7579481,-65.082072,-120.27282)">
+      <g
+         transform="matrix(0.9938888,0,0,0.9938888,0.7073937,3.9868945)"
+         id="g11945">
+        <path
+           style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.70000005;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="M 143.94674,204.8442 L 143.94674,283.6361"
+           id="path11414" />
+        <path
+           id="path11925"
+           d="M 171.94674,204.8442 L 171.94674,283.6361"
+           style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.70000005;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+        <path
+           style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.70000005;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="M 116.60413,230.24015 L 200.34012,230.24015"
+           id="path11927" />
+        <path
+           id="path11929"
+           d="M 116.60413,258.24015 L 200.34012,258.24015"
+           style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.70000005;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+        <rect
+           style="fill:#f6c022;fill-opacity:1;stroke:none;stroke-width:1.70000005;stroke-miterlimit:4;stroke-dasharray:none"
+           id="rect11933"
+           width="16.037031"
+           height="14.837045"
+           x="120.71323"
+           y="208.8848" />
+        <rect
+           y="208.8848"
+           x="149.84746"
+           height="14.837045"
+           width="16.037031"
+           id="rect11935"
+           style="fill:#f6c022;fill-opacity:1;stroke:none;stroke-width:1.70000005;stroke-miterlimit:4;stroke-dasharray:none" />
+        <rect
+           style="fill:#f6c022;fill-opacity:1;stroke:none;stroke-width:1.70000005;stroke-miterlimit:4;stroke-dasharray:none"
+           id="rect11937"
+           width="16.037031"
+           height="14.837045"
+           x="177.90784"
+           y="208.8848" />
+        <rect
+           y="236.8848"
+           x="120.71323"
+           height="14.837045"
+           width="16.037031"
+           id="rect11939"
+           style="fill:#f6c022;fill-opacity:1;stroke:none;stroke-width:1.70000005;stroke-miterlimit:4;stroke-dasharray:none" />
+        <rect
+           style="fill:#f6c022;fill-opacity:1;stroke:none;stroke-width:1.70000005;stroke-miterlimit:4;stroke-dasharray:none"
+           id="rect11941"
+           width="16.037031"
+           height="14.837045"
+           x="149.84746"
+           y="236.8848" />
+        <rect
+           style="fill:#f6c022;fill-opacity:1;stroke:none;stroke-width:1.70000005;stroke-miterlimit:4;stroke-dasharray:none"
+           id="rect11943"
+           width="16.037031"
+           height="14.837045"
+           x="120.71323"
+           y="263.95865" />
+      </g>
+      <g
+         transform="matrix(0.7674287,0,0,0.7674287,174.25437,3.3137199)"
+         id="g2615">
+        <text
+           xml:space="preserve"
+           style="font-size:29.37249184px;font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Purisa;-inkscape-font-specification:Purisa Light"
+           x="173.85672"
+           y="367.49103"
+           id="text4508"><tspan
+             sodipodi:role="line"
+             id="tspan4510"
+             x="173.85672"
+             y="367.49103">Taskboard</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-size:97.20831299px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:semi-expanded;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HandelGothic BT;-inkscape-font-specification:HandelGothic BT Semi-Expanded"
+           x="45.93388"
+           y="334.84146"
+           id="text12144"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan12146"
+             x="45.93388"
+             y="334.84146">Agilar</tspan></text>
+      </g>
+      <g
+         transform="matrix(0.8660254,0.5,-0.5,0.8660254,348.25946,-255.50356)"
+         id="g3394">
+        <path
+           style="opacity:0.4435484;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:1.70000005;stroke-miterlimit:4"
+           d="M 239.3018,384.80478 L 334.87518,384.80478 L 331.56758,388.2465 L 335.10623,390.62875 L 332.92595,392.30463 L 336.31264,395.28477 L 329.60658,397.07616 L 333.48887,397.90691 L 334.5286,399.87084 L 334.29755,402.06584 L 336.76886,403.79873 L 333.95097,407.49557 L 334.87518,409.50352 L 239.3018,409.50352 L 240.71873,407.14653 L 239.56942,405.39897 L 242.34759,403.903 L 238.6232,402.19293 L 241.96414,400.58324 L 244.15394,397.83776 L 239.21322,394.56903 L 242.75475,391.65828 L 239.19708,388.30697 L 244.56621,386.88788 L 239.3018,384.80478 z"
+           id="rect2621"
+           sodipodi:nodetypes="ccccccccccccccccccccccccc" />
+        <text
+           xml:space="preserve"
+           style="font-size:27.56471252px;font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Purisa;-inkscape-font-specification:Purisa Light"
+           x="248.90018"
+           y="407.6539"
+           id="text4610"><tspan
+             sodipodi:role="line"
+             id="tspan4612"
+             x="248.90018"
+             y="407.6539"
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ff0000;font-family:AlMateen;-inkscape-font-specification:AlMateen Bold">BETA</tspan></text>
+      </g>
+    </g>
+    <image
+       y="27.74604"
+       x="888.45203"
+       id="image4283"
+       height="100"
+       width="100"
+       sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/default_av.png"
+       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/default_av.png" />
+    <text
+       xml:space="preserve"
+       style="font-size:21.59073639px;font-style:normal;font-weight:normal;line-height:125%;fill:#00112b;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+       x="878.09351"
+       y="50.719826"
+       id="text4287"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4289"
+         x="878.09351"
+         y="50.719826"
+         style="font-size:21px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:125%;writing-mode:lr-tb;text-anchor:end;fill:#00112b;font-family:Arial;-inkscape-font-specification:Arial">Welcome <tspan
+   style="fill:#003380"
+   id="tspan4546">Francisco Tufró</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:12.52674007px;font-style:normal;font-weight:normal;fill:#00112b;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+       x="877.31665"
+       y="68.192131"
+       id="text4291"><tspan
+         sodipodi:role="line"
+         id="tspan4293"
+         x="877.31665"
+         y="68.192131"
+         style="font-size:13px;text-align:end;text-anchor:end;fill:#00112b">You are a System Administrator</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:16.99651336999999884px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#00112b;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+       x="711.68286"
+       y="123.95795"
+       id="text4311"><tspan
+         sodipodi:role="line"
+         id="tspan4313"
+         x="711.68286"
+         y="123.95795"
+         style="font-size:18px;fill:#00112b">[ logout | edit profile ]</tspan></text>
+    <g
+       id="g4413"
+       transform="translate(0,-26)">
+      <g
+         id="g4400">
+        <rect
+           style="fill:#0c82eb;fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="rect4319"
+           width="154.88177"
+           height="30.976358"
+           x="24.770519"
+           y="168.05096"
+           rx="13"
+           ry="13" />
+        <rect
+           ry="0"
+           rx="0"
+           y="168.05096"
+           x="24.770519"
+           height="16.665407"
+           width="154.88177"
+           id="rect4398"
+           style="fill:#0c82eb;fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      </g>
+      <text
+         id="text4358"
+         y="189.27571"
+         x="34.755138"
+         style="font-size:22.70238495px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+         xml:space="preserve"><tspan
+           y="189.27571"
+           x="34.755138"
+           id="tspan4360"
+           sodipodi:role="line">organizations</tspan></text>
+    </g>
+    <g
+       id="g4456"
+       transform="translate(0,-26)">
+      <g
+         id="g4422">
+        <rect
+           ry="13"
+           rx="13"
+           y="168.05096"
+           x="24.770519"
+           height="30.976358"
+           width="154.88177"
+           id="rect4424"
+           style="fill:#0c82eb;fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+        <rect
+           style="fill:#0c82eb;fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="rect4426"
+           width="154.88177"
+           height="16.665407"
+           x="24.770519"
+           y="168.05096"
+           rx="0"
+           ry="0" />
+      </g>
+      <text
+         xml:space="preserve"
+         style="font-size:22.70238495px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+         x="102.27238"
+         y="189.27571"
+         id="text4428"><tspan
+           sodipodi:role="line"
+           id="tspan4430"
+           x="102.27238"
+           y="189.27571"
+           style="text-align:center;text-anchor:middle">organizations</tspan></text>
+    </g>
+    <g
+       transform="translate(160,-26)"
+       id="g4463">
+      <g
+         id="g4465">
+        <rect
+           style="fill:#0c82eb;fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="rect4467"
+           width="154.88177"
+           height="30.976358"
+           x="24.770519"
+           y="168.05096"
+           rx="13"
+           ry="13" />
+        <rect
+           ry="0"
+           rx="0"
+           y="168.05096"
+           x="24.770519"
+           height="16.665407"
+           width="154.88177"
+           id="rect4469"
+           style="fill:#0c82eb;fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      </g>
+      <text
+         id="text4471"
+         y="189.27571"
+         x="102.27238"
+         style="font-size:22.70238494999999901px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#f6c022;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+         xml:space="preserve"><tspan
+           style="text-align:center;text-anchor:middle;fill:#f6c022;fill-opacity:1"
+           y="189.27571"
+           x="102.27238"
+           id="tspan4473"
+           sodipodi:role="line">members</tspan></text>
+    </g>
+    <g
+       id="g4475"
+       transform="translate(320,-26)">
+      <g
+         id="g4477">
+        <rect
+           ry="13"
+           rx="13"
+           y="168.05096"
+           x="24.770519"
+           height="30.976358"
+           width="154.88177"
+           id="rect4479"
+           style="fill:#0c82eb;fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+        <rect
+           style="fill:#0c82eb;fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="rect4481"
+           width="154.88177"
+           height="16.665407"
+           x="24.770519"
+           y="168.05096"
+           rx="0"
+           ry="0" />
+      </g>
+      <text
+         xml:space="preserve"
+         style="font-size:22.70238495px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+         x="102.27238"
+         y="189.27571"
+         id="text4483"><tspan
+           sodipodi:role="line"
+           id="tspan4485"
+           x="102.27238"
+           y="189.27571"
+           style="text-align:center;text-anchor:middle">projects</tspan></text>
+    </g>
+    <g
+       transform="translate(480,-26)"
+       id="g4487">
+      <g
+         id="g4489">
+        <rect
+           style="fill:#0c82eb;fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="rect4491"
+           width="154.88177"
+           height="30.976358"
+           x="24.770519"
+           y="168.05096"
+           rx="13"
+           ry="13" />
+        <rect
+           ry="0"
+           rx="0"
+           y="168.05096"
+           x="24.770519"
+           height="16.665407"
+           width="154.88177"
+           id="rect4493"
+           style="fill:#0c82eb;fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      </g>
+      <text
+         id="text4495"
+         y="189.27571"
+         x="102.27238"
+         style="font-size:22.70238495px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+         xml:space="preserve"><tspan
+           style="text-align:center;text-anchor:middle"
+           y="189.27571"
+           x="102.27238"
+           id="tspan4497"
+           sodipodi:role="line">teams</tspan></text>
+    </g>
+    <image
+       y="304.90002"
+       x="954.25055"
+       id="image4975"
+       height="66"
+       width="66"
+       sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Find Search_128.png"
+       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Find Search_128.png" />
+    <text
+       xml:space="preserve"
+       style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+       x="944.28271"
+       y="248.12901"
+       id="text2886"><tspan
+         sodipodi:role="line"
+         id="tspan2888"
+         x="944.28271"
+         y="248.12901"
+         style="text-align:end;text-anchor:end">new member</tspan></text>
+    <image
+       y="211.40501"
+       x="954.25055"
+       id="image5268"
+       height="66"
+       width="65.600555"
+       sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Add.png"
+       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Add.png" />
+    <g
+       id="g5280"
+       transform="translate(-12,71.911623)">
+      <rect
+         ry="13"
+         rx="13"
+         y="253.44048"
+         x="812.21594"
+         height="25.095852"
+         width="144.30115"
+         id="rect5000"
+         style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         xml:space="preserve"
+         style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+         x="928.62823"
+         y="270.12903"
+         id="text5276"><tspan
+           sodipodi:role="line"
+           id="tspan5278"
+           x="928.62823"
+           y="270.12903"
+           style="text-align:end;text-anchor:end">find member</tspan></text>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+       x="872.65771"
+       y="446.29318"
+       id="text8317"><tspan
+         sodipodi:role="line"
+         id="tspan8319"
+         x="872.65771"
+         y="446.29318">report bug</tspan></text>
+    <image
+       y="409.25021"
+       x="954.25055"
+       id="image8455"
+       height="66"
+       width="66"
+       sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Bug-128.png"
+       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Bug-128.png" />
+    <g
+       id="g3162"
+       transform="translate(-1.0000158,0)">
+      <rect
+         style="fill:#deedff;fill-opacity:1;stroke:#0c82eb;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect9964"
+         width="764.52191"
+         height="56.582325"
+         x="14.739059"
+         y="205.46704"
+         rx="16"
+         ry="16" />
+      <path
+         transform="matrix(0,-0.4053786,0.4053786,0,-96.123127,293.52683)"
+         d="M 115.66622,325.84332 L 145.22965,325.84332 L 174.79307,325.84332 L 160.01136,351.446 L 145.22965,377.04868 L 130.44793,351.446 L 115.66622,325.84332 z"
+         inkscape:randomized="0"
+         inkscape:rounded="0"
+         inkscape:flatsided="false"
+         sodipodi:arg2="-1.5707963"
+         sodipodi:arg1="-2.6179939"
+         sodipodi:r2="17.068451"
+         sodipodi:r1="34.136902"
+         sodipodi:cy="342.91177"
+         sodipodi:cx="145.22964"
+         sodipodi:sides="3"
+         id="path9966"
+         style="fill:#0c82eb;fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         sodipodi:type="star" />
+      <text
+         id="text9968"
+         y="241.86938"
+         x="68.959381"
+         style="font-size:28.55548668px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#002255;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+         xml:space="preserve"><tspan
+           y="241.86938"
+           x="68.959381"
+           id="tspan9970"
+           sodipodi:role="line">A Closed Member</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:32.76691437px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;fill:#002255;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+         x="672.20825"
+         y="247.76129"
+         id="text9974"><tspan
+           sodipodi:role="line"
+           id="tspan9976"
+           x="672.20825"
+           y="247.76129">10</tspan></text>
+      <path
+         style="fill:none;fill-rule:evenodd;stroke:#0c82eb;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="M 638.01646,207.06219 L 638.01646,261.36331"
+         id="path9978" />
+      <image
+         y="201.58405"
+         x="562.77722"
+         id="image9980"
+         height="71"
+         width="71"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Folders_128.png"
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Folders_128.png" />
+      <text
+         id="text9982"
+         y="247.76129"
+         x="544.20825"
+         style="font-size:32.76691437px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;fill:#002255;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+         xml:space="preserve"><tspan
+           y="247.76129"
+           x="544.20825"
+           id="tspan9984"
+           sodipodi:role="line">3</tspan></text>
+      <path
+         id="path9986"
+         d="M 516.01646,207.06219 L 516.01646,261.36331"
+         style="fill:none;fill-rule:evenodd;stroke:#0c82eb;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <g
+         id="g9988"
+         transform="translate(-15,1)">
+        <image
+           y="209.67079"
+           x="480.57654"
+           id="image9990"
+           height="49.102562"
+           width="49.102562"
+           sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png"
+           xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png" />
+        <image
+           y="209.95483"
+           x="425.4321"
+           id="image9992"
+           height="48.53455"
+           width="48.53455"
+           sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit.png"
+           xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit.png" />
+      </g>
+      <image
+         y="199"
+         x="702"
+         id="image3111"
+         height="60"
+         width="60"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/brand_128.png"
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/brand_128.png" />
+    </g>
+    <g
+       id="g3872">
+      <rect
+         ry="16"
+         rx="16"
+         y="283.46704"
+         x="13.739043"
+         height="56.582325"
+         width="764.52191"
+         id="rect3181"
+         style="fill:#deedff;fill-opacity:1;stroke:#0c82eb;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         sodipodi:type="star"
+         style="fill:#0c82eb;fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="path3183"
+         sodipodi:sides="3"
+         sodipodi:cx="145.22964"
+         sodipodi:cy="342.91177"
+         sodipodi:r1="34.136902"
+         sodipodi:r2="17.068451"
+         sodipodi:arg1="-2.6179939"
+         sodipodi:arg2="-1.5707963"
+         inkscape:flatsided="false"
+         inkscape:rounded="0"
+         inkscape:randomized="0"
+         d="M 115.66622,325.84332 L 145.22965,325.84332 L 174.79307,325.84332 L 160.01136,351.446 L 145.22965,377.04868 L 130.44793,351.446 L 115.66622,325.84332 z"
+         transform="matrix(0,-0.4053786,0.4053786,0,-97.123143,371.52683)" />
+      <text
+         xml:space="preserve"
+         style="font-size:28.55548668px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#002255;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+         x="67.959366"
+         y="319.86938"
+         id="text3185"><tspan
+           sodipodi:role="line"
+           id="tspan3187"
+           x="67.959366"
+           y="319.86938">A Closed Member</tspan></text>
+      <text
+         id="text3189"
+         y="325.76129"
+         x="671.20825"
+         style="font-size:32.76691437px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;fill:#002255;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+         xml:space="preserve"><tspan
+           y="325.76129"
+           x="671.20825"
+           id="tspan3191"
+           sodipodi:role="line">10</tspan></text>
+      <path
+         id="path3193"
+         d="M 637.01644,285.06219 L 637.01644,339.36331"
+         style="fill:none;fill-rule:evenodd;stroke:#0c82eb;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <image
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Folders_128.png"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Folders_128.png"
+         width="71"
+         height="71"
+         id="image3195"
+         x="561.77722"
+         y="279.58405" />
+      <text
+         xml:space="preserve"
+         style="font-size:32.76691437px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;fill:#002255;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+         x="543.20825"
+         y="325.76129"
+         id="text3197"><tspan
+           sodipodi:role="line"
+           id="tspan3199"
+           x="543.20825"
+           y="325.76129">3</tspan></text>
+      <path
+         style="fill:none;fill-rule:evenodd;stroke:#0c82eb;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="M 515.01644,285.06219 L 515.01644,339.36331"
+         id="path3201" />
+      <g
+         transform="translate(-16.000016,79)"
+         id="g3203">
+        <image
+           xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png"
+           sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png"
+           width="49.102562"
+           height="49.102562"
+           id="image3205"
+           x="480.57654"
+           y="209.67079" />
+        <image
+           xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit.png"
+           sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit.png"
+           width="48.53455"
+           height="48.53455"
+           id="image3207"
+           x="425.4321"
+           y="209.95483" />
+      </g>
+      <image
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/brand_128.png"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/brand_128.png"
+         width="60"
+         height="60"
+         id="image3209"
+         x="701"
+         y="277" />
+    </g>
+    <rect
+       style="fill:#deedff;fill-opacity:1;stroke:#0c82eb;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect3213"
+       width="761.89441"
+       height="445.24893"
+       x="14.748169"
+       y="355.78076"
+       rx="16"
+       ry="16.000002" />
+    <path
+       transform="matrix(0.4053786,0,0,0.4053786,-13.83207,241.61411)"
+       d="M 115.66622,325.84332 L 145.22965,325.84332 L 174.79307,325.84332 L 160.01136,351.446 L 145.22965,377.04868 L 130.44793,351.446 L 115.66622,325.84332 z"
+       inkscape:randomized="0"
+       inkscape:rounded="0"
+       inkscape:flatsided="false"
+       sodipodi:arg2="-1.5707963"
+       sodipodi:arg1="-2.6179939"
+       sodipodi:r2="17.068451"
+       sodipodi:r1="34.136902"
+       sodipodi:cy="342.91177"
+       sodipodi:cx="145.22964"
+       sodipodi:sides="3"
+       id="path3215"
+       style="fill:#0c82eb;fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       sodipodi:type="star" />
+    <text
+       id="text3217"
+       y="391.29834"
+       x="67.654739"
+       style="font-size:28.55548668px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#002255;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+       xml:space="preserve"><tspan
+         y="391.29834"
+         x="67.654739"
+         id="tspan3219"
+         sodipodi:role="line">Francisco Tufró</tspan></text>
+    <path
+       id="path3221"
+       d="M 15.13704,414.10614 L 777.25183,414.10614"
+       style="fill:none;fill-rule:evenodd;stroke:#0c82eb;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#0c82eb;stroke-width:2.99999976;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 637.01646,356.98122 L 637.01646,413.05592"
+       id="path3229" />
+    <path
+       id="path3237"
+       d="M 523.01646,356.98256 L 523.01646,413.1054"
+       style="fill:none;fill-rule:evenodd;stroke:#0c82eb;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <g
+       id="g3681"
+       transform="translate(20,0)">
+      <rect
+         rx="13"
+         ry="12.999999"
+         y="478.42099"
+         x="25.636597"
+         height="33.175301"
+         width="289.44769"
+         id="rect3239"
+         style="fill:#f1f6ff;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         xml:space="preserve"
+         style="font-size:12.41710472px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#002255;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+         x="38.728348"
+         y="498.83182"
+         id="text3241"><tspan
+           sodipodi:role="line"
+           x="38.728348"
+           y="498.83182"
+           style="font-size:14.18180943px;text-align:start;text-anchor:start"
+           id="tspan3243">Agilar Taskboard ( Blue Team )</tspan></text>
+      <image
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png"
+         width="31.422136"
+         height="31.422136"
+         id="image3245"
+         x="282.25696"
+         y="479.29755" />
+      <image
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit.png"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit.png"
+         width="31.058649"
+         height="31.058649"
+         id="image3247"
+         x="246.96844"
+         y="479.47931" />
+    </g>
+    <rect
+       style="fill:#afc6e9;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect3249"
+       width="758.93976"
+       height="52.80677"
+       x="16.103363"
+       y="415.58823" />
+    <image
+       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Folders_128.png"
+       sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Folders_128.png"
+       width="52.841446"
+       height="52.841446"
+       id="image3251"
+       x="19.935791"
+       y="419.66208" />
+    <text
+       id="text3277"
+       y="447.21799"
+       x="84.720001"
+       style="font-size:20.68335152px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#162d50;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+       xml:space="preserve"><tspan
+         y="447.21799"
+         x="84.720001"
+         id="tspan3279"
+         sodipodi:role="line">Projects (Teams)</tspan></text>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#0c82eb;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 15.13704,604.10614 L 777.25183,604.10614"
+       id="path3281" />
+    <rect
+       y="604.98749"
+       x="16.223511"
+       height="53.407509"
+       width="759.54047"
+       id="rect3283"
+       style="fill:#afc6e9;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <g
+       id="g3285"
+       transform="matrix(0.7425534,0,0,0.7425534,107.56767,510.0312)">
+      <image
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Find Search_128.png"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Find Search_128.png"
+         width="29.730181"
+         height="29.730181"
+         id="image3287"
+         x="849.04315"
+         y="147.90265" />
+      <rect
+         ry="17.507158"
+         rx="17.507158"
+         y="147.81363"
+         x="675.20721"
+         height="29.908205"
+         width="171.97218"
+         id="rect3289"
+         style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         xml:space="preserve"
+         style="font-size:23.85014153px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+         x="685.93774"
+         y="169.1642"
+         id="text3291"><tspan
+           sodipodi:role="line"
+           id="tspan3293"
+           x="685.93774"
+           y="169.1642"
+           style="font-size:22px">search</tspan></text>
+    </g>
+    <g
+       transform="translate(-116,182)"
+       id="g3295">
+      <path
+         sodipodi:type="arc"
+         style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="path3297"
+         sodipodi:cx="150.58929"
+         sodipodi:cy="455.61234"
+         sodipodi:rx="4.6949115"
+         sodipodi:ry="4.4014797"
+         d="M 155.28421,455.61234 A 4.6949115,4.4014797 0 1 1 145.89438,455.61234 A 4.6949115,4.4014797 0 1 1 155.28421,455.61234 z"
+         transform="matrix(1.0875,0,0,1.1066667,-13.23525,-49.068139)" />
+      <path
+         transform="matrix(1.4125,0,0,1.5866667,-45.237789,-276.46163)"
+         d="M 155.28421,455.61234 A 4.6949115,4.4014797 0 1 1 145.89438,455.61234 A 4.6949115,4.4014797 0 1 1 155.28421,455.61234 z"
+         sodipodi:ry="4.4014797"
+         sodipodi:rx="4.6949115"
+         sodipodi:cy="455.61234"
+         sodipodi:cx="150.58929"
+         id="path3299"
+         style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         sodipodi:type="arc" />
+      <image
+         y="423.4465"
+         x="131.05707"
+         id="image3301"
+         height="60"
+         width="60"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Buddy Group_128.png"
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Buddy Group_128.png" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:20.68335152px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#162d50;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+       x="84.720001"
+       y="637.21802"
+       id="text3303"><tspan
+         sodipodi:role="line"
+         id="tspan3305"
+         x="84.720001"
+         y="637.21802">Organizations</tspan></text>
+    <g
+       transform="matrix(0.7425534,0,0,0.7425534,107.56767,320.0312)"
+       id="g3307">
+      <image
+         y="147.90265"
+         x="849.04315"
+         id="image3309"
+         height="29.730181"
+         width="29.730181"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Find Search_128.png"
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Find Search_128.png" />
+      <rect
+         style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect3311"
+         width="171.97218"
+         height="29.908205"
+         x="675.20721"
+         y="147.81363"
+         rx="17.507158"
+         ry="17.507158" />
+      <text
+         id="text3313"
+         y="169.1642"
+         x="685.93774"
+         style="font-size:23.85014153px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+         xml:space="preserve"><tspan
+           style="font-size:22px"
+           y="169.1642"
+           x="685.93774"
+           id="tspan3315"
+           sodipodi:role="line">search</tspan></text>
+    </g>
+    <g
+       id="g3377"
+       transform="translate(-16,150)">
+      <rect
+         style="fill:#f1f6ff;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect3379"
+         width="197.44768"
+         height="33.175301"
+         x="41.636597"
+         y="518.42096"
+         ry="12.999999"
+         rx="13" />
+      <text
+         id="text3381"
+         y="538.83185"
+         x="54.728348"
+         style="font-size:12.41710472px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#002255;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+         xml:space="preserve"><tspan
+           id="tspan3383"
+           style="font-size:14.18180943px;text-align:start;text-anchor:start"
+           y="538.83185"
+           x="54.728348"
+           sodipodi:role="line">Agilar</tspan></text>
+      <image
+         y="519.29755"
+         x="198.25696"
+         id="image3385"
+         height="31.422136"
+         width="31.422136"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png"
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png" />
+      <image
+         y="519.47931"
+         x="162.96846"
+         id="image3387"
+         height="31.058649"
+         width="31.058649"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit.png"
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit.png" />
+    </g>
+    <g
+       transform="translate(-16,190)"
+       id="g3389">
+      <rect
+         rx="13"
+         ry="12.999999"
+         y="518.42096"
+         x="41.636597"
+         height="33.175301"
+         width="197.44768"
+         id="rect3391"
+         style="fill:#f1f6ff;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         xml:space="preserve"
+         style="font-size:12.41710472px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#002255;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+         x="54.728348"
+         y="538.83185"
+         id="text3393"><tspan
+           sodipodi:role="line"
+           x="54.728348"
+           y="538.83185"
+           style="font-size:14.18180943px;text-align:start;text-anchor:start"
+           id="tspan3395">Dias Felices</tspan></text>
+      <image
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png"
+         width="31.422136"
+         height="31.422136"
+         id="image3397"
+         x="198.25696"
+         y="519.29755" />
+      <image
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit.png"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit.png"
+         width="31.058649"
+         height="31.058649"
+         id="image3399"
+         x="162.96846"
+         y="519.47931" />
+    </g>
+    <g
+       id="g3401"
+       transform="translate(-16,230)">
+      <rect
+         style="fill:#f1f6ff;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect3403"
+         width="197.44768"
+         height="33.175301"
+         x="41.636597"
+         y="518.42096"
+         ry="12.999999"
+         rx="13" />
+      <text
+         id="text3405"
+         y="538.83185"
+         x="54.728348"
+         style="font-size:12.41710472px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#002255;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+         xml:space="preserve"><tspan
+           id="tspan3407"
+           style="font-size:14.18180943px;text-align:start;text-anchor:start"
+           y="538.83185"
+           x="54.728348"
+           sodipodi:role="line">Test</tspan></text>
+      <image
+         y="519.29755"
+         x="198.25696"
+         id="image3409"
+         height="31.422136"
+         width="31.422136"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png"
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png" />
+      <image
+         y="519.47931"
+         x="162.96846"
+         id="image3411"
+         height="31.058649"
+         width="31.058649"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit.png"
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit.png" />
+    </g>
+    <g
+       id="g3485"
+       transform="translate(-16,150)">
+      <image
+         style="fill:#004455"
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/next-128.png"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/next-128.png"
+         width="32.934631"
+         height="32.934631"
+         id="image3487"
+         x="748.57471"
+         y="328.54132" />
+      <image
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/back-128.png"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/back-128.png"
+         width="32.934631"
+         height="32.934631"
+         id="image3489"
+         x="748.57471"
+         y="367.76175" />
+      <image
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Add.png"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Add.png"
+         width="53.060429"
+         height="53.383518"
+         id="image3491"
+         x="741.14429"
+         y="402.75775" />
+    </g>
+    <g
+       transform="translate(-16,338)"
+       id="g3493">
+      <image
+         y="328.54132"
+         x="748.57471"
+         id="image3495"
+         height="32.934631"
+         width="32.934631"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/next-128.png"
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/next-128.png"
+         style="fill:#004455" />
+      <image
+         y="367.76175"
+         x="748.57471"
+         id="image3497"
+         height="32.934631"
+         width="32.934631"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/back-128.png"
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/back-128.png" />
+      <image
+         y="402.75775"
+         x="741.14429"
+         id="image3499"
+         height="53.383518"
+         width="53.060429"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Add.png"
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Add.png" />
+    </g>
+    <g
+       id="g3501"
+       transform="translate(-16,150)">
+      <image
+         y="209.67079"
+         x="480.57654"
+         id="image3503"
+         height="49.102562"
+         width="49.102562"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png"
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png" />
+      <image
+         y="209.95483"
+         x="425.4321"
+         id="image3505"
+         height="48.53455"
+         width="48.53455"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit.png"
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit.png" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:32.76691437px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;fill:#002255;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+       x="543.20825"
+       y="395.76129"
+       id="text3669"><tspan
+         sodipodi:role="line"
+         id="tspan3671"
+         x="543.20825"
+         y="395.76129">3</tspan></text>
+    <image
+       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Folders_128.png"
+       sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Folders_128.png"
+       width="71"
+       height="71"
+       id="image3673"
+       x="561.77722"
+       y="351.58405" />
+    <text
+       id="text3675"
+       y="397.76129"
+       x="671.20825"
+       style="font-size:32.76691437px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;fill:#002255;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+       xml:space="preserve"><tspan
+         y="397.76129"
+         x="671.20825"
+         id="tspan3677"
+         sodipodi:role="line">10</tspan></text>
+    <image
+       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/brand_128.png"
+       sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/brand_128.png"
+       width="60"
+       height="60"
+       id="image3679"
+       x="701"
+       y="349" />
+    <g
+       id="g3688"
+       transform="translate(20,40)">
+      <rect
+         style="fill:#f1f6ff;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect3690"
+         width="289.44769"
+         height="33.175301"
+         x="25.636597"
+         y="478.42099"
+         ry="12.999999"
+         rx="13" />
+      <text
+         id="text3692"
+         y="498.83182"
+         x="38.728348"
+         style="font-size:12.41710472px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#002255;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+         xml:space="preserve"><tspan
+           id="tspan3694"
+           style="font-size:14.18180943px;text-align:start;text-anchor:start"
+           y="498.83182"
+           x="38.728348"
+           sodipodi:role="line">Agilar Taskboard ( Blue Team )</tspan></text>
+      <image
+         y="479.29755"
+         x="282.25696"
+         id="image3696"
+         height="31.422136"
+         width="31.422136"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png"
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png" />
+      <image
+         y="479.47931"
+         x="246.96844"
+         id="image3698"
+         height="31.058649"
+         width="31.058649"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit.png"
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit.png" />
+    </g>
+    <g
+       transform="translate(20,80)"
+       id="g3700">
+      <rect
+         rx="13"
+         ry="12.999999"
+         y="478.42099"
+         x="25.636597"
+         height="33.175301"
+         width="289.44769"
+         id="rect3702"
+         style="fill:#f1f6ff;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         xml:space="preserve"
+         style="font-size:12.41710472px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#002255;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+         x="38.728348"
+         y="498.83182"
+         id="text3704"><tspan
+           sodipodi:role="line"
+           x="38.728348"
+           y="498.83182"
+           style="font-size:14.18180943px;text-align:start;text-anchor:start"
+           id="tspan3706">Agilar Taskboard ( Blue Team )</tspan></text>
+      <image
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png"
+         width="31.422136"
+         height="31.422136"
+         id="image3708"
+         x="282.25696"
+         y="479.29755" />
+      <image
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit.png"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit.png"
+         width="31.058649"
+         height="31.058649"
+         id="image3710"
+         x="246.96844"
+         y="479.47931" />
+    </g>
+    <g
+       id="g3712"
+       transform="translate(360,0)">
+      <rect
+         style="fill:#f1f6ff;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect3714"
+         width="289.44769"
+         height="33.175301"
+         x="25.636597"
+         y="478.42099"
+         ry="12.999999"
+         rx="13" />
+      <text
+         id="text3716"
+         y="498.83182"
+         x="38.728348"
+         style="font-size:12.41710472px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#002255;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+         xml:space="preserve"><tspan
+           id="tspan3718"
+           style="font-size:14.18180943px;text-align:start;text-anchor:start"
+           y="498.83182"
+           x="38.728348"
+           sodipodi:role="line">Agilar Taskboard ( Blue Team )</tspan></text>
+      <image
+         y="479.29755"
+         x="282.25696"
+         id="image3720"
+         height="31.422136"
+         width="31.422136"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png"
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png" />
+      <image
+         y="479.47931"
+         x="246.96844"
+         id="image3722"
+         height="31.058649"
+         width="31.058649"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit.png"
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit.png" />
+    </g>
+    <g
+       transform="translate(360,40)"
+       id="g3724">
+      <rect
+         rx="13"
+         ry="12.999999"
+         y="478.42099"
+         x="25.636597"
+         height="33.175301"
+         width="289.44769"
+         id="rect3726"
+         style="fill:#f1f6ff;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         xml:space="preserve"
+         style="font-size:12.41710472px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#002255;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+         x="38.728348"
+         y="498.83182"
+         id="text3728"><tspan
+           sodipodi:role="line"
+           x="38.728348"
+           y="498.83182"
+           style="font-size:14.18180943px;text-align:start;text-anchor:start"
+           id="tspan3730">Agilar Taskboard ( Blue Team )</tspan></text>
+      <image
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png"
+         width="31.422136"
+         height="31.422136"
+         id="image3732"
+         x="282.25696"
+         y="479.29755" />
+      <image
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit.png"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit.png"
+         width="31.058649"
+         height="31.058649"
+         id="image3734"
+         x="246.96844"
+         y="479.47931" />
+    </g>
+    <g
+       id="g3736"
+       transform="translate(360,80)">
+      <rect
+         style="fill:#f1f6ff;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect3738"
+         width="289.44769"
+         height="33.175301"
+         x="25.636597"
+         y="478.42099"
+         ry="12.999999"
+         rx="13" />
+      <text
+         id="text3740"
+         y="498.83182"
+         x="38.728348"
+         style="font-size:12.41710472px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#002255;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+         xml:space="preserve"><tspan
+           id="tspan3742"
+           style="font-size:14.18180943px;text-align:start;text-anchor:start"
+           y="498.83182"
+           x="38.728348"
+           sodipodi:role="line">Agilar Taskboard ( Blue Team )</tspan></text>
+      <image
+         y="479.29755"
+         x="282.25696"
+         id="image3744"
+         height="31.422136"
+         width="31.422136"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png"
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png" />
+      <image
+         y="479.47931"
+         x="246.96844"
+         id="image3746"
+         height="31.058649"
+         width="31.058649"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit.png"
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit.png" />
+    </g>
+    <g
+       transform="translate(224,150)"
+       id="g3748">
+      <rect
+         rx="13"
+         ry="12.999999"
+         y="518.42096"
+         x="41.636597"
+         height="33.175301"
+         width="197.44768"
+         id="rect3750"
+         style="fill:#f1f6ff;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         xml:space="preserve"
+         style="font-size:12.41710472px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#002255;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+         x="54.728348"
+         y="538.83185"
+         id="text3752"><tspan
+           sodipodi:role="line"
+           x="54.728348"
+           y="538.83185"
+           style="font-size:14.18180943px;text-align:start;text-anchor:start"
+           id="tspan3754">Agilar</tspan></text>
+      <image
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png"
+         width="31.422136"
+         height="31.422136"
+         id="image3756"
+         x="198.25696"
+         y="519.29755" />
+      <image
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit.png"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit.png"
+         width="31.058649"
+         height="31.058649"
+         id="image3758"
+         x="162.96846"
+         y="519.47931" />
+    </g>
+    <g
+       id="g3760"
+       transform="translate(224,190)">
+      <rect
+         style="fill:#f1f6ff;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect3762"
+         width="197.44768"
+         height="33.175301"
+         x="41.636597"
+         y="518.42096"
+         ry="12.999999"
+         rx="13" />
+      <text
+         id="text3764"
+         y="538.83185"
+         x="54.728348"
+         style="font-size:12.41710472px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#002255;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+         xml:space="preserve"><tspan
+           id="tspan3766"
+           style="font-size:14.18180943px;text-align:start;text-anchor:start"
+           y="538.83185"
+           x="54.728348"
+           sodipodi:role="line">Dias Felices</tspan></text>
+      <image
+         y="519.29755"
+         x="198.25696"
+         id="image3768"
+         height="31.422136"
+         width="31.422136"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png"
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png" />
+      <image
+         y="519.47931"
+         x="162.96846"
+         id="image3770"
+         height="31.058649"
+         width="31.058649"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit.png"
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit.png" />
+    </g>
+    <g
+       transform="translate(224,230)"
+       id="g3772">
+      <rect
+         rx="13"
+         ry="12.999999"
+         y="518.42096"
+         x="41.636597"
+         height="33.175301"
+         width="197.44768"
+         id="rect3774"
+         style="fill:#f1f6ff;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         xml:space="preserve"
+         style="font-size:12.41710472px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#002255;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+         x="54.728348"
+         y="538.83185"
+         id="text3776"><tspan
+           sodipodi:role="line"
+           x="54.728348"
+           y="538.83185"
+           style="font-size:14.18180943px;text-align:start;text-anchor:start"
+           id="tspan3778">Test</tspan></text>
+      <image
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png"
+         width="31.422136"
+         height="31.422136"
+         id="image3780"
+         x="198.25696"
+         y="519.29755" />
+      <image
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit.png"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit.png"
+         width="31.058649"
+         height="31.058649"
+         id="image3782"
+         x="162.96846"
+         y="519.47931" />
+    </g>
+    <g
+       id="g3784"
+       transform="translate(464,150)">
+      <rect
+         style="fill:#f1f6ff;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect3786"
+         width="197.44768"
+         height="33.175301"
+         x="41.636597"
+         y="518.42096"
+         ry="12.999999"
+         rx="13" />
+      <text
+         id="text3788"
+         y="538.83185"
+         x="54.728348"
+         style="font-size:12.41710472px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#002255;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+         xml:space="preserve"><tspan
+           id="tspan3790"
+           style="font-size:14.18180943px;text-align:start;text-anchor:start"
+           y="538.83185"
+           x="54.728348"
+           sodipodi:role="line">Agilar</tspan></text>
+      <image
+         y="519.29755"
+         x="198.25696"
+         id="image3792"
+         height="31.422136"
+         width="31.422136"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png"
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png" />
+      <image
+         y="519.47931"
+         x="162.96846"
+         id="image3794"
+         height="31.058649"
+         width="31.058649"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit.png"
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit.png" />
+    </g>
+    <g
+       transform="translate(464,190)"
+       id="g3796">
+      <rect
+         rx="13"
+         ry="12.999999"
+         y="518.42096"
+         x="41.636597"
+         height="33.175301"
+         width="197.44768"
+         id="rect3798"
+         style="fill:#f1f6ff;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         xml:space="preserve"
+         style="font-size:12.41710472px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#002255;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+         x="54.728348"
+         y="538.83185"
+         id="text3800"><tspan
+           sodipodi:role="line"
+           x="54.728348"
+           y="538.83185"
+           style="font-size:14.18180943px;text-align:start;text-anchor:start"
+           id="tspan3802">Dias Felices</tspan></text>
+      <image
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png"
+         width="31.422136"
+         height="31.422136"
+         id="image3804"
+         x="198.25696"
+         y="519.29755" />
+      <image
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit.png"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit.png"
+         width="31.058649"
+         height="31.058649"
+         id="image3806"
+         x="162.96846"
+         y="519.47931" />
+    </g>
+    <g
+       id="g3808"
+       transform="translate(464,230)">
+      <rect
+         style="fill:#f1f6ff;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect3810"
+         width="197.44768"
+         height="33.175301"
+         x="41.636597"
+         y="518.42096"
+         ry="12.999999"
+         rx="13" />
+      <text
+         id="text3812"
+         y="538.83185"
+         x="54.728348"
+         style="font-size:12.41710472px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#002255;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+         xml:space="preserve"><tspan
+           id="tspan3814"
+           style="font-size:14.18180943px;text-align:start;text-anchor:start"
+           y="538.83185"
+           x="54.728348"
+           sodipodi:role="line">Test</tspan></text>
+      <image
+         y="519.29755"
+         x="198.25696"
+         id="image3816"
+         height="31.422136"
+         width="31.422136"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png"
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png" />
+      <image
+         y="519.47931"
+         x="162.96846"
+         id="image3818"
+         height="31.058649"
+         width="31.058649"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit.png"
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit.png" />
+    </g>
+    <g
+       id="g3889"
+       transform="translate(0,540)">
+      <rect
+         style="fill:#deedff;fill-opacity:1;stroke:#0c82eb;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect3891"
+         width="764.52191"
+         height="56.582325"
+         x="13.739043"
+         y="283.46704"
+         rx="16"
+         ry="16" />
+      <path
+         transform="matrix(0,-0.4053786,0.4053786,0,-97.123143,371.52683)"
+         d="M 115.66622,325.84332 L 145.22965,325.84332 L 174.79307,325.84332 L 160.01136,351.446 L 145.22965,377.04868 L 130.44793,351.446 L 115.66622,325.84332 z"
+         inkscape:randomized="0"
+         inkscape:rounded="0"
+         inkscape:flatsided="false"
+         sodipodi:arg2="-1.5707963"
+         sodipodi:arg1="-2.6179939"
+         sodipodi:r2="17.068451"
+         sodipodi:r1="34.136902"
+         sodipodi:cy="342.91177"
+         sodipodi:cx="145.22964"
+         sodipodi:sides="3"
+         id="path3893"
+         style="fill:#0c82eb;fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         sodipodi:type="star" />
+      <text
+         id="text3895"
+         y="319.86938"
+         x="67.959366"
+         style="font-size:28.55548668px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#002255;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+         xml:space="preserve"><tspan
+           y="319.86938"
+           x="67.959366"
+           id="tspan3897"
+           sodipodi:role="line">A Closed Member</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:32.76691437px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;fill:#002255;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+         x="671.20825"
+         y="325.76129"
+         id="text3899"><tspan
+           sodipodi:role="line"
+           id="tspan3901"
+           x="671.20825"
+           y="325.76129">10</tspan></text>
+      <path
+         style="fill:none;fill-rule:evenodd;stroke:#0c82eb;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="M 637.01644,285.06219 L 637.01644,339.36331"
+         id="path3903" />
+      <image
+         y="279.58405"
+         x="561.77722"
+         id="image3905"
+         height="71"
+         width="71"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Folders_128.png"
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Folders_128.png" />
+      <text
+         id="text3907"
+         y="325.76129"
+         x="543.20825"
+         style="font-size:32.76691437px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;fill:#002255;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+         xml:space="preserve"><tspan
+           y="325.76129"
+           x="543.20825"
+           id="tspan3909"
+           sodipodi:role="line">3</tspan></text>
+      <path
+         id="path3911"
+         d="M 515.01644,285.06219 L 515.01644,339.36331"
+         style="fill:none;fill-rule:evenodd;stroke:#0c82eb;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <g
+         id="g3913"
+         transform="translate(-16.000016,79)">
+        <image
+           y="209.67079"
+           x="480.57654"
+           id="image3915"
+           height="49.102562"
+           width="49.102562"
+           sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png"
+           xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png" />
+        <image
+           y="209.95483"
+           x="425.4321"
+           id="image3917"
+           height="48.53455"
+           width="48.53455"
+           sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit.png"
+           xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit.png" />
+      </g>
+      <image
+         y="277"
+         x="701"
+         id="image3919"
+         height="60"
+         width="60"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/brand_128.png"
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/brand_128.png" />
+    </g>
+  </g>
+</svg>

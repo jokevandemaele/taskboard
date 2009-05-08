@@ -5,6 +5,7 @@ class TaskboardController < ApplicationController
   def show
     @project = Project.find(params[:id])
     @stories_by_priority = @project.stories_in_progress
+    @member = current_member
     @members = @project.members
     if(@project.teams.first)
       @color = @project.teams.first.color

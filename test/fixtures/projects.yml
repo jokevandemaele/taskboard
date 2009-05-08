@@ -1,4 +1,6 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  name: Project One
+  id: 1
+  name: Find the island
+  organization_id: 1

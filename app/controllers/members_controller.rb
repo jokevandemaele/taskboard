@@ -149,7 +149,8 @@ class MembersController < ApplicationController
   
   def login
     if request.post?
-      session[:member] = Member.authenticate(params[:member][:username], params[:member][:password])
+      @member = Member.authenticate(params[:member][:username], params[:member][:password])
+      session[:member] = @member.id
       if session[:member]
         redirect_to_stored
       else
