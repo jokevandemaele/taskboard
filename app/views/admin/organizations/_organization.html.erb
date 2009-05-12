@@ -1,0 +1,72 @@
+<%= admin_open_div(700) -%>
+<div id="organization-<%= organization.id %>" class="admin-div-organization-top">
+	<div class="admin-div-organization-top-actions admin-div-top-actions" style="float:right; margin: none;">
+		<%= image_tag "admin/admin-div-actions-edit.png", :alt => "Edit" -%>
+		<%= image_tag "admin/admin-div-actions-remove.png", :alt => "Remove" -%>
+		<%= image_tag "admin/admin-div-actions-separator.png", :alt => "Separator", :class => "admin-div-top-actions-separator"-%>
+		<span class="admin-div-top-actions-counts"><%=h organization.projects.count %></span>
+		<%= image_tag "admin/admin-div-actions-projects.png", :alt => "Projects" -%>
+		<%= image_tag "admin/admin-div-actions-separator.png", :alt => "Separator", :class => "admin-div-top-actions-separator"-%>
+		<span class="admin-div-top-actions-counts"><%=h organization.members.count %></span>
+		<%= image_tag "admin/admin-div-actions-members.png", :alt => "Members" -%>
+	</div>
+	<div id="admin-div-organization-top-name" style="float:left;">
+		<script>
+			ids<%= organization.id %> = new Array('admin-div-organization-projects-<%= organization.id %>', 'admin-div-organization-members-<%= organization.id %>');
+		</script>
+		<%= image_tag "admin/admin-div-expand.png", 
+			:alt => "Expand", 
+			:style => "cursor: pointer",
+			:onClick => "expandCollapseDivs(ids#{organization.id})" -%>
+			
+		<h1 onClick="expandCollapseDivs(ids<%= organization.id -%>)"><%=h organization.name -%></h1>
+	</div>
+	<div style="clear: both;"></div>
+</div>
+
+<div id="admin-div-organization-projects-<%= organization.id -%>" class="admin-div-organization-projects" style="display:none">
+<div class="admin-div-section">
+	<span class="admin-div-elements-search"><%= text_field_tag "admin-div-projects-search", "search", :onClick => "if(this.value == 'search') {this.clear();}" , :autocomplete => "off", :class => "admin-div-elements-search-field" -%><%= image_tag 'admin/admin-div-elements-search.png', :alt => "find" -%></span>
+	<%= image_tag "admin/admin-div-actions-projects.png", :alt => "Projects", :style => "position: relative; top: 10px" -%>
+	<h2>Projects</h2>
+	
+</div>
+<div class="admin-div-elements-actions">
+	<%= image_tag "admin/admin-div-elements-next.png", :alt => "Next" -%><br />
+	<%= image_tag "admin/admin-div-elements-prev.png", :alt => "Previous" -%><br />
+	<%= image_tag "admin/admin-div-elements-add.png", :alt => "Add" -%>
+</div>
+	<% organization.projects.each do |project| -%>
+		<div class="admin-div-element">
+		<%= image_tag "admin/admin-div-element-remove.png", :alt => "Edit", :style => "float: right; position:relative; top: 5px; left: -10px;" -%>
+		<%= image_tag "admin/admin-div-element-edit.png", :alt => "Edit", :style => "float: right; position:relative; top: 5px; left: -15px;" -%>
+		<p id="admin-div-element-text-project-<%= project.id -%>"><%= project.name -%></p>
+		<script>
+			resizeFontSizeToFitParent('admin-div-element-text-project-<%= project.id -%>');
+		</script>
+		</div>
+	<% end -%>
+	<div style="clear: both;"></div>
+</div>
+
+<div id="admin-div-organization-members-<%= organization.id -%>" class="admin-div-organization-members" style="display:none">
+<div class="admin-div-section">
+	<span class="admin-div-elements-search"><%= text_field_tag "admin-div-members-search", "search", :onClick => "if(this.value == 'search') {this.clear();}" , :autocomplete => "off", :class => "admin-div-elements-search-field" -%><%= image_tag 'admin/admin-div-elements-search.png', :alt => "find" -%></span>
+	<%= image_tag "admin/admin-div-actions-members.png", :alt => "members", :style => "position: relative; top: 10px" -%>
+	<h2>Members</h2>
+</div>
+<div class="admin-div-elements-actions">
+	<%= image_tag "admin/admin-div-elements-next.png", :alt => "Next" -%><br />
+	<%= image_tag "admin/admin-div-elements-prev.png", :alt => "Previous" -%><br />
+	<%= image_tag "admin/admin-div-elements-add.png", :alt => "Add" -%>
+</div>
+	<% organization.members.each do |member| -%>
+		<div class="admin-div-element">
+		<%= image_tag "admin/admin-div-element-remove.png", :alt => "Edit", :style => "float: right; position:relative; top: 5px; left: -10px;" -%>
+		<%= image_tag "admin/admin-div-element-edit.png", :alt => "Edit", :style => "float: right; position:relative; top: 5px; left: -15px;" -%>
+		<p id="admin-div-element-text-member-<%= member.id -%>"><%= member.name -%></p>
+		</div>
+	<% end -%>
+	<div style="clear: both;"></div>
+</div>
+<%= admin_close_div(700) -%>

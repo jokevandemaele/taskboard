@@ -1,0 +1,146 @@
+/* General  */
+body { background: url('/images/admin/admin-background.png') repeat-x #f1f6ff; } 
+img { border: none; vertical-align: middle; }
+a { text-decoration: none;}
+#admin-dummy-container{ margin: 0 auto; width: 1000px}
+
+#admin-container {
+	position: relative;
+	width: 1000px;
+	height: 100px;
+}
+#admin-content{
+	float: left;
+	width: 780px;
+	height: 100px;
+}
+
+#admin-sidebar{
+	float: left;
+	width: 220px;
+}
+
+#admin-sidebar-menu{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	text-align: right;
+	color: #00112b;
+	font-size: 16px;
+}
+
+#admin-sidebar-menu a:hover{
+	color: #2a7fff;
+}
+
+#admin-sidebar-search{
+	background: url('/images/admin/admin-sidebar-search-input-background.png') no-repeat transparent;
+	border: none;
+	width: 140px;
+	height: 25px;
+	vertical-align: middle;
+	color: #00112b;
+	font-size: 14px;
+	padding-top: 3px;
+	padding-left: 10px;
+	position:relative;
+	float: left;
+	top: 20px;
+	left: 5px;
+}
+#admin-sidebar-menu img{
+	vertical-align: middle;
+}
+/* Admin Div  */
+.admin-div-top{ height: 15px; }
+.admin-div-top-left{ float: left; width: 15px; height: 15px; background: url('/images/admin/admin-div-top-left.png');}
+.admin-div-top-middle{ float: left; width: 100%; height: 12px; background:green; border-top: 3px solid #0c82eb; background: #d5e5ff;}
+.admin-div-top-right{ float: right; width: 15px; height: 15px; background: url('/images/admin/admin-div-top-right.png');}
+.admin-div-content{ padding-left: 12px; padding-right: 12px; border-left: 3px solid #0c82eb; border-right: 3px solid #0c82eb; background: #d5e5ff;}
+.admin-div-content h1 { position: relative; top: 4px; font-size: 28; color: #002255; display: inline; margin: 0; margin-left: 10px; font-weight: normal;}
+.admin-div-content h2 { color: #002255; display: inline; margin: 0; margin-left: 10px; font-weight: normal;}
+.admin-div-bottom{margin-bottom: 30px;}
+.admin-div-bottom-left{ float: left; width: 15px; height: 15px; background: url('/images/admin/admin-div-bottom-left.png');}
+.admin-div-bottom-middle{ float: left; width: 100%; height: 12px; background:green; border-bottom: 3px solid #0c82eb; background: #d5e5ff;}
+.admin-div-bottom-right{ float: right; width: 15px; height: 15px; background: url('/images/admin/admin-div-bottom-right.png');}
+.admin-div-top-actions{display: inline; margin: 0; padding: 0; position: relative;}
+.admin-div-top-actions-separator { margin-left: 10px;margin-right: 10px;}
+.admin-div-top-actions-counts{ position: relative; top: 4px; font-size: 22px; color: #002255;}
+.admin-div-hr { border-top: 1px solid #0c82eb; border-bottom: 2px solid #0c82eb; border-left: 0; border-right: 0; margin: 0; width: 700px; position: relative; left: -15px;}
+.admin-div-section { width: 100%; height: 52px; background: #afc6e9;}
+.admin-div-section h2 { position: relative; top: 13px;}
+.admin-div-elements-actions{
+	float: right;
+}
+.admin-div-element { 
+	float: left;
+	width: 197px;
+	height: 33px;
+	background: url('/images/admin/admin-div-element-display.png') no-repeat;
+	margin: 5px;
+}
+
+.admin-div-element p{ 
+	font-size: 14px; 
+	color: #002255;
+	padding-left: 10px;
+	padding-top: 5px;
+	margin: 0;
+}
+
+.admin-div-elements-search{
+	float:right;
+	position: relative;
+	top: 11px;
+	margin-right: 10px;
+}
+.admin-div-elements-search-field{
+	background: url('/images/admin/admin-div-elements-search-field.png') no-repeat transparent;
+	border: none;
+	width: 128px;
+	height: 25px;
+	font-size: 12px; 
+	position:relative;
+	top: 4px;
+	padding-left: 12px;
+	padding-top: 3px;
+	margin: 0;
+}
+/* End Admin Div  */
+
+/* Admin User Info */
+#admin-user-info {
+	top: 0px;
+	left: 0px;
+	right: 0;
+	text-align: right;
+	background: red;
+}
+#admin-user-info-text p{
+	margin: 0;
+	color: #00112b;
+	font-size: 21px;
+	text-align: right;
+}
+.admin-user-info-text-user{
+	color: #003380;
+}
+#admin-user-info-text .admin-user-info-text-role{
+	color: #00112b;
+	font-size: 13px;
+}
+
+#admin-user-info-text .admin-user-info-text-role a{
+	text-decoration: none;
+	color: #00112b;
+}
+#admin-user-info-text .admin-user-info-text-role a:hover{
+	color: #2a7fff;
+}
+
+#admin-user-info-links {
+	position:relative;
+}
+
+/* End Admin User Info */
+/* End General  */

@@ -3,6 +3,26 @@
 
 (document.getElementById) ? dom = true : dom = false;
 
+// Admin Section
+function expandCollapseDivs(ids){
+	ids.each(
+		function(elem){ 
+			if($(elem).visible())
+			{
+				Effect.SlideUp(elem, {duration: 0.3});
+			}else{
+				Effect.SlideDown(elem, {duration: 0.3});
+			}
+		})
+}
+	
+// End Admin Section
+function resizeFontSizeToFitParent(id){
+		//size = $(id).getStyle('font-size').replace("px","")
+		//alert($(id).parent);
+		//if($id.offsetHeight > )
+}
+
 function keepDivOnTop(div) {
 	$(div).style.top = window.pageYOffset + "px";
 	$(div).style.left = window.pageXOffset + "px";
