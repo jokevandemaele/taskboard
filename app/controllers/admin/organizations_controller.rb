@@ -1,6 +1,7 @@
 class Admin::OrganizationsController < ApplicationController
   before_filter :login_required
   before_filter :check_permissions, :except => [:index]
+  layout proc{ |controller| controller.request.path_parameters[:action] == 'show' ? nil : "admin/organizations" }
   
   def index
     @member = Member.find session[:member]
@@ -29,9 +30,10 @@ class Admin::OrganizationsController < ApplicationController
   def create
     @organization = Organization.new(params[:organization])
     if @organization.save
-      render :inline => "<script>location.reload(true)</script>"
+      render :inline => @organization.id, :status => :ok
     else
-      render :action => "new"
+      # Decide what to do here, we should send the error somehow and process it in the view.
+      render :inline => "", :status => :internal_server_error
     end
   end
 

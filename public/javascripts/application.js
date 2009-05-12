@@ -15,7 +15,12 @@ function expandCollapseDivs(ids){
 			}
 		})
 }
-	
+
+function cancelForm(id){
+	Effect.Fade($(id), { duration: 0.1 }); 
+	Effect.Fade($('dialog-background-fade'), { duration: 0.1 });
+
+}	
 // End Admin Section
 function resizeFontSizeToFitParent(id){
 		//size = $(id).getStyle('font-size').replace("px","")
