@@ -45,8 +45,8 @@ module ApplicationHelper
 		return string.gsub(/\d/, '')
 	end
 
-  def admin_open_div(size)
-    "<div class=\"admin-div-top\" style=\"width: #{size}px\"><span class=\"admin-div-top-left\"></span><span class=\"admin-div-top-middle\" style=\"width: #{size - 30}px\"></span><span class=\"admin-div-top-right\"></span></div>
+  def admin_open_div(size, options = {})
+    "<div id=\"#{options[:id]}\" class=\"admin-div-top #{options[:class]}\" style=\"width: #{size}px; #{options[:style]}\"><span class=\"admin-div-top-left\"></span><span class=\"admin-div-top-middle\" style=\"width: #{size - 30}px\"></span><span class=\"admin-div-top-right\"></span></div>
     <div class=\"admin-div-content\" style=\"width: #{size-30}px\">"
   end
 

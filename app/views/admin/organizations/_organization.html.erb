@@ -1,8 +1,15 @@
+<div id="organization-<%= organization.id %>-container">
 <%= admin_open_div(700) -%>
 <div id="organization-<%= organization.id %>" class="admin-div-organization-top">
 	<div class="admin-div-organization-top-actions admin-div-top-actions" style="float:right; margin: none;">
 		<%= image_tag "admin/admin-div-actions-edit.png", :alt => "Edit" -%>
-		<%= image_tag "admin/admin-div-actions-remove.png", :alt => "Remove" -%>
+
+		<%= link_to_remote image_tag("admin/admin-div-actions-remove.png", :alt => "Remove"), 
+				:url => admin_organization_url(organization.id), 
+				:method => :delete, 
+				:success => "Effect.Puff($('organization-#{organization.id}-container'));"
+		-%>
+
 		<%= image_tag "admin/admin-div-actions-separator.png", :alt => "Separator", :class => "admin-div-top-actions-separator"-%>
 		<span class="admin-div-top-actions-counts"><%=h organization.projects.count %></span>
 		<%= image_tag "admin/admin-div-actions-projects.png", :alt => "Projects" -%>
@@ -38,7 +45,7 @@
 </div>
 	<% organization.projects.each do |project| -%>
 		<div class="admin-div-element">
-		<%= image_tag "admin/admin-div-element-remove.png", :alt => "Edit", :style => "float: right; position:relative; top: 5px; left: -10px;" -%>
+		<%= image_tag "admin/admin-div-element-remove.png", :alt => "Remove", :style => "float: right; position:relative; top: 5px; left: -10px;" -%>
 		<%= image_tag "admin/admin-div-element-edit.png", :alt => "Edit", :style => "float: right; position:relative; top: 5px; left: -15px;" -%>
 		<p id="admin-div-element-text-project-<%= project.id -%>"><%= project.name -%></p>
 		<script>
@@ -61,8 +68,8 @@
 	<%= image_tag "admin/admin-div-elements-add.png", :alt => "Add" -%>
 </div>
 	<% organization.members.each do |member| -%>
-		<div class="admin-div-element">
-		<%= image_tag "admin/admin-div-element-remove.png", :alt => "Edit", :style => "float: right; position:relative; top: 5px; left: -10px;" -%>
+		<div id="organization-<%= organization.id %>-member-<%= member.id %>"class="admin-div-element">
+		<%= image_tag "admin/admin-div-element-remove.png", :alt => "Remove", :style => "float: right; position:relative; top: 5px; left: -10px;" -%>
 		<%= image_tag "admin/admin-div-element-edit.png", :alt => "Edit", :style => "float: right; position:relative; top: 5px; left: -15px;" -%>
 		<p id="admin-div-element-text-member-<%= member.id -%>"><%= member.name -%></p>
 		</div>
@@ -70,3 +77,4 @@
 	<div style="clear: both;"></div>
 </div>
 <%= admin_close_div(700) -%>
+</div>

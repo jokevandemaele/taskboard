@@ -19,7 +19,7 @@
 	<div id="admin-sidebar">
 		<ul id="admin-sidebar-menu">
 			<% image = image_tag 'admin/add.png', :alt => 'new' -%>
-			<li><%= link_to_remote "new organization #{image}" -%></li>
+			<li><%= link_to_remote "new organization #{image}", :url => { :action => :show_form } -%></li>
 			<li><%= text_field_tag "admin-sidebar-search", "find organization", :onClick => "if(this.value == 'find organization') {this.clear();}" , :autocomplete => "off" -%> <%= image_tag 'admin/find.png', :alt => "find" -%></li>
 			<% image = image_tag 'admin/bug.png', :alt => "bug" -%>
 			<li><%= link_to_remote "report bug #{image}" -%></li>
@@ -27,5 +27,11 @@
 	</div>
 </div>
 </div>
+
+<div id="dummy-for-actions" stye="position:absolute; top: 0; left: 0; z-index: 120;">
+</div>
+
+<%= render :partial => 'layouts/admin/dialog_background_fade' -%>
+
 </body>
 </html>

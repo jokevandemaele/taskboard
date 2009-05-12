@@ -3538,7 +3538,10 @@
        height="128"
        width="128"
        sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Check.png"
-       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Check.png" />
+       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Check.png"
+       inkscape:export-filename="/Users/nictuku/Documents/programacion/agilar/taskboard/public/images/admin/admin-form-submit.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <image
        y="299.63858"
        x="879.81012"
@@ -3546,7 +3549,10 @@
        height="128"
        width="128"
        sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete.png"
-       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete.png" />
+       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete.png"
+       inkscape:export-filename="/Users/nictuku/Documents/programacion/agilar/taskboard/public/images/admin/admin-form-cancel.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <image
        y="140.63857"
        x="59.81012"
@@ -3554,6 +3560,9 @@
        height="128"
        width="128"
        sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/brand_128.png"
-       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/brand_128.png" />
+       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/brand_128.png"
+       inkscape:export-filename="/Users/nictuku/Documents/programacion/agilar/taskboard/public/images/admin/admin-logo-organizations.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
   </g>
 </svg>

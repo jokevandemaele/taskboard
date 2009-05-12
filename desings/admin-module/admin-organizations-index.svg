@@ -1298,7 +1298,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="490.31011"
+     inkscape:cx="271.81011"
      inkscape:cy="437.36143"
      inkscape:current-layer="layer1"
      inkscape:document-units="px"
@@ -1805,7 +1805,7 @@
        inkscape:rounded="0"
        inkscape:randomized="0"
        d="M 115.66622,325.84332 L 145.22965,325.84332 L 174.79307,325.84332 L 160.01136,351.446 L 145.22965,377.04868 L 130.44793,351.446 L 115.66622,325.84332 z"
-       transform="matrix(0.4053786,0,0,0.4053786,2.16793,241.61411)"
+       transform="matrix(0.4053786,0,0,0.4053786,0.2649915,240.85065)"
        inkscape:export-filename="/Users/nictuku/Documents/programacion/agilar/taskboard/public/images/admin/admin-div-collapse.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
@@ -3219,5 +3219,15 @@
        inkscape:export-filename="/Users/nictuku/Documents/programacion/agilar/taskboard/public/images/admin/admin-div-expand.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/Users/nictuku/Documents/programacion/agilar/taskboard/public/images/admin/admin-div-collapse.png"
+       y="367.81934"
+       x="43.137981"
+       height="31"
+       width="32"
+       id="rect2890"
+       style="opacity:0;fill:#2a7fff;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" />
   </g>
 </svg>

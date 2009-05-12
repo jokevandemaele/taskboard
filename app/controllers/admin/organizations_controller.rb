@@ -28,7 +28,6 @@ class Admin::OrganizationsController < ApplicationController
 
   def create
     @organization = Organization.new(params[:organization])
-
     if @organization.save
       render :inline => "<script>location.reload(true)</script>"
     else
@@ -49,9 +48,11 @@ class Admin::OrganizationsController < ApplicationController
 
   def destroy
     @organization = Organization.find(params[:id])
-    @organization.destroy
-
-    redirect_to(organizations_url)
+    if @organization.destroy
+      render :inline => "", :status => :ok
+    else
+      render :inline => "", :status => :internal_server_error
+    end
   end
   
   def show_form
@@ -61,13 +62,10 @@ class Admin::OrganizationsController < ApplicationController
 	    @organization = Organization.new
     end
     
-    @projects = Project.free
-
     render :update do |page|
     		page.replace_html "dummy-for-actions", 
-    			:partial => 'form', 
-    			:object => @organization,
-    			:locals => { :projects =>  @projects	}
+    		:partial => 'form',
+    		:object => @organization
     end
   end
 
@@ -84,6 +82,7 @@ class Admin::OrganizationsController < ApplicationController
   
   def add_project
     @organization = Organization.find(params[:organization][:id])
+
     if params[:organization][:projects]
       @project = Project.find(params[:organization][:projects])
       @organization.projects << @project
