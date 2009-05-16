@@ -23,5 +23,7 @@ Feature: Organizations
 
   Scenario: Create Organization as admin
     Given I am logged in as clittleton with password test
-    When I create the organization "Oceanic Six"
-    Then I should see "Successfully created the Oceanic Six organization."
+    When I go to the list of organizations
+	And I follow "new organization"
+	And I fill in "organization[name]" with "Oceanic Six"
+    Then I should see "Oceanic Six"

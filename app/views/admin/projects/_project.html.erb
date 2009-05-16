@@ -1,0 +1,70 @@
+<%= "<script>cancelForm('#{close_dialog}');</script>" if defined? close_dialog -%>
+<div id="project-<%= project.id %>-container">
+<%= admin_open_div(700) -%>
+<div id="project-<%= project.id %>" class="admin-div-project-top">
+	<div class="admin-div-project-top-actions admin-div-top-actions" style="float:right; margin: none;">
+		<%= link_to_remote image_tag("admin/admin-div-actions-edit.png",:alt => "Edit"), :url => { :action => :show_form, :id => project.id } -%>
+		<%= link_to_remote image_tag("admin/admin-div-actions-remove.png", :alt => "Remove"), 
+				:url => admin_project_url(project.id), 
+				:method => :delete, 
+				:success => "Effect.Puff($('project-#{project.id}-container'));"
+		-%>
+
+		<%= image_tag "admin/admin-div-actions-separator.png", :alt => "Separator", :class => "admin-div-top-actions-separator"-%>
+		<span class="admin-div-top-actions-counts"><%=h project.stories.count %></span>
+		<%= image_tag "admin/admin-div-actions-stories.png", :alt => "Stories" -%>
+		<%= image_tag "admin/admin-div-actions-separator.png", :alt => "Separator", :class => "admin-div-top-actions-separator"-%>
+		<span class="admin-div-top-actions-counts"><%=h project.members.count %></span>
+		<%= image_tag "admin/admin-div-actions-members.png", :alt => "Members" -%>
+	</div>
+	<div id="admin-div-project-top-name" style="float:left;">
+		<script>
+			ids<%= project.id %> = new Array('admin-div-project-stories-<%= project.id %>','admin-div-project-members-<%= project.id %>','admin-div-project-taskboard-<%= project.id %>','admin-div-project-backlog-<%= project.id %>','admin-div-project-burndown-<%= project.id %>');
+		</script>
+		<%= image_tag "admin/admin-div-expand.png", 
+			:alt => "Expand", 
+			:style => "cursor: pointer",
+			:onClick => "expandCollapseDivs(ids#{project.id})" -%>
+			
+		<h1 onClick="expandCollapseDivs(ids<%= project.id -%>)"><%=h project.name -%></h1>
+	</div>
+	<div style="clear: both;"></div>
+</div>
+
+<div id="admin-div-project-stories-<%= project.id -%>" class="admin-div-project-stories" style="display:none;">
+	<div class="admin-div-section">
+		<%= image_tag "admin/admin-div-actions-stories.png", :alt => "Stories", :style => "position: relative;" -%>
+		<h2>Stories</h2>
+	</div>
+	<div style="clear: both;"></div>
+</div>
+<div id="admin-div-project-members-<%= project.id -%>" class="admin-div-project-members" style="display:none; margin-top: 10px;">
+	<div class="admin-div-section">
+		<%= image_tag "admin/admin-div-actions-members.png", :alt => "Members", :style => "position: relative;" -%>
+		<h2>Members</h2>
+	</div>
+	<div style="clear: both;"></div>
+</div>
+<div id="admin-div-project-taskboard-<%= project.id -%>" class="admin-div-project-taskboard" style="display:none; margin-top: 10px;">
+	<div class="admin-div-section">
+		<%= image_tag "admin/admin-div-actions-taskboard.png", :alt => "Taskboard", :style => "position: relative;" -%>
+		<h2>Taskboard</h2>
+	</div>
+	<div style="clear: both;"></div>
+</div>
+<div id="admin-div-project-backlog-<%= project.id -%>" class="admin-div-backlog-members" style="display:none; margin-top: 10px;">
+	<div class="admin-div-section">
+		<%= image_tag "admin/admin-div-actions-backlog.png", :alt => "Product Backlog", :style => "position: relative;" -%>
+		<h2>Product Backlog</h2>
+	</div>
+	<div style="clear: both;"></div>
+</div>
+<div id="admin-div-project-burndown-<%= project.id -%>" class="admin-div-burndown-members" style="display:none; margin-top: 10px;">
+	<div class="admin-div-section">
+		<%= image_tag "admin/admin-div-actions-burndown-chart.png", :alt => "Burndown Chart", :style => "position: relative; top: 10px" -%>
+		<h2>Burndown Chart</h2>
+	</div>
+	<div style="clear: both;"></div>
+</div>
+<%= admin_close_div(700) -%>
+</div>

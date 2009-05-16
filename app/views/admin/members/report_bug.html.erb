@@ -1,0 +1,14 @@
+<h1>Report bug</h1>
+<% form_tag '/report_bug' do -%>
+	<p>
+		<%= label_tag 'subject', 'Subject:' -%><br />
+		<%= text_field_tag 'subject'  -%>
+	</p>
+	<p>
+		<%= label_tag 'message', 'Message:' -%><br />
+		<%= text_area_tag 'message' -%>
+	</p>
+	<p>
+		<%= submit_tag -%>
+	</p>
+<% end -%>

@@ -10,3 +10,8 @@ Then /^I should see all the organizations$/ do
   @organizations.should_not be_nil
   @organizations.each {|organization| response.should contain(organization.name)} 
 end
+
+When /^I create the organization "([^\"]*)"$/ do |arg1|
+  
+end
+

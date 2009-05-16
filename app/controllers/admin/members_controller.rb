@@ -1,7 +1,8 @@
-class MembersController < ApplicationController
+class Admin::MembersController < ApplicationController
   before_filter :login_required, :except => [:login, :logout]
   before_filter :check_permissions, :except => [:login, :logout, :access_denied, :show_form]
-    
+  layout proc{ |controller| controller.request.path_parameters[:action] == 'report_bug' || controller.request.path_parameters[:action] == 'login' ? nil : "admin/members" }
+  
   # GET /members
   def index
     @members = Member.find(:all)
@@ -164,7 +165,7 @@ class MembersController < ApplicationController
     if(request.referer)
       redirect_to(request.referer)
     else
-      redirect_to(projects_url)
+      redirect_to(admin_projects_url)
     end
   end
 
@@ -198,5 +199,11 @@ class MembersController < ApplicationController
       page.replace_html "dummy-for-actions", "<script>location.reload(true)</script>"
     end
   end
-end
 
+  def report_bug
+    if request.post?
+      BugReporter.deliver_bug_report(params[:subject], params[:message], @member.name)
+      redirect_to(admin_organizations_path)
+    end
+  end
+end

@@ -1,5 +1,6 @@
 <div id="header">
 <%= admin_open_div(1000) -%>
+<% if session[:member] -%>
 <div id="admin-user-info">
 	<div id="admin-user-info-picture" style="float:right;">
 		<%= image_tag @member.show_picture -%>
@@ -13,7 +14,7 @@
 		<p id="admin-user-info-links" class="admin-user-info-text-role">[ <%= link_to "logout", :controller => "/logout" %> | edit profile ]</p>
 	</div>
 </div>
-
+<% end -%>
 <%= image_tag "agilar_logo.png", :alt => "Agilar" -%>
 <%= admin_close_div(1000) -%>
 </div>

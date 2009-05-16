@@ -1,10 +1,11 @@
-class ProjectsController < ApplicationController
+class Admin::ProjectsController < ApplicationController
   before_filter :login_required
   before_filter :check_permissions, :except => [:index]
   
   # GET /projects
   def index
-    @projects = current_member.projects
+    #@projects = current_member.projects
+    @projects = Project.all
     @member = current_member
     @admins = @member.admin?
     if @projects.length == 1
@@ -14,7 +15,6 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1
   def show
-    redirect_to(:controller => :taskboard, :action => :show, :id => params[:id])
   end
 
   # GET /projects/new
@@ -54,9 +54,28 @@ class ProjectsController < ApplicationController
   # DELETE /projects/1
   def destroy
     @project = Project.find(params[:id])
-    @project.destroy
-
-    redirect_to(projects_url)
+    if @project.destroy
+      render :inline => "", :status => :ok
+    else
+      render :inline => "", :status => :internal_server_error
+    end
+  end
+  
+  def show_form
+    @edit = false
+    if(params[:id])
+	    @project = Project.find(params[:id])
+	    @edit = true
+    else
+	    @project = Project.new
+    end
+    
+    render :update do |page|
+    		page.replace_html "dummy-for-actions", 
+    		:partial => 'form',
+    		:object => @project,
+    		:locals => { :edit => @edit }
+    end
   end
   
   def add_team_to_project

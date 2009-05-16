@@ -17,8 +17,8 @@ function expandCollapseDivs(ids){
 }
 
 function cancelForm(id){
-	Effect.Fade($(id), { duration: 0.1 }); 
-	Effect.Fade($('dialog-background-fade'), { duration: 0.1 });
+	Effect.Fade($(id), { duration: 0.2 }); 
+	Effect.Fade($('dialog-background-fade'), { duration: 0.2 });
 
 }	
 // End Admin Section

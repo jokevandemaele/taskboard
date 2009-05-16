@@ -29,17 +29,17 @@
 		<% else %>
 			<%= link_to_remote 'Make System Admin', :url => {:action => :make_sysadmin, :id => member.id }%> | 
 		<% end %>
-		<%= link_to 'Show', member %> | 
-		<%= link_to 'Edit', edit_member_path(member) %> |
-		<%= link_to 'Destroy', member, :confirm => 'Are you sure?', :method => :delete %>
+		<%= link_to 'Show', :object => member %> | 
+		<%= link_to 'Edit', edit_admin_member_path(member) %> |
+		<%= link_to 'Destroy', :object => member, :confirm => 'Are you sure?', :method => :delete %>
 		]
 </div>
 <% end %>
 <tr id="table_footer">
   <td colspan=4>
-    <%= link_to 'New member', new_member_path %> | 
-    <%= link_to 'Manage Teams', teams_path %> |
-    <%= link_to 'Manage Projects', projects_path %>
+    <%= link_to 'New member', new_admin_member_path %> | 
+    <%= link_to 'Manage Teams', admin_teams_path %> |
+    <%= link_to 'Manage Projects', admin_projects_path %>
   </td>
 <div id="dummy-for-actions"></div>
 

@@ -1,9 +1,9 @@
+<%= "<script>cancelForm('#{close_dialog}');</script>" if defined? close_dialog -%>
 <div id="organization-<%= organization.id %>-container">
 <%= admin_open_div(700) -%>
 <div id="organization-<%= organization.id %>" class="admin-div-organization-top">
 	<div class="admin-div-organization-top-actions admin-div-top-actions" style="float:right; margin: none;">
-		<%= image_tag "admin/admin-div-actions-edit.png", :alt => "Edit" -%>
-
+		<%= link_to_remote image_tag("admin/admin-div-actions-edit.png",:alt => "Edit"), :url => { :action => :show_form, :id => organization.id } -%>
 		<%= link_to_remote image_tag("admin/admin-div-actions-remove.png", :alt => "Remove"), 
 				:url => admin_organization_url(organization.id), 
 				:method => :delete, 
@@ -41,7 +41,7 @@
 <div class="admin-div-elements-actions">
 	<%= image_tag "admin/admin-div-elements-next.png", :alt => "Next" -%><br />
 	<%= image_tag "admin/admin-div-elements-prev.png", :alt => "Previous" -%><br />
-	<%= image_tag "admin/admin-div-elements-add.png", :alt => "Add" -%>
+	<%= link_to_remote image_tag("admin/admin-div-elements-add.png", :alt => "Add"), :url => { :controller => "admin/projects" , :action => :show_form }, :locals => { :display_existing => true, :organization => organization.id } -%>
 </div>
 	<% organization.projects.each do |project| -%>
 		<div class="admin-div-element">

@@ -1,0 +1,47 @@
+<% if !defined?(no_refresh) -%>
+<script>
+	Effect.Appear($('dialog-background-fade'), { duration: 0.2, to: 0.9 });
+</script>
+<% end -%>
+<div id="form-add-project" class="admin-new" style="display:none;">
+	<%= image_tag "admin/admin-logo-organizations.png", :alt => "Project", :style => "position:absolute; top: -64px; left: -54px; z-index: 101; " -%>
+	<div style="clear: both"></div>
+	<%= admin_open_div 765 -%>
+	<div class="admin-div-project-top">
+		<% remote_form_for @project, :url => { :controller => 'admin/projects' } do |f| -%>
+		<% 
+		if (edit || defined? no_refresh) 
+			name = @project.name
+		else
+			name =  "Click To Edit Project Name" 
+		end 
+		%>
+
+		<%= f.text_field :name, 
+			:value => name, 
+			:class => "form-name", 
+			:onClick => "if(this.value == 'Click To Edit Project Name' ) this.clear();" %>
+			<%= image_submit_tag "admin/admin-form-submit.png", :alt => "Submit", :style => "position:absolute; top: 25px; right: 119px;"-%>
+			<%= image_tag "admin/admin-form-cancel.png", 
+				:alt => "Cancel", 
+				:style => "position:absolute; top: 25px; right: 30px; cursor: pointer;", 
+				:onClick => "cancelForm('form-add-project');" -%>
+		<% end %>
+	</div>
+		<% if defined?(no_refresh) && no_refresh -%>
+		<%= error_messages_for('project', :object => @project) -%>
+		<div style="clear: both;"></div>
+		<% end -%>
+	<%= admin_close_div 765 -%>
+</div>
+<% if !defined?(no_refresh) -%>
+<script>
+	centerTo($('form-add-project'),$('dialog-background-fade'));
+	Effect.Appear($('form-add-project'));
+</script>
+<% else -%>
+<script>
+	centerTo($('form-add-project'),$('dialog-background-fade'));
+	Effect.Appear($('form-add-project'));
+</script>
+<% end -%>

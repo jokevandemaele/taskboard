@@ -1,7 +1,7 @@
 class Admin::OrganizationsController < ApplicationController
   before_filter :login_required
   before_filter :check_permissions, :except => [:index]
-  layout proc{ |controller| controller.request.path_parameters[:action] == 'show' ? nil : "admin/organizations" }
+  #layout proc{ |controller| controller.request.path_parameters[:action] == 'show' ? nil : "admin/organizations" }
   
   def index
     @member = Member.find session[:member]
@@ -30,10 +30,20 @@ class Admin::OrganizationsController < ApplicationController
   def create
     @organization = Organization.new(params[:organization])
     if @organization.save
-      render :inline => @organization.id, :status => :ok
+      render :update, :status => :ok do |page|
+        page.insert_html :bottom, "organizations-list", :partial => "organization", :object => @organization
+        page.replace_html "dummy-for-actions", "<script>$('dialog-background-fade').hide();</script>"
+      end
+      #render :partial => "organization", :object => @organization, :locals => { :close_dialog => 'form-add-organization' }, :status => :ok
     else
       # Decide what to do here, we should send the error somehow and process it in the view.
-      render :inline => "", :status => :internal_server_error
+      render :update, :status => :internal_server_error do |page|
+      		page.replace_html "dummy-for-actions", 
+      		:partial => 'form',
+      		:object => @organization,
+      		:locals => { :no_refresh => true }
+      end
+      
     end
   end
 
@@ -58,8 +68,10 @@ class Admin::OrganizationsController < ApplicationController
   end
   
   def show_form
-    if(params[:organization])
-	    @organization = Organization.find(params[:organization])
+    @edit = false
+    if(params[:id])
+	    @organization = Organization.find(params[:id])
+	    @edit = true
     else
 	    @organization = Organization.new
     end
@@ -67,7 +79,8 @@ class Admin::OrganizationsController < ApplicationController
     render :update do |page|
     		page.replace_html "dummy-for-actions", 
     		:partial => 'form',
-    		:object => @organization
+    		:object => @organization,
+    		:locals => { :edit => @edit }
     end
   end
 

@@ -4309,7 +4309,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.93619792"
-     inkscape:cx="512"
+     inkscape:cx="295.69958"
      inkscape:cy="384"
      inkscape:current-layer="layer1"
      inkscape:document-units="px"
@@ -4990,7 +4990,10 @@
        height="44.574409"
        width="44.574409"
        sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit1.png"
-       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit1.png" />
+       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit1.png"
+       inkscape:export-filename="/Users/nictuku/Documents/programacion/agilar/taskboard/public/images/admin/admin-div-actions-stories.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <text
        xml:space="preserve"
        style="font-size:13.74736309px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#002255;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
@@ -5138,7 +5141,10 @@
        width="44.495132"
        sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/chart_128.png"
        xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/chart_128.png"
-       transform="scale(-1,1)" />
+       transform="scale(-1,1)"
+       inkscape:export-filename="/Users/nictuku/Documents/programacion/agilar/taskboard/public/images/admin/admin-div-actions-burndown-chart.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <image
        y="565.02924"
        x="742.93585"
@@ -5146,7 +5152,10 @@
        height="41.324062"
        width="41.324062"
        sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/lightning_sign_128.png"
-       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/lightning_sign_128.png" />
+       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/lightning_sign_128.png"
+       inkscape:export-filename="/Users/nictuku/Documents/programacion/agilar/taskboard/public/images/admin/admin-div-actions-coming-soon.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <text
        xml:space="preserve"
        style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#003380;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
@@ -5164,7 +5173,10 @@
        height="48"
        width="48"
        sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/table_green_48.png"
-       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/table_green_48.png" />
+       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/table_green_48.png"
+       inkscape:export-filename="/Users/nictuku/Documents/programacion/agilar/taskboard/public/images/admin/admin-div-actions-backlog.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <text
        xml:space="preserve"
        style="font-size:13.74736309px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#002255;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
@@ -5199,7 +5211,10 @@
          id="tspan6656" /></text>
     <g
        id="g4738"
-       transform="matrix(0.4396032,0,0,0.4396032,3.3085509,7.9606714)">
+       transform="matrix(0.4396032,0,0,0.4396032,3.3085509,7.9606714)"
+       inkscape:export-filename="/Users/nictuku/Documents/programacion/agilar/taskboard/public/images/admin/admin-div-actions-taskboard.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
       <path
          id="path5627"
          d="M 175.66003,1018.5195 L 170.67493,1105.7587"

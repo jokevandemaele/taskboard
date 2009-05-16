@@ -2,23 +2,18 @@ ActionController::Routing::Routes.draw do |map|
   # Sample resource route within a namespace:
   map.namespace :admin do |admin|
    admin.resources :organizations
+   admin.resources :members
+   admin.resources :teams
+   admin.resources :projects
   end
 
   map.resources :rights
 
-  # map.resources :organizations
-
   map.resources :roles
-
-  map.resources :members
-
-  map.resources :teams
 
   map.resources :statustags
 
   map.resources :nametags
-
-  map.resources :projects
 
   map.resources :tasks
 
@@ -27,6 +22,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :taskboard
 
   map.resources :backlog
+
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:
@@ -36,9 +32,10 @@ ActionController::Routing::Routes.draw do |map|
   # Sample of named route:
   #   map.purchase 'products/:id/purchase', :controller => 'catalog', :action => 'purchase'
   # This route can be invoked with purchase_url(:id => product.id)
-  map.login '/login', :controller => 'members', :action => 'login'
-  map.logout '/logout', :controller => 'members', :action => 'logout'
-  map.access_denied '/access_denied', :controller => 'members', :action => "access_denied"
+  map.login '/login', :controller => 'admin/members', :action => 'login'
+  map.logout '/logout', :controller => 'admin/members', :action => 'logout'
+  map.access_denied '/access_denied', :controller => 'admin/members', :action => "access_denied"
+  map.report_bug '/report_bug', :controller => 'admin/members', :action => 'report_bug'
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   map.resources :products
 
@@ -49,7 +46,7 @@ ActionController::Routing::Routes.draw do |map|
   #   map.resources :products, :has_many => [ :comments, :sales ], :has_one => :seller
   
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
-  map.root :controller => "projects"
+  map.root :controller => "admin/projects"
   
   # See how all your routes lay out with "rake routes"
 
