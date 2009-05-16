@@ -16,6 +16,12 @@ Feature: Organizations
     Then I should see all the organizations
 
   # Simple User's view
-  Scenario: Simple Users should see only it's organizations
+  Scenario: Simple Users should see only their organizations
+    Given I am logged in as jburke with password test
+    When I go to the list of organizations
+    Then I should not see "Widmore Corporation"
 
-  
+  Scenario: Create Organization as admin
+    Given I am logged in as clittleton with password test
+    When I create the organization "Oceanic Six"
+    Then I should see "Successfully created the Oceanic Six organization."
