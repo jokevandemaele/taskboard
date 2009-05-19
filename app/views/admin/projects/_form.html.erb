@@ -8,7 +8,7 @@
 	<div style="clear: both"></div>
 	<%= admin_open_div 765 -%>
 	<div class="admin-div-project-top">
-		<% remote_form_for @project, :url => { :controller => 'admin/projects' } do |f| -%>
+		<% remote_form_for @project, :url => { :controller => 'admin/projects' }, :update => "dummy-for-actions" do |f| -%>
 		<% 
 		if (edit || defined? no_refresh) 
 			name = @project.name
@@ -21,10 +21,13 @@
 			:value => name, 
 			:class => "form-name", 
 			:onClick => "if(this.value == 'Click To Edit Project Name' ) this.clear();" %>
-			<%= image_submit_tag "admin/admin-form-submit.png", :alt => "Submit", :style => "position:absolute; top: 25px; right: 119px;"-%>
+		<% if @organization %>
+		<%= hidden_field_tag "project[organization_id]", @organization -%>
+		<% end %>
+			<%= image_submit_tag "admin/admin-form-submit.png", :alt => "Submit", :style => "position:absolute; top: -15px; right: 119px;"-%>
 			<%= image_tag "admin/admin-form-cancel.png", 
 				:alt => "Cancel", 
-				:style => "position:absolute; top: 25px; right: 30px; cursor: pointer;", 
+				:style => "position:absolute; top: -15px; right: 30px; cursor: pointer;", 
 				:onClick => "cancelForm('form-add-project');" -%>
 		<% end %>
 	</div>
@@ -33,6 +36,27 @@
 		<div style="clear: both;"></div>
 		<% end -%>
 	<%= admin_close_div 765 -%>
+	<div style="width: 100px; height: 30px;"></div>
+<% if !@free_projects.empty? && @organization %>
+	<%= admin_open_div 765 -%>
+	<div class="admin-div-project-top">
+		<% form_remote_tag :url => { :controller => "admin/organizations", :action => :add_project, :id => @organization  }, :method => :put, :update => "dummy-for-actions" do |f| -%>
+		<span class="form-name" style="font-size: 16px;">Or choose an existing one: <%= select_tag "project", options_from_collection_for_select(@free_projects, 'id', 'name'), :style => "width: 250px;" -%></span>
+		<%= image_submit_tag "admin/admin-form-submit.png", :alt => "Submit", :style => "position:absolute; top: 85px; right: 119px;"-%>
+		<%= image_tag "admin/admin-form-cancel.png", 
+			:alt => "Cancel", 
+			:style => "position:absolute; top: 85px; right: 30px; cursor: pointer;", 
+			:onClick => "cancelForm('form-add-project');" -%>
+		
+		<% end -%>
+	</div>
+		<% if defined?(no_refresh) && no_refresh -%>
+		<%= error_messages_for('project', :object => @project) -%>
+		<div style="clear: both;"></div>
+		<% end -%>
+	<%= admin_close_div 765 -%>
+<% end %>
+
 </div>
 <% if !defined?(no_refresh) -%>
 <script>

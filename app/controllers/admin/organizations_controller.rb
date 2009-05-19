@@ -84,26 +84,25 @@ class Admin::OrganizationsController < ApplicationController
     end
   end
 
-  def add_project_form
-    @projects = Project.free
-    logger.error("Projects: ?",@projects)
-    @organization = Organization.find(params[:id])
-    render :update do |page|
-    		page.replace_html "dummy-for-actions", 
-    			:partial => 'add_project_form', 
-    			:locals => { :organization => @organization, :projects =>  @projects	}
-    end
-  end
+  # def add_project_form
+  #   @projects = Project.free
+  #   @organization = Organization.find(params[:id])
+  #   render :update do |page|
+  #       page.replace_html "dummy-for-actions", 
+  #         :partial => 'add_project_form', 
+  #         :locals => { :organization => @organization, :projects =>  @projects  }
+  #   end
+  # end
   
   def add_project
-    @organization = Organization.find(params[:organization][:id])
+    @organization = Organization.find(params[:id])
 
-    if params[:organization][:projects]
-      @project = Project.find(params[:organization][:projects])
+    if params[:id]
+      @project = Project.find(params[:project])
       @organization.projects << @project
       if @organization.save
         render :update do |page|
-          page.replace_html "dummy-for-actions", "<script>location.reload(true)</script>"
+          page.replace_html "dummy-for-actions", "<script>location.reload(false)</script>"
         end
       end
     end

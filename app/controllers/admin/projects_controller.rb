@@ -30,10 +30,9 @@ class Admin::ProjectsController < ApplicationController
   # POST /projects
   def create
     @project = Project.new(params[:project])
-    @project.organization_id = nil
+
     if @project.save
-      flash[:notice] = 'Project was successfully created.'
-      redirect_to(organizations_path)
+      render :inline => "<script>location.reload(true);</script>"
     else
       render :action => "new"
     end
@@ -44,8 +43,7 @@ class Admin::ProjectsController < ApplicationController
     @project = Project.find(params[:id])
 
     if @project.update_attributes(params[:project])
-      flash[:notice] = 'Project was successfully updated.'
-      redirect_to(@project)
+      render :inline => "<script>location.reload(true);</script>"
     else
       render :action => "edit"
     end
@@ -70,11 +68,23 @@ class Admin::ProjectsController < ApplicationController
 	    @project = Project.new
     end
     
+    if defined? params[:organization]
+      @organization = params[:organization]
+    else
+      @organization = nil
+    end
+    
+    if defined? params[:display_existing]
+      @free_projects = Project.free
+    else
+      @free_projects = nil
+    end
+    
     render :update do |page|
     		page.replace_html "dummy-for-actions", 
     		:partial => 'form',
     		:object => @project,
-    		:locals => { :edit => @edit }
+    		:locals => { :edit => @edit, :organization => @organization, :free_projects => @free_projects }
     end
   end
   

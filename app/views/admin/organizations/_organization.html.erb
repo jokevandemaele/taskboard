@@ -7,6 +7,7 @@
 		<%= link_to_remote image_tag("admin/admin-div-actions-remove.png", :alt => "Remove"), 
 				:url => admin_organization_url(organization.id), 
 				:method => :delete, 
+				:confirm => "Are you sure?",
 				:success => "Effect.Puff($('organization-#{organization.id}-container'));"
 		-%>
 
@@ -39,17 +40,17 @@
 	
 </div>
 <div class="admin-div-elements-actions">
-	<%= image_tag "admin/admin-div-elements-next.png", :alt => "Next" -%><br />
-	<%= image_tag "admin/admin-div-elements-prev.png", :alt => "Previous" -%><br />
-	<%= link_to_remote image_tag("admin/admin-div-elements-add.png", :alt => "Add"), :url => { :controller => "admin/projects" , :action => :show_form }, :locals => { :display_existing => true, :organization => organization.id } -%>
+	<%= link_to_remote image_tag("admin/admin-div-elements-add.png", :alt => "Add"), :url => { :controller => "admin/projects" , :action => :show_form, :display_existing => true, :organization => organization.id } -%>
+	<%= image_tag "admin/admin-div-elements-next.png", :alt => "Next", :style => "display:none;"-%><br />
+	<%= image_tag "admin/admin-div-elements-prev.png", :alt => "Previous", :style => "display:none;" -%><br />
 </div>
 	<% organization.projects.each do |project| -%>
 		<div class="admin-div-element">
 		<%= image_tag "admin/admin-div-element-remove.png", :alt => "Remove", :style => "float: right; position:relative; top: 5px; left: -10px;" -%>
 		<%= image_tag "admin/admin-div-element-edit.png", :alt => "Edit", :style => "float: right; position:relative; top: 5px; left: -15px;" -%>
-		<p id="admin-div-element-text-project-<%= project.id -%>"><%= project.name -%></p>
+		<p id="admin-div-element-text-project-<%= project.id -%>"><%= truncate(project.name, :length => 16) -%></p>
 		<script>
-			resizeFontSizeToFitParent('admin-div-element-text-project-<%= project.id -%>');
+			//resizeFontSizeToFitParent('admin-div-element-text-project-<%= project.id -%>');
 		</script>
 		</div>
 	<% end -%>
@@ -63,9 +64,9 @@
 	<h2>Members</h2>
 </div>
 <div class="admin-div-elements-actions">
-	<%= image_tag "admin/admin-div-elements-next.png", :alt => "Next" -%><br />
-	<%= image_tag "admin/admin-div-elements-prev.png", :alt => "Previous" -%><br />
 	<%= image_tag "admin/admin-div-elements-add.png", :alt => "Add" -%>
+	<%= image_tag "admin/admin-div-elements-next.png", :alt => "Next", :style => "display:none;" -%><br />
+	<%= image_tag "admin/admin-div-elements-prev.png", :alt => "Previous", :style => "display:none;" -%><br />
 </div>
 	<% organization.members.each do |member| -%>
 		<div id="organization-<%= organization.id %>-member-<%= member.id %>"class="admin-div-element">
