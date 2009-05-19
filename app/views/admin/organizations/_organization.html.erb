@@ -45,8 +45,13 @@
 	<%= image_tag "admin/admin-div-elements-prev.png", :alt => "Previous", :style => "display:none;" -%><br />
 </div>
 	<% organization.projects.each do |project| -%>
-		<div class="admin-div-element">
-		<%= image_tag "admin/admin-div-element-remove.png", :alt => "Remove", :style => "float: right; position:relative; top: 5px; left: -10px;" -%>
+		<div id="organization-<%= organization.id %>-project-<%= project.id %>" class="admin-div-element">
+		<%= link_to_remote image_tag("admin/admin-div-element-remove.png", :alt => "Remove",
+				:style => "float: right; position:relative; top: 5px; left: -10px;"),
+				:url => admin_project_url(project.id),
+				:method => :delete,
+				:confirm => "Are you sure?",
+				:success => "Effect.Puff($('organization-#{organization.id}-project-#{project.id}'));" -%>
 		<%= image_tag "admin/admin-div-element-edit.png", :alt => "Edit", :style => "float: right; position:relative; top: 5px; left: -15px;" -%>
 		<p id="admin-div-element-text-project-<%= project.id -%>"><%= truncate(project.name, :length => 16) -%></p>
 		<script>
