@@ -1621,18 +1621,6 @@
        id="linearGradient7473"
        xlink:href="#linearGradient3777"
        inkscape:collect="always" />
-    <filter
-       height="1.2385079"
-       y="-0.11925394"
-       width="1.2317921"
-       x="-0.11589605"
-       id="filter4526"
-       inkscape:collect="always">
-      <feGaussianBlur
-         id="feGaussianBlur4528"
-         stdDeviation="5.3324696"
-         inkscape:collect="always" />
-    </filter>
     <linearGradient
        y2="73.736046"
        x2="49.163891"
@@ -4590,41 +4578,38 @@
          id="tspan4430"
          sodipodi:role="line">organizations</tspan></text>
     <g
-       transform="translate(160,-26)"
-       id="g4463">
-      <g
-         id="g4465">
-        <rect
-           style="fill:#0c82eb;fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           id="rect4467"
-           width="154.88177"
-           height="30.976358"
-           x="24.770519"
-           y="168.05096"
-           rx="13"
-           ry="13" />
-        <rect
-           ry="0"
-           rx="0"
-           y="168.05096"
-           x="24.770519"
-           height="16.665407"
-           width="154.88177"
-           id="rect4469"
-           style="fill:#0c82eb;fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      </g>
-      <text
-         id="text4471"
-         y="189.27571"
-         x="102.27238"
-         style="font-size:22.70238495px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
-         xml:space="preserve"><tspan
-           style="text-align:center;text-anchor:middle"
-           y="189.27571"
-           x="102.27238"
-           id="tspan4473"
-           sodipodi:role="line">members</tspan></text>
+       id="g4465"
+       transform="translate(160,-26)">
+      <rect
+         ry="13"
+         rx="13"
+         y="168.05096"
+         x="24.770519"
+         height="30.976358"
+         width="154.88177"
+         id="rect4467"
+         style="fill:#0c82eb;fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <rect
+         style="fill:#0c82eb;fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect4469"
+         width="154.88177"
+         height="16.665407"
+         x="24.770519"
+         y="168.05096"
+         rx="0"
+         ry="0" />
     </g>
+    <text
+       xml:space="preserve"
+       style="font-size:22.70238494999999901px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#ffccaa;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+       x="262.27237"
+       y="163.27571"
+       id="text4471"><tspan
+         sodipodi:role="line"
+         id="tspan4473"
+         x="262.27237"
+         y="163.27571"
+         style="text-align:center;text-anchor:middle;fill:#ffccaa">members</tspan></text>
     <g
        id="g4477"
        transform="translate(320,-26)">

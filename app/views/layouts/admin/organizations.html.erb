@@ -11,7 +11,7 @@
 </head>
 <body>
 <div id="admin-dummy-container">
-<%= render :partial => 'layouts/admin/header' -%>
+<%= render :partial => 'layouts/admin/header', :locals => { :controller => request_controller() } -%>
 <div id="admin-container">
 	<div id="admin-content">
 		<%= yield  %>

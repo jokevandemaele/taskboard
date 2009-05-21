@@ -17,4 +17,10 @@
 <% end -%>
 <%= image_tag "agilar_logo.png", :alt => "Agilar" -%>
 <%= admin_close_div(1000) -%>
+<div id="admin-menu">
+		<div class="admin-menu-element <%= "admin-menu-current" if controller == "admin/organizations" -%>"><%= link_to "organizations", admin_organizations_path() %></div>
+		<div class="admin-menu-element <%= "admin-menu-current" if controller == "admin/projects" -%>"><%= link_to "projects", admin_projects_path() %></div>
+		<div class="admin-menu-element <%= "admin-menu-current" if controller == "admin/members" -%>"><%= link_to "members", admin_members_path() %></div>
+		<div class="admin-menu-element <%= "admin-menu-current" if controller == "admin/teams" -%>"><%= link_to "teams", admin_teams_path() %></div>
+</div>
 </div>

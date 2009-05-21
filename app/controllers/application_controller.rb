@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   ExceptionNotifier.smtp_settings = {  :address => "mail.agilar.org",  :port => 25,  :domain => "agilar.org" } 
   
   helper :all # include all helpers, all the time
-
+  helper_method :request_controller
   # See ActionController::RequestForgeryProtection for details
   # Uncomment the :secret if you're not using the cookie session store
   protect_from_forgery # :secret => '5e2fef265e68f375d5902befc545a584'
@@ -93,7 +93,6 @@ class ApplicationController < ActionController::Base
     if session[:member]
       return true
     end
-      flash[:warning] = "Please login"
       session[:return_to] = request.request_uri
       redirect_to :controller => "admin/members", :action => "login"
       return false
@@ -103,6 +102,10 @@ class ApplicationController < ActionController::Base
     Member.find(session[:member])
   end
 
+  def request_controller
+    request.path_parameters[:controller]
+  end
+  
   def redirect_to_stored
     if return_to = session[:return_to]
       session[:return_to]=nil

@@ -2951,535 +2951,534 @@
        height="767"
        x="0.5"
        y="0.49998769" />
+    <rect
+       style="fill:#deedff;fill-opacity:1;stroke:#0c82eb;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4200"
+       width="761.89441"
+       height="500.24896"
+       x="90.748169"
+       y="158.0159"
+       rx="16"
+       ry="16.000002" />
+    <text
+       id="text4204"
+       y="195.53348"
+       x="179.65474"
+       style="font-size:28.55548668px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#002255;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+       xml:space="preserve"><tspan
+         y="195.53348"
+         x="179.65474"
+         id="tspan4206"
+         sodipodi:role="line">Click To Edit User Full Name</tspan></text>
+    <path
+       id="path4208"
+       d="M 91.13704,216.34126 L 853.25183,216.34126"
+       style="fill:none;fill-rule:evenodd;stroke:#0c82eb;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <rect
+       y="217.22261"
+       x="92.223511"
+       height="71.407509"
+       width="759.54047"
+       id="rect4270"
+       style="fill:#afc6e9;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <text
+       xml:space="preserve"
+       style="font-size:20.68335152px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#162d50;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+       x="163.28557"
+       y="243.45311"
+       id="text4290"><tspan
+         sodipodi:role="line"
+         id="tspan4292"
+         x="163.28557"
+         y="243.45311">Color</tspan></text>
+    <image
+       y="157.23512"
+       x="863"
+       id="image6953"
+       height="128"
+       width="128"
+       sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Check.png"
+       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Check.png" />
+    <image
+       y="261.87369"
+       x="859.81012"
+       id="image7173"
+       height="128"
+       width="128"
+       sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete.png"
+       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete.png" />
     <g
-       id="g10655"
-       transform="translate(-20,-17.764882)">
-      <rect
-         ry="16.000002"
-         rx="16"
-         y="175.78078"
-         x="110.74817"
-         height="500.24896"
-         width="761.89441"
-         id="rect4200"
-         style="fill:#deedff;fill-opacity:1;stroke:#0c82eb;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <text
-         xml:space="preserve"
-         style="font-size:28.55548668px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#002255;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
-         x="199.65474"
-         y="213.29836"
-         id="text4204"><tspan
-           sodipodi:role="line"
-           id="tspan4206"
-           x="199.65474"
-           y="213.29836">Click To Edit User Full Name</tspan></text>
+       id="g4056"
+       transform="translate(-20,-37.764882)"
+       inkscape:export-filename="/Users/nictuku/Documents/programacion/agilar/taskboard/public/images/admin/admin-logo-members.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
       <path
-         style="fill:none;fill-rule:evenodd;stroke:#0c82eb;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         d="M 111.13704,234.10614 L 873.25183,234.10614"
-         id="path4208" />
+         transform="matrix(0.852,0,0,1.1410789,16.388539,-25.843137)"
+         d="M 138.83171,194.51947 A 19.993046,19.273296 0 1 1 98.845615,194.51947 A 19.993046,19.273296 0 1 1 138.83171,194.51947 z"
+         sodipodi:ry="19.273296"
+         sodipodi:rx="19.993046"
+         sodipodi:cy="194.51947"
+         sodipodi:cx="118.83866"
+         id="path3280"
+         style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         sodipodi:type="arc" />
       <rect
-         style="fill:#afc6e9;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         id="rect4270"
-         width="759.54047"
-         height="71.407509"
-         x="112.22351"
-         y="234.98749" />
-      <text
-         id="text4290"
-         y="261.21799"
-         x="183.28557"
-         style="font-size:20.68335152px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#162d50;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
-         xml:space="preserve"><tspan
-           y="261.21799"
-           x="183.28557"
-           id="tspan4292"
-           sodipodi:role="line">Color</tspan></text>
+         y="188.04172"
+         x="121.71767"
+         height="11.995828"
+         width="13.91516"
+         id="rect4052"
+         style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         transform="matrix(1.1386139,0,0,1.9759036,-14.732303,-196.06143)"
+         d="M 114.36023,198.1982 A 8.0771904,6.637691 0 1 1 98.205853,198.1982 A 8.0771904,6.637691 0 1 1 114.36023,198.1982 z"
+         sodipodi:ry="6.637691"
+         sodipodi:rx="8.0771904"
+         sodipodi:cy="198.1982"
+         sodipodi:cx="106.28304"
+         id="path4054"
+         style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         sodipodi:type="arc" />
       <image
-         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Check.png"
-         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Check.png"
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Buddy.png"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Buddy.png"
          width="128"
          height="128"
-         id="image6953"
-         x="883"
-         y="175" />
-      <image
-         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete.png"
-         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete.png"
-         width="128"
-         height="128"
-         id="image7173"
-         x="879.81012"
-         y="279.63858" />
-      <g
-         transform="translate(0,-20)"
-         id="g4056">
-        <path
-           sodipodi:type="arc"
-           style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           id="path3280"
-           sodipodi:cx="118.83866"
-           sodipodi:cy="194.51947"
-           sodipodi:rx="19.993046"
-           sodipodi:ry="19.273296"
-           d="M 138.83171,194.51947 A 19.993046,19.273296 0 1 1 98.845615,194.51947 A 19.993046,19.273296 0 1 1 138.83171,194.51947 z"
-           transform="matrix(0.852,0,0,1.1410789,16.388539,-25.843137)" />
-        <rect
-           style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           id="rect4052"
-           width="13.91516"
-           height="11.995828"
-           x="121.71767"
-           y="188.04172" />
-        <path
-           sodipodi:type="arc"
-           style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           id="path4054"
-           sodipodi:cx="106.28304"
-           sodipodi:cy="198.1982"
-           sodipodi:rx="8.0771904"
-           sodipodi:ry="6.637691"
-           d="M 114.36023,198.1982 A 8.0771904,6.637691 0 1 1 98.205853,198.1982 A 8.0771904,6.637691 0 1 1 114.36023,198.1982 z"
-           transform="matrix(1.1386139,0,0,1.9759036,-14.732303,-196.06143)" />
-        <image
-           y="146"
-           x="53"
-           id="image3276"
-           height="128"
-           width="128"
-           sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Buddy.png"
-           xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Buddy.png" />
-      </g>
-      <image
-         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/paint-128.png"
-         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/paint-128.png"
-         width="46.177341"
-         height="46.177341"
-         id="image7032"
-         x="115.48686"
-         y="239.16284" />
-      <text
-         id="text7332"
-         y="276"
-         x="185"
-         style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
-         xml:space="preserve"><tspan
-           style="font-size:14px;fill:#003380"
-           id="tspan7336"
-           y="276"
-           x="185"
-           sodipodi:role="line">(This color will be used to identify </tspan><tspan
-           style="font-size:14px;fill:#003380"
-           id="tspan7340"
-           y="293.5"
-           x="185"
-           sodipodi:role="line">the user in the taskboard)</tspan></text>
-      <rect
-         y="244"
-         x="684"
-         height="33"
-         width="167"
-         id="rect7342"
-         style="fill:#16502d;fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <text
-         id="text7344"
-         y="294"
-         x="797"
-         style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#162d50;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
-         xml:space="preserve"><tspan
-           y="294"
-           x="797"
-           id="tspan7346"
-           sodipodi:role="line">choose</tspan></text>
-      <path
-         id="path7350"
-         d="M 111.13704,308.10614 L 873.25183,308.10614"
-         style="fill:none;fill-rule:evenodd;stroke:#0c82eb;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <rect
-         y="308.98749"
-         x="112.22351"
-         height="71.407509"
-         width="759.54047"
-         id="rect7352"
-         style="fill:#afc6e9;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <text
-         xml:space="preserve"
-         style="font-size:20.68335152px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#162d50;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
-         x="182.8008"
-         y="335.21799"
-         id="text7354"><tspan
-           sodipodi:role="line"
-           id="tspan7356"
-           x="182.8008"
-           y="335.21799">Login Information</tspan></text>
-      <rect
-         rx="13"
-         ry="13"
-         y="316"
-         x="679.59998"
-         height="26.133333"
-         width="176.39999"
-         id="rect7368"
-         style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <rect
-         style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         id="rect7370"
-         width="176.39999"
-         height="26.133333"
-         x="679.59998"
-         y="349.86667"
-         ry="13"
-         rx="13" />
-      <text
-         xml:space="preserve"
-         style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#162d50;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
-         x="603"
-         y="334"
-         id="text7376"><tspan
-           sodipodi:role="line"
-           id="tspan7378"
-           x="603"
-           y="334">username</tspan></text>
-      <text
-         id="text7384"
-         y="368"
-         x="603"
-         style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#162d50;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
-         xml:space="preserve"><tspan
-           y="368"
-           x="603"
-           id="tspan7386"
-           sodipodi:role="line">password</tspan></text>
-      <image
-         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Keys.png"
-         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Keys.png"
-         width="55.842365"
-         height="55.842365"
-         id="image7518"
-         x="113.5304"
-         y="309.86481" />
-      <path
-         style="fill:none;fill-rule:evenodd;stroke:#0c82eb;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         d="M 111.13704,382.10614 L 873.25183,382.10614"
-         id="path7522" />
-      <rect
-         style="fill:#afc6e9;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         id="rect7524"
-         width="759.54047"
-         height="71.407509"
-         x="112.22351"
-         y="382.98749" />
-      <text
-         id="text7526"
-         y="409.21799"
-         x="182.72"
-         style="font-size:20.68335152px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#162d50;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
-         xml:space="preserve"><tspan
-           y="409.21799"
-           x="182.72"
-           id="tspan7528"
-           sodipodi:role="line">Picture</tspan></text>
-      <image
-         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Album.png"
-         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Album.png"
-         width="70.876846"
-         height="70.876846"
-         id="image7610"
-         x="105.82184"
-         y="386.28598" />
-      <rect
-         rx="13"
-         ry="13"
-         y="389.86667"
-         x="679.59998"
-         height="26.133333"
-         width="176.39999"
-         id="rect7614"
-         style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <text
-         xml:space="preserve"
-         style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#162d50;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
-         x="603"
-         y="408"
-         id="text7616"><tspan
-           sodipodi:role="line"
-           id="tspan7618"
-           x="603"
-           y="408">browse...</tspan></text>
-      <path
-         style="fill:none;fill-rule:evenodd;stroke:#0c82eb;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         d="M 111.13704,446.10614 L 873.25183,446.10614"
-         id="path7620" />
-      <rect
-         style="fill:#afc6e9;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         id="rect7700"
-         width="759.54047"
-         height="53.407509"
-         x="112.22351"
-         y="447.98749" />
-      <text
-         id="text7720"
-         y="480.21802"
-         x="180.72"
-         style="font-size:20.68335152px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#162d50;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
-         xml:space="preserve"><tspan
-           y="480.21802"
-           x="180.72"
-           id="tspan7722"
-           sodipodi:role="line">Organizations</tspan></text>
-      <rect
-         style="fill:#f1f6ff;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         id="rect7796"
-         width="197.44768"
-         height="33.175301"
-         x="153.26991"
-         y="511.42096"
-         ry="12.999999"
-         rx="13" />
-      <text
-         id="text7798"
-         y="531.83185"
-         x="166.36166"
-         style="font-size:12.41710472px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#002255;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
-         xml:space="preserve"><tspan
-           id="tspan7800"
-           style="font-size:14.18180943px;text-align:start;text-anchor:start"
-           y="531.83185"
-           x="166.36166"
-           sodipodi:role="line">Agilar</tspan></text>
-      <image
-         y="512.29755"
-         x="309.89026"
-         id="image7802"
-         height="31.422136"
-         width="31.422136"
-         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png"
-         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png" />
-      <rect
-         rx="13"
-         ry="12.999999"
-         y="511.42096"
-         x="393.2699"
-         height="33.175301"
-         width="197.44768"
-         id="rect7832"
-         style="fill:#f1f6ff;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <text
-         xml:space="preserve"
-         style="font-size:12.41710472px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#002255;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
-         x="406.36166"
-         y="531.83185"
-         id="text7834"><tspan
-           sodipodi:role="line"
-           x="406.36166"
-           y="531.83185"
-           style="font-size:14.18180943px;text-align:start;text-anchor:start"
-           id="tspan7836">Agilar</tspan></text>
-      <image
-         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png"
-         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png"
-         width="31.422136"
-         height="31.422136"
-         id="image7838"
-         x="549.89026"
-         y="512.29755" />
-      <rect
-         style="fill:#f1f6ff;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         id="rect7868"
-         width="197.44768"
-         height="33.175301"
-         x="633.2699"
-         y="511.42096"
-         ry="12.999999"
-         rx="13" />
-      <text
-         id="text7870"
-         y="531.83185"
-         x="646.36163"
-         style="font-size:12.41710472px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#002255;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
-         xml:space="preserve"><tspan
-           id="tspan7872"
-           style="font-size:14.18180943px;text-align:start;text-anchor:start"
-           y="531.83185"
-           x="646.36163"
-           sodipodi:role="line">Agilar</tspan></text>
-      <image
-         y="512.29755"
-         x="789.89026"
-         id="image7874"
-         height="31.422136"
-         width="31.422136"
-         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png"
-         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png" />
-      <image
-         y="455.54132"
-         x="785.57471"
-         id="image7912"
-         height="32.934631"
-         width="32.934631"
-         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/next-128.png"
-         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/next-128.png"
-         style="fill:#004455" />
-      <image
-         y="455.76172"
-         x="737.57471"
-         id="image7914"
-         height="32.934631"
-         width="32.934631"
-         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/back-128.png"
-         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/back-128.png" />
-      <image
-         y="447.75775"
-         x="816.14429"
-         id="image7916"
-         height="53.383518"
-         width="53.060429"
-         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Add.png"
-         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Add.png" />
-      <image
-         y="451"
-         x="115"
-         id="image8243"
-         height="49"
-         width="49"
-         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/brand_128.png"
-         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/brand_128.png" />
-      <path
-         id="path8680"
-         d="M 111.13704,556.10614 L 873.25183,556.10614"
-         style="fill:none;fill-rule:evenodd;stroke:#0c82eb;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <rect
-         y="557.98749"
-         x="112.22351"
-         height="53.407509"
-         width="759.54047"
-         id="rect8682"
-         style="fill:#afc6e9;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <text
-         xml:space="preserve"
-         style="font-size:20.68335152px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#162d50;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
-         x="180.72"
-         y="590.21802"
-         id="text8684"><tspan
-           sodipodi:role="line"
-           id="tspan8686"
-           x="180.72"
-           y="590.21802">Security</tspan></text>
-      <image
-         y="560.69879"
-         x="114.82184"
-         id="image10225"
-         height="44"
-         width="44"
-         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Lock1.png"
-         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Lock1.png" />
-      <text
-         xml:space="preserve"
-         style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
-         x="641"
-         y="590"
-         id="text10231"><tspan
-           sodipodi:role="line"
-           id="tspan10233"
-           x="641"
-           y="590">User is a System administrator</tspan></text>
-      <rect
-         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         id="rect10235"
-         width="17"
-         height="18"
-         x="614"
-         y="574.85938" />
-      <text
-         id="text10258"
-         y="648.21802"
-         x="180.72"
-         style="font-size:20.68335152px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#162d50;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
-         xml:space="preserve"><tspan
-           y="648.21802"
-           x="180.72"
-           id="tspan10260"
-           sodipodi:role="line">Roles</tspan></text>
-      <rect
-         rx="13"
-         ry="12.999999"
-         y="624.34875"
-         x="277.2699"
-         height="33.175301"
-         width="197.44768"
-         id="rect10276"
-         style="fill:#f1f6ff;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <text
-         xml:space="preserve"
-         style="font-size:12.41710472px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#002255;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
-         x="290.36166"
-         y="644.75964"
-         id="text10278"><tspan
-           sodipodi:role="line"
-           x="290.36166"
-           y="644.75964"
-           style="font-size:14.18180943px;text-align:start;text-anchor:start"
-           id="tspan10280">Team Member</tspan></text>
-      <image
-         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png"
-         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png"
-         width="31.422136"
-         height="31.422136"
-         id="image10282"
-         x="433.89026"
-         y="625.22534" />
-      <rect
-         style="fill:#f1f6ff;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         id="rect10288"
-         width="197.44768"
-         height="33.175301"
-         x="517.2699"
-         y="624.34875"
-         ry="12.999999"
-         rx="13" />
-      <text
-         id="text10290"
-         y="644.75964"
-         x="530.36163"
-         style="font-size:12.41710472px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#002255;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
-         xml:space="preserve"><tspan
-           id="tspan10292"
-           style="font-size:14.18180943px;text-align:start;text-anchor:start"
-           y="644.75964"
-           x="530.36163"
-           sodipodi:role="line">Scrum Master</tspan></text>
-      <image
-         y="625.22534"
-         x="673.89026"
-         id="image10294"
-         height="31.422136"
-         width="31.422136"
-         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png"
-         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png" />
-      <image
-         style="fill:#004455"
-         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/next-128.png"
-         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/next-128.png"
-         width="32.934631"
-         height="32.934631"
-         id="image10310"
-         x="785.57471"
-         y="624.46912" />
-      <image
-         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/back-128.png"
-         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/back-128.png"
-         width="32.934631"
-         height="32.934631"
-         id="image10312"
-         x="737.57471"
-         y="624.46912" />
-      <image
-         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Add.png"
-         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Add.png"
-         width="53.060429"
-         height="53.383518"
-         id="image10314"
-         x="816.14429"
-         y="614.24469" />
+         id="image3276"
+         x="53"
+         y="146" />
     </g>
+    <image
+       y="221.39796"
+       x="95.486862"
+       id="image7032"
+       height="46.177341"
+       width="46.177341"
+       sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/paint-128.png"
+       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/paint-128.png" />
+    <text
+       xml:space="preserve"
+       style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+       x="165"
+       y="258.23511"
+       id="text7332"><tspan
+         sodipodi:role="line"
+         x="165"
+         y="258.23511"
+         id="tspan7336"
+         style="font-size:14px;fill:#003380">(This color will be used to identify </tspan><tspan
+         sodipodi:role="line"
+         x="165"
+         y="275.73511"
+         id="tspan7340"
+         style="font-size:14px;fill:#003380">the user in the taskboard)</tspan></text>
+    <rect
+       style="fill:#16502d;fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect7342"
+       width="167"
+       height="33"
+       x="664"
+       y="226.23512" />
+    <text
+       xml:space="preserve"
+       style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#162d50;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+       x="777"
+       y="276.23511"
+       id="text7344"><tspan
+         sodipodi:role="line"
+         id="tspan7346"
+         x="777"
+         y="276.23511">choose</tspan></text>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#0c82eb;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 91.13704,290.34126 L 853.25183,290.34126"
+       id="path7350" />
+    <rect
+       style="fill:#afc6e9;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect7352"
+       width="759.54047"
+       height="71.407509"
+       x="92.223511"
+       y="291.2226" />
+    <text
+       id="text7354"
+       y="317.45309"
+       x="162.8008"
+       style="font-size:20.68335152px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#162d50;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+       xml:space="preserve"><tspan
+         y="317.45309"
+         x="162.8008"
+         id="tspan7356"
+         sodipodi:role="line">Login Information</tspan></text>
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect7368"
+       width="176.39999"
+       height="26.133333"
+       x="659.59998"
+       y="298.23511"
+       ry="13"
+       rx="13" />
+    <rect
+       rx="13"
+       ry="13"
+       y="332.10178"
+       x="659.59998"
+       height="26.133333"
+       width="176.39999"
+       id="rect7370"
+       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <text
+       id="text7376"
+       y="316.23511"
+       x="583"
+       style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#162d50;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+       xml:space="preserve"><tspan
+         y="316.23511"
+         x="583"
+         id="tspan7378"
+         sodipodi:role="line">username</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#162d50;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+       x="583"
+       y="350.23511"
+       id="text7384"><tspan
+         sodipodi:role="line"
+         id="tspan7386"
+         x="583"
+         y="350.23511">password</tspan></text>
+    <image
+       y="292.09991"
+       x="93.530403"
+       id="image7518"
+       height="55.842365"
+       width="55.842365"
+       sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Keys.png"
+       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Keys.png" />
+    <path
+       id="path7522"
+       d="M 91.13704,364.34126 L 853.25183,364.34126"
+       style="fill:none;fill-rule:evenodd;stroke:#0c82eb;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <rect
+       y="365.2226"
+       x="92.223511"
+       height="71.407509"
+       width="759.54047"
+       id="rect7524"
+       style="fill:#afc6e9;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <text
+       xml:space="preserve"
+       style="font-size:20.68335152px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#162d50;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+       x="162.72"
+       y="391.45309"
+       id="text7526"><tspan
+         sodipodi:role="line"
+         id="tspan7528"
+         x="162.72"
+         y="391.45309">Picture</tspan></text>
+    <image
+       y="368.52109"
+       x="85.821838"
+       id="image7610"
+       height="70.876846"
+       width="70.876846"
+       sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Album.png"
+       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Album.png" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect7614"
+       width="176.39999"
+       height="26.133333"
+       x="659.59998"
+       y="372.10178"
+       ry="13"
+       rx="13" />
+    <text
+       id="text7616"
+       y="390.23511"
+       x="583"
+       style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#162d50;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+       xml:space="preserve"><tspan
+         y="390.23511"
+         x="583"
+         id="tspan7618"
+         sodipodi:role="line">browse...</tspan></text>
+    <path
+       id="path7620"
+       d="M 91.13704,428.34126 L 853.25183,428.34126"
+       style="fill:none;fill-rule:evenodd;stroke:#0c82eb;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <rect
+       y="430.2226"
+       x="92.223511"
+       height="53.407509"
+       width="759.54047"
+       id="rect7700"
+       style="fill:#afc6e9;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <text
+       xml:space="preserve"
+       style="font-size:20.68335152px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#162d50;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+       x="160.72"
+       y="462.45312"
+       id="text7720"><tspan
+         sodipodi:role="line"
+         id="tspan7722"
+         x="160.72"
+         y="462.45312">Organizations</tspan></text>
+    <rect
+       rx="13"
+       ry="12.999999"
+       y="493.65607"
+       x="133.26991"
+       height="33.175301"
+       width="197.44768"
+       id="rect7796"
+       style="fill:#f1f6ff;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <text
+       xml:space="preserve"
+       style="font-size:12.41710472px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#002255;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+       x="146.36166"
+       y="514.06696"
+       id="text7798"><tspan
+         sodipodi:role="line"
+         x="146.36166"
+         y="514.06696"
+         style="font-size:14.18180943px;text-align:start;text-anchor:start"
+         id="tspan7800">Agilar</tspan></text>
+    <image
+       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png"
+       sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png"
+       width="31.422136"
+       height="31.422136"
+       id="image7802"
+       x="289.89026"
+       y="494.53265" />
+    <rect
+       style="fill:#f1f6ff;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect7832"
+       width="197.44768"
+       height="33.175301"
+       x="373.2699"
+       y="493.65607"
+       ry="12.999999"
+       rx="13" />
+    <text
+       id="text7834"
+       y="514.06696"
+       x="386.36166"
+       style="font-size:12.41710472px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#002255;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+       xml:space="preserve"><tspan
+         id="tspan7836"
+         style="font-size:14.18180943px;text-align:start;text-anchor:start"
+         y="514.06696"
+         x="386.36166"
+         sodipodi:role="line">Agilar</tspan></text>
+    <image
+       y="494.53265"
+       x="529.89026"
+       id="image7838"
+       height="31.422136"
+       width="31.422136"
+       sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png"
+       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png" />
+    <rect
+       rx="13"
+       ry="12.999999"
+       y="493.65607"
+       x="613.2699"
+       height="33.175301"
+       width="197.44768"
+       id="rect7868"
+       style="fill:#f1f6ff;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <text
+       xml:space="preserve"
+       style="font-size:12.41710472px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#002255;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+       x="626.36163"
+       y="514.06696"
+       id="text7870"><tspan
+         sodipodi:role="line"
+         x="626.36163"
+         y="514.06696"
+         style="font-size:14.18180943px;text-align:start;text-anchor:start"
+         id="tspan7872">Agilar</tspan></text>
+    <image
+       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png"
+       sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png"
+       width="31.422136"
+       height="31.422136"
+       id="image7874"
+       x="769.89026"
+       y="494.53265" />
+    <image
+       style="fill:#004455"
+       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/next-128.png"
+       sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/next-128.png"
+       width="32.934631"
+       height="32.934631"
+       id="image7912"
+       x="765.57471"
+       y="437.77643" />
+    <image
+       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/back-128.png"
+       sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/back-128.png"
+       width="32.934631"
+       height="32.934631"
+       id="image7914"
+       x="717.57471"
+       y="437.99683" />
+    <image
+       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Add.png"
+       sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Add.png"
+       width="53.060429"
+       height="53.383518"
+       id="image7916"
+       x="796.14429"
+       y="429.99286" />
+    <image
+       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/brand_128.png"
+       sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/brand_128.png"
+       width="49"
+       height="49"
+       id="image8243"
+       x="95"
+       y="433.23511" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#0c82eb;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 91.13704,538.34126 L 853.25183,538.34126"
+       id="path8680" />
+    <rect
+       style="fill:#afc6e9;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect8682"
+       width="759.54047"
+       height="53.407509"
+       x="92.223511"
+       y="540.2226" />
+    <text
+       id="text8684"
+       y="572.45312"
+       x="160.72"
+       style="font-size:20.68335152px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#162d50;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+       xml:space="preserve"><tspan
+         y="572.45312"
+         x="160.72"
+         id="tspan8686"
+         sodipodi:role="line">Security</tspan></text>
+    <image
+       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Lock1.png"
+       sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Lock1.png"
+       width="44"
+       height="44"
+       id="image10225"
+       x="94.821838"
+       y="542.9339" />
+    <text
+       id="text10231"
+       y="572.23511"
+       x="621"
+       style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+       xml:space="preserve"><tspan
+         y="572.23511"
+         x="621"
+         id="tspan10233"
+         sodipodi:role="line">User is a System administrator</tspan></text>
+    <rect
+       y="557.09448"
+       x="594"
+       height="18"
+       width="17"
+       id="rect10235"
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <text
+       xml:space="preserve"
+       style="font-size:20.68335152px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#162d50;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+       x="160.72"
+       y="630.45312"
+       id="text10258"><tspan
+         sodipodi:role="line"
+         id="tspan10260"
+         x="160.72"
+         y="630.45312">Roles</tspan></text>
+    <rect
+       style="fill:#f1f6ff;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect10276"
+       width="197.44768"
+       height="33.175301"
+       x="257.2699"
+       y="606.58386"
+       ry="12.999999"
+       rx="13" />
+    <text
+       id="text10278"
+       y="626.99475"
+       x="270.36166"
+       style="font-size:12.41710472px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#002255;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+       xml:space="preserve"><tspan
+         id="tspan10280"
+         style="font-size:14.18180943px;text-align:start;text-anchor:start"
+         y="626.99475"
+         x="270.36166"
+         sodipodi:role="line">Team Member</tspan></text>
+    <image
+       y="607.46045"
+       x="413.89026"
+       id="image10282"
+       height="31.422136"
+       width="31.422136"
+       sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png"
+       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png" />
+    <rect
+       rx="13"
+       ry="12.999999"
+       y="606.58386"
+       x="497.2699"
+       height="33.175301"
+       width="197.44768"
+       id="rect10288"
+       style="fill:#f1f6ff;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <text
+       xml:space="preserve"
+       style="font-size:12.41710472px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#002255;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+       x="510.36163"
+       y="626.99475"
+       id="text10290"><tspan
+         sodipodi:role="line"
+         x="510.36163"
+         y="626.99475"
+         style="font-size:14.18180943px;text-align:start;text-anchor:start"
+         id="tspan10292">Scrum Master</tspan></text>
+    <image
+       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png"
+       sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png"
+       width="31.422136"
+       height="31.422136"
+       id="image10294"
+       x="653.89026"
+       y="607.46045" />
+    <image
+       y="606.70422"
+       x="765.57471"
+       id="image10310"
+       height="32.934631"
+       width="32.934631"
+       sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/next-128.png"
+       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/next-128.png"
+       style="fill:#004455" />
+    <image
+       y="606.70422"
+       x="717.57471"
+       id="image10312"
+       height="32.934631"
+       width="32.934631"
+       sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/back-128.png"
+       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/back-128.png" />
+    <image
+       y="596.4798"
+       x="796.14429"
+       id="image10314"
+       height="53.383518"
+       width="53.060429"
+       sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Add.png"
+       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Add.png" />
   </g>
 </svg>
