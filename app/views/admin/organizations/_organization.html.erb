@@ -69,7 +69,7 @@
 	<h2>Members</h2>
 </div>
 <div class="admin-div-elements-actions">
-	<%= image_tag "admin/admin-div-elements-add.png", :alt => "Add" -%>
+	<%= link_to_remote image_tag("admin/admin-div-elements-add.png", :alt => "Add"), :url => { :controller => 'admin/members', :action => :show_form, :display_existing => true, :organization => organization.id } -%>
 	<%= image_tag "admin/admin-div-elements-next.png", :alt => "Next", :style => "display:none;" -%><br />
 	<%= image_tag "admin/admin-div-elements-prev.png", :alt => "Previous", :style => "display:none;" -%><br />
 </div>

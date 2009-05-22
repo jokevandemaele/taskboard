@@ -41,40 +41,17 @@ class Admin::MembersController < ApplicationController
       end
     end
     
-    if(params[:dynamic])
-      if @member.save
-        @project = Project.find(params[:project])
-        @membership = OrganizationMembership.new
-        @membership.organization = @project.organization
-        @membership.member = @member
-        @membership.save
-        
-        if(params[:picture_file])
-          added = @member.add_picture(params[:picture_file])
-          if( added == "ok")
-            render :inline => "<script>window.parent.location.reload(true);</script>"
-          else
-            render :inline => "<script>window.parent.location.reload(true);</script>"
-          end
-        end
-      else
-        render :inline => "Error adding member"
+    if @member.save
+      if(params[:picture_file])
+        @member.add_picture(params[:picture_file])
       end
+      # render :update, :status => :ok do |page|
+      #   page.insert_html :bottom, "members-list", :partial => "members", :object => @member
+      #   page.replace_html "dummy-for-actions", "<script>$('dialog-background-fade').hide();</script>"
+      # end
+      redirect_to(admin_members_url)
     else
-      if @member.save
-        if(params[:picture_file])
-          added = @member.add_picture(params[:picture_file])
-          if( added == "ok")
-            render :inline => "<script>window.parent.location.reload(true);</script>"
-          else
-            # Add error handling and report
-            render :inline => "<script>window.parent.location.reload(true);</script>"
-          end
-        end
-        redirect_to(@member)
-      else
-        render :action => "new"
-      end
+      render :inline => "Error adding member"
     end
   end
 
@@ -127,7 +104,7 @@ class Admin::MembersController < ApplicationController
     if(params[:dynamic])
       render :inline => "<script>location.reload(true);</script>"
     else
-      redirect_to(members_url)
+      redirect_to(admin_members_url)
     end
   end
 

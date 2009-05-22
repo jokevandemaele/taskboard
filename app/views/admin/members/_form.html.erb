@@ -1,41 +1,49 @@
+<% if !defined?(no_refresh) -%>
 <script>
-$('adder-container').show();
+	Effect.Appear($('dialog-background-fade'), { duration: 0.2, to: 0.9 });
 </script>
-<div id="form-add-member" class="dynamic-form" style="display: none;">
-<% form_for member, :html => { :multipart => true, :target => "upload_frame" } do |f| %>
-	<div id="information"></div>
-	<iframe id="upload_frame" name="upload_frame" style="display:none;"></iframe>
-    <%= f.label :name %> <%= f.text_field :name %><br />
-    <%= f.label :color %> <%= f.text_field :color, :size => 5 %><br /> 
+<% end -%>
+<div id="form-add-member" class="admin-new" style="display: none;">
+	<%= image_tag "admin/admin-logo-members.png", :alt => "Member", :style => "position:absolute; top: -64px; left: -54px; z-index: 101" -%>
+	<div style="clear: both"></div>
+	<%= admin_open_div 765 -%>
+	<div class="admin-div-organization-top">
+		<% form_for member, :url => { :controller => 'admin/members' }, :html => { :multipart => true, :target => "upload_frame" } do |f| %>
+			<div id="information"></div>
+			<iframe id="upload_frame" name="upload_frame" style="display: none;"></iframe>
+		    <%= f.label :name %> <%= f.text_field :name %><br />
+		    <%= f.label :color %> <%= f.text_field :color, :size => 5 %><br /> 
 
-    <%= f.label :username %> <%= f.text_field :username %><br />
-	<% if member.id %>
-		<%= f.label :password %> <span id="password_field">
-			<span style="text-decoration: underline;cursor:pointer;" onClick="javascript:$('password_field').innerHTML = '<input type=password size=30 name=member[password] id=member_password />'">change password</span>
-			</span><br />
-   	<% else %>
-		<%= f.label :password %> <%= f.password_field :password %><br />
-	<% end %>
+		    <%= f.label :username %> <%= f.text_field :username %><br />
+			<% if member.id %>
+				<%= f.label :password %> <span id="password_field">
+					<span style="text-decoration: underline;cursor:pointer;" onClick="javascript:$('password_field').innerHTML = '<input type=password size=30 name=member[password] id=member_password />'">change password</span>
+					</span><br />
+		   	<% else %>
+				<%= f.label :password %> <%= f.password_field :password %><br />
+			<% end %>
 
-		
+			<%= label :member, :picture %> 
+			<%= file_field_tag :picture_file %><br/>
+			<strong>INFO:</strong>The picture should be a .jpg, .png, or .gif and will be scaled to 88x88 pixels<br />
 
-	<%= label :member, :picture %> 
-	<%= file_field_tag :picture_file %><br/>
-	<strong>INFO:</strong>The picture should be a .jpg, .png, or .gif and will be scaled to 88x88 pixels<br />
-
-	<% if !@roles.nil? %>
-			<%= f.label :roles -%><br />
-		    <%= select_tag(:roles, 
-			options_from_collection_for_select(@roles, "id", "name", @roles_selected), :multiple => true, :style => "width: 100%;") -%><br />
-	<% end -%>
-	<br />
-    <%= button_to_function "Cancel", "cancel($('form-add-member'));", :id => "form-add-member-cancel"-%>
-    <%= hidden_field_tag(:dynamic, "true") %>
-    <%= hidden_field_tag(:project, project) %>
-    <%= f.submit "Save", :id => "form-add-member-submit" -%>
-<% end %>
+			<% if !@roles.nil? %>
+					<%= f.label :roles -%><br />
+				    <%= select_tag(:roles, 
+					options_from_collection_for_select(@roles, "id", "name", @roles_selected), :multiple => true, :style => "width: 315px;") -%><br />
+			<% end -%>
+			<br />
+			<%= image_submit_tag "admin/admin-form-submit.png", :alt => "Submit", :style => "position:absolute; top: 25px; right: 119px;"-%>
+			<%= image_tag "admin/admin-form-cancel.png", 
+				:alt => "Cancel", 
+				:style => "position:absolute; top: 25px; right: 30px; cursor: pointer;", 
+				:onClick => "cancelForm('form-add-member');" -%>
+		<% end %>
+		</div>
+	<%= admin_close_div 765 -%>
+</div>
 <script>
-	centerTo($('form-add-member'),$('adder-container'));
+	centerTo($('form-add-member'),$('dialog-background-fade'));
 	Effect.Appear($('form-add-member'));
 </script>
 <% # render :partial => 'color_picker' -%>
