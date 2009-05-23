@@ -132,10 +132,10 @@ class Admin::OrganizationsController < ApplicationController
   end
   
   def add_member
-    @organization = Organization.find(params[:organization][:id])
+    @organization = Organization.find(params[:id])
     
-    if params[:organization][:members]
-      @member = Member.find(params[:organization][:members])
+    if params[:id]
+      @member = Member.find(params[:member])
       @membership = OrganizationMembership.new
       @membership.member = @member
       @membership.organization = @organization

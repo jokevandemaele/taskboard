@@ -116,6 +116,13 @@ class Admin::MembersController < ApplicationController
 	    @member = Member.new
     end
 
+    if params[:organization]
+      @organization = Organization.find(params[:organization])
+      @members_not_in_organization = Member.all - @organization.members
+    else
+      @organization = nil
+    end
+
     @roles = Role.all
     @roles_selected = Array.new
     @roles.each { |role| @roles_selected << role.id if (@member.roles.include?(role)) }

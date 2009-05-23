@@ -41,6 +41,18 @@
 		<% end %>
 		</div>
 	<%= admin_close_div 765 -%>
+        <% if @organization %>
+          <%= admin_open_div 765 -%>
+            <% form_remote_tag :url => { :controller => 'admin/organizations', :action => 'add_member', :id => @organization.id }, :method => :put, :update => 'dummy-for-actions' do |f| %>
+              <span class="form-name" style="font-size: 16px;">Or choose an existing one: <%= select_tag 'member', options_from_collection_for_select(@members_not_in_organization, 'id', 'name'), :style => "width: 250px;" -%></span>
+              <%= image_submit_tag "admin/admin-form-submit.png", :alt => "Submit", :style => "position:absolute; top: 250px; right: 119px;"-%>
+              <%= image_tag "admin/admin-form-cancel.png", 
+                  :alt => "Cancel", 
+                  :style => "position:absolute; top: 250px; right: 30px; cursor: pointer;", 
+                  :onClick => "cancelForm('form-add-member');" -%>
+            <% end %>
+          <%= admin_close_div 765 -%>
+        <% end %>
 </div>
 <script>
 	centerTo($('form-add-member'),$('dialog-background-fade'));
