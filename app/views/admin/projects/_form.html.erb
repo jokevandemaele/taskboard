@@ -8,7 +8,14 @@
 	<div style="clear: both"></div>
 	<%= admin_open_div 765 -%>
 	<div class="admin-div-project-top">
-		<% remote_form_for @project, :url => { :controller => 'admin/projects' }, :update => "dummy-for-actions" do |f| -%>
+                <%
+                if edit
+                  action = :update
+                else
+                  action = :create
+                end
+                -%>
+		<% remote_form_for @project, :url => { :controller => 'admin/projects', :action => action, :id => @project.id }, :update => "dummy-for-actions" do |f| -%>
 		<% 
 		if (edit || defined? no_refresh) 
 			name = @project.name
@@ -22,11 +29,13 @@
 			:class => "form-name", 
 			:onClick => "if(this.value == 'Click To Edit Project Name' ) this.clear();" %>
 
-		<p><% if @organization %>
-		<%= hidden_field_tag "project[organization_id]", @organization -%>
-		<% else %>
-		  <%= select_tag "project[organization_id]", options_from_collection_for_select(current_member.organizations_administered, 'id', 'name') -%>
-		<% end %></p>
+                <% if !edit -%>
+		  <p><% if @organization %>
+		    <%= hidden_field_tag "project[organization_id]", @organization -%>
+		  <% else %>
+		    <%= select_tag "project[organization_id]", options_from_collection_for_select(current_member.organizations_administered, 'id', 'name') -%>
+		  <% end %></p>
+                <% end -%>
 		
 			<%= image_submit_tag "admin/admin-form-submit.png", :alt => "Submit", :style => "position:absolute; top: -15px; right: 119px;"-%>
 			<%= image_tag "admin/admin-form-cancel.png", 
