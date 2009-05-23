@@ -27,7 +27,7 @@
 			:style => "cursor: pointer",
 			:onClick => "expandCollapseDivs(ids#{organization.id})" -%>
 			
-		<h1 onClick="expandCollapseDivs(ids<%= organization.id -%>)"><%=h organization.name -%></h1>
+		<h1 id="organization-<%= organization.id -%>-name" onClick="expandCollapseDivs(ids<%= organization.id -%>)"><%=h organization.name -%></h1>
 	</div>
 	<div style="clear: both;"></div>
 </div>

@@ -19,7 +19,14 @@ function expandCollapseDivs(ids){
 function cancelForm(id){
 	Effect.Fade($(id), { duration: 0.2 }); 
 	Effect.Fade($('dialog-background-fade'), { duration: 0.2 });
-}	
+}
+
+function updateName(type,object){
+	object_id = type + "-" + object.id + "-name";
+	$(object_id).innerHTML = object.name;
+	Effect.Fade($('dialog-background-fade'), { duration: 0.2 });
+    new Effect.Highlight(object_id, { startcolor: '#ffff99', endcolor: '#d5e5ff' });
+}
 // End Admin Section
 
 function resizeFontSizeToFitParent(id){

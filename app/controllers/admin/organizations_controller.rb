@@ -30,11 +30,7 @@ class Admin::OrganizationsController < ApplicationController
   def create
     @organization = Organization.new(params[:organization])
     if @organization.save
-      render :update, :status => :ok do |page|
-        page.insert_html :bottom, "organizations-list", :partial => "organization", :object => @organization
-        page.replace_html "dummy-for-actions", "<script>$('dialog-background-fade').hide();</script>"
-      end
-      #render :partial => "organization", :object => @organization, :locals => { :close_dialog => 'form-add-organization' }, :status => :ok
+      render :inline => "<script>location.reload(true)</script>"
     else
       # Decide what to do here, we should send the error somehow and process it in the view.
       render :update, :status => :internal_server_error do |page|
@@ -51,10 +47,20 @@ class Admin::OrganizationsController < ApplicationController
     @organization = Organization.find(params[:id])
 
     if @organization.update_attributes(params[:organization])
-      flash[:notice] = 'Organization was successfully updated.'
-      redirect_to(@organization)
+      render :inline => "
+      <script>
+        var organization = eval(#{@organization.to_json});
+        updateName('organization',organization.organization);
+        //cancelForm('form-add-organization');        
+      </script>"
     else
-      render :action => "edit"
+      # Decide what to do here, we should send the error somehow and process it in the view.
+      render :update, :status => :internal_server_error do |page|
+      		page.replace_html "dummy-for-actions", 
+      		:partial => 'form',
+      		:object => @organization,
+      		:locals => { :no_refresh => true }
+      end
     end
   end
 
@@ -121,15 +127,15 @@ class Admin::OrganizationsController < ApplicationController
   end
 
 
-  def add_member_form
-    @organization = Organization.find(params[:organization])
-    @members = Member.all - @organization.members
-    render :update do |page|
-    		page.replace_html "dummy-for-actions", 
-    			:partial => 'add_member_form', 
-    			:locals => { :organization => @organization, :members =>  @members	}
-    end
-  end
+  # def add_member_form
+  #   @organization = Organization.find(params[:organization])
+  #   @members = Member.all - @organization.members
+  #   render :update do |page|
+  #       page.replace_html "dummy-for-actions", 
+  #         :partial => 'add_member_form', 
+  #         :locals => { :organization => @organization, :members =>  @members  }
+  #   end
+  # end
   
   def add_member
     @organization = Organization.find(params[:id])
@@ -142,9 +148,8 @@ class Admin::OrganizationsController < ApplicationController
       @membership.admin = nil
       
       if @membership.save
-        render :update do |page|
-          page.replace_html "dummy-for-actions", "<script>location.reload(true)</script>"
-        end
+        # TODO: Don't refresh the whole page, just add the user.
+        render :inline => "<script>location.reload(true)</script>"
       end
     end
   end
@@ -155,9 +160,10 @@ class Admin::OrganizationsController < ApplicationController
     @member = @membership.member
     # We assume that the team has only one project, that's why .first is enough and we don't have to iterate.
     @member.teams.each { |team| team.members.delete(@member) if team.projects.first.organization == @organization }
-    @membership.destroy
-    render :update do |page|
-      page.replace_html "dummy-for-actions", "<script>location.reload(true)</script>"
+    if @membership.destroy
+      render :inline => "", :status => :ok
+    else
+      render :inline => "", :status => :internal_server_error
     end
   end
   

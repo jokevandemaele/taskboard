@@ -8,7 +8,14 @@
 	<div style="clear: both"></div>
 	<%= admin_open_div 765 -%>
 	<div class="admin-div-organization-top">
-		<% remote_form_for @organization, :url => { :controller => 'admin/organizations' } do |f| -%>
+		<% 
+		if edit 
+			action = :update
+		else
+			action = :create
+		end
+		-%>
+		<% remote_form_for @organization, :url => { :controller => "admin/organizations", :action => action, :id => @organization}, :update => "dummy-for-actions" do |f| -%>
 		<% 
 		if (edit || defined? no_refresh) 
 			name = @organization.name
@@ -28,22 +35,6 @@
 				:onClick => "cancelForm('form-add-organization');" -%>
 		<% end %>
 	</div>
-	<div class="admin-div-section">
-		<%= image_tag "admin/admin-div-actions-members.png", :alt => "members", :style => "position: relative; top: 10px" -%>
-		<h2>Members</h2>
-	</div>
-	<div class="admin-div-elements-actions">
-		<%= image_tag "admin/admin-div-elements-next.png", :alt => "Next" -%><br />
-		<%= image_tag "admin/admin-div-elements-prev.png", :alt => "Previous" -%><br />
-		<%= image_tag "admin/admin-div-elements-add.png", :alt => "Add" -%>
-	</div>
-		<% @organization.members.each do |member| -%>
-			<div class="admin-div-element">
-			<%= image_tag "admin/admin-div-element-remove.png", :alt => "Edit", :style => "float: right; position:relative; top: 5px; left: -10px;" -%>
-			<%= image_tag "admin/admin-div-element-edit.png", :alt => "Edit", :style => "float: right; position:relative; top: 5px; left: -15px;" -%>
-			<p id="admin-div-element-text-member-<%= member.id -%>"><%= member.name -%></p>
-			</div>
-		<% end -%>
 		<div style="clear: both;"></div>
 		<% if defined?(no_refresh) && no_refresh -%>
 		<%= error_messages_for('organization', :object => @organization) -%>

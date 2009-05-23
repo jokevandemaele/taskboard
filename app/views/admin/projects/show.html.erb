@@ -1,21 +1,6 @@
-<%= render :partial => "menu" , :locals => { :members => @members }-%> 
-<%= render :partial => "adder" -%>
-<div id="container">
-<table>
-<tr>
-	<th style="width: 190px">Story</th>
-	<th style="width: 25%">Not started</th>
-	<th style="width: 100%">In Progress</th>
-	<th style="width: 25%">Finished</th>
-</tr>
-<% for story in @stories_by_priority %>
-	<% if story.priority != -1 -%>
-		<tr id="story-<%= story.id %>" class="<%= cycle('listing-even', 'listing-odd') %>">
-			<%= render :partial => "stories/show", :locals => { :story => story, :project => @project } %> 
-		</tr>
-	<% end -%>
-<% end %>
-</table>
+<div id="organizations-list">
+<%= render :partial => "project", :object => @project %>
 </div>
-<div id="dummy-for-actions">
-</div>
+<script>
+	expandCollapseDivs(ids<%= @project.id -%>)
+</script>
