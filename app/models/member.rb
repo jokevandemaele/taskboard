@@ -29,13 +29,26 @@ class Member < ActiveRecord::Base
 
   #see if the user admins an organization
   def admins_any_organization?
-    memberships = OrganizationMembership.all(:conditions => ["member_id = ?", id])
-    logger.error(memberships.inspect)
-    memberships.each { |membership| return membership.admin? if membership.admin? }
+    #memberships = OrganizationMembership.all(:conditions => ["member_id = ?", id])
+    #logger.error(memberships.inspect)
+    #memberships.each { |membership| return membership.admin? if membership.admin? }
     return self.admin?
   end
   
-  # returns all the projects that the user belongs to
+  def organizations_administered
+    if self.admin?
+      organizations = Organization.all
+    else
+      organizations = Array.new
+      memberships = OrganizationMembership.all(:conditions => ["member_id = ? AND admin = ?", id, true])
+      memberships.each do |membership|
+        organizations << membership.organization
+      end
+    end
+
+    return organizations
+  end
+
   def projects
     projects = []
     for team in teams

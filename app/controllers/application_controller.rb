@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   ExceptionNotifier.smtp_settings = {  :address => "mail.agilar.org",  :port => 25,  :domain => "agilar.org" } 
   
   helper :all # include all helpers, all the time
-  helper_method :request_controller
+  helper_method :request_controller, :current_member
   # See ActionController::RequestForgeryProtection for details
   # Uncomment the :secret if you're not using the cookie session store
   protect_from_forgery # :secret => '5e2fef265e68f375d5902befc545a584'

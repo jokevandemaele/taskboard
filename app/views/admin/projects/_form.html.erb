@@ -4,7 +4,7 @@
 </script>
 <% end -%>
 <div id="form-add-project" class="admin-new" style="display:none;">
-	<%= image_tag "admin/admin-logo-organizations.png", :alt => "Project", :style => "position:absolute; top: -64px; left: -54px; z-index: 101; " -%>
+	<%= image_tag "admin/admin-logo-projects.png", :alt => "Project", :style => "position:absolute; top: -64px; left: -54px; z-index: 101; " -%>
 	<div style="clear: both"></div>
 	<%= admin_open_div 765 -%>
 	<div class="admin-div-project-top">
@@ -21,9 +21,13 @@
 			:value => name, 
 			:class => "form-name", 
 			:onClick => "if(this.value == 'Click To Edit Project Name' ) this.clear();" %>
-		<% if @organization %>
+
+		<p><% if @organization %>
 		<%= hidden_field_tag "project[organization_id]", @organization -%>
-		<% end %>
+		<% else %>
+		  <%= select_tag "project[organization_id]", options_from_collection_for_select(current_member.organizations_administered, 'id', 'name') -%>
+		<% end %></p>
+		
 			<%= image_submit_tag "admin/admin-form-submit.png", :alt => "Submit", :style => "position:absolute; top: -15px; right: 119px;"-%>
 			<%= image_tag "admin/admin-form-cancel.png", 
 				:alt => "Cancel", 
