@@ -30,17 +30,21 @@
 			:onClick => "if(this.value == 'Click To Edit Project Name' ) this.clear();" %>
 
                 <% if !edit -%>
-		  <p><% if @organization %>
+		  <% if @organization %>
 		    <%= hidden_field_tag "project[organization_id]", @organization -%>
 		  <% else %>
-		    <%= select_tag "project[organization_id]", options_from_collection_for_select(current_member.organizations_administered, 'id', 'name') -%>
-		  <% end %></p>
+                    <div class="admin-div-section">
+                    <%= image_tag 'admin/admin-div-actions-organizations.png', :alt => 'Organization', :style => 'position: relative; top: -7px; margin-left: 10px;' -%>
+                    <h2 style="position: relative; top: 0; margin-left: 20px;">Organization:</h2>
+                    <%= select_tag "project[organization_id]", options_from_collection_for_select(current_member.organizations_administered, 'id', 'name'), :style => 'margin-left: 20px; width: 480px;' -%>
+                    </div>
+		  <% end %>
                 <% end -%>
 		
-			<%= image_submit_tag "admin/admin-form-submit.png", :alt => "Submit", :style => "position:absolute; top: -15px; right: 119px;"-%>
+			<%= image_submit_tag "admin/admin-form-submit.png", :alt => "Submit", :style => "position:absolute; top: -25px; right: 119px;"-%>
 			<%= image_tag "admin/admin-form-cancel.png", 
 				:alt => "Cancel", 
-				:style => "position:absolute; top: -15px; right: 30px; cursor: pointer;", 
+				:style => "position:absolute; top: -25px; right: 30px; cursor: pointer;", 
 				:onClick => "cancelForm('form-add-project');" -%>
 		<% end %>
 	</div>
