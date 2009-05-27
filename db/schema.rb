@@ -60,19 +60,6 @@ ActiveRecord::Schema.define(:version => 20090515231405) do
     t.datetime "updated_at"
   end
 
-  create_table "portraits", :force => true do |t|
-    t.integer  "member_id"
-    t.integer  "parent_id"
-    t.integer  "size"
-    t.integer  "width"
-    t.integer  "height"
-    t.string   "content_type"
-    t.string   "filename"
-    t.string   "thumbnail"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "project_memberships", :force => true do |t|
     t.integer  "project_id"
     t.integer  "member_id"
@@ -85,7 +72,7 @@ ActiveRecord::Schema.define(:version => 20090515231405) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "organization_id", :default => 0
+    t.integer  "organization_id"
   end
 
   create_table "projects_teams", :id => false, :force => true do |t|
