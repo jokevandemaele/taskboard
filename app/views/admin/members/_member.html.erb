@@ -1,0 +1,68 @@
+<%= "<script>cancelForm('#{close_dialog}');</script>" if defined? close_dialog -%>
+<div id="member-<%= member.id %>-container">
+<%= admin_open_div(700) -%>
+<div id="member-<%= member.id %>" class="admin-div-member-top">
+	<div class="admin-div-organization-top-actions admin-div-top-actions" style="float:right; margin: none;">
+		<%= link_to_remote image_tag("admin/admin-div-actions-edit.png", :alt => "Edit"), :url => { :action => :show_form, :id => member.id } -%>
+		<%= link_to_remote image_tag("admin/admin-div-actions-remove.png", :alt => "Remove"), 
+				:url => admin_member_url(member.id), 
+				:method => :delete,
+				:confirm => "Are you sure?",
+				:success => "Effect.Puff($('member-#{member.id}-container'));"
+		-%>
+		<%= image_tag "admin/admin-div-actions-separator.png", :alt => "Separator", :class => "admin-div-top-actions-separator"-%>
+		<span class="admin-div-top-actions-counts"><%=h member.projects.count %></span>
+		<%= image_tag "admin/admin-div-actions-projects.png", :alt => "Projects" -%>
+		<%= image_tag "admin/admin-div-actions-separator.png", :alt => "Separator", :class => "admin-div-top-actions-separator"-%>
+		<span class="admin-div-top-actions-counts"><%=h member.organizations.count %></span>
+		<%= image_tag "admin/admin-div-actions-organizations.png", :alt => "Organizations" -%>
+	</div>
+	<div id="admin-div-member-top-name" style="float:left;">
+		<script>
+			ids<%= member.id %> = new Array('admin-div-member-projects-<%= member.id %>', 'admin-div-member-organizations-<%= member.id %>');
+		</script>
+		<%= image_tag "admin/admin-div-expand.png", 
+			:alt => "Expand", 
+			:style => "cursor: pointer",
+			:onClick => "expandCollapseDivs(ids#{member.id})" -%>
+			
+		<h1 id="member-<%= member.id -%>-name" onClick="expandCollapseDivs(ids<%= member.id -%>)"><%=h truncate(member.name) -%></h1>
+	</div>
+	<div style="clear: both;"></div>
+
+	<div id="admin-div-member-projects-<%= member.id -%>" class="admin-div-member-projects" style="display:none">
+		<div class="admin-div-section">
+			<span class="admin-div-elements-search"><%= text_field_tag "admin-div-projects-search", "search", :onClick => "if(this.value == 'search') {this.clear();}" , :autocomplete => "off", :class => "admin-div-elements-search-field" -%><%= image_tag 'admin/admin-div-elements-search.png', :alt => "find" -%></span>
+			<%= image_tag "admin/admin-div-actions-projects.png", :alt => "Projects", :style => "position: relative; top: 10px" -%>
+			<h2>Projects</h2>
+		</div>
+	<% member.projects.each do |project| -%>
+		<div id="member-<%= member.id %>-project-<%= project.id %>" class="admin-div-element">
+			<p id="admin-div-element-text-project-<%= project.id -%>"><%=h truncate(project.name, :length => 16) -%></p>
+			<script>
+				//resizeFontSizeToFitParent('admin-div-element-text-project-<%= project.id -%>');
+			</script>
+		</div>
+	<% end -%>
+		<div style="clear: both;"></div>
+	</div>
+	<div id="admin-div-member-organizations-<%= member.id -%>" class="admin-div-member-organizations" style="display:none">
+		<div class="admin-div-section">
+			<span class="admin-div-elements-search"><%= text_field_tag "admin-div-organizations-search", "search", :onClick => "if(this.value == 'search') {this.clear();}" , :autocomplete => "off", :class => "admin-div-elements-search-field" -%><%= image_tag 'admin/admin-div-elements-search.png', :alt => "find" -%></span>
+			<%= image_tag "admin/admin-div-actions-organizations.png", :alt => "Organizations", :style => "position: relative; top: 10px" -%>
+			<h2>Organizations</h2>
+		</div>
+	<% member.organizations.each do |organization| -%>
+		<div id="member-<%= member.id %>-organization-<%= organization.id %>" class="admin-div-element">
+			<p id="admin-div-element-text-organization-<%= organization.id -%>"><%=h truncate(organization.name, :length => 16) -%></p>
+			<script>
+				//resizeFontSizeToFitParent('admin-div-element-text-project-<%= organization.id -%>');
+			</script>
+		</div>
+	<% end -%>
+		<div style="clear: both;"></div>
+	</div>
+</div>
+<%= admin_close_div(700) -%>
+</div>
+
