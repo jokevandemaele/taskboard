@@ -19,6 +19,9 @@ module NavigationHelpers
 
     when /the login screen/
       '/login'
+
+    when /destroy organization ([0-9]+)/
+      '/admin/organizations/destroy/' + $1
     
     # Add more mappings here.
     # Here is a more fancy example:

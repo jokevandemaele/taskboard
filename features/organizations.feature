@@ -21,9 +21,15 @@ Feature: Organizations
     When I go to the list of organizations
     Then I should not see "Widmore Corporation"
 
-  Scenario: Create Organization as admin
-    Given I am logged in as clittleton with password test
-    When I go to the list of organizations
-	And I follow "new organization"
-	And I fill in "organization[name]" with "Oceanic Six"
-    Then I should see "Oceanic Six"
+	#   Scenario: Create Organization as admin
+	#     Given I am logged in as clittleton with password test
+	#     When I go to the list of organizations
+	# And I follow "new organization"
+	# And I fill in "organization[name]" with "Oceanic Six"
+	#     Then I should see "Oceanic Six"
+
+  Scenario: Destroy Organization as a simple user
+	Given I am logged in as dfaraday with password test
+	And I go to destroy organization 1
+	Then I should see "access denied"
+

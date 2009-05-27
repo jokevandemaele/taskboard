@@ -57,7 +57,7 @@
 		:url => { :controller => :members, :action => :delete_member, :dynamic => true }) 
 	%>
 	
-	<%= render :partial => "members/member_info", :locals => { :member => session[:member] } -%>
+	<%= render :partial => "admin/members/member_info", :locals => { :member => current_member } -%>
 	
 </div>
 

@@ -17,16 +17,6 @@ class Admin::OrganizationsController < ApplicationController
     @organization = Organization.find(params[:id])
   end
 
-  def new
-    @organization = Organization.new
-    @free_projects = Project.free
-  end
-
-  def edit
-    @organization = Organization.find(params[:id])
-    @free_projects = Project.free
-  end
-
   def create
     @organization = Organization.new(params[:organization])
     if @organization.save
@@ -50,8 +40,7 @@ class Admin::OrganizationsController < ApplicationController
       render :inline => "
       <script>
         var organization = eval(#{@organization.to_json});
-        updateName('organization',organization.organization);
-        //cancelForm('form-add-organization');        
+        updateName('organization',organization.organization);       
       </script>"
     else
       # Decide what to do here, we should send the error somehow and process it in the view.
@@ -90,16 +79,6 @@ class Admin::OrganizationsController < ApplicationController
     end
   end
 
-  # def add_project_form
-  #   @projects = Project.free
-  #   @organization = Organization.find(params[:id])
-  #   render :update do |page|
-  #       page.replace_html "dummy-for-actions", 
-  #         :partial => 'add_project_form', 
-  #         :locals => { :organization => @organization, :projects =>  @projects  }
-  #   end
-  # end
-  
   def add_project
     @organization = Organization.find(params[:id])
 
@@ -126,17 +105,6 @@ class Admin::OrganizationsController < ApplicationController
     end
   end
 
-
-  # def add_member_form
-  #   @organization = Organization.find(params[:organization])
-  #   @members = Member.all - @organization.members
-  #   render :update do |page|
-  #       page.replace_html "dummy-for-actions", 
-  #         :partial => 'add_member_form', 
-  #         :locals => { :organization => @organization, :members =>  @members  }
-  #   end
-  # end
-  
   def add_member
     @organization = Organization.find(params[:id])
     
@@ -167,16 +135,6 @@ class Admin::OrganizationsController < ApplicationController
     end
   end
   
-  def remove_admin
-    @membership = OrganizationMembership.find(params[:membership])
-    @membership.admin = nil
-    @membership.save
-    render :update do |page|
-      page.replace_html "dummy-for-actions", "<script>location.reload(true)</script>"
-    end
-    
-  end
-  
   def make_admin
     @membership = OrganizationMembership.find(params[:membership])
     logger.error(@membership.inspect)
@@ -185,7 +143,14 @@ class Admin::OrganizationsController < ApplicationController
     render :update do |page|
       page.replace_html "dummy-for-actions", "<script>location.reload(true)</script>"
     end
-    
   end
-
+  
+  def remove_admin
+    @membership = OrganizationMembership.find(params[:membership])
+    @membership.admin = nil
+    @membership.save
+    render :update do |page|
+      page.replace_html "dummy-for-actions", "<script>location.reload(true)</script>"
+    end
+  end
 end

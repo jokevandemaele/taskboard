@@ -41,7 +41,7 @@ class ApplicationController < ActionController::Base
       if @member.admins?(@organization)
         return true
       else
-        redirect_to :controller => :members, :action => :access_denied
+        redirect_to :controller => "admin/members", :action => :access_denied
       end
     end
 

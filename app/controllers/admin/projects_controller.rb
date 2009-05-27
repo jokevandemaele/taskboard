@@ -4,13 +4,12 @@ class Admin::ProjectsController < ApplicationController
   
   # GET /projects
   def index
-    #@projects = current_member.projects
-    @projects = Project.all
+    @projects = current_member.projects
     @member = current_member
     @admins = @member.admin?
-    if @projects.length == 1
-      redirect_to :controller => '/taskboard', :action => :show, :id => @projects.first.id
-    end
+    #if @projects.length == 1
+    #  redirect_to :controller => '/taskboard', :action => :show, :id => @projects.first.id
+    #end
   end
 
   # GET /projects/1

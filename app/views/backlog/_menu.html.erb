@@ -29,7 +29,7 @@
 		:project => project.id
 	-%>	
 	
-	<%= render :partial => "members/member_info", :locals => { :member => session[:member] } -%>
+	<%= render :partial => "admin/members/member_info", :locals => { :member => current_member } -%>
 	
 </div>
 

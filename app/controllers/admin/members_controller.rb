@@ -135,8 +135,9 @@ class Admin::MembersController < ApplicationController
   def login
     if request.post?
       @member = Member.authenticate(params[:member][:username], params[:member][:password])
-      session[:member] = @member.id
-      if session[:member]
+      
+      if @member
+        session[:member] = @member.id
         redirect_to_stored
       else
         flash[:notice] = "Access Denied"
