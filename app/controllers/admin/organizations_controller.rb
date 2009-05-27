@@ -120,11 +120,10 @@ class Admin::OrganizationsController < ApplicationController
   end
   
   def remove_member
-    @organization = Organization.find params[:organization]
     @membership = OrganizationMembership.first(:conditions => ["member_id = ? and organization_id = ?", params[:member], params[:organization]])
     @member = @membership.member
     # We assume that the team has only one project, that's why .first is enough and we don't have to iterate.
-    @member.teams.each { |team| team.members.delete(@member) if team.projects.first.organization == @organization }
+    @member.teams.each { |team| team.members.delete(@member) if team.projects.first.organization.id == params[:organization] }
     if @membership.destroy
       render :inline => "", :status => :ok
     else
@@ -132,22 +131,19 @@ class Admin::OrganizationsController < ApplicationController
     end
   end
   
-  def make_admin
-    @membership = OrganizationMembership.find(params[:membership])
-    logger.error(@membership.inspect)
-    @membership.admin = true
-    @membership.save
-    render :update do |page|
-      page.replace_html "dummy-for-actions", "<script>location.reload(true)</script>"
+  def toggle_admin
+    @membership = OrganizationMembership.first(:conditions => ["member_id = ? and organization_id = ?", params[:member], params[:id]])
+    logger.error("Membership: #{@membership.inspect}");
+    if @membership.admin
+      @membership.admin = nil
+    else
+      @membership.admin = true
     end
-  end
-  
-  def remove_admin
-    @membership = OrganizationMembership.find(params[:membership])
-    @membership.admin = nil
-    @membership.save
-    render :update do |page|
-      page.replace_html "dummy-for-actions", "<script>location.reload(true)</script>"
+    
+    if @membership.save
+      render :inline => "", :status => :ok
+    else
+      render :inline => "", :status => :internal_server_error
     end
   end
 end

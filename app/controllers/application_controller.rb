@@ -72,6 +72,7 @@ class ApplicationController < ActionController::Base
     if @path[:controller] == "admin/members"
       if params[:action] == 'index'
         redirect_to :controller => 'admin/members', :action => :access_denied
+        return false
       end
 
       if params[:project]

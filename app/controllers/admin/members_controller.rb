@@ -110,8 +110,10 @@ class Admin::MembersController < ApplicationController
 
   # Member form, used to display the partial of the member's form when adding or editing them.
   def show_form
+    @edit = false
     if(params[:member])
 	    @member = Member.find(params[:member])
+	    @edit = true
     else
 	    @member = Member.new
     end
@@ -128,7 +130,10 @@ class Admin::MembersController < ApplicationController
     @roles.each { |role| @roles_selected << role.id if (@member.roles.include?(role)) }
     
     render :update do |page|
-	    page.replace_html "dummy-for-actions", :partial => 'form', :locals => { :member => @member, :project => params[:project] }
+	    page.replace_html "dummy-for-actions", 
+	      :partial => 'form', 
+	      :object => @member,
+	      :locals => { :project => params[:project], :edit => @edit }
     end
   end
   

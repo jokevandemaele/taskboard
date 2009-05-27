@@ -90,7 +90,27 @@
                                    :url => { :controller => 'admin/organizations', :action => 'remove_member', :organization => organization.id, :member => member.id },
                                    :confirm => 'Are you sure?',
                                    :success => "Effect.Puff($('organization-#{organization.id}-member-#{member.id}'));" -%>
+
 		<%= image_tag "admin/admin-div-element-edit.png", :alt => "Edit", :style => "float: right; position:relative; top: 5px; left: -15px;" -%>
+		<% if member.admins?(organization) -%>
+			<% 
+				action = 'remove' 
+				reaction = 'make'
+			%>
+		<% else %>
+			<% 
+				action = 'make' 
+				reaction = 'remove'
+			%>
+		<% end %>
+		<% if member.admin? %>
+			<%= image_tag("admin/admin-div-element-sysadmin.png", :alt => "sysadmin", :id => "organization-#{organization.id}-member-#{member.id}-admin", :style =>"float: right; position:relative; top: 5px; left: -25px;") -%>
+		<% else %>
+			<%= link_to_remote image_tag("admin/admin-div-element-#{action}-admin.png", :alt => "#{action} admin", :id => "organization-#{organization.id}-member-#{member.id}-admin", :style =>"float: right; position:relative; top: 5px; left: -25px;"), 
+			:url => { :controller => 'admin/organizations', :action => 'toggle_admin', :id => organization, :member => member },
+			:success => "adminToggleImage('organization-#{organization.id}-member-#{member.id}-admin')"
+		-%>
+		<% end -%>
 		<% end %>
 		<p id="admin-div-element-text-member-<%= member.id -%>"><%=h truncate(member.name, :length => 16) -%></p>
 		</div>

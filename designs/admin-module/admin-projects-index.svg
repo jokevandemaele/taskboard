@@ -4471,8 +4471,8 @@
        id="image4283"
        height="100"
        width="100"
-       sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/default_av.png"
-       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/default_av.png" />
+       sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/default_av.png"
+       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/default_av.png" />
     <text
        xml:space="preserve"
        style="font-size:21.59073639px;font-style:normal;font-weight:normal;line-height:125%;fill:#00112b;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
@@ -4685,8 +4685,8 @@
        id="image4975"
        height="66"
        width="66"
-       sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Find Search_128.png"
-       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Find Search_128.png" />
+       sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/Find Search_128.png"
+       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/Find Search_128.png" />
     <text
        xml:space="preserve"
        style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
@@ -4703,8 +4703,8 @@
        id="image5268"
        height="66"
        width="65.600555"
-       sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Add.png"
-       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Add.png" />
+       sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/Symbol - Add.png"
+       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/Symbol - Add.png" />
     <g
        id="g5280"
        transform="translate(-12,71.911623)">
@@ -4744,8 +4744,8 @@
        id="image8455"
        height="66"
        width="66"
-       sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Bug-128.png"
-       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Bug-128.png" />
+       sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/Bug-128.png"
+       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/Bug-128.png" />
     <rect
        ry="16.000002"
        rx="16"
@@ -4786,8 +4786,8 @@
        d="M 31.13704,334.10614 L 793.25183,334.10614"
        id="path4540" />
     <image
-       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Buddy Group_128.png"
-       sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Buddy Group_128.png"
+       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/Buddy Group_128.png"
+       sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/Buddy Group_128.png"
        width="58.182198"
        height="58.182198"
        id="image5290"
@@ -4842,16 +4842,16 @@
        id="g9784"
        transform="translate(0,70)">
       <image
-         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png"
-         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png"
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/Symbol - Delete_128.png"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/Symbol - Delete_128.png"
          width="49.102562"
          height="49.102562"
          id="image9713"
          x="480.57654"
          y="209.67079" />
       <image
-         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit.png"
-         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit.png"
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/Edit.png"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/Edit.png"
          width="48.53455"
          height="48.53455"
          id="image9715"
@@ -4901,8 +4901,8 @@
          id="image9972"
          height="71"
          width="71"
-         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Buddy Group_128.png"
-         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Buddy Group_128.png" />
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/Buddy Group_128.png"
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/Buddy Group_128.png" />
       <text
          xml:space="preserve"
          style="font-size:32.76691437px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;fill:#002255;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
@@ -4940,20 +4940,20 @@
            id="image9990"
            height="49.102562"
            width="49.102562"
-           sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png"
-           xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png" />
+           sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/Symbol - Delete_128.png"
+           xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/Symbol - Delete_128.png" />
         <image
            y="209.95483"
            x="425.4321"
            id="image9992"
            height="48.53455"
            width="48.53455"
-           sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit.png"
-           xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit.png" />
+           sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/Edit.png"
+           xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/Edit.png" />
       </g>
       <image
-         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit1.png"
-         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit1.png"
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/Edit1.png"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/Edit1.png"
          width="44.574409"
          height="44.574409"
          id="image3051"
@@ -4961,8 +4961,8 @@
          y="204.31766" />
     </g>
     <image
-       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit1.png"
-       sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit1.png"
+       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/Edit1.png"
+       sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/Edit1.png"
        width="44.574409"
        height="44.574409"
        id="image3202"
@@ -4974,8 +4974,8 @@
        id="image3204"
        height="44.574409"
        width="44.574409"
-       sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit1.png"
-       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit1.png"
+       sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/Edit1.png"
+       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/Edit1.png"
        inkscape:export-filename="/Users/nictuku/Documents/programacion/agilar/taskboard/public/images/admin/admin-div-actions-stories.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
@@ -5027,8 +5027,8 @@
          d="M 155.28421,455.61234 A 4.6949115,4.4014797 0 1 1 145.89438,455.61234 A 4.6949115,4.4014797 0 1 1 155.28421,455.61234 z"
          transform="matrix(1.4125,0,0,1.5866667,-45.237789,-276.46163)" />
       <image
-         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Buddy Group_128.png"
-         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Buddy Group_128.png"
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/Buddy Group_128.png"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/Buddy Group_128.png"
          width="60"
          height="60"
          id="image5379"
@@ -5124,8 +5124,8 @@
        id="image3352"
        height="44.495132"
        width="44.495132"
-       sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/chart_128.png"
-       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/chart_128.png"
+       sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/chart_128.png"
+       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/chart_128.png"
        transform="scale(-1,1)"
        inkscape:export-filename="/Users/nictuku/Documents/programacion/agilar/taskboard/public/images/admin/admin-div-actions-burndown-chart.png"
        inkscape:export-xdpi="90"
@@ -5136,8 +5136,8 @@
        id="image3504"
        height="41.324062"
        width="41.324062"
-       sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/lightning_sign_128.png"
-       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/lightning_sign_128.png"
+       sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/lightning_sign_128.png"
+       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/lightning_sign_128.png"
        inkscape:export-filename="/Users/nictuku/Documents/programacion/agilar/taskboard/public/images/admin/admin-div-actions-coming-soon.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
@@ -5157,8 +5157,8 @@
        id="image3728"
        height="48"
        width="48"
-       sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/table_green_48.png"
-       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/table_green_48.png"
+       sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/table_green_48.png"
+       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/table_green_48.png"
        inkscape:export-filename="/Users/nictuku/Documents/programacion/agilar/taskboard/public/images/admin/admin-div-actions-backlog.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
@@ -5827,8 +5827,8 @@
            x="83.959381"
            y="234.86938">A Closed Project</tspan></text>
       <image
-         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Buddy Group_128.png"
-         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Buddy Group_128.png"
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/Buddy Group_128.png"
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/Buddy Group_128.png"
          width="71"
          height="71"
          id="image10515"
@@ -5866,16 +5866,16 @@
          transform="translate(0,-6)"
          id="g10529">
         <image
-           xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png"
-           sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Symbol - Delete_128.png"
+           xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/Symbol - Delete_128.png"
+           sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/Symbol - Delete_128.png"
            width="49.102562"
            height="49.102562"
            id="image10531"
            x="480.57654"
            y="209.67079" />
         <image
-           xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit.png"
-           sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit.png"
+           xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/Edit.png"
+           sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/Edit.png"
            width="48.53455"
            height="48.53455"
            id="image10533"
@@ -5888,8 +5888,8 @@
          id="image10535"
          height="44.574409"
          width="44.574409"
-         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit1.png"
-         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/desings/shared/Edit1.png" />
+         sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/Edit1.png"
+         xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/Edit1.png" />
     </g>
   </g>
 </svg>

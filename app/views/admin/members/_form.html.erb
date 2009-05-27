@@ -8,31 +8,54 @@
 	<div style="clear: both"></div>
 	<%= admin_open_div 765 -%>
 	<div class="admin-div-organization-top">
-		<% form_for member, :url => { :controller => 'admin/members' }, :html => { :multipart => true, :target => "upload_frame" } do |f| %>
+		<% 
+		if edit 
+			action = :update
+		else
+			action = :create
+		end
+		-%>
+		<% form_for @member, :url => { :controller => 'admin/members', :action => action, :id => @member }, :html => { :multipart => true, :target => "upload_frame" } do |f| %>
 			<div id="information"></div>
 			<iframe id="upload_frame" name="upload_frame" style="display: none;"></iframe>
-		    <%= f.label :name %> <%= f.text_field :name %><br />
+			<% 
+			if (edit || defined? no_refresh) 
+				name = @member.name
+			else
+				name =  "Click To Edit Member Name" 
+			end 
+			%>
+			
+			<%= f.text_field :name, 
+				:value => name, 
+				:class => "form-name", 
+				:onClick => "if(this.value == 'Click To Edit Organization Name' ) this.clear();" %>
+			
+			<div class="admin-div-section">
 		    <%= f.label :color %> <%= f.text_field :color, :size => 5 %><br /> 
-
-		    <%= f.label :username %> <%= f.text_field :username %><br />
-			<% if member.id %>
-				<%= f.label :password %> <span id="password_field">
-					<span style="text-decoration: underline;cursor:pointer;" onClick="javascript:$('password_field').innerHTML = '<input type=password size=30 name=member[password] id=member_password />'">change password</span>
-					</span><br />
-		   	<% else %>
-				<%= f.label :password %> <%= f.password_field :password %><br />
-			<% end %>
-
-			<%= label :member, :picture %> 
-			<%= file_field_tag :picture_file %><br/>
-			<strong>INFO:</strong>The picture should be a .jpg, .png, or .gif and will be scaled to 88x88 pixels<br />
-
-			<% if !@roles.nil? %>
-					<%= f.label :roles -%><br />
-				    <%= select_tag(:roles, 
-					options_from_collection_for_select(@roles, "id", "name", @roles_selected), :multiple => true, :style => "width: 315px;") -%><br />
-			<% end -%>
-			<br />
+			</div>
+			<div class="admin-div-section">
+			    <%= f.label :username %> <%= f.text_field :username %><br />
+				<% if @member.id %>
+					<%= f.label :password %> <span id="password_field">
+						<span style="text-decoration: underline;cursor:pointer;" onClick="javascript:$('password_field').innerHTML = '<input type=password size=30 name=member[password] id=member_password />'">change password</span>
+						</span><br />
+			   	<% else %>
+					<%= f.label :password %> <%= f.password_field :password %><br />
+				<% end %>
+			</div>
+			<div class="admin-div-section">
+				<%= label :member, :picture %> 
+				<%= file_field_tag :picture_file %><br/>
+				<strong>INFO:</strong>The picture should be a .jpg, .png, or .gif and will be scaled to 88x88 pixels<br />
+			</div>
+			<div class="admin-div-section">
+				<% if !@roles.nil? %>
+						<%= f.label :roles -%><br />
+					    <%= select_tag(:roles, 
+						options_from_collection_for_select(@roles, "id", "name", @roles_selected), :multiple => true, :style => "width: 315px;") -%><br />
+				<% end -%>
+			</div>
 			<%= image_submit_tag "admin/admin-form-submit.png", :alt => "Submit", :style => "position:absolute; top: 25px; right: 119px;"-%>
 			<%= image_tag "admin/admin-form-cancel.png", 
 				:alt => "Cancel", 

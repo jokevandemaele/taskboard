@@ -27,6 +27,14 @@ function updateName(type,object){
 	Effect.Fade($('dialog-background-fade'), { duration: 0.2 });
     new Effect.Highlight(object_id, { startcolor: '#ffff99', endcolor: '#d5e5ff' });
 }
+function adminToggleImage(id){
+	member = $(id);
+	if(member.src.search('/images/admin/admin-div-element-make-admin.png') != -1){
+		member.src = '/images/admin/admin-div-element-remove-admin.png';
+	}else{
+		member.src = '/images/admin/admin-div-element-make-admin.png';
+	}
+}
 // End Admin Section
 
 function resizeFontSizeToFitParent(id){
