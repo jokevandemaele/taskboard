@@ -4,3 +4,7 @@ one:
   id: 1
   name: Find the island
   organization_id: 1
+
+two:
+  id: 2
+  name: Do weird experiments

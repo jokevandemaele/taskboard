@@ -155,6 +155,7 @@ class Admin::MembersController < ApplicationController
   end
 
   def access_denied
+    @member = Member.find(session[:member])
   end
   
   def delete_member

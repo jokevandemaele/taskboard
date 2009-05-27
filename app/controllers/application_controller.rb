@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
     
     @path = request.path_parameters
     # Organizations controller can be accessible only if user is admin of that organization
-    if @path[:controller] == "organizations"
+    if @path[:controller] == "admin/organizations"
       # This is needed because show_form recieves the organization as :organization not as :id, change that.
       if defined?(params[:organization][:id])
         id = params[:organization][:id]
@@ -46,30 +46,34 @@ class ApplicationController < ActionController::Base
     end
 
     # Taskboard and backlog can be accessible only if the member belogs to the project and by organization admin
-    if ((@path[:controller] == "taskboard")||(@path[:controller] == "backlog"))
+    if ((@path[:controller] == "taskboard") || (@path[:controller] == "backlog"))
       @proj = Project.find(params[:id])
       if (@member.admins?(@proj.organization))
         return true
       end
       if !(@member.projects.include? @proj)
-        redirect_to :controller => :members, :action => :access_denied
+        redirect_to :controller => 'admin/members', :action => :access_denied
       end
     end
     
     # Manage Teams could only be accessed by organization admin
-    if @path[:controller] == "teams"
+    if @path[:controller] == "admin/teams"
       @proj = Project.find(params[:project])
       @organization = @proj.organization
       logger.error("Administra: ?",@member.admins?(@organization))
       if @member.admins?(@organization)
         return true
       else
-        redirect_to :controller => :members, :action => :access_denied
+        redirect_to :controller => 'admin/members', :action => :access_denied
       end
     end
     
     # Members could only be accessed by sysadmin or if the user is the admin of the organization
-    if @path[:controller] == "members"
+    if @path[:controller] == "admin/members"
+      if params[:action] == 'index'
+        redirect_to :controller => 'admin/members', :action => :access_denied
+      end
+
       if params[:project]
         project = Project.find(params[:project])
       else
@@ -82,7 +86,7 @@ class ApplicationController < ActionController::Base
       if @member.id == params[:id]
         return true
       end
-      redirect_to :controller => :members, :action => :access_denied
+      redirect_to :controller => 'admin/members', :action => :access_denied
     end
   end
   
@@ -108,10 +112,10 @@ class ApplicationController < ActionController::Base
   
   def redirect_to_stored
     if return_to = session[:return_to]
-      session[:return_to]=nil
+      session[:return_to] = nil
       redirect_to(return_to)
     else
-      redirect_to :controller=>'projects', :action=>'index'
+      redirect_to :controller => 'admin/projects', :action => 'index'
     end
   end
 

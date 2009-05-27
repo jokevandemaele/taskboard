@@ -31,3 +31,8 @@ Then /^I should be admin$/ do
   @member = Member.find(session[:member])
   @member.admin?.should be_true
 end
+
+When /^I view organization ([0-9]+)$/ do |organization|
+  visit "/admin/organizations/show/#{organization}"
+end
+

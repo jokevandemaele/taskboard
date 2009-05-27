@@ -4,3 +4,13 @@ one:
     organization_id: 1
     member_id: 1
     admin: false
+
+two:
+    organization_id: 1
+    member_id: 3
+    admin: true
+
+three:
+    organization_id: 2
+    member_id: 2
+    admin: true

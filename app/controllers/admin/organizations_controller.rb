@@ -53,7 +53,7 @@ class Admin::OrganizationsController < ApplicationController
   def destroy
     @organization = Organization.find(params[:id])
     if @organization.destroy
-      render :inline => "", :status => :ok
+      render :inline => "successfully destroyed organization", :status => :ok
     else
       render :inline => "", :status => :internal_server_error
     end
@@ -90,17 +90,17 @@ class Admin::OrganizationsController < ApplicationController
     end
   end
   
-  def remove_project
-    @project = Project.find(params[:project])
-    @organization = Organization.find(params[:organization])
-    
-    @organization.projects.delete @project
-    if @organization.save
-      render :update do |page|
-        page.replace_html "dummy-for-actions", "<script>location.reload(true)</script>"
-      end
-    end
-  end
+#  def remove_project
+#    @project = Project.find(params[:project])
+#    @organization = Organization.find(params[:organization])
+#    
+#    @organization.projects.delete @project
+#    if @organization.save
+#      render :update do |page|
+#        page.replace_html "dummy-for-actions", "<script>location.reload(true)</script>"
+#      end
+#    end
+#  end
 
   def add_member
     @organization = Organization.find(params[:id])

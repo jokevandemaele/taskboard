@@ -19,12 +19,16 @@ class Member < ActiveRecord::Base
   
   #see if the user admins an organization
   def admins?(organization)
+    if self.admin?
+      return true
+    end
+
     organization = OrganizationMembership.first(:conditions => ["member_id = ? and organization_id = ?", id, organization.id])
     if organization
       return organization.admin?
-    else
-      return self.admin?
     end
+
+    return false
   end
 
   #see if the user admins an organization
