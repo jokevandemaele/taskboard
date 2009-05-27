@@ -34,7 +34,10 @@ class Admin::ProjectsController < ApplicationController
     if @project.save
       render :inline => "<script>location.reload(true);</script>"
     else
-      render :action => "new"
+      render :partial => 'form',
+      		:object => @project,
+      		:locals => { :no_refresh => true, :edit => false, :organization => @project.organization_id },
+ 		:status => :internal_server_error
     end
   end
 

@@ -3,6 +3,8 @@ class Project < ActiveRecord::Base
   belongs_to :organization
   has_many :stories
   has_and_belongs_to_many :teams
+  # Validations
+  validates_uniqueness_of :name
   
   # Named Scopes
   # Free projects are projects that don't have an organization assigned

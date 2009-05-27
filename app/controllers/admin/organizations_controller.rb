@@ -23,13 +23,10 @@ class Admin::OrganizationsController < ApplicationController
       render :inline => "<script>location.reload(true)</script>"
     else
       # Decide what to do here, we should send the error somehow and process it in the view.
-      render :update, :status => :internal_server_error do |page|
-      		page.replace_html "dummy-for-actions", 
-      		:partial => 'form',
+      render :partial => 'form',
       		:object => @organization,
-      		:locals => { :no_refresh => true }
-      end
-      
+      		:locals => { :no_refresh => true, :edit => false },
+ 		:status => :internal_server_error
     end
   end
 
