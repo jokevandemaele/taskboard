@@ -3056,7 +3056,10 @@
        height="46.177341"
        width="46.177341"
        sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/paint-128.png"
-       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/paint-128.png" />
+       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/paint-128.png"
+       inkscape:export-filename="/Users/nictuku/Documents/programacion/agilar/taskboard/public/images/admin/admin-div-actions-color.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <text
        xml:space="preserve"
        style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
@@ -3156,7 +3159,10 @@
        height="55.842365"
        width="55.842365"
        sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/Keys.png"
-       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/Keys.png" />
+       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/Keys.png"
+       inkscape:export-filename="/Users/nictuku/Documents/programacion/agilar/taskboard/public/images/admin/admin-div-actions-login.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        id="path7522"
        d="M 91.13704,364.34126 L 853.25183,364.34126"
@@ -3185,7 +3191,10 @@
        height="70.876846"
        width="70.876846"
        sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/Album.png"
-       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/Album.png" />
+       xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/Album.png"
+       inkscape:export-filename="/Users/nictuku/Documents/programacion/agilar/taskboard/public/images/admin/admin-div-actions-picture.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <rect
        style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect7614"
