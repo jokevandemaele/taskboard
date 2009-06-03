@@ -3,6 +3,9 @@
 <%= admin_open_div(700) -%>
 <div id="member-<%= member.id %>" class="admin-div-member-top">
 	<div class="admin-div-organization-top-actions admin-div-top-actions" style="float:right; margin: none;">
+		<% if member.admin? -%>
+			<%= image_tag "admin/admin-div-element-sysadmin.png", :alt => "Sysadmin", :style => "position: relative; right: 10px;", :title => "User is a System Administrator"-%>
+		<% end -%>
 		<%= link_to_remote image_tag("admin/admin-div-actions-edit.png", :alt => "Edit"), :url => { :action => :show_form, :id => member.id } -%>
 		<%= link_to_remote image_tag("admin/admin-div-actions-remove.png", :alt => "Remove"), 
 				:url => admin_member_url(member.id), 
@@ -17,6 +20,7 @@
 		<span class="admin-div-top-actions-counts"><%=h member.organizations.length %></span>
 		<%= image_tag "admin/admin-div-actions-organizations.png", :alt => "Organizations" -%>
 	</div>
+	
 	<div id="admin-div-member-top-name" style="float:left;">
 		<script>
 			ids<%= member.id %> = new Array('admin-div-member-projects-<%= member.id %>', 'admin-div-member-organizations-<%= member.id %>');
@@ -26,7 +30,7 @@
 			:style => "cursor: pointer",
 			:onClick => "expandCollapseDivs(ids#{member.id})" -%>
 			
-		<h1 id="member-<%= member.id -%>-name" onClick="expandCollapseDivs(ids<%= member.id -%>)"><%=h truncate(member.name) -%></h1>
+		<h1 id="member-<%= member.id -%>-name" onClick="expandCollapseDivs(ids<%= member.id -%>)">	<%= image_tag member.show_picture, :style => "width: 37px; position: relative; top: -5px;" -%> <%=h truncate(member.name) -%></h1>
 	</div>
 	<div style="clear: both;"></div>
 

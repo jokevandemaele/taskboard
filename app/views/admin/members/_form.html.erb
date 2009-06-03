@@ -15,7 +15,7 @@
 			action = :create
 		end
 		-%>
-		<% form_for @member, :url => { :controller => 'admin/members', :action => action, :id => @member }, :html => { :multipart => true, :target => "upload_frame" } do |f| %>
+		<% form_for @member, :url => { :controller => 'admin/members', :action => action, :id => @member }, :html => { :multipart => true } do |f| %>
 			<div id="information"></div>
 			<iframe id="upload_frame" name="upload_frame" style="display: none;"></iframe>
 			<% 
@@ -29,41 +29,60 @@
 			<%= f.text_field :name, 
 				:value => name, 
 				:class => "form-name", 
-				:onClick => "if(this.value == 'Click To Edit Organization Name' ) this.clear();" %>
+				:onClick => "if(this.value == 'Click To Edit Member Name' ) this.clear();" %>
+
+			<% if @organization %>
+			  <%= hidden_field_tag "organization", @organization -%>
+			<% else %>
+	                  <div class="admin-div-section" style="margin-bottom: 10px;">
+	                  <%= image_tag 'admin/admin-div-actions-organizations.png', :alt => 'Organization', :style => 'position: relative; top: 10px; margin-left: 10px;' -%>
+	                  <h2 style="position: relative; top: 10; margin-left: 10px;">Organization:</h2>
+	                  <%= select_tag "organization", options_from_collection_for_select(current_member.organizations_administered, 'id', 'name'), :style => 'position: relative; top: 10px; margin-left: 10px; width: 500px;' -%>
+	                  </div>
+			<% end %>
 			
-			<div class="admin-div-section">
-		    <%= f.label :color %> <%= f.text_field :color, :size => 5 %><br /> 
+			<div class="admin-div-section" style="margin-bottom: 10px;">
+				<%= image_tag "admin/admin-div-actions-color.png", :alt => "Color", :style => "position: relative; left: 10px; top: 2px;" -%>
+				<h2 style="position: relative; top: 0px; margin-left: 20px;"><%= f.label :color %></h2>
+				<p style="color: #04a; font-size: 10px; margin: 0; position:relative; top: -18px; left: 70px;">(This color will be used to identify the user in the taskboard)</p>
+				<%= f.text_field :color, :style => "float: right; position: relative; top: -55px; border: none; right: 10px; width: 150px; height: 20px; " %>
+				<p style="color: #04a; font-size: 12px; float:right; margin: 0; position:relative; left: 140px; top: -35px;">choose</p>
 			</div>
-			<div class="admin-div-section">
-			    <%= f.label :username %> <%= f.text_field :username %><br />
-				<% if @member.id %>
-					<%= f.label :password %> <span id="password_field">
-						<span style="text-decoration: underline;cursor:pointer;" onClick="javascript:$('password_field').innerHTML = '<input type=password size=30 name=member[password] id=member_password />'">change password</span>
-						</span><br />
-			   	<% else %>
-					<%= f.label :password %> <%= f.password_field :password %><br />
-				<% end %>
+			
+			<div class="admin-div-section" style="margin-bottom: 10px; height: 80px;">
+				<%= image_tag "admin/admin-div-actions-login.png", :alt => "Login", :style => "position: relative; left: 10px; top: -2px;" -%>
+				<h2 style="position: relative; top: 0px; margin-left: 10px;">Login information</h2>
+			    <div style="float:right; position: relative; top: -50px;">
+				 	<span style="color: #162d50;">username</span> <%= f.text_field :username, :style => "position: relative; right: 2px; background: url('/images/admin/admin-div-field.png') no-repeat top left; border: none; width: 168px; height: 26px; padding: 5px;" %><br />
+					<span style="color: #162d50;">password</span> <%= f.password_field :password, :style => "background: url('/images/admin/admin-div-field.png') no-repeat top left; border: none; width: 168px; height: 26px; padding: 5px;", :size => "10" %>
+				</div>
 			</div>
-			<div class="admin-div-section">
-				<%= label :member, :picture %> 
-				<%= file_field_tag :picture_file %><br/>
-				<strong>INFO:</strong>The picture should be a .jpg, .png, or .gif and will be scaled to 88x88 pixels<br />
+			
+			<div class="admin-div-section" style="margin-bottom: 10px; height: 60px; ">
+				<%= image_tag "admin/admin-div-actions-picture.png", :alt => "Picture", :style => "position: relative; left: 0px; top: -5px;" -%>
+				<h2 style="position: relative; top: 0px; margin-left: -5px; top: -10px;">Picture</h2>
+				<p style="color: #04a; font-size: 10px; margin: 0; position:relative; top: -38px; left: 70px;">The picture should be a .jpg, .png, or .gif and will be scaled to 88x88 pixels</p>
+				<%= file_field_tag :picture_file, :style => "float: right; position: relative; right: 5px; top: -75px; background: url('/images/admin/admin-div-field.png') no-repeat top left; border: none; padding: 5px;" %>
 			</div>
-			<div class="admin-div-section">
-				<% if !@roles.nil? %>
-						<%= f.label :roles -%><br />
-					    <%= select_tag(:roles, 
-						options_from_collection_for_select(@roles, "id", "name", @roles_selected), :multiple => true, :style => "width: 315px;") -%><br />
-				<% end -%>
+			
+			<div class="admin-div-section" style="">
+				<%= image_tag "admin/admin-div-actions-security.png", :alt => "Security", :style => "position: relative; left: 0px; top: 3px;" -%>
+				<h2 style="position: relative; top: 0px; margin-left: -5px; top: 5px;">Security</h2>
+				<div style="float: right; position: relative; top: -30px; right: 10px;">
+					<%= check_box_tag "member[admin]", true -%><span style="position: relative; top: -2px; font-size: 16px; ">User is a System Administrator</span>
+				</div>
 			</div>
-			<%= image_submit_tag "admin/admin-form-submit.png", :alt => "Submit", :style => "position:absolute; top: 25px; right: 119px;"-%>
+			
+			<div style="clear:both; margin: 0; padding: 0;"></div>
+			<%= image_submit_tag "admin/admin-form-submit.png", :alt => "Submit", :style => "position:absolute; top: -30px; right: 119px;"-%>
 			<%= image_tag "admin/admin-form-cancel.png", 
 				:alt => "Cancel", 
-				:style => "position:absolute; top: 25px; right: 30px; cursor: pointer;", 
+				:style => "position:absolute; top: -30px; right: 30px; cursor: pointer;", 
 				:onClick => "cancelForm('form-add-member');" -%>
 		<% end %>
-		</div>
+	</div>
 	<%= admin_close_div 765 -%>
+	
         <% if @organization %>
           <%= admin_open_div 765 -%>
             <% form_remote_tag :url => { :controller => 'admin/organizations', :action => 'add_member', :id => @organization.id }, :method => :put, :update => 'dummy-for-actions' do |f| %>

@@ -45,6 +45,17 @@ class Admin::MembersController < ApplicationController
       if(params[:picture_file])
         @member.add_picture(params[:picture_file])
       end
+      
+      if params[:organization]
+        @organization = Organization.find(params[:organization])
+        @membership = OrganizationMembership.new
+        @membership.member = @member
+        @membership.organization = @organization
+        @membership.admin = nil
+
+        @membership.save
+      end
+      
       # render :update, :status => :ok do |page|
       #   page.insert_html :bottom, "members-list", :partial => "members", :object => @member
       #   page.replace_html "dummy-for-actions", "<script>$('dialog-background-fade').hide();</script>"
@@ -119,16 +130,16 @@ class Admin::MembersController < ApplicationController
     end
 
     if params[:organization]
-      @organization = Organization.find(params[:organization])
+      @organization = Organization.find params[:organization]
       @members_not_in_organization = Member.all - @organization.members
     else
       @organization = nil
     end
 
-    @roles = Role.all
-    @roles_selected = Array.new
-    @roles.each { |role| @roles_selected << role.id if (@member.roles.include?(role)) }
-    
+    # @roles = Role.all
+    #     @roles_selected = Array.new
+    #     @roles.each { |role| @roles_selected << role.id if (@member.roles.include?(role)) }
+
     render :update do |page|
 	    page.replace_html "dummy-for-actions", 
 	      :partial => 'form', 

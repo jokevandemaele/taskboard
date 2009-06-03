@@ -34,8 +34,8 @@
 		<% else %>
                   <div class="admin-div-section">
                   <%= image_tag 'admin/admin-div-actions-organizations.png', :alt => 'Organization', :style => 'position: relative; top: 10px; margin-left: 10px;' -%>
-                  <h2 style="position: relative; top: 10; margin-left: 20px;">Organization:</h2>
-                  <%= select_tag "project[organization_id]", options_from_collection_for_select(current_member.organizations_administered, 'id', 'name', :selected => @project.organization_id), :style => 'position: relative; top: 10px; margin-left: 20px; width: 510px;' -%>
+                  <h2 style="position: relative; top: 10; margin-left: 10px;">Organization:</h2>
+                  <%= select_tag "project[organization_id]", options_from_collection_for_select(current_member.organizations_administered, 'id', 'name', :selected => @project.organization_id), :style => 'position: relative; top: 10px; margin-left: 10px; width: 500px;' -%>
                   </div>
 		<% end %>
 		
