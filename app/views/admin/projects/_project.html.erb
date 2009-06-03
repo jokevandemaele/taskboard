@@ -12,10 +12,10 @@
 		-%>
 
 		<%= image_tag "admin/admin-div-actions-separator.png", :alt => "Separator", :class => "admin-div-top-actions-separator"-%>
-		<span class="admin-div-top-actions-counts"><%=h project.stories.count %></span>
+		<span class="admin-div-top-actions-counts"><%=h project.stories.length %></span>
 		<%= image_tag "admin/admin-div-actions-stories.png", :alt => "Stories" -%>
 		<%= image_tag "admin/admin-div-actions-separator.png", :alt => "Separator", :class => "admin-div-top-actions-separator"-%>
-		<span class="admin-div-top-actions-counts"><%=h project.members.count %></span>
+		<span class="admin-div-top-actions-counts"><%=h project.members.length %></span>
 		<%= image_tag "admin/admin-div-actions-members.png", :alt => "Members" -%>
 	</div>
 	<div id="admin-div-project-top-name" style="float:left;">

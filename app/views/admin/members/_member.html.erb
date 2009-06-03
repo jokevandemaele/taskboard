@@ -11,10 +11,10 @@
 				:success => "Effect.Puff($('member-#{member.id}-container'));"
 		-%>
 		<%= image_tag "admin/admin-div-actions-separator.png", :alt => "Separator", :class => "admin-div-top-actions-separator"-%>
-		<span class="admin-div-top-actions-counts"><%=h member.projects.count %></span>
+		<span class="admin-div-top-actions-counts"><%=h member.projects.length %></span>
 		<%= image_tag "admin/admin-div-actions-projects.png", :alt => "Projects" -%>
 		<%= image_tag "admin/admin-div-actions-separator.png", :alt => "Separator", :class => "admin-div-top-actions-separator"-%>
-		<span class="admin-div-top-actions-counts"><%=h member.organizations.count %></span>
+		<span class="admin-div-top-actions-counts"><%=h member.organizations.length %></span>
 		<%= image_tag "admin/admin-div-actions-organizations.png", :alt => "Organizations" -%>
 	</div>
 	<div id="admin-div-member-top-name" style="float:left;">
