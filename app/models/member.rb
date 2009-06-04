@@ -33,10 +33,11 @@ class Member < ActiveRecord::Base
 
   #see if the user admins an organization
   def admins_any_organization?
-    #memberships = OrganizationMembership.all(:conditions => ["member_id = ?", id])
-    #logger.error(memberships.inspect)
-    #memberships.each { |membership| return membership.admin? if membership.admin? }
-    return self.admin?
+    if self.admin?
+      return true
+    else
+      return !self.organizations_administered.empty?
+    end
   end
   
   def organizations_administered

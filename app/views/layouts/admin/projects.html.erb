@@ -18,8 +18,10 @@
 	</div>
 	<div id="admin-sidebar">
 		<ul id="admin-sidebar-menu">
+      <% if current_member.admins_any_organization? %>
 			<% image = image_tag 'admin/add.png', :alt => 'new' -%>
 			<li><%= link_to_remote "new project #{image}", :url => { :action => :show_form } -%></li>
+      <% end %>
 			<li><%= text_field_tag "admin-sidebar-search", "find project", :onClick => "if(this.value == 'find project') {this.clear();}" , :autocomplete => "off" -%> <%= image_tag 'admin/find.png', :alt => "find" -%></li>
 			<% image = image_tag 'admin/bug.png', :alt => "bug" -%>
 			<li><%= link_to "report bug #{image}", "/report_bug" -%></li>
