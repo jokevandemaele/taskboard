@@ -3,6 +3,7 @@
 <%= admin_open_div(700) -%>
 <div id="project-<%= project.id %>" class="admin-div-project-top">
 	<div class="admin-div-project-top-actions admin-div-top-actions" style="float:right; margin: none;">
+    <% if member.admin? || member.admins?(project.organization) %>
 		<%= link_to_remote image_tag("admin/admin-div-actions-edit.png",:alt => "Edit"), :url => { :action => :show_form, :id => project.id } -%>
 		<%= link_to_remote image_tag("admin/admin-div-actions-remove.png", :alt => "Remove"), 
 				:url => admin_project_url(project.id), 
@@ -10,6 +11,7 @@
 				:confirm => "Are you sure?",
 				:success => "Effect.Puff($('project-#{project.id}-container'));"
 		-%>
+    <% end %>
 
 		<%= image_tag "admin/admin-div-actions-separator.png", :alt => "Separator", :class => "admin-div-top-actions-separator"-%>
 		<span class="admin-div-top-actions-counts"><%=h project.stories.length %></span>
