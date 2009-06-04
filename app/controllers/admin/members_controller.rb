@@ -101,7 +101,8 @@ class Admin::MembersController < ApplicationController
       end
     else
       if @member.update_attributes(params[:member])
-        redirect_to(@member)
+        #redirect_to(@member)
+        redirect_to :controller => 'admin/members', :action => 'index'
       else
         render :action => "edit"
       end
@@ -122,16 +123,16 @@ class Admin::MembersController < ApplicationController
   # Member form, used to display the partial of the member's form when adding or editing them.
   def show_form
     @edit = false
-    if(params[:member])
-	    @member = Member.find(params[:member])
+    if(params[:id])
+	    @member = Member.find(params[:id])
 	    @edit = true
     else
 	    @member = Member.new
     end
 
-    if params[:organization]
-      @organization = Organization.find params[:organization]
-      @members_not_in_organization = Member.all - @organization.members
+    if defined? params[:organization]
+      @organization = params[:organization]
+      # @members_not_in_organization = Member.all - @organization.members
     else
       @organization = nil
     end
