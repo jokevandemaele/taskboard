@@ -91,7 +91,9 @@
                                    :confirm => 'Are you sure?',
                                    :success => "Effect.Puff($('organization-#{organization.id}-member-#{member.id}'));" -%>
 
-		<%= image_tag "admin/admin-div-element-edit.png", :alt => "Edit", :style => "float: right; position:relative; top: 5px; left: -15px;" -%>
+		<%= link_to_remote image_tag("admin/admin-div-element-edit.png", :alt => "Edit",
+					:style => "float: right; position:relative; top: 5px; left: -15px;"),
+					:url => { :controller => 'admin/members', :action => 'show_form', :id => member.id } -%>
 		<% if member.admins?(organization) -%>
 			<% 
 				action = 'remove' 

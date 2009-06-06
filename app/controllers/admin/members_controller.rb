@@ -102,7 +102,7 @@ class Admin::MembersController < ApplicationController
     else
       if @member.update_attributes(params[:member])
         #redirect_to(@member)
-        redirect_to :controller => 'admin/members', :action => 'index'
+	redirect_to request.referer
       else
         render :action => "edit"
       end

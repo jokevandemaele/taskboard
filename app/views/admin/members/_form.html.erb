@@ -31,14 +31,16 @@
 				:class => "form-name", 
 				:onClick => "if(this.value == 'Click To Edit Member Name' ) this.clear();" %>
 
+			<% if !edit %>
 			<% if @organization %>
 			  <%= hidden_field_tag "organization", @organization -%>
 			<% else %>
-	                  <div class="admin-div-section" style="margin-bottom: 10px;">
-	                  <%= image_tag 'admin/admin-div-actions-organizations.png', :alt => 'Organization', :style => 'position: relative; top: 10px; margin-left: 10px;' -%>
-	                  <h2 style="position: relative; top: 10; margin-left: 10px;">Organization:</h2>
-	                  <%= select_tag "organization", options_from_collection_for_select(current_member.organizations_administered, 'id', 'name'), :style => 'position: relative; top: 10px; margin-left: 10px; width: 500px;' -%>
-	                  </div>
+		          <div class="admin-div-section" style="margin-bottom: 10px;">
+		          <%= image_tag 'admin/admin-div-actions-organizations.png', :alt => 'Organization', :style => 'position: relative; top: 10px; margin-left: 10px;' -%>
+		          <h2 style="position: relative; top: 10; margin-left: 10px;">Organization:</h2>
+		          <%= select_tag "organization", options_from_collection_for_select(current_member.organizations_administered, 'id', 'name'), :style => 'position: relative; top: 10px; margin-left: 10px; width: 500px;' -%>
+		          </div>
+			<% end %>
 			<% end %>
 			
 			<div class="admin-div-section" style="margin-bottom: 10px;">
