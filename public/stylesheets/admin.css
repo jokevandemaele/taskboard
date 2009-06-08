@@ -127,6 +127,9 @@ a { text-decoration: none;}
 	padding-top: 3px;
 	margin: 0;
 }
+
+#admin-div-color-picker-content table { border-spacing: 3px; }
+#admin-div-color-picker-content table tbody tr td { width: 24px; height: 24px; }
 /* End Admin Div  */
 
 /* Admin Form */

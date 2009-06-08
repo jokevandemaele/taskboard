@@ -47,8 +47,8 @@
 				<%= image_tag "admin/admin-div-actions-color.png", :alt => "Color", :style => "position: relative; left: 10px; top: 2px;" -%>
 				<h2 style="position: relative; top: 0px; margin-left: 20px;"><%= f.label :color %></h2>
 				<p style="color: #04a; font-size: 10px; margin: 0; position:relative; top: -18px; left: 70px;">(This color will be used to identify the user in the taskboard)</p>
-				<%= f.text_field :color, :style => "float: right; position: relative; top: -55px; border: none; right: 10px; width: 150px; height: 20px; " %>
-				<p style="color: #04a; font-size: 12px; float:right; margin: 0; position:relative; left: 140px; top: -35px;">choose</p>
+				<%= f.text_field :color, :style => "float: right; position: relative; top: -55px; border: none; right: 10px; width: 150px; height: 20px;" %>
+				<p style="color: #04a; font-size: 12px; float:right; margin: 0; position:relative; left: 140px; top: -35px; cursor: pointer;" onclick="toggle_color_picker();">choose</p>
 			</div>
 			
 			<div class="admin-div-section" style="margin-bottom: 10px; height: 80px;">
@@ -97,8 +97,17 @@
             <% end %>
           <%= admin_close_div 765 -%>
         <% end %>
+
+	<div id="admin-div-color-picker" style="display: none; position: absolute; top: 119px; right: 3px;">
+	<%= admin_open_div 208 -%>
+  <div id="admin-div-color-picker-content"></div>
+	<%= admin_close_div 208 -%>
+	</div>
 </div>
 <script>
+  $('admin-div-color-picker-content').innerHTML = generate_color_table();
+  if($('member_color').value != '')
+    $('member_color').style.backgroundColor = $('member_color').style.color = '#' + $('member_color').value;
 	centerTo($('form-add-member'),$('dialog-background-fade'));
 	Effect.Appear($('form-add-member'));
 </script>
