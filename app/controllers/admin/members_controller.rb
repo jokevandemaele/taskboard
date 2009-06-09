@@ -130,9 +130,9 @@ class Admin::MembersController < ApplicationController
 	    @member = Member.new
     end
 
-    if defined? params[:organization]
-      @organization = params[:organization]
-      # @members_not_in_organization = Member.all - @organization.members
+    if params[:organization]
+      @organization = Organization.find(params[:organization])
+      @members_not_in_organization = Member.all - @organization.members
     else
       @organization = nil
     end

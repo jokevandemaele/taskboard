@@ -7,75 +7,27 @@ a { text-decoration: none;}
 #admin-content{	float: left;	width: 780px;	height: 100px;}
 #admin-sidebar{	float: left;	width: 220px;}
 #admin-sidebar-menu{	margin: 0;	padding: 0;	list-style: none;	text-align: right;	color: #00112b;	font-size: 16px;}
+#admin-sidebar-menu{	margin: 0;	padding: 0;	list-style: none;	text-align: right;	color: #00112b;	font-size: 16px;}
 #admin-sidebar-menu a:hover{color: #2a7fff;}
 #admin-sidebar-search{background: url('/images/admin/admin-sidebar-search-input-background.png') no-repeat transparent;	border: none;	width: 140px;	height: 25px;	vertical-align: middle;	color: #00112b;	font-size: 14px;	padding-top: 3px;	padding-left: 10px;	position:relative;	float: left;	top: 20px;	left: 5px;}
 #admin-sidebar-menu img{ vertical-align: middle;}
+/* End General  */
 
 /* Admin Menu */
-#admin-menu {
-	position:relative;
-	top: -15px; 
-	left: 15px;
-	margin: 0; padding: 0;
-}
-
-#admin-menu .admin-menu-element{
-	margin: 0;
-	background: url('/images/admin/admin-menu-item-background.png') top left no-repeat transparent;
-	width: 155px;
-	height: 31px;
-	text-align: center;
-	float: left;
-	margin-right: 10px;
-}
-
-#admin-menu .admin-menu-element a{
-	color: white;
-	font-size: 16px;
-}
-#admin-menu .admin-menu-element a:hover{
-	color: #ffccaa;
-}
-
-#admin-menu .admin-menu-current a{
-	color: #f6c022;
-}
+#admin-menu { position:relative; top: -15px; left: 15px; margin: 0; padding: 0;}
+#admin-menu .admin-menu-element{ margin: 0; background: url('/images/admin/admin-menu-item-background.png') top left no-repeat transparent; width: 155px; height: 31px;	text-align: center;	float: left; margin-right: 10px;}
+#admin-menu .admin-menu-element a{ color: white; font-size: 16px; }
+#admin-menu .admin-menu-element a:hover{ color: #ffccaa; }
+#admin-menu .admin-menu-current a{ color: #f6c022; }
 /* End */ 
 
-.fieldWithErrors {
-  padding: 2px;
-  background-color: red;
-  display: table;
-}
-
-#errorExplanation {
-  width: 100%;
-  border: 2px solid red;
-  margin: 0;
-  background-color: #d5e5ff;
-}
-
-#errorExplanation h2 {
-  width: 100%;
-  height: 20px;
-  text-align: left;
-  font-weight: bold;
-  font-size: 12px;
-  margin: 0;
-  background-color: #c00;
-  color: #fff;
-}
-
-#errorExplanation p {
-  color: #333;
-  margin-bottom: 0;
-  padding: 5px;
-}
-
-#errorExplanation ul li {
-  font-size: 12px;
-  list-style: square;
-}
+/* Errors */
+.fieldWithErrors { padding: 2px; background-color: red; display: table; }
+#errorExplanation { width: 100%; border: 2px solid red; margin: 0; background-color: #d5e5ff;}
+#errorExplanation h2 { width: 100%; height: 20px; text-align: left; font-weight: bold; font-size: 12px; margin: 0; background-color: #c00; color: #fff;}
+#errorExplanation p { color: #333; margin-bottom: 0; padding: 5px;}
+#errorExplanation ul li { font-size: 12px; list-style: square; }
+/* End */
 
 /* Admin Div  */
 .admin-div-top{ height: 15px; }
@@ -97,92 +49,40 @@ a { text-decoration: none;}
 .admin-div-section h2 { position: relative; top: 13px; }
 .admin-div-section a { color: #002255; }
 .admin-div-section a:hover { color: #0c82eb; }
-
 .admin-div-section-img {position: relative; height: 32px; left: 10px; top: 10px}
 .admin-div-elements-actions{ float: right;}
 .admin-div-element { float: left; width: 197px; height: 33px; background: url('/images/admin/admin-div-element-display.png') no-repeat; margin: 5px;}
-.admin-div-element p{ 
-	font-size: 14px; 
-	color: #002255;
-	padding-left: 10px;
-	padding-top: 5px;
-	margin: 0;
-}
-
-.admin-div-elements-search{
-	float:right;
-	position: relative;
-	top: 11px;
-	margin-right: 10px;
-}
-.admin-div-elements-search-field{
-	background: url('/images/admin/admin-div-elements-search-field.png') no-repeat transparent;
-	border: none;
-	width: 128px;
-	height: 25px;
-	font-size: 12px; 
-	position:relative;
-	top: 4px;
-	padding-left: 12px;
-	padding-top: 3px;
-	margin: 0;
-}
-
+.admin-div-element p{ font-size: 14px; color: #002255; padding-left: 10px; padding-top: 5px; margin: 0;}
+.admin-div-elements-search{ float:right; position: relative; top: 11px; margin-right: 10px;} 
+.admin-div-elements-search-field{ background: url('/images/admin/admin-div-elements-search-field.png') no-repeat transparent; border: none; width: 128px; height: 25px; font-size: 12px;  position:relative; top: 4px; padding-left: 12px; padding-top: 3px; margin: 0;}
 #admin-div-color-picker-content table { border-spacing: 3px; }
 #admin-div-color-picker-content table tbody tr td { width: 24px; height: 24px; }
 /* End Admin Div  */
 
 /* Admin Form */
-.admin-new {
-	position: fixed; 
-	top: 0px; 
-	left: 0px; 
-	z-index: 101;
-}
-.form-name{
-	position:relative;
-	left: 52px;
-	font-size: 28px;
-	color: #002255;
-	width: 480px;
-	height: 40px;
-	border: none;
-	background: transparent;
-}
+.admin-new { position: fixed; top: 0px; left: 0px; z-index: 101; }
+.form-name{ position:relative; left: 52px; font-size: 28px; color: #002255; width: 480px; height: 40px; border: none; background: transparent;}
 /* End Admin Form */
+
 /* Admin User Info */
-#admin-user-info {
-	top: 0px;
-	left: 0px;
-	right: 0;
-	text-align: right;
-	background: red;
-}
-#admin-user-info-text p{
-	margin: 0;
-	color: #00112b;
-	font-size: 21px;
-	text-align: right;
-}
-.admin-user-info-text-user{
-	color: #003380;
-}
-#admin-user-info-text .admin-user-info-text-role{
-	color: #00112b;
-	font-size: 13px;
-}
-
-#admin-user-info-text .admin-user-info-text-role a{
-	text-decoration: none;
-	color: #00112b;
-}
-#admin-user-info-text .admin-user-info-text-role a:hover{
-	color: #2a7fff;
-}
-
-#admin-user-info-links {
-	position:relative;
-}
+#admin-user-info { top: 0px; left: 0px; right: 0; text-align: right; background: red; }
+#admin-user-info-text p{ margin: 0; color: #00112b; font-size: 21px; text-align: right;}
+.admin-user-info-text-user{ color: #003380;}
+#admin-user-info-text .admin-user-info-text-role{ color: #00112b; font-size: 13px;}
+#admin-user-info-text .admin-user-info-text-role a{ text-decoration: none; color: #00112b;}
+#admin-user-info-text .admin-user-info-text-role a:hover{ color: #2a7fff; }
+#admin-user-info-links { position:relative;}
 /* End Admin User Info */
 
-/* End General  */
+/* Admin Teams */
+.organization_member{
+	position: relative;
+	top: 0px;
+	left: 0px;
+}
+.organization-member{
+	color: #00112b;
+	text-align: center;
+	font-weight: bold;
+}
+/* End Teams */

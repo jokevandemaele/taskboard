@@ -10,6 +10,11 @@ class Admin::TeamsController < ApplicationController
 	    @teams = @project.teams
       @members = @project.organization.members
     else
+      @organizations = current_member.organizations_administered
+      @projects = Array.new
+      @organizations.each do |organization|
+        organization.projects.each {|project| @projects << project }
+      end
       @members = Member.all()
       @teams = Team.all()
     end
@@ -104,8 +109,10 @@ class Admin::TeamsController < ApplicationController
   end
   
   def show_form
-    if(params[:team])
-	    @team = Team.find(params[:team])
+    @edit = false
+    if(params[:id])
+	    @team = Team.find(params[:id])
+	    @edit = true
     else
 	    @team = Team.new
     end
@@ -116,14 +123,16 @@ class Admin::TeamsController < ApplicationController
 	    if @project       
     		page.replace_html "dummy-for-actions", 
     			:partial => 'form', 
+          :object => @team, 
     			:locals => { 
-  				  :team => @team, 
+    			  :edit => @edit,
   				  :project =>  @project 
     			}
 	    else
     		page.replace_html "dummy-for-actions", 
-    			:partial => 'form', 
-    			  :locals => { :team => @team }
+    			:partial => 'form',
+    			:edit => @edit,
+    			:object => @team
 	    end		
     end
   end

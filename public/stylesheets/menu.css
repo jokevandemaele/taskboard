@@ -14,7 +14,6 @@
 #menu_story_add_image {	float: left; position: relative; top:10px; left: 34px; }
 #menu_manage_teams_image{ float: left; position: relative; top:10px; left: 54px; }
 #menu_add_team_image { float: left; position: relative; left: 54px;}
-#menu_add_member_image { float: left; position: relative; left: 54px;}
 /* Taskboard's Menu Specific Style */
 #taskboard_menu_task_add { float: left;	top:7px; left: 34px; }
 #menu_statustags { position: relative; top: 10px; left: 65px; border: none; width: 10px; height: 10px; padding: 0px; margin: 0; }
@@ -26,15 +25,6 @@
 
 /* Team's Menu Specific Style */
 /* Members List Style*/
-#members-list {
-	position: fixed;
-	top: 5px;
-	left: 620px;
-	border-left: 5px solid #3771c8;
-	border-right: 5px solid #3771c8;
-	width: 800px;
-	height: 126px;
-}
 
 .less {
 	float: left;
@@ -43,7 +33,6 @@
 	float: right;
 }
 .add_member{
-	float: left;
 	font-weight: bold;
 	width: 88px;
 	top: 10px;

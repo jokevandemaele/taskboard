@@ -33,7 +33,7 @@
 
 			<% if !edit %>
 			<% if @organization %>
-			  <%= hidden_field_tag "organization", @organization -%>
+			  <%= hidden_field_tag "organization", @organization.id -%>
 			<% else %>
 		          <div class="admin-div-section" style="margin-bottom: 10px;">
 		          <%= image_tag 'admin/admin-div-actions-organizations.png', :alt => 'Organization', :style => 'position: relative; top: 10px; margin-left: 10px;' -%>
@@ -89,11 +89,12 @@
 		<% end %>
 	</div>
 	<%= admin_close_div 765 -%>
-	
+
+<% if !@members_not_in_organization.nil? && !@members_not_in_organization.empty? -%>
         <% if @organization %>
           <%= admin_open_div 765 -%>
             <% form_remote_tag :url => { :controller => 'admin/organizations', :action => 'add_member', :id => @organization.id }, :method => :put, :update => 'dummy-for-actions' do |f| %>
-              <span class="form-name" style="font-size: 16px;">Or choose an existing one: <%= select_tag 'member', options_from_collection_for_select(@members_not_in_organization, 'id', 'name'), :style => "width: 250px;" -%></span>
+				<span class="form-name" style="font-size: 16px;">Or choose an existing one: <%= select_tag 'member', options_from_collection_for_select(@members_not_in_organization, 'id', 'name'), :style => "width: 250px;" -%></span>
               <%= image_submit_tag "admin/admin-form-submit.png", :alt => "Submit", :style => "position:absolute; top: 250px; right: 119px;"-%>
               <%= image_tag "admin/admin-form-cancel.png", 
                   :alt => "Cancel", 
@@ -102,7 +103,7 @@
             <% end %>
           <%= admin_close_div 765 -%>
         <% end %>
-
+<% end -%>
 	<div id="admin-div-color-picker" style="display: none; position: absolute; top: 119px; right: 3px;">
 	<%= admin_open_div 208 -%>
   <div id="admin-div-color-picker-content"></div>
