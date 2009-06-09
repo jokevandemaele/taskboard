@@ -29,17 +29,17 @@ function rgb2hex(rgb) {
   return '' + dec2hex(colors[0]) + dec2hex(colors[1]) + dec2hex(colors[2]);
 }
 
-function set_member_color(html_object) {
+function set_color(html_object, target_object) {
   var color = html_object.style.backgroundColor;
   if(color.charAt(0) == '#')
     color = color.substr(1);
   else
     color = rgb2hex(color);
-  $('member_color').style.backgroundColor = $('member_color').style.color = '#' + color;
-  $('member_color').value = color;
+  $(target_object).style.backgroundColor = $(target_object).style.color = '#' + color;
+  $(target_object).value = color;
 }
 
-function generate_color_table() {
+function generate_color_table(target_object) {
   var content = '<table><tbody>';
   var color;
   var i, j, k, colors_index = 0;
@@ -55,7 +55,7 @@ function generate_color_table() {
   for(i = 0; i < 6; i++) {
     content += '<tr>';
     for(j = 0; j < 6; j++) {
-          content += '<td onclick="set_member_color(this); toggle_color_picker();" style="background: #' + colors[colors_index++] + '">&nbsp;</td>';
+          content += '<td onclick="set_color(this, \'' + target_object + '\'); toggle_color_picker();" style="background: #' + colors[colors_index++] + '">&nbsp;</td>';
     }
     content += '</tr>';
   }
