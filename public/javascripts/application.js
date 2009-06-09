@@ -32,8 +32,10 @@ function adminToggleImage(id){
 	member = $(id);
 	if(member.src.search('/images/admin/admin-div-element-make-admin.png') != -1){
 		member.src = '/images/admin/admin-div-element-remove-admin.png';
+    member.title = 'remove admin';
 	}else{
 		member.src = '/images/admin/admin-div-element-make-admin.png';
+    member.title = 'make admin';
 	}
 }
 // End Admin Section

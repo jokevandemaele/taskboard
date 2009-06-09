@@ -108,7 +108,7 @@
 		<% if member.admin? %>
 			<%= image_tag("admin/admin-div-element-sysadmin.png", :alt => "sysadmin", :id => "organization-#{organization.id}-member-#{member.id}-admin", :style =>"float: right; position:relative; top: 5px; left: -25px;") -%>
 		<% else %>
-			<%= link_to_remote image_tag("admin/admin-div-element-#{action}-admin.png", :alt => "#{action} admin", :id => "organization-#{organization.id}-member-#{member.id}-admin", :style =>"float: right; position:relative; top: 5px; left: -25px;"), 
+			<%= link_to_remote image_tag("admin/admin-div-element-#{action}-admin.png", :alt => "#{action} admin", :title => "#{action} admin", :id => "organization-#{organization.id}-member-#{member.id}-admin", :style =>"float: right; position:relative; top: 5px; left: -25px;"), 
 			:url => { :controller => 'admin/organizations', :action => 'toggle_admin', :id => organization, :member => member },
 			:success => "adminToggleImage('organization-#{organization.id}-member-#{member.id}-admin')"
 		-%>
