@@ -48,7 +48,7 @@
 				<h2 style="position: relative; top: 0px; margin-left: 20px;"><%= f.label :color %></h2>
 				<p style="color: #04a; font-size: 10px; margin: 0; position:relative; top: -18px; left: 70px;">(This color will be used to identify the user in the taskboard)</p>
 				<%= f.text_field :color, :style => "float: right; position: relative; top: -55px; border: none; right: 10px; width: 150px; height: 20px;" %>
-				<p style="color: #04a; font-size: 12px; float:right; margin: 0; position:relative; left: 140px; top: -35px; cursor: pointer;" onclick="toggle_color_picker();">choose</p>
+				<p id="admin-member-color-choose" style="color: #04a; font-size: 12px; float:right; margin: 0; position:relative; left: 140px; top: -35px; cursor: pointer;" onclick="toggle_color_picker();">choose</p>
 			</div>
 			
 			<div class="admin-div-section" style="margin-bottom: 10px; height: 80px;">
@@ -71,7 +71,12 @@
 				<%= image_tag "admin/admin-div-actions-security.png", :alt => "Security", :style => "position: relative; left: 0px; top: 3px;" -%>
 				<h2 style="position: relative; top: 0px; margin-left: -5px; top: 5px;">Security</h2>
 				<div style="float: right; position: relative; top: -30px; right: 10px;">
-					<%= check_box_tag "member[admin]", true -%><span style="position: relative; top: -2px; font-size: 16px; ">User is a System Administrator</span>
+          <% if @member.admin? %>
+					<%= check_box_tag "member[admin]", true, :checked => 'checked' -%>
+          <% else %>
+					<%= check_box_tag "member[admin]", true -%>
+          <% end %>
+          <span style="position: relative; top: -2px; font-size: 16px; ">User is a System Administrator</span>
 				</div>
 			</div>
 			

@@ -69,43 +69,37 @@ class Admin::MembersController < ApplicationController
   # PUT /members/1
   def update
     @member = Member.find(params[:id])
-    if(params[:dynamic])
-      @member.update_attributes(params[:member])
-      @roles = Role.all
+    if !params[:member][:admin]
+      params[:member][:admin] = false
+    end
+    @member.update_attributes(params[:member])
+    @roles = Role.all
 
-      if params[:roles].nil?
-        @member.roles.each {|role| @member.roles.delete(role)}
-      else
-        @roles.each do |role|
-          if params[:roles].include?("#{role.id}")
-            @member.roles << role if !@member.roles.include?(role)
-          else
-            @member.roles.delete(role)
-          end
-        end
-      end
-
-      if @member.save
-        if(params[:picture_file])
-          added = @member.add_picture(params[:picture_file])
-          if( added == "ok")
-            render :inline => "<script>window.parent.location.reload(true);</script>"
-          else
-            # Add error handling and report
-            render :inline => "<script>window.parent.location.reload(true);</script>"
-          end
-        end
-        #redirect_to(:controller => :teams, :project => params[:project])
-      else
-        render :inline => "username already taken"
-      end
+    if params[:roles].nil?
+      @member.roles.each {|role| @member.roles.delete(role)}
     else
-      if @member.update_attributes(params[:member])
-        #redirect_to(@member)
-	redirect_to request.referer
-      else
-        render :action => "edit"
+      @roles.each do |role|
+        if params[:roles].include?("#{role.id}")
+          @member.roles << role if !@member.roles.include?(role)
+        else
+          @member.roles.delete(role)
+        end
       end
+    end
+
+    if @member.save
+      if(params[:picture_file])
+        added = @member.add_picture(params[:picture_file])
+        if( added == "ok")
+          render :inline => "<script>window.parent.location.reload(true);</script>"
+        else
+          # Add error handling and report
+          render :inline => "<script>window.parent.location.reload(true);</script>"
+        end
+      end
+      redirect_to(request.referer)
+    else
+      render :inline => "username already taken"
     end
   end
 

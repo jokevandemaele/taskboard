@@ -1,5 +1,13 @@
 function toggle_color_picker() {
-  $('admin-div-color-picker').style.display = ($('admin-div-color-picker').style.display == 'none') ? '' : 'none';
+  //$('admin-div-color-picker').style.display = ($('admin-div-color-picker').style.display == 'none') ? '' : 'none';
+  if($('admin-div-color-picker').style.display == 'none') {
+    $('admin-div-color-picker').style.display = '';
+    $('admin-member-color-choose').innerHTML = 'close';
+  }
+  else {
+    $('admin-div-color-picker').style.display = 'none';
+    $('admin-member-color-choose').innerHTML = 'choose';
+  }
 }
 
 function dec2hex(dec) {
@@ -32,7 +40,7 @@ function set_member_color(html_object) {
 }
 
 function generate_color_table() {
-  var content = '<table onclick="toggle_color_picker();"><tbody>';
+  var content = '<table><tbody>';
   var color;
   var i, j, k, colors_index = 0;
   var colors = new Array('ff0000', 'd70000', 'af0000', '870000', '5f0000', '370000',
@@ -47,7 +55,7 @@ function generate_color_table() {
   for(i = 0; i < 6; i++) {
     content += '<tr>';
     for(j = 0; j < 6; j++) {
-          content += '<td onmouseover="set_member_color(this);" style="background: #' + colors[colors_index++] + '">&nbsp;</td>';
+          content += '<td onclick="set_member_color(this); toggle_color_picker();" style="background: #' + colors[colors_index++] + '">&nbsp;</td>';
     }
     content += '</tr>';
   }
