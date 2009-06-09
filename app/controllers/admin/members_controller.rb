@@ -72,7 +72,13 @@ class Admin::MembersController < ApplicationController
     if !params[:member][:admin]
       params[:member][:admin] = false
     end
+    if params[:member][:password].empty?
+      old_password = @member.hashed_password
+    end
     @member.update_attributes(params[:member])
+    if params[:member][:password].empty?
+      @member.hashed_password = old_password
+    end
     @roles = Role.all
 
     if params[:roles].nil?

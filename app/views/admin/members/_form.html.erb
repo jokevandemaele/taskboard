@@ -47,7 +47,7 @@
 				<%= image_tag "admin/admin-div-actions-color.png", :alt => "Color", :style => "position: relative; left: 10px; top: 2px;" -%>
 				<h2 style="position: relative; top: 0px; margin-left: 20px;"><%= f.label :color %></h2>
 				<p style="color: #04a; font-size: 10px; margin: 0; position:relative; top: -18px; left: 70px;">(This color will be used to identify the user in the taskboard)</p>
-				<%= f.text_field :color, :style => "float: right; position: relative; top: -55px; border: none; right: 10px; width: 150px; height: 20px;" %>
+				<%= f.text_field :color, :style => "float: right; position: relative; top: -55px; border: none; right: 10px; width: 150px; height: 20px;", :readonly => 'readonly', :onclick => "toggle_color_picker();" %>
 				<p id="admin-member-color-choose" style="color: #04a; font-size: 12px; float:right; margin: 0; position:relative; left: 140px; top: -35px; cursor: pointer;" onclick="toggle_color_picker();">choose</p>
 			</div>
 			
