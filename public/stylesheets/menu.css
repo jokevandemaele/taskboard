@@ -25,13 +25,6 @@
 
 /* Team's Menu Specific Style */
 /* Members List Style*/
-
-.less {
-	float: left;
-}
-.more {
-	float: right;
-}
 .add_member{
 	font-weight: bold;
 	width: 88px;

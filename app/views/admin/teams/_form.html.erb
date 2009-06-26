@@ -14,7 +14,7 @@
       action = :create
     end
     -%>
-    <% remote_form_for @team, :url => { :controller => 'admin/teams', :action => action, :id => project.id }, :update => "dummy-for-actions" do |f| %>
+    <% remote_form_for @team, :url => { :controller => 'admin/teams', :action => action, :id => @team.id }, :update => "dummy-for-actions" do |f| %>
 	  <%= f.error_messages %>
 		<%= unless @project.nil?
 	 		project.name
@@ -45,7 +45,6 @@
 	    <script>
 		setColor('team_color', $('team_color').value);
 	    </script>
-    	<%= hidden_field_tag(:dynamic, "true") %>
 		<%= image_submit_tag "admin/admin-form-submit.png", :alt => "Submit", :style => "position:absolute; top: -30px; right: 119px;"-%>
 		<%= image_tag "admin/admin-form-cancel.png", 
 			:alt => "Cancel", 

@@ -21,16 +21,6 @@
 			:action => 'show_form', 
 			:project => project.id } 
 	-%>
-
-	<%= link_to image_tag('menu_manage_teams.png', 
-			:border => 0, 
-			:id => "menu_manage_teams_image"), 
-		:controller => "teams",
-		:project => project.id
-	-%>	
-	
-	<%= render :partial => "admin/members/member_info", :locals => { :member => current_member } -%>
-	
 </div>
 
 <div id="menu_expand" style="position:absolute; top: 0px; left: 0px; z-index: 9; background: url('/images/menu_collapsed_background.png') left no-repeat transparent; height: 61px;width: 69px;">

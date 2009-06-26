@@ -60,26 +60,22 @@ class Admin::TeamsController < ApplicationController
   # PUT /teams/1
   def update
     @team = Team.find(params[:id])
-
-    if(params[:dynamic])
-      @team.update_attributes(params[:team])
+    if @team.update_attributes(params[:team])
       render :inline => "<script>location.reload(true);</script>"
     else
-      if @team.update_attributes(params[:team])
-        flash[:notice] = 'Team was successfully updated.'
-        redirect_to(@team)
-      else
-        render :action => "edit"
-      end
+      render :action => "edit"
     end
   end
 
   # DELETE /teams/1
   def destroy
     @team = Team.find(params[:id])
-    @team.destroy
+    if @team.destroy
+      render :inline => "", :status => :ok
+    else
+      render :inline => "", :status => :internal_server_error
+    end
 
-    redirect_to(teams_url)
   end
 
   def add_member
@@ -91,8 +87,8 @@ class Admin::TeamsController < ApplicationController
       @team.save
     end
     render :update do |page|
-      page.replace_html "team-members-list-#{@team.id}", :partial => 'team_members_list', :locals => { :team => @team }
-      page.replace_html "members-list", :partial => "teams/members_list", :locals => { :members => @team.projects.first.organization.members, :project => params[:project] }
+      page.replace_html "team_members_list-#{@team.id}", :partial => 'team_members_list', :locals => { :team => @team }
+      page.replace_html "members-list", :partial => "members_list", :locals => { :members => @team.projects.first.organization.members, :project => params[:project] }
     end
   end
 
@@ -104,7 +100,7 @@ class Admin::TeamsController < ApplicationController
       @team.save
     end
     render :update do |page|
-      page.replace_html "team-members-list-#{@team.id}", :partial => 'team_members_list', :locals => { :team => @team }
+      page.replace_html "team_members_list-#{@team.id}", :partial => 'team_members_list', :locals => { :team => @team }
     end
   end
   

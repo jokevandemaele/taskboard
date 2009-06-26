@@ -4,7 +4,7 @@ class Member < ActiveRecord::Base
   # Relations
   has_and_belongs_to_many :teams
   has_and_belongs_to_many :roles
-  has_many :organization_memberships
+  has_many :organization_memberships, :dependent => :destroy 
   has_many :organizations, :through => :organization_memberships
   has_many :nametags, :dependent => :destroy
 

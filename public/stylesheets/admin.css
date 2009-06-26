@@ -75,12 +75,24 @@ a { text-decoration: none;}
 /* End Admin User Info */
 
 /* Admin Teams */
-.organization_member, .team_member{
+.organization_member{
+	text-align: center;
 	position: relative;
 	top: 0px;
 	left: 0px;
 }
+.team_member {
+	text-align: center;
+	position: relative;
+	top: 10px;
+	left: 5px;
+}
 .organization-member, .team-member{
+	position:absolute;
+	top: 86px;
+	width: 88px;
+	max-width: 88px;
+	max-height: 22px;
 	color: #00112b;
 	font-weight: bold;
 }

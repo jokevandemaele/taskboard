@@ -2,7 +2,7 @@ class Admin::OrganizationsController < ApplicationController
   before_filter :login_required
   before_filter :check_permissions, :except => [:index]
   #layout proc{ |controller| controller.request.path_parameters[:action] == 'show' ? nil : "admin/organizations" }
-  
+
   def index
     @member = Member.find session[:member]
     

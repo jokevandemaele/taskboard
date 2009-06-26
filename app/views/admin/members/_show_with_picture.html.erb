@@ -1,7 +1,7 @@
 <div id="<%= id_text -%>-<%= member.id -%>" class="<%= class_text %>" style="float: left; <%= if( defined?(highlight_loged_member) && highlight_loged_member  && session[:member] == member) 
 																								"border: 4px solid red; top: -3px;" 
 																							end -%> ">
-	<% member.roles.each do |role| %>
+	<% member.roles.each do |role| %>	
 		<%= image_tag('role_product_owner.png', :alt => "Product Owner", :style => "float:right; position: relative; top: 3px; left:-3px; z-index: 10;") if role.id == 2 %>
 		<%= image_tag('role_scrum_master.png', :alt => "Scrum Master", :style => "float:right; position: relative; top: 3px; left:-3px; z-index: 10;") if role.id == 3 %>
 	<% end %>
@@ -11,6 +11,6 @@
 			:url => {:controller => 'members', :action => 'show_form', :member => member, :project => project },
 			:hover => 'member_edit_hover.png', :class => 'member-edit' -%>
 	<% end -%><br />
-	<div class="<%= member_name_class -%> .slide_item" style = "position:absolute; top: 88px;"><%= member.formatted_nametag %></div>
+	<div class="<%= member_name_class -%> .slide_item" ><%= member.formatted_nametag %></div>
 	</div>
 

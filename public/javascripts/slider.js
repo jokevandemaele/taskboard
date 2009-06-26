@@ -26,10 +26,19 @@ function Slider(list, show, name){
 	$(name + "_prev").hide();
 	
 	this.next = function(){		
-		if( (this.current + (show)) < (list.length)){ 
-			$(list[this.current]).hide();
-			$(list[(this.current + this.show)]).show();
-			this.current++;
+		if( (this.current + (show)) < (list.length)){
+			for(var i = this.current; i < this.current + show; i++)
+				$(list[i]).hide();
+
+			if((this.current + 2*show) < list.length)
+				upto = this.current + 2*show
+			else
+				upto = list.length
+
+			this.current = this.current + show;
+			for(var i = this.current; i < upto; i++)
+				$(list[i]).show();
+
 			if((this.current + (show)) >= (list.length)){
 				$(name + "_next").hide();
 			}
@@ -42,9 +51,19 @@ function Slider(list, show, name){
 
 	this.prev = function(){
 		if(this.current > 0){
-			$(list[(this.current + (this.show - 1))]).hide();
-			$(list[(this.current -1)]).show();
-			this.current--;
+			for(var i = this.current; i < list.length; i++){
+				$(list[i]).hide();
+			}
+
+			from = this.current - 1
+			if((this.current - show) > 0)
+				this.current = this.current - show
+			else
+				this.current = 0
+			
+			for(var i = from; i >= this.current; i--){
+				$(list[i]).show();
+			}
 			if(this.current <= 0 ){
 				$(name + "_prev").hide();
 			}
