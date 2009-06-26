@@ -1,0 +1,29 @@
+<div id="team-<%= team.id %>" class="team" style="margin-right: 10px; float: left;">
+	<%= admin_open_div(380) -%>
+	<div id="admin-div-team-top-name" style="float:left;">
+		<script>
+			ids<%= team.id %> = new Array('admin-div-team-members-<%= team.id %>');
+		</script>
+		<%= image_tag "admin/admin-div-expand.png", 
+			:alt => "Expand", 
+			:style => "cursor: pointer",
+			:onClick => "expandCollapseDivs(ids#{team.id})" -%>
+			
+		<h1 id="team-<%= team.id -%>-team" onClick="expandCollapseDivs(ids<%= team.id -%>)"><%=h truncate(team.name) -%></h1>
+	</div>
+	
+	<div class="team_paginate">
+		<a href="javascript:team_<%= team.id -%>_members_slider.prev();"><%= image_tag "less.png", :id => "team_#{team.id}_members_slider_prev", :alt => "more", :class => "less", :style => "border: none;" -%></a>
+		<a href="javascript:team_<%= team.id -%>_members_slider.next();"><%= image_tag "more.png", :id => "team_#{team.id}_members_slider_next", :alt => "more", :class => "more", :style => "border: none;" -%></a>
+	</div>
+	<div id="team-members-list-<%= team.id %>">
+		<% #render :partial => 'team_members_list', :locals => {:team => team } -%>
+	</div>
+	<%= admin_close_div(380) -%>
+
+</div>
+<%= drop_receiving_element("team-#{team.id}", 
+	:accept => "member", 
+	:with   => "'member=' + (element.id.split('-').last())+ '&team=#{team.id}&project=#{project.id}'", 
+	:url => { :controller => 'teams', :action=>:add_member }) 
+%>
