@@ -75,14 +75,13 @@ a { text-decoration: none;}
 /* End Admin User Info */
 
 /* Admin Teams */
-.organization_member{
+.organization_member, .team_member{
 	position: relative;
 	top: 0px;
 	left: 0px;
 }
-.organization-member{
+.organization-member, .team-member{
 	color: #00112b;
-	text-align: center;
 	font-weight: bold;
 }
 /* End Teams */

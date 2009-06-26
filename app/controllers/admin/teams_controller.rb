@@ -118,7 +118,6 @@ class Admin::TeamsController < ApplicationController
     end
     
     @project = Project.find(params[:project]) if (params[:project])
-
     render :update do |page|
 	    if @project       
     		page.replace_html "dummy-for-actions", 

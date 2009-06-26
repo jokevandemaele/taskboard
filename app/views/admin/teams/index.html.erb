@@ -6,8 +6,9 @@
 	<div id="members-list">
 		<%= render :partial => "members_list", :locals => { :members => @members, :project => @project.id }%>
 	</div>
+	<div style="clear:both;"></div>
+	<%= render :partial => "team", :collection => @teams, :locals => {:project => @project} %>
 	
-	<%= render :partial => "teams_list", :locals => { :teams => @teams, :project => @project }%>
 <% else %>
 	<div id="chose-project">
 	<h1>Choose a Project:</h1>

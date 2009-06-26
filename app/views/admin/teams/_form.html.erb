@@ -14,7 +14,7 @@
       action = :create
     end
     -%>
-    <% remote_form_for @team, :url => { :controller => 'admin/projects', :action => action, :id => @project.id }, :update => "dummy-for-actions" do |f| %>
+    <% remote_form_for @team, :url => { :controller => 'admin/teams', :action => action, :id => project.id }, :update => "dummy-for-actions" do |f| %>
 	  <%= f.error_messages %>
 		<%= unless @project.nil?
 	 		project.name
@@ -23,20 +23,48 @@
 			    select_tag(:project_id, options_for_select(@projects))
 			end
 		%> 
-	    <%= f.label :name %> <%= f.text_field :name %><br />
-	    <%= f.label :color %> <%= f.text_field :color, :size => 5, :style => "border: 1px solid black;" %><br />
+		<% 
+		if (edit || defined? no_refresh) 
+			name = @team.name
+		else
+			name =  "Click To Edit Team Name" 
+		end 
+		%>
+
+		<%= f.text_field :name, 
+			:value => name, 
+			:class => "form-name", 
+			:onClick => "if(this.value == 'Click To Edit Team Name' ) this.clear();" -%>
+			<div class="admin-div-section" style="margin-bottom: 10px;">
+				<%= image_tag "admin/admin-div-actions-color.png", :alt => "Color", :style => "position: relative; left: 10px; top: 2px;" -%>
+				<h2 style="position: relative; top: 0px; margin-left: 20px;"><%= f.label :color %></h2>
+				<p style="color: #04a; font-size: 10px; margin: 0; position:relative; top: -18px; left: 70px;">(This color will be used to identify the team in the taskboard)</p>
+				<%= f.text_field :color, :style => "float: right; position: relative; top: -55px; border: none; right: 10px; width: 150px; height: 20px;", :readonly => 'readonly', :onclick => "toggle_color_picker();" %>
+				<p id="admin-member-color-choose" style="color: #04a; font-size: 12px; float:right; margin: 0; position:relative; left: 140px; top: -35px; cursor: pointer;" onclick="toggle_color_picker();">choose</p>
+			</div>
 	    <script>
 		setColor('team_color', $('team_color').value);
 	    </script>
-	    <%= render :partial => 'color_picker', :locals => {:picker => "team_color" } -%>
-
-	    <%= button_to_function "Cancel", "cancel($('form-add-team'));", :id => "form-add-team-cancel"-%>
-
-	    <%= hidden_field_tag(:dynamic, "true") %>
-
-	    <%= f.submit "Save", :id => "form-add-team-submit" -%>
+    	<%= hidden_field_tag(:dynamic, "true") %>
+		<%= image_submit_tag "admin/admin-form-submit.png", :alt => "Submit", :style => "position:absolute; top: -30px; right: 119px;"-%>
+		<%= image_tag "admin/admin-form-cancel.png", 
+			:alt => "Cancel", 
+			:style => "position:absolute; top: -30px; right: 30px; cursor: pointer;", 
+			:onClick => "cancelForm('form-add-team');" -%>
 	<% end %>
+	<div style="clear: both;"></div>
+	<%= admin_close_div 765 -%>
+	<div id="admin-div-color-picker" style="display: none; position: absolute; top: 119px; right: 3px;">
+	<%= admin_open_div 208 -%>
+  <div id="admin-div-color-picker-content"></div>
+	<%= admin_close_div 208 -%>
+	</div>
+	
 <script>
+	$('admin-div-color-picker-content').innerHTML = generate_color_table('team_color');
+  if($('team_color').value != '')
+    $('team_color').style.backgroundColor = $('team_color').style.color = '#' + $('team_color').value;
+  
 	centerTo($('form-add-team'),$('dialog-background-fade'));
 	Effect.Appear($('form-add-team'));
 </script>

@@ -1,13 +1,16 @@
 		<% team_members_list = Array.new %>
 		<% for member in team.members %>
-				<%= render :partial => "admin/members/show_with_picture", 
-					:locals => { :id_text => "team-#{team.id}-member", 
+		<div id="div-team-<%= team.id -%>-member-<%= member.id -%>" class="member-container" style="background: url('/images/admin/admin-teams-member-background.png') no-repeat; width: 109px; height: 125px; padding: 5px; float: left;" title="<%= member.name -%>">
+			<%= render :partial => "admin/members/show_with_picture", 
+				:locals => { 
+					:id_text => "team-#{team.id}-member", 
 					:class_text => "team_member", 
-					:member_name_class => "team_member",
+					:member_name_class => "team-member",
 					:member => member,
 					:edit => false } -%>
-			<% team_members_list << "team-#{team.id}-member-#{member.id}" -%>
-			<%= draggable_element "team-#{team.id}-member-#{member.id}", :revert => "'failure'" -%>
+		</div>	
+			<% team_members_list << "div-team-#{team.id}-member-#{member.id}" -%>
+			<%= draggable_element "div-team-#{team.id}-member-#{member.id}", :revert => "'failure'" -%>
 		<% end %>
 		<script>
 			team_<%= team.id -%>_members_slider = new Slider(<%= team_members_list.to_json %>,6,"team_<%= team.id -%>_members_slider");
