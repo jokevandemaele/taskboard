@@ -97,10 +97,10 @@ class Admin::MembersController < ApplicationController
       if(params[:picture_file])
         added = @member.add_picture(params[:picture_file])
         if( added == "ok")
-          render :inline => "<script>window.parent.location.reload(true);</script>"
+          # render :inline => "<script>window.parent.location.reload(true);</script>"
         else
           # Add error handling and report
-          render :inline => "<script>window.parent.location.reload(true);</script>"
+          #render :inline => "<script>window.parent.location.reload(true);</script>"
         end
       end
       redirect_to(request.referer)
