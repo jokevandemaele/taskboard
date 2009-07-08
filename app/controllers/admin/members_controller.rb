@@ -70,15 +70,19 @@ class Admin::MembersController < ApplicationController
   def update
     @member = Member.find(params[:id])
     if !params[:member][:admin]
-      params[:member][:admin] = false
+      params[:member][:admin] = nil
     end
+
     if params[:member][:password].empty?
       old_password = @member.hashed_password
     end
+    
     @member.update_attributes(params[:member])
+    
     if params[:member][:password].empty?
       @member.hashed_password = old_password
     end
+    
     @roles = Role.all
 
     if params[:roles].nil?
