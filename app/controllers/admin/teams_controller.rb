@@ -62,7 +62,11 @@ class Admin::TeamsController < ApplicationController
     if @team.update_attributes(params[:team])
       render :inline => "<script>location.reload(true);</script>"
     else
-      render :action => "edit"
+      @project = Project.find(params[:project_id])
+      render :partial => 'form',
+      		:object => @team,
+      		:locals => { :no_refresh => true, :edit => true, :project => @project },
+ 		:status => :internal_server_error
     end
   end
 

@@ -15,11 +15,12 @@
     end
     -%>
     <% remote_form_for @team, :url => { :controller => 'admin/teams', :action => action, :id => @team.id }, :update => "dummy-for-actions" do |f| %>
-		<%= unless @project.nil?
-	 		project.name
-			hidden_field_tag(:project_id, "#{@project.id}")
+		<%= 
+      unless @project.nil?
+	 		  project.name
+    		hidden_field_tag(:project_id, "#{@project.id}")
 			else 
-			    select_tag(:project_id, options_for_select(@projects))
+			  select_tag(:project_id, options_for_select(@projects))
 			end
 		%> 
 		<% 
