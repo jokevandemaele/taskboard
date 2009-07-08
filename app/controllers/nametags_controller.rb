@@ -17,7 +17,14 @@ class NametagsController < ApplicationController
       render :update do |page|
         @tasks = Task.tasks_by_status(@task.story,@task.status)
         page.replace_html "#{@task.status}-#{@task.story_id}", :partial => "tasks/tasks_by_status", :locals => { :tasks => @tasks  } 
-        page.replace_html "menu_nametags", :partial => "taskboard/menu_nametags", :locals => { :members => @task.story.project.members }
+        
+        @task.story.project.teams.each do |team|
+          if(team.members.include?(@member))
+            @member_team = team
+          end
+        end
+        
+        page.replace_html "menu_nametags", :partial => "taskboard/menu_nametags", :locals => { :team => @member_team }
       end
     end
   end

@@ -1,6 +1,4 @@
-<div id="<%= id_text -%>-<%= member.id -%>" class="<%= class_text %>" style="float: left; <%= if( defined?(highlight_loged_member) && highlight_loged_member  && session[:member] == member) 
-																								"border: 4px solid red; top: -3px;" 
-																							end -%> ">
+<div id="<%= id_text -%>-<%= member.id -%>" class="<%= class_text %>" style="float: left; <%= "border: 4px solid red;" if( defined?(highlight_loged_member) && highlight_loged_member  && session[:member] == member) -%> ">
 	<% member.roles.each do |role| %>	
 		<%= image_tag('role_product_owner.png', :alt => "Product Owner", :style => "float:right; position: relative; top: 3px; left:-3px; z-index: 10;") if role.id == 2 %>
 		<%= image_tag('role_scrum_master.png', :alt => "Scrum Master", :style => "float:right; position: relative; top: 3px; left:-3px; z-index: 10;") if role.id == 3 %>
@@ -11,6 +9,13 @@
 			:url => {:controller => 'members', :action => 'show_form', :member => member, :project => project },
 			:hover => 'member_edit_hover.png', :class => 'member-edit' -%>
 	<% end -%><br />
-	<div class="<%= member_name_class -%> .slide_item" ><%= member.formatted_nametag %></div>
+	<% 
+	if defined?(team) 
+		@team = team.id
+	else
+		@team = nil
+	end 
+	-%>
+	<div class="<%= member_name_class -%> .slide_item" style="<%= style if(defined?(style)) -%>"><%= member.formatted_nametag(@team) %></div>
 	</div>
 

@@ -76,8 +76,14 @@ class Member < ActiveRecord::Base
   end
 
   # formated_nametags: this method is used to return the correct name of a member to display in it's nametag
-  def formatted_nametag
-    members = Member.all()
+  def formatted_nametag(team = nil)
+    if(team)
+      @team = Team.find(team)
+      members = @team.members
+    else
+      members = Member.all()
+    end
+    
     names = name.split()
     name = names[0]
     members = members - [self]

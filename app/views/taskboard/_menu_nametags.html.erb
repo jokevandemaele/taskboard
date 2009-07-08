@@ -1,10 +1,12 @@
-<% for member in members -%>
+<% for member in team.members -%>
 		<%= render :partial => "admin/members/show_with_picture", 
 			:locals => { :id_text => "add-nametag", 
 				:class_text => "add_nametag",
-				:member_name_class => "menu_nametag nametag nametag_#{ member.color }",
+				:member_name_class => "nametag nametag_menu",
 				:member => member,
+				:style => "background: ##{ member.color };",
 				:edit => false,
+				:team => team,
 				:highlight_loged_member => true} -%>
 <%= draggable_element "add-nametag-#{member.id}", :revert => '"failure"' -%>
 <% end %>

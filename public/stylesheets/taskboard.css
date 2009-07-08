@@ -228,53 +228,18 @@ table td{
 }
 .nametag {
 	width: 88px;
-	height: 24px;
 	font-size: 10px;
 	text-align: center;
 	font-weight: bold;
 	z-index: 2;
 }
-.nametag_1 {background: url('/images/tags/1.png') left no-repeat transparent;}
-.nametag_2 {background: url('/images/tags/2.png') left no-repeat transparent;}
-.nametag_3 {background: url('/images/tags/3.png') left no-repeat transparent;}
-.nametag_4 {background: url('/images/tags/4.png') left no-repeat transparent;}
-.nametag_5 {background: url('/images/tags/5.png') left no-repeat transparent;}
-.nametag_6 {background: url('/images/tags/6.png') left no-repeat transparent;}
-.nametag_7 {background: url('/images/tags/7.png') left no-repeat transparent;}
-.nametag_8 {background: url('/images/tags/8.png') left no-repeat transparent;}
-.nametag_9 {background: url('/images/tags/9.png') left no-repeat transparent;}
-.nametag_10 {background: url('/images/tags/10.png') left no-repeat transparent;}
-.nametag_11 {background: url('/images/tags/11.png') left no-repeat transparent;}
-.nametag_12 {background: url('/images/tags/12.png') left no-repeat transparent;}
-.nametag_13 {background: url('/images/tags/13.png') left no-repeat transparent;}
-.nametag_14 {background: url('/images/tags/14.png') left no-repeat transparent;}
-.nametag_15 {background: url('/images/tags/15.png') left no-repeat transparent;}
-.nametag_16 {background: url('/images/tags/16.png') left no-repeat transparent;}
-.nametag_17 {background: url('/images/tags/17.png') left no-repeat transparent;}
-.nametag_18 {background: url('/images/tags/18.png') left no-repeat transparent;}
-.nametag_19 {background: url('/images/tags/19.png') left no-repeat transparent;}
-.nametag_20 {background: url('/images/tags/20.png') left no-repeat transparent;}
-.nametag_21 {background: url('/images/tags/21.png') left no-repeat transparent;}
-.nametag_22 {background: url('/images/tags/22.png') left no-repeat transparent;}
-.nametag_23 {background: url('/images/tags/23.png') left no-repeat transparent;}
-.nametag_24 {background: url('/images/tags/24.png') left no-repeat transparent;}
-.nametag_25 {background: url('/images/tags/25.png') left no-repeat transparent;}
-.nametag_26 {background: url('/images/tags/26.png') left no-repeat transparent;}
-.nametag_27 {background: url('/images/tags/27.png') left no-repeat transparent;}
-.nametag_28 {background: url('/images/tags/28.png') left no-repeat transparent;}
-.nametag_29 {background: url('/images/tags/29.png') left no-repeat transparent;}
-.nametag_30 {background: url('/images/tags/30.png') left no-repeat transparent;}
-.nametag_31 {background: url('/images/tags/31.png') left no-repeat transparent;}
-.nametag_32 {background: url('/images/tags/32.png') left no-repeat transparent;}
-.nametag_33 {background: url('/images/tags/33.png') left no-repeat transparent;}
-.nametag_34 {background: url('/images/tags/34.png') left no-repeat transparent;}
-.nametag_35 {background: url('/images/tags/35.png') left no-repeat transparent;}
-.nametag_36 {background: url('/images/tags/36.png') left no-repeat transparent;}
-.nametag_37 {background: url('/images/tags/37.png') left no-repeat transparent;}
-.nametag_38 {background: url('/images/tags/38.png') left no-repeat transparent;}
-.nametag_39 {background: url('/images/tags/39.png') left no-repeat transparent;}
-.nametag_40 {background: url('/images/tags/40.png') left no-repeat transparent;}
-.nametag_41 {background: url('/images/tags/41.png') left no-repeat transparent;}
+.nametag_menu {
+	position: relative;
+	top: 70px;
+	border: 1px solid black;
+	width: 86px;
+	padding: 0;
+}
 
 .statustag {
 	width: 71px;
