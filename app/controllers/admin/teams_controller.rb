@@ -8,7 +8,11 @@ class Admin::TeamsController < ApplicationController
     if(params[:project])
 	    @project = Project.find(params[:project])
 	    @teams = @project.teams
-      @members = @project.organization.members
+      if(@project.organization.members)
+        @members = @project.organization.members
+      else
+        @members = []
+      end
     else
       @organizations = current_member.organizations_administered
       @projects = Array.new

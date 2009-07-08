@@ -122,8 +122,9 @@ class Admin::OrganizationsController < ApplicationController
   def remove_member
     @membership = OrganizationMembership.first(:conditions => ["member_id = ? and organization_id = ?", params[:member], params[:organization]])
     @member = @membership.member
+    @organization = @membership.organization
     # We assume that the team has only one project, that's why .first is enough and we don't have to iterate.
-    @member.teams.each { |team| team.members.delete(@member) if team.projects.first.organization.id == params[:organization] }
+    @member.teams.each { |team| team.members.delete(@member) if team.projects.each { |project| project.organization == @organization } }
     if @membership.destroy
       render :inline => "", :status => :ok
     else
