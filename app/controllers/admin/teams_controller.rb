@@ -38,22 +38,17 @@ class Admin::TeamsController < ApplicationController
   # POST /teams
   def create
     @team = Team.new(params[:team])
-    if params[:project_id]
-        @project = Project.find(params[:project_id])
-        @project.teams << @team
-        @project.save
-    end
+    @project = Project.find(params[:project_id])
 
-    if(params[:dynamic])
-      @team.save
+    if @team.save
+      @project.teams << @team
+      @project.save
       render :inline => "<script>location.reload(true);</script>"
     else
-      if @team.save
-        flash[:notice] = 'Team was successfully created.'
-        redirect_to(@team)
-      else
-        render :action => "new"
-      end
+      render :partial => 'form',
+      		:object => @team,
+      		:locals => { :no_refresh => true, :edit => false, :project => @project },
+ 		:status => :internal_server_error
     end
   end
 

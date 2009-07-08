@@ -15,7 +15,6 @@
     end
     -%>
     <% remote_form_for @team, :url => { :controller => 'admin/teams', :action => action, :id => @team.id }, :update => "dummy-for-actions" do |f| %>
-	  <%= f.error_messages %>
 		<%= unless @project.nil?
 	 		project.name
 			hidden_field_tag(:project_id, "#{@project.id}")
@@ -51,6 +50,7 @@
 			:style => "position:absolute; top: -30px; right: 30px; cursor: pointer;", 
 			:onClick => "cancelForm('form-add-team');" -%>
 	<% end %>
+	<%= error_messages_for('team', :object => @team) -%>
 	<div style="clear: both;"></div>
 	<%= admin_close_div 765 -%>
 	<div id="admin-div-color-picker" style="display: none; position: absolute; top: 119px; right: 3px;">
