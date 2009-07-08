@@ -84,13 +84,14 @@ class Admin::TeamsController < ApplicationController
   def add_member
     @team = Team.find(params[:team])
     @member = Member.find(params[:member])
-    @members = Member.all()
     if !@team.members.exists?(@member)
       @team.members << @member
       @team.save
     end
     render :update do |page|
       page.replace_html "team_members_list-#{@team.id}", :partial => 'team_members_list', :locals => { :team => @team }
+      # For some obscure reason, @team seems to be nil at this point.
+      @team = Team.find(params[:team])
       page.replace_html "members-list", :partial => "members_list", :locals => { :members => @team.projects.first.organization.members, :project => params[:project] }
     end
   end
