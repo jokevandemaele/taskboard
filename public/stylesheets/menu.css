@@ -1,6 +1,9 @@
 #menu { position:fixed; top: 0px; left: 0px; background: url('/images/menu_expanded_background.png') repeat-x white; width: 100%; height: 136px; z-index: 100;
 }
 
+div#menu_report_bug { position: fixed; bottom: 0; right: 0; z-index: 200;}
+div#menu_report_bug img { border: none; margin:0 auto;}
+
 #menu_expand { position:fixed; top: 0px; left: 0px; z-index: 9;  background: url('/images/menu_collapsed_background.png') left no-repeat transparent; height: 61px; width: 69px;}
 
 
@@ -42,3 +45,4 @@ img#trash { position: fixed; top: 14px; right: 0; z-index: 100;}
 	border: 5px solid #3771c8;
 	z-index: 100;
 }
+

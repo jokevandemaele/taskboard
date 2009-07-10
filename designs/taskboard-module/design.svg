@@ -1901,6 +1901,14 @@
        y1="1684.5"
        x2="221.5"
        y2="1569" />
+    <filter
+       inkscape:collect="always"
+       id="filter4687">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="4.4750002"
+         id="feGaussianBlur4689" />
+    </filter>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -6401,6 +6409,38 @@
            x="-669.90131"
            id="tspan4612"
            sodipodi:role="line">BETA</tspan></text>
+    </g>
+    <g
+       id="g4701"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="matrix(0.9268161,0,0,1,122.58965,0)"
+       inkscape:export-filename="/Users/nictuku/Documents/programacion/agilar/taskboard/public/images/story.png">
+      <path
+         style="opacity:0.62781953;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;filter:url(#filter4687)"
+         d="M 1690.475,323.86297 L 1859.475,323.86297 C 1862.245,323.86297 1864.475,326.09297 1864.475,328.86297 C 1864.475,328.86297 1862.1727,383.54121 1864.1339,433.97661 C 1866.1339,485.41049 1867.475,493.86299 1867.475,493.86299 C 1867.475,496.63299 1865.245,498.86299 1862.475,498.86299 L 1689.475,497.86299 C 1686.705,497.86299 1684.475,495.63299 1684.475,492.86299 C 1684.475,492.86299 1687.475,445.21291 1687.475,419.86291 C 1687.475,394.51291 1685.475,328.86297 1685.475,328.86297 C 1685.475,326.09297 1687.705,323.86297 1690.475,323.86297 z"
+         id="path4440"
+         sodipodi:nodetypes="ccczcccczcc" />
+      <path
+         sodipodi:nodetypes="ccczcccczcc"
+         id="rect3588"
+         d="M 1690.475,321.86297 L 1859.475,321.86297 C 1862.245,321.86297 1864.475,324.09297 1864.475,326.86297 C 1864.475,326.86297 1862.1727,381.54121 1864.1339,431.97661 C 1866.1339,483.41049 1867.475,491.86299 1867.475,491.86299 C 1867.475,494.63299 1865.245,496.86299 1862.475,496.86299 L 1689.475,495.86299 C 1686.705,495.86299 1684.475,493.63299 1684.475,490.86299 C 1684.475,490.86299 1687.475,443.21291 1687.475,417.86291 C 1687.475,392.51291 1685.475,326.86297 1685.475,326.86297 C 1685.475,324.09297 1687.705,321.86297 1690.475,321.86297 z"
+         style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1" />
+      <path
+         sodipodi:nodetypes="cccccccccccccccccccccc"
+         id="rect4405"
+         d="M 1765.2825,308.66864 L 1769.1917,310.18617 L 1774.2149,308.88791 L 1776.4428,310.96284 L 1778.4379,308.77741 L 1780.373,310.46605 L 1782.621,309.21059 L 1787.0725,311.30799 L 1791.0929,309.85641 L 1791.6525,337.84154 L 1788.7932,336.18056 L 1785.8641,338.51768 L 1784.3703,336.15706 L 1782.521,337.79105 L 1780.0338,335.81588 L 1777.0972,337.47745 L 1774.3102,335.60119 L 1771.8959,337.15603 L 1769.3818,335.57491 L 1767.1554,337.74654 L 1765.0462,336.32401 L 1765.2825,308.66864 z"
+         style="fill:#000000;fill-opacity:0.32222224;stroke:#000000;stroke-width:1.35035062;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.27407412" />
+      <rect
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/Users/nictuku/Documents/programacion/agilar/taskboard/public/images/story.png"
+         y="304.46991"
+         x="1675.0896"
+         height="203.84688"
+         width="198.52914"
+         id="rect4696"
+         style="opacity:0.46864666;fill:none;fill-opacity:0.32222224;stroke:none;stroke-width:1.29999995;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     </g>
   </g>
 </svg>

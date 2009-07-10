@@ -23,7 +23,7 @@
 			<li><%= link_to_remote "new team #{image}", :url => { :action => :show_form, :project => @project } -%></li>
 			<li><%= text_field_tag "admin-sidebar-search", "find team", :onClick => "if(this.value == 'find team') {this.clear();}" , :autocomplete => "off" -%> <%= image_tag 'admin/find.png', :alt => "find" -%></li>
 			<% end %>
-			<% image = image_tag 'admin/bug.png', :alt => "bug" -%>
+			<% image = image_tag('admin/bug.png', :alt => "bug") -%>
 			<li><%= link_to "report bug #{image}", "/report_bug" -%></li>
 		</ul>
 	</div>

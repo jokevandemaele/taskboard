@@ -1,5 +1,5 @@
 <%= "<script>cancelForm('#{close_dialog}');</script>" if defined? close_dialog -%>
-<div id="project-<%= project.id %>-container">
+<div id="project-container-<%= project.id %>">
 <%= admin_open_div(700) -%>
 <div id="project-<%= project.id %>" class="admin-div-project-top">
 	<div class="admin-div-project-top-actions admin-div-top-actions" style="float:right; margin: none;">
@@ -9,7 +9,7 @@
 				:url => admin_project_url(project.id), 
 				:method => :delete, 
 				:confirm => "Are you sure?",
-				:success => "Effect.Puff($('project-#{project.id}-container'));"
+				:success => "Effect.Puff($('project-container-#{project.id}'));"
 		-%>
     <% end %>
 
@@ -20,7 +20,7 @@
 		<span class="admin-div-top-actions-counts"><%=h project.members.length %></span>
 		<%= image_tag "admin/admin-div-actions-members.png", :alt => "Members" -%>
 	</div>
-	<div id="admin-div-project-top-name" style="float:left;">
+	<div id="admin-div-project-top-name-<%= project.id -%>" style="float:left; max-width: 430px; height: 30px;">
 		<script>
 			ids<%= project.id %> = new Array('admin-div-project-stories-<%= project.id %>','admin-div-project-members-<%= project.id %>','admin-div-project-taskboard-<%= project.id %>','admin-div-project-backlog-<%= project.id %>','admin-div-project-burndown-<%= project.id %>');
 		</script>
@@ -29,12 +29,16 @@
 			:style => "cursor: pointer",
 			:onClick => "expandCollapseDivs(ids#{project.id})" -%>
 			
-		<h1 onClick="expandCollapseDivs(ids<%= project.id -%>)"><%=h truncate(project.name, :length => 18) -%></h1>
+		<h1 onClick="expandCollapseDivs(ids<%= project.id -%>)" id="admin-div-project-top-name-<%= project.id -%>-name" title="<%=h project.name -%>"><%=h project.name -%></h1>
 	</div>
+	<script>
+	 resizeFontSizeToFit($('admin-div-project-top-name-<%= project.id -%>-name'), $('admin-div-project-top-name-<%= project.id -%>'));
+	</script>
+	
 	<div style="clear: both;"></div>
 </div>
 
-<div id="admin-div-project-stories-<%= project.id -%>" class="admin-div-project-section admin-div-project-stories" style="display:none; margin:0;">
+<div id="admin-div-project-stories-<%= project.id -%>" class="admin-div-project-section admin-div-project-stories" style="margin:0;">
 	<div class="admin-div-section">
 		<%= image_tag "admin/admin-div-actions-stories.png", :alt => "Stories", :class => "admin-div-section-img" -%>
 		<h2 style="position: relative; top: 5px; left: 10px;"><%= link_to "Stories", :controller => "/backlog", :action => :show, :id => project.id %></h2>
@@ -42,7 +46,7 @@
 	</div>
 	<div style="clear: both;"></div>
 </div>
-<div id="admin-div-project-members-<%= project.id -%>" class="admin-div-project-members" style="display:none; margin:0;">
+<div id="admin-div-project-members-<%= project.id -%>" class="admin-div-project-members" style="margin:0;">
 	<div class="admin-div-section">
 		<%= image_tag "admin/admin-div-actions-members.png", :alt => "Members", :class => "admin-div-section-img" -%>
 		<h2 style="position: relative; top: 5px; left: 3px;"><%= link_to "Members", :controller => :teams, :project => project.id %></h2>
@@ -51,7 +55,7 @@
 	</div>
 	<div style="clear: both;"></div>
 </div>
-<div id="admin-div-project-taskboard-<%= project.id -%>" class="admin-div-project-taskboard" style="display:none; margin:0;">
+<div id="admin-div-project-taskboard-<%= project.id -%>" class="admin-div-project-taskboard" style="margin:0;">
 	<div class="admin-div-section">
 		<%= image_tag "admin/admin-div-actions-taskboard.png", :alt => "Taskboard", :class => "admin-div-section-img" -%>
 		<h2 style="position: relative; top: 5px; left: 0px;"><%= link_to "Taskboard", :controller => "/taskboard", :action => :show, :id => project.id -%></h2>
@@ -59,7 +63,7 @@
 	</div>
 	<div style="clear: both;"></div>
 </div>
-<div id="admin-div-project-backlog-<%= project.id -%>" class="admin-div-backlog-members" style="display:none; margin:0;">
+<div id="admin-div-project-backlog-<%= project.id -%>" class="admin-div-backlog-members" style="margin:0;">
 	<div class="admin-div-section">
 		<%= image_tag "admin/admin-div-actions-backlog.png", :alt => "Product Backlog", :class => "admin-div-section-img" -%>
 		<h2 style="position: relative; top: 5px; left: 10px;"><%= link_to "Product Backlog", :controller => "/backlog", :action => :show, :id => project.id %></h2>
@@ -67,7 +71,7 @@
 	</div>
 	<div style="clear: both;"></div>
 </div>
-<div id="admin-div-project-burndown-<%= project.id -%>" class="admin-div-burndown-members" style="display:none; margin:0;">
+<div id="admin-div-project-burndown-<%= project.id -%>" class="admin-div-burndown-members" style="margin:0;">
 	<div class="admin-div-section">
 		<%= image_tag "admin/admin-div-actions-burndown-chart.png", :alt => "Burndown Chart", :class => "admin-div-section-img" -%>
 		<h2 style="position: relative; top: 5px; left: 10px;">Burndown Chart</h2>
@@ -76,5 +80,10 @@
 	</div>
 	<div style="clear: both;"></div>
 </div>
+<script>
+</script>
 <%= admin_close_div(700) -%>
 </div>
+<script>
+projects_search.addElement('<%= project.to_json %>');
+</script>

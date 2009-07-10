@@ -1,3 +1,6 @@
+<script>
+	projects_search = new Search('project-container');
+</script>
 <div id="projects-list">
 <%= render :partial => "project", :collection => @projects, :locals => { :member => @member } %>
 </div>

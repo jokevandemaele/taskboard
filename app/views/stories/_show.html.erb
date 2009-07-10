@@ -16,7 +16,8 @@
 			</div>
 		</div>
 		<script>
-		 resizeFontSizeToFit($('storycard-<%= story.id %>-name'), $('storycard-<%= story.id -%>-container'));
+		resizeFontSizeToFit($('storycard-<%= story.id %>-name'), $('storycard-<%= story.id -%>-container'));
+		$('storycard-<%= story.id %>-name').setStyle({left: '-' + $('storycard-<%= story.id %>-name').offsetWidth / 2 + 'px'});
 		</script>
 	</td>
 	<td id="not_started-<%= story.id %>" style="<%= taskboard_border_style(@color, [ "left", "bottom"]) %>">

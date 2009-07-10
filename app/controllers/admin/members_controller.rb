@@ -208,9 +208,12 @@ class Admin::MembersController < ApplicationController
   end
 
   def report_bug
+    if request.get?
+      session[:return_to] = request.request_uri
+    end
     if request.post?
       BugReporter.deliver_bug_report(params[:subject], params[:message], @member.name)
-      redirect_to(admin_organizations_path)
+      redirect_to_stored
     end
   end
 end

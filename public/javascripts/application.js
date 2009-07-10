@@ -55,8 +55,6 @@ function resizeFontSizeToFit(element,container){
 			containerW = container.offsetWidth;
 			containerH = container.offsetHeight;
 		}
-		element.setStyle({left: '-' + element.offsetWidth / 2 + 'px'});
-
 }
 
 function keepDivOnTop(div) {
