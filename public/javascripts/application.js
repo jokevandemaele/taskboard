@@ -73,6 +73,19 @@ function y(element){
 	return $(element).cumulativeOffset().top
 }
 
+function positionX(draggable, droppable){
+	return (x(draggable) - (x(droppable) - window.pageXOffset) - 9);
+}
+
+function positionY(draggable, droppable, nametag){
+	if(nametag){
+		image_offset = 88;
+	}else{
+		image_offset = 0;
+	}
+	return (y(draggable)- (y(droppable) - window.pageYOffset) + image_offset);
+}
+
 function timedRefresh(timeoutPeriod) {
 	setTimeout("location.reload(true);",timeoutPeriod);
 }
@@ -102,3 +115,6 @@ function setColor(id,color){
 	$(id).setStyle({ background: '#'+color, color: '#'+color});
 }
 
+function droppable_position(){
+(Droppables.drops[0].accept)
+}

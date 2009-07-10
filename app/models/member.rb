@@ -90,9 +90,7 @@ class Member < ActiveRecord::Base
     members.each do 
     |member|
     member_nametag = member.name.split()
-      if member_nametag[0] == names[0] && names.length > 1
-        name = "#{names[0]} #{names[1][0,1]}"
-      end
+      name = "#{names[0]} #{names[1][0,1]}" if member_nametag[0] == names[0] && names.length > 1
     end
     return name.upcase()[0..8]
   end

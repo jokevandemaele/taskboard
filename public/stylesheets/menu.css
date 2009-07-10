@@ -6,7 +6,7 @@
 
 #menu_space {background: transparent; height: 136px; width: 100%; }
 
-#trash { float:right; position: relative; top: 14px; }
+img#trash { position: fixed; top: 14px; right: 0; z-index: 100;}
 
 /* Menu Links */
 #menu_product_backlog_image { float:left; position: relative; border: none; top: 7px; left: 14px; }

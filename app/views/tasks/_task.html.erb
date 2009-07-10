@@ -28,19 +28,13 @@
 
 <% if task.status != 'finished' %>
 	<%= drop_receiving_element("task-#{task.id}", 
-		:accept => "create_nametag", 
-		:with   => "'id=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ ($(element).cumulativeOffset().left - $('task-#{task.id}').cumulativeOffset().left)+ '&y='+ ($(element).cumulativeOffset().top - $('task-#{task.id}').cumulativeOffset().top)", 
-		:url => { :controller => :nametags, :action=>:update_nametag }
-		) 
-	%>
-	<%= drop_receiving_element("task-#{task.id}", 
 		:accept => "add_status", 
-		:with   => "'status=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ (x($(element)) - x($('task-#{task.id}')) + window.pageXOffset) + '&y='+ (y($(element))-y($('task-#{task.id}')) + window.pageYOffset)", 
+		:with   => "'status=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ positionX($(element),$('task-#{task.id}')) + '&y='+ positionY($(element),$('task-#{task.id}'),false)", 
 		:url => { :controller => :statustags }) 
 	%>
 	<%= drop_receiving_element("task-#{task.id}", 
 		:accept => "statustag", 
-		:with   => "'id=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ (x($(element)) - x($('task-#{task.id}'))) + '&y='+ (y($(element))-y($('task-#{task.id}')))", 
+		:with   => "'id=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ positionX($(element),$('task-#{task.id}')) + '&y='+ positionY($(element),$('task-#{task.id}'),false)", 
 		:url => { :controller => :statustags, :action=>:update },
 		:method => :put ) 
 	%>
@@ -48,12 +42,12 @@
 
 	<%= drop_receiving_element("task-#{task.id}", 
 		:accept => "add_nametag", 
-		:with   => "'member=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ (x($(element)) - x($('task-#{task.id}'))) + '&y=' + (y($(element))-y($('task-#{task.id}'))+ 88 + window.pageYOffset) ", 
+		:with   => "'member=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ positionX($(element),$('task-#{task.id}')) + '&y=' + positionY($(element),$('task-#{task.id}'),true)", 
 		:url => { :controller => :nametags }) 
 	%>
 	<%= drop_receiving_element("task-#{task.id}", 
 		:accept => "nametag", 
-		:with   => "'tagid=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ (x($(element)) - x($('task-#{task.id}'))) + '&y='+ (y($(element))-y($('task-#{task.id}')))", 
+		:with   => "'tagid=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ positionX($(element),$('task-#{task.id}')) + '&y='+ positionY($(element),$('task-#{task.id}'),true)", 
 		:url => { :controller => :nametags, :action => :update },
 		:method => :put)
 	%>

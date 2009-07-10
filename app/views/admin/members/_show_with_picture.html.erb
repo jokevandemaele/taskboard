@@ -3,7 +3,7 @@
 		<%= image_tag('role_product_owner.png', :alt => "Product Owner", :style => "float:right; position: relative; top: 3px; left:-3px; z-index: 10;") if role.id == 2 %>
 		<%= image_tag('role_scrum_master.png', :alt => "Scrum Master", :style => "float:right; position: relative; top: 3px; left:-3px; z-index: 10;") if role.id == 3 %>
 	<% end %>
-	<%= image_tag member.show_picture, :style => "position:absolute; top: 0px; left: 0px;" %>
+	<%= image_tag member.show_picture, :style => "position:absolute; top: 0px; left: 0px;", :title => member.name%>
 	<% if edit -%>
 		<%= link_to_remote image_tag('member_edit.png', :class => "member-edit"),
 			:url => {:controller => 'members', :action => 'show_form', :member => member, :project => project },
@@ -16,6 +16,6 @@
 		@team = nil
 	end 
 	-%>
-	<div class="<%= member_name_class -%> .slide_item" style="<%= style if(defined?(style)) -%>"><%= member.formatted_nametag(@team) %></div>
+	<div class="<%= member_name_class -%> .slide_item" style="<%= style if(defined?(style)) -%>" title="<%= member.name -%>"><%= member.formatted_nametag(@team) %></div>
 	</div>
 
