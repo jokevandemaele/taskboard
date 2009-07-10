@@ -227,17 +227,18 @@ table td{
 	text-align: center;
 }
 .nametag {
+	background: url('/images/tags/nametags-bkg.png') left no-repeat;
 	width: 88px;
+	height: 18px;
 	font-size: 10px;
 	text-align: center;
 	font-weight: bold;
 	z-index: 2;
 }
 .nametag_menu {
+	background: url('/images/tags/nametags-bkg.png') left no-repeat;
 	position: relative;
 	top: 70px;
-	border: 1px solid black;
-	width: 86px;
 	padding: 0;
 }
 

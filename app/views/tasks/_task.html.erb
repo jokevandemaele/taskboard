@@ -29,12 +29,12 @@
 <% if task.status != 'finished' %>
 	<%= drop_receiving_element("task-#{task.id}", 
 		:accept => "add_status", 
-		:with   => "'status=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ positionX($(element),$('task-#{task.id}')) + '&y='+ positionY($(element),$('task-#{task.id}'),false)", 
+		:with   => "'status=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ positionCreateX($(element),$('task-#{task.id}')) + '&y='+ positionCreateY($(element),$('task-#{task.id}'),false)", 
 		:url => { :controller => :statustags }) 
 	%>
 	<%= drop_receiving_element("task-#{task.id}", 
 		:accept => "statustag", 
-		:with   => "'id=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ positionX($(element),$('task-#{task.id}')) + '&y='+ positionY($(element),$('task-#{task.id}'),false)", 
+		:with   => "'tag_id=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ positionUpdateX($(element),$('task-#{task.id}')) + '&y='+ positionUpdateY($(element),$('task-#{task.id}'),false)", 
 		:url => { :controller => :statustags, :action=>:update },
 		:method => :put ) 
 	%>
@@ -42,17 +42,17 @@
 
 	<%= drop_receiving_element("task-#{task.id}", 
 		:accept => "add_nametag", 
-		:with   => "'member=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ positionX($(element),$('task-#{task.id}')) + '&y=' + positionY($(element),$('task-#{task.id}'),true)", 
+		:with   => "'member=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ positionCreateX($(element),$('task-#{task.id}')) + '&y=' + positionCreateY($(element),$('task-#{task.id}'),true)", 
 		:url => { :controller => :nametags }) 
 	%>
 	<%= drop_receiving_element("task-#{task.id}", 
 		:accept => "nametag", 
-		:with   => "'tagid=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ positionX($(element),$('task-#{task.id}')) + '&y='+ positionY($(element),$('task-#{task.id}'),true)", 
+		:with   => "'tagid=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ positionUpdateX($(element),$('task-#{task.id}')) + '&y='+ positionUpdateY($(element),$('task-#{task.id}'),true)", 
 		:url => { :controller => :nametags, :action => :update },
 		:method => :put)
 	%>
 <% end %>
-<%= draggable_element "task-#{task.id}", :revert => '"failure"'%>
+<%= draggable_element "task-#{task.id}", :revert => '"failure"' -%>
 <%=
 if column < 2
 	"</td>"

@@ -4164,7 +4164,7 @@ var Position = {
   // set to true if needed, warning: firefox performance problems
   // NOT neeeded for page scrolling, only if draggable contained in
   // scrollable elements
-  includeScrollOffsets: false,
+  includeScrollOffsets: true,
 
   // must be called before calling withinIncludingScrolloffset, every time the
   // page is scrolled
@@ -4195,11 +4195,10 @@ var Position = {
 
   withinIncludingScrolloffsets: function(element, x, y) {
     var offsetcache = Element.cumulativeScrollOffset(element);
-
     this.xcomp = x + offsetcache[0] - this.deltaX;
     this.ycomp = y + offsetcache[1] - this.deltaY;
     this.offset = Element.cumulativeOffset(element);
-
+	
     return (this.ycomp >= this.offset[1] &&
             this.ycomp <  this.offset[1] + element.offsetHeight &&
             this.xcomp >= this.offset[0] &&

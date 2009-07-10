@@ -73,17 +73,25 @@ function y(element){
 	return $(element).cumulativeOffset().top
 }
 
-function positionX(draggable, droppable){
+function positionCreateX(draggable, droppable){
 	return (x(draggable) - (x(droppable) - window.pageXOffset) - 9);
 }
 
-function positionY(draggable, droppable, nametag){
+function positionCreateY(draggable, droppable, nametag){
 	if(nametag){
 		image_offset = 88;
 	}else{
 		image_offset = 0;
 	}
 	return (y(draggable)- (y(droppable) - window.pageYOffset) + image_offset);
+}
+
+function positionUpdateX(draggable, droppable){
+	return (x(draggable) - (x(droppable)));
+}
+
+function positionUpdateY(draggable, droppable, nametag){
+	return (y(draggable)- (y(droppable)));
 }
 
 function timedRefresh(timeoutPeriod) {

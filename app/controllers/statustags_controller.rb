@@ -23,8 +23,9 @@ class StatustagsController < ApplicationController
   # PUT /statustags/1
   def update
     if request.xhr?
+      logger.error(params.inspect)
       @task = Task.find(params[:task])
-      @tag = Statustag.find(params[:id])
+      @tag = Statustag.find(params[:tag_id])
       @tag.relative_position_x = params[:x]
       @tag.relative_position_y = params[:y]
       @tag.task = @task

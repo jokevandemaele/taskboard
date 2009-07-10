@@ -109,7 +109,6 @@ var Droppables = {
   fire: function(event, element) {
     if(!this.last_active) return;
     Position.prepare();
-
     if (this.isAffected([Event.pointerX(event), Event.pointerY(event)], element, this.last_active))
       if (this.last_active.onDrop) {
         this.last_active.onDrop(element, this.last_active.element, event);
