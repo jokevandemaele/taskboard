@@ -1,17 +1,23 @@
 	<td class="story-td">
-		<div class="story" id="storycard-<%= story.id -%>">
-			<div class="story-left-column">
-				<p class="story-field-realid"><%= story.realid %></p>
-				<p class="story-field-name"><%= story.name[0..20] %><%= 
-				if(story.name.size > 20) 
-					"..."
-				end %></p>
-				<p class="story-field-label-priority">Priority:</p>
-				<p class="story-field-number-priority"><%= story.priority %></p>
-				<p class="story-field-label-size">Size:</p>
-				<p class="story-field-number-size"><%= story.size %></p>
+		<div class="story" id="storycard-<%= story.id -%>" title="<%= story.name %>">
+			<div class="story-container" id="storycard-<%= story.id -%>-container">
+				<p class="story-field-realid" ><%= story.realid %></p>
+				<p id="storycard-<%= story.id %>-name" class="story-field-name"><%= story.name %></p>
+				<div style="clear: both;"></div>
+				<div class="storycard-priority">
+					<p class="story-field-label">Priority:</p>
+					<p class="story-field-number"><%= story.priority %></p>
+				</div>
+				<div class="storycard-size">
+					<p class="story-field-label">Size:</p>
+					<p class="story-field-number"><%= story.size %></p>
+				</div>
+				
 			</div>
 		</div>
+		<script>
+		 resizeFontSizeToFit($('storycard-<%= story.id %>-name'), $('storycard-<%= story.id -%>-container'));
+		</script>
 	</td>
 	<td id="not_started-<%= story.id %>" style="<%= taskboard_border_style(@color, [ "left", "bottom"]) %>">
 		<%= render :partial => "tasks/tasks_by_status", :locals => { :tasks => story.tasks.not_started } %> 

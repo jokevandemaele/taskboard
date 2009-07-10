@@ -176,49 +176,55 @@ table td{
 	background: white;
 }
 .story{
-	width: 180px;
-	height: 188px;
+	width: 184px;
+	height: 204px;
 	background: url('/images/story.png') no-repeat left; 
 }
+.story p{
+	margin: 0;
+}
+.story-container{
+	padding: 0;
+	width: 155px;
+	height: 150px;
+	margin: 0 auto;
+	position: relative;
+	top: 36px;
+}
 .story-field-realid{
-	font-weight: bold;
-	position:relative;
-	top:20px;
 	text-align: right;
-	padding-right: 10px;
+	font-weight: bold;
+	position: relative;
+	top: -10px;
+	left: -2px;
 }
 .story-field-name {
-	width: 160px;
-	margin: 0 auto;
-	position:relative;
-	top:5px;
+	float: left;
+	position: relative;
+	margin-left: 50% !important;
 	font-size: 18px;
 	text-align: center;
 }
-.story-field-label-priority {
-	padding-top: 5px;
+.storycard-priority{
+	position: absolute;
+	bottom: 5px;
+	left: 5px;
+}
+
+.storycard-size{
+	position: absolute;
+	bottom: 5px;
+	right: 5px;
+}
+
+.story-field-label {
 	margin: 0;
 	text-align: center;
-	position:relative;
-	top: 10px;
 }
-.story-field-number-priority {
+.story-field-number {
 	font-size: 24px;
 	font-weight: bold;
-	position: relative;
-	top: -5px;
 	text-align: center;
-}
-.story-field-label-size{
-	text-align: center;
-	position:relative;
-	top: -25px;	
-}
-.story-field-number-size {
-	text-align: center;
-	position:relative;
-	top: -43px;
-	font-size: 18px;	
 }
 /* Nametags and Statustags Style */
 .add_nametag {

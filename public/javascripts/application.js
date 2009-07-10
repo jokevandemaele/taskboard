@@ -40,10 +40,23 @@ function adminToggleImage(id){
 }
 // End Admin Section
 
-function resizeFontSizeToFitParent(id){
-		//size = $(id).getStyle('font-size').replace("px","")
-		//alert($(id).parent);
-		//if($id.offsetHeight > )
+function resizeFontSizeToFit(element,container){
+		font_size = element.getStyle('font-size').replace('px', '');
+		elementW = element.offsetWidth;
+		elementH = element.offsetHeight;
+		containerW = container.offsetWidth;
+		containerH = container.offsetHeight;
+		
+		while(elementW > containerW || elementH > containerH){
+			font_size -= 1;
+			element.setStyle({fontSize: font_size + 'px'});
+			elementW = element.offsetWidth;
+			elementH = element.offsetHeight;
+			containerW = container.offsetWidth;
+			containerH = container.offsetHeight;
+		}
+		element.setStyle({left: '-' + element.offsetWidth / 2 + 'px'});
+
 }
 
 function keepDivOnTop(div) {
