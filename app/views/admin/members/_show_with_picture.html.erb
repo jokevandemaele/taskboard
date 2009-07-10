@@ -1,4 +1,4 @@
-<div id="<%= id_text -%>-<%= member.id -%>" class="<%= class_text %>" style="float: left; <%= "border: 4px solid red;" if( defined?(highlight_loged_member) && highlight_loged_member  && session[:member] == member) -%> ">
+<div id="<%= id_text -%>-<%= member.id -%>" class="<%= class_text %>" style="float: left; <%= "border: 4px solid #a02c2c; top: -4px;" if( defined?(highlight_loged_member) && highlight_loged_member  && session[:member] == member.id ) -%> ">
 	<%= image_tag member.show_picture, :style => "position:absolute; top: 0px; left: 0px;", :title => member.name%>
 	<% if edit -%>
 		<%= link_to_remote image_tag('member_edit.png', :class => "member-edit"),
