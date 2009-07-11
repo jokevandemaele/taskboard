@@ -1,4 +1,3 @@
-		<% team_members_list = Array.new %>
 		<% for member in team.members %>
 		<div id="div-team-<%= team.id -%>-member-<%= member.id -%>" class="member-container" style="background: url('/images/admin/admin-teams-member-background.png') no-repeat; width: 109px; height: 125px; padding: 5px; float: left;" title="<%= member.name -%>">
 			
@@ -16,9 +15,4 @@
 				:member => member,
 				:edit => false } -%>
 		</div>	
-			<% team_members_list << "div-team-#{team.id}-member-#{member.id}" -%>
-		<% end %>
-		<script>
-			team_<%= team.id -%>_members_slider = new Slider(<%= team_members_list.to_json %>,4,"team_<%= team.id -%>_members_slider");
-		</script>
-		
+		<% end %>		

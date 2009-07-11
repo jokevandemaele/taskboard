@@ -14,7 +14,7 @@
 		<%= admin_open_div 700 -%>
 		<h1 style="position: relative; top: 10px;">Choose a Project:</h1>
 		<form method=GET>
-		<%= select_tag "project", options_from_collection_for_select(@projects,'id','name'), :style => "width: 300px; position: relative; top: -8px; left: 250px;" -%>
+		<%= select_tag "project", options_for_project_select(@projects), :style => "width: 300px; position: relative; top: -8px; left: 250px;" -%>
 <%= image_submit_tag "admin/admin-form-submit.png", :alt => "Submit", :style => "position:absolute; top: 5px; left: 600px; "-%>
 		</form>
 		<%= admin_close_div 700 -%>
