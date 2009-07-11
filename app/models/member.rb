@@ -56,9 +56,7 @@ class Member < ActiveRecord::Base
 
   def projects
     projects = []
-    for team in teams
-      projects.concat team.projects
-    end
+    teams.each { |team| projects.concat team.projects}
     return projects
   end
   

@@ -28,9 +28,10 @@ class Admin::MembersController < ApplicationController
   def create
     @member = Member.new(params[:member])
     @roles = Role.all
+    @member_roles = @members.roles
 
     if params[:roles].nil?
-      @member.roles.each {|role| @member.roles.delete(role)}
+      @member_roles.each {|role| @member_roles.delete(role)}
     else
       @roles.each do |role|
         if params[:roles].include?("#{role.id}")
