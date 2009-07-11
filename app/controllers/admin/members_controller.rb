@@ -156,6 +156,7 @@ class Admin::MembersController < ApplicationController
   end
   
   def login
+    flash[:notice] = nil
     if request.post?
       @member = Member.authenticate(params[:member][:username], params[:member][:password])
       
