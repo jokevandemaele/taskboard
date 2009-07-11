@@ -1,6 +1,6 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-NotStartedTask1:
+not_started_1:
     name: NotStartedTask1
     story_id: 1
     description: 
@@ -8,7 +8,7 @@ NotStartedTask1:
     relative_position_x: 100
     relative_position_y: 101
 
-NotStartedTask2:
+not_started_2:
     name: NotStartedTask2
     story_id: 1
     description: 
@@ -16,7 +16,7 @@ NotStartedTask2:
     relative_position_x: 100
     relative_position_y: 101
 
-InProgressTask1:
+in_progress_1:
     name: InProgressTask1
     story_id: 1
     description: 

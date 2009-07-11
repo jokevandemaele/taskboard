@@ -1,6 +1,6 @@
 class Admin::MembersController < ApplicationController
   before_filter :login_required, :except => [:login, :logout]
-  before_filter :check_permissions, :except => [:login, :logout, :access_denied, :show_form]
+  before_filter :check_permissions, :except => [:login, :logout, :access_denied, :show_form, :report_bug]
   layout proc{ |controller| controller.request.path_parameters[:action] == 'report_bug' || controller.request.path_parameters[:action] == 'login' ? nil : "admin/members" }
   
   # GET /members
@@ -176,6 +176,7 @@ class Admin::MembersController < ApplicationController
   end
 
   def access_denied
+    @hide_sidebar = true
     @member = Member.find(session[:member])
   end
   
@@ -208,6 +209,7 @@ class Admin::MembersController < ApplicationController
   end
 
   def report_bug
+    @member = Member.find(current_member)
     if request.get?
       session[:return_to] = request.request_uri
     end

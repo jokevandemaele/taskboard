@@ -2,7 +2,7 @@ require 'test_helper'
 
 class TaskTest < ActiveSupport::TestCase
   self.use_instantiated_fixtures = true
-  fixtures :stories
+  fixtures :stories, :tasks
   
   # named_scope's
   test "named scope - not_started" do

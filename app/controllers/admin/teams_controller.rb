@@ -4,7 +4,6 @@ class Admin::TeamsController < ApplicationController
   
   # GET /teams
   def index
-
     if(params[:project])
 	    @project = Project.find(params[:project])
 	    @teams = @project.teams
@@ -14,7 +13,12 @@ class Admin::TeamsController < ApplicationController
         @members = []
       end
     else
-      @organizations = current_member.organizations_administered
+      if(current_member.admin?)
+        @organizations = Organization.all
+      else
+        @organizations = current_member.organizations_administered
+      end
+
       @projects = Array.new
       @organizations.each do |organization|
         organization.projects.each {|project| @projects << project }
