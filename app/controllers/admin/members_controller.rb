@@ -212,7 +212,7 @@ class Admin::MembersController < ApplicationController
   def report_bug
     @member = Member.find(current_member)
     if request.get?
-      session[:return_to] = request.request_uri
+      session[:return_to] = request.referer
     end
     if request.post?
       BugReporter.deliver_bug_report(params[:subject], params[:message], @member.name)
