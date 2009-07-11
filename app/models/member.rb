@@ -68,7 +68,7 @@ class Member < ActiveRecord::Base
 
   # authenticate: this method is used when a visitor tryies to login
   def self.authenticate(username, password)
-    member = Member.first :conditions => "username = '#{username}'"
+    member = Member.first :conditions => ["username = ?", username]
     return nil if member.nil?
     return member if Member.encrypt(password)==member.hashed_password
   end

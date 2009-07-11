@@ -5,7 +5,7 @@ class Story < ActiveRecord::Base
   validates_uniqueness_of :realid
 
   def self.last_realid(project_id)
-	story = Story.first(:conditions => "project_id = #{project_id} AND realid != ''", :order => "realid DESC")
+	story = Story.first(:conditions => ["project_id = ? AND realid != ''", project_id], :order => "realid DESC")
 	if story
 		return story.realid
 	else 
