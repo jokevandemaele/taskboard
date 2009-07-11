@@ -52,12 +52,12 @@
 			</div>
 			
 			<div class="admin-div-section" style="margin-bottom: 10px; height: 80px;">
-				<%= image_tag "admin/admin-div-actions-login.png", :alt => "Login", :style => "position: relative; left: 10px; top: -2px;" -%>
-				<h2 style="position: relative; top: 0px; margin-left: 10px;">Login information</h2>
-			    <div style="float:right; position: relative; top: -50px;">
+			    <div style="position: absolute; right: 20px; padding-top: 5px;">
 				 	<span style="color: #162d50;">username</span> <%= f.text_field :username, :style => "position: relative; right: 2px; background: url('/images/admin/admin-div-field.png') no-repeat top left; border: none; width: 168px; height: 26px; padding: 5px;" %><br />
 					<span style="color: #162d50;">password</span> <%= f.password_field :password, :style => "background: url('/images/admin/admin-div-field.png') no-repeat top left; border: none; width: 168px; height: 26px; padding: 5px;", :size => "10" %>
 				</div>
+				<%= image_tag "admin/admin-div-actions-login.png", :alt => "Login", :style => "position: relative; left: 10px; top: -2px;" -%>
+				<h2 style="position: relative; top: 0px; margin-left: 10px;">Login information</h2>
 			</div>
 			
 			<div class="admin-div-section" style="margin-bottom: 10px; height: 60px; ">
@@ -66,20 +66,20 @@
 				<p style="color: #04a; font-size: 10px; margin: 0; position:relative; top: -38px; left: 70px;">The picture should be a .jpg, .png, or .gif and will be scaled to 88x88 pixels</p>
 				<%= file_field_tag :picture_file, :style => "float: right; position: relative; right: 5px; top: -75px; background: url('/images/admin/admin-div-field.png') no-repeat top left; border: none; padding: 5px;" %>
 			</div>
-			
+			<% if(current_member.admin?)%>
 			<div class="admin-div-section" style="">
-				<%= image_tag "admin/admin-div-actions-security.png", :alt => "Security", :style => "position: relative; left: 0px; top: 3px;" -%>
-				<h2 style="position: relative; top: 0px; margin-left: -5px; top: 5px;">Security</h2>
-				<div style="float: right; position: relative; top: -30px; right: 10px;">
-          <% if @member.admin? %>
-					<%= check_box_tag "member[admin]", true, :checked => 'checked' -%>
-          <% else %>
-					<%= check_box_tag "member[admin]", true -%>
-          <% end %>
-          <span style="position: relative; top: -2px; font-size: 16px; ">User is a System Administrator</span>
-				</div>
-			</div>
-			
+					<div style="float: right; position: absolute; right: 40px; margin-top: 15px;">
+			          <% if @member.admin? %>
+								<%= check_box_tag "member[admin]", true, :checked => 'checked' -%>
+			          <% else %>
+								<%= check_box_tag "member[admin]", true -%>
+			          <% end %>
+			          <span style="position: relative; top: -2px; font-size: 16px; ">User is a System Administrator</span>
+							</div>
+						<%= image_tag "admin/admin-div-actions-security.png", :alt => "Security", :style => "position: relative; left: 0px; top: 3px;" -%>
+						<h2 style="position: relative; top: 0px; margin-left: -5px; top: 5px;">Security</h2>
+					</div>
+			<% end %>
 			<div style="clear:both; margin: 0; padding: 0;"></div>
 			<%= image_submit_tag "admin/admin-form-submit.png", :alt => "Submit", :style => "position:absolute; top: -30px; right: 119px;"-%>
 			<%= image_tag "admin/admin-form-cancel.png", 

@@ -16,7 +16,7 @@
 	<div id="admin-content">
 		<%= yield  %>
 	</div>
-	<% if defined?(hide_sidebar) && (hide_sidebar) -%>
+	<% if !defined?(@hide_sidebar) || (defined?(@hide_sidebar) && (!@hide_sidebar)) -%>
 	<div id="admin-sidebar">
 		<ul id="admin-sidebar-menu">
 			<% image = image_tag 'admin/add.png', :alt => 'new' -%>

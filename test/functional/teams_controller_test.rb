@@ -37,40 +37,23 @@ class Admin::TeamsControllerTest < ActionController::TestCase
       end
     end
   end
+  
+  test "show team admin if i administer the organization of this project" do
+    login_as_organization_admin
+    get :index, :project => 1
+    assert_select "div#members-list", :count => 1
+  end
 
-  #test "should get new" do
-  #  get :new
-  #  assert_response :success
-  #end
+  test "show access denied if i don't administer the organization of this project" do
+    login_as_normal_user
+    get :index, :project => 1
+    assert_redirected_to :controller => "admin/members", :action => :access_denied
+  end
 
-  #test "should create team" do
-  #  assert_difference('Team.count') do
-  #    post :create, :team => { }
-  #  end
+  test "show access denied if i don't administer the organization of this project but administer another" do
+    login_as_organization_admin
+    get :index, :project => 2
+    assert_redirected_to :controller => "admin/members", :action => :access_denied
+  end
 
-  #  assert_redirected_to team_path(assigns(:team))
-  #end
-
-#  test "should show team" do
-#    get :show, :id => teams(:one).id
-#    assert_response :success
-#  end
-
-#  test "should get edit" do
-#    get :edit, :id => teams(:one).id
-#    assert_response :success
-#  end
-
-#  test "should update team" do
-#    put :update, :id => teams(:one).id, :team => { }
-#    assert_redirected_to team_path(assigns(:team))
-#  end
-
-#  test "should destroy team" do
-#    assert_difference('Team.count', -1) do
-#      delete :destroy, :id => teams(:one).id
-#    end
-
-#    assert_redirected_to teams_path
-#  end
 end

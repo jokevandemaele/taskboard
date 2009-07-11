@@ -21,6 +21,7 @@ cwidmore:
     name: Charles Widmore
     color: 10
     username: cwidmore
+    hashed_password: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3 # test
     admin: false
 
 cpace:

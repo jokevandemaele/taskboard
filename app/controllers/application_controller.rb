@@ -59,7 +59,15 @@ class ApplicationController < ActionController::Base
     # Manage Teams could only be accessed by organization admin
     if(@path['controller'] == 'admin/teams')
       if(@member.admins_any_organization?)
-        return true
+        if(params[:project])
+          @p = Project.find(params[:project])
+          if(@member.admins?(@p.organization))
+            return true
+          else
+            redirect_to :controller => 'admin/members', :action => :access_denied
+            return false
+          end
+        end
       else
         redirect_to :controller => 'admin/members', :action => :access_denied
         return false

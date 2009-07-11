@@ -6,6 +6,7 @@ class Admin::MembersController < ApplicationController
   # GET /members
   def index
     @members = Member.find(:all)
+    @hide_sidebar = nil
   end
 
   # GET /members/1
