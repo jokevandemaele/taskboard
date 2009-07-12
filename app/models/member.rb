@@ -3,7 +3,6 @@ require 'RMagick'
 class Member < ActiveRecord::Base
   # Relations
   has_and_belongs_to_many :teams
-  has_and_belongs_to_many :roles
   has_many :organization_memberships, :dependent => :destroy 
   has_many :organizations, :through => :organization_memberships
   has_many :nametags, :dependent => :destroy
@@ -16,6 +15,18 @@ class Member < ActiveRecord::Base
   #validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => "Invalid email"
 
   attr_accessor :password, :password_confirmation
+  
+  # add user to organization
+  def add_to_organization(organization)
+    if organization
+      @organization = Organization.find(organization)
+      @membership = OrganizationMembership.new
+      @membership.member = self
+      @membership.organization = @organization
+      @membership.admin = nil
+      @membership.save
+    end
+  end
   
   #see if the user admins an organization
   def admins?(organization)
@@ -62,8 +73,7 @@ class Member < ActiveRecord::Base
   
   # password: this method encrypts the plain text password to store it in the database
   def password=(pass)
-    @password=pass
-    self.hashed_password = Member.encrypt(@password)
+    self.hashed_password = Member.encrypt(pass)
   end
 
   # authenticate: this method is used when a visitor tryies to login
@@ -94,28 +104,30 @@ class Member < ActiveRecord::Base
   end
   
   def add_picture(picture_file)
-    image_types = ["image/jpeg", "image/pjpeg", "image/gif", "image/png", "image/x-png"]
-    if (!picture_file.blank? || !(picture_file.size == 0))
-      if image_types.include?picture_file.content_type.chomp
-        if picture_file.size < 2097152
-          picture_file.rewind
-          pic = Magick::Image.from_blob(picture_file.read)[0]
+    if(picture_file)
+      image_types = ["image/jpeg", "image/pjpeg", "image/gif", "image/png", "image/x-png"]
+      if (!picture_file.blank? || !(picture_file.size == 0))
+        if image_types.include?picture_file.content_type.chomp
+          if picture_file.size < 2097152
+            picture_file.rewind
+            pic = Magick::Image.from_blob(picture_file.read)[0]
 
-          # 88x88 is the default picture size
-          image = pic.scale(88, 88)
+            # 88x88 is the default picture size
+            image = pic.scale(88, 88)
           
-          File.open(RAILS_ROOT + "/public/images/members/" + self.id.to_s + ".png", "wb") do |f|
-            f.write(image.to_blob)
+            File.open(RAILS_ROOT + "/public/images/members/" + self.id.to_s + ".png", "wb") do |f|
+              f.write(image.to_blob)
+            end
+            return "ok"
+          else
+            return "Image file too big"
           end
-          return "ok"
         else
-          return "Image file too big"
+          return "Unsupported image format"
         end
       else
-        return "Unsupported image format"
+        return "Unable to upload the file you selected, please try again."
       end
-    else
-      return "Unable to upload the file you selected, please try again."
     end
   end
   def show_picture()

@@ -28,40 +28,10 @@ class Admin::MembersController < ApplicationController
   # POST /members
   def create
     @member = Member.new(params[:member])
-    @roles = Role.all
-    @member_roles = @members.roles
 
-    if params[:roles].nil?
-      @member_roles.each {|role| @member_roles.delete(role)}
-    else
-      @roles.each do |role|
-        if params[:roles].include?("#{role.id}")
-          @member.roles << role if !@member.roles.include?(role)
-        else
-          @member.roles.delete(role)
-        end
-      end
-    end
-    
     if @member.save
-      if(params[:picture_file])
-        @member.add_picture(params[:picture_file])
-      end
-      
-      if params[:organization]
-        @organization = Organization.find(params[:organization])
-        @membership = OrganizationMembership.new
-        @membership.member = @member
-        @membership.organization = @organization
-        @membership.admin = nil
-
-        @membership.save
-      end
-      
-      # render :update, :status => :ok do |page|
-      #   page.insert_html :bottom, "members-list", :partial => "members", :object => @member
-      #   page.replace_html "dummy-for-actions", "<script>$('dialog-background-fade').hide();</script>"
-      # end
+      @member.add_picture(params[:picture_file])
+      @member.add_to_organization(params[:organization])
       redirect_to(admin_members_url)
     else
       render :inline => "Error adding member"
@@ -85,30 +55,8 @@ class Admin::MembersController < ApplicationController
       @member.hashed_password = old_password
     end
     
-    @roles = Role.all
-
-    if params[:roles].nil?
-      @member.roles.each {|role| @member.roles.delete(role)}
-    else
-      @roles.each do |role|
-        if params[:roles].include?("#{role.id}")
-          @member.roles << role if !@member.roles.include?(role)
-        else
-          @member.roles.delete(role)
-        end
-      end
-    end
-
     if @member.save
-      if(params[:picture_file])
-        added = @member.add_picture(params[:picture_file])
-        if( added == "ok")
-          # render :inline => "<script>window.parent.location.reload(true);</script>"
-        else
-          # Add error handling and report
-          #render :inline => "<script>window.parent.location.reload(true);</script>"
-        end
-      end
+      @member.add_picture(params[:picture_file])
       redirect_to(request.referer)
     else
       render :inline => "username already taken"

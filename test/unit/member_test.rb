@@ -2,7 +2,7 @@ require 'test_helper'
 
 class MemberTest < ActiveSupport::TestCase
   self.use_instantiated_fixtures = true
-  fixtures :members
+  fixtures :members, :organizations
 
   # Test authentication.
   def test_auth
@@ -89,5 +89,13 @@ class MemberTest < ActiveSupport::TestCase
   def test_nametag_format
     assert_equal "CHARLIE", members(:cpace).formatted_nametag
     assert_equal "MICHAEL F", members(:mfaraday).formatted_nametag
+  end
+  
+  test "add member to organization should work as expected" do
+    # Daniel Faraday joins Dharma initiative in the 5th Season, so, check that.
+    dfaraday = members(:dfaraday)
+    dfaraday.add_to_organization(organizations(:dharma_initiative).id)
+    
+    assert dfaraday.organizations.include?(organizations(:dharma_initiative))
   end
 end
