@@ -27,11 +27,13 @@ class Admin::MembersController < ApplicationController
 
   # POST /members
   def create
-    @member = Member.new(params[:member])
+    @params = params
+    @member = Member.new(@params[:member])
 
+    # Solve this with after_save()
     if @member.save
-      @member.add_picture(params[:picture_file])
-      @member.add_to_organization(params[:organization])
+      @member.add_picture(@params[:picture_file])
+      @member.add_to_organization(@params[:organization])
       redirect_to(admin_members_url)
     else
       render :inline => "Error adding member"

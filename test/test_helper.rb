@@ -35,17 +35,22 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  def login_as(user)
+    session[:member] = user.id
+  end
+
   def login_as_administrator
-    session[:member] = members(:clittleton).id
+    login_as(members(:clittleton))
   end
   
   def login_as_organization_admin
-    session[:member] = members(:cwidmore).id
+    login_as(members(:cwidmore))
   end
 
   def login_as_normal_user
-    session[:member] = members(:dfaraday).id
+    login_as(members(:dfaraday))
   end
+
 
   def current_member
     Member.find(session[:member])

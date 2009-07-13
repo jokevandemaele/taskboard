@@ -1,11 +1,21 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
+find_the_island:
   id: 1
   name: Find the island
   organization_id: 1
 
-two:
+do_weird_experiments:
   id: 2
   name: Do weird experiments
   organization_id: 2
+
+escape_from_the_iland:
+  id: 3
+  name: Escape from the island
+  organization_id: 3
+
+come_back_to_the_island:
+  id: 4
+  name: Come back to the island
+  organization_id: 3

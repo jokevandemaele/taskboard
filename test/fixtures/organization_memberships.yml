@@ -1,16 +1,62 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-    organization_id: 1
-    member_id: 1
+dfaraday_widmore:
+    organization: widmore_corporation
+    member: dfaraday
     admin: false
 
-two:
+cwidmore_widmore:
     organization_id: 1
     member_id: 3
     admin: true
 
-three:
-    organization_id: 2
-    member_id: 2
+jburke_dharma:
+    organization: dharma_initiative
+    member: jburke
     admin: true
+
+jshephard_dharma:
+    organization: dharma_initiative
+    member: jshephard
+    admin: false
+
+kausten_dharma:
+    organization: dharma_initiative
+    member: kausten
+    admin: false
+
+hreyes_dharma:
+    organization: dharma_initiative
+    member: hreyes
+    admin: false
+
+jshephard_oceanic:
+    organization: oceanic_six
+    member: jshephard
+    admin: true
+
+kausten_oceanic:
+    organization: oceanic_six
+    member: kausten
+    admin: false
+
+hreyes_oceanic:
+    organization: oceanic_six
+    member: hreyes
+    admin: false
+
+sjarrah_oceanic:
+    organization: oceanic_six
+    member: sjarrah
+    admin: false
+
+alittleton_oceanic:
+    organization: oceanic_six
+    member: alittleton
+    admin: false
+
+skwon_oceanic:
+    organization: oceanic_six
+    member: skwon
+    admin: false
+

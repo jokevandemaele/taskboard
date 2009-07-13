@@ -5,15 +5,16 @@ class Admin::ProjectsController < ApplicationController
   # GET /projects
   def index
     @member = current_member
-    if @member.admin?
-      @projects = Project.all
+    @admins = @member.admin?
+    
+    @projects = []
+    if @member.admins_any_organization?
+      @member.organizations_administered.each { |o| @projects.concat o.projects } 
     else
       @projects = @member.projects
+      redirect_to :controller => :taskboard, :action => :show, :id => @projects.first.id if @projects.length == 1
     end
-    #@admins = @member.admin?
-    #if @projects.length == 1
-    #  redirect_to :controller => '/taskboard', :action => :show, :id => @projects.first.id
-    #end
+    
   end
 
   # GET /projects/1

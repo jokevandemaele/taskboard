@@ -3,7 +3,7 @@
 dfaraday:
   id: 1
   name: Daniel Faraday
-  color: 20
+  color: 000000
   username: dfaraday
   hashed_password: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3 # test
   admin: false
@@ -11,7 +11,7 @@ dfaraday:
 jburke:
     id: 2
     name: Juliet Burke
-    color: 1
+    color: 000000
     username: jburke
     hashed_password: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3 # test
     admin: false
@@ -19,35 +19,78 @@ jburke:
 cwidmore:
     id: 3
     name: Charles Widmore
-    color: 10
+    color: 000000
     username: cwidmore
     hashed_password: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3 # test
     admin: false
 
 cpace:
     name: Charlie Pace
-    color: 7
+    color: 000000
     username: cpace
     hashed_password: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3 # test
     admin: false
 
 clittleton:
     name: Claire Littleton
-    color: 9
+    color: 000000
     username: clittleton
     hashed_password: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3 # test
     admin: true
 
 mdawson:
     name: Michael Dawson
-    color: 2
+    color: 000000
     username: mdawson
     hashed_password: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3 # test
     admin: false
 
 mfaraday:
     name: Michael Faraday
-    color: 4
+    color: 000000
     username: mfaraday
+    hashed_password: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3 # test
+    admin: false
+
+jshephard:
+    id: 8
+    name: Jack Shephard
+    color: 000000
+    username: jshephard
+    hashed_password: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3 # test
+    admin: false
+
+kausten:
+    name: Kate Austen
+    color: 000000
+    username: kausten
+    hashed_password: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3 # test
+    admin: false
+
+hreyes:
+    name: Hugo "Hurley" Reyes
+    color: 000000
+    username: hreyes
+    hashed_password: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3 # test
+    admin: false
+
+sjarrah:
+    name: Sayid Jarrah
+    color: 000000
+    username: sjarrah
+    hashed_password: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3 # test
+    admin: false
+
+alittleton:
+    name: Aaron Littleton
+    color: 000000
+    username: alittleton
+    hashed_password: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3 # test
+    admin: false
+
+skwon:
+    name: Sun-Hwa Kwon
+    color: 000000
+    username: skwon
     hashed_password: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3 # test
     admin: false

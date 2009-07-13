@@ -1,10 +1,11 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
+widmore_team:
   id: 1
   name: Wildmore Corporation's Team'
   color: 0000FF
 
-two:
-  name: Team 2 
+oceanic_six:
+  id: 2
+  name: Oceanic Six
   color: 00FF00

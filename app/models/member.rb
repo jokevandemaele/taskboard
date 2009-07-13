@@ -19,50 +19,31 @@ class Member < ActiveRecord::Base
   # add user to organization
   def add_to_organization(organization)
     if organization
-      @organization = Organization.find(organization)
-      @membership = OrganizationMembership.new
-      @membership.member = self
-      @membership.organization = @organization
-      @membership.admin = nil
+      
+      @membership = OrganizationMembership.new(
+        :member_id => self.id,
+        :organization_id => organization,
+        :admin => nil 
+      )
+      
       @membership.save
     end
   end
   
+  # return all the organizations the user can admin
+  def organizations_administered
+    return Organization.all if self.admin?
+    self.organization_memberships.administered.collect {|membership| membership.organization }
+  end
+
   #see if the user admins an organization
   def admins?(organization)
-    if self.admin?
-      return true
-    end
-
-    organization = OrganizationMembership.first(:conditions => ["member_id = ? and organization_id = ?", id, organization.id])
-    if organization
-      return organization.admin?
-    end
-
-    return false
+    self.organizations_administered.include?(organization)
   end
 
   #see if the user admins an organization
   def admins_any_organization?
-    if self.admin?
-      return true
-    else
-      return !self.organizations_administered.empty?
-    end
-  end
-  
-  def organizations_administered
-    if self.admin?
-      organizations = Organization.all
-    else
-      organizations = Array.new
-      memberships = OrganizationMembership.all(:conditions => ["member_id = ? AND admin = ?", id, true])
-      memberships.each do |membership|
-        organizations << membership.organization
-      end
-    end
-
-    return organizations
+    !self.organizations_administered.empty?
   end
 
   def projects

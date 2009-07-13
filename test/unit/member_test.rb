@@ -80,7 +80,7 @@ class MemberTest < ActiveSupport::TestCase
     assert member.save
     assert_equal member, Member.authenticate('newmember', 'okpassword')
     member = Member.new(:username => "newmember2", :password => "newpassword", :name => "New Name" )
-    assert_not_nil member.password
+    assert member.hashed_password == Member.encrypt('newpassword')
     assert member.save 
     assert_equal member, Member.authenticate("newmember2", "newpassword")
   end
@@ -95,7 +95,28 @@ class MemberTest < ActiveSupport::TestCase
     # Daniel Faraday joins Dharma initiative in the 5th Season, so, check that.
     dfaraday = members(:dfaraday)
     dfaraday.add_to_organization(organizations(:dharma_initiative).id)
-    
     assert dfaraday.organizations.include?(organizations(:dharma_initiative))
+  end
+  
+  test "organizations administered should give all the organizations the user admins" do
+    # an organization administrator should have al the organizations it administers
+    assert_equal 1, members(:cwidmore).organizations_administered.size
+    # a normal user should not have any organization
+    assert_equal 0, members(:dfaraday).organizations_administered.size
+    # an admin should have the organizations
+    assert_equal Organization.all.size, members(:clittleton).organizations_administered.size
+  end
+  
+  test "admins return if i admin a certain organization" do
+    assert members(:clittleton).admins?(organizations(:widmore_corporation))
+    assert members(:clittleton).admins?(organizations(:dharma_initiative))
+    assert members(:cwidmore).admins?(organizations(:widmore_corporation))
+    assert !members(:dfaraday).admins?(organizations(:widmore_corporation))
+  end
+  
+  test "admins_any_organization? works as expected" do
+    assert members(:clittleton).admins_any_organization?
+    assert members(:cwidmore).admins_any_organization?
+    assert !members(:dfaraday).admins_any_organization?
   end
 end

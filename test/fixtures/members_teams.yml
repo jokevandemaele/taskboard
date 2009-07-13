@@ -1,3 +1,7 @@
-one:
+dfaraday_widmore:
     member_id: 1
     team_id: 1
+
+jshephard_oceanic:
+    team_id: 2
+    member_id: 8 
