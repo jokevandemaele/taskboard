@@ -1,0 +1,101 @@
+<% 
+element_class = element.class.to_s.downcase
+parent_class = parent.class.to_s.downcase
+%>
+<div id='<%= parent_class -%>-<%= parent.id -%>-<%= element_class -%>-<%= element.id -%>' class='admin-div-element'>
+<%
+# If the user admins the organization i should display remove, edit, and change admin settings
+if(parent_class == 'organization' && current_member.admins?(parent))
+  # Link to Remove
+	if !(element_class == 'member' && element.admin? && !current_member.admin?)
+%>
+	<%
+	if(element_class == 'project') %>
+	    <%= link_to_remote image_tag("admin/admin-div-element-remove.png", :alt => "Remove",
+	                    :style => "float: right; position:relative; top: 5px; left: -10px;"),
+	                    :url => admin_project_url(element.id),
+	                    :method => :delete,
+	                    :confirm => "Are you sure?",
+	                    :success => "Effect.Puff($('organization-#{parent.id}-project-#{element.id}'));"
+		%>
+	<% else %>
+	<%= link_to_remote image_tag("admin/admin-div-element-remove.png", 
+                  :alt => "remove", 
+                  :style => "float: right; position:relative; top: 5px; left: -10px;"
+                 ),
+                 :url => { 
+                   :controller => "admin/#{parent_class}s", 
+                   :action => "remove_#{element_class}", 
+                   :organization => parent.id, 
+                   :object => element.id 
+                 },
+                 :confirm => 'Are you sure?',
+                 :success => "Effect.Puff($('#{parent_class}-#{parent.id}-#{element_class}-#{element.id}'));"
+	-%>
+	<% 
+	end -%>
+<%
+  # Link to Edit
+%>
+	<%=  link_to_remote image_tag("admin/admin-div-element-edit.png", 
+                :alt => "Edit",
+                :style => "float: right; position:relative; top: 5px; left: -15px;"
+              ),
+              :url => { 
+                :controller => "admin/#{element_class}s", 
+                :action => 'show_form', 
+                :id => element.id
+              }
+ -%>
+  <% end %>
+<%
+  # If this is a user, show change admin settings
+  if(element_class == 'member')
+    if element.admins?(parent)
+      action = 'remove' 
+      reaction = 'make'
+    else
+      action = 'make' 
+      reaction = 'remove'
+    end
+
+    if element.admin?
+%>
+     <%= image_tag("admin/admin-div-element-sysadmin.png", 
+                  :alt => "sysadmin", 
+                  :id => "organization-#{parent.id}-member-#{element.id}-admin", 
+                  :style =>"float: right; position:relative; top: 5px; left: -25px;"
+                )
+	%>
+<%
+    else
+%>
+      	<%= link_to_remote image_tag("admin/admin-div-element-#{action}-admin.png", 
+                    :alt => "#{action} admin", 
+                    :title => "#{action} admin", 
+                    :id => "organization-#{parent.id}-member-#{element.id}-admin", 
+                    :style =>"float: right; position:relative; top: 5px; left: -25px;"
+                  ), 
+                  :url => { 
+                    :controller => 'admin/organizations', 
+                    :action => 'toggle_admin', 
+                    :id => parent, 
+                    :member => element 
+                  },
+                  :success => "adminToggleImage('organization-#{parent.id}-member-#{element.id}-admin')"
+		-%>
+<%
+    end
+  end
+end
+%>
+<%
+# Write the name of the element
+%>
+	<div id="admin-div-element-text-<%= element_class -%>-<%= element.id -%>-container" style='width: 213px; height: 33px; padding: 0;'>
+		<p id="admin-div-element-text-<%= element_class -%>-<%= element.id -%>" title="<%= element.name -%>" class="<%= 'not-mine' if element_class == 'project' && !current_member.projects.include?(element) %>"><%= element.name -%></p>
+	</div>
+</div>
+<script>
+	resizeFontSizeToFit($('admin-div-element-text-<%= element_class -%>-<%= element.id -%>'),$('admin-div-element-text-<%= element_class -%>-<%= element.id -%>-container'));
+</script>

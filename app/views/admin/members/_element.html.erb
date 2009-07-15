@@ -1,0 +1,16 @@
+<% 
+element_class = element.class.to_s.downcase
+parent_class = parent.class.to_s.downcase
+%>
+
+<div id='<%= parent_class -%>-<%= parent.id -%>-<%= element_class -%>-<%= element.id -%>' class='admin-div-element-members admin-div-element'>
+<%
+# Write the name of the element
+%>
+	<div id="admin-div-element-text-<%= parent_class -%>-<%= parent.id -%>-<%= element_class -%>-<%= element.id -%>-container" style='width: 320px; height: 33px; padding: 0; text-align: center;'>
+		<p id="admin-div-element-text-<%= parent_class -%>-<%= parent.id -%>-<%= element_class -%>-<%= element.id -%>" title="<%= element.name -%>"style=""><%= element.name -%></p>
+	</div>
+</div>
+<script>
+	resizeFontSizeToFit($('admin-div-element-text-<%= parent_class -%>-<%= parent.id -%>-<%= element_class -%>-<%= element.id -%>'),$('admin-div-element-text-<%= parent_class -%>-<%= parent.id -%>-<%= element_class -%>-<%= element.id -%>-container'));
+</script>

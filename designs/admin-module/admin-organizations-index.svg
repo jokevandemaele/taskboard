@@ -1889,6 +1889,18 @@
        width="52.841446"
        sodipodi:absref="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/Folders_128.png"
        xlink:href="/Users/nictuku/Documents/programacion/agilar/taskboard/designs/shared/Folders_128.png" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/Users/nictuku/Documents/programacion/agilar/taskboard/public/images/admin/admin-div-element-display-members.png"
+       style="fill:#f1f6ff;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect2897"
+       width="320"
+       height="33.175301"
+       x="41.636597"
+       y="516.82471"
+       ry="12.999999"
+       rx="12.999999" />
     <g
        id="g9396"
        transform="matrix(0.8913736,0,0,0.8913736,4.5228323,185.67518)">
@@ -2991,21 +3003,20 @@
        width="32"
        id="rect2890"
        style="opacity:0;fill:#2a7fff;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1" />
-    <rect
-       inkscape:export-ydpi="90"
-       inkscape:export-xdpi="90"
-       inkscape:export-filename="/Users/nictuku/Documents/programacion/agilar/taskboard/public/images/admin/admin-div-element-display.png"
-       style="fill:#afc6e9;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="rect4008"
-       width="142"
-       height="33.174999"
-       x="219.6366"
-       y="478.42114"
-       ry="12.999999"
-       rx="12.999999" />
     <g
-       id="g4557"
-       style="fill:#f1f6ff;fill-opacity:1">
+       id="g2899">
+      <rect
+         rx="12.999999"
+         ry="12.999999"
+         y="478.42114"
+         x="219.6366"
+         height="33.174999"
+         width="142"
+         id="rect4008"
+         style="fill:#afc6e9;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:export-filename="/Users/nictuku/Documents/programacion/agilar/taskboard/public/images/admin/admin-div-element-display.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90" />
       <rect
          inkscape:export-ydpi="90"
          inkscape:export-xdpi="90"
