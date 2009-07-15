@@ -12,11 +12,11 @@ require 'tasks/rails'
 require 'rcov/rcovtask'
 
 # This enables metric_fu profiling system, don't enable it unless needed in development or production
- require 'metric_fu'
- MetricFu::Configuration.run do |config| 
-   #define which metrics you want to use 
-   config.metrics  = [:churn, :saikuro, :stats, :flog, :flay, :reek, :roodi] 
- end
+ # require 'metric_fu'
+ # MetricFu::Configuration.run do |config| 
+ #   #define which metrics you want to use 
+ #   config.metrics  = [:churn, :saikuro, :stats, :flog, :flay, :reek, :roodi] 
+ # end
 namespace :test do
 namespace :coverage do
 desc "Delete aggregate coverage data."
