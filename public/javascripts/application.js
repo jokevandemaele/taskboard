@@ -24,8 +24,11 @@ function cancelForm(id){
 function updateName(type,object){
 	object_id = type + "-" + object.id + "-name";
 	$(object_id).innerHTML = object.name;
+	
 	Effect.Fade($('dialog-background-fade'), { duration: 0.2 });
     new Effect.Highlight(object_id, { startcolor: '#ffff99', endcolor: '#d5e5ff' });
+	resizeFontSizeToFit($(object_id), $(type + "-" + object.id));
+
 }
 
 function adminToggleImage(id){
@@ -46,7 +49,6 @@ function resizeFontSizeToFit(element,container){
 		elementH = element.offsetHeight;
 		containerW = container.offsetWidth;
 		containerH = container.offsetHeight;
-		
 		while(elementW > containerW || elementH > containerH){
 			font_size -= 1;
 			element.setStyle({fontSize: font_size + 'px'});

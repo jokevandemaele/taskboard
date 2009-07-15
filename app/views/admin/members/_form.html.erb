@@ -90,7 +90,7 @@
 	</div>
 	<%= admin_close_div 765 -%>
 
-<% if !@members_not_in_organization.nil? && !@members_not_in_organization.empty? -%>
+<% if !@members_not_in_organization.nil? && !@members_not_in_organization.empty? && current_member.admin? -%>
         <% if @organization %>
           <%= admin_open_div 765 -%>
             <% form_remote_tag :url => { :controller => 'admin/organizations', :action => 'add_member', :id => @organization.id }, :method => :put, :update => 'dummy-for-actions' do |f| %>

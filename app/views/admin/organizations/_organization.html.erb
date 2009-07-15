@@ -2,7 +2,7 @@
 <div id="organization-<%= organization.id %>-container">
 <%= admin_open_div(700) -%>
 <div id="organization-<%= organization.id %>" class="admin-div-organization-top">
-	<div class="admin-div-organization-top-actions admin-div-top-actions" style="float:right; margin: none;">
+	<div class="admin-div-organization-top-actions admin-div-top-actions" style="float:right; margin: 0;">
 		<% if current_member.admins?(organization)%>
 		<%= link_to_remote image_tag("admin/admin-div-actions-edit.png",:alt => "Edit"), :url => { :action => :show_form, :id => organization.id } -%>
 		<%= link_to_remote image_tag("admin/admin-div-actions-remove.png", :alt => "Remove"), 
@@ -19,7 +19,7 @@
 		<span class="admin-div-top-actions-counts"><%=h organization.members.length %></span>
 		<%= image_tag "admin/admin-div-actions-members.png", :alt => "Members" -%>
 	</div>
-	<div id="admin-div-organization-top-name" style="float:left;">
+	<div id="admin-div-organization-top-name-<%= organization.id -%>" style="float:left; max-width: 415px; height: 30px;">
 		<script>
 			ids<%= organization.id %> = new Array('admin-div-organization-projects-<%= organization.id %>', 'admin-div-organization-members-<%= organization.id %>');
 		</script>
@@ -28,94 +28,53 @@
 			:style => "cursor: pointer",
 			:onClick => "expandCollapseDivs(ids#{organization.id})" -%>
 			
-		<h1 id="organization-<%= organization.id -%>-name" onClick="expandCollapseDivs(ids<%= organization.id -%>)"><%=h truncate(organization.name, :length => 18) -%></h1>
+		<h1 id="admin-div-organization-top-name-<%= organization.id -%>-name" onClick="expandCollapseDivs(ids<%= organization.id -%>)"><%=h organization.name -%></h1>
 	</div>
+	<script>
+	 resizeFontSizeToFit($('admin-div-organization-top-name-<%= organization.id -%>-name'), $('admin-div-organization-top-name-<%= organization.id -%>'));
+	</script>
 	<div style="clear: both;"></div>
 </div>
 
-<div id="admin-div-organization-projects-<%= organization.id -%>" class="admin-div-organization-projects" style="display:none">
+
+<div id="admin-div-organization-projects-<%= organization.id -%>" class="admin-div-organization-projects" style="<%= 'display:none' if !organization.members.include?(current_member) %>">
 <div class="admin-div-section">
-	<span class="admin-div-elements-search"><%= text_field_tag "admin-div-projects-search", "search", :onClick => "if(this.value == 'search') {this.clear();}" , :autocomplete => "off", :class => "admin-div-elements-search-field" -%><%= image_tag 'admin/admin-div-elements-search.png', :alt => "find" -%></span>
+	<!--<span class="admin-div-elements-search"><%= text_field_tag "admin-div-projects-search", "search", :onClick => "if(this.value == 'search') {this.clear();}" , :autocomplete => "off", :class => "admin-div-elements-search-field" -%><%= image_tag 'admin/admin-div-elements-search.png', :alt => "find" -%></span> -->
 	<%= image_tag "admin/admin-div-actions-projects.png", :alt => "Projects", :style => "position: relative; top: 10px" -%>
 	<h2>Projects</h2>
-	
+	<% if current_member.admins?(organization)%>
+		<div style="float: right; position: relative; top: 8px; right: 15px;">
+		<%= link_to_remote "new project" + image_tag("admin/admin-div-elements-add.png", :alt => "Add", :style => "margin-left: 10px; "), :url => { :controller => "admin/projects" , :action => :show_form, :display_existing => true, :organization => organization.id } -%>
+		</div>
+	<% end %>
 </div>
 <div class="admin-div-elements-actions">
-	<% if current_member.admins?(organization)%>
-	<%= link_to_remote image_tag("admin/admin-div-elements-add.png", :alt => "Add"), :url => { :controller => "admin/projects" , :action => :show_form, :display_existing => true, :organization => organization.id } -%>
-	<% end %>
 	<%= image_tag "admin/admin-div-elements-next.png", :alt => "Next", :style => "display:none;"-%><br />
 	<%= image_tag "admin/admin-div-elements-prev.png", :alt => "Previous", :style => "display:none;" -%><br />
 </div>
 	<% organization.projects.each do |project| -%>
-		<div id="organization-<%= organization.id %>-project-<%= project.id %>" class="admin-div-element">
-		<% if current_member.admins?(organization)%>
-		<%= link_to_remote image_tag("admin/admin-div-element-remove.png", :alt => "Remove",
-				:style => "float: right; position:relative; top: 5px; left: -10px;"),
-				:url => admin_project_url(project.id),
-				:method => :delete,
-				:confirm => "Are you sure?",
-				:success => "Effect.Puff($('organization-#{organization.id}-project-#{project.id}'));" -%>
-		<%= link_to_remote image_tag("admin/admin-div-element-edit.png", :alt => "Edit",
-                                     :style => "float: right; position:relative; top: 5px; left: -15px;"),
-                                   :url => { :controller => 'admin/projects', :action => :show_form, :id => project.id } -%>
-		<% end %>
-		<p id="admin-div-element-text-project-<%= project.id -%>"><%=h truncate(project.name, :length => 13) -%></p>
-		<script>
-			//resizeFontSizeToFitParent('admin-div-element-text-project-<%= project.id -%>');
-		</script>
-		</div>
+		<%= render :partial => "element", :locals => {:element => project, :parent => organization} -%>
 	<% end -%>
 	<div style="clear: both;"></div>
 </div>
 
-<div id="admin-div-organization-members-<%= organization.id -%>" class="admin-div-organization-members" style="display:none">
+<div id="admin-div-organization-members-<%= organization.id -%>" class="admin-div-organization-members" style="<%= 'display:none' if !organization.members.include?(current_member) %>">
 <div class="admin-div-section">
-	<span class="admin-div-elements-search"><%= text_field_tag "admin-div-members-search", "search", :onClick => "if(this.value == 'search') {this.clear();}" , :autocomplete => "off", :class => "admin-div-elements-search-field" -%><%= image_tag 'admin/admin-div-elements-search.png', :alt => "find" -%></span>
+	<!--<span class="admin-div-elements-search"><%= text_field_tag "admin-div-members-search", "search", :onClick => "if(this.value == 'search') {this.clear();}" , :autocomplete => "off", :class => "admin-div-elements-search-field" -%><%= image_tag 'admin/admin-div-elements-search.png', :alt => "find" -%></span> -->
 	<%= image_tag "admin/admin-div-actions-members.png", :alt => "members", :style => "position: relative; top: 10px" -%>
 	<h2>Members</h2>
+	<% if current_member.admins?(organization)%>
+	<div style="float: right; position: relative; top: 8px; right: 15px;">
+		<%= link_to_remote "new member" + image_tag("admin/admin-div-elements-add.png", :alt => "Add", :style => "margin-left: 10px;"), :url => { :controller => 'admin/members', :action => :show_form, :organization => organization.id } -%>
+	</div>
+	<% end %>
 </div>
 <div class="admin-div-elements-actions">
-	<% if current_member.admins?(organization)%>
-	<%= link_to_remote image_tag("admin/admin-div-elements-add.png", :alt => "Add"), :url => { :controller => 'admin/members', :action => :show_form, :organization => organization.id } -%>
-	<% end %>
 	<%= image_tag "admin/admin-div-elements-next.png", :alt => "Next", :style => "display:none;" -%><br />
 	<%= image_tag "admin/admin-div-elements-prev.png", :alt => "Previous", :style => "display:none;" -%><br />
 </div>
 	<% organization.members.each do |member| -%>
-		<div id="organization-<%= organization.id %>-member-<%= member.id %>"class="admin-div-element">
-		<% if current_member.admins?(organization)%>
-		<%= link_to_remote image_tag("admin/admin-div-element-remove.png", :alt => "Remove",
-                                     :style => "float: right; position:relative; top: 5px; left: -10px;"),
-                                   :url => { :controller => 'admin/organizations', :action => 'remove_member', :organization => organization.id, :member => member.id },
-                                   :confirm => 'Are you sure?',
-                                   :success => "Effect.Puff($('organization-#{organization.id}-member-#{member.id}'));" -%>
-
-		<%= link_to_remote image_tag("admin/admin-div-element-edit.png", :alt => "Edit",
-					:style => "float: right; position:relative; top: 5px; left: -15px;"),
-					:url => { :controller => 'admin/members', :action => 'show_form', :id => member.id } -%>
-		<% if member.admins?(organization) -%>
-			<% 
-				action = 'remove' 
-				reaction = 'make'
-			%>
-		<% else %>
-			<% 
-				action = 'make' 
-				reaction = 'remove'
-			%>
-		<% end %>
-		<% if member.admin? %>
-			<%= image_tag("admin/admin-div-element-sysadmin.png", :alt => "sysadmin", :id => "organization-#{organization.id}-member-#{member.id}-admin", :style =>"float: right; position:relative; top: 5px; left: -25px;") -%>
-		<% else %>
-			<%= link_to_remote image_tag("admin/admin-div-element-#{action}-admin.png", :alt => "#{action} admin", :title => "#{action} admin", :id => "organization-#{organization.id}-member-#{member.id}-admin", :style =>"float: right; position:relative; top: 5px; left: -25px;"), 
-			:url => { :controller => 'admin/organizations', :action => 'toggle_admin', :id => organization, :member => member },
-			:success => "adminToggleImage('organization-#{organization.id}-member-#{member.id}-admin')"
-		-%>
-		<% end -%>
-		<% end %>
-		<p id="admin-div-element-text-member-<%= member.id -%>"><%=h truncate(member.name, :length => 16) -%></p>
-		</div>
+		<%= render :partial => "element", :locals => {:element => member, :parent => organization} -%>
 	<% end -%>
 	<div style="clear: both;"></div>
 </div>

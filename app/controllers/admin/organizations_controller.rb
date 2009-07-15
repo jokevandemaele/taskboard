@@ -37,7 +37,7 @@ class Admin::OrganizationsController < ApplicationController
       render :inline => "
       <script>
         var organization = eval(#{@organization.to_json});
-        updateName('organization',organization.organization);       
+        updateName('admin-div-organization-top-name',organization.organization);
       </script>"
     else
       # Decide what to do here, we should send the error somehow and process it in the view.
@@ -120,7 +120,7 @@ class Admin::OrganizationsController < ApplicationController
   end
   
   def remove_member
-    @membership = OrganizationMembership.first(:conditions => ["member_id = ? and organization_id = ?", params[:member], params[:organization]])
+    @membership = OrganizationMembership.first(:conditions => ["member_id = ? and organization_id = ?", params[:object], params[:organization]])
     @member = @membership.member
     @organization = @membership.organization
     # We assume that the team has only one project, that's why .first is enough and we don't have to iterate.

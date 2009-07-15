@@ -2,7 +2,7 @@
 <div id="member-<%= member.id %>-container">
 <%= admin_open_div(700) -%>
 <div id="member-<%= member.id %>" class="admin-div-member-top">
-	<div class="admin-div-organization-top-actions admin-div-top-actions" style="float:right; margin: none;">
+	<div class="admin-div-organization-top-actions admin-div-top-actions" style="float:right; margin: 0;">
 		<% if member.admin? -%>
 			<%= image_tag "admin/admin-div-element-sysadmin.png", :alt => "Sysadmin", :style => "position: relative; right: 10px;", :title => "User is a System Administrator"-%>
 		<% end -%>
@@ -21,7 +21,7 @@
 		<%= image_tag "admin/admin-div-actions-organizations.png", :alt => "Organizations" -%>
 	</div>
 	
-	<div id="admin-div-member-top-name" style="float:left;">
+	<div id="admin-div-member-top-<%= member.id -%>" style="float:left; max-width: 415px; height: 30px;">
 		<script>
 			ids<%= member.id %> = new Array('admin-div-member-projects-<%= member.id %>', 'admin-div-member-organizations-<%= member.id %>');
 		</script>
@@ -30,40 +30,33 @@
 			:style => "cursor: pointer",
 			:onClick => "expandCollapseDivs(ids#{member.id})" -%>
 			
-		<h1 id="member-<%= member.id -%>-name" onClick="expandCollapseDivs(ids<%= member.id -%>)">	<%= image_tag member.show_picture, :style => "width: 37px; position: relative; top: -5px;" -%> <%=h truncate(member.name) -%></h1>
+		<h1 id="admin-div-member-top-<%= member.id -%>-name" onClick="expandCollapseDivs(ids<%= member.id -%>)">	<%= image_tag member.show_picture, :style => "width: 37px; position: relative; top: -5px;" -%> <%=h member.name -%></h1>
 	</div>
-	<div style="clear: both;"></div>
+	<script>
+	 resizeFontSizeToFit($('admin-div-member-top-<%= member.id -%>-name'), $('admin-div-member-top-<%= member.id -%>'));
+	</script>
+	<div style="clear: both; margin-bottom: 10px;"></div>
 
-	<div id="admin-div-member-projects-<%= member.id -%>" class="admin-div-member-projects" style="display:none">
+	<div id="admin-div-member-projects-<%= member.id -%>" class="admin-div-member-projects">
 		<div class="admin-div-section">
-			<span class="admin-div-elements-search"><%= text_field_tag "admin-div-projects-search", "search", :onClick => "if(this.value == 'search') {this.clear();}" , :autocomplete => "off", :class => "admin-div-elements-search-field" -%><%= image_tag 'admin/admin-div-elements-search.png', :alt => "find" -%></span>
+			<!-- <span class="admin-div-elements-search"><%= text_field_tag "admin-div-projects-search", "search", :onClick => "if(this.value == 'search') {this.clear();}" , :autocomplete => "off", :class => "admin-div-elements-search-field" -%><%= image_tag 'admin/admin-div-elements-search.png', :alt => "find" -%></span> -->
 			<%= image_tag "admin/admin-div-actions-projects.png", :alt => "Projects", :style => "position: relative; top: 10px" -%>
 			<h2>Projects</h2>
 		</div>
-	<% member.projects.each do |project| -%>
-		<div id="member-<%= member.id %>-project-<%= project.id %>" class="admin-div-element">
-			<p id="admin-div-element-text-project-<%= project.id -%>"><%=h truncate(project.name, :length => 16) -%></p>
-			<script>
-				//resizeFontSizeToFitParent('admin-div-element-text-project-<%= project.id -%>');
-			</script>
-		</div>
-	<% end -%>
+		<% member.projects.each do |project| -%>
+			<%= render :partial => "element", :locals => {:element => project, :parent => member} -%>
+		<% end -%>
 		<div style="clear: both;"></div>
 	</div>
-	<div id="admin-div-member-organizations-<%= member.id -%>" class="admin-div-member-organizations" style="display:none">
+	<div id="admin-div-member-organizations-<%= member.id -%>" class="admin-div-member-organizations">
 		<div class="admin-div-section">
-			<span class="admin-div-elements-search"><%= text_field_tag "admin-div-organizations-search", "search", :onClick => "if(this.value == 'search') {this.clear();}" , :autocomplete => "off", :class => "admin-div-elements-search-field" -%><%= image_tag 'admin/admin-div-elements-search.png', :alt => "find" -%></span>
+			<!-- <span class="admin-div-elements-search"><%= text_field_tag "admin-div-organizations-search", "search", :onClick => "if(this.value == 'search') {this.clear();}" , :autocomplete => "off", :class => "admin-div-elements-search-field" -%><%= image_tag 'admin/admin-div-elements-search.png', :alt => "find" -%></span> -->
 			<%= image_tag "admin/admin-div-actions-organizations.png", :alt => "Organizations", :style => "position: relative; top: 10px" -%>
 			<h2>Organizations</h2>
 		</div>
-	<% member.organizations.each do |organization| -%>
-		<div id="member-<%= member.id %>-organization-<%= organization.id %>" class="admin-div-element">
-			<p id="admin-div-element-text-organization-<%= organization.id -%>"><%=h truncate(organization.name, :length => 16) -%></p>
-			<script>
-				//resizeFontSizeToFitParent('admin-div-element-text-project-<%= organization.id -%>');
-			</script>
-		</div>
-	<% end -%>
+		<% member.organizations.each do |organization| -%>
+			<%= render :partial => "element", :locals => {:element => organization, :parent => member} -%>
+		<% end -%>
 		<div style="clear: both;"></div>
 	</div>
 </div>

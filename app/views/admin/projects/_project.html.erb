@@ -20,7 +20,7 @@
 		<span class="admin-div-top-actions-counts"><%=h project.members.length %></span>
 		<%= image_tag "admin/admin-div-actions-members.png", :alt => "Members" -%>
 	</div>
-	<div id="admin-div-project-top-name-<%= project.id -%>" style="float:left; max-width: 430px; height: 30px;">
+	<div id="admin-div-project-top-name-<%= project.id -%>" style="float:left; max-width: 415px; height: 30px;">
 		<script>
 			ids<%= project.id %> = new Array('admin-div-project-stories-<%= project.id %>','admin-div-project-members-<%= project.id %>','admin-div-project-taskboard-<%= project.id %>','admin-div-project-backlog-<%= project.id %>','admin-div-project-burndown-<%= project.id %>');
 		</script>
@@ -29,7 +29,7 @@
 			:style => "cursor: pointer",
 			:onClick => "expandCollapseDivs(ids#{project.id})" -%>
 			
-		<h1 onClick="expandCollapseDivs(ids<%= project.id -%>)" id="admin-div-project-top-name-<%= project.id -%>-name" title="<%=h project.name -%>"><%=h project.name -%></h1>
+		<h1 onClick="expandCollapseDivs(ids<%= project.id -%>)" id="admin-div-project-top-name-<%= project.id -%>-name" title="<%=h project.name -%>" class="<%= 'not-mine' if !current_member.projects.include?(project) %>"><%=h project.name -%></h1>
 	</div>
 	<script>
 	 resizeFontSizeToFit($('admin-div-project-top-name-<%= project.id -%>-name'), $('admin-div-project-top-name-<%= project.id -%>'));
@@ -38,28 +38,10 @@
 	<div style="clear: both;"></div>
 </div>
 
-<div id="admin-div-project-stories-<%= project.id -%>" class="admin-div-project-section admin-div-project-stories" style="margin:0;">
-	<div class="admin-div-section">
-		<%= image_tag "admin/admin-div-actions-stories.png", :alt => "Stories", :class => "admin-div-section-img" -%>
-		<h2 style="position: relative; top: 5px; left: 10px;"><%= link_to "Stories", :controller => "/backlog", :action => :show, :id => project.id %></h2>
-		<p style="color: #04a; font-size: 12px; position:relative; top: -17px; left: 57px;">(to edit go to <%= link_to "product backlog", :controller => "/backlog", :action => :show, :id => project.id %>)</p>
-	</div>
-	<div style="clear: both;"></div>
-</div>
-<div id="admin-div-project-members-<%= project.id -%>" class="admin-div-project-members" style="margin:0;">
-	<div class="admin-div-section">
-		<%= image_tag "admin/admin-div-actions-members.png", :alt => "Members", :class => "admin-div-section-img" -%>
-		<h2 style="position: relative; top: 5px; left: 3px;"><%= link_to "Members", :controller => :teams, :project => project.id %></h2>
-		<p style="color: #04a; font-size: 12px; position:relative; top: -17px; left: 57px;">(to edit go to <%= link_to "teams", :controller => :teams, :project => project.id %>)</p>
-		
-	</div>
-	<div style="clear: both;"></div>
-</div>
 <div id="admin-div-project-taskboard-<%= project.id -%>" class="admin-div-project-taskboard" style="margin:0;">
 	<div class="admin-div-section">
 		<%= image_tag "admin/admin-div-actions-taskboard.png", :alt => "Taskboard", :class => "admin-div-section-img" -%>
 		<h2 style="position: relative; top: 5px; left: 0px;"><%= link_to "Taskboard", :controller => "/taskboard", :action => :show, :id => project.id -%></h2>
-		<p style="color: #04a; font-size: 12px; position:relative; top: -17px; left: 57px;">(where the magic actually happens)</p>
 	</div>
 	<div style="clear: both;"></div>
 </div>
@@ -67,7 +49,13 @@
 	<div class="admin-div-section">
 		<%= image_tag "admin/admin-div-actions-backlog.png", :alt => "Product Backlog", :class => "admin-div-section-img" -%>
 		<h2 style="position: relative; top: 5px; left: 10px;"><%= link_to "Product Backlog", :controller => "/backlog", :action => :show, :id => project.id %></h2>
-		<p style="color: #04a; font-size: 12px; position:relative; top: -17px; left: 57px;">(manage stories, set priorities, etc..)</p>
+	</div>
+	<div style="clear: both;"></div>
+</div>
+<div id="admin-div-project-members-<%= project.id -%>" class="admin-div-project-members" style="margin:0;">
+	<div class="admin-div-section">
+		<%= image_tag "admin/admin-div-actions-members.png", :alt => "Members", :class => "admin-div-section-img" -%>
+		<h2 style="position: relative; top: 5px; left: 3px;"><%= link_to "Team Members", :controller => :teams, :project => project.id %></h2>
 	</div>
 	<div style="clear: both;"></div>
 </div>

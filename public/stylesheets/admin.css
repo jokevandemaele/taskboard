@@ -35,7 +35,7 @@ a { text-decoration: none;}
 .admin-div-top-middle{ float: left; width: 100%; height: 12px; background:green; border-top: 3px solid #0c82eb; background: #d5e5ff;}
 .admin-div-top-right{ float: right; width: 15px; height: 15px; background: url('/images/admin/admin-div-top-right.png');}
 .admin-div-content{ padding-left: 12px; padding-right: 12px; border-left: 3px solid #0c82eb; border-right: 3px solid #0c82eb; background: #d5e5ff;}
-.admin-div-content h1 { position: relative; top: 4px; font-size: 28; color: #002255; display: inline; margin: 0; margin-left: 10px; font-weight: normal;}
+.admin-div-content h1 { position: relative; top: 4px; font-size: 28px; color: #002255; display: inline; margin: 0; margin-left: 10px; font-weight: normal;}
 .admin-div-content h2 { color: #002255; display: inline; margin: 0; margin-left: 10px; font-weight: normal;}
 .admin-div-bottom{margin-bottom: 30px;}
 .admin-div-bottom-left{ float: left; width: 15px; height: 15px; background: url('/images/admin/admin-div-bottom-left.png');}
@@ -51,12 +51,14 @@ a { text-decoration: none;}
 .admin-div-section a:hover { color: #0c82eb; }
 .admin-div-section-img {position: relative; height: 32px; left: 10px; top: 10px}
 .admin-div-elements-actions{ float: right;}
-.admin-div-element { float: left; width: 197px; height: 33px; background: url('/images/admin/admin-div-element-display.png') no-repeat; margin: 5px;}
+.admin-div-element { float: left; width: 320px; height: 33px; background: url('/images/admin/admin-div-element-display.png') no-repeat; margin: 5px; }
+.admin-div-element-members { background: url('/images/admin/admin-div-element-display-members.png') no-repeat; }
 .admin-div-element p{ font-size: 14px; color: #002255; padding-left: 10px; padding-top: 5px; margin: 0;}
 .admin-div-elements-search{ float:right; position: relative; top: 11px; margin-right: 10px;} 
 .admin-div-elements-search-field{ background: url('/images/admin/admin-div-elements-search-field.png') no-repeat transparent; border: none; width: 128px; height: 25px; font-size: 12px;  position:relative; top: 4px; padding-left: 12px; padding-top: 3px; margin: 0;}
 #admin-div-color-picker-content table { border-spacing: 3px; }
 #admin-div-color-picker-content table tbody tr td { width: 24px; height: 24px; }
+.not-mine { color: #aaa !important;}
 /* End Admin Div  */
 
 /* Admin Form */

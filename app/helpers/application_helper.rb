@@ -54,4 +54,5 @@ module ApplicationHelper
     "</div>
     <div class=\"admin-div-bottom\" style=\"width: #{size}px\"><span class=\"admin-div-bottom-left\"></span><span class=\"admin-div-bottom-middle\" style=\"width: #{size-30}px\"></span><span class=\"admin-div-bottom-right\"></span></div>"
   end
+  
 end

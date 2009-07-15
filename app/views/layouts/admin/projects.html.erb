@@ -22,7 +22,9 @@
 			<% image = image_tag 'admin/add.png', :alt => 'new' -%>
 			<li><%= link_to_remote "new project #{image}", :url => { :action => :show_form } -%></li>
       <% end %>
+	  <% if @projects.size > 10 -%>
 			<li><%= text_field_tag "admin-sidebar-search", "find project", :onClick => "if(this.value == 'find project') {this.clear();}" , :onChange => "projects_search.search(this.value)", :autocomplete => "off" -%> <%= image_tag 'admin/find.png', :alt => "find" -%></li>
+	  <% end %>
 			<% image = image_tag 'admin/bug.png', :alt => "bug" -%>
 			<li><%= link_to "report bug #{image}", "/report_bug" -%></li>
 		</ul>
