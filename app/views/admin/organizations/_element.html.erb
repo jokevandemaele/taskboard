@@ -2,7 +2,11 @@
 element_class = element.class.to_s.downcase
 parent_class = parent.class.to_s.downcase
 %>
+<% if parent_class == 'organization' && current_member.admins?(parent) %>
+<div id='<%= parent_class -%>-<%= parent.id -%>-<%= element_class -%>-<%= element.id -%>' class='admin-div-element-actions'>
+<% else %>
 <div id='<%= parent_class -%>-<%= parent.id -%>-<%= element_class -%>-<%= element.id -%>' class='admin-div-element'>
+<% end %>
 <%
 # If the user admins the organization i should display remove, edit, and change admin settings
 if(parent_class == 'organization' && current_member.admins?(parent))
@@ -92,8 +96,26 @@ end
 <%
 # Write the name of the element
 %>
-	<div id="admin-div-element-text-<%= element_class -%>-<%= element.id -%>-container" style='width: 213px; height: 33px; padding: 0;'>
-		<p id="admin-div-element-text-<%= element_class -%>-<%= element.id -%>" title="<%= element.name -%>" class="<%= 'not-mine' if element_class == 'project' && !current_member.projects.include?(element) %>"><%= element.name -%></p>
+	<div id="admin-div-element-text-<%= element_class -%>-<%= element.id -%>-container" style='padding: 0;'>
+		<p id="admin-div-element-text-<%= element_class -%>-<%= element.id -%>" title="<%= element.name -%>" class="<%= 'not-mine' if element_class == 'project' && !current_member.projects.include?(element) %>">
+      <% if parent_class == 'organization' && element_class == 'member' && !current_member.admins?(parent) %>
+        <% if element.admin? %>
+        <%= image_tag("admin/admin-div-element-sysadmin.png", 
+                    :alt => "sysadmin", 
+                    :id => "organization-#{parent.id}-member-#{element.id}-admin"
+                  )
+        %>
+          <% else if element.admins?(parent) %>
+            <%= image_tag("admin/admin-div-element-remove-admin.png", 
+                        :alt => "sysadmin", 
+                        :id => "organization-#{parent.id}-member-#{element.id}-admin"
+                      )
+            %>
+          <% end %>
+        <% end %>
+      <% end %>
+      <%= element.name -%>
+    </p>
 	</div>
 </div>
 <script>
