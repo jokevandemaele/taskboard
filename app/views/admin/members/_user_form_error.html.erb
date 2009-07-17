@@ -1,0 +1,4 @@
+<script>
+	top.$('show-errors').innerHTML = <%= error_messages_for(:member, :object => object).to_json -%>;
+	top.$('show-errors').show();
+</script>
