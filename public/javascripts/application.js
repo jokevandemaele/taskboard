@@ -49,7 +49,7 @@ function resizeFontSizeToFit(element,container){
 		elementH = element.offsetHeight;
 		containerW = container.offsetWidth;
 		containerH = container.offsetHeight;
-		while(elementW > containerW || elementH > (containerH - 10)){
+		while(elementW > containerW || elementH > containerH){
 			font_size -= 1;
 			element.setStyle({fontSize: font_size + 'px'});
 			elementW = element.offsetWidth;

@@ -8,9 +8,13 @@
 
 	<div id="admin-user-info-text" style="float:right; margin-right: 5px">
 		<p>Welcome, <span class="admin-user-info-text-user"><%= @member.name %></span></p>
-		<% if @member.admin? -%>
-			<p class="admin-user-info-text-role">You are a System Administrator</p>
-		<% end -%>
+<% if @member.admin? -%>
+		<p class="admin-user-info-text-role">You are a System Administrator</p>
+<% else -%>
+<% 	if @member.admins_any_organization? %>
+		<p class="admin-user-info-text-role">You are an Organization Administrator</p>
+<%	end -%>
+<% end -%>
 		<p id="admin-user-info-links" class="admin-user-info-text-role">[ <%= link_to "logout", :controller => "/logout" %> | edit profile ]</p>
 	</div>
 </div>

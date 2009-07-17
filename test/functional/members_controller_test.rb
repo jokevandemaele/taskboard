@@ -15,16 +15,30 @@ class Admin::MembersControllerTest < ActionController::TestCase
   end
   
   # Permissions tests
-  test "an organization admin should be able to add a user to that organization" do
-    login_as_organization_admin
-    post :create, :member => {:name => 'Vincent', :username => 'vincent', :password => 'dog'}
-    assert_response :bad_request
-    user = Member.find_by_name('Vincent')
-    assert !user
-    post :create, :member => {:name => 'Vincent', :username => 'vincent', :email => 'vincent@peta.org', :password => 'dog'}
+  test "a system adminsitrator should CRUD people to any organization" do
+    login_as_administrator
+
+    # CREATE to organization where admin belongs
+    post :create, { :member => {:name => 'Vincent', :username => 'vincent', :email => 'vincent@peta.org', :password => 'dog'}, :organization => organizations(:widmore_corporation).id }
     assert_response :created
-    user = Member.find_by_name('Vincent')
-    assert user
+    # READ from organization where admin belongs
+    
+    # UPDATE from organization where admin belongs
+    # DELETE from organization where admin belongs
+
   end
+
+  test "an organization admin should CRUD people to my organization" do
+    login_as_organization_admin
+  end
+
+  test "an organization admin shouldn't CRUD people to another organization" do
+    login_as_organization_admin
+  end 
+
+  test "a normal user shouldn't be able to CRUD people to any organization" do
+    login_as_normal_user
+  end
+
   
 end

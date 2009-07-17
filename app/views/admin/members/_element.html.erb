@@ -3,7 +3,7 @@ element_class = element.class.to_s.downcase
 parent_class = parent.class.to_s.downcase
 %>
 
-<div id='<%= parent_class -%>-<%= parent.id -%>-<%= element_class -%>-<%= element.id -%>' class='admin-div-element'>
+<div id='<%= parent_class -%>-<%= parent.id -%>-<%= element_class -%>-<%= element.id -%>' class='admin-div-element admin-div-element-core'>
 <%
 # Write the name of the element
 %>
@@ -16,3 +16,4 @@ parent_class = parent.class.to_s.downcase
 		resizeFontSizeToFit($('name-<%= parent_class%>-<%= parent.id %>-<%= element_class -%>-<%= element.id -%>'),$('name-<%= parent_class%>-<%= parent.id %>-<%= element_class -%>-<%= element.id -%>-container'));
 		$('name-<%= parent_class%>-<%= parent.id %>-<%= element_class -%>-<%= element.id -%>').setStyle({ width: '100%' });
 	</script>
+</div>

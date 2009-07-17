@@ -29,7 +29,7 @@
 		<script>
 			ids<%= organization.id %> = new Array('admin-div-organization-projects-<%= organization.id %>', 'admin-div-organization-members-<%= organization.id %>');
 		</script>
-		<h1 id="admin-div-organization-top-name-<%= organization.id -%>-name" onClick="expandCollapseDivs(ids<%= organization.id -%>)" ><%=h organization.name -%></h1>
+		<h1 id="admin-div-organization-top-name-<%= organization.id -%>-name" onClick="expandCollapseDivs(ids<%= organization.id -%>)" class="<%= 'not-mine' if !organization.members.include?(current_member)-%>"><%=h organization.name -%></h1>
 	</div>
 	<script>
 	 resizeFontSizeToFit($('admin-div-organization-top-name-<%= organization.id -%>-name'), $('admin-div-organization-top-name-<%= organization.id -%>'));
@@ -38,7 +38,7 @@
 </div>
 
 
-<div id="admin-div-organization-projects-<%= organization.id -%>" class="admin-div-organization-projects" style="<%= 'display:none' if !organization.members.include?(current_member) %>">
+<div id="admin-div-organization-projects-<%= organization.id -%>" class="admin-div-organization-projects" style="<%= '' if !organization.members.include?(current_member) %>">
 <div class="admin-div-section">
 	<!--<span class="admin-div-elements-search"><%= text_field_tag "admin-div-projects-search", "search", :onClick => "if(this.value == 'search') {this.clear();}" , :autocomplete => "off", :class => "admin-div-elements-search-field" -%><%= image_tag 'admin/admin-div-elements-search.png', :alt => "find" -%></span> -->
 	<%= image_tag "admin/admin-div-actions-projects.png", :alt => "Projects", :style => "position: relative; top: 10px" -%>
@@ -55,7 +55,7 @@
 	<div style="clear: both;"></div>
 </div>
 
-<div id="admin-div-organization-members-<%= organization.id -%>" class="admin-div-organization-members" style="<%= 'display:none' if !organization.members.include?(current_member) %>">
+<div id="admin-div-organization-members-<%= organization.id -%>" class="admin-div-organization-members">
 <div class="admin-div-section">
 	<!--<span class="admin-div-elements-search"><%= text_field_tag "admin-div-members-search", "search", :onClick => "if(this.value == 'search') {this.clear();}" , :autocomplete => "off", :class => "admin-div-elements-search-field" -%><%= image_tag 'admin/admin-div-elements-search.png', :alt => "find" -%></span> -->
 	<%= image_tag "admin/admin-div-actions-members.png", :alt => "members", :style => "position: relative; top: 10px" -%>

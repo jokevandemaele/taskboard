@@ -58,8 +58,8 @@ a { text-decoration: none;}
 .admin-div-element-actions-edit { margin-right: 5px;}
 .admin-div-element-actions img.admin-div-element-actions-edit-admin { margin-right: 10px; }
 
-.admin-div-element div { width: 300px; height: 33px;}
-.admin-div-element-actions div { width: 214px; height: 33px;}
+.admin-div-element div { width: 300px; height: 33px; }
+.admin-div-element-actions div { width: 214px; height: 33px; }
 
 .admin-div-element p, .admin-div-element-actions p { float:left; margin: 0; color: #002255; padding: 0; position:relative; top: 8px; }
 .admin-div-element p { text-align: center;}

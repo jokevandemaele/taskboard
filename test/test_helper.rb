@@ -51,7 +51,6 @@ class ActiveSupport::TestCase
     login_as(members(:dfaraday))
   end
 
-
   def current_member
     Member.find(session[:member])
   end

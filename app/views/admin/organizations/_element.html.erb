@@ -1,7 +1,7 @@
 <% 
 element_class = element.class.to_s.downcase
 parent_class = parent.class.to_s.downcase
-current_member_admins_parent = current_member.admins?(parent)
+current_member_admins_parent = (element_class == 'member') ? current_member.admin? || (current_member.admins?(parent) && !element.admin?) : (current_member.admins?(parent))
 %>
 <div id="<%= parent_class -%>-<%= parent.id -%>-<%= element_class -%>-<%= element.id -%>" class="admin-div-element-core admin-div-element<%= '-actions' if current_member_admins_parent -%>">
 	<%
