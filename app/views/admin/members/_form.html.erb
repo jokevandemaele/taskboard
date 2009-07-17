@@ -15,9 +15,10 @@
 			action = :create
 		end
 		-%>
-		<% form_for @member, :url => { :controller => 'admin/members', :action => action, :id => @member }, :html => { :multipart => true } do |f| %>
+		
+		<% form_for @member, :url => { :controller => 'admin/members', :action => action, :id => @member }, :html => { :multipart => true, :target => :upload_frame } do |f| %>
 			<div id="information"></div>
-			<iframe id="upload_frame" name="upload_frame" style="display: none;"></iframe>
+			<iframe id="upload_frame" name="upload_frame" style="display:none;"></iframe>
 			<% 
 			if (edit || defined? no_refresh) 
 				name = @member.name
@@ -59,6 +60,14 @@
 				<%= image_tag "admin/admin-div-actions-login.png", :alt => "Login", :style => "position: relative; left: 10px; top: -2px;" -%>
 				<h2 style="position: relative; top: 0px; margin-left: 10px;">Login information</h2>
 			</div>
+
+			<div class="admin-div-section" style="margin-bottom: 10px;">
+				<%= image_tag "admin/admin-div-actions-email.png", :alt => "Color", :style => "position: relative; left: 10px; top: 2px; width: 50px;" -%>
+				<h2 style="position: relative; top: 0px; margin-left: 20px;">E-Mail</h2>
+				<p style="color: #04a; font-size: 10px; margin: 0; position:relative; top: -18px; left: 70px;">(This mail will be used to send taskboard's notifications and invites)</p>
+				<%= f.text_field :email, :style => "float:right; position: relative; top: -55px; right: 10px; background: url('/images/admin/admin-div-field.png') no-repeat top left; border: none; width: 168px; height: 26px; padding: 5px;" %>
+			</div>
+
 			
 			<div class="admin-div-section" style="margin-bottom: 10px; height: 60px; ">
 				<%= image_tag "admin/admin-div-actions-picture.png", :alt => "Picture", :style => "position: relative; left: 0px; top: -5px;" -%>
@@ -84,9 +93,11 @@
 			<%= image_submit_tag "admin/admin-form-submit.png", :alt => "Submit", :style => "position:absolute; top: -30px; right: 119px;"-%>
 			<%= image_tag "admin/admin-form-cancel.png", 
 				:alt => "Cancel", 
-				:style => "position:absolute; top: -30px; right: 30px; cursor: pointer;", 
+				:style => "position:absolute; top: -20px; right: 30px; cursor: pointer;", 
 				:onClick => "cancelForm('form-add-member');" -%>
 		<% end %>
+	</div>
+	<div id="show-errors" style="display:none;">
 	</div>
 	<%= admin_close_div 765 -%>
 
@@ -95,10 +106,10 @@
           <%= admin_open_div 765 -%>
             <% form_remote_tag :url => { :controller => 'admin/organizations', :action => 'add_member', :id => @organization.id }, :method => :put, :update => 'dummy-for-actions' do |f| %>
 				<span class="form-name" style="font-size: 16px;">Or choose an existing one: <%= select_tag 'member', options_from_collection_for_select(@members_not_in_organization, 'id', 'name'), :style => "width: 250px;" -%></span>
-              <%= image_submit_tag "admin/admin-form-submit.png", :alt => "Submit", :style => "position:absolute; top: 340px; right: 119px;"-%>
+              <%= image_submit_tag "admin/admin-form-submit.png", :alt => "Submit", :style => "position:absolute; bottom: 29px; right: 119px;"-%>
               <%= image_tag "admin/admin-form-cancel.png", 
                   :alt => "Cancel", 
-                  :style => "position:absolute; top: 340px; right: 30px; cursor: pointer;", 
+                  :style => "position:absolute; bottom: 29px; right: 30px; cursor: pointer;", 
                   :onClick => "cancelForm('form-add-member');" -%>
             <% end %>
           <%= admin_close_div 765 -%>

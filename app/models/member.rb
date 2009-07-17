@@ -11,8 +11,8 @@ class Member < ActiveRecord::Base
   validates_uniqueness_of :username
   validates_length_of :username, :within => 3..40
   #validates_length_of :password, :within => 0..40
-  validates_presence_of :name, :username
-  #validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => "Invalid email"
+  validates_presence_of :name, :username, :email
+  validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => "Invalid email"
 
   attr_accessor :password, :password_confirmation
   

@@ -73,6 +73,7 @@ class ApplicationController < ActionController::Base
         return false
       end
     end
+    
     # Members could only be accessed by sysadmin or if the user is the admin of the organization
     if @path[:controller] == "admin/members"
       if params[:action] == 'index'
@@ -89,6 +90,13 @@ class ApplicationController < ActionController::Base
       if params[:project] && @member.admins?(project.organization)
         return true
       end
+      
+      # if @path[:action] == 'create' || @path[:action] == 'update' && params[:member][:organization]
+      #   logger.error(params[:member][:organization])
+      #   org = Organization.find(params[:member][:organization])
+      #   return true if @member.admins?(org)
+      # end
+      
       if @member.id == params[:id]
         return true
       end

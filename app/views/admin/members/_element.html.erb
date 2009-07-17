@@ -7,10 +7,12 @@ parent_class = parent.class.to_s.downcase
 <%
 # Write the name of the element
 %>
-	<div id="admin-div-element-text-<%= parent_class -%>-<%= parent.id -%>-<%= element_class -%>-<%= element.id -%>-container" style='width: 320px; height: 33px; padding: 0; text-align: center;'>
-		<p id="admin-div-element-text-<%= parent_class -%>-<%= parent.id -%>-<%= element_class -%>-<%= element.id -%>" title="<%= element.name -%>"style=""><%= element.name -%></p>
+	<div id="name-<%= parent_class%>-<%= parent.id %>-<%= element_class -%>-<%= element.id -%>-container">
+		<p id="name-<%= parent_class%>-<%= parent.id %>-<%= element_class -%>-<%= element.id -%>" title="<%= element.name -%>">
+			<%= element.name -%>
+		</p>
 	</div>
-</div>
-<script>
-	resizeFontSizeToFit($('admin-div-element-text-<%= parent_class -%>-<%= parent.id -%>-<%= element_class -%>-<%= element.id -%>'),$('admin-div-element-text-<%= parent_class -%>-<%= parent.id -%>-<%= element_class -%>-<%= element.id -%>-container'));
-</script>
+	<script>
+		resizeFontSizeToFit($('name-<%= parent_class%>-<%= parent.id %>-<%= element_class -%>-<%= element.id -%>'),$('name-<%= parent_class%>-<%= parent.id %>-<%= element_class -%>-<%= element.id -%>-container'));
+		$('name-<%= parent_class%>-<%= parent.id %>-<%= element_class -%>-<%= element.id -%>').setStyle({ width: '100%' });
+	</script>

@@ -15,6 +15,7 @@ img#trash { position: fixed; top: 14px; right: 0; z-index: 100;}
 #menu_product_backlog_image { float:left; position: relative; border: none; top: 7px; left: 14px; }
 #menu_taskboard_image { float:left; position: relative; border: none; top: 13px; left: 14px; }
 #menu_story_add_image {	float: left; position: relative; top:10px; left: 34px; }
+#menu_admin_image { float: left; position: relative; top:10px; left: 34px;}
 #menu_manage_teams_image{ float: left; position: relative; top:10px; left: 54px; }
 #menu_add_team_image { float: left; position: relative; left: 54px;}
 /* Taskboard's Menu Specific Style */

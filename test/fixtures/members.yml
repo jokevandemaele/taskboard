@@ -5,6 +5,7 @@ dfaraday:
   name: Daniel Faraday
   color: 000000
   username: dfaraday
+  email: dfaraday@widmore.com
   hashed_password: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3 # test
   admin: false
 
@@ -13,6 +14,7 @@ jburke:
     name: Juliet Burke
     color: 000000
     username: jburke
+    email: jburke@dharma.com
     hashed_password: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3 # test
     admin: false
 
@@ -21,6 +23,7 @@ cwidmore:
     name: Charles Widmore
     color: 000000
     username: cwidmore
+    email: charles@widmore.com
     hashed_password: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3 # test
     admin: false
 
@@ -28,6 +31,7 @@ cpace:
     name: Charlie Pace
     color: 000000
     username: cpace
+    email: cpace@lost.com
     hashed_password: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3 # test
     admin: false
 
@@ -35,6 +39,7 @@ clittleton:
     name: Claire Littleton
     color: 000000
     username: clittleton
+    email: clittleton@lost.com
     hashed_password: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3 # test
     admin: true
 
@@ -42,6 +47,7 @@ mdawson:
     name: Michael Dawson
     color: 000000
     username: mdawson
+    email: mdawson@lost.com
     hashed_password: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3 # test
     admin: false
 
@@ -49,6 +55,7 @@ mfaraday:
     name: Michael Faraday
     color: 000000
     username: mfaraday
+    email: faraday@physics.com
     hashed_password: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3 # test
     admin: false
 
@@ -57,6 +64,7 @@ jshephard:
     name: Jack Shephard
     color: 000000
     username: jshephard
+    email: jshephard@lost.com
     hashed_password: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3 # test
     admin: false
 
@@ -64,6 +72,7 @@ kausten:
     name: Kate Austen
     color: 000000
     username: kausten
+    email: kausten@lost.com
     hashed_password: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3 # test
     admin: false
 
@@ -71,6 +80,7 @@ hreyes:
     name: Hugo "Hurley" Reyes
     color: 000000
     username: hreyes
+    email: hreyes@lost.com
     hashed_password: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3 # test
     admin: false
 
@@ -78,6 +88,7 @@ sjarrah:
     name: Sayid Jarrah
     color: 000000
     username: sjarrah
+    email: sjarrah@lost.com
     hashed_password: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3 # test
     admin: false
 
@@ -85,6 +96,7 @@ alittleton:
     name: Aaron Littleton
     color: 000000
     username: alittleton
+    email: alittleton@lost.com
     hashed_password: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3 # test
     admin: false
 
@@ -92,5 +104,6 @@ skwon:
     name: Sun-Hwa Kwon
     color: 000000
     username: skwon
+    email: skwon@lost.com
     hashed_password: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3 # test
     admin: false

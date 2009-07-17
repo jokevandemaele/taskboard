@@ -27,16 +27,17 @@ class Admin::MembersController < ApplicationController
 
   # POST /members
   def create
+    # See how to move this to ajax
     @params = params
     @member = Member.new(@params[:member])
 
-    # Solve this with after_save()
+
     if @member.save
       @member.add_picture(@params[:picture_file])
       @member.add_to_organization(@params[:organization])
-      redirect_to(admin_members_url)
+      render :inline => "<script>top.location.reload(true)</script>", :status => :created
     else
-      render :inline => "Error adding member"
+      render :partial => "user_form_error", :locals => { :object => @member }, :status => :bad_request
     end
   end
 
@@ -59,9 +60,9 @@ class Admin::MembersController < ApplicationController
     
     if @member.save
       @member.add_picture(params[:picture_file])
-      redirect_to(request.referer)
+      render :inline => "<script>top.location.reload(true)</script>", :status => :created
     else
-      render :inline => "username already taken"
+      render :partial => "user_form_error", :locals => { :object => @member }, :status => :bad_request
     end
   end
 

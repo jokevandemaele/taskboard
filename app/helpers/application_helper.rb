@@ -54,5 +54,30 @@ module ApplicationHelper
     "</div>
     <div class=\"admin-div-bottom\" style=\"width: #{size}px\"><span class=\"admin-div-bottom-left\"></span><span class=\"admin-div-bottom-middle\" style=\"width: #{size-30}px\"></span><span class=\"admin-div-bottom-right\"></span></div>"
   end
-  
+  def show_admin_info_for(member, parent)
+    return image_tag("admin/admin-div-element-sysadmin.png", 
+                      :alt => "sysadmin", 
+                      :id => "organization-#{parent.id}-member-#{member.id}-admin", 
+                      :class => "admin-div-element-actions-edit-admin") if member.admin?
+
+    action = member.admins?(parent) ? "remove" : "make"
+    image = image_tag("admin/admin-div-element-#{action}-admin.png", 
+            :alt => "Toggle admin", 
+            :title => "Toggle admin", 
+            :id => "organization-#{parent.id}-member-#{member.id}-admin", 
+            :class => "admin-div-element-actions-edit-admin")
+
+    if(current_member.admins?(parent))
+      link_to_remote image,
+            :url => { 
+              :controller => 'admin/organizations', 
+              :action => 'toggle_admin', 
+              :id => parent, 
+              :member => member },
+            :success => "adminToggleImage('organization-#{parent.id}-member-#{member.id}-admin')"
+    else
+      image
+    end 
+  end
+
 end

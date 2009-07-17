@@ -20,7 +20,7 @@
 		<span class="admin-div-top-actions-counts"><%=h project.members.length %></span>
 		<%= image_tag "admin/admin-div-actions-members.png", :alt => "Members" -%>
 	</div>
-	<div id="admin-div-project-top-name-<%= project.id -%>" style="float:left; max-width: 415px; height: 30px;">
+	<div id="admin-div-project-top-name-<%= project.id -%>" style="float:left; width: 370px; height: 30px;">
 		<script>
 			ids<%= project.id %> = new Array('admin-div-project-stories-<%= project.id %>','admin-div-project-members-<%= project.id %>','admin-div-project-taskboard-<%= project.id %>','admin-div-project-backlog-<%= project.id %>','admin-div-project-burndown-<%= project.id %>');
 		</script>

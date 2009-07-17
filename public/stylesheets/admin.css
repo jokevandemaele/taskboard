@@ -50,12 +50,20 @@ a { text-decoration: none;}
 .admin-div-section a { color: #002255; }
 .admin-div-section a:hover { color: #0c82eb; }
 .admin-div-section-img {position: relative; height: 32px; left: 10px; top: 10px}
-.admin-div-elements-actions{ float: right;}
-.admin-div-element { float: left; width: 320px; height: 33px; background: url('/images/admin/admin-div-element-display.png') no-repeat; margin: 5px; }
-.admin-div-element-actions { float: left; width: 320px; height: 33px; background: url('/images/admin/admin-div-element-display-actions.png') no-repeat; margin: 5px; }
-.admin-div-element div { width: 320px; height: 33px; }
-.admin-div-element-actions div { width: 213px; position: relative; left: 10px; height: 33px; }
-.admin-div-element p, .admin-div-element-actions p { text-align: center; margin: 0; font-size: 14px; color: #002255; float: left; }
+
+.admin-div-element-core { float: left; width: 300px; height: 33px; margin: 5px; padding-left: 10px; padding-right: 10px;}
+.admin-div-element { background: url('/images/admin/admin-div-element-display.png') no-repeat; }
+.admin-div-element-actions { background: url('/images/admin/admin-div-element-display-actions.png') no-repeat; }
+.admin-div-element-actions img { float: right; position:relative; top: 6px; }
+.admin-div-element-actions-edit { margin-right: 5px;}
+.admin-div-element-actions img.admin-div-element-actions-edit-admin { margin-right: 10px; }
+
+.admin-div-element div { width: 300px; height: 33px;}
+.admin-div-element-actions div { width: 214px; height: 33px;}
+
+.admin-div-element p, .admin-div-element-actions p { float:left; margin: 0; color: #002255; padding: 0; position:relative; top: 8px; }
+.admin-div-element p { text-align: center;}
+
 .admin-div-elements-search{ float:right; position: relative; top: 11px; margin-right: 10px;} 
 .admin-div-elements-search-field{ background: url('/images/admin/admin-div-elements-search-field.png') no-repeat transparent; border: none; width: 128px; height: 25px; font-size: 12px;  position:relative; top: 4px; padding-left: 12px; padding-top: 3px; margin: 0;}
 #admin-div-color-picker-content table { border-spacing: 3px; }

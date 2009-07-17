@@ -19,16 +19,17 @@
 		<span class="admin-div-top-actions-counts"><%=h organization.members.length %></span>
 		<%= image_tag "admin/admin-div-actions-members.png", :alt => "Members" -%>
 	</div>
-	<div id="admin-div-organization-top-name-<%= organization.id -%>" style="float:left; max-width: 415px; height: 30px;">
+	
+	<%= image_tag "admin/admin-div-expand.png", 
+		:alt => "Expand", 
+		:style => "cursor: pointer; float: left;",
+		:onClick => "expandCollapseDivs(ids#{organization.id})" -%>
+		
+	<div id="admin-div-organization-top-name-<%= organization.id -%>" style="float:left; width: 370px; height: 30px;">
 		<script>
 			ids<%= organization.id %> = new Array('admin-div-organization-projects-<%= organization.id %>', 'admin-div-organization-members-<%= organization.id %>');
 		</script>
-		<%= image_tag "admin/admin-div-expand.png", 
-			:alt => "Expand", 
-			:style => "cursor: pointer",
-			:onClick => "expandCollapseDivs(ids#{organization.id})" -%>
-			
-		<h1 id="admin-div-organization-top-name-<%= organization.id -%>-name" onClick="expandCollapseDivs(ids<%= organization.id -%>)"><%=h organization.name -%></h1>
+		<h1 id="admin-div-organization-top-name-<%= organization.id -%>-name" onClick="expandCollapseDivs(ids<%= organization.id -%>)" ><%=h organization.name -%></h1>
 	</div>
 	<script>
 	 resizeFontSizeToFit($('admin-div-organization-top-name-<%= organization.id -%>-name'), $('admin-div-organization-top-name-<%= organization.id -%>'));
@@ -48,10 +49,6 @@
 		</div>
 	<% end %>
 </div>
-<div class="admin-div-elements-actions">
-	<%= image_tag "admin/admin-div-elements-next.png", :alt => "Next", :style => "display:none;"-%><br />
-	<%= image_tag "admin/admin-div-elements-prev.png", :alt => "Previous", :style => "display:none;" -%><br />
-</div>
 	<% organization.projects.each do |project| -%>
 		<%= render :partial => "element", :locals => {:element => project, :parent => organization} -%>
 	<% end -%>
@@ -69,12 +66,8 @@
 	</div>
 	<% end %>
 </div>
-<div class="admin-div-elements-actions">
-	<%= image_tag "admin/admin-div-elements-next.png", :alt => "Next", :style => "display:none;" -%><br />
-	<%= image_tag "admin/admin-div-elements-prev.png", :alt => "Previous", :style => "display:none;" -%><br />
-</div>
-	<% organization.members.each do |member| -%>
-		<%= render :partial => "element", :locals => {:element => member, :parent => organization} -%>
+	<% organization.members.each do |memb| -%>
+		<%= render :partial => "element", :locals => { :element => memb, :parent => organization} -%>
 	<% end -%>
 	<div style="clear: both;"></div>
 </div>
