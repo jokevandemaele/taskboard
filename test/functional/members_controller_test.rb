@@ -96,7 +96,7 @@ class Admin::MembersControllerTest < ActionController::TestCase
     assert_response :ok
 
     login_as_normal_user
-    get :edit, :id => 1
+    get :edit, :id => 2
     assert_response 302
   end
   
@@ -164,45 +164,85 @@ class Admin::MembersControllerTest < ActionController::TestCase
   test "an organization admin shouldn't be able CRUD people to another organization" do
     login_as_organization_admin
     
-    # CREATE to organization where admin belongs
+    # CREATE to organization where admin doesn't belong
     response = post :create, { :member => {:name => 'Vincent', :username => 'vincent1', :email => 'vincent@peta.org', :password => 'dog'}, :organization => organizations(:dharma_initiative).id }
     assert_response 302
     assert !Member.find_by_name('Vincent')
     
-    # UPDATE from organization where admin belongs
-    member = members(:clittleton)
+    # UPDATE from organization where admin doesn't belong
+    member = members(:kausten)
     put :update, { :id => member.id, :member => { :name => 'Vincent', :username => 'vincent', :email => 'clittleton@blo.org', :password => 'dog'} }
     assert_response 302
     member.reload
     assert_not_equal 'clittleton@blo.org', member.email
     
-    # DELETE from organization where admin belongs
+    # DELETE from organization where admin doesn't belong
     delete :destroy, { :id => member.id }
     assert_response 302
     assert Member.find_by_name(member.name)
   end 
 
   test "a normal user shouldn't be able to CRUD people to any organization" do
-    login_as_normal_user
+    login_as(members(:kausten))
     
-    # CREATE to organization where admin belongs
-    response = post :create, { :member => {:name => 'Vincent', :username => 'vincent1', :email => 'vincent@peta.org', :password => 'dog'}, :organization => organizations(:dharma_initiative).id }
+    # CREATE to organization where member belongs
+    response = post :create, { :member => {:name => 'Vincent', :username => 'vincent1', :email => 'vincent@peta.org', :password => 'dog'}, :organization => organizations(:oceanic_six).id }
     assert_response 302
     assert !Member.find_by_name('Vincent')
     
-    # UPDATE from organization where admin belongs
+    # UPDATE from organization where member belongs
     member = members(:clittleton)
     put :update, { :id => member.id, :member => { :name => 'Vincent', :username => 'vincent', :email => 'clittleton@blo.org', :password => 'dog'} }
     assert_response 302
     member.reload
     assert_not_equal 'clittleton@blo.org', member.email
     
-    # DELETE from organization where admin belongs
+    # DELETE from organization where member belongs
     delete :destroy, { :id => member.id }
     assert_response 302
     assert Member.find_by_name(member.name)
     
   end
+  
+  test "any user should be able to edit its own profile" do
+    # System Administrator
+    member = members(:clittleton)
+    login_as(member)
+    get :edit, :id => member.id
+    assert_response :ok
+    put :update, { :id => member.id, :member => { :name => 'Missing', :username => 'clit', :email => 'clittleton@blo.org', :password => 'anotherpassword'} }
+    assert_response :ok
+    member.reload
+    assert_equal 'Missing', member.name 
+    assert_equal 'clit', member.username
+    assert_equal 'clittleton@blo.org', member.email
+    assert_equal Member.encrypt('anotherpassword'), member.hashed_password
+    
+    # Organization admin
+    member = members(:cwidmore)
+    login_as(member)
+    get :edit, :id => member.id
+    assert_response :ok
+    put :update, { :id => member.id, :member => { :name => 'Charles Xavier', :username => 'cxavier', :email => 'xavier@xmen.com', :password => 'ihavenothingtodohere'} }
+    assert_response :ok
+    member.reload
+    assert_equal 'Charles Xavier', member.name 
+    assert_equal 'cxavier', member.username
+    assert_equal 'xavier@xmen.com', member.email
+    assert_equal Member.encrypt('ihavenothingtodohere'), member.hashed_password
 
+    # Normal user
+    member = members(:kausten)
+    login_as(member)
+    get :edit, :id => member.id
+    assert_response :ok
+    put :update, { :id => member.id, :member => { :name => 'Freckles', :username => 'freckles', :email => 'hoaxby@sawyer.com', :password => 'shortcake'} }
+    assert_response :ok
+    member.reload
+    assert_equal 'Freckles', member.name 
+    assert_equal 'freckles', member.username
+    assert_equal 'hoaxby@sawyer.com', member.email
+    assert_equal Member.encrypt('shortcake'), member.hashed_password  
+  end
   
 end
