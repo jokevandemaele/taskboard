@@ -5,7 +5,7 @@
 			ids<%= team.id %> = new Array('admin-div-team-members-<%= team.id %>');
 		</script>			
 		<h1 id="team-<%= team.id -%>-team"><%=h truncate(team.name) -%></h1>
-		<%= link_to_remote image_tag("admin/admin-div-actions-edit.png", :alt => "Edit"), :url => { :action => :show_form, :id => team.id, :project => project.id  } -%>
+		<%= link_to_remote image_tag("admin/admin-div-actions-edit.png", :alt => "Edit"), :url => { :action => :edit, :id => team.id, :project => project.id  }, :method => :get, :update => "dummy-for-actions" -%>
 		<%= link_to_remote image_tag("admin/admin-div-actions-remove.png", :alt => "Remove"), 
 				:url => admin_team_url(team.id), 
 				:method => :delete,

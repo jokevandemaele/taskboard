@@ -1,8 +1,8 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 dfaraday_widmore:
-    organization: widmore_corporation
-    member: dfaraday
+    organization_id: 1
+    member_id: 1
     admin: false
 
 cwidmore_widmore:
@@ -10,10 +10,15 @@ cwidmore_widmore:
     member_id: 3
     admin: true
 
-jburke_dharma:
-    organization: dharma_initiative
-    member: jburke
+clittleton_widmore:
+    organization_id: 1
+    member_id: 4
     admin: true
+
+jburke_dharma:
+    organization_id: 2
+    member_id: 2
+    admin: false
 
 jshephard_dharma:
     organization: dharma_initiative
@@ -36,8 +41,8 @@ jshephard_oceanic:
     admin: true
 
 kausten_oceanic:
-    organization: oceanic_six
-    member: kausten
+    organization_id: 3
+    member_id: 9
     admin: false
 
 hreyes_oceanic:

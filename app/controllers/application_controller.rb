@@ -21,87 +21,97 @@ class ApplicationController < ActionController::Base
   # filter_parameter_logging :password
   
   def check_permissions
-    @member = Member.find(session[:member])
+    @current_member = current_member
+    
     # If user is sysadmin allow everything
-    if @member.admin?
-      return true
-    end
+    return true if @current_member.admin?
     
+    # If user is not a sysadmin, permissions should be applied
     @path = request.path_parameters
-    # Organizations controller can be accessible only if user is admin of that organization
-    if @path[:controller] == "admin/organizations"
-      # This is needed because show_form recieves the organization as :organization not as :id, change that.
-      if defined?(params[:organization][:id])
-        id = params[:organization][:id]
+    case @path['controller']
+      when 'admin/organizations'
+        result = check_organizations_controller_perms(@current_member, @path, request)
+      when 'admin/members'
+        result = check_members_controller_perms(@current_member, @path, request)
+      when 'admin/projects'
+        result = check_projects_controller_perms(@current_member, @path, request)
+      when 'admin/teams'
+        result = check_teams_controller_perms(@current_member, @path, request)
+      when 'taskboard'
+        result = check_taskboard_perms(@current_member, @path, request)
+      when 'backlog'
+        result = check_backlog_perms(@current_member, @path, request)
       else
-        id = @path[:id]
-      end
-      
-      @organization = Organization.find(id)
-      if @member.admins?(@organization)
         return true
-      else
-        redirect_to :controller => "admin/members", :action => :access_denied
-      end
     end
+    return true if result
+    redirect_to :controller => 'admin/members', :action => :access_denied
+  end
+  
+  def check_taskboard_perms(member, path, request)
+    # Taskboard and backlog can be accessible only if the member belogs to the project or if it admins the project organization
+    @proj = Project.find(params[:id])
+    return (@current_member.admins?(@proj.organization) || @current_member.projects.include?(@proj))
+  end
+  
+  def check_backlog_perms(member, path, request)
+    check_taskboard_perms(member, path, request)
+  end
+  
+  def check_organizations_controller_perms(member, path, request)
+    return session[:member] != nil if path['action'] == 'index'
+    return @current_member.admin? if path['action'] == 'new'
+    return @current_member.admin? if path['action'] == 'create'
+    return @current_member.admins?(Organization.find(params[:id]))
+  end
 
-    # Taskboard and backlog can be accessible only if the member belogs to the project and by organization admin
-    if ((@path[:controller] == "taskboard") || (@path[:controller] == "backlog"))
-      @proj = Project.find(params[:id])
-      if (@member.admins?(@proj.organization))
-        return true
+  def check_members_controller_perms(member, path, request)
+    # Bug Report Should be accessible if logged in
+    return session[:member] != nil if path['action'] == 'bug_report'
+
+    return member.admin? if path['action'] == 'index'
+
+    if path['action'] == 'edit'
+      memberships = OrganizationMembership.find_all_by_member_id(request.params[:id])
+      result = false
+      memberships.each do |membership|
+        result = result || member.admins?(membership.organization)
       end
-      if !(@member.projects.include? @proj)
-        redirect_to :controller => 'admin/members', :action => :access_denied
-      end
+      return result
     end
     
-    # Manage Teams could only be accessed by organization admin
-    if(@path['controller'] == 'admin/teams')
-      if(@member.admins_any_organization?)
-        if(params[:project])
-          @p = Project.find(params[:project])
-          if(@member.admins?(@p.organization))
-            return true
-          else
-            redirect_to :controller => 'admin/members', :action => :access_denied
-            return false
-          end
-        end
-      else
-        redirect_to :controller => 'admin/members', :action => :access_denied
-        return false
-      end
+    return member.admins?(Organization.find(request.params[:organization]))
+    return false
+  end
+
+  def check_projects_controller_perms(member, path, request)
+    return session[:member] != nil if path['action'] == 'index'
+
+    if path['action'] == 'new'
+      return member.admins?(Organization.find(request.params[:organization])) if (request.params[:organization])
+      return member.admins_any_organization?
     end
     
-    # Members could only be accessed by sysadmin or if the user is the admin of the organization
-    if @path[:controller] == "admin/members"
-      if params[:action] == 'index'
-        redirect_to :controller => 'admin/members', :action => :access_denied
-        return false
-      end
+    return member.admins?(Organization.find(request.params[:project][:organization_id])) if path['action'] == 'create'
+    return member.admins?(Project.find(params[:id]).organization)
+  end
 
-      if params[:project]
-        project = Project.find(params[:project])
-      else
-        project = Project.new
-      end 
-
-      if params[:project] && @member.admins?(project.organization)
-        return true
-      end
-      
-      # if @path[:action] == 'create' || @path[:action] == 'update' && params[:member][:organization]
-      #   logger.error(params[:member][:organization])
-      #   org = Organization.find(params[:member][:organization])
-      #   return true if @member.admins?(org)
-      # end
-      
-      if @member.id == params[:id]
-        return true
-      end
-      redirect_to :controller => 'admin/members', :action => :access_denied
+  def check_teams_controller_perms(member, path, request)
+    if path['action'] == 'index'
+      return member.admins?(Project.find(params[:project]).organization) if(params[:project])
+      return member.admins_any_organization?
     end
+        
+    if path['action'] == 'add_member' || path['action'] == 'remove_member'
+      check_member = Member.find(params[:member])
+      check_team = Team.find(params[:team])
+      result = false
+      check_team.projects.each do |project|
+        result = result || member.admins?(project.organization) if(check_member.organizations.include?(project.organization))
+      end
+      return result
+    end
+    return member.admins?(Project.find(params[:project]).organization)
   end
   
   def login_required

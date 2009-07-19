@@ -9,3 +9,13 @@ oceanic_six:
   id: 2
   name: Oceanic Six
   color: 00FF00
+
+plaincrash_team:
+    id: 3
+    name: Plaincrash Team
+    color: 0000FF
+
+dharma_team:
+    id: 4
+    name: Dharma Team
+    color: 0000FF

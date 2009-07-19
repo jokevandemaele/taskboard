@@ -23,7 +23,7 @@ current_member_admins_parent = (element_class == 'member') ? current_member.admi
 		                 :url => { 
 		                   :controller => "admin/#{parent_class}s", 
 		                   :action => "remove_#{element_class}", 
-		                   :organization => parent.id, 
+		                   :id => parent.id, 
 		                   :object => element.id 
 		                 },
 		                 :confirm => 'Are you sure?',
@@ -34,9 +34,9 @@ current_member_admins_parent = (element_class == 'member') ? current_member.admi
 	                :class => "admin-div-element-actions-edit", :title => "Edit"),
 	              :url => { 
 	                :controller => "admin/#{element_class}s", 
-	                :action => 'show_form', 
+	                :action => :edit, 
 	                :id => element.id
-	              }
+	              }, :method => :get, :update => "dummy-for-actions"
 		
 		-%>
 		<%= # Admin info

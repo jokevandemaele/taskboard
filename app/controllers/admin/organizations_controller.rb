@@ -1,32 +1,35 @@
 class Admin::OrganizationsController < ApplicationController
   before_filter :login_required
-  before_filter :check_permissions, :except => [:index]
+  before_filter :check_permissions
   #layout proc{ |controller| controller.request.path_parameters[:action] == 'show' ? nil : "admin/organizations" }
 
   def index
-    @member = Member.find session[:member]
-    
-    if @member.admin?
-      @organizations = Organization.all
-    else
-      @organizations = @member.organizations    
-    end
+    @organizations = (@current_member.admin?) ? Organization.all : @current_member.organizations
   end
 
   def show
     @organization = Organization.find(params[:id])
   end
 
+  def new
+	  @organization = Organization.new
+    render :partial => 'form', :object => @organization, :locals => { :edit => false }
+  end
+  
+  def edit 
+    @organization = Organization.find(params[:id])
+    render :partial => 'form', :object => @organization, :locals => { :edit => true }
+  end
+    
   def create
     @organization = Organization.new(params[:organization])
     if @organization.save
-      render :inline => "<script>location.reload(true)</script>"
+      render :inline => "<script>location.reload(true)</script>", :status => :created
     else
-      # Decide what to do here, we should send the error somehow and process it in the view.
       render :partial => 'form',
       		:object => @organization,
       		:locals => { :no_refresh => true, :edit => false },
- 		:status => :internal_server_error
+ 		      :status => :internal_server_error
     end
   end
 
@@ -40,12 +43,11 @@ class Admin::OrganizationsController < ApplicationController
         updateName('admin-div-organization-top-name',organization.organization);
       </script>"
     else
-      # Decide what to do here, we should send the error somehow and process it in the view.
       render :update, :status => :internal_server_error do |page|
       		page.replace_html "dummy-for-actions", 
       		:partial => 'form',
       		:object => @organization,
-      		:locals => { :no_refresh => true }
+      		:locals => { :no_refresh => true, :edit => true }
       end
     end
   end
@@ -59,26 +61,9 @@ class Admin::OrganizationsController < ApplicationController
     end
   end
   
-  def show_form
-    @edit = false
-    if(params[:id])
-	    @organization = Organization.find(params[:id])
-	    @edit = true
-    else
-	    @organization = Organization.new
-    end
-    
-    render :update do |page|
-    		page.replace_html "dummy-for-actions", 
-    		:partial => 'form',
-    		:object => @organization,
-    		:locals => { :edit => @edit }
-    end
-  end
-
   def add_project
     @organization = Organization.find(params[:id])
-
+  
     if params[:id]
       @project = Project.find(params[:project])
       @organization.projects << @project
@@ -90,40 +75,23 @@ class Admin::OrganizationsController < ApplicationController
     end
   end
   
-#  def remove_project
-#    @project = Project.find(params[:project])
-#    @organization = Organization.find(params[:organization])
-#    
-#    @organization.projects.delete @project
-#    if @organization.save
-#      render :update do |page|
-#        page.replace_html "dummy-for-actions", "<script>location.reload(true)</script>"
-#      end
-#    end
-#  end
-
   def add_member
     @organization = Organization.find(params[:id])
-    
-    if params[:id]
-      @member = Member.find(params[:member])
-      @membership = OrganizationMembership.new
-      @membership.member = @member
-      @membership.organization = @organization
-      @membership.admin = nil
-      
-      if @membership.save
-        # TODO: Don't refresh the whole page, just add the user.
-        render :inline => "<script>location.reload(true)</script>"
-      end
+    @member = Member.find(params[:member])
+    @membership = OrganizationMembership.new
+    @membership.member = @member
+    @membership.organization = @organization
+    @membership.admin = nil
+    if @membership.save
+      # TODO: Don't refresh the whole page, just add the user.
+      render :inline => "<script>location.reload(true)</script>"
     end
   end
   
   def remove_member
-    @membership = OrganizationMembership.first(:conditions => ["member_id = ? and organization_id = ?", params[:object], params[:organization]])
+    @membership = OrganizationMembership.first(:conditions => ["member_id = ? and organization_id = ?", params[:object], params[:id]])
     @member = @membership.member
     @organization = @membership.organization
-    # We assume that the team has only one project, that's why .first is enough and we don't have to iterate.
     @member.teams.each { |team| team.members.delete(@member) if team.projects.each { |project| project.organization == @organization } }
     if @membership.destroy
       render :inline => "", :status => :ok
@@ -134,7 +102,7 @@ class Admin::OrganizationsController < ApplicationController
   
   def toggle_admin
     @membership = OrganizationMembership.first(:conditions => ["member_id = ? and organization_id = ?", params[:member], params[:id]])
-    logger.error("Membership: #{@membership.inspect}");
+
     if @membership.admin
       @membership.admin = nil
     else

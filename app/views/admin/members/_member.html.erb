@@ -6,7 +6,7 @@
 		<% if member.admin? -%>
 			<%= image_tag "admin/admin-div-element-sysadmin.png", :alt => "Sysadmin", :style => "position: relative; right: 10px;", :title => "User is a System Administrator"-%>
 		<% end -%>
-		<%= link_to_remote image_tag("admin/admin-div-actions-edit.png", :alt => "Edit"), :url => { :action => :show_form, :id => member.id } -%>
+		<%= link_to_remote image_tag("admin/admin-div-actions-edit.png", :alt => "Edit"), :url => edit_admin_member_url(member.id), :method => :get, :update => "dummy-for-actions" -%>
 		<%= link_to_remote image_tag("admin/admin-div-actions-remove.png", :alt => "Remove"), 
 				:url => admin_member_url(member.id), 
 				:method => :delete,

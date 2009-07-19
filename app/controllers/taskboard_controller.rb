@@ -5,7 +5,7 @@ class TaskboardController < ApplicationController
   def show
     @project = Project.find(params[:id])
     @stories_by_priority = @project.stories_in_progress
-    @member = current_member
+    @member = @current_member
 
     @project.teams.each do |team|
       if(team.members.include?(@member))

@@ -27,6 +27,15 @@ cwidmore:
     hashed_password: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3 # test
     admin: false
 
+clittleton:
+    id: 4
+    name: Claire Littleton
+    color: 000000
+    username: clittleton
+    email: clittleton@lost.com
+    hashed_password: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3 # test
+    admin: true
+
 cpace:
     name: Charlie Pace
     color: 000000
@@ -34,14 +43,6 @@ cpace:
     email: cpace@lost.com
     hashed_password: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3 # test
     admin: false
-
-clittleton:
-    name: Claire Littleton
-    color: 000000
-    username: clittleton
-    email: clittleton@lost.com
-    hashed_password: a94a8fe5ccb19ba61c4c0873d391e987982fbbd3 # test
-    admin: true
 
 mdawson:
     name: Michael Dawson
@@ -69,6 +70,7 @@ jshephard:
     admin: false
 
 kausten:
+    id: 9
     name: Kate Austen
     color: 000000
     username: kausten

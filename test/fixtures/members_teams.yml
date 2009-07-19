@@ -5,3 +5,15 @@ dfaraday_widmore:
 jshephard_oceanic:
     team_id: 2
     member_id: 8 
+
+kausten_oceanic:
+    team_id: 2
+    member_id: 9
+
+dfaraday_widmore:
+    member_id: 3
+    team_id: 3
+
+jburke_dharma:
+    member_id: 2
+    team_id: 4

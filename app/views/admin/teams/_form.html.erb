@@ -8,7 +8,7 @@
 	<div style="clear: both"></div>
 	<%= admin_open_div 765 -%>
 	<%
-    if @edit
+    if edit
       action = :update
     else
       action = :create
@@ -16,11 +16,11 @@
     -%>
     <% remote_form_for @team, :url => { :controller => 'admin/teams', :action => action, :id => @team.id }, :update => "dummy-for-actions" do |f| %>
 		<%= 
-      unless @project.nil?
-	 		  project.name
-    		hidden_field_tag(:project_id, "#{@project.id}")
-			else 
-			  select_tag(:project_id, options_for_select(@projects))
+      		if defined?(@project)
+				hidden_field_tag(:project, "#{@project.id}")
+			else
+			 	hidden_field_tag(:project, "#{@team.project_id}")
+			  #select_tag(:project_id, options_for_select(@projects))
 			end
 		%> 
 		<% 

@@ -4,7 +4,7 @@
 <div id="project-<%= project.id %>" class="admin-div-project-top">
 	<div class="admin-div-project-top-actions admin-div-top-actions" style="float:right; margin: none;">
     <% if member.admin? || member.admins?(project.organization) %>
-		<%= link_to_remote image_tag("admin/admin-div-actions-edit.png",:alt => "Edit"), :url => { :action => :show_form, :id => project.id } -%>
+		<%= link_to_remote image_tag("admin/admin-div-actions-edit.png",:alt => "Edit"), :url => edit_admin_project_url(project.id), :method => :get, :update => "dummy-for-actions" -%>
 		<%= link_to_remote image_tag("admin/admin-div-actions-remove.png", :alt => "Remove"), 
 				:url => admin_project_url(project.id), 
 				:method => :delete, 

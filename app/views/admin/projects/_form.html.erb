@@ -31,6 +31,7 @@
 
 		<% if @organization %>
 		  <%= hidden_field_tag "project[organization_id]", @organization -%>
+		  <%= hidden_field_tag "organization", @organization -%>
 		<% else %>
                   <div class="admin-div-section">
                   <%= image_tag 'admin/admin-div-actions-organizations.png', :alt => 'Organization', :style => 'position: relative; top: 10px; margin-left: 10px;' -%>
@@ -39,10 +40,10 @@
                   </div>
 		<% end %>
 		
-			<%= image_submit_tag "admin/admin-form-submit.png", :alt => "Submit", :style => "position:absolute; bottom: 60px; right: 119px;"-%>
+			<%= image_submit_tag "admin/admin-form-submit.png", :alt => "Submit", :style => "position:absolute; top: -20px; right: 119px;"-%>
 			<%= image_tag "admin/admin-form-cancel.png", 
 				:alt => "Cancel", 
-				:style => "position:absolute; bottom: 60px; right: 30px; cursor: pointer;", 
+				:style => "position:absolute; top: -20px; right: 30px; cursor: pointer;", 
 				:onClick => "cancelForm('form-add-project');" -%>
 		<% end %>
 	</div>

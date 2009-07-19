@@ -3,15 +3,15 @@
 <% if session[:member] -%>
 <div id="admin-user-info">
 	<div id="admin-user-info-picture" style="float:right;">
-		<%= image_tag @member.show_picture -%>
+		<%= image_tag @current_member.show_picture -%>
 	</div>
 
 	<div id="admin-user-info-text" style="float:right; margin-right: 5px">
-		<p>Welcome, <span class="admin-user-info-text-user"><%= @member.name %></span></p>
-<% if @member.admin? -%>
+		<p>Welcome, <span class="admin-user-info-text-user"><%= @current_member.name %></span></p>
+<% if @current_member.admin? -%>
 		<p class="admin-user-info-text-role">You are a System Administrator</p>
 <% else -%>
-<% 	if @member.admins_any_organization? %>
+<% 	if @current_member.admins_any_organization? %>
 		<p class="admin-user-info-text-role">You are an Organization Administrator</p>
 <%	end -%>
 <% end -%>
@@ -24,7 +24,7 @@
 <div id="admin-menu">
 		<div class="admin-menu-element <%= "admin-menu-current" if controller == "admin/organizations" -%>"><%= link_to "organizations", admin_organizations_path() %></div>
 		<div class="admin-menu-element <%= "admin-menu-current" if controller == "admin/projects" -%>"><%= link_to "projects", admin_projects_path() %></div>
-		<% if @member.admin? -%>
+		<% if @current_member.admin? -%>
 		<div class="admin-menu-element <%= "admin-menu-current" if controller == "admin/members" -%>"><%= link_to "people", admin_members_path() %></div>
 		<% end -%>
 		<div class="admin-menu-element <%= "admin-menu-current" if controller == "admin/teams" -%>"><%= link_to "teams", admin_teams_path() %></div>

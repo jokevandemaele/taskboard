@@ -1,7 +1,7 @@
 class Admin::MembersController < ApplicationController
   before_filter :login_required, :except => [:login, :logout]
-  before_filter :check_permissions, :except => [:login, :logout, :access_denied, :show_form, :report_bug]
-  layout proc{ |controller| controller.request.path_parameters[:action] == 'report_bug' || controller.request.path_parameters[:action] == 'login' ? nil : "admin/members" }
+  before_filter :check_permissions, :except => [:login, :logout, :access_denied, :report_bug]
+  layout 'admin/members', :except => [:report_bug, :login]
   
   # GET /members
   def index
@@ -9,21 +9,29 @@ class Admin::MembersController < ApplicationController
     @hide_sidebar = nil
   end
 
-  # GET /members/1
-  def show
-    @member = Member.find(params[:id])
-  end
+  # # GET /members/1
+  # def show
+  # end
 
   # GET /members/new
   def new
     @member = Member.new
-    @team = params[:team] if params[:team]
+
+    if params[:organization]
+      @organization = Organization.find(params[:organization])
+      @members_not_in_organization = Member.all - @organization.members
+    else
+      @organization = nil
+    end
+    
+    render :partial => 'form', :object => @member, :locals => { :project => params[:project], :edit => false }, :status => :ok
   end
 
   # GET /members/1/edit
-  def edit
-    @member = Member.find(params[:id])
-  end
+   def edit
+     @member = Member.find(params[:id])
+     render :partial => 'form', :object => @member, :locals => { :project => params[:project], :edit => true }
+   end
 
   # POST /members
   def create
@@ -60,7 +68,7 @@ class Admin::MembersController < ApplicationController
     
     if @member.save
       @member.add_picture(params[:picture_file])
-      render :inline => "<script>top.location.reload(true)</script>", :status => :created
+      render :inline => "<script>top.location.reload(true)</script>", :status => :ok
     else
       render :partial => "user_form_error", :locals => { :object => @member }, :status => :bad_request
     end
@@ -69,43 +77,13 @@ class Admin::MembersController < ApplicationController
   # DELETE /members/1
   def destroy
     @member = Member.find(params[:id])
-    @member.destroy
-    if(params[:dynamic])
-      render :inline => "<script>location.reload(true);</script>"
+    if @member.destroy
+      render :inline => "", :status => :ok
     else
-      redirect_to(admin_members_url)
+      render :inline => "", :status => :bad_request
     end
   end
 
-  # Member form, used to display the partial of the member's form when adding or editing them.
-  def show_form
-    @edit = false
-    if(params[:id])
-	    @member = Member.find(params[:id])
-	    @edit = true
-    else
-	    @member = Member.new
-    end
-
-    if params[:organization]
-      @organization = Organization.find(params[:organization])
-      @members_not_in_organization = Member.all - @organization.members
-    else
-      @organization = nil
-    end
-
-    # @roles = Role.all
-    #     @roles_selected = Array.new
-    #     @roles.each { |role| @roles_selected << role.id if (@member.roles.include?(role)) }
-
-    render :update do |page|
-	    page.replace_html "dummy-for-actions", 
-	      :partial => 'form', 
-	      :object => @member,
-	      :locals => { :project => params[:project], :edit => @edit }
-    end
-  end
-  
   def login
     flash[:notice] = nil
     if request.post?
@@ -131,36 +109,37 @@ class Admin::MembersController < ApplicationController
 
   def access_denied
     @hide_sidebar = true
-    @member = Member.find(session[:member])
+    @current_member = Member.find(session[:member])
+    render :template => "admin/members/access_denied", :status => :forbidden
   end
   
-  def delete_member
-    @member = Member.find(params[:id])
-    @member.destroy
-    @members = Member.all()
-    
-    render :update do |page| 
-      page.replace_html "members-list", :partial => "teams/members_list", :locals => { :members => @members, :project => params[:project] }
-    end
-  end
-
-  def make_sysadmin
-    @member = Member.find(params[:id])
-    @member.admin = true
-    @member.save
-    render :update do |page|
-      page.replace_html "dummy-for-actions", "<script>location.reload(true)</script>"
-    end
-  end
-
-  def remove_sysadmin
-    @member = Member.find(params[:id])
-    @member.admin = nil
-    @member.save
-    render :update do |page|
-      page.replace_html "dummy-for-actions", "<script>location.reload(true)</script>"
-    end
-  end
+  # def delete_member
+  #   @member = Member.find(params[:id])
+  #   @member.destroy
+  #   @members = Member.all()
+  #   
+  #   render :update do |page| 
+  #     page.replace_html "members-list", :partial => "teams/members_list", :locals => { :members => @members, :project => params[:project] }
+  #   end
+  # end
+  # 
+  # def make_sysadmin
+  #   @member = Member.find(params[:id])
+  #   @member.admin = true
+  #   @member.save
+  #   render :update do |page|
+  #     page.replace_html "dummy-for-actions", "<script>location.reload(true)</script>"
+  #   end
+  # end
+  # 
+  # def remove_sysadmin
+  #   @member = Member.find(params[:id])
+  #   @member.admin = nil
+  #   @member.save
+  #   render :update do |page|
+  #     page.replace_html "dummy-for-actions", "<script>location.reload(true)</script>"
+  #   end
+  # end
 
   def report_bug
     @member = Member.find(current_member)

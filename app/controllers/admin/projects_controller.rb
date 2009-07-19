@@ -1,6 +1,6 @@
 class Admin::ProjectsController < ApplicationController
   before_filter :login_required
-  before_filter :check_permissions, :except => [:index]
+  before_filter :check_permissions
   
   # GET /projects
   def index
@@ -12,7 +12,7 @@ class Admin::ProjectsController < ApplicationController
       @member.organizations_administered.each { |o| @projects.concat o.projects } 
     else
       @projects = @member.projects
-      redirect_to :controller => :taskboard, :action => :show, :id => @projects.first.id if @projects.length == 1
+      redirect_to :controller => '/taskboard', :action => :show, :id => @projects.first.id if @projects.length == 1
     end
     
   end
@@ -24,12 +24,23 @@ class Admin::ProjectsController < ApplicationController
 
   # GET /projects/new
   def new
-    @project = Project.new
+	  @project = Project.new
+    @organization = (defined?(params[:organization])) ? params[:organization] : nil
+    @free_projects = (defined?(params[:display_existing])) ? Project.free : @free_projects = nil
+    
+    render :partial => 'form', 
+      :object => @project,
+    	:locals => { 
+    	  :edit => false, 
+    	  :organization => @organization, 
+    	  :free_projects => @free_project
+    	}, :status => :ok
   end
 
   # GET /projects/1/edit
   def edit
-    @project = Project.find(params[:id])
+	  @project = Project.find(params[:id])
+    render :partial => 'form', :object => @project, :locals => { :edit => true, :organization => @organization, :free_projects => nil }
   end
 
   # POST /projects
@@ -37,7 +48,7 @@ class Admin::ProjectsController < ApplicationController
     @project = Project.new(params[:project])
 
     if @project.save
-      render :inline => "<script>location.reload(true);</script>"
+      render :inline => "<script>location.reload(true);</script>", :status => :created
     else
       render :partial => 'form',
       		:object => @project,
@@ -65,59 +76,5 @@ class Admin::ProjectsController < ApplicationController
     else
       render :inline => "", :status => :internal_server_error
     end
-  end
-  
-  def show_form
-    @edit = false
-    if(params[:id])
-	    @project = Project.find(params[:id])
-	    @edit = true
-    else
-	    @project = Project.new
-    end
-    
-    if defined? params[:organization]
-      @organization = params[:organization]
-    else
-      @organization = nil
-    end
-    
-    if defined? params[:display_existing]
-      @free_projects = Project.free
-    else
-      @free_projects = nil
-    end
-    
-    render :update do |page|
-    		page.replace_html "dummy-for-actions", 
-    		:partial => 'form',
-    		:object => @project,
-    		:locals => { :edit => @edit, :organization => @organization, :free_projects => @free_projects }
-    end
-  end
-  
-  def add_team_to_project
-    @project = Project.find(params[:id])
-    @teams = Team.find(:all).collect { |team| [team.name, team.id] }
-  end
-
-  def create_team_to_project_relation
-    @project = Project.find(params[:id])
-    @team = Team.find(params[:team_id])
-    if !@project.teams.exists?(@team)
-      @project.teams << @team
-      @project.save
-    end
-    redirect_to(projects_url)
-  end
-
-  def delete_team_to_project_relation
-    @project = Project.find(params[:id])
-    @team = Team.find(params[:team_id])
-    if @project.teams.exists?(@team)
-      @project.teams.delete(@team)
-      @project.save
-    end
-    redirect_to(projects_url)
   end
 end

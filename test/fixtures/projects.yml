@@ -19,3 +19,8 @@ come_back_to_the_island:
   id: 4
   name: Come back to the island
   organization_id: 3
+
+fake_plaincrash:
+    id: 5
+    name: Fake a plain crash to flight 815
+    organization_id: 1

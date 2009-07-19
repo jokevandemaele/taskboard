@@ -20,7 +20,7 @@
 		<ul id="admin-sidebar-menu">
       <% if current_member.admins_any_organization? %>
 			<% image = image_tag 'admin/add.png', :alt => 'new' -%>
-			<li><%= link_to_remote "new project #{image}", :url => { :action => :show_form } -%></li>
+			<li><%= link_to_remote "new project #{image}", :url => { :action => :new }, :update => "dummy-for-actions" -%></li>
       <% end %>
 	  <% if @projects.size > 10 -%>
 			<li><%= text_field_tag "admin-sidebar-search", "find project", :onClick => "if(this.value == 'find project') {this.clear();}" , :onChange => "projects_search.search(this.value)", :autocomplete => "off" -%> <%= image_tag 'admin/find.png', :alt => "find" -%></li>

@@ -4,7 +4,7 @@
 <div id="organization-<%= organization.id %>" class="admin-div-organization-top">
 	<div class="admin-div-organization-top-actions admin-div-top-actions" style="float:right; margin: 0;">
 		<% if current_member.admins?(organization)%>
-		<%= link_to_remote image_tag("admin/admin-div-actions-edit.png",:alt => "Edit"), :url => { :action => :show_form, :id => organization.id } -%>
+		<%= link_to_remote image_tag("admin/admin-div-actions-edit.png",:alt => "Edit"), :url => edit_admin_organization_url(organization.id), :method => :get, :update => "dummy-for-actions" -%>
 		<%= link_to_remote image_tag("admin/admin-div-actions-remove.png", :alt => "Remove"), 
 				:url => admin_organization_url(organization.id), 
 				:method => :delete, 
@@ -45,7 +45,8 @@
 	<h2>Projects</h2>
 	<% if current_member.admins?(organization)%>
 		<div style="float: right; position: relative; top: 8px; right: 15px;">
-		<%= link_to_remote "new project" + image_tag("admin/admin-div-elements-add.png", :alt => "Add", :style => "margin-left: 10px; "), :url => { :controller => "admin/projects" , :action => :show_form, :display_existing => true, :organization => organization.id } -%>
+		<%= link_to_remote "new project" + image_tag("admin/admin-div-elements-add.png", :alt => "Add", :style => "margin-left: 10px; "), 
+			:url => { :controller => "admin/projects" , :action => :new, :organization => organization.id }, :update => "dummy-for-actions" -%>
 		</div>
 	<% end %>
 </div>
@@ -62,7 +63,7 @@
 	<h2>Members</h2>
 	<% if current_member.admins?(organization)%>
 	<div style="float: right; position: relative; top: 8px; right: 15px;">
-		<%= link_to_remote "new member" + image_tag("admin/admin-div-elements-add.png", :alt => "Add", :style => "margin-left: 10px;"), :url => { :controller => 'admin/members', :action => :show_form, :organization => organization.id } -%>
+		<%= link_to_remote "new member" + image_tag("admin/admin-div-elements-add.png", :alt => "Add", :style => "margin-left: 10px;"), :url => { :controller => 'admin/members', :action => :new, :organization => organization.id }, :update => "dummy-for-actions" -%>
 	</div>
 	<% end %>
 </div>
