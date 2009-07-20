@@ -67,7 +67,7 @@
 	</div>
 	<% end %>
 </div>
-	<% organization.members.each do |memb| -%>
+	<% organization.members_ordered_by_role.each do |memb| -%>
 		<%= render :partial => "element", :locals => { :element => memb, :parent => organization} -%>
 	<% end -%>
 	<div style="clear: both;"></div>

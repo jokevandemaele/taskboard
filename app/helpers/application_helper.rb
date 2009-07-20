@@ -58,17 +58,16 @@ module ApplicationHelper
     return image_tag("admin/admin-div-element-sysadmin.png", 
                       :alt => "sysadmin", 
                       :id => "organization-#{parent.id}-member-#{member.id}-admin", 
-                      :class => "admin-div-element-actions-edit-admin") if member.admin?
+                      :class => "admin-div-element-actions-edit-admin", :title => "System Administrator") if member.admin?
 
     action = member.admins?(parent) ? "remove" : "make"
-    image = image_tag("admin/admin-div-element-#{action}-admin.png", 
-            :alt => "Toggle admin", 
-            :title => "Toggle admin", 
-            :id => "organization-#{parent.id}-member-#{member.id}-admin", 
-            :class => "admin-div-element-actions-edit-admin")
 
     if(current_member.admins?(parent))
-      link_to_remote image,
+      link_to_remote image_tag("admin/admin-div-element-#{action}-admin.png", 
+              :alt => "Toggle admin", 
+              :title => "Toggle admin", 
+              :id => "organization-#{parent.id}-member-#{member.id}-admin", 
+              :class => "admin-div-element-actions-edit-admin"),
             :url => { 
               :controller => 'admin/organizations', 
               :action => 'toggle_admin', 
@@ -76,7 +75,11 @@ module ApplicationHelper
               :member => member },
             :success => "adminToggleImage('organization-#{parent.id}-member-#{member.id}-admin')"
     else
-      image
+      image_tag("admin/admin-div-element-#{action}-admin.png", 
+              :alt => "Organization Admin", 
+              :title => "Organization Admin", 
+              :id => "organization-#{parent.id}-member-#{member.id}-admin", 
+              :class => "admin-div-element-actions-edit-admin") if action == "remove"
     end 
   end
 

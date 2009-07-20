@@ -9,7 +9,10 @@ class Admin::ProjectsController < ApplicationController
     
     @projects = []
     if @member.admins_any_organization?
-      @member.organizations_administered.each { |o| @projects.concat o.projects } 
+      @member.organizations_administered.each { |org| @projects.concat org.projects } 
+
+      # Add the projects from the organizations it doesn't administers
+      @member.projects.each { |proj| @projects << proj if(!@projects.include?(proj)) }
     else
       @projects = @member.projects
       redirect_to :controller => '/taskboard', :action => :show, :id => @projects.first.id if @projects.length == 1

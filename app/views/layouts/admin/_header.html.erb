@@ -10,13 +10,11 @@
 		<p>Welcome, <span class="admin-user-info-text-user"><%= @current_member.name %></span></p>
 <% if @current_member.admin? -%>
 		<p class="admin-user-info-text-role">You are a System Administrator</p>
-<% end -%>
+<% else -%>
 <% 	if @current_member.admins_any_organization? %>
 		<p class="admin-user-info-text-role">You are an Organization Administrator</p>
 <%	end -%>
-<% 	if !@current_member.admins_any_organization? %>
-		<p class="admin-user-info-text-role">You are a Normal User</p>
-<%	end -%>
+<% end %>
 		<p id="admin-user-info-links" class="admin-user-info-text-role">[ <%= link_to "logout", :controller => "/logout" %> | <%= link_to_remote "edit profile", :url => edit_admin_member_url(@current_member), :method => :get, :update => "dummy-for-actions" -%> 
 			]</p>
 	</div>
@@ -30,6 +28,8 @@
 		<% if @current_member.admin? -%>
 		<div class="admin-menu-element <%= "admin-menu-current" if controller == "admin/members" -%>"><%= link_to "people", admin_members_path() %></div>
 		<% end -%>
+		<% if @current_member.admins_any_organization? -%>
 		<div class="admin-menu-element <%= "admin-menu-current" if controller == "admin/teams" -%>"><%= link_to "teams", admin_teams_path() %></div>
+		<% end -%>
 </div>
 </div>

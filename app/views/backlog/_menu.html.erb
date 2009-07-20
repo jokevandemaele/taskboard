@@ -13,17 +13,6 @@
 		:id => project.id
 	-%>
 
-	<%= link_to image_tag('menu_admin_section.png', 
-			:border => 0, 
-			:id => "menu_admin_image",
-			:title => "Admin Section"), 
-		:controller => "admin/projects",
-		:action => "index",
-		:id => project.id
-	-%>
-	
-	
-
 	<%= link_to_remote image_tag('menu_story_add.png',
 				:border => 0,
 				:id => "menu_story_add_image"),
@@ -32,6 +21,16 @@
 			:action => 'show_form', 
 			:project => project.id } 
 	-%>
+
+	<%= link_to image_tag('menu_admin_section.png', 
+			:border => 0, 
+			:id => "menu_admin_image",
+			:title => "Admin Section"), 
+		:controller => "admin/projects",
+		:action => "index",
+		:id => project.id
+	-%>
+
 </div>
 
 <div id="menu_expand" style="position:absolute; top: 0px; left: 0px; z-index: 9; background: url('/images/menu_collapsed_background.png') left no-repeat transparent; height: 61px;width: 69px;">
