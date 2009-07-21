@@ -43,6 +43,8 @@ class Admin::MembersController < ApplicationController
     if @member.save
       @member.add_picture(@params[:picture_file])
       @member.add_to_organization(@params[:organization])
+      # Send email notificating the lucky user
+      MemberMailer.deliver_create(@member.username, @member.email)
       render :inline => "<script>top.location.reload(true)</script>", :status => :created
     else
       render :partial => "user_form_error", :locals => { :object => @member }, :status => :bad_request
