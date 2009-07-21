@@ -30,25 +30,3 @@
 		<%= render :partial => "tasks/tasks_by_status", :locals => { :tasks => story.tasks.finished } %> 
 	</td>
 	
-<%= drop_receiving_element("not_started-#{story.id}", 
-	:accept => "task", 
-	:with   => "'task=' + (element.id.split('-').last()) + '&status=not_started&story=#{story.id}' + '&x='+ (x(element) - x($('not_started-#{story.id}'))) +'&y='+ (y(element) - y($('not_started-#{story.id}')))", 
-	:url => { :controller => :tasks, :action=>:update_task}) 
-%>
-<%= drop_receiving_element("not_started-#{story.id}", 
-	:accept => "task-add", 
-	:with   => "'status=not_started' + '&story=#{story.id}'",
-	:url => { :controller => :tasks, :action=>:show_form}) 
-%>
-
-<%= drop_receiving_element("in_progress-#{story.id}", 
-	:accept => "task", 
-	:with   => "'task=' + (element.id.split('-').last()) + '&status=in_progress&story=#{story.id}' + '&x='+ (x(element) - x($('in_progress-#{story.id}')))+ '&y='+ (y(element) - y($('in_progress-#{story.id}')))", 
-	:url => { :controller => :tasks, :action=>:update_task}) 
-%>
-
-<%= drop_receiving_element("finished-#{story.id}", 
-	:accept => "task", 
-	:with   => "'task=' + (element.id.split('-').last()) + '&status=finished&story=#{story.id}' + '&x='+ (x(element) - x($('finished-#{story.id}')))+ '&y='+ (y(element) - y($('finished-#{story.id}')))", 
-	:url => { :controller => :tasks, :action=>:update_task}) 
-%>

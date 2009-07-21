@@ -50,8 +50,14 @@
 		:accept => "form-add-task"
 		) 
 	%>
+	<%= link_to (image_tag 'menu_logout.png' , 
+		:border => 0 ,
+		:id => 'taskboard_menu_logout', 
+		:title => "Log out",
+		:class => "logout"), :controller => 'admin/members', :action => :logout
+	-%>
+	
 	<% #render :partial => "admin/members/member_info", :locals => { :member => @member } -%>
-
 </div>
 
 <div id="menu_expand">

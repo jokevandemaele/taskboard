@@ -54,6 +54,7 @@ module ApplicationHelper
     "</div>
     <div class=\"admin-div-bottom\" style=\"width: #{size}px\"><span class=\"admin-div-bottom-left\"></span><span class=\"admin-div-bottom-middle\" style=\"width: #{size-30}px\"></span><span class=\"admin-div-bottom-right\"></span></div>"
   end
+  
   def show_admin_info_for(member, parent)
     return image_tag("admin/admin-div-element-sysadmin.png", 
                       :alt => "sysadmin", 
@@ -62,7 +63,7 @@ module ApplicationHelper
 
     action = member.admins?(parent) ? "remove" : "make"
 
-    if(current_member.admins?(parent))
+    if(current_member.admins?(parent) && (current_member.id != member.id))
       link_to_remote image_tag("admin/admin-div-element-#{action}-admin.png", 
               :alt => "Toggle admin", 
               :title => "Toggle admin", 

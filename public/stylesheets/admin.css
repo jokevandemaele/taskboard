@@ -2,6 +2,9 @@
 body { background: url('/images/admin/admin-background.png') repeat-x #f1f6ff; } 
 img { border: none; vertical-align: middle; }
 a { text-decoration: none;}
+h1 { font-size: 28px; color: #002255;}
+p { color: #002255;}
+
 #admin-dummy-container{ margin: 0 auto; width: 1000px}
 #admin-container {	position: relative;	width: 1000px;	height: 100px;}
 #admin-content{	float: left;	width: 780px;	height: 100px;}
@@ -109,3 +112,5 @@ a { text-decoration: none;}
 	font-weight: bold;
 }
 /* End Teams */
+
+div#no-projects { width: 750px; margin: 0 auto; }

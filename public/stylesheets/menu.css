@@ -9,7 +9,8 @@ div#menu_report_bug img { border: none; margin:0 auto;}
 
 #menu_space {background: transparent; height: 136px; width: 100%; }
 
-img#trash { position: fixed; top: 14px; right: 0; z-index: 100;}
+img#trash { position: fixed; top: 14px; right: 108px; z-index: 100;}
+#taskboard_menu_logout { position: fixed; right: 10px; top: 23px;}
 
 /* Menu Links */
 #menu_product_backlog_image { float:left; position: relative; border: none; top: 7px; left: 14px; }

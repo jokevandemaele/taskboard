@@ -153,7 +153,8 @@ class ApplicationController < ActionController::Base
     if return_to = session[:return_to]
       session[:return_to] = nil
       redirect_to(return_to)
-    else
+    else                                                                                                                                                                                                                                         
+      return redirect_to :controller => '/taskboard', :action => :show, :id => current_member.projects.first.id if current_member.projects.size == 1 && request.referer == url_for(:controller => 'admin/members', :action => :login, :only_path=>false)
       redirect_to :controller => 'admin/projects', :action => 'index'
     end
   end

@@ -120,39 +120,60 @@ class Admin::OrganizationsControllerTest < ActionController::TestCase
     assert Organization.find_by_name('Oceanic Six')
   end
 
-  # test "an organization admin should be able to add & remove members for teams within its organizations" do
-  #   login_as_organization_admin
-  # 
-  #   # ADD MEMBER with team and member belonging to organization
-  #   post :add_member,{ :team => teams(:widmore_team), :member => members(:cwidmore) }
-  #   assert_response :ok
-  #   assert teams(:widmore_team).members.include?(members(:cwidmore))
-  # 
-  #   # ADD MEMBER with team belonging to organization
-  #   post :add_member,{ :team => teams(:widmore_team), :member => members(:mdawson) }
-  #   assert_response 302
-  #   assert !teams(:widmore_team).members.include?(members(:mdawson))
-  #   
-  #   # ADD MEMBER with member belonging to organization
-  #   post :add_member,{ :team => teams(:oceanic_six), :member => members(:clittleton) }
-  #   assert_response 302
-  #   assert !teams(:oceanic_six).members.include?(members(:clittleton))
-  # 
-  #   # ADD MEMBER with none belonging to organization
-  #   post :add_member,{ :team => teams(:oceanic_six), :member => members(:mdawson) }
-  #   assert_response 302
-  #   assert !teams(:oceanic_six).members.include?(members(:mdawson))
-  # 
-  #   # REMOVE MEMBER with team and member belonging to organization
-  #   post :remove_member,{ :team => teams(:widmore_team), :member => members(:cwidmore) }
-  #   assert_response :ok
-  #   assert !teams(:widmore_team).members.include?(members(:cwidmore))
-  # 
-  #   # REMOVE MEMBER with none belonging to organization
-  #   post :remove_member,{ :team => teams(:oceanic_six), :member => members(:jshephard) }
-  #   assert_response 302
-  #   assert teams(:oceanic_six).members.include?(members(:jshephard))
-  #   
-  # end
-  # 
+  test "a system administrator should be able to toggle admin for any user" do
+    login_as_administrator
+    # Toggle admin in own organization
+    get :toggle_admin, { :id => organizations(:widmore_corporation).id, :member => members(:dfaraday).id }
+    assert_response :ok
+    assert members(:dfaraday).admins?(organizations(:widmore_corporation))
+    get :toggle_admin, { :id => organizations(:widmore_corporation).id, :member => members(:dfaraday).id }
+    assert_response :ok
+    assert !members(:dfaraday).admins?(organizations(:widmore_corporation))
+    
+    # Toggle admin in foreign organization
+    get :toggle_admin, { :id => organizations(:oceanic_six).id, :member => members(:kausten).id }
+    assert_response :ok
+    assert members(:kausten).admins?(organizations(:oceanic_six))
+    get :toggle_admin, { :id => organizations(:oceanic_six).id, :member => members(:kausten).id }
+    assert_response :ok
+    assert !members(:kausten).admins?(organizations(:oceanic_six))
+    
+  end
+
+  test "an organization administrator should be able to toggle admin only within its organizations" do
+    login_as_organization_admin
+    # Toggle admin in own organization
+    get :toggle_admin, { :id => organizations(:widmore_corporation).id, :member => members(:dfaraday).id }
+    assert_response :ok
+    assert members(:dfaraday).admins?(organizations(:widmore_corporation))
+    get :toggle_admin, { :id => organizations(:widmore_corporation).id, :member => members(:dfaraday).id }
+    assert_response :ok
+    assert !members(:dfaraday).admins?(organizations(:widmore_corporation))
+    
+    # Toggle admin in foreign organization
+    get :toggle_admin, { :id => organizations(:oceanic_six).id, :member => members(:kausten).id }
+    assert_response 302
+    assert !members(:kausten).admins?(organizations(:oceanic_six))
+  end
+
+  test "a normal user should't be able to toggle admin at all" do
+    login_as_normal_user
+    # Toggle admin in own organization
+    get :toggle_admin, { :id => organizations(:widmore_corporation).id, :member => members(:dfaraday).id }
+    assert_response 302
+    assert !members(:dfaraday).admins?(organizations(:widmore_corporation))
+    
+    # Toggle admin in foreign organization
+    get :toggle_admin, { :id => organizations(:oceanic_six).id, :member => members(:kausten).id }
+    assert_response 302
+    assert !members(:kausten).admins?(organizations(:oceanic_six))
+  end
+  
+  test "no one should be able to auto toggle admin" do
+    # Organization admin
+    login_as_organization_admin
+    get :toggle_admin, { :id => organizations(:widmore_corporation).id, :member => members(:cwidmore).id }
+    assert_response :internal_server_error
+    assert members(:cwidmore).admins?(organizations(:widmore_corporation))
+  end
 end

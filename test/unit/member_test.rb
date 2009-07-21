@@ -127,4 +127,5 @@ class MemberTest < ActiveSupport::TestCase
     assert members(:cwidmore).admins_any_organization?
     assert !members(:dfaraday).admins_any_organization?
   end
+  
 end

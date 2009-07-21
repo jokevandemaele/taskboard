@@ -101,13 +101,9 @@ class Admin::OrganizationsController < ApplicationController
   end
   
   def toggle_admin
+    return render :inline => "", :status => :internal_server_error if @current_member.id == params[:member].to_i
     @membership = OrganizationMembership.first(:conditions => ["member_id = ? and organization_id = ?", params[:member], params[:id]])
-
-    if @membership.admin
-      @membership.admin = nil
-    else
-      @membership.admin = true
-    end
+    @membership.admin = @membership.admin ? nil : true
     
     if @membership.save
       render :inline => "", :status => :ok

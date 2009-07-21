@@ -31,16 +31,16 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
     login_as_organization_admin
     get :index
     assert_response :ok
-    
   end
 
-  test "index, if logged in as normal user and have only one project, i should be redirected to its taskboard" do
+  test "index, if logged in as normal user and have only one project, i should see the list" do
     login_as(members(:jburke))
     get :index
-    assert_redirected_to :controller => '/taskboard', :action => :show, :id => members(:jburke).projects.first.id
+    assert_response :ok
+    assert_select "div.project-container", :count => members(:jburke).projects.size
   end
 
-  test "index, if logged in as normal user and have more than one project, i should see the list" do
+  test "index, if logging in as normal user and have more than one project, i should see the list" do
     login_as(members(:jshephard))
     get :index
     assert_response :ok

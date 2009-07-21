@@ -15,9 +15,7 @@ class Admin::ProjectsController < ApplicationController
       @member.projects.each { |proj| @projects << proj if(!@projects.include?(proj)) }
     else
       @projects = @member.projects
-      redirect_to :controller => '/taskboard', :action => :show, :id => @projects.first.id if @projects.length == 1
     end
-    
   end
 
   # GET /projects/1
