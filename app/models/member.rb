@@ -121,6 +121,12 @@ class Member < ActiveRecord::Base
     end
   end
   
+  def administrators
+    admins = []
+    organizations.each {|organization| OrganizationMembership.all(:conditions => ["organization_id = ? AND admin = ?", organization, true]).collect { |memb| admins << memb.member if !admins.include?(memb.member) } } 
+    return admins
+  end
+
 protected
 
   # Auxiliary Functions

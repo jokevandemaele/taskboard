@@ -1,0 +1,17 @@
+<%= admin_open_div(750)%>
+<div id="no-projects">
+	<h1>No projects found.</h1>
+	<p style="position:relative; left: 10px;">You're not participating in any projects right now, please contact an administrator of your organization.</p>
+	<% if !@member.administrators.empty? -%>
+	<div class="admin-div-section" style="width: 720px;">
+	<h2>Organization Administrators</h2>
+	</div>
+	<div style="width: 100%">
+		<% @member.administrators.each do |administrator| %>
+			<%= render :partial => 'admin/members/element', :locals => {:element => administrator, :parent => administrator.organizations.first} %>
+		<% end %>
+	<% end -%>
+	</div>
+	<div style="clear:both;"></div>
+</div>
+<%= admin_close_div(750)%>

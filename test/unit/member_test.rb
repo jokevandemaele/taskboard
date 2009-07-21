@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class MemberTest < ActiveSupport::TestCase
-  fixtures :members, :organizations
+  fixtures :members, :organizations, :organization_memberships
 
   test "authentication works as expected" do
     # check that we can login with a valid user
@@ -93,8 +93,7 @@ class MemberTest < ActiveSupport::TestCase
     #assert_equal member, Member.authenticate("newmember2", "newpassword")
   end
   
-  # Test the format of nametags
-  def test_nametag_format
+  test "test the format of nametags" do
     assert_equal "CHARLIE", members(:cpace).formatted_nametag
     assert_equal "MICHAEL F", members(:mfaraday).formatted_nametag
   end
@@ -127,5 +126,13 @@ class MemberTest < ActiveSupport::TestCase
     assert members(:cwidmore).admins_any_organization?
     assert !members(:dfaraday).admins_any_organization?
   end
-  
+
+  test "member.administrators should return all the organization admins from the organizations the user belongs to" do
+    admins = []
+    members(:dfaraday).organizations.each do |organization|
+      memberships = OrganizationMembership.all(:conditions => ["organization_id = ? AND admin = ?", organization, true])
+      memberships.each {|memb| admins << memb.member }
+    end
+    assert_equal admins, members(:dfaraday).administrators
+  end
 end
