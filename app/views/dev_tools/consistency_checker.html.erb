@@ -1,0 +1,62 @@
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>Agilar Taskboard - Developer Tools</title>
+  <%= javascript_include_tag :defaults %>
+</head>
+<h1>Consistency Checker</h1>
+<hr />
+<h2>Organization Memberships</h2>
+	<% @memberships.each do |membership| -%>
+	<div style="margin: 10px; padding-left: 10px; border: 3px solid <%= (membership.member.nil? || membership.organization.nil?) ? 'red' : 'green' %>;">
+	<h3><%= "#{membership.member.name} <=> #{membership.organization.name})" if !(membership.member.nil? || membership.organization.nil?) %><h3> 
+	</div>
+	<% end -%>
+<hr />
+<h2>Projects</h2>
+	<% @projects.each do |project| -%>
+	<div style="margin: 10px; padding-left: 10px; border: 3px solid <%= (project.organization.nil?) ? 'red' : 'green' %>;">
+	<h3><%= project.name -%> <%= "(#{project.organization.name})" if !project.organization.nil? %><h3> 
+	[ <%= link_to_remote 'remove', :url => {:controller => 'admin/projects', :action => :destroy, :id => project}, :method => :delete, :success => "location.reload(true)" -%> ]
+	</div>
+	<% end -%>
+<hr />
+<h2>Teams</h2>
+	<% @teams.each do |team| -%>
+	<div style="margin: 10px; padding-left: 10px; border: 3px solid <%= (team.projects.first.nil?) ? 'red' : 'green' %>;">
+	<h3><%= team.name -%> <%= "(#{team.projects.first.name})" if !team.projects.first.nil? %><h3> 
+	<%= team.members.collect{|memb| "<br/>#{memb.name}" } -%>
+	[ <%= link_to_remote 'remove', :url => {:controller => 'admin/teams', :action => :destroy, :id => team}, :method => :delete, :success => "location.reload(true)" -%> ]
+	</div>
+	<% end -%>
+<hr />
+<h2>Stories</h2>
+	<% @stories.each do |story| -%>
+	<div style="margin: 10px; padding-left: 10px; border: 3px solid <%= (story.project.nil?) ? 'red' : 'green' %>;">
+	<h3><%= story.name -%> <%= "(#{story.project.name})" if !story.project.nil? %><h3> 
+	[ <%= link_to_remote 'remove', :url => {:controller => 'stories', :action => :destroy, :id => story}, :method => :delete, :success => "location.reload(true)" -%> ]
+	</div>
+	<% end -%>
+<hr />
+<h2>Tasks</h2>
+	<% @tasks.each do |task| -%>
+	<div style="margin: 10px; padding-left: 10px; border: 3px solid <%= (task.story.nil?) ? 'red' : 'green' %>;">
+	<h3><%= task.name -%> <%= "(#{task.name})" if !task.story.nil? %><h3> 
+	[ <%= link_to_remote 'remove', :url => {:controller => 'tasks', :action => :destroy, :id => task}, :method => :delete, :success => "location.reload(true)" -%> ]
+</div>
+<% end -%>
+<hr />
+<h2>Statustags</h2>
+	<% @statustags.each do |statustag| -%>
+	<div style="margin: 10px; padding-left: 10px; border: 3px solid <%= (statustag.task.nil?) ? 'red' : 'green' %>;">
+	<h3><%= statustag.status -%> <%= "(#{statustag.task.name})" if !statustag.task.nil? %><h3> 
+	[ <%= link_to_remote 'remove', :url => {:controller => 'statustags', :action => :destroy, :id => statustag}, :method => :delete, :success => "location.reload(true)" -%> ]
+</div>
+<% end -%>
+<hr />
+<h2>Nametags</h2>
+<% @nametags.each do |nametag| -%>
+<div style="margin: 10px; padding-left: 10px; border: 3px solid <%= (nametag.task.nil? || nametag.member.name.nil?) ? 'red' : 'green' %>;">
+<h3><%= nametag.member.name if !nametag.member.name.nil?-%> <%= "(#{nametag.task.name})" if !nametag.task.nil? %><h3> 
+[ <%= link_to_remote 'remove', :url => {:controller => 'nametags', :action => :destroy, :id => nametag}, :method => :delete, :success => "location.reload(true)" -%> ]
+</div>
+<% end -%>
