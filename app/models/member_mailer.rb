@@ -9,13 +9,13 @@ class MemberMailer < ActionMailer::Base
     body       :greeting => 'Hi,'
   end
 
-  def create(username, email, sent_at = Time.now)
+  def create(member, password, creator, sent_at = Time.now)
     subject    'Welcome to the Agilar Taskboard!'
-    recipients email
+    recipients member.email
     from       'taskboard@agilar.org'
     sent_on    sent_at
     
-    body       :username => username
+    body       :member => member, :password => password, :creator => creator
   end
 
 end
