@@ -1,5 +1,7 @@
 class DevToolsController < ApplicationController
   def consistency_checker
+    redirect_to :controller => 'admin/members', :action => :access_denied if session[:member].nil? || !Member.find(session[:member]).admin?
+
     # To check memberships
     @memberships = OrganizationMembership.all
     # To check projects
