@@ -1,7 +1,7 @@
 class Project < ActiveRecord::Base
   # Associations
   belongs_to :organization
-  has_many :stories
+  has_many :stories, :dependent => :delete_all
   has_and_belongs_to_many :teams
   # Validations
   validates_uniqueness_of :name

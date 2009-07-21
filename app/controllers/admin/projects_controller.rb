@@ -72,7 +72,11 @@ class Admin::ProjectsController < ApplicationController
   # DELETE /projects/1
   def destroy
     @project = Project.find(params[:id])
+    # This is concateneted to [] to create a new array and not just reference it.
+    @teams = [] + @project.teams
     if @project.destroy
+      logger.error(@teams.inspect)
+      @teams.each { |team| team.destroy }
       render :inline => "", :status => :ok
     else
       render :inline => "", :status => :internal_server_error
