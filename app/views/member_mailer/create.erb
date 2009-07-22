@@ -1,10 +1,10 @@
-Hello, <strong><%=h @member.name -%></strong>! If you're reading this, you're in luck - <strong><%=h @creator -%></strong> thinks you're very special and has invited you to use <strong>Agilar Taskboard</strong> as a member of <%=h @member.organizations.first.name -%>. Welcome aboard!
+Hello, <%=h @member.name -%>! If you're reading this, you're in luck - <%=h @creator -%> thinks you're very special and has invited you to use Agilar Taskboard as a member of <%=h @member.organizations.first.name -%>. Welcome aboard!
 
 This is your login information:
 User name: <%=h @member.username %>
 Password: <%=h @password %>
 
-Head over to <a href="<%= @url -%>"><%= @url -%></a> to start living the experience!
+Head over to <%= @url -%> to start living the experience!
 
 
       the Agilar Taskboard Team
