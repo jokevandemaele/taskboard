@@ -9,7 +9,15 @@ parent_class = parent.class.to_s.downcase
 %>
 	<div id="name-<%= parent_class%>-<%= parent.id %>-<%= element_class -%>-<%= element.id -%>-container">
 		<p id="name-<%= parent_class%>-<%= parent.id %>-<%= element_class -%>-<%= element.id -%>" title="<%= element.name -%>">
-			<%= element.name -%>
+			<% if defined?(contact) && contact %>
+				<a href="mailto:<%= element.email %>">
+				<%= image_tag "admin/admin-div-actions-email-small.png", :alt => "email", :title => "Send E-Mail to Administrator" -%>
+			<% end -%>
+				<%= element.name -%>
+			<% if defined?(contact) && contact %>
+				</a>
+			<% end %>
+				
 		</p>
 	</div>
 	<script>

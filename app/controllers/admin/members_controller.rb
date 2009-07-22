@@ -102,11 +102,8 @@ class Admin::MembersController < ApplicationController
 
   def logout
     session[:member] = nil
-    if(request.referer)
-      redirect_to(request.referer)
-    else
-      redirect_to(admin_projects_url)
-    end
+    session[:return_to] = nil
+    redirect_to :controller => 'admin/members', :action => 'login'
   end
 
   def access_denied

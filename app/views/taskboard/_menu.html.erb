@@ -27,7 +27,7 @@
 	</table>
 	</div>
 	<div id="menu_nametags">
-		<%= render :partial => "menu_nametags", :locals => { :team => team } if team -%> 
+		<%= render :partial => "menu_nametags", :locals => { :team => team } if !team.nil? -%> 
 	</div>
 
 	<%= image_tag 'menu_trash.png' , :border => 0, :id => 'trash' -%>

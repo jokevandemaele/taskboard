@@ -8,7 +8,7 @@
 	</div>
 	<div style="width: 100%">
 		<% @member.administrators.each do |administrator| %>
-			<%= render :partial => 'admin/members/element', :locals => {:element => administrator, :parent => administrator.organizations.first} %>
+			<%= render :partial => 'admin/members/element', :locals => {:element => administrator, :parent => administrator.organizations.first, :contact => true} %>
 		<% end %>
 	<% end -%>
 	</div>
