@@ -6,13 +6,12 @@
     <th>Name</th>
     <th>Priority</th>
     <th>Size</th>
-    <th>Requirement</th>
-    <th>How to demo</th>
+    <th>Description</th>
   </tr>
 
 <% for story in @stories %>
   <tr class="story-<%= story.status -%>">
-    <td>
+    <td class="name-cell">
 	(<%=h story.realid %>) <%=h story.name %><br />
 	<% if story.status != 'finished' -%>
 		[
@@ -37,8 +36,7 @@
 		<%= story.priority %>
 	<% end %>
     <td class="size-cell"><%=h story.size %></td>
-    <td><%=h truncate(story.requirement) %></td>
-    <td><%=h truncate(story.how_to_demo) %></td>
+    <td><%=h story.description %></td>
   </tr>
 <% end %>
 </table>

@@ -1,6 +1,6 @@
 body{
 	margin: 0;
-	}
+}
 
 table {
 	width: 100%;
@@ -10,7 +10,6 @@ table {
 	margin: 0 auto;
 	border-spacing: 0px;
 }
-
 #table_footer {
 	background: #447821;
 	color: white;
@@ -31,6 +30,7 @@ table th{
 	padding: 10px;
 	border-left: 4px solid #447821;
 }
+
 table td{
 	border-left: 4px solid #447821;
 	border-bottom: 4px solid #447821;
@@ -51,13 +51,19 @@ table td{
 	text-align: center;
 	font-size: 20px;
 	font-weight: bold;
+	width: 1px;
 }
+
 .size-cell {
 	text-align: center;
 	font-size: 15px;
 	font-weight: bold;
+	width: 1px;
 }
 
+.name-cell{
+	width: 210px;
+}
 #container {
 	width: 100%;
 }

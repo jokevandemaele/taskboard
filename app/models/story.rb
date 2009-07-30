@@ -3,6 +3,12 @@ class Story < ActiveRecord::Base
   has_many :tasks, :dependent => :destroy
 
   validates_uniqueness_of :realid
+  
+  after_create :add_template_task
+
+  def add_template_task
+    self.tasks << Task.new(:name => "This is a sample task")
+  end
 
   def self.last_realid(project_id)
 	story = Story.first(:conditions => ["project_id = ? AND realid != ''", project_id], :order => "realid DESC")

@@ -1,8 +1,9 @@
 require 'test_helper'
 
 class StoryTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
-  end
+	test "every story should be created with a template task" do
+		s = Story.new
+		s.save
+		assert_equal 1, s.tasks.size
+	end
 end

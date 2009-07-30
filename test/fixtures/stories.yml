@@ -5,8 +5,7 @@ NotStartedStory:
   project_id: 1
   priority: 10
   size: 100
-  how_to_demo: DemoLikeThat
-  requirement: Requirement
+  description: description
   status: not_started
   realid: TS101
 
@@ -15,8 +14,7 @@ InProgressStory:
   project_id: 1
   priority: 100
   size: 100
-  how_to_demo: DemoLikeThat
-  requirement: Requirement
+  description: description
   status: in_progress
   realid: TS101
 
@@ -25,8 +23,7 @@ DoneStory:
   project_id: 1
   priority: -1
   size: 100
-  how_to_demo: DemoLikeThat
-  requirement: Requirement
+  description: description
   status: finished
   realid: TS101
 
