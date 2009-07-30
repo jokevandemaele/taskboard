@@ -66,6 +66,12 @@ table td{
 	max-width: 300px;
 	
 }
+.description-cell{
+	min-width: 300px;
+	max-width: 400px;
+	
+}
+
 #container {
 	width: 100%;
 }
