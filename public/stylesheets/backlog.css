@@ -62,7 +62,9 @@ table td{
 }
 
 .name-cell{
-	width: 210px;
+	min-width: 260px;
+	max-width: 300px;
+	
 }
 #container {
 	width: 100%;
