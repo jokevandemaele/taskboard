@@ -49,7 +49,8 @@ current_member_admins_parent = (element_class == 'member') ? current_member.admi
 	<div id="name-<%= parent_class%>-<%= parent.id %>-<%= element_class -%>-<%= element.id -%>-container">
 		<p id="name-<%= parent_class%>-<%= parent.id %>-<%= element_class -%>-<%= element.id -%>" title="<%= element.name -%>" class="<%=  not_mine %>">
 			<%= show_admin_info_for element, parent if (element_class == 'member' && !current_member_admins_parent) -%>
-			<%= element.name -%>
+			<%= link_to(element.name, :controller => "/taskboard", :action => :show, :id => element.id) if element_class == 'project' %>
+			<%= element.name if element_class != 'project' -%>
 		</p>
 	</div>
 	<script>
