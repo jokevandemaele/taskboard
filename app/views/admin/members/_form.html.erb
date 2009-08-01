@@ -4,17 +4,33 @@
 </script>
 <% end -%>
 <div id="form-add-member" class="admin-new" style="display: none;">
-	<%= image_tag "admin/admin-logo-members.png", :alt => "Member", :style => "position:absolute; top: -64px; left: -54px; z-index: 101" -%>
+	<!-- <%= image_tag "admin/admin-logo-members.png", :alt => "Member", :style => "z-index: 101" -%>-->
+	<% if !@members_not_in_organization.nil? && !@members_not_in_organization.empty? && current_member.admin? -%>
+	        <% if @organization %>
+	          <%= admin_open_div 765 -%>
+	            <% form_remote_tag :url => { :controller => 'admin/organizations', :action => 'add_member', :id => @organization.id }, :method => :put, :update => 'dummy-for-actions' do %>
+					<span class="form-name" style="font-size: 16px;">Choose an existing member: <%= select_tag 'member', options_from_collection_for_select(@members_not_in_organization, 'id', 'name'), :style => "width: 250px;" -%></span>
+	              <%= image_submit_tag "admin/admin-form-submit.png", :alt => "Submit", :style => "position:absolute; top: -30px; right: 119px;"-%>
+	              <%= image_tag "admin/admin-form-cancel.png", 
+	                  :alt => "Cancel", 
+	                  :style => "position:absolute; top: -25px; right: 30px; cursor: pointer;", 
+	                  :onClick => "cancelForm('form-add-member');" -%>
+	            <% end %>
+	          <%= admin_close_div 765 -%>
+	        <% end %>
+	<% end -%>
+
 	<div style="clear: both"></div>
 	<%= admin_open_div 765 -%>
+	
 	<div class="admin-div-organization-top">
 		<% 
 		if edit 
 			action = :update
 		else
-			action = :create
-		end
-		-%>
+			action = :create %>
+			<span class="form-name" style="font-size: 16px;position:relative; left: 0px;">Create a new member: </span>
+		<% end -%>
 		
 		<% form_for @member, :url => { :controller => 'admin/members', :action => action, :id => @member }, :html => { :multipart => true, :target => :upload_frame } do |f| %>
 			<div id="information"></div>
@@ -29,9 +45,9 @@
 			
 			<%= f.text_field :name, 
 				:value => name, 
-				:class => "form-name", 
+				:class => "form-name name-field", 
 				:onClick => "if(this.value == 'Click To Edit Member Name' ) this.clear();" %>
-
+				
 			<% if !edit %>
 			<% if @organization %>
 			  <%= hidden_field_tag "organization", @organization.id -%>
@@ -89,32 +105,19 @@
 						<h2 style="position: relative; top: 0px; margin-left: -5px; top: 5px;">Security</h2>
 					</div>
 			<% end %>
-			<div style="clear:both; margin: 0; padding: 0;"></div>
-			<%= image_submit_tag "admin/admin-form-submit.png", :alt => "Submit", :style => "position:absolute; top: -30px; right: 119px;"-%>
+			<div style="float: right; position:relative; top: 20px;">
+			<%= image_submit_tag "admin/admin-form-submit.png", :alt => "Submit", :style => ""-%>
 			<%= image_tag "admin/admin-form-cancel.png", 
 				:alt => "Cancel", 
-				:style => "position:absolute; top: -20px; right: 30px; cursor: pointer;", 
+				:style => "position:relative; top: -30px; cursor: pointer; margin-left: 20px;", 
 				:onClick => "cancelForm('form-add-member');" -%>
 		<% end %>
+			</div>
+			<div style="clear:both; margin: 0; padding: 0;"></div>
 	</div>
 	<div id="show-errors" style="display:none;">
 	</div>
 	<%= admin_close_div 765 -%>
-
-<% if !@members_not_in_organization.nil? && !@members_not_in_organization.empty? && current_member.admin? -%>
-        <% if @organization %>
-          <%= admin_open_div 765 -%>
-            <% form_remote_tag :url => { :controller => 'admin/organizations', :action => 'add_member', :id => @organization.id }, :method => :put, :update => 'dummy-for-actions' do %>
-				<span class="form-name" style="font-size: 16px;">Or choose an existing one: <%= select_tag 'member', options_from_collection_for_select(@members_not_in_organization, 'id', 'name'), :style => "width: 250px;" -%></span>
-              <%= image_submit_tag "admin/admin-form-submit.png", :alt => "Submit", :style => "position:absolute; bottom: 29px; right: 119px;"-%>
-              <%= image_tag "admin/admin-form-cancel.png", 
-                  :alt => "Cancel", 
-                  :style => "position:absolute; bottom: 29px; right: 30px; cursor: pointer;", 
-                  :onClick => "cancelForm('form-add-member');" -%>
-            <% end %>
-          <%= admin_close_div 765 -%>
-        <% end %>
-<% end -%>
 	<div id="admin-div-color-picker" style="display: none; position: absolute; top: 119px; right: 3px;">
 	<%= admin_open_div 208 -%>
   <div id="admin-div-color-picker-content"></div>
@@ -126,7 +129,9 @@
   if($('member_color').value != '')
     $('member_color').style.backgroundColor = $('member_color').style.color = '#' + $('member_color').value;
 	centerTo($('form-add-member'),$('dialog-background-fade'));
-	Effect.Appear($('form-add-member'));
+	Effect.Appear($('form-add-member'), { afterFinish : function() { Form.Element.focus($('member_name'))}});	
+	
+	
 </script>
 <% # render :partial => 'color_picker' -%>
 </div>

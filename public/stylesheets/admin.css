@@ -76,7 +76,8 @@ p { color: #002255;}
 
 /* Admin Form */
 .admin-new { position: fixed; top: 0px; left: 0px; z-index: 101; }
-.form-name{ position:relative; left: 52px; font-size: 28px; color: #002255; width: 480px; height: 40px; border: none; background: transparent;}
+.form-name{ position:relative; font-size: 28px; color: #002255; width: 100%; border: none; background: transparent;}
+.name-field { background: #afc6e9; margin-bottom: 5px;margin-top: 5px;}
 /* End Admin Form */
 
 /* Admin User Info */
