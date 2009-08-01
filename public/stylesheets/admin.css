@@ -65,13 +65,15 @@ p { color: #002255;}
 .admin-div-element-actions div { width: 214px; height: 33px; }
 
 .admin-div-element p, .admin-div-element-actions p { float:left; margin: 0; color: #002255; padding: 0; position:relative; top: 8px; }
+.not-mine { color: #aaa !important;}
+.not-mine a:visited;{ color: #aaa !important;}
+.admin-div-element-core a:visited {color: #002255;}
+.admin-div-element-core p.not-mine a:visited {color: #aaa;}
 .admin-div-element p { text-align: center;}
-
 .admin-div-elements-search{ float:right; position: relative; top: 11px; margin-right: 10px;} 
 .admin-div-elements-search-field{ background: url('/images/admin/admin-div-elements-search-field.png') no-repeat transparent; border: none; width: 128px; height: 25px; font-size: 12px;  position:relative; top: 4px; padding-left: 12px; padding-top: 3px; margin: 0;}
 #admin-div-color-picker-content table { border-spacing: 3px; }
 #admin-div-color-picker-content table tbody tr td { width: 24px; height: 24px; }
-.not-mine { color: #aaa !important;}
 /* End Admin Div  */
 
 /* Admin Form */
