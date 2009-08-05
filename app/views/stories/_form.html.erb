@@ -8,12 +8,13 @@
 		<% action = edit ? :update : :create -%>
 		<% remote_form_for @story, :url => { :controller => :stories, :action => action, :id => @story.id }, :update => "dummy-for-actions" do |f| %>
 			<%= hidden_field_tag("story[project_id]", "#{project}") -%> 
-			<%= admin_form_name(@team, edit, f) -%>
+			<%= admin_form_name(@story, edit, f) -%>
 
 			<div class="admin-div-section" style="margin-top: 10px;">
 				<table id="story-add-fields">
 					<tr style="border: 0; margin: 0; padding: 0;">
-						<td style="border: 0; margin: 0; padding: 0; padding-top: 12px; width: 33%;">Story ID <%= f.text_field :realid, :value => next_realid(@last_realid), :class => "field-id" %></td>
+						<%	realid = (edit) ? @story.realid : next_realid(@last_realid)	-%>
+						<td style="border: 0; margin: 0; padding: 0; padding-top: 12px; width: 33%;">Story ID <%= f.text_field :realid, :value => realid, :class => "field-id" %></td>
 						<td style="border: 0; margin: 0; padding: 0; padding-top: 12px; width: 33%;"><%= f.label :priority %> <%= f.text_field :priority, :class => "field" %></td>
 					<td style="border: 0; margin: 0; padding: 0; padding-top: 12px; width: 33%;"><%= f.label :size %> <%= f.text_field :size, :class => "field" %></td>
 				</tr>

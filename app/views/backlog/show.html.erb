@@ -24,8 +24,8 @@
 				<%= link_to 'Stop', :controller => 'stories', :action => 'stop_story', :id => story.id, :project => @project.id -%> |  
 			<% end -%>  
 			<%= link_to 'Finish', :controller => 'stories', :action => 'finish_story', :id => story.id, :project => @project.id -%> |
-			<%= link_to_remote "Edit", :url => {:controller => :stories, :action => :show_form, :project => story.project.id, :story => story } %> | 
-			<%= link_to_remote "Delete", :url => {:controller => :stories, :action => :destroy, :id => story}, :confirm => 'Are you sure?', :method => :delete, :complete => "location.reload(true);" %>
+			<%= link_to_remote "Edit", :url => edit_story_url(story.id), :method => :get, :update => "dummy-for-actions" %> | 
+			<%= link_to_remote "Delete", :url => url_for(story), :confirm => 'Are you sure?', :method => :delete, :complete => "location.reload(true);" %>
 			]
 		<% else %>
 		  [ Date Finished: <%= "#{story.updated_at.month}/#{story.updated_at.day}/#{story.updated_at.year}" %> ]

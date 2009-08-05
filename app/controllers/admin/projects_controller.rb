@@ -65,7 +65,10 @@ class Admin::ProjectsController < ApplicationController
     if @project.update_attributes(params[:project])
       render :inline => "<script>location.reload(true);</script>"
     else
-      render :action => "edit"
+        render :partial => 'form',
+        		:object => @project,
+        		:locals => { :no_refresh => true, :edit => true, :organization => @project.organization_id },
+   		:status => :internal_server_error
     end
   end
 
@@ -75,7 +78,6 @@ class Admin::ProjectsController < ApplicationController
     # This is concateneted to [] to create a new array and not just reference it.
     @teams = [] + @project.teams
     if @project.destroy
-      logger.error(@teams.inspect)
       @teams.each { |team| team.destroy }
       render :inline => "", :status => :ok
     else

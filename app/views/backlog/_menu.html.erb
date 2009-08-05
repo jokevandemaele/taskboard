@@ -13,13 +13,7 @@
 		:id => project.id
 	-%>
 
-	<%= link_to_remote image_tag('menu_story_add.png',
-				:border => 0,
-				:id => "menu_story_add_image"),
-		:url => {
-			:controller => 'stories', 
-			:action => 'show_form', 
-			:project => project.id } 
+	<%= link_to_remote image_tag('menu_story_add.png', :id => "menu_story_add_image"), :url => { :controller => :stories, :action => :new, :project => project.id }, :update => "dummy-for-actions" 
 	-%>
 
 	<%= link_to image_tag('menu_admin_section.png', 
