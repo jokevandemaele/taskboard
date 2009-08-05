@@ -49,7 +49,7 @@ class NametagsController < ApplicationController
     @tag = Nametag.find(params[:nametag])
     @html_id = 'nametag-' + @tag.id.to_s
     if @tag.destroy
-      render :inline => "<script>Effect.Fold($('#{@html_id}'), {duration: 0.2});</script>", :status => :ok
+      render :inline => "<script>Effect.Fade($('#{@html_id}'), {duration: 0.3});</script>", :status => :ok
     else
       render :inline => "", :status => :bad_request
     end
