@@ -1,6 +1,7 @@
 	<td class="task-list-item">
 		<div class="task" id="task-<%= task.id -%>">
 			<div class="task-container-table">	
+				<%= link_to_remote image_tag("task_delete.png", :alt => "Delete Task", :style => "position: absolute; top: 5px; right: 5px; border: 0; cursor: pointer;"), :url => { :controller => :tasks, :action=>:destroy, :id => task.id}, :method => :delete, :update => "dummy-for-actions", :style => "border: 2px solid red; " -%>
 			<div class="task-container-cell">	
 				<p class="task-name" id="task-<%= task.id -%>-name" onDblClick="<%= remote_function(:url => { :controller => :tasks, :action => :show_edit_task_name_form, :id => task.id, :story => task.story.id}) %>;")><%=h task.name -%></p>
 

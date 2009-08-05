@@ -29,7 +29,8 @@
 	<td id="finished-<%= story.id %>" style="<%= taskboard_border_style(@color, [ "left", "right", "bottom"]) %>">
 		<%= render :partial => "tasks/tasks_by_status", :locals => { :tasks => story.tasks.finished } %> 
 	</td>
-	
+
+
 <%= drop_receiving_element("not_started-#{story.id}", 
 	:accept => "task", 
 	:with   => "'task=' + (element.id.split('-').last()) + '&status=not_started&story=#{story.id}' + '&x='+ (x(element) - x($('not_started-#{story.id}'))) +'&y='+ (y(element) - y($('not_started-#{story.id}')))", 
@@ -40,11 +41,39 @@
 	:with   => "'status=not_started' + '&story=#{story.id}'",
 	:url => { :controller => :tasks, :action=>:show_form}) 
 %>
+<%= drop_receiving_element("not_started-#{story.id}", 
+	:accept => "statustag", 
+	:with   => "'statustag=' + (element.id.split('-').last())", 
+	:url => { :controller => :statustags, :action=>:destroy},
+	:method => :delete,
+	:update => "dummy-for-actions")
+%>
+<%= drop_receiving_element("not_started-#{story.id}", 
+	:accept => "nametag", 
+	:with   => "'nametag=' + (element.id.split('-').last())", 
+	:url => { :controller => :nametags, :action => :destroy },
+	:method => :delete,
+	:update => "dummy-for-actions") 
+%>
 
 <%= drop_receiving_element("in_progress-#{story.id}", 
 	:accept => "task", 
 	:with   => "'task=' + (element.id.split('-').last()) + '&status=in_progress&story=#{story.id}' + '&x='+ (x(element) - x($('in_progress-#{story.id}')))+ '&y='+ (y(element) - y($('in_progress-#{story.id}')))", 
 	:url => { :controller => :tasks, :action=>:update_task}) 
+%>
+<%= drop_receiving_element("in_progress-#{story.id}", 
+	:accept => "statustag", 
+	:with   => "'statustag=' + (element.id.split('-').last())", 
+	:url => { :controller => :statustags, :action=>:destroy},
+	:method => :delete,
+	:update => "dummy-for-actions")
+%>
+<%= drop_receiving_element("in_progress-#{story.id}", 
+	:accept => "nametag", 
+	:with   => "'nametag=' + (element.id.split('-').last())", 
+	:url => { :controller => :nametags, :action => :destroy },
+	:method => :delete,
+	:update => "dummy-for-actions") 
 %>
 
 <%= drop_receiving_element("finished-#{story.id}", 
@@ -52,3 +81,18 @@
 	:with   => "'task=' + (element.id.split('-').last()) + '&status=finished&story=#{story.id}' + '&x='+ (x(element) - x($('finished-#{story.id}')))+ '&y='+ (y(element) - y($('finished-#{story.id}')))", 
 	:url => { :controller => :tasks, :action=>:update_task}) 
 %>
+<%= drop_receiving_element("finished-#{story.id}", 
+	:accept => "statustag", 
+	:with   => "'statustag=' + (element.id.split('-').last())", 
+	:url => { :controller => :statustags, :action=>:destroy},
+	:method => :delete,
+	:update => "dummy-for-actions")
+%>
+<%= drop_receiving_element("finished-#{story.id}", 
+	:accept => "nametag", 
+	:with   => "'nametag=' + (element.id.split('-').last())", 
+	:url => { :controller => :nametags, :action => :destroy },
+	:method => :delete,
+	:update => "dummy-for-actions") 
+%>
+

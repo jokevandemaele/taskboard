@@ -29,27 +29,6 @@
 	<div id="menu_nametags">
 		<%= render :partial => "menu_nametags", :locals => { :team => team } if !team.nil? -%> 
 	</div>
-
-	<%= image_tag 'menu_trash.png' , :border => 0, :id => 'trash' -%>
-	<%= drop_receiving_element("trash", 
-		:accept => "task", 
-		:with   => "'task=' + (element.id.split('-').last())", 
-		:url => { :controller => :tasks, :action=>:destroy_task}) 
-	%>
-	<%= drop_receiving_element("trash", 
-		:accept => "statustag", 
-		:with   => "'statustag=' + (element.id.split('-').last())", 
-		:url => { :controller => :statustags, :action=>:destroy_statustag}) 
-	%>
-	<%= drop_receiving_element("trash", 
-		:accept => "nametag", 
-		:with   => "'nametag=' + (element.id.split('-').last())", 
-		:url => { :controller => :nametags, :action => :destroy_nametag }) 
-	%>
-	<%= drop_receiving_element("trash", 
-		:accept => "form-add-task"
-		) 
-	%>
 	<%= link_to (image_tag 'menu_logout.png' , 
 		:border => 0 ,
 		:id => 'taskboard_menu_logout', 

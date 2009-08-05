@@ -65,28 +65,15 @@ class TasksController < ApplicationController
   # DELETE /tasks/1
   def destroy
     @task = Task.find(params[:id])
-    @task.nametags.each {|nametag| nametag.destroy }
-    @task.statustags.each {|statustag| statustag.destroy }
-    @task.destroy
-
-    redirect_to(tasks_url)
+    @html_id = 'task-' + @task.id.to_s
+    if @task.destroy
+      render :inline => "<script>Effect.Fade($('#{@html_id}'), {duration: 0.2});</script>", :status => :ok
+    else
+      render :inline => "", :status => :bad_request
+    end
   end
   
   # These functions are used by the taskboard. TODO: See how to avoid them
-  def destroy_task
-    @task = Task.find(params[:task])
-    id = @task.id
-    old_status = @task.status
-    story = @task.story
-    story_id = @task.story_id
-    @task.destroy
-    
-    @tasks = Task.tasks_by_status(story,old_status)
-    render :update do |page|
-      page.replace_html "#{old_status}-#{story_id}", :partial => "tasks/tasks_by_status", :locals => { :tasks => @tasks } 
-    end
-  end
-
   def show_form
     @story = Story.find(params[:story])
     @task = Task.new

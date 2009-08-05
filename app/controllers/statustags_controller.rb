@@ -36,26 +36,14 @@ class StatustagsController < ApplicationController
     end
   end
 
-  # DELETE /statustags/1
+  # DELETE /statustags/1?statustag=id
   def destroy
-    @statustag = Statustag.find(params[:id])
-    @statustag.destroy
-
-    redirect_to(statustags_url)
-  end
-  
-  # These functions are used by the taskboard. TODO: See how to avoid them
-  def destroy_statustag
     @tag = Statustag.find(params[:statustag])
-    id = @tag.task.id
-    old_status = @tag.task.status
-    story = @tag.task.story
-    story_id = @tag.task.story_id
-    @tag.destroy
-    
-    render :update do |page|
-      @tasks = Task.tasks_by_status(story,old_status)
-      page.replace_html "#{old_status}-#{story_id}", :partial => "tasks/tasks_by_status", :locals => { :tasks => @tasks } 
+    @html_id = 'statustag-' + @tag.id.to_s
+    if @tag.destroy
+      render :inline => "<script>Effect.Fold($('#{@html_id}'), {duration: 0.2});</script>", :status => :ok
+    else
+      render :inline => "", :status => :bad_request
     end
   end
   
