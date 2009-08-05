@@ -4,77 +4,38 @@
 </script>
 <% end -%>
 <div id="form-add-project" class="admin-new" style="display:none;">
-	<%= image_tag "admin/admin-logo-projects.png", :alt => "Project", :style => "position:absolute; top: -64px; left: -54px; z-index: 101; " -%>
+	<%= image_tag "admin/admin-logo-projects.png", :alt => "Project",:style => "position:absolute; top: 0px; left: -120px; " -%>
 	<div style="clear: both"></div>
 	<%= admin_open_div 765 -%>
-	<div class="admin-div-project-top">
-                <%
-                if edit
-                  action = :update
-                else
-                  action = :create
-                end
-                -%>
+		<div class="admin-div-project-top">
+		<% action = edit ? :update : :create -%>
 		<% remote_form_for @project, :url => { :controller => 'admin/projects', :action => action, :id => @project.id }, :update => "dummy-for-actions" do |f| -%>
-		<% 
-		if (edit || defined? no_refresh) 
-			name = @project.name
-		else
-			name =  "Click To Edit Project Name" 
-		end 
-		%>
 
-		<%= f.text_field :name, 
-			:value => name, 
-			:class => "form-name", 
-			:onClick => "if(this.value == 'Click To Edit Project Name' ) this.clear();" -%>
+			<%= admin_form_name(@project, edit, f) -%>
 
-		<% if @organization %>
-		  <%= hidden_field_tag "project[organization_id]", @organization -%>
-		  <%= hidden_field_tag "organization", @organization -%>
-		<% else %>
-                  <div class="admin-div-section">
-                  <%= image_tag 'admin/admin-div-actions-organizations.png', :alt => 'Organization', :style => 'position: relative; top: 10px; margin-left: 10px;' -%>
-                  <h2 style="position: relative; top: 10; margin-left: 10px;">Organization:</h2>
-                  <%= select_tag "project[organization_id]", options_from_collection_for_select(current_member.organizations_administered, 'id', 'name', :selected => @project.organization_id), :style => 'position: relative; top: 10px; margin-left: 10px; width: 500px;' -%>
-                  </div>
+			<% if @organization %>
+				<%= hidden_field_tag "project[organization_id]", @organization -%>
+				<%= hidden_field_tag "organization", @organization -%>
+			<% else %>
+				<div class="admin-div-section">
+				<%= image_tag 'admin/admin-div-actions-organizations.png', :alt => 'Organization', :style => 'position: relative; top: 10px; margin-left: 10px;' -%>
+				<h2 style="position: relative; top: 10; margin-left: 10px;">Organization:</h2>
+				<%= select_tag "project[organization_id]", options_from_collection_for_select(current_member.organizations_administered, 'id', 'name', :selected => @project.organization_id), :style => 'position: relative; top: 10px; margin-left: 10px; width: 500px;' -%>
+				</div>
+			<% end %>
+			<%= error_messages_for('project', :object => @project) if (defined?(no_refresh) && no_refresh) -%>
+			
+			<%= admin_form_buttons(@project) -%>
 		<% end %>
-		
-			<%= image_submit_tag "admin/admin-form-submit.png", :alt => "Submit", :style => "position:absolute; top: -20px; right: 119px;"-%>
-			<%= image_tag "admin/admin-form-cancel.png", 
-				:alt => "Cancel", 
-				:style => "position:absolute; top: -20px; right: 30px; cursor: pointer;", 
-				:onClick => "cancelForm('form-add-project');" -%>
-		<% end %>
-	</div>
-		<% if defined?(no_refresh) && no_refresh -%>
-		<%= error_messages_for('project', :object => @project) -%>
+
 		<div style="clear: both;"></div>
-		<% end -%>
+		</div>
+		
 	<%= admin_close_div 765 -%>
+
 	<div style="width: 100px; height: 30px;"></div>
-<% if defined?(@free_projects) && !@free_projects.empty? && @organization %>
-	<%= admin_open_div 765 -%>
-	<div class="admin-div-project-top">
-		<% form_remote_tag :url => { :controller => "admin/organizations", :action => :add_project, :id => @organization  }, :method => :put, :update => "dummy-for-actions" do |f| -%>
-		<span class="form-name" style="font-size: 16px;">Or choose an existing one: <%= select_tag "project", options_from_collection_for_select(@free_projects, 'id', 'name'), :style => "width: 250px;" -%></span>
-		<%= image_submit_tag "admin/admin-form-submit.png", :alt => "Submit", :style => "position:absolute; top: 85px; right: 119px;"-%>
-		<%= image_tag "admin/admin-form-cancel.png", 
-			:alt => "Cancel", 
-			:style => "position:absolute; top: 85px; right: 30px; cursor: pointer;", 
-			:onClick => "cancelForm('form-add-project');" -%>
-		
-		<% end -%>
-	</div>
-		<% if defined?(no_refresh) && no_refresh -%>
-		<%= error_messages_for('project', :object => @project) -%>
-		<div style="clear: both;"></div>
-		<% end -%>
-	<%= admin_close_div 765 -%>
-<% end %>
-
 </div>
 <script>
 	centerTo($('form-add-project'),$('dialog-background-fade'));
-	Effect.Appear($('form-add-project'));
+	Effect.Appear($('form-add-project'), { afterFinish : function() { Form.Element.select($('project_name'))}});	
 </script>

@@ -4,7 +4,7 @@
 </script>
 <% end -%>
 <div id="form-add-member" class="admin-new" style="display: none;">
-	<!-- <%= image_tag "admin/admin-logo-members.png", :alt => "Member", :style => "z-index: 101" -%>-->
+	<%= image_tag "admin/admin-logo-members.png", :alt => "Member", :style => "position:absolute; top: 0px; left: -120px; " -%>
 	<% if !@members_not_in_organization.nil? && !@members_not_in_organization.empty? && current_member.admin? -%>
 	        <% if @organization %>
 	          <%= admin_open_div 765 -%>
@@ -24,24 +24,13 @@
 	<%= admin_open_div 765 -%>
 	
 	<div class="admin-div-organization-top">
-		<% 
-		if edit 
-			action = :update
-		else
-			action = :create %>
-			<span class="form-name" style="font-size: 16px;position:relative; left: 0px;">Create a new member: </span>
-		<% end -%>
-		
+		<% action = edit ? :update : :create -%>
 		<% form_for @member, :url => { :controller => 'admin/members', :action => action, :id => @member }, :html => { :multipart => true, :target => :upload_frame } do |f| %>
 			<div id="information"></div>
 			<iframe id="upload_frame" name="upload_frame" style="display:none;"></iframe>
-			<% name = (edit || defined? no_refresh) ? @member.name : "Click To Edit Member Name" -%>
-			
-			<%= f.text_field :name, 
-				:value => name, 
-				:class => "form-name name-field", 
-				:onClick => "if(this.value == 'Click To Edit Member Name' ) this.clear();" %>
-				
+
+			<%= admin_form_name(@member, edit, f) -%>
+
 			<% if !edit %>
 			<% if @organization %>
 			  <%= hidden_field_tag "organization", @organization.id -%>
@@ -99,14 +88,8 @@
 						<h2 style="position: relative; top: 0px; margin-left: -5px; top: 5px;">Security</h2>
 					</div>
 			<% end %>
-			<div style="float: right; position:relative; top: 20px;">
-			<%= image_submit_tag "admin/admin-form-submit.png", :alt => "Submit", :style => ""-%>
-			<%= image_tag "admin/admin-form-cancel.png", 
-				:alt => "Cancel", 
-				:style => "position:relative; top: -30px; cursor: pointer; margin-left: 20px;", 
-				:onClick => "cancelForm('form-add-member');" -%>
+			<%= admin_form_buttons(@member) -%>
 		<% end %>
-			</div>
 			<div style="clear:both; margin: 0; padding: 0;"></div>
 	</div>
 	<div id="show-errors" style="display:none;">
@@ -123,9 +106,7 @@
   if($('member_color').value != '')
     $('member_color').style.backgroundColor = $('member_color').style.color = '#' + $('member_color').value;
 	centerTo($('form-add-member'),$('dialog-background-fade'));
-	Effect.Appear($('form-add-member'), { afterFinish : function() { Form.Element.focus($('member_name'))}});	
-	
-	
+	Effect.Appear($('form-add-member'), { afterFinish : function() { Form.Element.select($('member_name'))}});	
 </script>
 <% # render :partial => 'color_picker' -%>
 </div>

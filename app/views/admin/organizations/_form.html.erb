@@ -4,53 +4,21 @@
 </script>
 <% end -%>
 <div id="form-add-organization" class="admin-new" style="display:none;">
-	<%= image_tag "admin/admin-logo-organizations.png", :alt => "Organization", :style => "position:absolute; top: -64px; left: -54px; z-index: 101; " -%>
+	<%= image_tag "admin/admin-logo-organizations.png", :alt => "Organization",:style => "position:absolute; top: 0px; left: -120px; " -%>
 	<div style="clear: both"></div>
 	<%= admin_open_div 765 -%>
-	<div class="admin-div-organization-top">
-		<% 
-		if edit 
-			action = :update
-		else
-			action = :create
-		end
-		-%>
-		<% remote_form_for @organization, :url => { :controller => "admin/organizations", :action => action, :id => @organization}, :update => "dummy-for-actions" do |f| -%>
-		<% 
-		if (edit || defined? no_refresh) 
-			name = @organization.name
-		else
-			name =  "Click To Edit Organization Name" 
-		end 
-		%>
-
-		<%= f.text_field :name, 
-			:value => name, 
-			:class => "form-name", 
-			:onClick => "if(this.value == 'Click To Edit Organization Name' ) this.clear();" %>
-			<%= image_submit_tag "admin/admin-form-submit.png", :alt => "Submit", :style => "position:absolute; bottom: 30px; right: 119px;"-%>
-			<%= image_tag "admin/admin-form-cancel.png", 
-				:alt => "Cancel", 
-				:style => "position:absolute; bottom: 30px; right: 30px; cursor: pointer;", 
-				:onClick => "cancelForm('form-add-organization');" -%>
-		<% end %>
-	</div>
+		<div class="admin-div-organization-top">
+			<% action = edit ? :update : :create -%>
+			<% remote_form_for @organization, :url => { :controller => "admin/organizations", :action => action, :id => @organization}, :update => "dummy-for-actions" do |f| -%>
+			<%= admin_form_name(@organization, edit, f) -%>
+			<%= error_messages_for('organization', :object => @project) if (defined?(no_refresh) && no_refresh) -%>
+			<%= admin_form_buttons(@organization) -%>
+			<% end %>
+		</div>
 		<div style="clear: both;"></div>
-		<% if defined?(no_refresh) && no_refresh -%>
-		<%= error_messages_for('organization', :object => @organization) -%>
-		<div style="clear: both;"></div>
-		<% end -%>
-		
 	<%= admin_close_div 765 -%>
 </div>
-<% if !defined?(no_refresh) -%>
 <script>
 	centerTo($('form-add-organization'),$('dialog-background-fade'));
-	Effect.Appear($('form-add-organization'));
+	Effect.Appear($('form-add-organization'), { afterFinish : function() { Form.Element.select($('organization_name'))}});	
 </script>
-<% else -%>
-<script>
-	centerTo($('form-add-organization'),$('dialog-background-fade'));
-	Effect.Appear($('form-add-organization'));
-</script>
-<% end -%>

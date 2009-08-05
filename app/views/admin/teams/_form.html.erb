@@ -3,38 +3,17 @@
 	Effect.Appear($('dialog-background-fade'), { duration: 0.2, to: 0.9 });
 </script>
 <% end -%>
+
 <div id="form-add-team" class="admin-new" style="display:none;">
-	<%= image_tag "admin/admin-logo-teams.png", :alt => "Project", :style => "position:absolute; top: -64px; left: -54px; z-index: 101; " -%>
+	<%= image_tag "admin/admin-logo-teams.png", :alt => "Team", :style => "position:absolute; top: 0px; left: -120px; " -%>
+	
 	<div style="clear: both"></div>
 	<%= admin_open_div 765 -%>
-	<%
-    if edit
-      action = :update
-    else
-      action = :create
-    end
-    -%>
-    <% remote_form_for @team, :url => { :controller => 'admin/teams', :action => action, :id => @team.id }, :update => "dummy-for-actions" do |f| %>
-		<%= 
-      		if defined?(@project)
-				hidden_field_tag(:project, "#{@project.id}")
-			else
-			 	hidden_field_tag(:project, "#{@team.project_id}")
-			  #select_tag(:project_id, options_for_select(@projects))
-			end
-		%> 
-		<% 
-		if (edit || defined? no_refresh) 
-			name = @team.name
-		else
-			name =  "Click To Edit Team Name" 
-		end 
-		%>
-
-		<%= f.text_field :name, 
-			:value => name, 
-			:class => "form-name", 
-			:onClick => "if(this.value == 'Click To Edit Team Name' ) this.clear();" -%>
+		<% action = edit ? :update : :create -%>
+		<% remote_form_for @team, :url => { :controller => 'admin/teams', :action => action, :id => @team.id }, :update => "dummy-for-actions" do |f| %>
+			<%= defined?(@project) ? hidden_field_tag(:project, "#{@project.id}") : hidden_field_tag(:project, "#{@team.project_id}") -%>
+			<%= admin_form_name(@team, edit, f) -%>
+			
 			<div class="admin-div-section" style="margin-bottom: 10px;">
 				<%= image_tag "admin/admin-div-actions-color.png", :alt => "Color", :style => "position: relative; left: 10px; top: 2px;" -%>
 				<h2 style="position: relative; top: 0px; margin-left: 20px;"><%= f.label :color %></h2>
@@ -42,30 +21,29 @@
 				<%= f.text_field :color, :style => "float: right; position: relative; top: -55px; border: none; right: 10px; width: 150px; height: 20px;", :readonly => 'readonly', :onclick => "toggle_color_picker();" %>
 				<p id="admin-member-color-choose" style="color: #04a; font-size: 12px; float:right; margin: 0; position:relative; left: 140px; top: -35px; cursor: pointer;" onclick="toggle_color_picker();">choose</p>
 			</div>
-	    <script>
-		setColor('team_color', $('team_color').value);
-	    </script>
-		<%= image_submit_tag "admin/admin-form-submit.png", :alt => "Submit", :style => "position:absolute; top: -30px; right: 119px;"-%>
-		<%= image_tag "admin/admin-form-cancel.png", 
-			:alt => "Cancel", 
-			:style => "position:absolute; top: -20px; right: 30px; cursor: pointer;", 
-			:onClick => "cancelForm('form-add-team');" -%>
-	<% end %>
-	<%= error_messages_for('team', :object => @team) -%>
-	<div style="clear: both;"></div>
+			<div style="clear: both;"></div>
+			
+			<script>
+				setColor('team_color', $('team_color').value);
+			</script>
+			
+			<%= error_messages_for('team', :object => @team) if (defined?(no_refresh) && no_refresh) -%>
+			<%= admin_form_buttons(@team) -%>
+			<div style="clear: both;"></div>
+		<% end %>
 	<%= admin_close_div 765 -%>
+
 	<div id="admin-div-color-picker" style="display: none; position: absolute; top: 119px; right: 3px;">
-	<%= admin_open_div 208 -%>
-  <div id="admin-div-color-picker-content"></div>
-	<%= admin_close_div 208 -%>
+		<%= admin_open_div 208 -%>
+			<div id="admin-div-color-picker-content"></div>
+		<%= admin_close_div 208 -%>
 	</div>
-	
-<script>
-	$('admin-div-color-picker-content').innerHTML = generate_color_table('team_color');
-  if($('team_color').value != '')
-    $('team_color').style.backgroundColor = $('team_color').style.color = '#' + $('team_color').value;
-  
-	centerTo($('form-add-team'),$('dialog-background-fade'));
-	Effect.Appear($('form-add-team'));
-</script>
 </div>
+<script>
+$('admin-div-color-picker-content').innerHTML = generate_color_table('team_color');
+if($('team_color').value != '')
+$('team_color').style.backgroundColor = $('team_color').style.color = '#' + $('team_color').value;
+
+centerTo($('form-add-team'),$('dialog-background-fade'));
+Effect.Appear($('form-add-team'), { afterFinish : function() { Form.Element.select($('team_name'))}});
+</script>
