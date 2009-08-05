@@ -3,9 +3,9 @@ class StoriesController < ApplicationController
   before_filter :check_permissions
   
   # GET /stories
-  def index
-    @stories = Story.find(:all)
-  end
+  #def index
+  #  @stories = Story.find(:all)
+  #end
 
   # GET /stories/1
   def show
@@ -31,21 +31,33 @@ class StoriesController < ApplicationController
   # POST /stories
   def create
     @story = Story.new(params[:story])
-    @project = Project.find(params[:project_id])
-    @story.project = @project
-    if(params[:dynamic])
-	    if(!@story.save)
-	      render :inline => "Error #{@story.errors.inspect}"
-      else
-        render :inline => "<script>location.reload(true);</script>"
-      end
+
+    if @story.save
+      render :inline => "<script>location.reload(true);</script>", :status => :created
     else
-      if @story.save
-        redirect_to(:controller => :projects, :action => :show , :id => @story.project_id)
-      else
-        render :action => "new"
-      end
+      @last_realid = Story.last_realid(@story.project_id)
+      render :partial => 'form',
+      		:object => @story,
+      		:locals => { :no_refresh => true, :edit => false, :project => @story.project_id },
+ 		:status => :internal_server_error
     end
+
+    #@story = Story.new(params[:story])
+    #@project = Project.find(params[:project_id])
+    #@story.project = @project
+    #if(params[:dynamic])
+	  #  if(!@story.save)
+	  #    render :inline => "Error #{@story.errors.inspect}"
+    #  else
+    #    render :inline => "<script>location.reload(true);</script>"
+    #  end
+    #else
+    #  if @story.save
+    #    redirect_to(:controller => :projects, :action => :show , :id => @story.project_id)
+    #  else
+    #    render :action => "new"
+    #  end
+    #end
   end
 
   # PUT /stories/1
@@ -118,11 +130,11 @@ class StoriesController < ApplicationController
     else
 	    @story = Story.new
     end
-    @project = Project.find(params[:project])
-    @last_realid = Story.last_realid(@project.id)
+    @project = params[:project]
+    @last_realid = Story.last_realid(@project)
 
     render :update do |page|
-      page.replace_html "dummy-for-actions", :partial => 'form', :locals => { :story => @story, :project =>  @project }
+      page.replace_html "dummy-for-actions", :partial => 'form', :locals => { :edit => false, :story => @story, :project =>  @project }
     end
   end
 

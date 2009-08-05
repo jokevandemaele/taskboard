@@ -1,29 +1,54 @@
+<% if !defined?(no_refresh) -%>
 <script>
-$('adder-container').show();
-Effect.ScrollTo($('adder-container'), {duration:0.3});
+	Effect.Appear($('dialog-background-fade'), { duration: 0.2, to: 0.9 });
 </script>
-<div id="form-add-story" class="dynamic-form" style="display: none;">
-<% remote_form_for story, :update => { :success => 'dummy-for-actions' } do |f| %>
-  <%= f.error_messages %>
-	<%= unless @project.nil?
- 		project.name
-		hidden_field_tag(:project_id, "#{@project.id}")
-		else 
-		    select_tag(:project_id, options_for_select(@projects))
-		end
-	%> 
-    ID <%= f.text_field :realid, :value => next_realid(@last_realid), :size => 3 %><br />
-    <%= f.label :name %> <%= f.text_field :name %><br />
-    <%= f.label :priority %> <%= f.text_field :priority, :size => 3 %><br />
-    <%= f.label :size %> <%= f.text_field :size, :size => 3 %><br />
-    <%= f.label :description %><br />
-    <%= f.text_area :description, :rows => 2 %><br />
-    <%= button_to_function "Cancel", "cancel($('form-add-story'));", :id => "form-add-story-cancel"-%>
-    <%= hidden_field_tag(:dynamic, "true") %>
+<% end -%>
+<div id="form-add-story" class="admin-new" style="display:none;">
+	<%= admin_open_div 765 -%>
+    <% remote_form_for @story, :update => "dummy-for-actions" do |f| %>
+	      <%= hidden_field_tag("story[project_id]", "#{project}") -%> 
 
-    <%= f.submit "Save", :id => "form-add-story-submit" -%>
-<% end %>
+        <div class="admin-div-section">
+          <% name = (edit || defined? no_refresh) ? @story.name : "Click To Edit Story Name" -%>
+			
+			    <%= f.text_field :name, 
+				    :value => name, 
+				    :class => "form-name name-field", 
+				    :onClick => "if(this.value == 'Click To Edit Story Name' ) this.clear();" %>
+        </div>
+        
+        <div class="admin-div-section" style="margin-top: 10px;">
+          <table id="story-add-fields">
+            <tr style="border: 0; margin: 0; padding: 0;">
+              <td style="border: 0; margin: 0; padding: 0; padding-top: 12px; width: 33%;">Story ID <%= f.text_field :realid, :value => next_realid(@last_realid), :class => "field-id" %></td>
+              <td style="border: 0; margin: 0; padding: 0; padding-top: 12px; width: 33%;"><%= f.label :priority %> <%= f.text_field :priority, :class => "field" %></td>
+              <td style="border: 0; margin: 0; padding: 0; padding-top: 12px; width: 33%;"><%= f.label :size %> <%= f.text_field :size, :class => "field" %></td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="admin-div-section" style="margin-top: 10px; width: 715px; height: 200px; padding-left: 20px;">
+         <h2 style=" margin-left: 0; margin-bottom: 5px;  "><%= f.label :description %></h2>
+         <p><%= f.text_area :description, :class => "description"  %></p>
+        </div>
+
+			  <div style="float: right; position:relative; top: 20px;">
+          <%= image_submit_tag "admin/admin-form-submit.png", :alt => "Submit", :style => ""-%>
+			    <%= image_tag "admin/admin-form-cancel.png", 
+				    :alt => "Cancel", 
+				    :style => "position:relative; top: -30px; cursor: pointer; margin-left: 20px;", 
+				    :onClick => "cancelForm('form-add-story');" -%>
+        </div>
+			<div style="clear:both; margin: 0; padding: 0;"></div>
+    <% end %>
+		<% if defined?(no_refresh) && no_refresh -%>
+		<%= error_messages_for('story', :object => @story) -%>
+		<div style="clear: both;"></div>
+		<% end -%>
+	<%= admin_close_div 765 -%>
+
+</div>
 <script>
-	centerTo($('form-add-story'),$('adder-container'));
-	Effect.Appear($('form-add-story'));
+	centerTo($('form-add-story'),$('dialog-background-fade'));
+	Effect.Appear($('form-add-story'), { afterFinish : function() { Form.Element.focus($('story_name'))}});	
 </script>

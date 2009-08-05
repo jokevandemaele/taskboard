@@ -35,13 +35,7 @@
 		<% form_for @member, :url => { :controller => 'admin/members', :action => action, :id => @member }, :html => { :multipart => true, :target => :upload_frame } do |f| %>
 			<div id="information"></div>
 			<iframe id="upload_frame" name="upload_frame" style="display:none;"></iframe>
-			<% 
-			if (edit || defined? no_refresh) 
-				name = @member.name
-			else
-				name =  "Click To Edit Member Name" 
-			end 
-			%>
+			<% name = (edit || defined? no_refresh) ? @member.name : "Click To Edit Member Name" -%>
 			
 			<%= f.text_field :name, 
 				:value => name, 

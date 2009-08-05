@@ -82,3 +82,8 @@ table td{
 	text-decoration: none;
 }
 
+#story-add-fields { border: 0; margin: 0; padding: 0; text-align: center;}
+#story-add-fields .field { padding-top: 10px; padding-left: 8px; padding-right: 8px; border: 0; width: 40px; height: 23px; background: url('/images/story-fields-background.png') no-repeat transparent;}
+#story-add-fields .field-id { padding-top: 10px; padding-left: 8px; padding-right: 8px; border: 0; width: 80px; height: 23px; background: url('/images/story-id-background.png') no-repeat transparent;}
+
+.admin-div-section .description { position:relative; right: 7px; top: 10px; width: 695px; height: 128px; background: url('/images/story-description-background.png') no-repeat transparent; padding-top: 10px; padding-left: 8px; padding-right: 8px; border: 0;}
