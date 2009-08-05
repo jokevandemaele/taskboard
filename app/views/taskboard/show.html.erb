@@ -17,5 +17,20 @@
 <% end %>
 </table>
 </div>
+<%= drop_receiving_element("taskboard", 
+	:accept => "statustag", 
+	:with   => "'statustag=' + (element.id.split('-').last())", 
+	:url => { :controller => :statustags, :action=>:destroy},
+	:method => :delete,
+	:update => "dummy-for-actions")
+%>
+<%= drop_receiving_element("taskboard", 
+	:accept => "nametag", 
+	:with   => "'nametag=' + (element.id.split('-').last())", 
+	:url => { :controller => :nametags, :action => :destroy },
+	:method => :delete,
+	:update => "dummy-for-actions") 
+%>
+
 <div id="dummy-for-actions">
 </div>
