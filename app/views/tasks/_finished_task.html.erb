@@ -3,13 +3,6 @@
 			<div class="task-container-table">	
 			<div class="task-container-cell">	
 				<p class="task-name"><%=h task.name -%></p>
-
-				<% for nametag in task.nametags %>
-					<%= render :partial => "nametags/show", :locals => { :nametag => nametag } %> 
-				<% end %>
-				<% for statustag in task.statustags %>
-					<%= render :partial => "statustags/show", :locals => { :statustag => statustag } %> 
-				<% end %>
 			</div>
 			</div>
 			<a href="javascript:flip('task-<%= task.id -%>','back')">
