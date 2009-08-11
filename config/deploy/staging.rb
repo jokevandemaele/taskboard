@@ -37,7 +37,7 @@ namespace :deploy do
   end
 
   task :rake_db_migrate do
-    run "cd #{current_path}/ && rake RAILS_ENV=\"production\" db:migrate"
+    run "cd #{current_path}/ && rake RAILS_ENV=\"staging\" db:migrate"
   end
 
   [:start, :stop].each do |t|
