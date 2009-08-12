@@ -70,6 +70,7 @@ module ApplicationHelper
 		#{image_tag 'admin/admin-form-cancel.png', :alt => 'Cancel', :style => "width: 45px;", :class => 'admin-form-cancel', :onClick => 'cancelForm(\'form-add-'+ element_class +'\');'}
 		</div>"
   end
+  
   def show_admin_info_for(member, parent)
     return image_tag("admin/admin-div-element-sysadmin.png", 
                       :alt => "sysadmin", 
@@ -95,7 +96,7 @@ module ApplicationHelper
               :alt => "Organization Admin", 
               :title => "Organization Admin", 
               :id => "organization-#{parent.id}-member-#{member.id}-admin", 
-              :class => "admin-div-element-actions-edit-admin") if action == "remove"
+              :class => "admin-div-element-actions-edit-admin")
     end 
   end
 

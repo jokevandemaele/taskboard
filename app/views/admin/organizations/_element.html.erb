@@ -3,7 +3,7 @@ element_class = element.class.to_s.downcase
 parent_class = parent.class.to_s.downcase
 current_member_admins_parent = (element_class == 'member') ? current_member.admin? || (current_member.admins?(parent) && !element.admin?) : (current_member.admins?(parent))
 %>
-<div id="<%= parent_class -%>-<%= parent.id -%>-<%= element_class -%>-<%= element.id -%>" class="admin-div-element-core admin-div-element<%= '-actions' if current_member_admins_parent -%>">
+<div id="<%= parent_class -%>-<%= parent.id -%>-<%= element_class -%>-<%= element.id -%>" class="admin-div-element-core admin-div-element<%= '-actions' if current_member_admins_parent || element_class == 'member' -%>">
 	<%
 	# If the user admins the organization i should display remove, edit, and change admin settings
 	if current_member_admins_parent
@@ -46,9 +46,9 @@ current_member_admins_parent = (element_class == 'member') ? current_member.admi
 	<% # Write element name
 	not_mine = (element_class == 'project' && !current_member.projects.include?(element) ) ? 'not-mine' : ''
 	%>
+	<%= show_admin_info_for element, parent if (element_class == 'member' && !current_member_admins_parent) -%>
 	<div id="name-<%= parent_class%>-<%= parent.id %>-<%= element_class -%>-<%= element.id -%>-container">
 		<p id="name-<%= parent_class%>-<%= parent.id %>-<%= element_class -%>-<%= element.id -%>" title="<%= element.name -%>" class="<%=  not_mine %>">
-			<%= show_admin_info_for element, parent if (element_class == 'member' && !current_member_admins_parent) -%>
 			<%= link_to(element.name, :controller => "/taskboard", :action => :show, :id => element.id) if element_class == 'project' %>
 			<%= element.name if element_class != 'project' -%>
 		</p>
@@ -56,7 +56,7 @@ current_member_admins_parent = (element_class == 'member') ? current_member.admi
 	<script>
 		resizeFontSizeToFit($('name-<%= parent_class%>-<%= parent.id %>-<%= element_class -%>-<%= element.id -%>'),$('name-<%= parent_class%>-<%= parent.id %>-<%= element_class -%>-<%= element.id -%>-container'));
 <% if !current_member_admins_parent -%>
-		$('name-<%= parent_class%>-<%= parent.id %>-<%= element_class -%>-<%= element.id -%>').setStyle({ width: '100%' });
+		//$('name-<%= parent_class%>-<%= parent.id %>-<%= element_class -%>-<%= element.id -%>').setStyle({ width: '100%' });
 <% end -%>
 	</script>
 </div>
