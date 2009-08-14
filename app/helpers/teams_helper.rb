@@ -1,8 +1,8 @@
 module TeamsHelper
-  def options_for_project_select(projects)
+  def options_for_team_select(teams)
     output = ''
-    projects.each do |project|
-      output += "<option value=\"#{project.id}\">#{project.name} (#{project.organization.name})</option>"
+    teams.each do |team|
+      output += "<option value=\"#{team.id}\">#{team.name} (#{team.organization.name})</option>"
     end
     return output
   end

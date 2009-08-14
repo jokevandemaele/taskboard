@@ -3111,7 +3111,10 @@
        height="33.175301"
        width="89.447678"
        id="rect4416"
-       style="fill:#f1f6ff;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+       style="fill:#f1f6ff;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       inkscape:export-filename="/home/nictuku/Documents/programacion/agilar/taskboard/public/images/story-id-background.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <text
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
@@ -3119,7 +3122,7 @@
        y="241"
        id="text2965"><tspan
          sodipodi:role="line"
-         id="tspan2967"></tspan></text>
+         id="tspan2967" /></text>
     <text
        xml:space="preserve"
        style="font-size:17.89991951px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#002255;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"

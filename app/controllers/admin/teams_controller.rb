@@ -4,27 +4,10 @@ class Admin::TeamsController < ApplicationController
   
   # GET /teams
   def index
-    if(params[:project])
-	    @project = Project.find(params[:project])
-	    @teams = @project.teams
-      if(@project.organization.members)
-        @members = @project.organization.members
-      else
-        @members = []
-      end
-    else
-      if(current_member.admin?)
-        @organizations = Organization.all
-      else
-        @organizations = current_member.organizations_administered
-      end
-
-      @projects = Array.new
-      @organizations.each do |organization|
-        organization.projects.each {|project| @projects << project }
-      end
-      @members = Member.all()
-      @teams = Team.all()
+    @organizations = current_member.organizations_administered
+    @teams = []
+    @organizations.each do |organization|
+      organization.teams.each { |team| @teams << team }
     end
   end
 

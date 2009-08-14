@@ -1,28 +1,27 @@
-<div id="team-<%= team.id %>" class="team" style="margin-right: 10px; float: left; margin: 0 auto;">
+<div id="team-<%= @team.id %>" class="team" style="margin-right: 10px; float: left; margin: 0 auto;">
 	<%= admin_open_div(770) -%>
 	<div id="admin-div-team-top-name" style="">
-		<script>
-			ids<%= team.id %> = new Array('admin-div-team-members-<%= team.id %>');
-		</script>			
-		<h1 id="team-<%= team.id -%>-team"><%=h truncate(team.name) -%></h1>
-		<%= link_to_remote image_tag("admin/admin-div-actions-edit.png", :alt => "Edit"), :url => { :action => :edit, :id => team.id, :project => project.id  }, :method => :get, :update => "dummy-for-actions" -%>
-		<%= link_to_remote image_tag("admin/admin-div-actions-remove.png", :alt => "Remove"), 
-				:url => admin_team_url(team.id), 
-				:method => :delete,
-				:confirm => "Are you sure?",
-				:success => "Effect.Puff($('team-#{team.id}'));"
-		-%>
+	  <div id="admin-div-team-top-name-<%= @team.id -%>" style="float:left; width: 100%; height: 30px;">
+		  <h1 id="admin-div-team-top-name-<%= @team.id -%>-name" title="<%=h team.name -%>"><%=h @team.name -%></h1>
+	  </div>
+	  <script>
+	   resizeFontSizeToFit($('admin-div-team-top-name-<%= @team.id -%>-name'), $('admin-div-team-top-name-<%= @team.id -%>'));
+	  </script>
 
+
+		<script>
+			ids<%= @team.id %> = new Array('admin-div-team-members-<%= @team.id %>');
+		</script>			
 	</div>
-	<div  id="team_members_list-<%= team.id %>" style="position: relative; top: 20px; margin: 0 auto;">
-		<%= render :partial => 'team_members_list', :locals => { :team => team } %>
+	<div  id="team_members_list-<%= @team.id %>" style="position: relative; top: 20px; margin: 0 auto;">
+		<%= render :partial => 'team_members_list', :locals => { :team => @team } %>
 	</div>
 	<div style="clear: both; height: 20px;"></div>
 	<%= admin_close_div(770) -%>
 
 </div>
-<%= drop_receiving_element("team-#{team.id}", 
+<%= drop_receiving_element("team-#{@team.id}", 
 	:accept => "member", 
-	:with   => "'member=' + (element.id.split('-').last())+ '&team=#{team.id}&project=#{project.id}'", 
+	:with   => "'member=' + (element.id.split('-').last())+ '&team=#{@team.id}'", 
 	:url => { :controller => 'teams', :action=>:add_member }) 
 %>

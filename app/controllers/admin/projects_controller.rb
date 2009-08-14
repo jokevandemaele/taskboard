@@ -43,7 +43,9 @@ class Admin::ProjectsController < ApplicationController
   # GET /projects/1/edit
   def edit
 	  @project = Project.find(params[:id])
-    render :partial => 'form', :object => @project, :locals => { :edit => true, :organization => @organization, :free_projects => nil }
+    @organization = @project.organization_id
+    @teams = @organization ? Team.all(:conditions => [ "organization_id = ? ", @organization ]) : nil
+    render :partial => 'form', :object => @project, :locals => { :edit => true, :free_projects => nil }
   end
 
   # POST /projects
@@ -66,6 +68,8 @@ class Admin::ProjectsController < ApplicationController
     @project = Project.find(params[:id])
 
     if @project.update_attributes(params[:project])
+
+      @project.teams = [Team.find(params[:team_id])]
       render :inline => "<script>location.reload(true);</script>"
     else
         render :partial => 'form',

@@ -54,6 +54,13 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
     assert project.teams.first == Team.find(1)
   end
   
+  test "when a project is updated, the team should be assigned to it" do
+    login_as_organization_admin
+    project = Project.find(1)
+    post :update, { :id => project.id, :project => { :name => 'Find Jacob Again Agait' , :organization_id => organizations(:widmore_corporation).id}, :team_id => 2}
+    project.reload
+    assert project.teams.first == Team.find(2)
+  end
   ########################## Permissions tests ##########################
   test "new should be seen by administrator and organization admin" do
     login_as_administrator
@@ -71,10 +78,11 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
     get :new, :organization => 2
     assert_response 302
   
+    # THIS IS NOT ANYMORE LIKE THIS, YOU CANNOT CALL NEW WITHOUT AN ORGANIZATION
     # If trying to get form without an organization, it should only see the organizations it administers
-    get :new
-    assert_response :ok
-    assert_select "option", :count => members(:cwidmore).organizations_administered.size
+    #get :new
+    #assert_response :ok
+    #assert_select "option", :count => members(:cwidmore).organizations_administered.size
   
     login_as_normal_user
     get :new, :organization => 1

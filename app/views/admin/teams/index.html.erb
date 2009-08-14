@@ -1,24 +1,9 @@
-<% if defined?(@project) %>
-	<h1 style="font-size: 32px; font-weight: normal; margin: 0; color: #002255"><%= image_tag "admin/admin-logo-projects.png", :alt => "Project", :style => "width: 80px;" -%> <%= @project.name %>'s Teams</h1>
-	
-	<h2 style="font-size: 20px; font-weight: normal; margin: 0; color: #002255"><%= image_tag "admin/admin-logo-members.png", :alt => "Project", :style => "width: 40px;" -%> Organization's Members</h2>
-	
-	<div id="members-list">
-		<%= render :partial => "members_list", :locals => { :members => @members, :project => @project.id }%>
-	</div>
-	<div style="clear:both;"></div>
-	<%= render :partial => "team", :collection => @teams, :locals => {:project => @project} %>
-	
-<% else %>
-	<div id="admin-teams-chose-project">
-		<%= admin_open_div 700 -%>
-		<h1 style="position: relative; top: 10px;">Choose a Project:</h1>
-		<form method=GET>
-		<%= select_tag "project", options_for_project_select(@projects), :style => "width: 300px; position: relative; top: -8px; left: 250px;" -%>
+<div id="admin-teams-choose">
+  <%= admin_open_div 700 -%>
+	  <h1 style="position: relative; top: 10px;">Choose a Team:</h1>
+    
+		<%= select_tag "id", options_for_team_select(@teams), :style => "width: 300px; position: relative; top: -8px; left: 250px;" -%>
 <%= image_submit_tag "admin/admin-form-submit.png", :alt => "Submit", :style => "position:absolute; top: 5px; left: 600px; "-%>
 		</form>
 		<%= admin_close_div 700 -%>
-	</div>
-<% end %>
-<div id="dummy-for-actions">
 </div>
