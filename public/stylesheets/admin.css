@@ -39,7 +39,7 @@ p { color: #002255;}
 .admin-div-top-right{ float: right; width: 15px; height: 15px; background: url('/images/admin/admin-div-top-right.png');}
 .admin-div-content{ padding-left: 12px; padding-right: 12px; border-left: 3px solid #0c82eb; border-right: 3px solid #0c82eb; background: #d5e5ff;}
 .admin-div-content h1 { position: relative; top: 4px; font-size: 28px; color: #002255; display: inline; margin: 0; margin-left: 10px; font-weight: normal;}
-.admin-div-content h2 { color: #002255; display: inline; margin: 0; margin-left: 10px; font-weight: normal;}
+.admin-div-content h2 { color: #002255; display: inline; margin: 0; font-weight: normal;}
 .admin-div-bottom{margin-bottom: 30px;}
 .admin-div-bottom-left{ float: left; width: 15px; height: 15px; background: url('/images/admin/admin-div-bottom-left.png');}
 .admin-div-bottom-middle{ float: left; width: 100%; height: 12px; background:green; border-bottom: 3px solid #0c82eb; background: #d5e5ff;}
@@ -48,7 +48,7 @@ p { color: #002255;}
 .admin-div-top-actions-separator { margin-left: 10px;margin-right: 10px;}
 .admin-div-top-actions-counts{ position: relative; top: 4px; font-size: 22px; color: #002255;}
 .admin-div-hr { border-top: 1px solid #0c82eb; border-bottom: 2px solid #0c82eb; border-left: 0; border-right: 0; margin: 0; width: 700px; position: relative; left: -15px;}
-.admin-div-section { width: 100%; height: 52px; background: #afc6e9; }
+.admin-div-section { width: 100%; height: 52px; background: #afc6e9; border-bottom: 5px solid #d5e5ff;}
 .admin-div-section h2 { position: relative; top: 13px; }
 .admin-div-section a { color: #002255; }
 .admin-div-section a:hover { color: #0c82eb; }

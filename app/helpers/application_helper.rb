@@ -92,9 +92,10 @@ module ApplicationHelper
               :member => member },
             :success => "adminToggleImage('organization-#{parent.id}-member-#{member.id}-admin')"
     else
+      title = (action == "remove") ? "Organization Admin" : "Normal User"
       image_tag("admin/admin-div-element-#{action}-admin.png", 
-              :alt => "Organization Admin", 
-              :title => "Organization Admin", 
+              :alt => title, 
+              :title => title, 
               :id => "organization-#{parent.id}-member-#{member.id}-admin", 
               :class => "admin-div-element-actions-edit-admin")
     end 

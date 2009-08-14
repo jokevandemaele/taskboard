@@ -25,10 +25,10 @@
 		<script>
 			ids<%= member.id %> = new Array('admin-div-member-projects-<%= member.id %>', 'admin-div-member-organizations-<%= member.id %>');
 		</script>
-		<%= image_tag "admin/admin-div-expand.png", 
+		<!-- <%= image_tag "admin/admin-div-expand.png", 
 			:alt => "Expand", 
 			:style => "cursor: pointer",
-			:onClick => "expandCollapseDivs(ids#{member.id})" -%>
+			:onClick => "expandCollapseDivs(ids#{member.id})" -%> -->
 			
 		<h1 id="admin-div-member-top-<%= member.id -%>-name" onClick="expandCollapseDivs(ids<%= member.id -%>)">	<%= image_tag member.show_picture, :style => "width: 37px; position: relative; top: -5px;" -%> <%=h member.name -%></h1>
 	</div>

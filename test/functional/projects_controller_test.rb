@@ -47,6 +47,13 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
     assert_select "div.project-container", :count => members(:jshephard).projects.size
   end
 
+  test "when a project is created, the team should be assigned to it" do
+    login_as_organization_admin
+    post :create, { :project => {:name => 'Find Jacob Again' , :organization_id => organizations(:widmore_corporation).id}, :team_id => 1}
+    assert project = Project.find_by_name('Find Jacob Again')
+    assert project.teams.first == Team.find(1)
+  end
+  
   ########################## Permissions tests ##########################
   test "new should be seen by administrator and organization admin" do
     login_as_administrator
@@ -91,12 +98,12 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
   test "a system adminsitrator should be able CREATE, UPDATE and DELETE projects for any organization" do
     login_as_administrator
     # CREATE to organization where admin belongs
-    post :create, { :project => {:name => 'Find Jacob', :organization_id => organizations(:widmore_corporation).id } }
+    post :create, { :project => {:name => 'Find Jacob', :organization_id => organizations(:widmore_corporation).id }, :team_id => 1 }
     assert_response :created
     assert Project.find_by_name('Find Jacob')
 
     # CREATE to organization where admin doesn't belong
-    post :create, { :project => {:name => 'Destroy the magnetic zone', :organization_id => organizations(:dharma_initiative).id } }
+    post :create, { :project => {:name => 'Destroy the magnetic zone', :organization_id => organizations(:dharma_initiative).id }, :team_id => 1 }
     assert_response :created
     assert Project.find_by_name('Destroy the magnetic zone')
     
@@ -129,7 +136,7 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
     login_as_organization_admin
   
     # CREATE to organization where admin belongs
-    post :create, { :project => {:name => 'Find Jacob' , :organization_id => organizations(:widmore_corporation).id}}
+    post :create, { :project => {:name => 'Find Jacob' , :organization_id => organizations(:widmore_corporation).id}, :team_id => 1}
     assert_response :created
     project = Project.find_by_name('Find Jacob')
     assert project
@@ -152,7 +159,7 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
     login_as_organization_admin
     
     # CREATE to organization where admin doesn't belong
-    post :create, { :project => {:name => 'Destroy the magnetic zone', :organization_id => organizations(:dharma_initiative).id} }
+    post :create, { :project => {:name => 'Destroy the magnetic zone', :organization_id => organizations(:dharma_initiative).id}, :team_id => 1 }
     assert_response 302
     assert !Project.find_by_name('Destroy the magnetic zone')
     
@@ -173,7 +180,7 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
     login_as_normal_user
     
     # CREATE
-    post :create, { :project => {:name => 'Destroy the magnetic zone', :organization_id => organizations(:dharma_initiative).id } }
+    post :create, { :project => {:name => 'Destroy the magnetic zone', :organization_id => organizations(:dharma_initiative).id }, :team_id => 1 }
     assert_response 302
     assert !Project.find_by_name('Destroy the magnetic zone')
     

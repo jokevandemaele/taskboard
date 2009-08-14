@@ -20,10 +20,10 @@
 		<%= image_tag "admin/admin-div-actions-members.png", :alt => "Members" -%>
 	</div>
 	
-	<%= image_tag "admin/admin-div-expand.png", 
+	<!-- <%= image_tag "admin/admin-div-expand.png", 
 		:alt => "Expand", 
 		:style => "cursor: pointer; float: left;",
-		:onClick => "expandCollapseDivs(ids#{organization.id})" -%>
+		:onClick => "expandCollapseDivs(ids#{organization.id})" -%> -->
 		
 	<div id="admin-div-organization-top-name-<%= organization.id -%>" style="float:left; width: 370px; height: 30px;">
 		<script>
@@ -38,18 +38,8 @@
 </div>
 
 
-<div id="admin-div-organization-projects-<%= organization.id -%>" class="admin-div-organization-projects" style="<%= '' if !organization.members.include?(current_member) %>">
-<div class="admin-div-section">
-	<!--<span class="admin-div-elements-search"><%= text_field_tag "admin-div-projects-search", "search", :onClick => "if(this.value == 'search') {this.clear();}" , :autocomplete => "off", :class => "admin-div-elements-search-field" -%><%= image_tag 'admin/admin-div-elements-search.png', :alt => "find" -%></span> -->
-	<%= image_tag "admin/admin-div-actions-projects.png", :alt => "Projects", :style => "position: relative; top: 10px" -%>
-	<h2>Projects</h2>
-	<% if current_member.admins?(organization)%>
-		<div style="float: right; position: relative; top: 8px; right: 15px;">
-		<%= link_to_remote "new project" + image_tag("admin/admin-div-elements-add.png", :alt => "Add", :style => "margin-left: 10px; "), 
-			:url => { :controller => "admin/projects" , :action => :new, :organization => organization.id }, :update => "dummy-for-actions" -%>
-		</div>
-	<% end %>
-</div>
+<div id="admin-div-organization-projects-<%= organization.id -%>" class="admin-div-organization-projects">
+	<%= render :partial => "admin_div_section", :locals => {:element => Project, :parent => organization} -%>
 	<% organization.projects.each do |project| -%>
 		<%= render :partial => "element", :locals => {:element => project, :parent => organization} -%>
 	<% end -%>
@@ -57,20 +47,21 @@
 </div>
 
 <div id="admin-div-organization-members-<%= organization.id -%>" class="admin-div-organization-members">
-<div class="admin-div-section">
-	<!--<span class="admin-div-elements-search"><%= text_field_tag "admin-div-members-search", "search", :onClick => "if(this.value == 'search') {this.clear();}" , :autocomplete => "off", :class => "admin-div-elements-search-field" -%><%= image_tag 'admin/admin-div-elements-search.png', :alt => "find" -%></span> -->
-	<%= image_tag "admin/admin-div-actions-members.png", :alt => "members", :style => "position: relative; top: 10px" -%>
-	<h2>Members</h2>
-	<% if current_member.admins?(organization)%>
-	<div style="float: right; position: relative; top: 8px; right: 15px;">
-		<%= link_to_remote "new member" + image_tag("admin/admin-div-elements-add.png", :alt => "Add", :style => "margin-left: 10px;"), :url => { :controller => 'admin/members', :action => :new, :organization => organization.id }, :update => "dummy-for-actions" -%>
-	</div>
-	<% end %>
-</div>
+	<%= render :partial => "admin_div_section", :locals => {:element => Member, :parent => organization} -%>
 	<% organization.members_ordered_by_role.each do |memb| -%>
 		<%= render :partial => "element", :locals => { :element => memb, :parent => organization} -%>
 	<% end -%>
 	<div style="clear: both;"></div>
 </div>
+
+<div id="admin-div-organization-teams-<%= organization.id -%>" class="admin-div-organization-teams">
+	<%= render :partial => "admin_div_section", :locals => {:element => Team, :parent => organization} -%>
+
+	<% organization.teams.each do |team| -%>
+		<%= render :partial => "element", :locals => {:element => team, :parent => organization} -%>
+	<% end -%>
+	<div style="clear: both;"></div>
+</div>
+
 <%= admin_close_div(700) -%>
 </div>

@@ -24,10 +24,10 @@
 		<script>
 			ids<%= project.id %> = new Array('admin-div-project-stories-<%= project.id %>','admin-div-project-members-<%= project.id %>','admin-div-project-taskboard-<%= project.id %>','admin-div-project-backlog-<%= project.id %>','admin-div-project-burndown-<%= project.id %>');
 		</script>
-		<%= image_tag "admin/admin-div-expand.png", 
+		<!-- <%= image_tag "admin/admin-div-expand.png", 
 			:alt => "Expand", 
 			:style => "cursor: pointer",
-			:onClick => "expandCollapseDivs(ids#{project.id})" -%>
+			:onClick => "expandCollapseDivs(ids#{project.id})" -%> -->
 			
 		<h1 onClick="expandCollapseDivs(ids<%= project.id -%>)" id="admin-div-project-top-name-<%= project.id -%>-name" title="<%=h project.name -%>" class="<%= 'not-mine' if !current_member.projects.include?(project) %>"><%=h project.name -%></h1>
 	</div>

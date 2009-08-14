@@ -28,12 +28,14 @@ class Admin::ProjectsController < ApplicationController
 	  @project = Project.new
     @organization = (defined?(params[:organization])) ? params[:organization] : nil
     @free_projects = (defined?(params[:display_existing])) ? Project.free : @free_projects = nil
-    
+    @teams = @organization ? Team.all(:conditions => [ "organization_id = ? ", @organization ]) : nil
+    @selected = nil
     render :partial => 'form', 
       :object => @project,
     	:locals => { 
     	  :edit => false, 
     	  :organization => @organization, 
+    	  :teams => @teams,
     	  :free_projects => @free_project
     	}, :status => :ok
   end
@@ -49,6 +51,7 @@ class Admin::ProjectsController < ApplicationController
     @project = Project.new(params[:project])
 
     if @project.save
+      @project.teams << Team.find(params[:team_id])
       render :inline => "<script>location.reload(true);</script>", :status => :created
     else
       render :partial => 'form',

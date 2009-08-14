@@ -16,6 +16,14 @@ current_member_admins_parent = (element_class == 'member') ? current_member.admi
 	                    :confirm => "Are you sure?",
 	                    :success => "Effect.Puff($('organization-#{parent.id}-project-#{element.id}'));" if (element_class == 'project') 
 		-%>
+		<%= # Remove for a team
+			link_to_remote image_tag("admin/admin-div-element-remove.png", :alt => "Remove",
+	                    	:class => "admin-div-element-actions-remove", :title => "Remove"),
+	                    :url => admin_team_url(element.id),
+	                    :method => :delete,
+	                    :confirm => "Are you sure?",
+	                    :success => "Effect.Puff($('organization-#{parent.id}-team-#{element.id}'));" if (element_class == 'team') 
+		-%>
 		<%= # Remove for a member
 			link_to_remote image_tag("admin/admin-div-element-remove.png", :alt => "Remove", 
 		                  :class => "admin-div-element-actions-remove", :title => "Remove"
@@ -27,7 +35,7 @@ current_member_admins_parent = (element_class == 'member') ? current_member.admi
 		                   :object => element.id 
 		                 },
 		                 :confirm => 'Are you sure?',
-		                 :success => "Effect.Puff($('#{parent_class}-#{parent.id}-#{element_class}-#{element.id}'));" if !(element_class == 'project') 
+		                 :success => "Effect.Puff($('#{parent_class}-#{parent.id}-#{element_class}-#{element.id}'));" if (element_class == 'member') 
 		-%>
 		<%= # Edit
 			link_to_remote image_tag("admin/admin-div-element-edit.png", :alt => "Edit",

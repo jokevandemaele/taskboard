@@ -54,51 +54,51 @@ class Admin::TeamsControllerTest < ActionController::TestCase
   end
   test "new should be seen by administrator and organization admin" do
       login_as_administrator
-      get :new, :project => projects(:find_the_island).id
+      get :new, :organization => organizations(:widmore_corporation).id
       assert_response :ok
       
       login_as_organization_admin
-      get :new, :project => projects(:find_the_island).id
+      get :new, :organization => organizations(:widmore_corporation).id
       assert_response :ok
       
       # If trying to get form for a organization not administered it shouln't work
-      get :new, :project => projects(:do_weird_experiments).id
+      get :new, :organization => organizations(:dharma_initiative).id
       assert_response 302
     
       login_as_normal_user
-      get :new, :project => projects(:do_weird_experiments).id
+      get :new, :organization => organizations(:dharma_initiative).id
       assert_response 302
     end
 
   test "edit should be seen by administrator and organization admin" do
     login_as_administrator
-    get :edit, :id => teams(:widmore_team).id, :project=> projects(:find_the_island).id
+    get :edit, :id => teams(:widmore_team).id
     assert_response :ok
   
     login_as_organization_admin
-    get :edit, :id => teams(:widmore_team).id, :project=> projects(:find_the_island).id
+    get :edit, :id => teams(:widmore_team).id
     assert_response :ok
 
     login_as_normal_user
-    get :edit, :id => teams(:widmore_team).id, :project=> projects(:find_the_island).id
+    get :edit, :id => teams(:widmore_team).id
     assert_response 302
   end
   
   test "a system adminsitrator should be able CREATE, UPDATE and DELETE teams for any organization" do
     login_as_administrator
     # CREATE to organization where admin belongs
-    post :create,{ :team => { :name => 'Fucault Pendulum Research Team' }, :project => projects(:find_the_island).id }
+    post :create,{ :team => { :name => 'Fucault Pendulum Research Team', :organization_id => organizations(:widmore_corporation).id } }
     assert_response :created
     team = Team.find_by_name('Fucault Pendulum Research Team')
     assert team
-    assert projects(:find_the_island).teams.include?(team)
+    assert organizations(:widmore_corporation).teams.include?(team)
     
     # CREATE to organization where admin doesn't belong
-    post :create, { :team => {:name => 'Security Team' }, :project => projects(:do_weird_experiments).id }
+    post :create, { :team => {:name => 'Security Team', :organization_id => organizations(:dharma_initiative).id } }
     assert_response :created
     team_not_mine = Team.find_by_name('Security Team')
     assert team_not_mine
-    assert projects(:do_weird_experiments).teams.include?(team_not_mine)
+    assert organizations(:dharma_initiative).teams.include?(team_not_mine)
     
     # UPDATE from organization where admin belongs
     team = Team.find_by_name('Fucault Pendulum Research Team')
@@ -129,15 +129,15 @@ class Admin::TeamsControllerTest < ActionController::TestCase
     login_as_organization_admin
   
     # CREATE to organization where admin belongs
-    post :create,{ :team => { :name => 'Fucault Pendulum Research Team' }, :project => projects(:find_the_island).id }
+    post :create,{ :team => { :name => 'Fucault Pendulum Research Team', :organization_id => organizations(:widmore_corporation).id } }
     assert_response :created
     team = Team.find_by_name('Fucault Pendulum Research Team')
     assert team
-    assert projects(:find_the_island).teams.include?(team)
+    assert organizations(:widmore_corporation).teams.include?(team)
     
     # UPDATE from organization where admin belongs
     team = Team.find_by_name('Fucault Pendulum Research Team')
-    put :update, { :id => team.id, :team => {:name => 'Fucault Pendulum Research Team.' } }
+    put :update, { :id => team.id, :team => {:name => 'Fucault Pendulum Research Team.', :organization_id => organizations(:widmore_corporation).id } }
     assert_response :ok
     team.reload
     assert_equal 'Fucault Pendulum Research Team.', team.name
@@ -152,13 +152,13 @@ class Admin::TeamsControllerTest < ActionController::TestCase
     login_as_organization_admin
     
     # CREATE to organization where admin doesn't belong
-    post :create, { :team => {:name => 'Security Team' }, :project => projects(:do_weird_experiments).id }
+    post :create, { :team => {:name => 'Security Team', :organization_id => organizations(:dharma_initiative).id } }
     assert_response 302
     assert !Team.find_by_name('Security Team')
     
     # UPDATE from organization where admin doesn't
     team_notmine = teams(:oceanic_six)
-    put :update, { :id => team_notmine.id, :team => { :name => 'Dead People' } }
+    put :update, { :id => team_notmine.id, :team => { :name => 'Dead People', :organization_id => organizations(:dharma_initiative).id } }
     assert_response 302
     team_notmine.reload
     assert_not_equal 'Dead People', team_notmine.name
@@ -174,13 +174,13 @@ class Admin::TeamsControllerTest < ActionController::TestCase
     login_as_normal_user
     
     # CREATE
-    post :create, { :team => {:name => 'Security Team' }, :project => projects(:do_weird_experiments).id }
+    post :create, { :team => {:name => 'Security Team', :organization_id => organizations(:widmore_corporation).id } }
     assert_response 302
     assert !Team.find_by_name('Security Team')
     
     # UPDATE
     team_notmine = teams(:oceanic_six)
-    put :update, { :id => team_notmine.id, :team => { :name => 'Dead People' } }
+    put :update, { :id => team_notmine.id, :team => { :name => 'Dead People', :organization_id => organizations(:widmore_corporation).id } }
     assert_response 302
     team_notmine.reload
     assert_not_equal 'Dead People', team_notmine.name

@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class TeamTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
+  fixtures :organizations
+  
+  test "a team should be able to be assigned to an organization" do
+    team = Team.new(:name => "Dharma Initiative")
+    team.organization = organizations(:dharma_initiative)
+    team.save
   end
 end

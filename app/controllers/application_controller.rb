@@ -108,7 +108,10 @@ class ApplicationController < ActionController::Base
       end
       return result
     end
-    return member.admins?(Project.find(params[:project]).organization)
+    return @current_member.admins?(Organization.find(params[:organization])) if path['action'] == 'new'
+    return @current_member.admins?(Organization.find(params[:team][:organization_id])) if path['action'] == 'create' || path['action'] == 'update'
+    team = Team.find(params[:id])
+    return @current_member.admins?(team.organization)
   end
   
   def login_required

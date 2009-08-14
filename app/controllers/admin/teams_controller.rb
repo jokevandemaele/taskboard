@@ -36,30 +36,27 @@ class Admin::TeamsController < ApplicationController
   # GET /teams/new
   def new
     @team = Team.new
-    @project = Project.find(params[:project])
-    render :partial => 'form', :object => @team, :locals => { :edit => false, :project =>  @project }, :status => :ok
+    @organization = Organization.find(params[:organization])
+    render :partial => 'form', :object => @team, :locals => { :edit => false, :organization =>  @organization }, :status => :ok
   end
 
   # GET /teams/1/edit
   def edit
     @team = Team.find(params[:id])
-    @project = Project.find(params[:project])
-    render :partial => 'form', :object => @team, :locals => { :edit => true, :project => @project}, :status => :ok
+    render :partial => 'form', :object => @team, :locals => { :edit => true }, :status => :ok
   end
 
   # POST /teams
   def create
     @team = Team.new(params[:team])
-    @project = Project.find(params[:project])
 
     if @team.save
-      @project.teams << @team
-      @project.save
       render :inline => "<script>location.reload(true);</script>", :status => :created
     else
+      @organization = Organization.find(params[:team][:organization])
       render :partial => 'form',
       		:object => @team,
-      		:locals => { :no_refresh => true, :edit => false, :project => @project },
+      		:locals => { :no_refresh => true, :edit => false, :organization =>  @organization },
  		      :status => :internal_server_error
     end
   end
@@ -70,10 +67,10 @@ class Admin::TeamsController < ApplicationController
     if @team.update_attributes(params[:team])
       render :inline => "<script>location.reload(true);</script>", :status => :ok
     else
-      @project = Project.find(params[:project_id])
+      @organization = Organization.find(params[:organization])
       render :partial => 'form',
       		:object => @team,
-      		:locals => { :no_refresh => true, :edit => true, :project => @project },
+      		:locals => { :no_refresh => true, :edit => true, :organization =>  @organization },
  		:status => :internal_server_error
     end
   end
