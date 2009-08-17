@@ -1,0 +1,18 @@
+<% 
+element_class = element.class.to_s.downcase
+%>
+<div id="drag-member-<%= element.id %>" class="member">
+	<div class="admin-div-element-core admin-div-element">
+		<div id="name-<%= element.id -%>-container">
+			<p id="name-<%= element.id -%>" title="<%= element.name -%>">
+				<%= element.name -%>
+			</p>
+		</div>
+		<script>
+			resizeFontSizeToFit($('name-<%= element.id -%>'),$('name-<%= element.id -%>-container'));
+		</script>
+	</div>
+</div>	
+<%= draggable_element "drag-member-#{element.id}", :revert => "'failure'" -%>
+
+

@@ -1,0 +1,12 @@
+<div id="admin-div-project-<%= project.id -%>-team-<%= team.id -%>" class="admin-div-organization-teams">
+	<div class="admin-div-section">
+		<%= image_tag "admin/admin-div-actions-teams.png", :alt => "Teams", :style => "position: relative; top: 10px" -%>
+		<h2><%= link_to "Team: #{team.name}", admin_team_url(team.id) -%></h2>
+		
+	</div>
+
+	<%= render :partial => "element", :locals => {:parent => project }, :collection => team.members, :as => :element -%>
+	<div style="clear: both;"></div>
+</div>
+
+

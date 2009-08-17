@@ -77,10 +77,8 @@ class Admin::TeamsController < ApplicationController
       @team.save
     end
     render :update do |page|
-      page.replace_html "team_members_list-#{@team.id}", :partial => 'team_members_list', :locals => { :team => @team }
-      # For some obscure reason, @team seems to be nil at this point.
-      @team = Team.find(params[:team])
       page.replace_html "members-list", :partial => "members_list", :locals => { :members => @team.projects.first.organization.members, :project => params[:project] }
+      page.replace_html "team_members_list-#{@team.id}", :partial => 'team_members_list', :locals => { :team => @team }, :collection => @team.members, :as => :member
     end
   end
 
@@ -92,7 +90,7 @@ class Admin::TeamsController < ApplicationController
       @team.save
     end
     render :update do |page|
-      page.replace_html "team_members_list-#{@team.id}", :partial => 'team_members_list', :locals => { :team => @team }
+      page.replace_html "team_members_list-#{@team.id}", :partial => 'team_members_list', :locals => { :team => @team }, :collection => @team.members, :as => :member
     end
   end
 end

@@ -14,7 +14,7 @@
 		</script>			
 	</div>
 	<div  id="team_members_list-<%= @team.id %>" style="position: relative; top: 20px; margin: 0 auto;">
-		<%= render :partial => 'team_members_list', :locals => { :team => @team } %>
+		<%= render :partial => 'team_members_list', :locals => { :team => @team }, :collection => @team.members, :as => :member %>
 	</div>
 	<div style="clear: both; height: 20px;"></div>
 	<%= admin_close_div(770) -%>
