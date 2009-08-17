@@ -3,13 +3,13 @@ class Admin::TeamsController < ApplicationController
   before_filter :check_permissions
   
   # GET /teams
-  def index
-    @organizations = current_member.organizations_administered
-    @teams = []
-    @organizations.each do |organization|
-      organization.teams.each { |team| @teams << team }
-    end
-  end
+  # def index
+  #   @organizations = current_member.organizations_administered
+  #   @teams = []
+  #   @organizations.each do |organization|
+  #     organization.teams.each { |team| @teams << team }
+  #   end
+  # end
 
   # GET /teams/1
   def show

@@ -52,7 +52,7 @@
 	</div>
 	<div style="clear: both;"></div>
 </div>
-<% if @current_member.admins?(project.organization) -%>
+<!-- <% if @current_member.admins?(project.organization) -%>
 <div id="admin-div-project-members-<%= project.id -%>" class="admin-div-project-members" style="margin:0;">
 	<div class="admin-div-section">
 		<%= image_tag "admin/admin-div-actions-members.png", :alt => "Members", :class => "admin-div-section-img" -%>
@@ -60,7 +60,10 @@
 	</div>
 	<div style="clear: both;"></div>
 </div>
-<% end %>
+<% end %>-->
+
+<%= render :partial => "admin_team_section", :locals => {:project => project }, :collection => project.teams, :as => :team -%>
+
 <!--<div id="admin-div-project-burndown-<%= project.id -%>" class="admin-div-burndown-members" style="margin:0;">
 	<div class="admin-div-section">
 		<%= image_tag "admin/admin-div-actions-burndown-chart.png", :alt => "Burndown Chart", :class => "admin-div-section-img" -%>
