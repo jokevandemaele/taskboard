@@ -4,7 +4,6 @@ parent_class = parent.class.to_s.downcase
 current_member_admins_parent = (element_class == 'member') ? current_member.admin? || (current_member.admins?(parent.organization) && !element.admin?) : (current_member.admins?(parent.organization))
 %>
 <div id="<%= parent_class -%>-<%= parent.id -%>-<%= element_class -%>-<%= element.id -%>" class="admin-div-element-core admin-div-element">
-	<%= show_admin_info_for element, parent if (element_class == 'member' && !current_member_admins_parent) -%>
 	<div id="name-<%= parent_class%>-<%= parent.id %>-<%= element_class -%>-<%= element.id -%>-container">
 		<p id="name-<%= parent_class%>-<%= parent.id %>-<%= element_class -%>-<%= element.id -%>" title="<%= element.name -%>">
 			<%= element.name -%>
