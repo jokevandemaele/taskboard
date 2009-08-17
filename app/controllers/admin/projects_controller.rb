@@ -45,6 +45,7 @@ class Admin::ProjectsController < ApplicationController
 	  @project = Project.find(params[:id])
     @organization = @project.organization_id
     @teams = @organization ? Team.all(:conditions => [ "organization_id = ? ", @organization ]) : nil
+    @selected = (@project.teams.empty?) ? nil : @project.teams.first.id
     render :partial => 'form', :object => @project, :locals => { :edit => true, :free_projects => nil }
   end
 
