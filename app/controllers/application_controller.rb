@@ -94,6 +94,8 @@ class ApplicationController < ActionController::Base
   end
 
   def check_teams_controller_perms(member, path, request)
+    return true if path['action'] == 'display_compact_info'
+    
     if path['action'] == 'index'
       return member.admins?(Project.find(params[:project]).organization) if(params[:project])
       return member.admins_any_organization?
