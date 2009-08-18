@@ -41,7 +41,7 @@ function moveToMousePosition(id,element){
 		elt = elt.getOffsetParent();
 		mouseX = (Event.pointerX(event) - elt.cumulativeOffset().left + 10) + 'px';
 		mouseY = (Event.pointerY(event) - elt.cumulativeOffset().top + 10) + 'px';
-		$('display-info-' + element).setStyle({position:'absolute', top: mouseY, left: mouseX});
+		$('display-info-' + element).setStyle({position:'absolute', top: mouseY, left: mouseX, opacity : 1});
 		$('display-info-' + element).show();
 	});
 }
