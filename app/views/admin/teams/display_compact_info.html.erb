@@ -1,0 +1,18 @@
+<%= admin_open_div(200)%>
+<div id="display-info-text-<%= @team.id -%>" style="margin: 0; padding:0;">
+	<p style="margin: 0; padding: 0;">Members:</p>
+	<ul style="margin: 0; padding: 0 0 0 20px; font-size: 10px; color: #002255;">
+		<%= "This team has no members" if @team.members.empty? -%>
+		<% @team.members.each do |member| -%>
+		<li><%= member.name -%></li>
+		<% end -%>
+	</ul>
+	<p style="margin: 0; padding: 0;">Projects:</p>
+	<ul style="margin: 0; padding: 0 0 0 20px; font-size: 10px; color: #002255;">
+		<%= "This team has no projects" if @team.projects.empty? -%>
+		<% @team.projects.each do |project| -%>
+		<li><%= project.name -%></li>
+		<% end -%>
+	</ul>
+</div>
+<%= admin_close_div(200)%>

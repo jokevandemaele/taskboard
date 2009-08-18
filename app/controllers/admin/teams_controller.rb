@@ -1,6 +1,7 @@
 class Admin::TeamsController < ApplicationController
   before_filter :login_required
   before_filter :check_permissions
+  layout "admin/teams", :except => :display_compact_info
   
   # GET /teams
   # def index
@@ -93,4 +94,9 @@ class Admin::TeamsController < ApplicationController
       page.replace_html "team_members_list-#{@team.id}", :partial => 'team_members_list', :locals => { :team => @team }, :collection => @team.members, :as => :member
     end
   end
+
+  def display_compact_info
+    @team = Team.find(params[:id])
+  end
+
 end

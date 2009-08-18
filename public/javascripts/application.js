@@ -31,6 +31,21 @@ function updateName(type,object){
 
 }
 
+function display_waiting(id){
+	$(id).innerHTML = '<img src=\'/images/waiting.gif\' alt=\'Waiting\''
+}
+
+function moveToMousePosition(id,element){
+	Event.observe($(id), 'mousemove', function(event){
+		var elt = Event.findElement(event, 'P');
+		elt = elt.getOffsetParent();
+		mouseX = (Event.pointerX(event) - elt.cumulativeOffset().left + 10) + 'px';
+		mouseY = (Event.pointerY(event) - elt.cumulativeOffset().top + 10) + 'px';
+		$('display-info-' + element).setStyle({position:'absolute', top: mouseY, left: mouseX});
+		$('display-info-' + element).show();
+	});
+}
+
 function adminToggleImage(id){
 	member = $(id);
 	if(member.src.search('/images/admin/admin-div-element-make-admin.png') != -1){

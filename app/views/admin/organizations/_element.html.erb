@@ -62,9 +62,16 @@ current_member_admins_parent = (element_class == 'member') ? current_member.admi
 	%>
 	<%= show_admin_info_for element, parent if (element_class == 'member' && !current_member_admins_parent) -%>
 	<div id="name-<%= parent_class%>-<%= parent.id %>-<%= element_class -%>-<%= element.id -%>-container">
-		<p id="name-<%= parent_class%>-<%= parent.id %>-<%= element_class -%>-<%= element.id -%>" title="<%= element.name -%>" class="<%=  not_mine %>">
+		<p id="name-<%= parent_class%>-<%= parent.id %>-<%= element_class -%>-<%= element.id -%>" title="<%= element.name unless element_class == 'team' -%>" class="<%=  not_mine %>" onmouseover="<%= remote_function(:update => "display-info-#{element.id}", :url => { :controller => :teams, :action => :display_compact_info, :id => element.id }) if (element_class == 'team') -%>" onmouseout="Effect.Fade($('display-info-<%= element.id -%>'), { duration: 0.1 });">
 			<%= link_to(element.name, :controller => "/taskboard", :action => :show, :id => element.id) if element_class == 'project' %>
 			<%= link_to(element.name, :controller => "admin/teams", :action => :show, :id => element.id) if element_class == 'team' %>
+
+			<% if(element_class == 'team') %>
+				<script>
+					moveToMousePosition('name-<%= parent_class%>-<%= parent.id %>-<%= element_class -%>-<%= element.id -%>-container', <%= element.id -%>)
+				</script>
+			<% end %>
+
 			<%= element.name if element_class != 'project'  &&  element_class != 'team' -%>
 		</p>
 	</div>
@@ -75,3 +82,4 @@ current_member_admins_parent = (element_class == 'member') ? current_member.admi
 <% end -%>
 	</script>
 </div>
+<%= render :partial => "team_display_info", :locals => { :team => element } if element_class == 'team' -%>
