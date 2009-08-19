@@ -63,9 +63,10 @@ class Admin::ProjectsController < ApplicationController
         render :inline => "<script>location.reload(true);</script>", :status => :created
       end
     else
+      @teams = Team.all(:conditions => [ "organization_id = ? ", @project.organization.id ])
       render :partial => 'form',
       		:object => @project,
-      		:locals => { :no_refresh => true, :edit => false, :organization => @project.organization_id },
+      		:locals => { :no_refresh => true, :edit => false, :organization => @project.organization },
  		:status => :internal_server_error
     end
   end
