@@ -75,7 +75,7 @@ module ApplicationHelper
     return image_tag("admin/admin-div-element-sysadmin.png", 
                       :alt => "sysadmin", 
                       :id => "organization-#{parent.id}-member-#{member.id}-admin", 
-                      :class => "admin-div-element-actions-edit-admin #{'admin-div-element-actions-edit-admin-left-aligned' if current_member.admins?(parent)}", :title => "System Administrator") if member.admin?
+                      :class => "admin-div-element-actions-edit-admin#{'-left-aligned' if !current_member.admin?}", :title => "System Administrator") if member.admin?
 
     action = member.admins?(parent) ? "remove" : "make"
 
@@ -97,7 +97,7 @@ module ApplicationHelper
               :alt => title, 
               :title => title, 
               :id => "organization-#{parent.id}-member-#{member.id}-admin", 
-              :class => "admin-div-element-actions-edit-admin")
+              :class => "admin-div-element-actions-edit-admin#{'-left-aligned' if !current_member.admins?(parent)}")
     end 
   end
 

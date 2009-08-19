@@ -28,8 +28,8 @@ class Admin::ProjectsController < ApplicationController
 	  @project = Project.new
     @organization = (defined?(params[:organization])) ? params[:organization] : nil
     @free_projects = (defined?(params[:display_existing])) ? Project.free : @free_projects = nil
-    @teams = @organization ? Team.all(:conditions => [ "organization_id = ? ", @organization ]) : nil
-    @selected = nil
+    @teams = @organization ? Team.all(:conditions => [ "organization_id = ? ", @organization ]) : []
+    @selected = ''
     render :partial => 'form', 
       :object => @project,
     	:locals => { 
