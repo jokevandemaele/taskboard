@@ -12,6 +12,7 @@
 		<% action = edit ? :update : :create -%>
 		<% remote_form_for @team, :url => { :controller => 'admin/teams', :action => action, :id => @team.id }, :update => "dummy-for-actions" do |f| %>
 			<%= defined?(@organization) ? hidden_field_tag("team[organization_id]", "#{@organization.id}") : hidden_field_tag("team[organization_id]", "#{@team.organization_id}") -%>
+			<%= hidden_field_tag("project_id", "#{@project.id}") if defined?(@project) -%>
 			<%= admin_form_name(@team, edit, f) -%>
 			
 			<div class="admin-div-section" style="margin-bottom: 10px;">

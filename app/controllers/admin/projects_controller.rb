@@ -54,8 +54,14 @@ class Admin::ProjectsController < ApplicationController
     @project = Project.new(params[:project])
 
     if @project.save
-      @project.teams << Team.find(params[:team_id])
-      render :inline => "<script>location.reload(true);</script>", :status => :created
+      if(params[:create_team])
+        @team = Team.new
+        @organization = @project.organization
+        render :partial => 'admin/teams/form', :locals => { :edit => false, :organization =>  @organization, :project => @project }, :status => :ok
+      else
+        @project.teams << Team.find(params[:team_id])
+        render :inline => "<script>location.reload(true);</script>", :status => :created
+      end
     else
       render :partial => 'form',
       		:object => @project,

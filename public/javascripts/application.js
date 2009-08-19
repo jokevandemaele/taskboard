@@ -38,11 +38,13 @@ function display_waiting(id){
 function moveToMousePosition(id,element){
 	Event.observe($(id), 'mousemove', function(event){
 		var elt = Event.findElement(event, 'P');
-		elt = elt.getOffsetParent();
-		mouseX = (Event.pointerX(event) - elt.cumulativeOffset().left + 10) + 'px';
-		mouseY = (Event.pointerY(event) - elt.cumulativeOffset().top + 10) + 'px';
-		$('display-info-' + element).setStyle({position:'absolute', top: mouseY, left: mouseX, opacity : 1});
-		$('display-info-' + element).show();
+		if(elt){
+			elt = elt.getOffsetParent();
+			mouseX = (Event.pointerX(event) - elt.cumulativeOffset().left + 10) + 'px';
+			mouseY = (Event.pointerY(event) - elt.cumulativeOffset().top + 10) + 'px';
+			$('display-info-' + element).setStyle({position:'absolute', top: mouseY, left: mouseX, opacity : 1});
+			$('display-info-' + element).show();
+		}
 	});
 }
 
@@ -54,6 +56,14 @@ function adminToggleImage(id){
 	}else{
 		member.src = '/images/admin/admin-div-element-make-admin.png';
     member.title = 'make admin';
+	}
+}
+
+function toggleSelect(id,checkbox){
+	if($(checkbox).checked){
+		$(id).disable();
+	}else{
+		$(id).enable();
 	}
 }
 // End Admin Section

@@ -35,6 +35,7 @@ class Admin::TeamsController < ApplicationController
     @team = Team.new(params[:team])
 
     if @team.save
+      @team.projects << Project.find(params[:project_id]) if params[:project_id]
       render :inline => "<script>location.reload(true);</script>", :status => :created
     else
       @organization = Organization.find(params[:team][:organization])

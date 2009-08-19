@@ -16,10 +16,16 @@
 			<% if @organization %>
 				<%= hidden_field_tag "project[organization_id]", @organization -%>
 				<%= hidden_field_tag "organization", @organization -%>
-				<div class="admin-div-section">
+				<div class="admin-div-section" style="height: 70px;">
 					<%= image_tag 'admin/admin-div-actions-teams.png', :alt => 'Team', :style => 'position: relative; top: 10px; margin-left: 10px;' -%>
 					<h2 style="position: relative; top: 10; margin-left: 10px;">Team:</h2>
 					<%= select_tag "team_id", options_from_collection_for_select(@teams, 'id', 'name', :selected => @selected), :style => 'position: relative; top: 10px; margin-left: 10px; width: 500px;' -%>
+					<% if !edit -%>
+					<p style="margin-left: 15px;">
+						<%= check_box_tag 'create_team', 'Create a new team',false, :onclick => "toggleSelect('team_id','create_team');" -%>
+						<%= label_tag 'create_team', 'Create a new team' -%> 
+					</p>
+					<% end %>
 				</div>
 			<% else %>
 <!--				<div class="admin-div-section">
