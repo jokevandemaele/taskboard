@@ -5,10 +5,14 @@ class Story < ActiveRecord::Base
   validates_presence_of :realid
   validates_uniqueness_of :realid
   
-  after_create :add_template_task
+  after_create :add_template_task, :default_priority
 
   def add_template_task
     self.tasks << Task.new(:name => "This is a sample task")
+  end
+
+  def default_priority
+    self.priority = 0 if !self.priority
   end
 
   def self.last_realid(project_id)
