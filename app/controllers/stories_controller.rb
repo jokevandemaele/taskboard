@@ -25,6 +25,7 @@ class StoriesController < ApplicationController
   # POST /stories
   def create
     @story = Story.new(params[:story])
+    @story.priority = 0 if !@story.priority
     if @story.save
       render :inline => "<script>location.reload(true);</script>", :status => :created
     else
