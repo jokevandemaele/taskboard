@@ -31,6 +31,6 @@ class TaskboardController < ApplicationController
       end
       @stories_by_priority = @stories_by_priority.sort_by {|story| story.priority }
       @stories_by_priority = @stories_by_priority.reverse
-      @color = '3771c8'
+      @color = @member_team.color
   end
 end
