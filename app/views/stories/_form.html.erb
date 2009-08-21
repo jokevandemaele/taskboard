@@ -7,25 +7,34 @@
 	<%= admin_open_div 765 -%>
 		<% action = edit ? :update : :create -%>
 		<% remote_form_for @story, :url => { :controller => :stories, :action => action, :id => @story.id }, :update => "dummy-for-actions" do |f| %>
-			<%= hidden_field_tag("story[project_id]", "#{project}") -%> 
 			<%= admin_form_name(@story, edit, f) -%>
 
 			<div class="admin-div-section" style="margin-top: 10px;">
 				<table id="story-add-fields">
 					<tr style="border: 0; margin: 0; padding: 0;">
-						<%	realid = (edit) ? @story.realid : next_realid(@last_realid)	-%>
-						<td style="border: 0; margin: 0; padding: 0; padding-top: 12px; width: 33%;">Story ID <%= f.text_field :realid, :value => realid, :class => "field-id" %></td>
+						<%	realid = nil
+							realid = (edit) ? @story.realid : next_realid(@last_realid)	if @last_realid -%>
+						<td style="border: 0; margin: 0; padding: 0; padding-top: 12px; width: 33%;"><%= f.label :realid, "Story ID" %> <%= f.text_field :realid, :value => realid, :class => "field-id" %></td>
 						<td style="border: 0; margin: 0; padding: 0; padding-top: 12px; width: 33%;"><%= f.label :priority %> <%= f.text_field :priority, :class => "field" %></td>
 					<td style="border: 0; margin: 0; padding: 0; padding-top: 12px; width: 33%;"><%= f.label :size %> <%= f.text_field :size, :class => "field" %></td>
 				</tr>
 				</table>
 			</div>
 
+			<%= hidden_field_tag("story[project_id]", "#{project}") if project-%> 
+			<% if !project %>
+				<div class="admin-div-section" style="margin-top: 10px; width: 715px; padding-left: 20px;">
+					<%= image_tag 'admin/admin-div-actions-projects.png', :alt => 'Team', :style => 'position: relative; top: 10px; margin-left: 10px;' -%>
+					<h2 style="position: relative; top: 10; margin-left: 10px;">Project:</h2>
+					<%= select_tag "story[project_id]", options_from_collection_for_select(@projects, 'id', 'name'), :style => 'position: relative; top: 10px; margin-left: 10px; width: 500px;' -%>
+				</div>
+			<% end %>
+
+
 			<div class="admin-div-section" style="margin-top: 10px; width: 715px; height: 200px; padding-left: 20px;">
 				<h2 style=" margin-left: 0; margin-bottom: 5px;  "><%= f.label :description %></h2>
 				<p><%= f.text_area :description, :class => "description"  %></p>
 			</div>
-
 			<%= error_messages_for('story', :object => @story) if (defined?(no_refresh) && no_refresh) -%>
 			<%= admin_form_buttons(@story) -%>
 		<% end -%>

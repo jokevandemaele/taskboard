@@ -45,7 +45,9 @@ class ApplicationController < ActionController::Base
   
   def check_taskboard_perms(member, path, request)
     # Taskboard and backlog can be accessible only if the member belogs to the project or if it admins the project organization
-    @proj = Project.find(params[:id])
+    @team = Team.find(params[:id]) if path['action'] == 'team'
+    return (@current_member.admins?(@team.organization) || @current_member.teams.include?(@team)) if path['action'] == 'team'
+    @proj = Project.find(params[:id]) 
     return (@current_member.admins?(@proj.organization) || @current_member.projects.include?(@proj))
   end
   

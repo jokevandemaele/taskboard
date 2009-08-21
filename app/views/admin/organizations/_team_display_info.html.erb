@@ -1,2 +1,5 @@
-<div id="display-info-<%= team.id %>" style="z-index: 1000;" onMouseOver="Effect.Fade($('display-info-<%= team.id -%>'), { duration: 0.1 });">
+<div id="display-info-<%= team.id %>" style="z-index: 1000; display:none;" onMouseOver="Effect.Fade($('display-info-<%= team.id -%>'), { duration: 0.1 });">
 </div>
+<script>
+	<%= remote_function(:update => "display-info-#{team.id}", :url => { :controller => :teams, :action => :display_compact_info, :id => team.id }) -%>
+</script>

@@ -40,8 +40,9 @@ function moveToMousePosition(id,element){
 		var elt = Event.findElement(event, 'P');
 		if(elt){
 			elt = elt.getOffsetParent();
+			div_height = $('display-info-text-'+element).getHeight();
 			mouseX = (Event.pointerX(event) - elt.cumulativeOffset().left + 10) + 'px';
-			mouseY = (Event.pointerY(event) - elt.cumulativeOffset().top + 10) + 'px';
+			mouseY = (Event.pointerY(event) - elt.cumulativeOffset().top - div_height) + 'px';
 			$('display-info-' + element).setStyle({position:'absolute', top: mouseY, left: mouseX, opacity : 1});
 			$('display-info-' + element).show();
 		}
@@ -139,10 +140,12 @@ function timedRefresh(timeoutPeriod) {
 function flip(id,side){
 	if(side == 'back'){
 		$(id).hide();
+		$(id+"-flip").hide();
 		$(id + '-back').show();
 	}else{
 		$(id + '-back').hide();
 		$(id).show();
+		$(id+"-flip").show();
 	}
 }
 

@@ -10,8 +10,9 @@ class StoriesController < ApplicationController
   # GET /stories/new
   def new
 	  @story = Story.new
-    @project = params[:project]
-    @last_realid = Story.last_realid(@project)
+    @project = (params[:project]) ? params[:project] : nil
+    @projects = Team.find(params[:team]).projects
+    @last_realid = (params[:project]) ? Story.last_realid(@project) : nil
     render :partial => 'form', :object => @story, :locals => { :edit => false, :project =>  @project, :last_realid => @last_realid}, :status => :ok
   end
 
@@ -27,8 +28,9 @@ class StoriesController < ApplicationController
     if @story.save
       render :inline => "<script>location.reload(true);</script>", :status => :created
     else
-      @last_realid = Story.last_realid(@story.project_id)
-      render :partial => 'form', :object => @story, :locals => { :no_refresh => true, :edit => false, :project => @story.project_id }, :status => :internal_server_error
+      @last_realid = (@story.project_id) ? Story.last_realid(@story.project_id) : nil
+      @project = (@story.project_id) ? @story.project_id : nil
+      render :partial => 'form', :object => @story, :locals => { :no_refresh => true, :edit => false, :project => @project, :last_realid => @last_realid }, :status => :internal_server_error
     end
   end
 
@@ -56,7 +58,7 @@ class StoriesController < ApplicationController
     @story = Story.find(params[:id])
     @story.status = 'in_progress'
     @story.save
-    redirect_to :controller => :backlog, :action => :show, :id => params[:project]
+    redirect_to :controller => :backlog, :action => (params[:project]) ? :show : :team, :id => (params[:project]) ? params[:project] : params[:team]
   end
 
   def edit_priority
@@ -77,7 +79,7 @@ class StoriesController < ApplicationController
       @story.priority = params[:priority]
     end
     @story.save
-    redirect_to :controller => :backlog, :action => :show, :id => params[:project]
+    redirect_to :controller => :backlog, :action => (params[:project]) ? :show : :team, :id => (params[:project]) ? params[:project] : params[:team]
   end
 
   def finish_story
@@ -85,6 +87,6 @@ class StoriesController < ApplicationController
     @story.status = 'finished'
     @story.priority = -1
     @story.save
-    redirect_to :controller => :backlog, :action => :show, :id => params[:project]
+    redirect_to :controller => :backlog, :action => (params[:project]) ? :show : :team, :id => (params[:project]) ? params[:project] : params[:team]
   end
 end

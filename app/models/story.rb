@@ -2,6 +2,7 @@ class Story < ActiveRecord::Base
   belongs_to :project
   has_many :tasks, :dependent => :destroy
 
+  validates_presence_of :realid
   validates_uniqueness_of :realid
   
   after_create :add_template_task

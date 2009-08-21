@@ -11,6 +11,10 @@ div#menu_report_bug img { border: none; margin:0 auto;}
 
 img#trash { position: fixed; top: 14px; right: 108px; z-index: 100;}
 #taskboard_menu_logout { position: fixed; right: 10px; top: 23px;}
+#menu_views { width: 150px; position: fixed; right: 100px; top: 23px;}
+#menu_views .true { border: 4px solid rgb(160, 44, 44); padding: 5px;}
+#menu_views img { border: 0; vertical-align: middle;}
+#menu_views a { text-decoration: none;}
 
 /* Menu Links */
 #menu_product_backlog_image { float:left; position: relative; border: none; top: 7px; left: 14px; }

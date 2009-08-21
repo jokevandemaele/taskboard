@@ -65,7 +65,7 @@ table td{
 .flip-task-image {
 	position:relative;
 	left: 152px;
-	top: 152px;
+	top: 22px;
 	border: none;
 	z-index:1;
 }	
@@ -87,7 +87,13 @@ table td{
 	font-weight: bold;
 	text-align: center;
 }
-
+.task-name-container{
+	height: 130px;
+	position:relative;
+	top: 7px;
+	vertical-align: middle;
+	margin: 0 auto;
+}
 .task-description{
 	position: relative;
 	top: 2px;
