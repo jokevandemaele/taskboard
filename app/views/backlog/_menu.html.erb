@@ -22,8 +22,7 @@
 			:id => "menu_admin_image",
 			:title => "Admin Section"), 
 		:controller => (current_member.admins_any_organization?) ? "admin/organizations" : "admin/projects",
-		:action => "index",
-		:id => (project.id unless (current_member.admins_any_organization?) )
+		:action => "index"
 	-%>
 
 	<%= link_to (image_tag 'menu_logout.png' , 
