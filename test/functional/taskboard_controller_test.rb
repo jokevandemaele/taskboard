@@ -6,11 +6,18 @@ class TaskboardControllerTest < ActionController::TestCase
     # A taskboard from a project in an organization the admin belongs and he's on a team
     get :show, :id => projects(:fake_plaincrash)
     assert_response :ok
+    get :team, :id => teams(:widmore_team)
+    assert_response :ok
+
     # A taskboard from a project in an organization the admin belongs and he's not on the team
     get :show, :id => projects(:find_the_island)
     assert_response :ok
+    get :team, :id => teams(:widmore_team)
+    assert_response :ok
     # A taskboard from a project in an organization the admin doesn't belong
     get :show, :id => projects(:come_back_to_the_island)
+    assert_response :ok
+    get :team, :id => teams(:oceanic_six)
     assert_response :ok
   end
 
@@ -19,11 +26,17 @@ class TaskboardControllerTest < ActionController::TestCase
     # A taskboard from a project in an organization the admin belongs and he's on a team
     get :show, :id => projects(:find_the_island)
     assert_response :ok
+    get :team, :id => teams(:widmore_team)
+    assert_response :ok
     # A taskboard from a project in an organization the admin belongs and he's not on the team
     get :show, :id => projects(:find_the_island)
     assert_response :ok
+    get :team, :id => teams(:widmore_team)
+    assert_response :ok
     # A taskboard from a project in an organization the admin doesn't administers
     get :show, :id => projects(:come_back_to_the_island)
+    assert_response 302
+    get :team, :id => teams(:oceanic_six)
     assert_response 302
   end
   
@@ -32,9 +45,15 @@ class TaskboardControllerTest < ActionController::TestCase
     # A taskboard from a project where the user belongs
     get :show, :id => projects(:come_back_to_the_island)
     assert_response :ok
+    get :team, :id => teams(:oceanic_six)
+    assert_response :ok
+    
     # A taskboard from a project where the user doesn't belong
     get :show, :id => projects(:find_the_island)
     assert_response 302
+    get :team, :id => teams(:widmore_team)
+    assert_response 302
+    
   end
 
 end
