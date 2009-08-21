@@ -3,7 +3,9 @@
 
 class ApplicationController < ActionController::Base
   # Use the ExepctionNotifiable plugin to send a mail when an error is thrown.
-
+  include ExceptionNotifiable
+  ExceptionNotifier.exception_recipients = %w(taskboard@agilar.org)
+  
   helper :all # include all helpers, all the time
   helper_method :request_controller, :current_member
   # See ActionController::RequestForgeryProtection for details
