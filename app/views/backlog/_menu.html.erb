@@ -32,7 +32,7 @@
 	-%>
 	<div id="menu_views">
 		<% team_image = image_tag 'admin/admin-div-actions-teams.png' 
-		   team_selected = (@view == 'team')
+		   team_selected = (@view == :team)
 		%>
 		<% project_image = image_tag 'admin/admin-div-actions-projects.png' %>
 		<%= link_to "#{project_image} Project View ",

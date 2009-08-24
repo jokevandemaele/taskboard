@@ -11,17 +11,8 @@ class TaskboardController < ApplicationController
     @member.last_project = @project
     @member.save
 
-    @project.teams.each do |team|
-      @member_team = team if(team.members.include?(@member))
-    end
-
-
-    if(@member_team)
-      @color = @member_team.color
-    else
-      @color = "3771c8"
-      @member_team = @project.teams.first
-    end
+    @member_team = @project.team_including(@member)
+    @color = @member_team.color
     @projects = [@project]
   end
 

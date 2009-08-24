@@ -28,4 +28,10 @@ class Project < ActiveRecord::Base
     end
     return members
   end
+
+  def team_including(member)
+    result = self.teams.first
+    self.teams.each { |team| result = team if(team.members.include?(member)) }
+    return result
+  end
 end

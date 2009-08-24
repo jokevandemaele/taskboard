@@ -1,44 +1,5 @@
 <%= render :partial => "menu", :locals => { :project => @project}-%> 
 <%= render :partial => 'layouts/admin/dialog_background_fade' -%>
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Priority</th>
-    <th>Size</th>
-    <th>Description</th>
-  </tr>
-
-<% for story in @stories %>
-  <tr class="story-<%= story.status -%>">
-    <td class="name-cell">
-		<strong><%=h story.realid %></strong> 
-		<%=h story.name %> 
-		(<span title="Not Started Tasks"><%= story.tasks.not_started.size %></span>/<span title="In Progress Tasks"><%= story.tasks.in_progress.size %></span>/<span title="Finished Tasks"><%= story.tasks.finished.size %></span>)<br />
-		<% if story.status != 'finished' -%>
-			[
-			<% if story.status == 'not_started' -%>
-				<%= link_to 'Start', :controller => 'stories', :action => 'start_story', :id => story.id, :team => @member_team.id -%> |  
-			<% end %>  
-			<% if story.status == 'in_progress' -%>
-				<%= link_to 'Stop', :controller => 'stories', :action => 'stop_story', :id => story.id, :team => @member_team.id -%> |  
-			<% end -%>  
-			<%= link_to 'Finish', :controller => 'stories', :action => 'finish_story', :id => story.id, :team => @member_team.id -%> |
-			<%= link_to_remote "Edit", :url => edit_story_url(story.id), :method => :get, :update => "dummy-for-actions" %> | 
-			<%= link_to_remote "Delete", :url => url_for(story), :confirm => 'Are you sure?', :method => :delete, :complete => "location.reload(true);" %>
-			]
-		<% else %>
-		  [ Date Finished: <%= "#{story.updated_at.month}/#{story.updated_at.day}/#{story.updated_at.year}" %> ]
-		<% end %> 
-    </td>
-    <td class="priority-cell">
-		<span class="priority-edit" id="priority-<%= story.id %>"><%= render :partial => 'stories/edit_priority_link', :locals => {:story => story} if story.priority != -1-%></span>
-	</td>
-    <td class="size-cell"><%=h story.size %></td>
-    <td class="description-cell"><%=h story.description %></td>
-  </tr>
-<% end %>
-</table>
+<%= render :partial => "backlog_table" -%>
 <div id="dummy-for-actions">
 </div>
-

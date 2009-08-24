@@ -1,0 +1,29 @@
+<tr class="story-<%= story.status -%>">
+  <td class="name-cell">
+		<strong><%=h story.realid %></strong> 
+		<%=h story.name %>
+		<%= " - " + link_to("#{story.project.name}", :controller => :backlog, :action => :show, :id => story.project.id) +" - " if @view == :team -%> 
+		(<span title="Not Started Tasks"><%= story.tasks.not_started.size %></span>/<span title="In Progress Tasks"><%= story.tasks.in_progress.size %></span>/<span title="Finished Tasks"><%= story.tasks.finished.size %></span>)<br />
+		<% if story.status != 'finished' -%>
+		<% @action_id = (@view == :project ) ? @project.id : @member_team.id%>
+			[
+			<% if story.status == 'not_started' -%>
+				<%= link_to 'Start', :controller => 'stories', :action => 'start_story', :id => story.id, @view => @action_id -%> |  
+			<% end %>  
+			<% if story.status == 'in_progress' -%>
+				<%= link_to 'Stop', :controller => 'stories', :action => 'stop_story', :id => story.id, @view => @action_id -%> |  
+			<% end -%>  
+			<%= link_to 'Finish', :controller => 'stories', :action => 'finish_story', :id => story.id, @view => @action_id -%> |
+			<%= link_to_remote "Edit", :url => edit_story_url(story.id), :method => :get, :update => "dummy-for-actions" %> | 
+			<%= link_to_remote "Delete", :url => url_for(story), :confirm => 'Are you sure?', :method => :delete, :complete => "location.reload(true);" %>
+			]
+		<% else %>
+		  [ Date Finished: <%= "#{story.updated_at.month}/#{story.updated_at.day}/#{story.updated_at.year}" %> ]
+		<% end %> 
+  </td>
+  <td class="priority-cell">
+		<span class="priority-edit" id="priority-<%= story.id %>"><%= render :partial => 'stories/edit_priority_link', :locals => {:story => story} if story.priority != -1-%></span>
+	</td>
+  <td class="size-cell"><%=h story.size %></td>
+  <td class="description-cell"><%=h story.description %></td>
+</tr>
