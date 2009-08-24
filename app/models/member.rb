@@ -6,6 +6,7 @@ class Member < ActiveRecord::Base
   has_many :organization_memberships, :dependent => :destroy 
   has_many :organizations, :through => :organization_memberships
   has_many :nametags, :dependent => :destroy
+  belongs_to :last_project, :class_name => "Project"
 
   #Validations
   validates_uniqueness_of :username

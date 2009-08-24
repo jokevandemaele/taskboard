@@ -6,7 +6,11 @@ class BacklogController < ApplicationController
       @project = Project.find(params[:id])
       @stories = @project.stories_by_priority
       @projects = [@project]
+
       @member = @current_member
+      @member.last_project = @project
+      @member.save
+
       @member_team = @project.teams.first
       @project.teams.each do |team|
         @member_team = team if(team.members.include?(@member))

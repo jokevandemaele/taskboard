@@ -1,6 +1,33 @@
 require 'test_helper'
 
 class BacklogControllerTest < ActionController::TestCase
+  test "last project is set when accessing the taskboard" do
+    login_as_organization_admin
+    get :show, :id => projects(:find_the_island)
+    assert_response :ok
+    get :team, :id => teams(:widmore_team)
+    assert_response :ok
+    assert_select "div#menu_views" do |menu_views|
+      assert_select "a" do |links|
+        assert_equal "/backlog/#{projects(:find_the_island).id}", links[0].attributes['href']
+      end
+    end
+
+    get :show, :id => projects(:fake_plaincrash)
+    assert_response :ok
+    members(:cwidmore).reload
+    members(:cwidmore).last_project
+    get :team, :id => teams(:widmore_team)
+    assert_response :ok
+    assert_select "div#menu_views" do |menu_views|
+      assert_select "a" do |links|
+        assert_equal "/backlog/#{projects(:fake_plaincrash).id}", links[0].attributes['href'] 
+      end
+    end
+
+  end
+  
+  ########################## Permissions tests ##########################
   test "system administrator should be able to access any backlog" do
     login_as_administrator
     # A taskboard from a project in an organization the admin belongs and he's on a team

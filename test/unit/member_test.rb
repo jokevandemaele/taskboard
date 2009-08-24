@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class MemberTest < ActiveSupport::TestCase
-  fixtures :members, :organizations, :organization_memberships
+  fixtures :members, :organizations, :organization_memberships, :projects
 
   test "authentication works as expected" do
     # check that we can login with a valid user
@@ -134,5 +134,11 @@ class MemberTest < ActiveSupport::TestCase
       memberships.each {|memb| admins << memb.member }
     end
     assert_equal admins, members(:dfaraday).administrators
+  end
+  
+  test "last project association works" do
+    member = members(:dfaraday)
+    member.last_project = projects(:find_the_island)
+    assert_equal member.last_project, projects(:find_the_island)
   end
 end

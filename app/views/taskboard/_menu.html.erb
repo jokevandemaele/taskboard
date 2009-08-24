@@ -43,7 +43,7 @@
 		<% project_image = image_tag 'admin/admin-div-actions-projects.png' %>
 		<%= link_to "#{project_image} Project View ",
 			{:action => :show,
-			:id => @projects.first.id},
+			:id => @current_member.last_project},
 			:class => !team_selected
 		-%>
 		<%= link_to "#{team_image} Team View ",

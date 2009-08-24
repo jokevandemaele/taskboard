@@ -6,7 +6,11 @@ class TaskboardController < ApplicationController
     @view = 'project'
     @project = Project.find(params[:id])
     @stories_by_priority = @project.stories_in_progress
+
     @member = @current_member
+    @member.last_project = @project
+    @member.save
+
     @project.teams.each do |team|
       @member_team = team if(team.members.include?(@member))
     end
