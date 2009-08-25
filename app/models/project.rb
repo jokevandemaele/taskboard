@@ -3,6 +3,9 @@ class Project < ActiveRecord::Base
   belongs_to :organization
   has_many :stories, :dependent => :delete_all
   has_and_belongs_to_many :teams
+  has_many :guest_team_memberships
+  has_many :guest_members, :through => :guest_team_memberships, :source => :member
+  
   # Validations
   validates_uniqueness_of :name
   

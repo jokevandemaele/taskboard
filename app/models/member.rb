@@ -1,12 +1,13 @@
 require 'digest/sha1'
 require 'RMagick'
 class Member < ActiveRecord::Base
-  # Relations
+  # Associations
   has_and_belongs_to_many :teams
   has_many :organization_memberships, :dependent => :destroy 
   has_many :organizations, :through => :organization_memberships
   has_many :nametags, :dependent => :destroy
   belongs_to :last_project, :class_name => "Project"
+  has_many :guest_team_memberships
 
   #Validations
   validates_uniqueness_of :username

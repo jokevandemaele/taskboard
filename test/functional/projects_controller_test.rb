@@ -204,4 +204,42 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
     assert_response 302
     assert_nil Project.find_by_name('Destroy the magnetic zone.')    
   end
+  
+  test "a system administrator can add a guest member to any project" do
+    login_as_administrator
+    post :add_guest, { :id => projects(:do_weird_experiments), :member => members(:dfaraday), :team => teams(:dharma_team) }
+    assert_response :ok
+    assert projects(:do_weird_experiments).guest_members.include?(members(:dfaraday))
+    post :remove_guest, { :id => projects(:do_weird_experiments), :member => members(:dfaraday), :team => teams(:dharma_team) }
+    assert_response :ok
+    assert !projects(:do_weird_experiments).guest_members.include?(members(:dfaraday))
+    post :add_guest, { :id => projects(:find_the_island), :member => members(:kausten), :team => teams(:widmore_team) }
+    assert_response :ok
+    assert projects(:find_the_island).guest_members.include?(members(:kausten))
+    post :remove_guest, { :id => projects(:find_the_island), :member => members(:kausten), :team => teams(:widmore_team) }
+    assert_response :ok
+    assert !projects(:find_the_island).guest_members.include?(members(:kausten))
+  end
+
+  test "an organization administrator can add a guest member to projects within its organization" do
+    login_as_organization_admin
+    post :add_guest, { :id => projects(:find_the_island), :member => members(:kausten), :team => teams(:widmore_team) }
+    assert_response :ok
+    assert projects(:find_the_island).guest_members.include?(members(:kausten))
+    post :remove_guest, { :id => projects(:find_the_island), :member => members(:kausten), :team => teams(:widmore_team) }
+    assert_response :ok
+    assert !projects(:find_the_island).guest_members.include?(members(:kausten))
+    post :add_guest, { :id => projects(:do_weird_experiments), :member => members(:dfaraday), :team => teams(:dharma_team) }
+    assert_response 302
+    assert !projects(:do_weird_experiments).guest_members.include?(members(:dfaraday))
+    post :remove_guest, { :id => projects(:do_weird_experiments), :member => members(:dfaraday), :team => teams(:dharma_team) }
+    assert_response 302
+    assert !projects(:do_weird_experiments).guest_members.include?(members(:dfaraday))
+  end
+  # 
+  # test "a normal user can't add a guest members" do
+  #   login_as_organization_admin
+  #   post :add_guest { }
+  # end
+
 end

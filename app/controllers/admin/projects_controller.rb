@@ -99,4 +99,23 @@ class Admin::ProjectsController < ApplicationController
       render :inline => "", :status => :internal_server_error
     end
   end
+  
+  def add_guest
+    guest_membership = GuestTeamMembership.new(:project => params[:id], :member => params[:member], :team => params[:team])
+    if guest_membership.save
+      render :inline => "", :status => :ok
+    else
+      p guest_membership.errors
+      render :inline => "", :status => :internal_server_error
+    end
+  end
+
+  def remove_guest
+    guest_membership = GuestTeamMembership.first(:conditions => ['project_id = ? AND member_id = ? AND team_id = ?', params[:id], params[:member], params[:team] ])
+    if guest_membership.destroy
+      render :inline => "", :status => :ok
+    else
+      render :inline => "", :status => :internal_server_error
+    end
+  end
 end
