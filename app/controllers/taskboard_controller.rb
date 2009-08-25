@@ -3,7 +3,7 @@ class TaskboardController < ApplicationController
   before_filter :check_permissions
   
   def show
-    @view = 'project'
+    @view = :project
     @project = Project.find(params[:id])
     @stories_by_priority = @project.stories_in_progress
 
@@ -17,7 +17,7 @@ class TaskboardController < ApplicationController
   end
 
   def team
-      @view = 'team'
+      @view = :team
       @member_team = Team.find(params[:id])
       @projects = @member_team.projects
       @stories_by_priority = []
