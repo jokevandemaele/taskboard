@@ -1,6 +1,6 @@
 	<td class="task-list-item">
 		<div class="task" id="task-<%= task.id -%>">
-				<%= link_to_remote image_tag("task_delete.png", :alt => "Delete Task", :title => "Delete Task", :style => "position: absolute; top: 5px; right: 5px; border: 0; cursor: pointer; z-index: 100;"), :url => { :controller => :tasks, :action=>:destroy, :id => task.id}, :method => :delete, :update => "dummy-for-actions", :style => "border: 2px solid red; " -%>
+				<%= link_to_remote image_tag("task_delete.png", :alt => "Delete Task", :title => "Delete Task", :style => "position: absolute; top: 5px; right: 5px; border: 0; cursor: pointer; z-index: 10;"), :url => { :controller => :tasks, :action=>:destroy, :id => task.id}, :method => :delete, :update => "dummy-for-actions", :style => "border: 2px solid red; " -%>
 					<div class="task-name-container" id="task-<%= task.id -%>-name-container">
 						<div class="task-container-table">	
 						<div class="task-container-cell">

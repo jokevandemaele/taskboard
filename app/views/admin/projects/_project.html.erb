@@ -41,14 +41,14 @@
 <div id="admin-div-project-taskboard-<%= project.id -%>" class="admin-div-project-taskboard" style="margin:0;">
 	<div class="admin-div-section">
 		<%= image_tag "admin/admin-div-actions-taskboard.png", :alt => "Taskboard", :class => "admin-div-section-img" -%>
-		<h2 style="position: relative; top: 5px; left: 0px;"><%= link_to "Taskboard", :controller => "/taskboard", :action => :show, :id => project.id -%></h2>
+		<h2 style="position: relative; top: 13px; left: 1px;"><%= link_to "Taskboard", :controller => "/taskboard", :action => :show, :id => project.id -%></h2>
 	</div>
 	<div style="clear: both;"></div>
 </div>
 <div id="admin-div-project-backlog-<%= project.id -%>" class="admin-div-backlog-members" style="margin:0;">
 	<div class="admin-div-section">
 		<%= image_tag "admin/admin-div-actions-backlog.png", :alt => "Product Backlog", :class => "admin-div-section-img" -%>
-		<h2 style="position: relative; top: 5px; left: 10px;"><%= link_to "Product Backlog", :controller => "/backlog", :action => :show, :id => project.id %></h2>
+		<h2 style="position: relative; top: 10px; left: -1px;"><%= link_to "Product Backlog", :controller => "/backlog", :action => :show, :id => project.id %></h2>
 	</div>
 	<div style="clear: both;"></div>
 </div>

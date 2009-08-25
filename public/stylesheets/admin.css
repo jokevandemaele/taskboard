@@ -52,7 +52,7 @@ p { color: #002255;}
 .admin-div-section h2 { position: relative; top: 13px; }
 .admin-div-section a { color: #002255; }
 .admin-div-section a:hover { color: #0c82eb; }
-.admin-div-section-img {position: relative; height: 32px; left: 10px; top: 10px}
+.admin-div-section-img { position: relative; width: 36px; left: 2px; top: 10px; }
 
 .admin-div-element-core { float: left; width: 300px; height: 33px; margin: 5px; padding-left: 10px; padding-right: 10px;}
 .admin-div-element { background: url('/images/admin/admin-div-element-display.png') no-repeat; }

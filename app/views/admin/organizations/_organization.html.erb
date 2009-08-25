@@ -29,7 +29,7 @@
 		<script>
 			ids<%= organization.id %> = new Array('admin-div-organization-projects-<%= organization.id %>', 'admin-div-organization-members-<%= organization.id %>');
 		</script>
-		<h1 id="admin-div-organization-top-name-<%= organization.id -%>-name" onClick="expandCollapseDivs(ids<%= organization.id -%>)" class="<%= 'not-mine' if !organization.members.include?(current_member)-%>"><%=h organization.name -%></h1>
+		<h1 id="admin-div-organization-top-name-<%= organization.id -%>-name" class="<%= 'not-mine' if !organization.members.include?(current_member)-%>"><%=h organization.name -%></h1>
 	</div>
 	<script>
 	 resizeFontSizeToFit($('admin-div-organization-top-name-<%= organization.id -%>-name'), $('admin-div-organization-top-name-<%= organization.id -%>'));
