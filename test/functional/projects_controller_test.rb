@@ -61,6 +61,29 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
     project.reload
     assert project.teams.first == Team.find(2)
   end
+  
+  test "adding a guest member to multiple projects works" do
+    login_as_organization_admin
+    # with nil
+    post :add_guest, { :projects => { }, :email => "kausten@lost.com", :organization => organizations(:widmore_corporation) }
+    assert_response :internal_server_error
+    # with more than one project
+    post :add_guest, { :projects => { "#{projects(:find_the_island).id}" => projects(:find_the_island).id, "#{projects(:fake_plaincrash).id}" => projects(:fake_plaincrash).id,  }, :email => "kausten@lost.com", :organization => organizations(:widmore_corporation).id }
+    assert_response :ok
+    assert projects(:find_the_island).guest_members.include?(members(:kausten))
+    assert projects(:fake_plaincrash).guest_members.include?(members(:kausten))
+  end
+
+  test "removing a guest member from multiple projects works" do
+    login_as_organization_admin
+    post :add_guest, { :projects => { "#{projects(:find_the_island).id}" => projects(:find_the_island).id, "#{projects(:fake_plaincrash).id}" => projects(:fake_plaincrash).id,  }, :email => "kausten@lost.com", :organization => organizations(:widmore_corporation).id }
+    assert projects(:find_the_island).guest_members.include?(members(:kausten))
+    assert projects(:fake_plaincrash).guest_members.include?(members(:kausten))
+    post :remove_guest, { :organization => organizations(:widmore_corporation).id, :member => members(:kausten)}
+    assert_response :ok
+    assert !projects(:find_the_island).guest_members.include?(members(:kausten))
+    assert !projects(:fake_plaincrash).guest_members.include?(members(:kausten))
+  end
   ########################## Permissions tests ##########################
   test "new should be seen by administrator and organization admin" do
     login_as_administrator
@@ -207,39 +230,67 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
   
   test "a system administrator can add a guest member to any project" do
     login_as_administrator
-    post :add_guest, { :id => projects(:do_weird_experiments), :member => members(:dfaraday), :team => teams(:dharma_team) }
+
+    get :new_guest_team_member, { :organization => organizations(:dharma_initiative) }
+    assert_response :ok
+    post :add_guest, { :projects => { "#{projects(:do_weird_experiments).id}" => projects(:do_weird_experiments).id }, :email => "dfaraday@widmore.com", :organization => organizations(:dharma_initiative).id}
     assert_response :ok
     assert projects(:do_weird_experiments).guest_members.include?(members(:dfaraday))
-    post :remove_guest, { :id => projects(:do_weird_experiments), :member => members(:dfaraday), :team => teams(:dharma_team) }
+    post :remove_guest, { :id => projects(:do_weird_experiments), :member => members(:dfaraday)}
     assert_response :ok
     assert !projects(:do_weird_experiments).guest_members.include?(members(:dfaraday))
-    post :add_guest, { :id => projects(:find_the_island), :member => members(:kausten), :team => teams(:widmore_team) }
+
+    get :new_guest_team_member, { :organization => organizations(:widmore_corporation) }
+    assert_response :ok
+    post :add_guest, { :projects => { "#{projects(:find_the_island).id}" => projects(:find_the_island).id }, :email => "kausten@lost.com", :organization => organizations(:widmore_corporation).id }
     assert_response :ok
     assert projects(:find_the_island).guest_members.include?(members(:kausten))
-    post :remove_guest, { :id => projects(:find_the_island), :member => members(:kausten), :team => teams(:widmore_team) }
+    post :remove_guest, { :id => projects(:find_the_island), :member => members(:kausten)}
     assert_response :ok
     assert !projects(:find_the_island).guest_members.include?(members(:kausten))
   end
 
   test "an organization administrator can add a guest member to projects within its organization" do
     login_as_organization_admin
-    post :add_guest, { :id => projects(:find_the_island), :member => members(:kausten), :team => teams(:widmore_team) }
+    get :new_guest_team_member, { :organization => organizations(:widmore_corporation) }
+    assert_response :ok
+    post :add_guest, { :projects => { "#{projects(:find_the_island).id}" => projects(:find_the_island).id }, :email => "kausten@lost.com", :organization => organizations(:widmore_corporation).id }
     assert_response :ok
     assert projects(:find_the_island).guest_members.include?(members(:kausten))
-    post :remove_guest, { :id => projects(:find_the_island), :member => members(:kausten), :team => teams(:widmore_team) }
+    post :remove_guest, { :id => projects(:find_the_island), :member => members(:kausten) }
     assert_response :ok
     assert !projects(:find_the_island).guest_members.include?(members(:kausten))
-    post :add_guest, { :id => projects(:do_weird_experiments), :member => members(:dfaraday), :team => teams(:dharma_team) }
+    get :new_guest_team_member, { :organization => organizations(:dharma_initiative) }
+    assert_response 302
+    post :add_guest, { :projects => { "#{projects(:do_weird_experiments).id}" => projects(:do_weird_experiments).id }, :email => "dfaraday@widmore.com", :organization => organizations(:dharma_initiative).id}
     assert_response 302
     assert !projects(:do_weird_experiments).guest_members.include?(members(:dfaraday))
-    post :remove_guest, { :id => projects(:do_weird_experiments), :member => members(:dfaraday), :team => teams(:dharma_team) }
+    post :add_guest, { :projects => { "#{projects(:do_weird_experiments).id}" => projects(:do_weird_experiments).id }, :email => "dfaraday@widmore.com", :organization => organizations(:widmore_corporation).id}
+    assert_response 302
+    assert !projects(:do_weird_experiments).guest_members.include?(members(:dfaraday))
+    post :remove_guest, { :id => projects(:do_weird_experiments), :member => members(:dfaraday) }
+    assert_response 302
+  end
+  
+  test "a normal user can't add guest members" do
+    login_as_normal_user
+    get :new_guest_team_member, { :organization => organizations(:widmore_corporation) }
+    assert_response 302
+    post :add_guest, { :projects => { "#{projects(:find_the_island).id}" => projects(:find_the_island).id }, :email => "kausten@lost.com" , :organization => organizations(:widmore_corporation).id}
+    assert_response 302
+    assert !projects(:find_the_island).guest_members.include?(members(:kausten))
+    post :remove_guest, { :id => projects(:do_weird_experiments), :member => members(:kausten) }
+    assert_response 302
+    assert !projects(:find_the_island).guest_members.include?(members(:kausten))
+
+    get :new_guest_team_member, { :organization => organizations(:dharma_initiative) }
+    assert_response 302
+    post :add_guest, { :projects => { "#{projects(:do_weird_experiments).id}" => projects(:do_weird_experiments).id }, :email => "dfaraday@widmore.com", :organization => organizations(:dharma_initiative).id}
+    assert_response 302
+    assert !projects(:do_weird_experiments).guest_members.include?(members(:dfaraday))
+    post :remove_guest, { :id => projects(:do_weird_experiments), :member => members(:dfaraday) }
     assert_response 302
     assert !projects(:do_weird_experiments).guest_members.include?(members(:dfaraday))
   end
-  # 
-  # test "a normal user can't add a guest members" do
-  #   login_as_organization_admin
-  #   post :add_guest { }
-  # end
 
 end
