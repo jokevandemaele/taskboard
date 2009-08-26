@@ -101,21 +101,53 @@ class Admin::ProjectsController < ApplicationController
   end
   
   def add_guest
-    guest_membership = GuestTeamMembership.new(:project => params[:id], :member => params[:member], :team => params[:team])
-    if guest_membership.save
-      render :inline => "", :status => :ok
-    else
-      p guest_membership.errors
-      render :inline => "", :status => :internal_server_error
+    @member = Member.find_by_email(params[:email])
+    @projects = params[:projects].to_a
+    @error = false
+
+    @projects.each do |project| 
+      if !@error 
+          @project = Project.find(project[0])
+          @guest_team_member = GuestTeamMembership.new(:project => @project, :member => @member)
+          @error = true if !@guest_team_member.save
+      end
     end
+    if @projects.empty?
+      @guest_team_member = GuestTeamMembership.new(:project => nil, :member => @member)
+      @guest_team_member.save
+      @error = true 
+    end
+    render :partial => 'guest_team_member_form', :object => @guest_team_member, :locals => { :no_refresh => true, :organization => @organization = Organization.find(params[:organization]), :selected_projects => @projects }, :status => :internal_server_error if @error
+    render :inline => "<script>location.reload(true);</script>", :status => :ok if !@error 
   end
 
   def remove_guest
-    guest_membership = GuestTeamMembership.first(:conditions => ['project_id = ? AND member_id = ? AND team_id = ?', params[:id], params[:member], params[:team] ])
-    if guest_membership.destroy
-      render :inline => "", :status => :ok
-    else
-      render :inline => "", :status => :internal_server_error
+    if params[:id]
+      @guest_memberships = GuestTeamMembership.all(:conditions => ['project_id = ? AND member_id = ?', params[:id], params[:member]])
     end
+    if params[:organization] && !params[:id]
+      @guest_memberships = []
+      Organization.first(params[:organization]).projects.each do |project|
+        @membership = GuestTeamMembership.first(:conditions => ['project_id = ? AND member_id = ?', project.id, params[:member]])
+        @guest_memberships << @membership if @membership
+      end
+    end
+
+    @error = false
+    @guest_memberships.each do |guest|
+      if !@error && !guest.destroy
+        render :inline => "", :status => :internal_server_error if !@error
+        @error = true
+      end
+    end
+    render :inline => "", :status => :ok
+  end
+  
+  def new_guest_team_member
+    @guest_team_member = GuestTeamMembership.new
+	  @organization = Organization.find(params[:organization])
+    render :partial => 'guest_team_member_form', :object => @guest_team_member, :locals => { 
+    	  :organization => @organization, 
+    	}, :status => :ok
   end
 end

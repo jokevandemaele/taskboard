@@ -35,7 +35,20 @@ current_member_admins_parent = (element_class == 'member') ? current_member.admi
 		                   :object => element.id 
 		                 },
 		                 :confirm => 'Are you sure?',
-		                 :success => "Effect.Puff($('#{parent_class}-#{parent.id}-#{element_class}-#{element.id}'));" if (element_class == 'member') 
+		                 :success => "Effect.Puff($('#{parent_class}-#{parent.id}-#{element_class}-#{element.id}'));" if (element_class == 'member') && !parent.guest_members.include?(element) 
+		-%>
+		<%= # Remove for guest member
+			link_to_remote image_tag("admin/admin-div-element-remove.png", :alt => "Remove Guest Member from all projects", 
+		                  :class => "admin-div-element-actions-remove", :title => "Remove Guest Member from all projects"
+		                 ),
+		                 :url => { 
+							:controller => "admin/projects", 
+							:action => "remove_guest",
+							:member => element.id, 
+							:organization => parent.id
+		                 },
+		                 :confirm => 'Are you sure?',
+		                 :success => "Effect.Puff($('#{parent_class}-#{parent.id}-#{element_class}-#{element.id}'));" if (element_class == 'member') && parent.guest_members.include?(element) 
 		-%>
 		<%= # Edit
 			link_to_remote image_tag("admin/admin-div-element-edit.png", :alt => "Edit",
@@ -44,17 +57,27 @@ current_member_admins_parent = (element_class == 'member') ? current_member.admi
 	                :controller => "admin/#{element_class}s", 
 	                :action => :edit, 
 	                :id => element.id
-	              }, :method => :get, :update => "dummy-for-actions"
+	              }, :method => :get, :update => "dummy-for-actions" if !parent.guest_members.include?(element) 
 		
 		-%>
+		<!-- <%= # Edit guest team member
+			link_to_remote image_tag("admin/admin-div-element-edit.png", :alt => "Edit",
+	                :class => "admin-div-element-actions-edit", :title => "Edit Guest Member Projects"),
+	              :url => { 
+	                :controller => "admin/projects", 
+	                :action => :edit_guest_team_member,
+	                :id => element.id,
+					:organization => parent.id
+	              }, :method => :get, :update => "dummy-for-actions" if parent.guest_members.include?(element) 
+		
+		-%> -->
 		<%= # Team Members Edit
 			link_to image_tag("admin/admin-div-element-team-members.png", :alt => "Edit Team Members",
 	                    	:class => "admin-div-element-actions-team-members", :title => "Edit Team Members"),
 	            admin_team_url(element.id) if (element_class == 'team') 
 		-%>
-
 		<%= # Admin info
-			show_admin_info_for element, parent if element_class == 'member'
+			show_admin_info_for element, parent if element_class == 'member' && !parent.guest_members.include?(element) 
 		-%>
 	<% end -%>
 	<% # Write element name

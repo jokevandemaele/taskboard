@@ -63,5 +63,14 @@
 	<div style="clear: both;"></div>
 </div>
 
+<div id="admin-div-organization-guest_team_members-<%= organization.id -%>" class="admin-div-organization-teams">
+	<%= render :partial => "admin_div_section", :locals => {:element => GuestTeamMembership, :parent => organization, :organization => organization } -%>
+
+	<% organization.guest_members.each do |guest| -%>
+		<%= render :partial => "element", :locals => {:element => guest, :parent => organization} -%>
+	<% end -%>
+	<div style="clear: both;"></div>
+</div>
+
 <%= admin_close_div(700) -%>
 </div>

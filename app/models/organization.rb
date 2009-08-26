@@ -18,4 +18,11 @@ class Organization < ActiveRecord::Base
     return admins + org_admins + normal
   end
 
+  def guest_members
+    guests = []
+    self.projects.each do |project|
+      project.guest_members.each { |member| guests << member if !(guests.include?(member))}
+    end
+    return guests
+  end
 end
