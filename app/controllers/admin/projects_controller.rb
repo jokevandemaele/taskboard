@@ -117,7 +117,38 @@ class Admin::ProjectsController < ApplicationController
       @guest_team_member.save
       @error = true 
     end
-    render :partial => 'guest_team_member_form', :object => @guest_team_member, :locals => { :no_refresh => true, :organization => @organization = Organization.find(params[:organization]), :selected_projects => @projects }, :status => :internal_server_error if @error
+    render :partial => 'guest_team_member_form', :object => @guest_team_member, :locals => { :no_refresh => true, :edit => false, :organization => @organization = Organization.find(params[:organization]), :selected_projects => @projects }, :status => :internal_server_error if @error
+    render :inline => "<script>location.reload(true);</script>", :status => :ok if !@error 
+  end
+  
+  def update_guest
+    @guest_member = Member.find(params[:member])
+    @projects = params[:projects].to_a
+    @error = false
+    @guest_member_projects = []
+    @organization = Organization.find(params[:organization])
+    @organization.projects.each do |project|
+      @guest_member_projects << project if project.guest_members.include?(@guest_member)
+    end
+    @projects.each do |project| 
+      if !@error 
+          @project = Project.find(project[0])
+          if !@project.guest_members.include?(@guest_member)
+            @guest_team_member = GuestTeamMembership.new(:project => @project, :member => @guest_member) 
+            @error = true if !@guest_team_member.save
+          end
+      end
+    end
+    @guest_member_projects.each do |project|
+      @array = [ "#{project.id}", "#{project.id}" ]
+      if !@projects.include?(@array)
+        @guest_memberhsip = GuestTeamMembership.first(:conditions => ["member_id = ? AND project_id = ?", @guest_member.id, project.id])
+        if !@guest_memberhsip.destroy
+          @error = true
+        end
+      end
+    end
+    render :partial => 'guest_team_member_form', :object => @guest_team_member, :locals => { :no_refresh => true, :edit => false, :organization => @organization = Organization.find(params[:organization]), :selected_projects => @projects }, :status => :internal_server_error if @error
     render :inline => "<script>location.reload(true);</script>", :status => :ok if !@error 
   end
 
@@ -147,7 +178,23 @@ class Admin::ProjectsController < ApplicationController
     @guest_team_member = GuestTeamMembership.new
 	  @organization = Organization.find(params[:organization])
     render :partial => 'guest_team_member_form', :object => @guest_team_member, :locals => { 
+        :edit => false,
     	  :organization => @organization, 
     	}, :status => :ok
   end
+
+  def edit_guest_team_member
+	  @organization = Organization.find(params[:organization])
+    @guest_member = Member.find(params[:member])
+    @guest_team_member = GuestTeamMembership.new(:member => @guest_member)
+    @projects = []
+    @organization.projects.each { |project| @projects << ["#{project.id}", "#{project.id}"]  if project.guest_members.include?(@guest_member)}
+    
+    render :partial => 'guest_team_member_form', :object => @guest_team_member, :locals => { 
+        :edit => true,
+    	  :organization => @organization, 
+    	  :selected_projects => @projects
+    	}, :status => :ok
+  end
+
 end

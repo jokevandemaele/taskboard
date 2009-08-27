@@ -60,17 +60,17 @@ current_member_admins_parent = (element_class == 'member') ? current_member.admi
 	              }, :method => :get, :update => "dummy-for-actions" if !parent.guest_members.include?(element) 
 		
 		-%>
-		<!-- <%= # Edit guest team member
+ 		<%= # Edit guest team member
 			link_to_remote image_tag("admin/admin-div-element-edit.png", :alt => "Edit",
 	                :class => "admin-div-element-actions-edit", :title => "Edit Guest Member Projects"),
 	              :url => { 
 	                :controller => "admin/projects", 
 	                :action => :edit_guest_team_member,
-	                :id => element.id,
+	                :member => element.id,
 					:organization => parent.id
-	              }, :method => :get, :update => "dummy-for-actions" if parent.guest_members.include?(element) 
+	              }, :method => :post, :update => "dummy-for-actions" if parent.guest_members.include?(element) 
 		
-		-%> -->
+		-%>
 		<%= # Team Members Edit
 			link_to image_tag("admin/admin-div-element-team-members.png", :alt => "Edit Team Members",
 	                    	:class => "admin-div-element-actions-team-members", :title => "Edit Team Members"),

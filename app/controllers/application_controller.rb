@@ -92,7 +92,7 @@ class ApplicationController < ActionController::Base
       return member.admins?(Organization.find(request.params[:organization])) if (request.params[:organization])
       return member.admins_any_organization?
     end
-    if path['action'] == 'new_guest_team_member' || path['action'] == 'add_guest'
+    if path['action'] == 'new_guest_team_member' || path['action'] == 'add_guest' || path['action'] == 'update_guest'
       proj = params[:projects].to_a
       if !proj.empty?
         proj.each { |project| return false if !member.admins?(Project.find(project[0]).organization) }
@@ -100,7 +100,7 @@ class ApplicationController < ActionController::Base
       return member.admins?(Organization.find(request.params[:organization]))
     end
 
-    if path['action'] == 'remove_guest'
+    if path['action'] == 'remove_guest' || path['action'] == 'edit_guest_team_member'
       return member.admins?(Project.find(request.params[:id]).organization) if request.params[:id]
       return member.admins?(Organization.find(request.params[:organization])) if request.params[:organization]
     end

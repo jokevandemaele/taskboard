@@ -20,4 +20,10 @@ class GuestTeamMembershipTest < ActiveSupport::TestCase
     team_membership = GuestTeamMembership.new(:member => members(:dfaraday), :project => projects(:do_weird_experiments))
     assert !team_membership.save
   end
+
+  test "do not allow to save a guest member if it already belongs to the organization" do 
+    team_membership = GuestTeamMembership.new(:member => members(:dfaraday), :project => projects(:find_the_island))
+    assert !team_membership.save
+  end
+
 end

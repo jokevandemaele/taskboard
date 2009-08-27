@@ -1,3 +1,6 @@
+<%
+action = (edit) ? :update_guest : :add_guest
+%>
 <% if !defined?(no_refresh) -%>
 <script>
 	Effect.Appear($('dialog-background-fade'), { duration: 0.2, to: 0.9 });
@@ -8,16 +11,22 @@
 	<div style="clear: both"></div>
 	<%= admin_open_div 765 -%>
 		<div class="admin-div-guest-member-top">
-		<% remote_form_for @guest_team_member, :url => { :controller => 'admin/projects', :action => :add_guest }, :update => "dummy-for-actions" do |f| -%>
+		<% remote_form_for @guest_team_member, :url => { :controller => 'admin/projects', :action => action }, :update => "dummy-for-actions" do |f| -%>
 			<%= hidden_field_tag "organization", @organization.id -%>
-			
+			<% if edit %>
+			<%= hidden_field_tag "member", @guest_team_member.member.id -%>
+			<div class="admin-div-section" style="margin-bottom: 10px;">
+				<%= image_tag "admin/admin-div-actions-members.png", :alt => "Color", :style => "position: relative; left: 10px; top: 2px; width: 50px;" -%>
+				<h2 style="position: relative; top: 0px; margin-left: 20px;"><%= @guest_team_member.member.name -%> </h2>
+			</div>
+			<% else %>
 			<div class="admin-div-section" style="margin-bottom: 10px;">
 				<%= image_tag "admin/admin-div-actions-email.png", :alt => "Color", :style => "position: relative; left: 10px; top: 2px; width: 50px;" -%>
 				<h2 style="position: relative; top: 0px; margin-left: 20px;">E-Mail</h2>
-				<p style="color: #04a; font-size: 10px; margin: 0; position:relative; top: -18px; left: 70px;">(This mail will be used to send taskboard's notifications and invites)</p>
-				<%= text_field_tag "email", (@guest_team_member.member) ? @guest_team_member.member.email : "Insert E-Mail Here", :style => "float:right; position: relative; top: -55px; right: 10px; background: url('/images/admin/admin-div-field.png') no-repeat top left; border: none; width: 168px; height: 26px; padding: 5px;" %>
+				<p style="color: #04a; font-size: 10px; margin: 0; position:relative; top: -18px; left: 70px;">(This should be a valid member e-mail)</p>
+				<%= text_field_tag "email", (@guest_team_member.member) ? @guest_team_member.member.email : "Insert E-Mail Here", :style => "float:right; position: relative; top: -55px; right: 10px; background: url('/images/admin/admin-div-field.png') no-repeat top left; border: none; width: 168px; height: 26px; padding: 5px;", :onClick => "if(this.value == 'Insert E-Mail Here' ) this.clear();" %>
 			</div>
-
+			<% end %>
 			<div class="admin-div-section" style="height: 70px;">
 				<%= image_tag 'admin/admin-div-actions-projects.png', :alt => 'Project', :style => 'position: relative; top: 10px; margin-left: 10px;' -%>
 				<h2 style="position: relative; top: 10; margin-left: 10px;">Projects:</h2>
@@ -53,6 +62,7 @@
 	centerTo($('form-add-guestteammembership'),$('dialog-background-fade'));
 	Effect.Appear($('form-add-guestteammembership'), { afterFinish : function() { Form.Element.select($('email'))}});	
 	<% if @projects %>
+		<% logger.error("Projects:"+ @projects.inspect) %>
 		<% @projects.each do |project| %>
 			$('projects_<%= project[1] %>').click();
 		<% end %>
