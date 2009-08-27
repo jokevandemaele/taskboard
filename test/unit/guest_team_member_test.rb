@@ -26,4 +26,9 @@ class GuestTeamMembershipTest < ActiveSupport::TestCase
     assert !team_membership.save
   end
 
+  test "hash to array without index" do
+    hash = HashWithIndifferentAccess.new("0" => 0, "1" => 1, "2" => 2)
+    array = hash.to_a_with_no_index
+    assert_equal [0,1,2], array
+  end
 end

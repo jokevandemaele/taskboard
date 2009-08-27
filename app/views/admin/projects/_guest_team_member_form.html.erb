@@ -64,7 +64,7 @@ action = (edit) ? :update_guest : :add_guest
 	<% if @projects %>
 		<% logger.error("Projects:"+ @projects.inspect) %>
 		<% @projects.each do |project| %>
-			$('projects_<%= project[1] %>').click();
+			$('projects_<%= project %>').click();
 		<% end %>
 	<% end %>
 </script>

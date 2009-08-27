@@ -102,12 +102,11 @@ class Admin::ProjectsController < ApplicationController
   
   def add_guest
     @member = Member.find_by_email(params[:email])
-    @projects = params[:projects].to_a
+    @projects = params[:projects].to_a_with_no_index
     @error = false
-
     @projects.each do |project| 
       if !@error 
-          @project = Project.find(project[0])
+          @project = Project.find(project)
           @guest_team_member = GuestTeamMembership.new(:project => @project, :member => @member)
           @error = true if !@guest_team_member.save
       end
@@ -123,29 +122,28 @@ class Admin::ProjectsController < ApplicationController
   
   def update_guest
     @guest_member = Member.find(params[:member])
-    @projects = params[:projects].to_a
+    @projects = params[:projects].to_a_with_no_index
     @error = false
     @guest_member_projects = []
     @organization = Organization.find(params[:organization])
     @organization.projects.each do |project|
       @guest_member_projects << project if project.guest_members.include?(@guest_member)
     end
-    @projects.each do |project| 
-      if !@error 
-          @project = Project.find(project[0])
-          if !@project.guest_members.include?(@guest_member)
-            @guest_team_member = GuestTeamMembership.new(:project => @project, :member => @guest_member) 
-            @error = true if !@guest_team_member.save
-          end
-      end
-    end
     @guest_member_projects.each do |project|
-      @array = [ "#{project.id}", "#{project.id}" ]
-      if !@projects.include?(@array)
+      if !@projects.include?(project.id)
         @guest_memberhsip = GuestTeamMembership.first(:conditions => ["member_id = ? AND project_id = ?", @guest_member.id, project.id])
         if !@guest_memberhsip.destroy
           @error = true
         end
+      end
+    end
+    @projects.each do |project| 
+      if !@error 
+          @project = Project.find(project)
+          if !@project.guest_members.include?(@guest_member)
+            @guest_team_member = GuestTeamMembership.new(:project => @project, :member => @guest_member) 
+            @error = true if !@guest_team_member.save
+          end
       end
     end
     render :partial => 'guest_team_member_form', :object => @guest_team_member, :locals => { :no_refresh => true, :edit => false, :organization => @organization = Organization.find(params[:organization]), :selected_projects => @projects }, :status => :internal_server_error if @error
@@ -188,7 +186,7 @@ class Admin::ProjectsController < ApplicationController
     @guest_member = Member.find(params[:member])
     @guest_team_member = GuestTeamMembership.new(:member => @guest_member)
     @projects = []
-    @organization.projects.each { |project| @projects << ["#{project.id}", "#{project.id}"]  if project.guest_members.include?(@guest_member)}
+    @organization.projects.each { |project| @projects << project.id if project.guest_members.include?(@guest_member)}
     
     render :partial => 'guest_team_member_form', :object => @guest_team_member, :locals => { 
         :edit => true,
