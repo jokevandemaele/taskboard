@@ -102,7 +102,7 @@ class Admin::ProjectsController < ApplicationController
   
   def add_guest
     @member = Member.find_by_email(params[:email])
-    @projects = params[:projects].to_a_with_no_index
+    @projects = (params[:projects]) ? params[:projects].to_a_with_no_index : []
     @error = false
     @projects.each do |project| 
       if !@error 
@@ -122,7 +122,7 @@ class Admin::ProjectsController < ApplicationController
   
   def update_guest
     @guest_member = Member.find(params[:member])
-    @projects = params[:projects].to_a_with_no_index
+    @projects = (params[:projects]) ? params[:projects].to_a_with_no_index : []
     @error = false
     @guest_member_projects = []
     @organization = Organization.find(params[:organization])

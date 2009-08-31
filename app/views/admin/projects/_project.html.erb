@@ -64,6 +64,17 @@
 
 <%= render :partial => "admin_team_section", :locals => {:project => project }, :collection => project.teams, :as => :team -%>
 
+<div id="admin-div-project-guest_team_members-<%= project.id -%>" class="admin-div-organization-teams">
+	<div class="admin-div-section">
+		<%= image_tag "admin/admin-div-actions-members.png", :alt => "Guest Members", :style => "position: relative; top: 10px" -%>
+		<h2>Guest Members</h2>
+	</div>
+	<% project.guest_members.each do |guest| -%>
+		<%= render :partial => "element", :locals => {:element => guest, :parent => project} -%>
+	<% end -%>
+	<div style="clear: both;"></div>
+</div>
+
 <!--<div id="admin-div-project-burndown-<%= project.id -%>" class="admin-div-burndown-members" style="margin:0;">
 	<div class="admin-div-section">
 		<%= image_tag "admin/admin-div-actions-burndown-chart.png", :alt => "Burndown Chart", :class => "admin-div-section-img" -%>

@@ -8,7 +8,8 @@ class Member < ActiveRecord::Base
   has_many :nametags, :dependent => :destroy
   belongs_to :last_project, :class_name => "Project"
   has_many :guest_team_memberships
-
+  has_many :guest_projects, :through => :guest_team_memberships, :source => :project
+  
   #Validations
   validates_uniqueness_of :username
   validates_length_of :username, :within => 3..40
@@ -50,7 +51,8 @@ class Member < ActiveRecord::Base
 
   def projects
     projects = []
-    teams.each { |team| projects.concat team.projects}
+    self.teams.each { |team| projects += team.projects}
+    projects += self.guest_projects
     return projects
   end
   

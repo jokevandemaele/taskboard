@@ -141,4 +141,12 @@ class MemberTest < ActiveSupport::TestCase
     member.last_project = projects(:find_the_island)
     assert_equal member.last_project, projects(:find_the_island)
   end
+  
+  test "projects show all the projects where the user is a member or guest member" do
+    team_membership = GuestTeamMembership.new(:member => members(:dfaraday), :project => projects(:do_weird_experiments), :team => teams(:dharma_team))
+    assert team_membership.save
+    assert teams(:widmore_team).members << members(:dfaraday)
+    assert_equal [projects(:do_weird_experiments)], members(:dfaraday).guest_projects
+    assert_equal teams(:widmore_team).projects + [projects(:do_weird_experiments)], members(:dfaraday).projects
+  end
 end

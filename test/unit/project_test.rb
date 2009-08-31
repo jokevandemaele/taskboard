@@ -12,5 +12,9 @@ class ProjectTest < ActiveSupport::TestCase
     assert team_membership.save
     assert projects(:do_weird_experiments).guest_members.include?(members(:dfaraday))
   end
-  
+  test "members should return the team members + the guest members" do
+    team_membership = GuestTeamMembership.new(:member => members(:dfaraday), :project => projects(:do_weird_experiments), :team => teams(:dharma_team))
+    assert team_membership.save
+    assert_equal projects(:do_weird_experiments).teams.first.members + projects(:do_weird_experiments).guest_members, projects(:do_weird_experiments).members
+  end
 end

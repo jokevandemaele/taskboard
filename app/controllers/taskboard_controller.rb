@@ -10,15 +10,17 @@ class TaskboardController < ApplicationController
     @member = @current_member
     @member.last_project = @project
     @member.save
-
+    
     @member_team = @project.team_including(@member)
     @color = @member_team.color
     @projects = [@project]
+    @members = @project.members
   end
 
   def team
       @view = :team
       @member_team = Team.find(params[:id])
+      @members = @member_team.members
       @projects = @member_team.projects
       @stories_by_priority = []
       @projects.each do |project|

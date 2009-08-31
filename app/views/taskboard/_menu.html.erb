@@ -36,6 +36,7 @@
 		:id => 'taskboard_menu_logout', 
 		:title => "Log out"), :controller => 'admin/members', :action => :logout
 	-%>
+	<% if (@view == :project && (@project.teams.first.projects.size > 1 && !@project.guest_members.include?(@current_member))) || @view == :team-%>
 	<div id="menu_views">
 		<% team_image = image_tag 'admin/admin-div-actions-teams.png' 
 		   team_selected = (@view == :team)
@@ -52,6 +53,7 @@
 			:class => team_selected
 		-%><br />		
 	</div>
+	<% end %>
 </div>
 
 <div id="menu_expand">

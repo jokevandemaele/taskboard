@@ -29,6 +29,7 @@ class Project < ActiveRecord::Base
     teams.each do |team| 
       team.members.each { |member| members << member if !members.include?(member)}
     end
+    members += guest_members
     return members
   end
 
