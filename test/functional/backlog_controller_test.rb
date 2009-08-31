@@ -13,7 +13,7 @@ class BacklogControllerTest < ActionController::TestCase
       end
     end
 
-    get :show, :id => projects(:fake_plaincrash)
+    get :show, :id => projects(:fake_planecrash)
     assert_response :ok
     members(:cwidmore).reload
     members(:cwidmore).last_project
@@ -21,7 +21,7 @@ class BacklogControllerTest < ActionController::TestCase
     assert_response :ok
     assert_select "div#menu_views" do |menu_views|
       assert_select "a" do |links|
-        assert_equal "/backlog/#{projects(:fake_plaincrash).id}", links[0].attributes['href'] 
+        assert_equal "/backlog/#{projects(:fake_planecrash).id}", links[0].attributes['href'] 
       end
     end
 
@@ -31,7 +31,7 @@ class BacklogControllerTest < ActionController::TestCase
   test "system administrator should be able to access any backlog" do
     login_as_administrator
     # A taskboard from a project in an organization the admin belongs and he's on a team
-    get :show, :id => projects(:fake_plaincrash)
+    get :show, :id => projects(:fake_planecrash)
     assert_response :ok
     get :team, :id => teams(:widmore_team)
     assert_response :ok

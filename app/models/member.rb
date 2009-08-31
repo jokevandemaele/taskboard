@@ -51,7 +51,9 @@ class Member < ActiveRecord::Base
 
   def projects
     projects = []
-    self.teams.each { |team| projects += team.projects}
+    self.teams.each do |team| 
+      team.projects.each {|project| projects << project if !projects.include?(project) }
+    end
     projects += self.guest_projects
     return projects
   end

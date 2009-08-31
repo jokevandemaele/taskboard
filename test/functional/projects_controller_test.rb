@@ -68,21 +68,21 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
     post :add_guest, { :projects => { }, :email => "kausten@lost.com", :organization => organizations(:widmore_corporation) }
     assert_response :internal_server_error
     # with more than one project
-    post :add_guest, { :projects => { "#{projects(:find_the_island).id}" => projects(:find_the_island).id, "#{projects(:fake_plaincrash).id}" => projects(:fake_plaincrash).id,  }, :email => "kausten@lost.com", :organization => organizations(:widmore_corporation).id }
+    post :add_guest, { :projects => { "#{projects(:find_the_island).id}" => projects(:find_the_island).id, "#{projects(:fake_planecrash).id}" => projects(:fake_planecrash).id,  }, :email => "kausten@lost.com", :organization => organizations(:widmore_corporation).id }
     assert_response :ok
     assert projects(:find_the_island).guest_members.include?(members(:kausten))
-    assert projects(:fake_plaincrash).guest_members.include?(members(:kausten))
+    assert projects(:fake_planecrash).guest_members.include?(members(:kausten))
   end
 
   test "removing a guest member from multiple projects works" do
     login_as_organization_admin
-    post :add_guest, { :projects => { "#{projects(:find_the_island).id}" => projects(:find_the_island).id, "#{projects(:fake_plaincrash).id}" => projects(:fake_plaincrash).id,  }, :email => "kausten@lost.com", :organization => organizations(:widmore_corporation).id }
+    post :add_guest, { :projects => { "#{projects(:find_the_island).id}" => projects(:find_the_island).id, "#{projects(:fake_planecrash).id}" => projects(:fake_planecrash).id,  }, :email => "kausten@lost.com", :organization => organizations(:widmore_corporation).id }
     assert projects(:find_the_island).guest_members.include?(members(:kausten))
-    assert projects(:fake_plaincrash).guest_members.include?(members(:kausten))
+    assert projects(:fake_planecrash).guest_members.include?(members(:kausten))
     post :remove_guest, { :organization => organizations(:widmore_corporation).id, :member => members(:kausten)}
     assert_response :ok
     assert !projects(:find_the_island).guest_members.include?(members(:kausten))
-    assert !projects(:fake_plaincrash).guest_members.include?(members(:kausten))
+    assert !projects(:fake_planecrash).guest_members.include?(members(:kausten))
   end
   ########################## Permissions tests ##########################
   test "new should be seen by administrator and organization admin" do

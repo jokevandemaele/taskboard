@@ -17,6 +17,22 @@ class Organization < ActiveRecord::Base
     logger.error(" ----------------------------------------- "+ (admins + org_admins + normal).inspect)
     return admins + org_admins + normal
   end
+  
+  def teams_ordered_for_member(member)
+    teams = self.teams
+    teams_ordered_for_member = []
+    teams.each { |team| teams_ordered_for_member << team if team.members.include?(member) }
+    teams.each { |team| teams_ordered_for_member << team if !team.members.include?(member) }
+    return teams_ordered_for_member
+  end
+
+  def projects_ordered_for_member(member)
+    projects = self.projects
+    projects_ordered_for_member = []
+    projects.each { |project| projects_ordered_for_member << project if project.members.include?(member) }
+    projects.each { |project| projects_ordered_for_member << project if !project.members.include?(member) }
+    return projects_ordered_for_member
+  end
 
   def guest_members
     guests = []

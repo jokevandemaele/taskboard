@@ -40,7 +40,7 @@
 
 <div id="admin-div-organization-projects-<%= organization.id -%>" class="admin-div-organization-projects">
 	<%= render :partial => "admin_div_section", :locals => {:element => Project, :parent => organization} -%>
-	<% organization.projects.each do |project| -%>
+	<% organization.projects_ordered_for_member(@current_member).each do |project| -%>
 		<%= render :partial => "element", :locals => {:element => project, :parent => organization} -%>
 	<% end -%>
 	<div style="clear: both;"></div>
@@ -57,11 +57,12 @@
 <div id="admin-div-organization-teams-<%= organization.id -%>" class="admin-div-organization-teams">
 	<%= render :partial => "admin_div_section", :locals => {:element => Team, :parent => organization} -%>
 
-	<% organization.teams.each do |team| -%>
+	<% organization.teams_ordered_for_member(@current_member).each do |team| -%>
 		<%= render :partial => "element", :locals => {:element => team, :parent => organization} -%>
 	<% end -%>
 	<div style="clear: both;"></div>
 </div>
+<% if !organization.guest_members.empty? || @current_member.admins?(organization)%>
 <div id="admin-div-organization-guest_team_members-<%= organization.id -%>" class="admin-div-organization-teams">
 	<%= render :partial => "admin_div_section", :locals => {:element => GuestTeamMembership, :parent => organization, :organization => organization } -%>
 
@@ -70,5 +71,6 @@
 	<% end -%>
 	<div style="clear: both;"></div>
 </div>
+<% end %>
 <%= admin_close_div(700) -%>
 </div>
