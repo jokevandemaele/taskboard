@@ -66,9 +66,11 @@ p { color: #002255;}
 .admin-div-element-actions div { width: 214px; height: 33px; }
 
 .admin-div-element p, .admin-div-element-actions p { float:left; margin: 0; color: #002255; padding: 0; position:relative; top: 8px; }
-.not-mine a { color: #aaa !important;;}
-.not-mine a:hover { color: #aaa !important;;}
+.not-mine a { color: #aaa !important;}
+.not-mine a:hover { color: #aaa !important;}
 .not-mine a:visited { color: #aaa !important;}
+.not-mine { color: #aaa !important;}
+.admin-div-element-core a {color: #002255;}
 .admin-div-element-core a:visited {color: #002255;}
 .admin-div-element-core p.not-mine a:visited {color: #aaa;}
 .admin-div-element p { text-align: center;}
