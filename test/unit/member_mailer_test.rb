@@ -20,4 +20,13 @@ class MemberMailerTest < ActionMailer::TestCase
     assert !ActionMailer::Base.deliveries.empty? 
   end
 
+  test "add_guest_to_projects" do
+    @response = MemberMailer.deliver_add_guest_to_projects(members(:dfaraday), 'Charles Widmore', [projects(:escape_from_the_island).id, projects(:come_back_to_the_island).id])
+    assert_equal 'You have been added as a guest member', @response.subject
+    assert_equal members(:dfaraday).email, @response.to[0]
+    assert_match 'Charles Widmore', @response.body
+    assert_match projects(:escape_from_the_island).name, @response.body
+    assert_match projects(:come_back_to_the_island).name, @response.body
+    assert !ActionMailer::Base.deliveries.empty? 
+  end
 end

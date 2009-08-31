@@ -1,0 +1,9 @@
+Hello, <%=h @member.name -%>! <%=h @added_by -%> added you as a guest member to the following projects:
+
+<% @projects.each do |project| %>
+  * <%=h project -%>
+<% end %>
+
+Thank you for using the Agilar Taskboard!
+
+      the Agilar Taskboard Team
