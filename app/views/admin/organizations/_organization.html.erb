@@ -62,7 +62,6 @@
 	<% end -%>
 	<div style="clear: both;"></div>
 </div>
-<% if !organization.guest_members.empty?%>
 <div id="admin-div-organization-guest_team_members-<%= organization.id -%>" class="admin-div-organization-teams">
 	<%= render :partial => "admin_div_section", :locals => {:element => GuestTeamMembership, :parent => organization, :organization => organization } -%>
 
@@ -71,6 +70,5 @@
 	<% end -%>
 	<div style="clear: both;"></div>
 </div>
-<% end %>
 <%= admin_close_div(700) -%>
 </div>
