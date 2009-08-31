@@ -21,6 +21,7 @@ class MemberMailer < ActionMailer::Base
   def add_guest_to_projects(member, added_by, projects, sent_at = Time.now)
     subject     'You have been added as a guest member'
     recipients  member.email
+    from       'Agilar Taskboard Team <no-reply@agilar.org>'
     sent_on     sent_at
 
     project_names = []
