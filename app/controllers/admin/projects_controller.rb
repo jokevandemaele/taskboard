@@ -116,7 +116,7 @@ class Admin::ProjectsController < ApplicationController
       @guest_team_member.save
       @error = true 
     end
-    MemberMailer.deliver_add_guest_to_projects(@member, @current_member.name, @projects)
+    MemberMailer.deliver_add_guest_to_projects(@member, @current_member.name, @projects) if !@error
     render :partial => 'guest_team_member_form', :object => @guest_team_member, :locals => { :no_refresh => true, :edit => false, :organization => @organization = Organization.find(params[:organization]), :selected_projects => @projects }, :status => :internal_server_error if @error
     render :inline => "<script>location.reload(true);</script>", :status => :ok if !@error 
   end
