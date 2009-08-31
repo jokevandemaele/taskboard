@@ -14,7 +14,7 @@ class Organization < ActiveRecord::Base
       org_admins << member if !member.admin? && member.admins?(self)
       admins << member if member.admin?
     end
-    
+    logger.error(" ----------------------------------------- "+ (admins + org_admins + normal).inspect)
     return admins + org_admins + normal
   end
 

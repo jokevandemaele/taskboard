@@ -5,11 +5,6 @@ class Admin::OrganizationsController < ApplicationController
 
   def index
     @organizations = (@current_member.admin?) ? Organization.all : @current_member.organizations
-    @current_member.guest_projects.each do |project|
-      if !@organizations.include?(project.organization)
-        @organizations << project.organization
-      end
-    end
   end
 
   def show
