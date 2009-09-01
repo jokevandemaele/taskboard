@@ -12,4 +12,10 @@ class GuestTeamMembership < ActiveRecord::Base
     errors.add_to_base("That member belongs to the organization you're administering, there is no need to add it as a guest") if !project.nil? && project.organization.members.include?(member)
     errors.add_to_base "That member is already a guest member on #{Project.find(project).name}" if GuestTeamMembership.first(:conditions => ["member_id = ? AND project_id = ?", member, project])
   end
+  
+  def self.remove_from_organization(member,organization)
+    organization.projects.each do |project|
+      project.guest_members.delete(member)
+    end
+  end
 end

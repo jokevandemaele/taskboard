@@ -242,7 +242,8 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
     assert_response :ok
     assert !projects(:do_weird_experiments).guest_members.include?(members(:dfaraday))
     post :add_guest, { :projects => { "#{projects(:do_weird_experiments).id}" => projects(:do_weird_experiments).id }, :email => "dfaraday@widmore.com", :organization => organizations(:dharma_initiative).id}
-    post :remove_guest, { :id => projects(:do_weird_experiments), :member => members(:dfaraday)}
+    assert projects(:do_weird_experiments).guest_members.include?(members(:dfaraday))
+    post :remove_guest, { :organization => organizations(:dharma_initiative).id, :member => members(:dfaraday).id}
     assert_response :ok
     assert !projects(:do_weird_experiments).guest_members.include?(members(:dfaraday))
 
@@ -257,7 +258,7 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
     assert !projects(:find_the_island).guest_members.include?(members(:kausten))
     post :add_guest, { :projects => { "#{projects(:find_the_island).id}" => projects(:find_the_island).id }, :email => "kausten@lost.com", :organization => organizations(:widmore_corporation).id }
     assert projects(:find_the_island).guest_members.include?(members(:kausten))
-    post :remove_guest, { :id => projects(:find_the_island), :member => members(:kausten)}
+    post :remove_guest, { :organization => organizations(:widmore_corporation).id, :member => members(:kausten).id}
     assert_response :ok
     assert !projects(:find_the_island).guest_members.include?(members(:kausten))
   end
@@ -275,7 +276,7 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
     assert !projects(:find_the_island).guest_members.include?(members(:kausten))
     post :add_guest, { :projects => { "#{projects(:find_the_island).id}" => projects(:find_the_island).id }, :email => "kausten@lost.com", :organization => organizations(:widmore_corporation).id }
     assert projects(:find_the_island).guest_members.include?(members(:kausten))
-    post :remove_guest, { :id => projects(:find_the_island), :member => members(:kausten) }
+    post :remove_guest, { :organization => organizations(:widmore_corporation).id, :member => members(:kausten).id}
     assert_response :ok
     assert !projects(:find_the_island).guest_members.include?(members(:kausten))
     get :new_guest_team_member, { :organization => organizations(:dharma_initiative) }
@@ -290,7 +291,7 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
     post :add_guest, { :projects => { "#{projects(:do_weird_experiments).id}" => projects(:do_weird_experiments).id }, :email => "dfaraday@widmore.com", :organization => organizations(:widmore_corporation).id}
     assert_response 302
     assert !projects(:do_weird_experiments).guest_members.include?(members(:dfaraday))
-    post :remove_guest, { :id => projects(:do_weird_experiments), :member => members(:dfaraday) }
+    post :remove_guest, { :organization => organizations(:dharma_initiative).id, :member => members(:dfaraday).id}
     assert_response 302
   end
   
@@ -305,7 +306,7 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
     post :add_guest, { :projects => { "#{projects(:find_the_island).id}" => projects(:find_the_island).id }, :email => "kausten@lost.com" , :organization => organizations(:widmore_corporation).id}
     assert_response 302
     assert !projects(:find_the_island).guest_members.include?(members(:kausten))
-    post :remove_guest, { :id => projects(:do_weird_experiments), :member => members(:kausten) }
+    post :remove_guest, { :organization => organizations(:widmore_corporation).id, :member => members(:kausten).id}
     assert_response 302
     assert !projects(:find_the_island).guest_members.include?(members(:kausten))
 
@@ -317,7 +318,7 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
     assert_response 302
     post :update_guest, { :projects => { }, :member => members(:dfaraday).id, :organization => organizations(:dharma_initiative).id}
     assert_response 302
-    post :remove_guest, { :id => projects(:do_weird_experiments), :member => members(:dfaraday) }
+    post :remove_guest, { :organization => organizations(:dharma_initiative).id, :member => members(:dfaraday).id}
     assert_response 302
     assert !projects(:do_weird_experiments).guest_members.include?(members(:dfaraday))
   end

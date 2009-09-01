@@ -17,14 +17,15 @@ class Story < ActiveRecord::Base
   end
 
   def self.last_realid(project_id)
-	story = Story.first(:conditions => ["project_id = ? AND realid != ''", project_id], :order => "realid DESC")
-	if story
-		return story.realid
-	else 
-	project = Project.find(project_id)
-	number = '001'
-	text = Story.get_initials_of(project.name,2)
-	end
+  	story = Story.first(:conditions => ["project_id = ? AND realid != ''", project_id], :order => "realid DESC")
+  	if story
+  		return story.realid
+  	else 
+  	project = Project.find(project_id)
+  	number = '001'
+  	text = Story.get_initials_of(project.name,2)
+  	return text + number
+  	end
   end
 
   def self.get_initials_of(string,limit = 0)
@@ -50,6 +51,34 @@ class Story < ActiveRecord::Base
 	else
 		return initials.upcase
 	end
+  end
+  
+  def stopped?
+    self.status == 'not_started'
+  end
+
+  def started?
+    self.status == 'in_progress'
+  end
+
+  def finished?
+    self.status == 'finished'
+  end
+
+  def start
+    self.status = 'in_progress'
+    return self.save
+  end
+
+  def stop
+    self.status = 'not_started'
+    return self.save
+  end
+
+  def finish
+    self.status = 'finished'
+    self.priority = -1
+    return self.save
   end
 
 end

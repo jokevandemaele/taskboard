@@ -150,24 +150,9 @@ class Admin::ProjectsController < ApplicationController
   end
 
   def remove_guest
-    if params[:id]
-      @guest_memberships = GuestTeamMembership.all(:conditions => ['project_id = ? AND member_id = ?', params[:id], params[:member]])
-    end
-    if params[:organization] && !params[:id]
-      @guest_memberships = []
-      Organization.first(params[:organization]).projects.each do |project|
-        @membership = GuestTeamMembership.first(:conditions => ['project_id = ? AND member_id = ?', project.id, params[:member]])
-        @guest_memberships << @membership if @membership
-      end
-    end
-
-    @error = false
-    @guest_memberships.each do |guest|
-      if !@error && !guest.destroy
-        render :inline => "", :status => :internal_server_error if !@error
-        @error = true
-      end
-    end
+    @member = Member.find(params[:member])
+    @organization = Organization.find(params[:organization])
+    GuestTeamMembership.remove_from_organization(@member, @organization)
     render :inline => "", :status => :ok
   end
   

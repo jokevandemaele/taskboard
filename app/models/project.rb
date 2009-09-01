@@ -9,9 +9,17 @@ class Project < ActiveRecord::Base
   # Validations
   validates_uniqueness_of :name
   
+  #Callbacks
+  after_create :add_default_stories
+  
   # Named Scopes
   # Free projects are projects that don't have an organization assigned
   named_scope :free, :conditions => { :organization_id => 0 }
+  
+  # add_default_stories: this function is called when a new project is created, it adds the sample stories to it
+  def add_default_stories
+    story = Story.create(:project => self, :name => "Sample Story", :priority => 2000, :realid => Story.last_realid(self), :size => 10, :status => "in_progress", :description => "This is a sample story, edit it to begin using this project")
+  end
   
   # stories_by_priority: return all project's stories ordered by priority (highest on top)
   def stories_by_priority

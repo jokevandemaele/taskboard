@@ -31,4 +31,15 @@ class GuestTeamMembershipTest < ActiveSupport::TestCase
     array = hash.to_a_with_no_index
     assert_equal [0,1,2], array
   end
+  
+  test "remove guest member from organization works" do
+    team_membership = GuestTeamMembership.create(:member => members(:kausten), :project => projects(:fake_planecrash))
+    team_membership = GuestTeamMembership.create(:member => members(:kausten), :project => projects(:find_the_island))
+    assert projects(:fake_planecrash).guest_members.include?(members(:kausten))
+    assert projects(:find_the_island).guest_members.include?(members(:kausten))
+    GuestTeamMembership.remove_from_organization(members(:kausten), organizations(:widmore_corporation))
+    assert !projects(:fake_planecrash).guest_members.include?(members(:kausten))
+    assert !projects(:find_the_island).guest_members.include?(members(:kausten))
+    
+  end
 end

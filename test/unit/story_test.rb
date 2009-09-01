@@ -10,5 +10,17 @@ class StoryTest < ActiveSupport::TestCase
 		s = Story.create(:realid => "AAA1112")
 		assert_equal 0, s.priority
 	end
+  
+  test "start, stop and finish work ok" do
+    story = Story.create(:realid => "AAAA113")
+    assert story.stopped?
+    story.start
+    assert story.started?
+    story.stop
+    assert story.stopped?
+    story.finish
+    assert story.finished?
+    assert_equal -1, story.priority
+  end
 
 end

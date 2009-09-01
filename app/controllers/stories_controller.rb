@@ -55,13 +55,6 @@ class StoriesController < ApplicationController
     end
   end
 
-  def start_story
-    @story = Story.find(params[:id])
-    @story.status = 'in_progress'
-    @story.save
-    redirect_to :controller => :backlog, :action => (params[:project]) ? :show : :team, :id => (params[:project]) ? params[:project] : params[:team]
-  end
-
   def edit_priority
 	  @story = Story.find(params[:id])
     render :partial => "edit_priority", :locals => {:story => @story }
@@ -73,21 +66,25 @@ class StoriesController < ApplicationController
     render :inline => "<script>location.reload(true);</script>"
   end
 
+  def start_story
+    @story = Story.find(params[:id])
+    @story.start
+    redirect_to :controller => :backlog, :action => (params[:project]) ? :show : :team, :id => (params[:project]) ? params[:project] : params[:team]
+  end
+
   def stop_story
     @story = Story.find(params[:id])
-    @story.status = 'not_started'
-    if params[:priority]
-      @story.priority = params[:priority]
-    end
-    @story.save
+    @story.stop
+    # if params[:priority]
+    #   @story.priority = params[:priority]
+    # end
+    # @story.save
     redirect_to :controller => :backlog, :action => (params[:project]) ? :show : :team, :id => (params[:project]) ? params[:project] : params[:team]
   end
 
   def finish_story
     @story = Story.find(params[:id])
-    @story.status = 'finished'
-    @story.priority = -1
-    @story.save
+    @story.finish
     redirect_to :controller => :backlog, :action => (params[:project]) ? :show : :team, :id => (params[:project]) ? params[:project] : params[:team]
   end
 end
