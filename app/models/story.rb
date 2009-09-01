@@ -21,7 +21,7 @@ class Story < ActiveRecord::Base
   def next_priority(project_id)
     story = Story.first(:conditions => [ "project_id = ? AND priority != -1 ", project_id ], :order => "priority ASC")
     last_priority = (!story.nil?) ? story.priority : nil
-    return self.priority = (last_priority > 0) ? last_priority - 10 : 0 if last_priority
+    return self.priority = (last_priority > 10) ? last_priority - 10 : 0 if last_priority
     return self.priority = 2000 if !last_priority
   end
   
