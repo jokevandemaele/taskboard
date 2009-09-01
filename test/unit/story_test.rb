@@ -21,7 +21,9 @@ class StoryTest < ActiveSupport::TestCase
 		assert_equal 5, s.priority
 		s = Story.new
 		assert_equal 0, s.next_priority(projects(:come_back_to_the_island).id)
-		s = Story.create(:project => projects(:come_back_to_the_island), :realid => "AAB1162", :priority => 0)
+		s = Story.create(:project => projects(:come_back_to_the_island), :realid => "AAB1162", :priority => -5)
+		assert_equal 0, s.priority
+		s = Story.create(:project => projects(:come_back_to_the_island), :realid => "AAB1172", :priority => 0)
 		assert_equal 0, s.priority
 	end
   

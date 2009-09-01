@@ -13,8 +13,9 @@ class Story < ActiveRecord::Base
   end
 
   def default_priority
-    return self.priority if self.priority
     return self.priority = -1 if self.finished?
+    return self.priority if self.priority && self.priority >= 0
+    return self.priority = 0 if self.priority && self.priority < 0
     return next_priority(self.project_id)
   end
 
