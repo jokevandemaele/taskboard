@@ -6,16 +6,25 @@ class Story < ActiveRecord::Base
   validates_uniqueness_of :realid
   
   after_create :add_template_task
-  after_save :default_priority
+  before_save :default_priority
   
   def add_template_task
     self.tasks << Task.new(:name => "This is a sample task")
   end
 
   def default_priority
-    self.priority = 0 if !self.priority
+    return self.priority if self.priority
+    return self.priority = -1 if self.finished?
+    return next_priority(self.project_id)
   end
 
+  def next_priority(project_id)
+    story = Story.first(:conditions => [ "project_id = ? AND priority != -1 ", project_id ], :order => "priority ASC")
+    last_priority = (!story.nil?) ? story.priority : nil
+    return self.priority = (last_priority > 0) ? last_priority - 10 : 0 if last_priority
+    return self.priority = 2000 if !last_priority
+  end
+  
   def self.last_realid(project_id)
   	story = Story.first(:conditions => ["project_id = ? AND realid != ''", project_id], :order => "realid DESC")
   	if story

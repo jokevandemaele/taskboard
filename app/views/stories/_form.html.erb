@@ -15,7 +15,7 @@
 						<%	realid = nil
 							realid = (edit) ? @story.realid : next_realid(@last_realid)	if @last_realid -%>
 						<td style="border: 0; margin: 0; padding: 0; padding-top: 12px; width: 33%;"><%= f.label :realid, "Story ID" %> <%= f.text_field :realid, :value => realid, :class => "field-id" %></td>
-						<td style="border: 0; margin: 0; padding: 0; padding-top: 12px; width: 33%;"><%= f.label :priority %> <%= f.text_field :priority, :class => "field" %></td>
+						<td style="border: 0; margin: 0; padding: 0; padding-top: 12px; width: 33%;"><%= f.label :priority %> <%= f.text_field :priority, :class => "field", :value => edit ? @story.priority : @story.next_priority(@project)  %></td>
 					<td style="border: 0; margin: 0; padding: 0; padding-top: 12px; width: 33%;"><%= f.label :size %> <%= f.text_field :size, :class => "field" %></td>
 				</tr>
 				</table>
