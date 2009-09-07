@@ -2,14 +2,18 @@ class Story < ActiveRecord::Base
   belongs_to :project
   has_many :tasks, :dependent => :destroy
 
-  validates_presence_of :realid
+  validates_presence_of :realid, :project_id
   validates_uniqueness_of :realid
-  
+
   after_create :add_template_task
   before_save :default_priority
   
+  def after_initialize
+    self.realid = Story.next_realid(self.project) if !self.realid && self.project
+  end
+  
   def add_template_task
-    self.tasks << Task.new(:name => "This is a sample task")
+    self.tasks << Task.new(:name => "Add tasks")
   end
 
   def default_priority
@@ -26,15 +30,20 @@ class Story < ActiveRecord::Base
     return self.priority = 2000 if !last_priority
   end
   
-  def self.last_realid(project_id)
+  def self.next_realid(project_id)
   	story = Story.first(:conditions => ["project_id = ? AND realid != ''", project_id], :order => "realid DESC")
+
   	if story
-  		return story.realid
+  	  lastid = story.realid
+  		number = lastid.gsub(/\D/, '').to_i
+  		text = lastid.gsub(/\d/, '')
+  		number += 1
+  		id = (number < 10) ? "#{text}00#{number}" : "#{text}#{number}"
+  		id = "#{text}0#{number}" if (number >= 10 && number < 100)
+  		return id
   	else 
-  	project = Project.find(project_id)
-  	number = '001'
-  	text = Story.get_initials_of(project.name,2)
-  	return text + number
+    	project = Project.find(project_id)
+    	return Story.get_initials_of(project.name,2) + '001'
   	end
   end
 

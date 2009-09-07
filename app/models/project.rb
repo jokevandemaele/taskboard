@@ -18,7 +18,8 @@ class Project < ActiveRecord::Base
   
   # add_default_stories: this function is called when a new project is created, it adds the sample stories to it
   def add_default_stories
-    story = Story.create(:project => self, :name => "Sample Story", :priority => 2000, :realid => Story.last_realid(self), :size => 10, :status => "in_progress", :description => "This is a sample story, edit it to begin using this project")
+    story = Story.create(:project => self, :name => "Sample Started Story", :priority => 2000, :size => 10, :status => "in_progress", :description => "This is a sample story that is started, edit it to begin using this project")
+    story2 = Story.create(:project => self, :name => "Sample Not Started Story", :priority => 1990, :size => 10, :status => "not_started", :description => "This is a sample story that is not started, edit it to begin using this project")
   end
   
   # stories_by_priority: return all project's stories ordered by priority (highest on top)

@@ -3,15 +3,20 @@ require 'test_helper'
 class ProjectTest < ActiveSupport::TestCase
   fixtures :projects, :members, :teams, :organizations
 
-	test "every project should be created with a sample story" do
+	test "every project should be created with two sample stories, one started and one not started" do
 		project = Project.create(:name => "Find Mile's father", :organization => organizations(:widmore_corporation))
-		assert_equal 1, project.stories.size
-		assert_equal "Sample Story", project.stories.first.name
+		assert_equal 2, project.stories.size
+		assert_equal "Sample Started Story", project.stories.first.name
 		assert_equal 2000, project.stories.first.priority
 		assert_equal 10, project.stories.first.size
 		assert project.stories.first.started?
-		assert_equal "This is a sample story, edit it to begin using this project", project.stories.first.description
+		assert_equal "This is a sample story that is started, edit it to begin using this project", project.stories.first.description
 
+		assert_equal "Sample Not Started Story", project.stories.second.name
+		assert_equal 1990, project.stories.second.priority
+		assert_equal 10, project.stories.second.size
+		assert !project.stories.second.started?
+		assert_equal "This is a sample story that is not started, edit it to begin using this project", project.stories.second.description
 	end
 
   test 'find the team containing a member or return the first' do 

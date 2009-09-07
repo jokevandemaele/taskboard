@@ -1,15 +1,33 @@
 require 'test_helper'
 
 class StoryTest < ActiveSupport::TestCase
+  test "every story should belong to a project" do
+    story = Story.new
+    assert !story.save
+    story = Story.new(:project => projects(:come_back_to_the_island))
+    assert story
+    
+  end
 	test "every story should be created with a template task" do
-		s = Story.create(:realid => "AAA111")
+		s = Story.create(:project => projects(:come_back_to_the_island))
 		assert_equal 1, s.tasks.size
 	end
-
+  
+  test "Story next_readlid is selected correctly and stories assing it automatically" do
+    assert_equal "EF001", Story.next_realid(projects(:escape_from_the_island))
+    s = Story.create(:project => projects(:escape_from_the_island), :priority => 100)
+    assert_equal "EF001", s.realid
+    assert_equal "EF002", Story.next_realid(projects(:escape_from_the_island))
+    s = Story.new(:project => projects(:escape_from_the_island), :priority => 100)
+    assert_equal "EF002", s.realid
+    s.save
+    assert_equal "EF002", s.realid
+    assert_equal "EF003", Story.next_realid(projects(:escape_from_the_island))
+  end
+  
 	test "the default story priority is 10 less than the lower one, or zero if that is zero" do
 		s = Story.create(:project => projects(:come_back_to_the_island), :realid => "AAB1112", :priority => 100)
 		assert_equal 100, s.priority
-		s = Story.new
 		assert_equal 90, s.next_priority(projects(:come_back_to_the_island).id)
 		s = Story.create(:project => projects(:come_back_to_the_island), :realid => "AAB1122")
 		assert_equal 90, s.priority

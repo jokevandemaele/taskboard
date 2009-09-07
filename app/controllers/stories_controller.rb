@@ -9,11 +9,11 @@ class StoriesController < ApplicationController
 
   # GET /stories/new
   def new
-	  @story = Story.new
     @project = (params[:project]) ? params[:project] : nil
     @projects = Team.find(params[:team]).projects
-    @last_realid = (params[:project]) ? Story.last_realid(@project) : nil
-    render :partial => 'form', :object => @story, :locals => { :edit => false, :project =>  @project, :last_realid => @last_realid}, :status => :ok
+	  @story = (params[:project]) ? Story.new(:project_id => params[:project]) : Story.new(:project_id => @projects.first.id )
+	  logger.error("Story: #{@story.inspect}")
+    render :partial => 'form', :object => @story, :locals => { :edit => false, :project =>  @project}, :status => :ok
   end
 
   # GET /stories/1/edit
@@ -28,9 +28,8 @@ class StoriesController < ApplicationController
     if @story.save
       render :inline => "<script>location.reload(true);</script>", :status => :created
     else
-      @last_realid = (@story.project_id) ? Story.last_realid(@story.project_id) : nil
       @project = (@story.project_id) ? @story.project_id : nil
-      render :partial => 'form', :object => @story, :locals => { :no_refresh => true, :edit => false, :project => @project, :last_realid => @last_realid }, :status => :internal_server_error
+      render :partial => 'form', :object => @story, :locals => { :no_refresh => true, :edit => false, :project => @project }, :status => :internal_server_error
     end
   end
 
