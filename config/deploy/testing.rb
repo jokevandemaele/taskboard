@@ -5,7 +5,7 @@ namespace :deploy do
     # If you aren't deploying to /u/apps/#{application} on the target
     # servers (which is the default), you can specify the actual location
     # via the :deploy_to variable:
-    set :deploy_to, "/var/www/rails/#{application}/production"
+    set :deploy_to, "/var/www/rails/#{application}/testing"
 
     # If you aren't using Subversion to manage your source code, specify
     # your SCM below:
@@ -29,7 +29,7 @@ namespace :deploy do
   end
 
   task :rake_db_migrate do
-    run "cd #{current_path}/ && rake RAILS_ENV=\"production\" db:migrate"
+    run "cd #{current_path}/ && rake RAILS_ENV=\"testing\" db:migrate"
   end
 
   [:start, :stop].each do |t|

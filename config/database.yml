@@ -24,6 +24,14 @@ test:
 staging:
   adapter: mysql
   encoding: utf8
+  database: taskboard_testing
+  username: taskboard
+  password: tskb.430
+  host: 127.0.0.1
+
+staging:
+  adapter: mysql
+  encoding: utf8
   database: taskboard_staging
   username: taskboard
   password: tskb.430
