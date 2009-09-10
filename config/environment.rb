@@ -76,13 +76,14 @@ Rails::Initializer.run do |config|
   # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
 
   # ActionMailer
-  config.action_mailer.delivery_method = :sendmail
-  # config.action_mailer.smtp_settings = {
-  #    :address => 'smtp.agilar.org',
-  #    :port => 25,
-  #    :domain => 'agilar.org',
-  #    :authentication => :login,
-  #    :user_name => 'no-reply@agilar.org',
-  #    :password => 'agilarnrp.094'
-  # }
+  #config.action_mailer.delivery_method = :sendmail
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+     :address => 'mail.agilar.org',
+     :port => 25,
+     :domain => 'agilar.org',
+     :authentication => :login,
+     :user_name => 'no-reply@agilar.org',
+     :password => 'agilarnrp.094'
+  }
 end
