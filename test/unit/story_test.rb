@@ -6,8 +6,8 @@ class StoryTest < ActiveSupport::TestCase
     assert !story.save
     story = Story.new(:project => projects(:come_back_to_the_island))
     assert story
-    
   end
+
 	test "every story should be created with a template task" do
 		s = Story.create(:project => projects(:come_back_to_the_island))
 		assert_equal 1, s.tasks.size

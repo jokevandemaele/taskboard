@@ -17,4 +17,7 @@ class DevToolsController < ApplicationController
     # To check stories
     @stories = Story.all
   end
+  def exception
+    raise(Exception, "Forced Exception from DevToolsController")
+  end
 end
