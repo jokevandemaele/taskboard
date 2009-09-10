@@ -11,9 +11,11 @@ class StoriesController < ApplicationController
   def new
     @project = (params[:project]) ? params[:project] : nil
     @projects = Team.find(params[:team]).projects
+    @story_ids = []
+    @projects.each {|project| @story_ids[project.id] = Story.next_realid(project.id)}
 	  @story = (params[:project]) ? Story.new(:project_id => params[:project]) : Story.new(:project_id => @projects.first.id )
-	  logger.error("Story: #{@story.inspect}")
-    render :partial => 'form', :object => @story, :locals => { :edit => false, :project =>  @project}, :status => :ok
+	  logger.error("Story: #{@story_ids.inspect}")
+    render :partial => 'form', :object => @story, :locals => { :edit => false, :project =>  @project, :story_ids => @story_ids}, :status => :ok
   end
 
   # GET /stories/1/edit

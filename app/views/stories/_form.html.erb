@@ -9,6 +9,18 @@
 		<% remote_form_for @story, :url => { :controller => :stories, :action => action, :id => @story.id }, :update => "dummy-for-actions" do |f| %>
 			<%= admin_form_name(@story, edit, f) -%>
 
+			<%= hidden_field_tag("story[project_id]", "#{project}") if project-%> 
+			<% if !project %>
+				<div class="admin-div-section" style="margin-top: 10px; width: 715px; padding-left: 20px;">
+					<%= image_tag 'admin/admin-div-actions-projects.png', :alt => 'Team', :style => 'position: relative; top: 10px; margin-left: 10px;' -%>
+					<h2 style="position: relative; top: 10; margin-left: 10px;">Project:</h2>
+					<%= select_tag "story[project_id]", options_from_collection_for_select(@projects, 'id', 'name'), :style => 'position: relative; top: 10px; margin-left: 10px; width: 500px;', :onChange => "$('story_realid').value = project_realids[$(story_project_id).value]" -%>
+					<script>
+						project_realids = eval('<%= story_ids.to_json -%>');
+					</script>
+				</div>
+			<% end %>
+
 			<div class="admin-div-section" style="margin-top: 10px;">
 				<table id="story-add-fields">
 					<tr style="border: 0; margin: 0; padding: 0;">
@@ -18,16 +30,6 @@
 				</tr>
 				</table>
 			</div>
-
-			<%= hidden_field_tag("story[project_id]", "#{project}") if project-%> 
-			<% if !project %>
-				<div class="admin-div-section" style="margin-top: 10px; width: 715px; padding-left: 20px;">
-					<%= image_tag 'admin/admin-div-actions-projects.png', :alt => 'Team', :style => 'position: relative; top: 10px; margin-left: 10px;' -%>
-					<h2 style="position: relative; top: 10; margin-left: 10px;">Project:</h2>
-					<%= select_tag "story[project_id]", options_from_collection_for_select(@projects, 'id', 'name'), :style => 'position: relative; top: 10px; margin-left: 10px; width: 500px;' -%>
-				</div>
-			<% end %>
-
 
 			<div class="admin-div-section" style="margin-top: 10px; width: 715px; height: 200px; padding-left: 20px;">
 				<h2 style=" margin-left: 0; margin-bottom: 5px;  "><%= f.label :description %></h2>
