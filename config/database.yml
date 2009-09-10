@@ -21,7 +21,7 @@ test:
   pool: 5
   timeout: 5000
 
-staging:
+testing:
   adapter: mysql
   encoding: utf8
   database: taskboard_testing
