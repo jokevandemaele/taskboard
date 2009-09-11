@@ -1,9 +1,18 @@
 class Organization < ActiveRecord::Base
+  # Associations
   has_many :projects
   has_many :teams
   has_many :organization_memberships
   has_many :members, :through => :organization_memberships
   validates_uniqueness_of :name
+
+  # Callbacks
+  after_create :add_default_team_and_project
+
+  def add_default_team_and_project
+    team = Team.create(:name => "#{self.name} Team", :organization => self)
+    project = Project.create(:name => "#{self.name} Project", :organization => self, :teams => [team])
+  end
 
   def members_ordered_by_role
     admins = []

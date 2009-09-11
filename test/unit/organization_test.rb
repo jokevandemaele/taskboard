@@ -2,7 +2,19 @@ require 'test_helper'
 
 class OrganizationTest < ActiveSupport::TestCase
   fixtures :organizations
-  
+
+  test "an organization should be created with a default team and a default project" do
+    organization = Organization.create(:name => 'Testing Inc.')
+    assert_equal 1, organization.teams.size
+    assert_equal 'Testing Inc. Team', organization.teams.first.name
+
+    assert_equal 1, organization.projects.size
+    assert_equal 'Testing Inc. Project', organization.projects.first.name
+
+    assert_equal organization.projects.first.teams.first.name, organization.teams.first.name
+    assert_equal organization.teams.first.projects.first.name, organization.projects.first.name
+  end
+
   test "members_ordered_by_role works as expected" do
     organization = organizations(:widmore_corporation)
     
