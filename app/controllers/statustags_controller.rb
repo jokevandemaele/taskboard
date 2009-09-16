@@ -4,47 +4,39 @@ class StatustagsController < ApplicationController
   
   # POST /statustags
   def create
-    if request.xhr?
-      @task = Task.find(params[:task])
-      @tag = Statustag.new
-      @tag.relative_position_x = params[:x]
-      @tag.relative_position_y = params[:y]
-      @tag.task = @task
-      @tag.status = params[:status]
-      @tag.save
+    @project = Project.find(params[:project_id])
+    @statustag = Statustag.new(params[:statustag])
+    if @project.stories.include?(@statustag.task.story) && @statustag.save
       render :update do |page|
-        @tasks = Task.tasks_by_status(@task.story,@task.status)
-        page.replace_html "#{@task.status}-#{@task.story_id}", :partial => "tasks/tasks_by_status", :locals => { :tasks => @tasks  } 
-        page.replace_html "menu_statustags", :partial => "taskboard/menu_statustags"
+        @members = @statustag.task.story.project.members
+        @member_team = @statustag.task.story.project.team_including(@member)        
+        @tasks = Task.tasks_by_status(@statustag.task.story, @statustag.task.status)
+        page.replace_html "#{@statustag.task.status}-#{@statustag.task.story_id}", :partial => "tasks/tasks_by_status", :locals => { :tasks => @tasks  } 
+        page.replace_html "menu_statustags", :partial => "taskboard/menu_statustags", :locals => { :team => @member_team }
       end
+    else
+      render :inline => "", :status => :bad_request
     end
   end
 
   # PUT /statustags/1
   def update
-    if request.xhr?
-      logger.error(params.inspect)
-      @task = Task.find(params[:task])
-      @tag = Statustag.find(params[:tag_id])
-      @tag.relative_position_x = params[:x]
-      @tag.relative_position_y = params[:y]
-      @tag.task = @task
-      @tag.save
-      render :update do |page|
-        page.replace_html "dummy-for-actions", :partial => "taskboard/empty_dummy", :locals => { :tasks => @task.story.tasks, :status => @task.status } 
-      end
+    @project = Project.find(params[:project_id])
+    @statustag = Statustag.find(params[:statustag_id])
+    @statustag.update_attributes(params[:statustag])
+    if @project.stories.include?(@statustag.task.story) && @statustag.save
+      render :inline => "", :status => :ok
+    else
+      render :inline => "", :status => :bad_request
     end
   end
 
   # DELETE /statustags/1?statustag=id
   def destroy
-    @tag = Statustag.find(params[:statustag])
+    @tag = Statustag.find(params[:statustag_id])
     @html_id = 'statustag-' + @tag.id.to_s
-    if @tag.destroy
-      render :inline => "<script>Effect.Fade($('#{@html_id}'), {duration: 0.3});</script>", :status => :ok
-    else
-      render :inline => "", :status => :bad_request
-    end
+    @tag.destroy
+    render :inline => "<script>Effect.Fade($('#{@html_id}'), {duration: 0.3});</script>", :status => :ok
   end
   
 end

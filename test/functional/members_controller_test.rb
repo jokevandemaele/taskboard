@@ -12,6 +12,8 @@ class Admin::MembersControllerTest < ActionController::TestCase
     login_as_normal_user
     get :report_bug
     assert_select "div#reportbug"
+    post :report_bug, :subject => "A Subject", :message => "A message"
+    assert_redirected_to admin_projects_url
   end
 
   test "create with correct organization adds the member to that organization" do
@@ -52,6 +54,16 @@ class Admin::MembersControllerTest < ActionController::TestCase
     assert_equal Member.encrypt('test'), member.hashed_password
   end 
 
+  test "login works" do
+    get :login
+    assert_response :ok
+    post :login, :member => {:username => "fakeuser", :password => "fakepass"}
+    assert_select "input#member_username"
+    assert_select "input#member_password"
+    post :login, :member => {:username => "kausten", :password => "test"}
+    assert_select "input#member_username", 0
+    assert_select "input#member_password", 0
+  end
   ########################## Permissions tests ##########################
   test "index should be seen only by administrator" do
     login_as_administrator

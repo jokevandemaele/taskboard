@@ -10,7 +10,7 @@ class TaskTest < ActiveSupport::TestCase
   end
 
   test "named scope - in_progress" do
-    assert Task.in_progress.size == 1
+    assert Task.in_progress.size == 2
   end
 
   test "named scope - finished" do

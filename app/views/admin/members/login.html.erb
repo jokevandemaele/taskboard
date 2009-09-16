@@ -14,29 +14,26 @@
 </head>
 <body>
 	<div id="container" style="position: absolute; top: 0px; left: 0px; width:100%; height:100%;">
+    <div id="login-container" style="background: url('/images/login/login_background.png') center no-repeat transparent; width: 448px; height: 336px;">
+      <%= image_tag "login/login_logo.png", :alt => "Agilar Taskboard Beta", :style => "position: relative; margin-left: 50%; left: -168px; top: 34px;" -%>
+	    <%= form_tag "/login", :method=> :post %>
+  	    <%= image_tag "login/username.png", :style => "position: absolute; top: 148px; left: 57px;" -%>
+  	    <%= text_field "member", "username", :size => 20, :style => "font-size: 20px; color: #002255; padding-top: 2px; text-align: left; position: absolute; top: 140px; left: 200px; padding-left: 20px; border: none; background: url('/images/login/login_field.png') no-repeat transparent; width: 224px; height: 38px;" -%><br/>
+        <%= image_tag "login/password.png", :style => "position: absolute; top: 192px; left: 57px;" -%>
+  	    <%= password_field "member", "password", :size => 20, :style => "font-size: 20px; color: #002255; padding-top: 2px; text-align: left; position: absolute; top: 192px; left: 200px; padding-left: 20px; border: none; background: url('/images/login/login_field.png') no-repeat transparent; width: 224px; height: 38px;" %><br/>
+  	    <input type="image" src="/images/login/login_button.png" alt="Login" id="login-button" style="position:absolute; top: 237px; left: 315px;" >
+      </form>
+  	  <% if flash[:notice] -%>
+  	  <div id="flash" style="width: 448px; position: absolute; top: -50px; left: 0; font-size: 20px; font-family: verdana, arial, helvetica, sans-serif; text-align: center; color: red;">
+  	    <p><%= flash[:notice] -%></p>
+      </div>
+  	  <% end -%>
+  	</div>
 	</div>
-	<div id="login-container" style="background: url('/images/login/login_background.png') center no-repeat transparent; width: 448px; height: 336px;">
-	  <%= image_tag "login/login_logo.png", :alt => "Agilar Taskboard Beta", :style => "position: relative; margin-left: 50%; left: -168px; top: 34px;" -%>
-	  <%= form_tag "/login", :method=> :post %>
-
-	  <%= image_tag "login/username.png", :style => "position: absolute; top: 148px; left: 57px;" -%>
-	  <%= text_field "member", "username", :size => 20, :style => "font-size: 20px; color: #002255; padding-top: 2px; text-align: left; position: absolute; top: 140px; left: 200px; padding-left: 20px; border: none; background: url('/images/login/login_field.png') no-repeat transparent; width: 224px; height: 38px;" -%><br/>
-
-
-	  <%= image_tag "login/password.png", :style => "position: absolute; top: 192px; left: 57px;" -%>
-	  <%= password_field "member", "password", :size => 20, :style => "font-size: 20px; color: #002255; padding-top: 2px; text-align: left; position: absolute; top: 192px; left: 200px; padding-left: 20px; border: none; background: url('/images/login/login_field.png') no-repeat transparent; width: 224px; height: 38px;" %><br/>
-
-	  <% if flash[:notice] -%>
-	  <div id="flash" style="width: 448px; position: absolute; top: -50px; left: 0; font-size: 20px; font-family: verdana, arial, helvetica, sans-serif; text-align: center; color: red;">
-	    <p><%= flash[:notice] -%></p>
-	  </div>
-	  <% end%>
-	  <input type="image" src="/images/login/login_button.png" alt="Login" id="login-button" style="position:absolute; top: 237px; left: 315px;" >
-	</div>
-	<script>
-	  centerTo($('login-container'),$('container'));
-	  window.setTimeout("$('member_username').focus();", 100);
-	</script>
+  <script>
+    centerTo($('login-container'),$('container'));
+    window.setTimeout("$('member_username').focus();", 100);
+  </script>
 </body>
 </html>
 

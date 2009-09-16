@@ -75,10 +75,6 @@ class StoriesController < ApplicationController
   def stop_story
     @story = Story.find(params[:id])
     @story.stop
-    # if params[:priority]
-    #   @story.priority = params[:priority]
-    # end
-    # @story.save
     redirect_to :controller => :backlog, :action => (params[:project]) ? :show : :team, :id => (params[:project]) ? params[:project] : params[:team]
   end
 

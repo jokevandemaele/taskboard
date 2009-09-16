@@ -36,12 +36,12 @@
 <% if task.status != 'finished' %>
 	<%= drop_receiving_element("task-#{task.id}", 
 		:accept => "add_status", 
-		:with   => "'status=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ positionCreateX($(element),$('task-#{task.id}')) + '&y='+ positionCreateY($(element),$('task-#{task.id}'),false)", 
+		:with   => "'project_id=#{task.story.project.id}&statustag[status]=' + (element.id.split('-').last())+ '&statustag[task_id]=#{task.id}&statustag[relative_position_x]='+ positionCreateX($(element),$('task-#{task.id}')) + '&statustag[relative_position_y]='+ positionCreateY($(element),$('task-#{task.id}'),false)", 
 		:url => { :controller => :statustags }) 
 	%>
 	<%= drop_receiving_element("task-#{task.id}", 
 		:accept => "statustag", 
-		:with   => "'tag_id=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ positionUpdateX($(element),$('task-#{task.id}')) + '&y='+ positionUpdateY($(element),$('task-#{task.id}'),false)", 
+		:with   => "'project_id=#{task.story.project.id}&statustag_id=' + (element.id.split('-').last())+ '&statustag[task_id]=#{task.id}&statustag[relative_position_x]='+ positionUpdateX($(element),$('task-#{task.id}')) + '&statustag[relative_position_y]='+ positionUpdateY($(element),$('task-#{task.id}'),false)", 
 		:url => { :controller => :statustags, :action=>:update },
 		:method => :put ) 
 	%>
@@ -49,12 +49,12 @@
 
 	<%= drop_receiving_element("task-#{task.id}", 
 		:accept => "add_nametag", 
-		:with   => "'member=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ positionCreateX($(element),$('task-#{task.id}')) + '&y=' + positionCreateY($(element),$('task-#{task.id}'),true)", 
+		:with   => "'project_id=#{task.story.project.id}&nametag[member_id]=' + (element.id.split('-').last())+ '&nametag[task_id]=#{task.id}&nametag[relative_position_x]='+ positionCreateX($(element),$('task-#{task.id}')) + '&nametag[relative_position_y]=' + positionCreateY($(element),$('task-#{task.id}'),true)", 
 		:url => { :controller => :nametags }) 
 	%>
 	<%= drop_receiving_element("task-#{task.id}", 
 		:accept => "nametag", 
-		:with   => "'tagid=' + (element.id.split('-').last())+ '&task=#{task.id}&x='+ positionUpdateX($(element),$('task-#{task.id}')) + '&y='+ positionUpdateY($(element),$('task-#{task.id}'),true)", 
+		:with   => "'project_id=#{task.story.project.id}&nametag_id=' + (element.id.split('-').last())+ '&nametag[task_id]=#{task.id}&nametag[relative_position_x]='+ positionUpdateX($(element),$('task-#{task.id}')) + '&nametag[relative_position_y]='+ positionUpdateY($(element),$('task-#{task.id}'),true)", 
 		:url => { :controller => :nametags, :action => :update },
 		:method => :put)
 	%>

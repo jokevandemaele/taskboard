@@ -14,15 +14,15 @@ class StoryTest < ActiveSupport::TestCase
 	end
   
   test "Story next_readlid is selected correctly and stories assing it automatically" do
-    assert_equal "EF001", Story.next_realid(projects(:escape_from_the_island))
-    s = Story.create(:project => projects(:escape_from_the_island), :priority => 100)
-    assert_equal "EF001", s.realid
     assert_equal "EF002", Story.next_realid(projects(:escape_from_the_island))
-    s = Story.new(:project => projects(:escape_from_the_island), :priority => 100)
-    assert_equal "EF002", s.realid
-    s.save
+    s = Story.create(:project => projects(:escape_from_the_island), :priority => 100)
     assert_equal "EF002", s.realid
     assert_equal "EF003", Story.next_realid(projects(:escape_from_the_island))
+    s = Story.new(:project => projects(:escape_from_the_island), :priority => 100)
+    assert_equal "EF003", s.realid
+    s.save
+    assert_equal "EF003", s.realid
+    assert_equal "EF004", Story.next_realid(projects(:escape_from_the_island))
   end
   
 	test "the default story priority is 10 less than the lower one, or zero if that is zero" do

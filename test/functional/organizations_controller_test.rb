@@ -1,8 +1,13 @@
 require 'test_helper'
 
 class Admin::OrganizationsControllerTest < ActionController::TestCase
+  test "show displays the organization" do
+    login_as_administrator
+    result = get :show, :id => organizations(:widmore_corporation).id
+    assert_select "div#organization-#{organizations(:widmore_corporation).id}-container", 1
+  end
   ########################## Permissions tests ##########################
-  test "index should be seen only all" do
+  test "index should be seen by all" do
     login_as_administrator
     get :index
     assert_response :ok

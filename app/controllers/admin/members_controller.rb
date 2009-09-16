@@ -38,8 +38,6 @@ class Admin::MembersController < ApplicationController
     # See how to move this to ajax
     @params = params
     @member = Member.new(@params[:member])
-
-
     if @member.save
       @member.add_picture(@params[:picture_file])
       @member.add_to_organization(@params[:organization])
@@ -79,11 +77,8 @@ class Admin::MembersController < ApplicationController
   # DELETE /members/1
   def destroy
     @member = Member.find(params[:id])
-    if @member.destroy
-      render :inline => "", :status => :ok
-    else
-      render :inline => "", :status => :bad_request
-    end
+    @member.destroy
+    render :inline => "", :status => :ok
   end
 
   def login
@@ -111,34 +106,6 @@ class Admin::MembersController < ApplicationController
     @current_member = Member.find(session[:member])
     render :template => "admin/members/access_denied", :status => :forbidden
   end
-  
-  # def delete_member
-  #   @member = Member.find(params[:id])
-  #   @member.destroy
-  #   @members = Member.all()
-  #   
-  #   render :update do |page| 
-  #     page.replace_html "members-list", :partial => "teams/members_list", :locals => { :members => @members, :project => params[:project] }
-  #   end
-  # end
-  # 
-  # def make_sysadmin
-  #   @member = Member.find(params[:id])
-  #   @member.admin = true
-  #   @member.save
-  #   render :update do |page|
-  #     page.replace_html "dummy-for-actions", "<script>location.reload(true)</script>"
-  #   end
-  # end
-  # 
-  # def remove_sysadmin
-  #   @member = Member.find(params[:id])
-  #   @member.admin = nil
-  #   @member.save
-  #   render :update do |page|
-  #     page.replace_html "dummy-for-actions", "<script>location.reload(true)</script>"
-  #   end
-  # end
 
   def report_bug
     @member = Member.find(current_member)

@@ -6,3 +6,20 @@ one:
   color: 1
   relative_position_x: 100
   relative_position_y: 100
+  status: waiting
+  
+two:
+  status: Status Two
+  task_id: 1
+  color: 1
+  relative_position_x: 100
+  relative_position_y: 100
+  status: waiting
+  
+three:
+  status: Status Three
+  task_id: 1
+  color: 1
+  relative_position_x: 100
+  relative_position_y: 100
+  status: waiting

@@ -41,6 +41,10 @@ class ApplicationController < ActionController::Base
         result = check_taskboard_perms(@current_member, @path, request)
       when 'backlog'
         result = check_backlog_perms(@current_member, @path, request)
+      when 'nametags'
+        result = check_tag_perms(@current_member, @path, request)
+      when 'statustags'
+        result = check_tag_perms(@current_member, @path, request)
       else
         return true
     end
@@ -58,6 +62,11 @@ class ApplicationController < ActionController::Base
   
   def check_backlog_perms(member, path, request)
     check_taskboard_perms(member, path, request)
+  end
+
+  def check_tag_perms(member, path, request)
+    @project = Project.find(params[:project_id])
+    return (@current_member.admins?(@project.organization) || @current_member.projects.include?(@project))
   end
   
   def check_organizations_controller_perms(member, path, request)
