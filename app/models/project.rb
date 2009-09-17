@@ -47,4 +47,11 @@ class Project < ActiveRecord::Base
     self.teams.each { |team| result = team if(team.members.include?(member)) }
     return result
   end
+  
+  def next_priority
+    story = self.stories.first(:conditions => "priority != -1 ", :order => "priority ASC")
+    last_priority = (!story.nil?) ? story.priority : nil
+    return (last_priority > 10) ? last_priority - 10 : 0 if last_priority
+    return 2000 if !last_priority
+  end
 end

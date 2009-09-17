@@ -10,6 +10,7 @@ class Story < ActiveRecord::Base
   
   def after_initialize
     self.realid = Story.next_realid(self.project) if !self.realid && self.project
+    self.priority = self.project.next_priority if !self.priority && self.project
   end
   
   def add_template_task
@@ -20,15 +21,15 @@ class Story < ActiveRecord::Base
     return self.priority = -1 if self.finished?
     return self.priority if self.priority && self.priority >= 0
     return self.priority = 0 if self.priority && self.priority < 0
-    return next_priority(self.project_id)
+    return project.next_priority
   end
 
-  def next_priority(project_id)
-    story = Story.first(:conditions => [ "project_id = ? AND priority != -1 ", project_id ], :order => "priority ASC")
-    last_priority = (!story.nil?) ? story.priority : nil
-    return self.priority = (last_priority > 10) ? last_priority - 10 : 0 if last_priority
-    return self.priority = 2000 if !last_priority
-  end
+  # def next_priority(project_id)
+  #   story = Story.first(:conditions => [ "project_id = ? AND priority != -1 ", project_id ], :order => "priority ASC")
+  #   last_priority = (!story.nil?) ? story.priority : nil
+  #   return self.priority = (last_priority > 10) ? last_priority - 10 : 0 if last_priority
+  #   return self.priority = 2000 if !last_priority
+  # end
   
   def self.next_realid(project_id)
   	story = Story.first(:conditions => ["project_id = ? AND realid != ''", project_id], :order => "realid DESC")

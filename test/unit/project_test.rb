@@ -36,4 +36,19 @@ class ProjectTest < ActiveSupport::TestCase
     assert_equal projects(:do_weird_experiments).teams.first.members + projects(:do_weird_experiments).guest_members, projects(:do_weird_experiments).members
   end
   
+  test "next_priority" do
+    project = Project.create(:name => "Find Mile's father", :organization => organizations(:widmore_corporation))
+		assert_equal 1980, project.next_priority
+		s = Story.create(:project => project, :realid => "AAB1112", :priority => 100)
+		assert_equal 100, s.priority
+		assert_equal 90, project.next_priority
+		s = Story.create(:project => project, :realid => "AAB1122")
+		s = Story.create(:project => project, :realid => "AAB1132", :priority => 28)
+		s = Story.create(:project => project, :realid => "AAB1142")
+		s = Story.create(:project => project, :realid => "AAB1152", :priority => 5)
+		assert_equal 0, project.next_priority
+		s = Story.create(:project => project, :realid => "AAB1162", :priority => -5)
+		s = Story.create(:project => project, :realid => "AAB1172", :priority => 0)
+		assert_equal 0, s.priority
+  end
 end
