@@ -1,0 +1,32 @@
+!!!
+%html{ "xml:lang" => "en", :lang => "en", :xmlns => "http://www.w3.org/1999/xhtml" }
+  %head
+    %meta{ :content => "text/html;charset=UTF-8", "http-equiv" => "content-type" }
+    %title
+      Agilar Taskboard - Login
+    %script{ :src => "/javascripts/prototype.js?1247682980", :type => "text/javascript" }
+    %script{ :src => "/javascripts/effects.js?1247682980", :type => "text/javascript" }
+    %script{ :src => "/javascripts/dragdrop.js?1247682980", :type => "text/javascript" }
+    %script{ :src => "/javascripts/controls.js?1247682980", :type => "text/javascript" }
+    %script{ :src => "/javascripts/application.js?1250917693", :type => "text/javascript" }
+    %style
+      body {
+      background: #f1f6ff;
+      }
+  %body
+    #container{ :style => "position: absolute; top: 0px; left: 0px; width:100%; height:100%;" }
+      #login-container{ :style => "background: url('/images/login/login_background.png') center no-repeat transparent; width: 448px; height: 336px;" }
+        %img{ :src => "/images/login/login_logo.png?1247682979", :alt => "Agilar Taskboard Beta", :style => "position: relative; margin-left: 50%; left: -168px; top: 34px;" }
+        %form{ :method => "post", :action => "/login" }
+          %div{ :style => "margin:0;padding:0" }
+            %input{ :name => "authenticity_token", :type => "hidden", :value => "lzZawHete9Pr9rsz80tdNKdW/skY64n3DPxu0n0MSek=" }
+          %img{ :src => "/images/login/username.png?1247682979", :alt => "Username", :style => "position: absolute; top: 148px; left: 57px;" }
+          %input#member_username{ :name => "member[username]", :size => "20", :type => "text", :style => "font-size: 20px; color: #002255; text-align: left; position: absolute; top: 140px; left: 200px; border: none; background: url('/images/login/login_field.png') no-repeat transparent; width: 160px; height: 38px; padding: 2px 20px 0;" }
+          %br
+          %img{ :src => "/images/login/password.png?1247682979", :alt => "Password", :style => "position: absolute; top: 192px; left: 57px;" }
+          %input#member_password{ :name => "member[password]", :size => "20", :type => "password", :style => "font-size: 20px; color: #002255; text-align: left; position: absolute; top: 192px; left: 200px; border: none; background: url('/images/login/login_field.png') no-repeat transparent; width: 160px; height: 38px; padding: 2px 20px 0;" }
+          %br
+          %input#login-button{ :src => "/images/login/login_button.png", :type => "image", :alt => "Login", :style => "position:absolute; top: 237px; left: 315px;" }
+    %script
+      centerTo($('login-container'),$('container'));
+      window.setTimeout("$('member_username').focus();", 100);
