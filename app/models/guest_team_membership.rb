@@ -15,7 +15,20 @@ class GuestTeamMembership < ActiveRecord::Base
   
   def self.remove_from_organization(member,organization)
     organization.projects.each do |project|
+      remove_from_project(member,project)
+    end
+  end
+
+  def self.remove_from_project(member,project)
+    if project.guest_members.include?(member)
+      project.stories.each { |story| story.tasks.each { |task| task.nametags.each { |nametag| nametag.destroy if nametag.member == member } }}
       project.guest_members.delete(member)
     end
   end
+  
+  def self.add_to_project(member,project)
+    @guest_team_member = GuestTeamMembership.new(:project => project, :member => member)
+    return @guest_team_member.save
+  end
+  
 end

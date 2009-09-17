@@ -102,19 +102,19 @@ class Admin::ProjectsController < ApplicationController
     @member = Member.find_by_email(params[:email])
     @projects = (params[:projects]) ? params[:projects].to_a_with_no_index : []
     @error = false
-    @projects.each do |project| 
-      if !@error 
-          @project = Project.find(project)
-          @guest_team_member = GuestTeamMembership.new(:project => @project, :member => @member)
-          @error = true if !@guest_team_member.save
-      end
-    end
+    
+    # Add member to all projects
+    @projects.each { |project| @error = !GuestTeamMembership.add_to_project(@member,Project.find(project)) if !@error }
+    
+    # Display an error if no project is selected
     if @projects.empty?
       @guest_team_member = GuestTeamMembership.new(:project => nil, :member => @member)
-      @guest_team_member.save
-      @error = true 
+      @error = !@guest_team_member.save
     end
+
+    # Send e-mail to the member
     MemberMailer.deliver_add_guest_to_projects(@member, @current_member.name, @projects) if !@error
+
     render :partial => 'guest_team_member_form', :object => @guest_team_member, :locals => { :no_refresh => true, :edit => false, :organization => @organization = Organization.find(params[:organization]), :selected_projects => @projects }, :status => :internal_server_error if @error
     render :inline => "<script>location.reload(true);</script>", :status => :ok if !@error 
   end
@@ -128,14 +128,11 @@ class Admin::ProjectsController < ApplicationController
     @organization.projects.each do |project|
       @guest_member_projects << project if project.guest_members.include?(@guest_member)
     end
-    @guest_member_projects.each do |project|
-      if !@projects.include?(project.id)
-        @guest_memberhsip = GuestTeamMembership.first(:conditions => ["member_id = ? AND project_id = ?", @guest_member.id, project.id])
-        if !@guest_memberhsip.destroy
-          @error = true
-        end
-      end
-    end
+    
+    # Remove member from all the projects that he's not selected in update
+    @guest_member_projects.each { |project| GuestTeamMembership.remove_from_project(@guest_member,project) if !@projects.include?(project.id) }
+    
+    
     @projects.each do |project| 
       if !@error 
           @project = Project.find(project)
