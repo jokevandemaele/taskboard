@@ -11,7 +11,7 @@ class Member < ActiveRecord::Base
   has_many :guest_projects, :through => :guest_team_memberships, :source => :project
   
   #Validations
-  validates_uniqueness_of :username
+  validates_uniqueness_of :username, :email
   validates_length_of :username, :within => 3..40
   #validates_length_of :password, :within => 0..40
   validates_presence_of :name, :username, :email

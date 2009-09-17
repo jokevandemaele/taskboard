@@ -3,6 +3,15 @@ require 'test_helper'
 class MemberTest < ActiveSupport::TestCase
   fixtures :members, :organizations, :organization_memberships, :projects
 
+  test "email addresses should be unique among members" do
+    one_john = Member.new(:name => 'John Locke', :username => 'jlocke', :password => 'secret', :email => 'john@locke.com')
+    assert one_john.save
+
+    another_john = Member.new(:name => 'John Locke', :username => 'johnl', :password => 'secret', :email => 'john@locke.com')
+    assert !another_john.save
+    assert another_john.errors.invalid?('email')
+  end
+
   test "authentication works as expected" do
     # check that we can login with a valid user
     assert_equal members(:dfaraday), Member.authenticate("dfaraday","test")
