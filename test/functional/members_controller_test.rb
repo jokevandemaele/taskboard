@@ -120,7 +120,7 @@ class Admin::MembersControllerTest < ActionController::TestCase
     assert Member.find_by_name('Vincent')
 
     # CREATE to organization where admin doesn't belong
-    post :create, { :member => {:name => 'Vincent', :username => 'vincent1', :email => 'vincent@peta.org', :password => 'dog'}, :organization => organizations(:dharma_initiative).id }
+    post :create, { :member => {:name => 'Vincent', :username => 'vincent1', :email => 'vincent1@peta.org', :password => 'dog'}, :organization => organizations(:dharma_initiative).id }
     assert_response :created
     assert Member.find_by_name('Vincent')
 
@@ -134,10 +134,10 @@ class Admin::MembersControllerTest < ActionController::TestCase
 
     # UPDATE from organization where admin doesn't belong
     member = members(:cpace)
-    put :update, { :id => member.id, :member => { :name => 'Vincent', :username => 'vincent2', :email => 'vincent@dharma.org', :password => 'dog'} }
+    put :update, { :id => member.id, :member => { :name => 'Vincent', :username => 'vincent2', :email => 'vincent2@dharma.org', :password => 'dog'} }
     assert_response :ok
     member.reload
-    assert_equal 'vincent@dharma.org', member.email
+    assert_equal 'vincent2@dharma.org', member.email
     assert_not_equal 'cpace@lost.com', member.email
     
     # DELETE from organization where admin belongs
