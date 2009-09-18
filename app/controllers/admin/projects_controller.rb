@@ -101,14 +101,25 @@ class Admin::ProjectsController < ApplicationController
   def add_guest
     @member = Member.find_by_email(params[:email])
     @projects = (params[:projects]) ? params[:projects].to_a_with_no_index : []
-    @error = false
-    
+    @error = @member.nil?
+
     # Add member to all projects
-    @projects.each { |project| @error = !GuestTeamMembership.add_to_project(@member,Project.find(project)) if !@error }
+    @projects.each do |project| 
+      if !@error 
+        @guest_team_member = GuestTeamMembership.add_to_project(@member,Project.find(project))
+        @error = @guest_team_member.nil? 
+      end
+    end
     
     # Display an error if no project is selected
     if @projects.empty?
       @guest_team_member = GuestTeamMembership.new(:project => nil, :member => @member)
+      @error = !@guest_team_member.save
+    end
+    
+    # Display an error if no member is selected
+    if @member.nil? && !@projects.empty?
+      @guest_team_member = GuestTeamMembership.new(:project => Project.find(@projects[0]), :member => nil)
       @error = !@guest_team_member.save
     end
 
