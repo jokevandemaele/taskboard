@@ -34,7 +34,7 @@ class StatustagsController < ApplicationController
   # DELETE /statustags/1?statustag=id
   def destroy
     @tag = Statustag.find(params[:statustag_id])
-    @html_id = 'statustag-' + @tag.id.to_s
+    @html_id = "statustag-project-#{@tag.task.story.project.id}-#{@tag.id.to_s}"
     @tag.destroy
     render :inline => "<script>Effect.Fade($('#{@html_id}'), {duration: 0.3});</script>", :status => :ok
   end

@@ -1,3 +1,3 @@
-<div id="statustag-<%= statustag.id %>" class="statustag statustag-<%= statustag.status %>" style="position: absolute; top: <%= statustag.relative_position_y %>px; left: <%= statustag.relative_position_x %>px;">
+<div id="statustag-project-<%= statustag.task.story.project.id %>-<%= statustag.id %>" class="statustag statustag-<%= statustag.status %>" style="position: absolute; top: <%= statustag.relative_position_y %>px; left: <%= statustag.relative_position_x %>px;">
 </div>
-<%= draggable_element "statustag-#{statustag.id}", :revert => '"failure"'%>
+<%= draggable_element "statustag-project-#{statustag.task.story.project.id}-#{statustag.id}", :revert => '"failure"'%>
