@@ -19,14 +19,14 @@
 </div>
 <%= drop_receiving_element("taskboard", 
 	:accept => "statustag", 
-	:with   => "'project_id=#{@project.id}&statustag_id=' + (element.id.split('-').last())", 
+	:with   => "'project_id='+ (element.id.split('-')[2]) +'&statustag_id=' + (element.id.split('-').last())", 
 	:url => { :controller => :statustags, :action=>:destroy},
 	:method => :delete,
 	:update => "dummy-for-actions")
 %>
 <%= drop_receiving_element("taskboard", 
 	:accept => "nametag", 
-	:with   => "'project_id=#{@project.id}&nametag_id=' + (element.id.split('-').last())", 
+	:with   => "'project_id='+ (element.id.split('-')[2]) +'&nametag_id=' + (element.id.split('-').last())", 
 	:url => { :controller => :nametags, :action => :destroy },
 	:method => :delete,
 	:update => "dummy-for-actions") 

@@ -12,7 +12,7 @@ class NametagsController < ApplicationController
         @member_team = @nametag.task.story.project.team_including(@member)        
         @tasks = Task.tasks_by_status(@nametag.task.story, @nametag.task.status)
         page.replace_html "#{@nametag.task.status}-#{@nametag.task.story_id}", :partial => "tasks/tasks_by_status", :locals => { :tasks => @tasks  } 
-        page.replace_html "menu_nametags", :partial => "taskboard/menu_nametags", :locals => { :team => @member_team }
+        page.replace_html "menu_nametags", :partial => "taskboard/menu_nametags", :locals => { :team => @member_team, :members => @members }
       end
     else
       render :inline => "", :status => :bad_request
@@ -34,7 +34,7 @@ class NametagsController < ApplicationController
   # DELETE /nametags/1?nametag=id
   def destroy
     @tag = Nametag.find(params[:nametag_id])
-    @html_id = 'nametag-' + @tag.id.to_s
+    @html_id = "nametag-project-#{@tag.task.story.project.id}-#{@tag.id.to_s}"
     @tag.destroy
     render :inline => "<script>Effect.Fade($('#{@html_id}'), {duration: 0.3});</script>", :status => :ok
   end
