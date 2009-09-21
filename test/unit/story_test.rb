@@ -23,6 +23,14 @@ class StoryTest < ActiveSupport::TestCase
     s.save
     assert_equal "EF003", s.realid
     assert_equal "EF004", Story.next_realid(projects(:escape_from_the_island))
+
+    # s = Story.create(:project => projects(:escape_from_the_island), :realid => 'EF999')
+    # s.save
+    # assert_equal 'EF999', s.realid
+    # s = Story.create(:project => projects(:escape_from_the_island))
+    # assert_equal 'EF1000', s.realid
+    # s.save
+    # assert_equal 'EF1001', Story.next_realid(projects(:escape_from_the_island))
   end
   
 	test "the default story priority is 10 less than the lower one, or zero if that is zero" do

@@ -12,16 +12,20 @@ class StoriesController < ApplicationController
     @project = (params[:project]) ? params[:project] : nil
     @projects = (params[:project]) ? [Project.find(params[:project])] : Team.find(params[:team]).projects
     @story_ids = []
+    @next_priorities = []
 	  @story = (params[:project]) ? Story.new(:project_id => params[:project]) : Story.new(:project_id => @projects.first.id )
 
-    @lowest_priority = 
+    # @lowest_priority = 
     
     @projects.each do |project| 
       @story_ids[project.id] = Story.next_realid(project.id)
-      @story.priority = project.next_priority if project.next_priority < @story.priority
+      @next_priorities[project.id] = project.next_priority
+      # @story.priority = @next_priorities[project.id] # if @next_priorities[project.id] < @story.priority
     end
 
-    render :partial => 'form', :object => @story, :locals => { :edit => false, :project =>  @project, :story_ids => @story_ids, :story_priorities => @story_priorities}, :status => :ok
+    @story.priority = @next_priorities[@projects.first.id]
+
+    render :partial => 'form', :object => @story, :locals => { :edit => false, :project =>  @project, :story_ids => @story_ids, :story_priorities => @story_priorities, :next_priorities => @next_priorities}, :status => :ok
   end
 
   # GET /stories/1/edit

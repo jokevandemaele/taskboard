@@ -14,9 +14,10 @@
 				<div class="admin-div-section" style="margin-top: 10px; width: 715px; padding-left: 20px;">
 					<%= image_tag 'admin/admin-div-actions-projects.png', :alt => 'Team', :style => 'position: relative; top: 10px; margin-left: 10px;' -%>
 					<h2 style="position: relative; top: 10; margin-left: 10px;">Project:</h2>
-					<%= select_tag "story[project_id]", options_from_collection_for_select(@projects, 'id', 'name'), :style => 'position: relative; top: 10px; margin-left: 10px; width: 500px;', :onChange => "$('story_realid').value = project_realids[$(story_project_id).value]" -%>
+					<%= select_tag "story[project_id]", options_from_collection_for_select(@projects, 'id', 'name'), :style => 'position: relative; top: 10px; margin-left: 10px; width: 500px;', :onChange => "$('story_realid').value = project_realids[$(story_project_id).value]; $('story_priority').value = project_next_priorities[$(story_project_id).value];" -%>
 					<script>
 						project_realids = eval('<%= story_ids.to_json -%>');
+            project_next_priorities = eval('<%= next_priorities.to_json -%>');
 					</script>
 				</div>
 			<% end %>
