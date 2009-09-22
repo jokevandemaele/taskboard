@@ -10,7 +10,7 @@ class Organization < ActiveRecord::Base
   after_create :add_default_team_and_project
 
   def add_default_team_and_project
-    team = Team.create(:name => "#{self.name} Team", :organization => self)
+    team = Team.create(:name => "#{self.name} Team", :organization => self, :color => "3771c8")
     project = Project.create(:name => "#{self.name} Project", :organization => self, :teams => [team])
   end
 
