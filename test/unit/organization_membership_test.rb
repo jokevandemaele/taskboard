@@ -1,14 +1,21 @@
 require 'test_helper'
 
 class OrganizationMembershipTest < ActiveSupport::TestCase
+  test "a member created with admin privileges should keep them" do
+    others = Organization.create(:name => 'The Others')
+    one_john = Member.create(:name => 'John Locke', :username => 'jlocke', :password => 'secret', :email => 'jlocke@example.com', :new_organization => others.id)
+    another_john = Member.create(:name => 'John Locke', :username => 'johnl', :password => 'secret', :email => 'johnl@example.com', :new_organization => others.id, :admin => true)
+
+    assert one_john.admins?(others)
+    assert another_john.admins?(others)
+  end
+
   test "first member added to an organization should be given admin status" do
     others = Organization.create(:name => 'The Others')
-    one_john = Member.create(:name => 'John Locke', :username => 'jlocke', :password => 'secret', :email => 'jlocke@example.com')
-    another_john = Member.create(:name => 'John Locke', :username => 'johnl', :password => 'secret', :email => 'johnl@example.com')
+    one_john = Member.create(:name => 'John Locke', :username => 'jlocke', :password => 'secret', :email => 'jlocke@example.com', :new_organization => others.id)
+    another_john = Member.create(:name => 'John Locke', :username => 'johnl', :password => 'secret', :email => 'johnl@example.com', :new_organization => others.id)
 
-    OrganizationMembership.create(:member => one_john, :organization => others)
     assert one_john.admins?(others)
-    OrganizationMembership.create(:member => another_john, :organization => others)
     assert !another_john.admins?(others)
   end
 

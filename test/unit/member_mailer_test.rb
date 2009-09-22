@@ -11,12 +11,13 @@ class MemberMailerTest < ActionMailer::TestCase
 
   test "create" do
     @member = Member.new(:name => 'marquete', :username => 'marquete', :password => 'secret', :email => 'marquete@gmail.com')
+    @member.new_organization = organizations(:widmore_corporation).id
     @member.save
-    @member.add_to_organization(organizations(:widmore_corporation).id)
-    @response = MemberMailer.deliver_create(@member, 'secret', 'Charles Widmore', 'http://www.example.com/')
+    @response = MemberMailer.deliver_create(@member)
     assert_equal 'Welcome to the Agilar Taskboard!', @response.subject
-    assert_equal 'marquete@gmail.com', @response.to[0]
+    assert_equal ['marquete@gmail.com'], @response.to
     assert_match /marquete/, @response.body
+    assert_match /secret/, @response.body
     assert !ActionMailer::Base.deliveries.empty? 
   end
 

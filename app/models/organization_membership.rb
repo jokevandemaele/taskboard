@@ -10,7 +10,7 @@ class OrganizationMembership < ActiveRecord::Base
   named_scope :administered, :conditions => { :admin => true }
 
   def make_first_member_admin
-    self.admin = true if organization.members.empty?
+    self.admin = (organization.members.empty?) ? true : nil unless self.admin
   end
 
   def add_member_to_default_team

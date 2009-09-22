@@ -38,11 +38,10 @@ class Admin::MembersController < ApplicationController
     # See how to move this to ajax
     @params = params
     @member = Member.new(@params[:member])
+    @member.new_organization = @params[:organization]
+    @member.new_picture = @params[:picture_file]
     if @member.save
-      @member.add_picture(@params[:picture_file])
-      @member.add_to_organization(@params[:organization])
-      # Send email notificating the lucky user
-      MemberMailer.deliver_create(@member, @params[:member][:password], @current_member.name, url_for(:controller => 'admin/members', :action => 'login', :only_path => false))
+      @member.added_by = @current_member.name
       render :inline => "<script>top.location.reload(true)</script>", :status => :created
     else
       render :partial => "user_form_error", :locals => { :object => @member }, :status => :bad_request

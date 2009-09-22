@@ -17,16 +17,33 @@ class Member < ActiveRecord::Base
   validates_presence_of :name, :username, :email
   validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => "Invalid email"
 
-  attr_accessor :password, :password_confirmation
+  attr_accessor :password, :password_confirmation, :clear_password, :added_by, :new_organization, :new_picture
   
+  before_create :generate_password_if_missing
+  after_create :assign_picture, :add_to_organization_and_send_email_notification
+
+  def assign_picture
+    self.add_picture(self.new_picture) if self.new_picture
+  end
+
+  def add_to_organization_and_send_email_notification
+    self.add_to_organization(self.new_organization)
+    # Send email notificating the lucky user
+    MemberMailer.deliver_create(self)
+  end
+
+  def generate_password_if_missing
+    salt = Time.now.to_s
+    self.clear_password = Digest::SHA1.hexdigest(salt + self.name + self.username + self.email)[0..7] if self.hashed_password.nil?
+  end
+
   # add user to organization
   def add_to_organization(organization)
     if organization
       
       @membership = OrganizationMembership.new(
         :member_id => self.id,
-        :organization_id => organization,
-        :admin => nil 
+        :organization_id => organization
       )
       
       @membership.save
@@ -61,6 +78,7 @@ class Member < ActiveRecord::Base
   # password: this method encrypts the plain text password to store it in the database
   def password=(pass)
     self.hashed_password = Member.encrypt(pass)
+    self.clear_password = pass
   end
 
   # authenticate: this method is used when a visitor tryies to login
