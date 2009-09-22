@@ -3,7 +3,6 @@ class Story < ActiveRecord::Base
   has_many :tasks, :dependent => :destroy
 
   validates_presence_of :realid, :project_id
-  validates_uniqueness_of :realid
 
   after_create :add_template_task
   before_save :default_priority

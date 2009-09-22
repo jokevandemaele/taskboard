@@ -1,0 +1,45 @@
+<% if !defined?(no_refresh) -%>
+<script>
+	Effect.Appear($('dialog-background-fade'), { duration: 0.2, to: 0.9 });
+</script>
+<% end -%>
+<div id="form-invite" class="admin-new" style="display:none;">
+	<div style="clear: both"></div>
+	<%= admin_open_div 765 -%>
+    <% form_remote_tag :url => { :action => :send_invitation }, :update => 'dummy-for-actions' do %>
+
+      <div class="admin-div-section">
+  			<%= image_tag "admin/admin-div-actions-members.png", :alt => "Name", :style => "position: relative; left: 10px; top: 2px; width: 50px;" -%>
+        <h2 style="position: relative; top: 5px; margin-left: 20px;">Member Name</h2>
+        <%= text_field_tag 'name', '', :style => "float:right; position: relative; top: 12px; right: 10px; background: url('/images/admin/admin-div-field.png') no-repeat top left; border: none; width: 168px; height: 26px; padding: 5px;" -%>
+      </div>
+
+      <div class="admin-div-section">
+  			<%= image_tag "admin/admin-div-actions-email.png", :alt => "E-Mail", :style => "position: relative; left: 10px; top: 2px; width: 50px;" -%>
+        <h2 style="position: relative; top: 5px; margin-left: 20px;">E-Mail</h2>
+        <%= text_field_tag 'email', '', :style => "float:right; position: relative; top: 12px; right: 10px; background: url('/images/admin/admin-div-field.png') no-repeat top left; border: none; width: 168px; height: 26px; padding: 5px;" -%>
+      </div>
+
+      <div class="admin-div-section">
+  			<%= image_tag "admin/admin-div-actions-organizations.png", :alt => "Organization", :style => "position: relative; left: 10px; top: 2px; width: 50px;" -%>
+        <h2 style="position: relative; top: 5px; margin-left: 20px;">Organization</h2>
+        <%= text_field_tag 'organization', '', :style => "float:right; position: relative; top: 12px; right: 10px; background: url('/images/admin/admin-div-field.png') no-repeat top left; border: none; width: 168px; height: 26px; padding: 5px;" -%>
+      </div>
+      <div style='float: right; position:relative; top: 20px;'>
+  		 <%= image_submit_tag 'admin/admin-form-submit.png', :alt => 'Submit', :style => "width: 50px;" -%>
+  		 <%= image_tag 'admin/admin-form-cancel.png', :alt => 'Cancel', :style => "width: 45px;", :class => 'admin-form-cancel', :onClick => 'cancelForm(\'form-invite\');' -%>
+  		</div>
+      
+      <p style="color:red;">
+			<% errors.each do |error| %>
+        <%= error -%></br>
+			<% end %>
+			</p>
+    <% end %>
+		<div style="clear: both;"></div>
+	<%= admin_close_div 765 -%>
+</div>
+<script>
+	centerTo($('form-invite'),$('dialog-background-fade'));
+	Effect.Appear($('form-invite'), { afterFinish : function() { Form.Element.select($('name'))}});	
+</script>

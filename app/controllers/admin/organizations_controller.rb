@@ -111,4 +111,31 @@ class Admin::OrganizationsController < ApplicationController
       render :inline => "", :status => :internal_server_error
     end
   end
+
+  def invite
+    render :partial => 'invitation_form', :locals => {:errors => []}, :status => :ok
+  end
+
+  def send_invitation
+    @errors = []
+    @errors << "Organization already exists" if Organization.find_by_name(params[:organization].to_s)
+    @errors << "Member with that mail already exists" if Member.find_by_email(params[:email])
+
+    # create organization
+    @organization = Organization.new(:name => params[:organization])
+    @organization.save if @errors.empty?
+    
+    # create member
+    @member = Member.new(:name => params[:name], :new_organization => @organization.id, :username => params[:name].downcase.gsub(/ /, '.'), :email => params[:email])
+    
+    if @errors.empty? && @member.save
+      render :inline => "<script>location.reload(true)</script>", :status => :ok
+    else
+      @organization.destroy
+      render :partial => 'invitation_form',
+          :object => @organization,
+          :locals => { :no_refresh => true, :edit => false, :member => @member, :errors => @errors },
+              :status => :internal_server_error
+    end
+  end
 end

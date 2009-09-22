@@ -2,6 +2,8 @@
 body { background: url('/images/admin/admin-background.png') repeat-x #f1f6ff; } 
 img { border: none; vertical-align: middle; }
 a { text-decoration: none;}
+a:visited { color: #002255;}
+
 h1 { font-size: 28px; color: #002255;}
 p { color: #002255;}
 

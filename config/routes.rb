@@ -36,6 +36,8 @@ ActionController::Routing::Routes.draw do |map|
   map.logout '/logout', :controller => 'admin/members', :action => 'logout'
   map.access_denied '/access_denied', :controller => 'admin/members', :action => "access_denied"
   map.report_bug '/report_bug', :controller => 'admin/members', :action => 'report_bug'
+  map.report_bug '/invite', :controller => 'admin/members', :action => 'invite'
+
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   map.resources :products
 

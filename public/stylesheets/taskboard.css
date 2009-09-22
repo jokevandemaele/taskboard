@@ -8,6 +8,8 @@ table {
 	border-spacing: 0px;
 }
 
+a:visited { color: #002255;}
+
 #table_footer {
 	background: #162d50;
 	color: white;

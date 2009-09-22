@@ -71,6 +71,7 @@ class ApplicationController < ActionController::Base
   end
   
   def check_organizations_controller_perms(member, path, request)
+    return false if path['action'] == 'invite' || path['action'] == 'send_invitation'
     return session[:member] != nil if path['action'] == 'index'
     return @current_member.admin? if path['action'] == 'new'
     return @current_member.admin? if path['action'] == 'create'
@@ -172,7 +173,7 @@ class ApplicationController < ActionController::Base
     else                                                                                                                                                                                                                                         
       return redirect_to :controller => 'admin/organizations' if current_member.admins_any_organization?
       return redirect_to :controller => '/taskboard', :action => :show, :id => current_member.projects.first.id if current_member.projects.size == 1 && request.referer == url_for(:controller => 'admin/members', :action => :login, :only_path=>false)
-      redirect_to :controller => 'admin/projects', :action => 'index'
+      redirect_to :controller => 'admin/projects', :action => 'index' if !current_member.admins_any_organization?
     end
   end
 

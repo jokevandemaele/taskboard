@@ -181,4 +181,28 @@ class Admin::OrganizationsControllerTest < ActionController::TestCase
     assert_response :internal_server_error
     assert members(:cwidmore).admins?(organizations(:widmore_corporation))
   end
+  
+  test "only admin should be able to invite people" do
+    login_as_administrator
+    get :invite
+    assert_response :ok
+    post :send_invitation, { :name => "Miles", :organization => "Psicopats", :email => "miles@lost.com"}
+    assert_response :ok
+    
+    assert Organization.find_by_name("Psicopats")
+    assert member = Member.find_by_username("miles")
+    assert_equal 'miles@lost.com', member.email
+
+    login_as_organization_admin
+    get :invite
+    assert_response 302
+    get :send_invitation
+    assert_response 302
+
+    login_as_normal_user
+    get :invite
+    assert_response 302
+    get :send_invitation
+    assert_response 302
+  end
 end
