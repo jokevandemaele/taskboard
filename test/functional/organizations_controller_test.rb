@@ -183,6 +183,9 @@ class Admin::OrganizationsControllerTest < ActionController::TestCase
   end
   
   test "only admin should be able to invite people" do
+    ActionMailer::Base.deliveries.clear
+    assert ActionMailer::Base.deliveries.empty?
+
     login_as_administrator
     get :invite
     assert_response :ok
@@ -192,6 +195,14 @@ class Admin::OrganizationsControllerTest < ActionController::TestCase
     assert Organization.find_by_name("Psicopats")
     assert member = Member.find_by_username("miles")
     assert_equal 'miles@lost.com', member.email
+
+    email = MemberMailer.deliver_create(member)
+    assert !ActionMailer::Base.deliveries.empty?
+    assert_equal email.from, ['no-reply@agilar.org']
+    assert_equal email.to, ['miles@lost.com']
+    assert_equal email.subject, 'Welcome to the Agilar Taskboard!'
+    assert_match /Miles/, email.body
+    assert_match /Psicopats/, email.body
 
     login_as_organization_admin
     get :invite
