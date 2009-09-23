@@ -118,6 +118,11 @@ class Admin::OrganizationsController < ApplicationController
 
   def send_invitation
     @errors = []
+
+    @invite_info = {}
+    [:name, :email, :organization].each { |key| @invite_info[key] = (params[key]) ? params[key] : '' }
+
+    @errors << 'Please fill in all missing fields' if @invite_info.has_value?('')
     @errors << "Organization already exists" if Organization.find_by_name(params[:organization].to_s)
     @errors << "Member with that mail already exists" if Member.find_by_email(params[:email])
 
@@ -134,7 +139,7 @@ class Admin::OrganizationsController < ApplicationController
       @organization.destroy
       render :partial => 'invitation_form',
           :object => @organization,
-          :locals => { :no_refresh => true, :edit => false, :member => @member, :errors => @errors },
+          :locals => { :no_refresh => true, :edit => false, :member => @member, :errors => @errors, :invite_info => @invite_info },
               :status => :internal_server_error
     end
   end

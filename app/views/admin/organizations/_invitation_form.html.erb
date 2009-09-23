@@ -11,32 +11,32 @@
       <div class="admin-div-section">
   			<%= image_tag "admin/admin-div-actions-members.png", :alt => "Name", :style => "position: relative; left: 10px; top: 2px; width: 50px;" -%>
         <h2 style="position: relative; top: 5px; margin-left: 20px;">Member Name</h2>
-        <%= text_field_tag 'name', '', :style => "float:right; position: relative; top: 12px; right: 10px; background: url('/images/admin/admin-div-field.png') no-repeat top left; border: none; width: 168px; height: 26px; padding: 5px;" -%>
+        <%= text_field_tag 'name', (@invite_info) ? @invite_info[:name] : '', :style => "float:right; position: relative; top: 12px; right: 10px; background: url('/images/admin/admin-div-field.png') no-repeat top left; border: none; width: 168px; height: 26px; padding: 5px;" -%>
       </div>
 
       <div class="admin-div-section">
   			<%= image_tag "admin/admin-div-actions-email.png", :alt => "E-Mail", :style => "position: relative; left: 10px; top: 2px; width: 50px;" -%>
         <h2 style="position: relative; top: 5px; margin-left: 20px;">E-Mail</h2>
-        <%= text_field_tag 'email', '', :style => "float:right; position: relative; top: 12px; right: 10px; background: url('/images/admin/admin-div-field.png') no-repeat top left; border: none; width: 168px; height: 26px; padding: 5px;" -%>
+        <%= text_field_tag 'email', (@invite_info) ? @invite_info[:email] : '', :style => "float:right; position: relative; top: 12px; right: 10px; background: url('/images/admin/admin-div-field.png') no-repeat top left; border: none; width: 168px; height: 26px; padding: 5px;" -%>
       </div>
 
       <div class="admin-div-section">
   			<%= image_tag "admin/admin-div-actions-organizations.png", :alt => "Organization", :style => "position: relative; left: 10px; top: 2px; width: 50px;" -%>
         <h2 style="position: relative; top: 5px; margin-left: 20px;">Organization</h2>
-        <%= text_field_tag 'organization', '', :style => "float:right; position: relative; top: 12px; right: 10px; background: url('/images/admin/admin-div-field.png') no-repeat top left; border: none; width: 168px; height: 26px; padding: 5px;" -%>
+        <%= text_field_tag 'organization', (@invite_info) ? @invite_info[:organization] : '', :style => "float:right; position: relative; top: 12px; right: 10px; background: url('/images/admin/admin-div-field.png') no-repeat top left; border: none; width: 168px; height: 26px; padding: 5px;" -%>
       </div>
       <div style='float: right; position:relative; top: 20px;'>
   		 <%= image_submit_tag 'admin/admin-form-submit.png', :alt => 'Submit', :style => "width: 50px;" -%>
   		 <%= image_tag 'admin/admin-form-cancel.png', :alt => 'Cancel', :style => "width: 45px;", :class => 'admin-form-cancel', :onClick => 'cancelForm(\'form-invite\');' -%>
   		</div>
       
-      <p style="color:red;">
+      <p style="color:red; padding-top: 8px;">
 			<% errors.each do |error| %>
-        <%= error -%></br>
+        <%= error -%><br />
 			<% end %>
 			</p>
     <% end %>
-		<div style="clear: both;"></div>
+		<div style="clear: both;">&nbsp;</div>
 	<%= admin_close_div 765 -%>
 </div>
 <script>
