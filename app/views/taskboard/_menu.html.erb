@@ -42,22 +42,25 @@
 		   team_selected = (@view == :team)
 		%>
 		<% project_image = image_tag 'admin/admin-div-actions-projects.png' %>
-		<%= link_to "#{project_image} Project View ",
+		<%= link_to project_image,
 			{:action => :show,
 			:id => @current_member.last_project},
-			:class => !team_selected
+			:class => !team_selected,
+      :title => "Project View"
 		-%>
-		<%= link_to "#{team_image} Team View ",
+		<%= link_to team_image,
 			{:action => :team,
 			:id => @member_team.id},
-			:class => team_selected
-		-%><br />		
+			:class => team_selected,
+      :title => "Team View"
+		-%><br />
+
 	</div>
 	<% end %>
 </div>
 
 <div id="menu_expand">
-	<a href="#" onClick="expandMenu('taskboard');"><%= image_tag('menu_expand.png', :border => 0, :style => "position: relative; top: 11px; left: 14px;")-%></a>
+	<a href="#" onClick="expandMenu('taskboard');" style="position: relative; top: 8px; left: 10px;""><%= image_tag('menu_expand.png', :border => 0)-%></a>
 </div>
 <script>
 	expandMenu('taskboard');

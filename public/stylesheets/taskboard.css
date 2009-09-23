@@ -235,11 +235,8 @@ table td{
 	text-align: center;
 }
 /* Nametags and Statustags Style */
-.add_nametag {
-	width: 88px;
-	height: 106px;
-	text-align: center;
-}
+.add_nametag {width: 60px; height: 70px;	text-align: center; background: black;}
+.add_nametag img { height: 60px }
 .nametag {
 	background: url('/images/tags/nametags-bkg.png') left no-repeat;
 	width: 88px;
@@ -250,10 +247,15 @@ table td{
 	z-index: 2;
 }
 .nametag_menu {
-	background: url('/images/tags/nametags-bkg.png') left no-repeat;
-	position: relative;
-	top: 70px;
-	padding: 0;
+	background: url('/images/tags/nametags-menu-bkg.png') left no-repeat;
+  height: 12px;
+  width: 60px;
+  
+  position: relative;
+  top: 40px;
+  font-size: 9px;
+  font-weight: normal;
+  line-height: 10px;
 }
 
 .statustag {

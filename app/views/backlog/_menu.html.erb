@@ -32,16 +32,13 @@
 	-%>
 	<% if (@view == :project && (@project.teams.first.projects.size > 1 && !@project.guest_members.include?(@current_member))) || @view == :team-%>
 	<div id="menu_views">
-		<% team_image = image_tag 'admin/admin-div-actions-teams.png' 
-		   team_selected = (@view == :team)
-		%>
-		<% project_image = image_tag 'admin/admin-div-actions-projects.png' %>
-		<%= link_to "#{project_image} Project View ",
+		<% team_selected = (@view == :team) %>
+		<%= link_to image_tag('admin/admin-div-actions-projects.png'),
 			{:action => :show,
 			:id => @current_member.last_project_id},
 			:class => !team_selected
 		-%>
-		<%= link_to "#{team_image} Team View ",
+		<%= link_to image_tag('admin/admin-div-actions-teams.png'),
 			{:action => :team,
 			:id => @member_team.id},
 			:class => team_selected
@@ -51,8 +48,8 @@
 
 </div>
 
-<div id="menu_expand" style="position:absolute; top: 0px; left: 0px; z-index: 9; background: url('/images/menu_collapsed_background.png') left no-repeat transparent; height: 61px;width: 69px;">
-	<a href="#" onClick="expandMenu('backlog');"><%= image_tag('menu_expand.png', :border => 0, :style => "position: relative; top: 11px; left: 14px;")-%></a>
+<div id="menu_expand">
+	<a href="#" onClick="expandMenu('backlog');" style="position: relative; top: 8px; left: 10px;""><%= image_tag('menu_expand.png', :border => 0)-%></a>
 </div>
 <script>
 	expandMenu('backlog');
