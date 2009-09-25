@@ -113,12 +113,12 @@ function y(element){
 }
 
 function positionCreateX(draggable, droppable){
-	return (x(draggable) - (x(droppable) - window.pageXOffset) - 9);
+	return (x(draggable) - (x(droppable) - window.pageXOffset));
 }
 
 function positionCreateY(draggable, droppable, nametag){
 	if(nametag){
-		image_offset = 88;
+		image_offset = 58;
 	}else{
 		image_offset = 0;
 	}

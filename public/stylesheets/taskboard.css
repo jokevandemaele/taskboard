@@ -53,15 +53,16 @@ table td{ padding: 0px; }
 .add_nametag img { height: 60px }
 .nametag {
 	background: url('/images/tags/nametags-bkg.png') left no-repeat;
-	width: 88px;
-	height: 18px;
-	font-size: 10px;
+	width: 60px;
+	height: 12px;
+	font-size: 9px;
 	text-align: center;
 	font-weight: bold;
+  line-height: 10px;
 	z-index: 2;
 }
 .nametag_menu {
-	background: url('/images/tags/nametags-menu-bkg.png') left no-repeat;
+	background: url('/images/tags/nametags-bkg.png') left no-repeat;
   height: 12px;
   width: 60px;
   
