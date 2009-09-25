@@ -93,4 +93,19 @@ class StoriesController < ApplicationController
     @story.finish
     redirect_to :controller => :backlog, :action => (params[:project]) ? :show : :team, :id => (params[:project]) ? params[:project] : params[:team]
   end
+
+  def tasks_by_status
+    @story = Story.find(params[:id])
+    @status = params[:status]
+    case @status
+      when "in_progress"
+        @tasks = @story.tasks.in_progress
+      when "not_started"
+        @tasks = @story.tasks.not_started
+      when "finished"
+        @tasks = @story.tasks.finished
+      else
+        @tasks = []
+    end
+  end
 end

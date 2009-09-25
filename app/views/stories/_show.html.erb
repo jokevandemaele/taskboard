@@ -22,13 +22,19 @@
 		</script>
 	</td>
 	<td id="not_started-<%= story.id %>" style="<%= taskboard_border_style(@color, [ "left", "bottom"]) %>">
-		<%= render :partial => "tasks/tasks_by_status", :locals => { :tasks => story.tasks.not_started } %> 
+    <script>
+      <%= remote_function(:update => "not_started-#{story.id}", :url => { :controller => :stories, :action => :tasks_by_status, :id => story.id, :status => 'not_started' }) -%>
+    </script>
 	</td>
 	<td id="in_progress-<%= story.id %>" style="<%= taskboard_border_style(@color, [ "left", "bottom"]) %>">
-		<%= render :partial => "tasks/tasks_by_status", :locals => { :tasks => story.tasks.in_progress } %> 
+    <script>
+      <%= remote_function(:update => "in_progress-#{story.id}", :url => { :controller => :stories, :action => :tasks_by_status, :id => story.id, :status => 'in_progress' }) -%>
+    </script>
 	</td>
 	<td id="finished-<%= story.id %>" style="<%= taskboard_border_style(@color, [ "left", "right", "bottom"]) %>">
-		<%= render :partial => "tasks/tasks_by_status", :locals => { :tasks => story.tasks.finished } %> 
+    <script>
+      <%= remote_function(:update => "finished-#{story.id}", :url => { :controller => :stories, :action => :tasks_by_status, :id => story.id, :status => 'finished' }) -%>
+    </script>
 	</td>
 
 
