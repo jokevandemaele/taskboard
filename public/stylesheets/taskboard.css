@@ -33,37 +33,19 @@ table td{ padding: 0px; }
 
 /* Story Card Style */
 /* Story Style */
-.story-td {
-	background: white;
-}
-.story{
-	width: 184px;
-	height: 204px;
-	background: url('/images/story.png') no-repeat left; 
-}
-.story p{
-	margin: 0;
-}
-.story-container{
-	padding: 0;
-	width: 155px;
-	height: 150px;
-	margin: 0 auto;
-	position: relative;
-	top: 36px;
-}
-.story-field-realid{
-	text-align: right;
-	font-weight: bold;
-	position: relative;
-	top: -10px;
-	left: -2px;
-}
+.story-td { background: white; }
+.story{ width: 129px; height: 143px; background: url('/images/story.png') no-repeat left; }
+.story p{ margin: 0; }
+.story-container{ padding: 0; width: 108px; height: 105px; margin: 0 auto; position: relative; top: 25px; }
+.story-name-container{ padding: 0; width: 108px; height: 65px; margin: 0;}
+
+.story-field-realid{ font-size: 8px; text-align: right; font-weight: bold;	position: relative;	top: -12px; left: -2px; }
 .story-field-name {
 	float: left;
 	position: relative;
+  top: -10px;
 	margin-left: 50% !important;
-	font-size: 18px;
+	font-size: 12px;
 	text-align: center;
 }
 .storycard-priority{
@@ -81,9 +63,10 @@ table td{ padding: 0px; }
 .story-field-label {
 	margin: 0;
 	text-align: center;
+  font-size: 10px;
 }
 .story-field-number {
-	font-size: 24px;
+	font-size: 12px;
 	font-weight: bold;
 	text-align: center;
 }

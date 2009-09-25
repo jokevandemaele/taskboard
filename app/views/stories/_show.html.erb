@@ -1,8 +1,10 @@
 	<td class="story-td">
 		<div class="story" id="storycard-<%= story.id -%>" title="<%= story.name %>">
 			<div class="story-container" id="storycard-<%= story.id -%>-container">
-				<p class="story-field-realid" ><%= story.realid %></p>
-				<p id="storycard-<%= story.id %>-name" class="story-field-name"><%= story.name %></p>
+   			<div class="story-name-container" id="storycard-<%= story.id -%>-name-container">
+				  <p class="story-field-realid" ><%= story.realid %></p>
+				  <p id="storycard-<%= story.id %>-name" class="story-field-name"><%= story.name %></p>
+        </div>
 				<div style="clear: both;"></div>
 				<div class="storycard-priority">
 					<p class="story-field-label">Priority:</p>
@@ -12,11 +14,10 @@
 					<p class="story-field-label">Size:</p>
 					<p class="story-field-number"><%= story.size %></p>
 				</div>
-				
 			</div>
 		</div>
 		<script>
-		resizeFontSizeToFit($('storycard-<%= story.id %>-name'), $('storycard-<%= story.id -%>-container'));
+		resizeFontSizeToFit($('storycard-<%= story.id %>-name'), $('storycard-<%= story.id -%>-name-container'));
 		$('storycard-<%= story.id %>-name').setStyle({left: '-' + $('storycard-<%= story.id %>-name').offsetWidth / 2 + 'px'});
 		</script>
 	</td>
