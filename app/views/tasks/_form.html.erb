@@ -2,7 +2,6 @@
 $('adder-container').show();
 </script>
 <div id="form-add-task" style="position: fixed; top: 0px; left: 0px; display: none;" >
-
 	<%	remote_form_for @task, :update => {:success => "#{status}-#{story.id}"} do |f| %>
 		<%= button_to_function "Cancel", "cancel($('form-add-task'));", :id => "form-add-task-cancel"-%>
 		<%= f.submit "Save", :id => "form-add-task-submit" -%>
@@ -11,11 +10,12 @@ $('adder-container').show();
 			<a href="#" onClick="flip('form-add-task-fields','back');" >
 				<%= image_tag 'task_flip-new.png', 
 					:alt => 'Flip', 
+          :id => 'form-add-task-fields-flip',
 					:class => 'flip-task-image', 
 					:style => "position: absolute; top: 152px; left: 152px;" -%>
 			</a>
-			<div class="task-container-table">	
-			<div class="task-container-cell">	
+			<div class="task-container-table-new">	
+			<div class="task-container-cell-new">	
 				<%= f.text_field :name, 
 					:value => "Enter Task Here", 
 					:id => "form-add-task-task_name",

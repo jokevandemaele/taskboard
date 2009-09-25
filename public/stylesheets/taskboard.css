@@ -25,11 +25,13 @@ table td{ padding: 0px; }
 /* Menu - Add Task */
 #form-add-task{ position: absolute; margin: 0 auto; z-index: 101; 	background: url('/images/task-new.png') no-repeat left; width: 180px; height: 180px; }
 .form-task-task_name{ width: 100%; font-size: 18px; font-weight: bold; background: none; border: none;  text-align: center; color: #4d4d4d;	}
-#form-add-task-task_name { width: 100%; font-size: 18px; font-weight: bold; background: none; border: none; text-align: center; color: #4d4d4d; }
+#form-add-task-task_name { width: 100%; font-size: 18px; font-weight: bold; background: none; border: none; text-align: center; color: #4d4d4d; position: relative; left: 7px; top: 15px; }
 .form-task-task_description{ background: transparent; border: none; font-size: 12px; position: absolute; top:0px; left: 2px; overflow: hidden; }
 #form-add-task-task_description{ background: none; border: none; font-size: 12px; position: absolute; top:0px; left: 2px; }
 #form-add-task-submit{ position:absolute; left: 85px; top: 148px; z-index: 130; }
 #form-add-task-cancel{ position:relative; left: 12px; top: 148px; z-index: 130; }
+.task-container-table-new {	display: table;	position:absolute;	top: 0px;	width: 161px;	height: 124.6px;	background:transparent;	margin: 0 auto; }
+.task-container-cell-new { display: table-cell;	vertical-align: middle;	margin: 0 auto; }
 
 /* Story Card Style */
 /* Story Style */
