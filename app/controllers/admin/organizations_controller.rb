@@ -131,7 +131,7 @@ class Admin::OrganizationsController < ApplicationController
     @organization.save if @errors.empty?
     
     # create member
-    @member = Member.new(:name => params[:name], :new_organization => @organization.id, :username => params[:name].downcase.gsub(/ /, '.'), :email => params[:email])
+    @member = Member.new(:name => params[:name], :new_organization => @organization.id, :added_by => @current_member.name, :username => params[:name].downcase.gsub(/ /, '.'), :email => params[:email])
     
     if @errors.empty? && @member.save
       render :inline => "<script>location.reload(true)</script>", :status => :ok

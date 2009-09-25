@@ -7,7 +7,7 @@ class MemberTest < ActiveSupport::TestCase
     ActionMailer::Base.deliveries.clear
     assert ActionMailer::Base.deliveries.empty?
 
-    john = Member.create(:name => 'John Locke', :username => 'jlocke', :email => 'john@locke.com', :new_organization => 1)
+    john = Member.create(:name => 'John Locke', :username => 'jlocke', :email => 'john@locke.com', :new_organization => 1, :added_by => 'Charles Widmore')
 
     email = MemberMailer.deliver_create(john)
     assert !ActionMailer::Base.deliveries.empty?
@@ -15,6 +15,7 @@ class MemberTest < ActiveSupport::TestCase
     assert_equal email.to, ['john@locke.com']
     assert_equal email.subject, 'Welcome to the Agilar Taskboard!'
     assert_match /John Locke/, email.body
+    assert_match /Charles Widmore/, email.body
     assert_match organizations(:widmore_corporation).name, email.body
   end
 

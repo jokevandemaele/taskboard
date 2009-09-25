@@ -34,7 +34,7 @@ class Member < ActiveRecord::Base
 
   def generate_password_if_missing
     salt = Time.now.to_s
-    self.clear_password = Digest::SHA1.hexdigest(salt + self.name + self.username + self.email)[0..7] if self.hashed_password.nil?
+    self.password = Digest::SHA1.hexdigest(salt + self.name + self.username + self.email)[0..7] if self.hashed_password.nil?
   end
 
   # add user to organization
