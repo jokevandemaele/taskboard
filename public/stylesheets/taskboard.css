@@ -40,36 +40,12 @@ table td{ padding: 0px; }
 .story-name-container{ padding: 0; width: 108px; height: 65px; margin: 0;}
 
 .story-field-realid{ font-size: 8px; text-align: right; font-weight: bold;	position: relative;	top: -12px; left: -2px; }
-.story-field-name {
-	float: left;
-	position: relative;
-  top: -10px;
-	margin-left: 50% !important;
-	font-size: 12px;
-	text-align: center;
-}
-.storycard-priority{
-	position: absolute;
-	bottom: 5px;
-	left: 5px;
-}
+.story-field-name { float: left; position: relative; top: -10px; margin-left: 50% !important; font-size: 12px; text-align: center; }
+.storycard-priority{ position: absolute; bottom: 5px; left: 5px; }
+.storycard-size{ position: absolute; bottom: 5px; right: 5px; }
+.story-field-label { margin: 0; text-align: center; font-size: 10px; }
+.story-field-number { font-size: 12px; font-weight: bold; text-align: center; }
 
-.storycard-size{
-	position: absolute;
-	bottom: 5px;
-	right: 5px;
-}
-
-.story-field-label {
-	margin: 0;
-	text-align: center;
-  font-size: 10px;
-}
-.story-field-number {
-	font-size: 12px;
-	font-weight: bold;
-	text-align: center;
-}
 /* Nametags and Statustags Style */
 .add_nametag {width: 60px; height: 70px;	text-align: center; background: black;}
 .add_nametag img { height: 60px }
