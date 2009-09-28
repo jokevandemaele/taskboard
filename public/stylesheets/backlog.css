@@ -2,6 +2,9 @@ body{
 	margin: 0;
 }
 
+a { color: #1b51a2; }
+a:hover { color: #2a7fff; }
+
 table {
 	width: 100%;
 	border-right: 4px solid #447821;

@@ -11,8 +11,8 @@ p { color: #002255;}
 #admin-container {	position: relative;	width: 1000px;	height: 100px;}
 #admin-content{	float: left;	width: 780px;	height: 100px;}
 #admin-sidebar{	float: left;	width: 220px;}
-#admin-sidebar-menu{	margin: 0;	padding: 0;	list-style: none;	text-align: right;	color: #00112b;	font-size: 16px;}
-#admin-sidebar-menu{	margin: 0;	padding: 0;	list-style: none;	text-align: right;	color: #00112b;	font-size: 16px;}
+#admin-sidebar-menu{ margin: 0;	padding: 0;	list-style: none;	text-align: right; color: #00112b; font-size: 16px;}
+#admin-sidebar-menu a {color: #1b51a2;}
 #admin-sidebar-menu a:hover{color: #2a7fff;}
 #admin-sidebar-search{background: url('/images/admin/admin-sidebar-search-input-background.png') no-repeat transparent;	border: none;	width: 140px;	height: 25px;	vertical-align: middle;	color: #00112b;	font-size: 14px;	padding-top: 3px;	padding-left: 10px;	position:relative;	float: left;	top: 20px;	left: 5px;}
 #admin-sidebar-menu img{ vertical-align: middle;}
