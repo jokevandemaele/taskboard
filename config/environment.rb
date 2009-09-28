@@ -10,7 +10,10 @@ RAILS_GEM_VERSION = '2.3.2' unless defined? RAILS_GEM_VERSION
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 
+MAJOR_VERSION = '0'
+MINOR_VERSION = '1'
 SVN_REVISION = '$LastChangedRevision$'.gsub(/\D/, '') unless defined? SVN_REVISION
+FULL_VERSION = "version #{MAJOR_VERSION}.#{MINOR_VERSION} revision #{SVN_REVISION}"
 
 Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence over those specified here.

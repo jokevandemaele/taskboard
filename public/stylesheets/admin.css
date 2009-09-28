@@ -91,13 +91,14 @@ p { color: #002255;}
 /* End Admin Form */
 
 /* Admin User Info */
-#admin-user-info { top: 0px; left: 0px; right: 0; text-align: right; background: red; }
+#admin-user-info { top: 0px; left: 0px; right: 0; text-align: right; float: right; height: 88px; position: relative; }
 #admin-user-info-text p{ margin: 0; color: #00112b; font-size: 21px; text-align: right;}
 .admin-user-info-text-user{ color: #003380;}
 #admin-user-info-text .admin-user-info-text-role{ color: #00112b; font-size: 13px;}
 #admin-user-info-text .admin-user-info-text-role a{ text-decoration: none; color: #00112b;}
 #admin-user-info-text .admin-user-info-text-role a:hover{ color: #2a7fff; }
 #admin-user-info-links { position:relative;}
+#admin-user-info #revision { position: absolute; bottom: 0; right: 92px; font-size: 12px; }
 /* End Admin User Info */
 
 /* Admin Teams */

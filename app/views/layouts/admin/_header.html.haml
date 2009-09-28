@@ -1,0 +1,36 @@
+#header
+  = admin_open_div(1000)
+  - if session[:member]
+    #admin-user-info
+      #admin-user-info-picture{ :style => "float:right;" }
+        = image_tag @current_member.show_picture
+
+      #admin-user-info-text{ :style => "float:right; margin-right: 5px" }
+        %p
+          Welcome,
+          %span.admin-user-info-text-user= @current_member.name
+        - if @current_member.admin?
+          %p.admin-user-info-text-role You are a System Administrator
+        - else
+          - if @current_member.admins_any_organization?
+            %p.admin-user-info-text-role You are an Organization Administrator
+
+        %p#admin-user-info-links{ :class => 'admin-user-info-text-role' }
+          [
+          = link_to "logout", :controller => "/logout"
+          |
+          = link_to_remote "edit profile", :url => edit_admin_member_url(@current_member), :method => :get, :update => "dummy-for-actions"
+          ]
+        %p#revision= FULL_VERSION
+
+  = image_tag "agilar_logo.png", :alt => "Agilar"
+  = admin_close_div(1000)
+  #admin-menu
+    %div{ :class => "admin-menu-element #{'admin-menu-current' if controller == 'admin/organizations'}"}= link_to 'organizations', admin_organizations_path()
+    %div{ :class => "admin-menu-element #{'admin-menu-current' if controller == 'admin/projects'}"}= link_to 'projects', admin_projects_path()
+    - if @current_member.admin?
+      %div{ :class => "admin-menu-element #{'admin-menu-current' if controller == 'admin/members'}"}= link_to 'people', admin_members_path()
+    /
+      <% if @current_member.admins_any_organization? -%>
+      <div class="admin-menu-element <%= "admin-menu-current" if controller == "admin/teams" -%>"><%= link_to "teams", admin_teams_path() %></div>
+      <% end -%>
