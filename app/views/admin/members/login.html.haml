@@ -27,6 +27,8 @@
           %input#member_password{ :name => "member[password]", :size => "20", :type => "password", :style => "font-size: 20px; color: #002255; text-align: left; position: absolute; top: 192px; left: 200px; border: none; background: url('/images/login/login_field.png') no-repeat transparent; width: 160px; height: 38px; padding: 2px 20px 0;" }
           %br
           %input#login-button{ :src => "/images/login/login_button.png", :type => "image", :alt => "Login", :style => "position:absolute; top: 237px; left: 315px;" }
+    #revision
+      %p $LastChangedRevision$
     %script
       centerTo($('login-container'),$('container'));
       window.setTimeout("$('member_username').focus();", 100);

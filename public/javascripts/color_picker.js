@@ -43,12 +43,21 @@ function generate_color_table(target_object) {
   var content = '<table><tbody>';
   var color;
   var i, j, k, colors_index = 0;
+/*
   var colors = new Array('ff0000', 'd70000', 'af0000', '870000', '5f0000', '370000',
                           'ffff00', 'd7d700', 'afaf00', '878700', '5f5f00', '373700',
                           '00ff00', '00d700', '00af00', '008700', '005f00', '003700',
                           '00ffff', '00d7d7', '00afaf', '008787', '005f5f', '003737',
                           '0000ff', '0000d7', '0000af', '000087', '00005f', '000037',
                           'ff00ff', 'd700d7', 'af00af', '870087', '5f005f', '370037'
+                          );
+*/
+  var colors = new Array( '00ff00', '32cd32', '228b57', '3cb371', '00fa9a', '66cdaa',
+                          '9acd32', 'ffd700', 'ffff00', 'eee8aa', 'f0e68c', 'bdb76b',
+                          'ff69b4', 'ff1493', 'ff7f50', 'ff6347', 'dc143c', 'ff0000',
+                          'd8bfd8', 'da70d6', 'ff00ff', 'ba55d3', '9966cc', '800080',
+                          'b0c4de', 'add8e6', '00bfff', '1e90ff', '0000ff', '4682b4',
+                          '7b68ee', '6a5acd', '483d8b', 'c0c0c0', 'a9a9a9', '708090'
                           );
 
   colors_index = 0;
