@@ -28,7 +28,7 @@
           %br
           %input#login-button{ :src => "/images/login/login_button.png", :type => "image", :alt => "Login", :style => "position:absolute; top: 237px; left: 315px;" }
     #revision
-      %p $LastChangedRevision$
+      %p= SVN_REVISION
     %script
       centerTo($('login-container'),$('container'));
       window.setTimeout("$('member_username').focus();", 100);
