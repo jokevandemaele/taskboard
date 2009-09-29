@@ -5,15 +5,14 @@
   %table
     %tr
       %th{ :style => "width: 190px;" }= @member_team.name
-      %th{ :style=> "width: 25%; #{taskboard_border_style(@color, [ "left", "bottom"])}"}= image_tag "taskboard_not_started.png", :alt => "Not Started"
-      %th{ :style=> "width: 50%; #{taskboard_border_style(@color, [ "left", "bottom"])}"}= image_tag "taskboard_in_progress.png", :alt => "In Progress"
-      %th{ :style=> "width: 25%; #{taskboard_border_style(@color, [ "left", "right", "bottom"])}"}= image_tag "taskboard_finished.png", :alt => "Finished"
+      %th{ :style=> "width: 30%; max-width: 50%; #{taskboard_border_style(@color, [ "left", "bottom"])}"}= image_tag "taskboard_not_started.png", :alt => "Not Started"
+      %th{ :style=> "width: 30%; max-width: 50%; #{taskboard_border_style(@color, [ "left", "bottom"])}"}= image_tag "taskboard_in_progress.png", :alt => "In Progress"
+      %th{ :style=> "width: 30%; max-width: 50%; #{taskboard_border_style(@color, [ "left", "right", "bottom"])}"}= image_tag "taskboard_finished.png", :alt => "Finished"
     - for story in @stories_by_priority
       - if story.priority != -1
         %tr{:id => "story-#{story.id}" }
           = render :partial => "stories/show", :locals => { :story => story, :project => @project }
   			
-= drop_receiving_element("taskboard", :accept => "statustag", :with   => "'project_id='+ (element.id.split('-')[2]) +'&statustag_id=' + (element.id.split('-').last())", :url => { :controller => :statustags, :action=>:destroy},	:method => :delete,	:update => "dummy-for-actions")
-= drop_receiving_element("taskboard", :accept => "nametag", :with   => "'project_id='+ (element.id.split('-')[2]) +'&nametag_id=' + (element.id.split('-').last())", :url => { :controller => :nametags, :action => :destroy },	:method => :delete,	:update => "dummy-for-actions") 
+%script= "new YAHOO.util.DDTarget('taskboard');"
 
 #dummy-for-actions

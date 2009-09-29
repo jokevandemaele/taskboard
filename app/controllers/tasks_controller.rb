@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
   before_filter :login_required
   before_filter :check_permissions
+  layout nil
   
   # GET /tasks
   def index
@@ -39,7 +40,7 @@ class TasksController < ApplicationController
     
     if @task.save
       @tasks = Task.tasks_by_status(@task.story,params[:status])
-      render :partial => "tasks/tasks_by_status", :locals => { :tasks => @tasks, :new_task => true }
+      render :partial => "tasks/tasks_by_status", :locals => { :tasks => @tasks, :new_task => true, :story => @task.story, :status => params[:status] }
     else
       render :action => "new"
     end
@@ -65,7 +66,7 @@ class TasksController < ApplicationController
   # DELETE /tasks/1
   def destroy
     @task = Task.find(params[:id])
-    @html_id = 'task-' + @task.id.to_s
+    @html_id = "task-#{@task.id.to_s}-li"
     if @task.destroy
       render :inline => "<script>Effect.Fade($('#{@html_id}'), {duration: 0.2});</script>", :status => :ok
     else
@@ -110,16 +111,19 @@ class TasksController < ApplicationController
     if(@task.status == 'finished')
 	    @task.remove_tags
     end
-    @task.save
-    
-    # This will be necessary for the update
-    @new_status_tasks = Task.tasks_by_status(@task.story,@task.status)
-    @old_status_tasks = Task.tasks_by_status(old_story,old_status)
-
-    render :update do |page|
-        page.replace_html "#{@task.status}-#{@task.story_id}", :partial => "tasks/tasks_by_status", :locals => { :tasks => @new_status_tasks  } 
-        page.replace_html "#{old_status}-#{old_story.id}", :partial => "tasks/tasks_by_status", :locals => { :tasks => @old_status_tasks } 
+    if @task.save
+      render :inline => '', :status => :ok
+    else
+      render :inline => '', :status => :internal_server_error
     end
+    
+    # # This will be necessary for the update
+    # @new_status_tasks = Task.tasks_by_status(@task.story,@task.status)
+    # @old_status_tasks = Task.tasks_by_status(old_story,old_status)
+    # render :update do |page|
+    #     page.replace_html "#{@task.status}-#{@task.story_id}", :partial => "tasks/tasks_by_status", :locals => { :tasks => @new_status_tasks  } 
+    #     page.replace_html "#{old_status}-#{old_story.id}", :partial => "tasks/tasks_by_status", :locals => { :tasks => @old_status_tasks } 
+    # end
   end
 
 end

@@ -1,0 +1,44 @@
+%td.story-td
+  .story{ :title => story.name, :id => "storycard-#{story.id}" }
+    .story-container{ :id => "storycard-#{story.id}-container" }
+      .story-name-container{ :id => "storycard-#{story.id}-name-container" }
+        %p.story-field-realid
+          = story.realid
+        %p.story-field-name{ :id => "storycard-#{story.id}-name" }
+          = story.name
+      %div{ :style => "clear: both;" }
+      .storycard-priority
+        %p.story-field-label
+          Priority:
+        %p.story-field-number
+          = story.priority
+      .storycard-size
+        %p.story-field-label
+          Size:
+        %p.story-field-number
+          = story.size
+  %script= "resizeFontSizeToFit($('storycard-#{story.id}-name'), $('storycard-#{story.id}-name-container')); $('storycard-#{story.id}-name').setStyle({left: '-' + $('storycard-#{story.id}-name').offsetWidth / 2 + 'px'});"
+%td{ :id => "not_started-#{story.id}", :style => taskboard_border_style(@color, [ 'left', 'bottom']) }
+  %div{:style => "width: 100%; text-align: center;"}
+    = image_tag 'waiting.gif', :id => 'waiting-in_progress-#{story.id}', :style => "vertical-aling: middle;"
+    %br
+    Loading...
+  %script= remote_function(:update => "not_started-#{story.id}", :url => { :controller => :stories, :action => :tasks_by_status, :id => story.id, :status => 'not_started' }) 
+%td{ :id => "in_progress-#{story.id}", :style => taskboard_border_style(@color, [ 'left', 'bottom']) }
+  %div{:style => "width: 100%; text-align: center;"}
+    = image_tag 'waiting.gif', :id => 'waiting-in_progress-#{story.id}', :style => "vertical-aling: middle;"
+    %br
+    Loading...
+  %script= remote_function(:update => "in_progress-#{story.id}", :url => { :controller => :stories, :action => :tasks_by_status, :id => story.id, :status => 'in_progress' })
+%td{ :id => "finished-#{story.id}", :style => taskboard_border_style(@color, [ 'left', 'right', 'bottom']) }
+  %div{:style => "width: 100%; text-align: center;"}
+    = image_tag 'waiting.gif', :id => 'waiting-in_progress-#{story.id}', :style => "vertical-aling: middle;"
+    %br
+    Loading...
+  %script= remote_function(:update => "finished-#{story.id}", :url => { :controller => :stories, :action => :tasks_by_status, :id => story.id, :status => 'finished' })
+
+%script= "new YAHOO.util.DDTarget('not_started-#{story.id}');"
+%script= "new YAHOO.util.DDTarget('in_progress-#{story.id}');"
+%script= "new YAHOO.util.DDTarget('finished-#{story.id}');"
+
+= drop_receiving_element("not_started-#{story.id}",  :accept => "task-add",  :with   => "'status=not_started' + '&story=#{story.id}'", :url => { :controller => :tasks, :action=>:show_form})

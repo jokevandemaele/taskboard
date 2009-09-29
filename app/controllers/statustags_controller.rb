@@ -11,7 +11,7 @@ class StatustagsController < ApplicationController
         @members = @statustag.task.story.project.members
         @member_team = @statustag.task.story.project.team_including(@member)        
         @tasks = Task.tasks_by_status(@statustag.task.story, @statustag.task.status)
-        page.replace_html "#{@statustag.task.status}-#{@statustag.task.story_id}", :partial => "tasks/tasks_by_status", :locals => { :tasks => @tasks  } 
+        page.replace_html "#{@statustag.task.status}-#{@statustag.task.story_id}", :partial => "tasks/tasks_by_status", :locals => { :tasks => @tasks, :story => @statustag.task.story, :status => @statustag.task.status} 
         page.replace_html "menu_statustags", :partial => "taskboard/menu_statustags", :locals => { :team => @member_team }
       end
     else
@@ -22,9 +22,10 @@ class StatustagsController < ApplicationController
   # PUT /statustags/1
   def update
     @project = Project.find(params[:project_id])
-    @statustag = Statustag.find(params[:statustag_id])
+    @statustag = Statustag.find(params[:id])
     @statustag.update_attributes(params[:statustag])
     if @project.stories.include?(@statustag.task.story) && @statustag.save
+      logger.error("saved!")
       render :inline => "", :status => :ok
     else
       render :inline => "", :status => :bad_request
@@ -33,10 +34,13 @@ class StatustagsController < ApplicationController
 
   # DELETE /statustags/1?statustag=id
   def destroy
-    @tag = Statustag.find(params[:statustag_id])
+    @tag = Statustag.find(params[:id])
     @html_id = "statustag-project-#{@tag.task.story.project.id}-#{@tag.id.to_s}"
-    @tag.destroy
-    render :inline => "<script>Effect.Fade($('#{@html_id}'), {duration: 0.3});</script>", :status => :ok
+    if @tag.destroy
+      render :inline => "", :status => :ok
+    else
+      render :inline => "", :status => :bad_request
+    end
   end
   
 end

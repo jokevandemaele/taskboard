@@ -74,3 +74,46 @@ function Slider(list, show, name){
 		
 	}
 }
+
+function Hiddener(list, show, name){
+	this.list = list;
+	this.show = show;
+	this.current = 0;
+	this.name = name;
+	
+	for (i = 0; i < show && i < list.length; i++){
+		$(list[i]).show();
+	}
+	
+	for(i = show; i < list.length; i++){
+		$(list[i]).hide();
+	}
+	
+	if(list.length > show){
+		$(name + "_next").show();
+	}else{
+		$(name + "_next").hide();
+	}
+	
+	$(name + "_prev").hide();
+	
+	this.expand = function(){		
+		for(i = 0; i < list.length; i++){
+			$(list[i]).show();
+		}
+		$(name + "_prev").show();
+		$(name + "_next").hide();
+	}
+
+	this.collapse = function(){		
+		for (i = 0; i < show && i < list.length; i++){
+			$(list[i]).show();
+		}
+		for(i = show; i < list.length; i++){
+			$(list[i]).hide();
+		}
+		$(name + "_prev").hide();
+		$(name + "_next").show();
+	}
+
+}

@@ -1,4 +1,0 @@
-<div id="nametag-project-<%= nametag.task.story.project.id %>-<%= nametag.id %>" class="nametag" title="<%= nametag.member.name %>" style="position: absolute; top: <%= nametag.relative_position_y %>px; left: <%= nametag.relative_position_x %>px; background-color: #<%= nametag.member.color %>;">
-	<%= nametag.member.formatted_nametag -%>
-</div>
-<%= draggable_element "nametag-project-#{nametag.task.story.project.id}-#{nametag.id}", :revert => '"failure"'%>

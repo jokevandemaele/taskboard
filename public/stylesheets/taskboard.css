@@ -6,21 +6,19 @@ table th{ width: 15%; font-size: 14px; text-align: center; background: white; pa
 table td{ padding: 0px; }
 
 #container { width: 100%; }
+li { margin: 0; list-style-type: none;}
+ul { margin: 0 auto; }
 
 /* Task Style */
-.task {	margin: 0 auto;	background: url(/images/task.png) no-repeat;	width: 126px;	height: 126px; }
+.task {	background: url(/images/task.png) no-repeat;	width: 126px;	height: 126px; float: left; margin: 5px;}
 .task-container-table {	display: table;	position:absolute;	top: 0px;	width: 124.6px;	height: 124.6px;	background:transparent;	margin: 0 auto; }
 .task-container-cell { display: table-cell;	vertical-align: middle;	margin: 0 auto; }
 .flip-task-image { position:relative;	left: 106px; top: -23px;	border: none;	z-index:1; }	
 .flip-task-image-back{	border: none;	z-index:1; }
-#image-link-back { position:relative;	left: 106px; top: 11px;	border: none;	z-index:1; }	
+.image-link-back { position:relative;	left: 106px; top: 11px;	border: none;	z-index:1; }	
 .task-name{ width: 100%; margin-top: 0; font-size: 12.6px; font-weight: bold; text-align: center; }
 .task-name-container{ height: 130px; position:relative; top: 7px; vertical-align: middle; margin: 0 auto; }
 .task-description{ position: relative; top: 2px; left: 7px; width: 110px; height: 96px; margin: 0; font-size: 9px;}
-
-/* Task List Style */
-.task-list, .task-list-item{ border: none; margin: 0; padding: 1px; }
-.listing-table{ width: 100%; border: 2px solid black; }
 
 /* Menu - Add Task */
 #form-add-task{ position: absolute; margin: 0 auto; z-index: 101; 	background: url('/images/task-new.png') no-repeat left; width: 180px; height: 180px; }

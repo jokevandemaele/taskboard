@@ -126,11 +126,11 @@ function positionCreateY(draggable, droppable, nametag){
 }
 
 function positionUpdateX(draggable, droppable){
-	return (x(draggable) - (x(droppable)));
+	return ((draggable.left + draggable.width) - (x(droppable)));
 }
 
-function positionUpdateY(draggable, droppable, nametag){
-	return (y(draggable)- (y(droppable)));
+function positionUpdateY(draggable, droppable){
+	return (draggable.bottom - (y(droppable)));
 }
 
 function timedRefresh(timeoutPeriod) {
@@ -139,7 +139,7 @@ function timedRefresh(timeoutPeriod) {
 
 function flip(id,side){
 	if(side == 'back'){
-		$(id).hide();
+		$(id).hide();	
 		$(id+"-flip").hide();
 		$(id + '-back').show();
 	}else{
