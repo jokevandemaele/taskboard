@@ -3,10 +3,10 @@
 					:value => @task.description, 
 					:class => "form-task-task_description",
 					:id => "edit-task-#{task.id}-description",
-					:cols => "22", :rows => "10", 
+					:cols => "15", :rows => "6", 
 					:onFocus => "this.select();"
 				-%>
-				<input type="submit" style="position: relative; top: 110px;" value="Update" >
+				<input type="submit" style="position: relative; top: 95px;" value="Update" >
 
 				<%= hidden_field_tag(:story_id, "#{story.id}") %>
 				<%= hidden_field_tag(:status, "#{status}") %>

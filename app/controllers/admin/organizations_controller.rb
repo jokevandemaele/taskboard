@@ -120,18 +120,18 @@ class Admin::OrganizationsController < ApplicationController
     @errors = []
 
     @invite_info = {}
-    [:name, :email, :organization].each { |key| @invite_info[key] = (params[key]) ? params[key] : '' }
+    [:name, :email, :organization].each { |key| @invite_info[key] = (params[key]) ? params[key].to_s.strip : '' }
 
     @errors << 'Please fill in all missing fields' if @invite_info.has_value?('')
-    @errors << "Organization already exists" if Organization.find_by_name(params[:organization].to_s)
-    @errors << "Member with that mail already exists" if Member.find_by_email(params[:email])
+    @errors << "Organization already exists" if Organization.find_by_name(@invite_info[:organization])
+    @errors << "Member with that mail already exists" if Member.find_by_email(@invite_info[:email])
 
     # create organization
-    @organization = Organization.new(:name => params[:organization])
+    @organization = Organization.new(:name => @invite_info[:organization])
     @organization.save if @errors.empty?
     
     # create member
-    @member = Member.new(:name => params[:name], :new_organization => @organization.id, :added_by => @current_member.name, :color => 'ff0000', :username => params[:name].downcase.gsub(/ /, '.'), :email => params[:email])
+    @member = Member.new(:name => @invite_info[:name], :new_organization => @organization.id, :added_by => @current_member.name, :color => 'ff0000', :username => @invite_info[:name].downcase.gsub(/ /, '.'), :email => @invite_info[:email])
     
     if @errors.empty? && @member.save
       render :inline => "<script>location.reload(true)</script>", :status => :ok
