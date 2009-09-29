@@ -131,52 +131,52 @@ var DDM = YAHOO.util.DragDropMgr;
 	        this.lastY = y; 
 	    }, 
 	 
-	    onDragOver: function(e, id) { 
-	     
-	        var srcEl = this.getEl(); 
-	        var destEl = Dom.get(id); 
-	 
-	        // We are only concerned with list items, we ignore the dragover 
-	        // notifications for the list. 
-	        if (destEl.nodeName.toLowerCase() == "li") { 
-	            var orig_p = srcEl.parentNode; 
-	            var p = destEl.parentNode; 
-	            var refresh = false;
-
-              if(srcEl.parentNode.id == 'table-list'){
-                refresh = true;
-                var parent_name = srcEl.parentNode.parentNode.parentNode.parentNode.parentNode.id.split('-');
-              }
-	    
-	            if (this.goingUp) { 
-	                p.insertBefore(srcEl, destEl); // insert above 
-	            } else { 
-	                p.insertBefore(srcEl, destEl.nextSibling); // insert below 
-	            } 
-              // // Now we should make the ajax call
-              // var element_name = srcEl.id.split('-');
-              // if(p.id != 'table-list'){
-              //   var status_name = p.id.split('-');
-              // }else{
-              //   var status_name = p.parentNode.parentNode.parentNode.parentNode.id.split('-');
-              // }
-              // var refresh = false;
-              // if(srcEl.parentNode.id == 'table-list'){
-              //   refresh = true;
-              //   var parent_name = srcEl.parentNode.parentNode.parentNode.parentNode.parentNode.id.split('-');
-              // }
-              // 
-              // if(element_name[0] == 'task' && (status_name[0] == 'not_started' || status_name[0] == 'in_progress' || status_name[0] == 'finished')){
-              //   new Ajax.Request('/tasks/update_task', {asynchronous:true, evalScripts:true, parameters:'task=' + (element_name[1]) + '&status=' + status_name[0] +'&story='+status_name[1] + '&authenticity_token=' + getAuthKey()})
-              //   if(refresh){
-              //     new Ajax.Updater('finished-'+parent_name[1], '/stories/tasks_by_status/'+parent_name[1]+'?status=finished', {asynchronous:true, evalScripts:true, parameters:'authenticity_token=' + getAuthKey()})
-              //     new Ajax.Updater(status_name[0]+'-'+status_name[1], '/stories/tasks_by_status/'+status_name[1]+'?status='+status_name[0], {asynchronous:true, evalScripts:true, parameters:'authenticity_token=' + getAuthKey()})
-              //   }
-              // }
-            
-	            DDM.refreshCache(); 
-	        } 
-	    } 
+	    // onDragOver: function(e, id) { 
+	    //  
+	    //     var srcEl = this.getEl(); 
+	    //     var destEl = Dom.get(id); 
+	    // 	 
+	    //     // We are only concerned with list items, we ignore the dragover 
+	    //     // notifications for the list. 
+	    //     if (destEl.nodeName.toLowerCase() == "li") { 
+	    //         var orig_p = srcEl.parentNode; 
+	    //         var p = destEl.parentNode; 
+	    //         //var refresh = false;
+	    // 
+	    //               // if(srcEl.parentNode.id == 'table-list'){
+	    //               //   refresh = true;
+	    //               //   var parent_name = srcEl.parentNode.parentNode.parentNode.parentNode.parentNode.id.split('-');
+	    //               // }
+	    //               // 	    
+	    // 									// 	            if (this.goingUp) { 
+	    // 									// 	                p.insertBefore(srcEl, destEl); // insert above 
+	    // 									// 	            } else { 
+	    // 									// p.insertBefore(srcEl, destEl.nextSibling); // insert below 
+	    // 									// 	            } 
+	    //               // // Now we should make the ajax call
+	    //               // var element_name = srcEl.id.split('-');
+	    //               // if(p.id != 'table-list'){
+	    //               //   var status_name = p.id.split('-');
+	    //               // }else{
+	    //               //   var status_name = p.parentNode.parentNode.parentNode.parentNode.id.split('-');
+	    //               // }
+	    //               // var refresh = false;
+	    //               // if(srcEl.parentNode.id == 'table-list'){
+	    //               //   refresh = true;
+	    //               //   var parent_name = srcEl.parentNode.parentNode.parentNode.parentNode.parentNode.id.split('-');
+	    //               // }
+	    //               // 
+	    //               // if(element_name[0] == 'task' && (status_name[0] == 'not_started' || status_name[0] == 'in_progress' || status_name[0] == 'finished')){
+	    //               //   new Ajax.Request('/tasks/update_task', {asynchronous:true, evalScripts:true, parameters:'task=' + (element_name[1]) + '&status=' + status_name[0] +'&story='+status_name[1] + '&authenticity_token=' + getAuthKey()})
+	    //               //   if(refresh){
+	    //               //     new Ajax.Updater('finished-'+parent_name[1], '/stories/tasks_by_status/'+parent_name[1]+'?status=finished', {asynchronous:true, evalScripts:true, parameters:'authenticity_token=' + getAuthKey()})
+	    //               //     new Ajax.Updater(status_name[0]+'-'+status_name[1], '/stories/tasks_by_status/'+status_name[1]+'?status='+status_name[0], {asynchronous:true, evalScripts:true, parameters:'authenticity_token=' + getAuthKey()})
+	    //               //   }
+	    //               // }
+	    //             
+	    //         DDM.refreshCache(); 
+	    //     } 
+	    // } 
 	}); 
 	
   ////////////////////////////////////////////////////////////////////////////// 
