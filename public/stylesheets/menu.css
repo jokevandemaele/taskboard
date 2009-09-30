@@ -4,8 +4,6 @@ div#menu_report_bug img { border: none; margin:0 auto;}
 
 #menu_expand { position:fixed; top: 0px; left: 0px; z-index: 9;  background: url('/images/menu_collapsed_background.png') left no-repeat transparent; height: 43px; width: 49px;}
 
-.add_status { height: 35px; }
-
 #menu_space {background: transparent; height: 85px; width: 100%; }
 #taskboard_menu_logout { height: 60px; position: fixed; right: 10px; top: 17px;}
 #menu_views { width: 50px; position: fixed; right: 85px; top: 10px;}

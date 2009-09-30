@@ -1,19 +1,36 @@
 %tr
-  %td= image_tag 'tags/status/statustag_please_analyze.png' , :border => 0, :id => "add-status-please_analyze", :class => "add_status"
-  %td= image_tag 'tags/status/statustag_please_test.png' , :border => 0, :id => "add-status-please_test", :class => "add_status"
-  %td= image_tag 'tags/status/statustag_done.png' , :border => 0, :id => "add-status-done", :class => "add_status"
-  %td= image_tag 'tags/status/statustag_blocked.png' , :border => 0, :id => "add-status-blocked", :class => "add_status"
+  %td
+    #add-statustag-please_analyze{:class => "statustag statustag-please_analyze add_status" }
+  %td
+    #add-statustag-please_test{ :class => "statustag statustag-please_test add_status" }
+  %td
+    #add-statustag-done{ :class => "statustag statustag-done add_status" }
+  %td
+    #add-statustag-blocked{ :class => "statustag statustag-blocked add_status" }
 %tr
-  %td= image_tag 'tags/status/statustag_high_priority.png' , :border => 0, :id => "add-status-high_priority", :class => "add_status"
-  %td= image_tag 'tags/status/statustag_waiting.png' , :border => 0, :id => "add-status-waiting", :class => "add_status"
-  %td= image_tag 'tags/status/statustag_delegated.png' , :border => 0, :id => "add-status-delegated", :class => "add_status"
-  %td= image_tag 'tags/status/statustag_bug.png' , :border => 0, :id => "add-status-bug", :class => "add_status"
-    
-= draggable_element "add-status-please_analyze", :revert => '"failure"'
-= draggable_element "add-status-please_test", :revert => '"failure"'
-= draggable_element "add-status-done", :revert => '"failure"'
-= draggable_element "add-status-blocked", :revert => '"failure"'
-= draggable_element "add-status-high_priority", :revert => '"failure"'
-= draggable_element "add-status-waiting", :revert => '"failure"'
-= draggable_element "add-status-delegated", :revert => '"failure"'
-= draggable_element "add-status-bug", :revert => '"failure"'
+  %td
+    #add-statustag-high_priority{ :class => "statustag statustag-high_priority add_status" }
+  %td
+    #add-statustag-waiting{ :class => "statustag statustag-waiting add_status" }
+  %td
+    #add-statustag-delegated{ :class => "statustag statustag-delegated add_status" }
+  %td
+    #add-statustag-bug{ :class => "statustag statustag-bug add_status" }
+
+  %script= "new YAHOO.DDAddTags('add-statustag-please_analyze')"
+  %script= "new YAHOO.DDAddTags('add-statustag-please_test')"
+  %script= "new YAHOO.DDAddTags('add-statustag-done')"
+  %script= "new YAHOO.DDAddTags('add-statustag-blocked')"
+  %script= "new YAHOO.DDAddTags('add-statustag-high_priority')"
+  %script= "new YAHOO.DDAddTags('add-statustag-waiting')"
+  %script= "new YAHOO.DDAddTags('add-statustag-delegated')"
+  %script= "new YAHOO.DDAddTags('add-statustag-bug')"
+
+/ = draggable_element "add-status-please_analyze", :revert => '"failure"'
+/ = draggable_element "add-status-please_test", :revert => '"failure"'
+/ = draggable_element "add-status-done", :revert => '"failure"'
+/ = draggable_element "add-status-blocked", :revert => '"failure"'
+/ = draggable_element "add-status-high_priority", :revert => '"failure"'
+/ = draggable_element "add-status-waiting", :revert => '"failure"'
+/ = draggable_element "add-status-delegated", :revert => '"failure"'
+/ = draggable_element "add-status-bug", :revert => '"failure"'

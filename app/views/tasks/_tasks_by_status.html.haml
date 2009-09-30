@@ -7,19 +7,19 @@
     %tr
       %td#table-list
         - tasks.each do |task|
-          %li.task{:id => "task-#{task.id}-li", :style => "display: none;" }
+          %li.task{:id => "task-#{task.id}-project-#{task.story.project.id}-li", :style => "display: none;" }
             = render :partial => "tasks/finished_task", :locals => { :task => task }
-          %script= "new YAHOO.example.DDList('task-#{task.id}-li')"
-          - task_list_slider << "task-#{task.id}-li"
+          %script= "new YAHOO.example.DDList('task-#{task.id}-project-#{task.story.project.id}-li')"
+          - task_list_slider << "task-#{task.id}-project-#{task.story.project.id}-li"
       %td{:style => "vertical-align: top;"}
         = image_tag "expand.png",  :id => "finished_#{story.id}_slider_next", :alt => "Show More", :title => "Show All", :class => "expand", :style => "border: none; display: none;", :onClick => "javascript:finished_#{story.id}_slider.expand();", :style => "cursor: pointer; display: none;"
         = image_tag "collapse.png", :id => "finished_#{story.id}_slider_prev", :alt => "Show Less",:title => "Show First 3", :class => "collapse", :style => "border: none; display: none;", :onClick => "javascript:finished_#{story.id}_slider.collapse();", :style => "cursor: pointer; display: none; position: relative; top: 2px; right: 4px;"
   %script= "finished_#{story.id}_slider = new Hiddener(#{task_list_slider.to_json},3,'finished_#{story.id}_slider');"
 - else
   - tasks.each do |task|
-    %li.task{:id => "task-#{task.id}-li"}
+    %li.task{:id => "task-#{task.id}-project-#{task.story.project.id}-li"}
       = render :partial => "tasks/task", :locals => { :task => task }
-    %script= "new YAHOO.example.DDList('task-#{task.id}-li')"
-    = drop_receiving_element("task-#{task.id}-li", :accept => "add_status",  :with   => "'project_id=#{task.story.project.id}&statustag[status]=' + (element.id.split('-').last())+ '&statustag[task_id]=#{task.id}&statustag[relative_position_x]='+ positionCreateX($(element),$('task-#{task.id}-li')) + '&statustag[relative_position_y]='+ positionCreateY($(element),$('task-#{task.id}-li'),false)",  :url => { :controller => :statustags }, :method => :post)
-    = drop_receiving_element("task-#{task.id}-li",  :accept => "add_nametag",  :with   => "'project_id=#{task.story.project.id}&nametag[member_id]=' + (element.id.split('-').last())+ '&nametag[task_id]=#{task.id}&nametag[relative_position_x]='+ positionCreateX($(element),$('task-#{task.id}-li')) + '&nametag[relative_position_y]=' + positionCreateY($(element),$('task-#{task.id}-li'),true)",  :url => { :controller => :nametags })
-    %script= "new YAHOO.util.DDTarget('task-#{task.id}-li');"
+    %script= "new YAHOO.example.DDList('task-#{task.id}-project-#{task.story.project.id}-li')"
+    = drop_receiving_element("task-#{task.id}-project-#{task.story.project.id}-li", :accept => "add_status",  :with   => "'project_id=#{task.story.project.id}&statustag[status]=' + (element.id.split('-').last())+ '&statustag[task_id]=#{task.id}&statustag[relative_position_x]='+ positionCreateX($(element),$('task-#{task.id}-project-#{task.story.project.id}-li')) + '&statustag[relative_position_y]='+ positionCreateY($(element),$('task-#{task.id}-project-#{task.story.project.id}-li'),false)",  :url => { :controller => :statustags }, :method => :post)
+    = drop_receiving_element("task-#{task.id}-project-#{task.story.project.id}-li",  :accept => "add_nametag",  :with   => "'project_id=#{task.story.project.id}&nametag[member_id]=' + (element.id.split('-').last())+ '&nametag[task_id]=#{task.id}&nametag[relative_position_x]='+ positionCreateX($(element),$('task-#{task.id}-project-#{task.story.project.id}-li')) + '&nametag[relative_position_y]=' + positionCreateY($(element),$('task-#{task.id}-project-#{task.story.project.id}-li'),true)",  :url => { :controller => :nametags })
+    %script= "new YAHOO.util.DDTarget('task-#{task.id}-project-#{task.story.project.id}-li');"

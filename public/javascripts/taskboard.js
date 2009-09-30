@@ -180,7 +180,7 @@ var DDM = YAHOO.util.DragDropMgr;
 	}); 
 	
   ////////////////////////////////////////////////////////////////////////////// 
-  // custom drag and drop implementation for tasks
+  // custom drag and drop implementation for updating and removing tags
   ////////////////////////////////////////////////////////////////////////////// 
   
        YAHOO.DDTags = function(id, sGroup, config) { 
@@ -251,6 +251,7 @@ var DDM = YAHOO.util.DragDropMgr;
             new Ajax.Request('/'+element_name[0]+'s/'+element_name[3], {asynchronous:true, evalScripts:true,  method:'put', parameters:'project_id='+ element_name[2]+'&'+element_name[0]+'[task_id]=' + (dest_name[1]) + '&'+element_name[0]+'[relative_position_x]='+ x + '&'+element_name[0]+'[relative_position_y]='+ y + '&authenticity_token=' + getAuthKey()})
             srcEl.parentNode.removeChild(srcEl);
             destEl.appendChild(srcEl);
+						DDM.refreshCache();
           }
         }else{
           if(dest_name[0] == 'taskboard'){
@@ -268,6 +269,90 @@ var DDM = YAHOO.util.DragDropMgr;
         }
       }, 
     });
+
+
+	  ////////////////////////////////////////////////////////////////////////////// 
+	  // custom drag and drop implementation for adding tags
+	  ////////////////////////////////////////////////////////////////////////////// 
+
+	       YAHOO.DDAddTags = function(id, sGroup, config) { 
+
+	           YAHOO.DDAddTags.superclass.constructor.call(this, id, sGroup, config); 
+
+	           this.logger = this.logger || YAHOO; 
+	           var el = this.getDragEl();
+
+	           this.goingUp = false; 
+	           this.lastY = 0; 
+	       }; 
+
+	    YAHOO.extend(YAHOO.DDAddTags, YAHOO.util.DDProxy, { 
+		    endDrag: function(e) { 
+	      },
+	       startDrag: function(x, y) { 
+	         // make the proxy look like the source element 
+	         var dragEl = this.getDragEl(); 
+	         var clickEl = this.getEl(); 
+
+	         dragEl.innerHTML = clickEl.innerHTML;
+
+	         if(Dom.hasClass(clickEl,'statustag')){
+	           Dom.removeClass(dragEl, dragEl.className)
+	           if(Dom.hasClass(clickEl, 'statustag-done')){ Dom.addClass(dragEl, 'statustag-done')}
+	           if(Dom.hasClass(clickEl, 'statustag-blocked')){ Dom.addClass(dragEl, 'statustag-blocked')}
+	           if(Dom.hasClass(clickEl, 'statustag-high_priority')){ Dom.addClass(dragEl, 'statustag-high_priority')}
+	           if(Dom.hasClass(clickEl, 'statustag-waiting')){ Dom.addClass(dragEl, 'statustag-waiting')}
+	           if(Dom.hasClass(clickEl, 'statustag-delegated')){ Dom.addClass(dragEl, 'statustag-delegated')}
+	           if(Dom.hasClass(clickEl, 'statustag-bug')){ Dom.addClass(dragEl, 'statustag-bug')}
+	           if(Dom.hasClass(clickEl, 'statustag-please_analyze')){ Dom.addClass(dragEl, 'statustag-please_analyze')}
+	           if(Dom.hasClass(clickEl, 'statustag-please_test')){ Dom.addClass(dragEl, 'statustag-please_test')}
+	           Dom.setStyle(dragEl, "border", "none"); 
+	           Dom.setStyle(dragEl, "width", "50px");
+	           Dom.setStyle(dragEl, "height", "37px");
+	         }else{
+	           Dom.removeClass(dragEl, dragEl.className);
+	           Dom.addClass(dragEl, 'nametag')
+	           Dom.setStyle(dragEl, "border", "none"); 
+	           Dom.setStyle(dragEl, "width", "60px");
+	           Dom.setStyle(dragEl, "height", "12px");
+	           Dom.setStyle(dragEl, "background-color", clickEl.getStyle('background-color'));
+	         }
+	       },
+
+	      onDragDrop: function(e, id) {
+	        var destEl = Dom.get(id); 
+	        var destDD = DDM.getDDById(id); 
+	        var srcEl = this.getEl();
+	        var dragEl = this.getDragEl();
+         	var clickEl = this.getEl();
+	        var element_name = srcEl.id.split('-');
+	        var dest_name = destEl.id.split('-');
+          var drag_region = DDM.interactionInfo.draggedRegion;
+					var specific_parameter = ''
+					
+					if(element_name[1] == 'statustag')
+						specific_parameter = 'statustag[status]';
+					if(element_name[1] == 'nametag')
+						specific_parameter = 'nametag[member_id]';
+						
+					if((element_name[1] == 'statustag' || element_name[1] == 'nametag') && dest_name[0] == 'task'){
+						// Update database
+						var x = drag_region.left - $(destEl.id).cumulativeOffset().left
+						var y = drag_region.top - $(destEl.id).cumulativeOffset().top
+						request = new Ajax.Request('/'+element_name[1]+'s/', {
+							asynchronous:true, 
+							evalScripts:true,  
+							method:'post', 
+							parameters:'project_id='+ dest_name[3]+'&'+'statustag[task_id]=' + (dest_name[1]) + '&'+'statustag[relative_position_x]='+ x + '&'+'statustag[relative_position_y]='+ y + '&'+specific_parameter+"="+ element_name[2]+ '&authenticity_token=' + getAuthKey(),
+							onSuccess: function(transport) {
+								new Ajax.Updater(destEl.id, '/tasks/'+$(destEl.id).id.split('-')[1], {asynchronous:false, method:'get',evalScripts:true, parameters:'authenticity_token=' + getAuthKey()})
+						  },
+						});
+					}
+	      }, 
+	    });
+
+
   })(); 
 
   
