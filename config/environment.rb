@@ -12,7 +12,7 @@ require File.join(File.dirname(__FILE__), 'boot')
 
 VERSION = '0.1'
 SVN_REVISION = `svnversion -n`.gsub(/\D/, '') unless defined? SVN_REVISION
-FULL_VERSION = "version #{MAJOR_VERSION}.#{MINOR_VERSION} revision #{SVN_REVISION}"
+FULL_VERSION = "version #{VERSION} revision #{SVN_REVISION}"
 
 Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence over those specified here.
