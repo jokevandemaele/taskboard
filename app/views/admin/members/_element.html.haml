@@ -1,0 +1,13 @@
+- element_class = element.class.to_s.downcase
+- parent_class = parent.class.to_s.downcase
+.admin-div-element.admin-div-element-core{ :id => "#{parent_class}-#{parent.id}-#{element_class}-#{element.id}" }
+  %div{ :id => "name-#{parent_class}-#{parent.id}-#{element_class}-#{element.id}-container" }
+    %p{ :title => element.name, :id => "name-#{parent_class}-#{parent.id}-#{element_class}-#{element.id}" }
+      - if defined?(contact) && contact
+        %a{ :href => "mailto:#{element.email}" }
+        = image_tag "admin/admin-div-actions-email-small.png", :alt => "email", :title => "Send E-Mail to Administrator"
+        =h element.name
+      - else
+        =h element.name
+      
+  %script= "resizeFontSizeToFit($('name-#{parent_class}-#{parent.id }-#{element_class }-#{element.id }'),$('name-#{parent_class}-#{parent.id }-#{element_class }-#{element.id }-container')); $('name-#{parent_class}-#{parent.id }-#{element_class }-#{element.id }').setStyle({ width: '100%' });"

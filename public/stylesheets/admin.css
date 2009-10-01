@@ -16,7 +16,13 @@ p { color: #002255;}
 #admin-sidebar-menu a:hover{color: #2a7fff;}
 #admin-sidebar-search{background: url('/images/admin/admin-sidebar-search-input-background.png') no-repeat transparent;	border: none;	width: 140px;	height: 25px;	vertical-align: middle;	color: #00112b;	font-size: 14px;	padding-top: 3px;	padding-left: 10px;	position:relative;	float: left;	top: 20px;	left: 5px;}
 #admin-sidebar-menu img{ vertical-align: middle;}
+
+#dialog-background-fade { position: fixed; top: 0px; left: 0px; background: #0b1728; width: 100%; height: 100%; opacity: 0.9; z-index: 100; }
+#dummy-for-actions {position:absolute; top: 0; left: 0; z-index: 120;}
 /* End General  */
+
+
+
 
 /* Admin Menu */
 #admin-menu { position:relative; top: -15px; left: 15px; margin: 0; padding: 0;}
@@ -91,7 +97,9 @@ p { color: #002255;}
 /* End Admin Form */
 
 /* Admin User Info */
+#admin-user-info-picture {float:right;}
 #admin-user-info { top: 0px; left: 0px; right: 0; text-align: right; float: right; height: 88px; position: relative; }
+#admin-user-info-text {float:right; margin-right: 5px}
 #admin-user-info-text p{ margin: 0; color: #00112b; font-size: 21px; text-align: right;}
 .admin-user-info-text-user{ color: #003380;}
 #admin-user-info-text .admin-user-info-text-role{ color: #00112b; font-size: 13px;}

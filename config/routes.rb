@@ -7,10 +7,6 @@ ActionController::Routing::Routes.draw do |map|
    admin.resources :projects
   end
 
-  map.resources :rights
-
-  map.resources :roles
-
   map.resources :statustags
 
   map.resources :nametags
