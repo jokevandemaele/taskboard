@@ -1,9 +1,9 @@
 .task-front{:id => "task-#{task.id}", :style => "width: 126px; height: 126px;"}
-  = link_to_remote image_tag("task_delete.png", :alt => "Delete Task", :title => "Delete Task", :style => "float:right; position: relative; width: 19px; top: 5px; right: 5px; border: 0; cursor: pointer; z-index: 10;"), :url => { :controller => :tasks, :action=>:destroy, :id => task.id}, :method => :delete, :update => "dummy-for-actions", :style => "border: 2px solid red; "
+  = link_to_remote image_tag("task_delete.png", :alt => "Delete Task", :title => "Delete Task", :style => "float:right; position: relative; width: 19px; top: 5px; right: 5px; border: 0; cursor: pointer; z-index: 2;"), :url => { :controller => :tasks, :action=>:destroy, :id => task.id}, :method => :delete, :update => "dummy-for-actions", :style => "border: 2px solid red; "
   .task-name-container{ :id => "task-#{task.id}-name-container" }
     .task-container-table
       .task-container-cell
-        %p.task-name{:id => "task-#{task.id}-name", :onDblClick => remote_function(:url => { :controller => :tasks, :action => :show_edit_task_name_form, :id => task.id, :story => task.story.id})}= h task.name
+        %p.task-name{:id => "task-#{task.id}-name", :onDblClick => remote_function(:url => { :controller => :tasks, :action => :show_edit_task_name_form, :id => task.id, :story => task.story.id})}=h task.name
 
   - task.nametags.each do |nametag|
     = render :partial => nametag
