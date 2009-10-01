@@ -66,7 +66,7 @@ class TasksController < ApplicationController
   # DELETE /tasks/1
   def destroy
     @task = Task.find(params[:id])
-    @html_id = "task-#{@task.id.to_s}-li"
+    @html_id = "task-#{@task.id.to_s}-project-#{@task.story.project.id}-li"
     if @task.destroy
       render :inline => "<script>Effect.Fade($('#{@html_id}'), {duration: 0.2});</script>", :status => :ok
     else
