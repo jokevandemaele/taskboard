@@ -1,7 +1,7 @@
 <div id="admin-div-project-<%= project.id -%>-team-<%= team.id -%>" class="admin-div-organization-teams">
 	<div class="admin-div-section">
 		<%= image_tag "admin/admin-div-actions-teams.png", :alt => "Teams", :style => "position: relative; top: 10px" -%>
-		<h2>Team: <%= team.name -%></h2>
+		<h2>Team: <%=h team.name -%></h2>
 		
 	</div>
 

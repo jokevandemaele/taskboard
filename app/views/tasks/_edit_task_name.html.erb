@@ -1,4 +1,4 @@
-<%	remote_form_for @task, :update => {:success => "task-#{task.id}-name"} do |f| %>
+<%	remote_form_for @task do |f| %>
 				<%= f.text_field :name, 
 					:value => @task.name, 
 					:class => "form-task-task_name",

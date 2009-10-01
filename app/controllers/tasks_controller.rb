@@ -51,15 +51,11 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
 
     if @task.update_attributes(params[:task])
-      if(params[:task][:name])
-        render :inline => "#{@task.name}"
-      else
-        if(params[:task][:description])
-          render :inline => "#{@task.description}"
-        end
+      render :update do |page|
+        page.replace_html "task-#{@task.id}-project-#{@task.story.project.id}-li", :partial => 'task', :object => @task
       end
     else
-      render :inline => "error"
+      render :inline => "", :status => :internal_server_error
     end
   end
 
@@ -112,7 +108,8 @@ class TasksController < ApplicationController
 	    @task.remove_tags
     end
     if @task.save
-      render :inline => '', :status => :ok
+      # 
+      # render :inline => '', :status => :ok
     else
       render :inline => '', :status => :internal_server_error
     end

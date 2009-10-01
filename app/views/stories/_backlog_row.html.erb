@@ -2,7 +2,7 @@
   <td class="name-cell">
 		<strong><%=h story.realid %></strong> 
 		<%=h story.name %>
-		<%= " - " + link_to("#{story.project.name}", :controller => :backlog, :action => :show, :id => story.project.id) +" - " if @view == :team -%> 
+		<%= " - " + link_to("#{h story.project.name}", :controller => :backlog, :action => :show, :id => story.project.id) +" - " if @view == :team -%> 
 		(<span title="Not Started Tasks"><%= story.tasks.not_started.size %></span>/<span title="In Progress Tasks"><%= story.tasks.in_progress.size %></span>/<span title="Finished Tasks"><%= story.tasks.finished.size %></span>)<br />
 		<% if story.status != 'finished' -%>
 		<% @action_id = (@view == :project ) ? @project.id : @member_team.id%>

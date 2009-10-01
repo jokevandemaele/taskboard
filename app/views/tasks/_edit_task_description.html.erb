@@ -1,4 +1,4 @@
-<%	remote_form_for @task, :update => {:success => "task-#{task.id}-description"} do |f| %>
+<%	remote_form_for @task do |f| %>
 				<%= f.text_area :description, 
 					:value => @task.description, 
 					:class => "form-task-task_description",

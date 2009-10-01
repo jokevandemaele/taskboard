@@ -6,7 +6,7 @@ current_member_admins_parent = (element_class == 'member') ? current_member.admi
 <div id="<%= parent_class -%>-<%= parent.id -%>-<%= element_class -%>-<%= element.id -%>" class="admin-div-element-core admin-div-element">
 	<div id="name-<%= parent_class%>-<%= parent.id %>-<%= element_class -%>-<%= element.id -%>-container">
 		<p id="name-<%= parent_class%>-<%= parent.id %>-<%= element_class -%>-<%= element.id -%>" title="<%= element.name -%>">
-			<%= element.name -%>
+			<%=h element.name -%>
 		</p>
 	</div>
 	<script>

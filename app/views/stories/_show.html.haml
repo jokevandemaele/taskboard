@@ -1,22 +1,22 @@
 %td.story-td
-  .story{ :title => story.name, :id => "storycard-#{story.id}" }
+  .story{ :title => h(story.name), :id => "storycard-#{story.id}" }
     .story-container{ :id => "storycard-#{story.id}-container" }
       .story-name-container{ :id => "storycard-#{story.id}-name-container" }
         %p.story-field-realid
-          = story.realid
+          =h story.realid
         %p.story-field-name{ :id => "storycard-#{story.id}-name" }
-          = story.name
+          =h story.name
       %div{ :style => "clear: both;" }
       .storycard-priority
         %p.story-field-label
           Priority:
         %p.story-field-number
-          = story.priority
+          =h story.priority
       .storycard-size
         %p.story-field-label
           Size:
         %p.story-field-number
-          = story.size
+          =h story.size
   %script= "resizeFontSizeToFit($('storycard-#{story.id}-name'), $('storycard-#{story.id}-name-container')); $('storycard-#{story.id}-name').setStyle({left: '-' + $('storycard-#{story.id}-name').offsetWidth / 2 + 'px'});"
 %td{ :id => "not_started-#{story.id}", :style => taskboard_border_style(@color, [ 'left', 'bottom']) }
   %div{:style => "width: 100%; text-align: center;"}

@@ -85,12 +85,12 @@ current_member_admins_parent = (element_class == 'member') ? current_member.admi
 	%>
 	<%= show_admin_info_for element, parent if (element_class == 'member' && !current_member_admins_parent) -%>
 	<div id="name-<%= parent_class%>-<%= parent.id %>-<%= element_class -%>-<%= element.id -%>-container">
-		<p id="name-<%= parent_class%>-<%= parent.id %>-<%= element_class -%>-<%= element.id -%>" title="<%= element.name unless element_class == 'team' -%>" class="<%=  not_mine %>" onmouseover="<%= "moveToMousePosition('name-#{parent_class}-#{parent.id}-#{element_class}-#{element.id}-container', #{element.id});" if element_class == 'team' -%>" onmouseout="<%= "Effect.Fade($('display-info-#{element.id}'), { duration: 0.1 });" if element_class == 'team' %>">
-			<%= link_to(element.name, :controller => "/taskboard", :action => :show, :id => element.id) if element_class == 'project' && (element.members.include?(@current_member) || current_member_admins_parent) -%>
-			<%= element.name if (element_class == 'project' && !element.members.include?(@current_member) && !current_member_admins_parent) %>
+		<p id="name-<%= parent_class%>-<%= parent.id %>-<%= element_class -%>-<%= element.id -%>" title="<%= h(element.name) unless element_class == 'team' -%>" class="<%=  not_mine %>" onmouseover="<%= "moveToMousePosition('name-#{parent_class}-#{parent.id}-#{element_class}-#{element.id}-container', #{element.id});" if element_class == 'team' -%>" onmouseout="<%= "Effect.Fade($('display-info-#{element.id}'), { duration: 0.1 });" if element_class == 'team' %>">
+			<%= link_to(h(element.name), :controller => "/taskboard", :action => :show, :id => element.id) if element_class == 'project' && (element.members.include?(@current_member) || current_member_admins_parent) -%>
+			<%=h element.name if (element_class == 'project' && !element.members.include?(@current_member) && !current_member_admins_parent) %>
 
-			<%= link_to(element.name, :controller => "admin/teams", :action => :show, :id => element.id) if (element_class == 'team' && current_member_admins_parent) %>
-			<%= element.name if (element_class == 'team' && !current_member_admins_parent) %>
+			<%= link_to(h(element.name), :controller => "admin/teams", :action => :show, :id => element.id) if (element_class == 'team' && current_member_admins_parent) %>
+			<%=h element.name if (element_class == 'team' && !current_member_admins_parent) %>
 
 			<% if(element_class == 'team') %>
 				<script>
@@ -98,7 +98,7 @@ current_member_admins_parent = (element_class == 'member') ? current_member.admi
 				</script>
 			<% end %>
 
-			<%= element.name if element_class != 'project'  &&  element_class != 'team' -%>
+			<%=h element.name if element_class != 'project'  &&  element_class != 'team' -%>
 		</p>
 	</div>
 	<script>

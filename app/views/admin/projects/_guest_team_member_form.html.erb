@@ -62,7 +62,6 @@ action = (edit) ? :update_guest : :add_guest
 	centerTo($('form-add-guestteammembership'),$('dialog-background-fade'));
 	Effect.Appear($('form-add-guestteammembership'), { afterFinish : function() { Form.Element.select($('email'))}});	
 	<% if @projects %>
-		<% logger.error("Projects:"+ @projects.inspect) %>
 		<% @projects.each do |project| %>
 			$('projects_<%= project %>').click();
 		<% end %>

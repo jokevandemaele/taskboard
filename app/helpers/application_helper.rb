@@ -15,7 +15,7 @@ module ApplicationHelper
     element_class = element.class.to_s
     name = (element.name) ? element.name : "Click To Edit #{element_class} Name"
 		f.text_field :name, 
-			:value => name, 
+			:value => h(name), 
 			:class => "form-name name-field", 
 			:onClick => "if(this.value == 'Click To Edit #{element_class} Name' ) this.clear();" 
   end

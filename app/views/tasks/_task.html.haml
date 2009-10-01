@@ -15,7 +15,7 @@
   %script= "resizeFontSizeToFit($('task-#{task.id}-name'), $('task-#{task.id}-name-container'));"
 
 .task-back{ :id => "task-#{task.id}-back", :style => "display: none;" }
-  .task-description{ :id => "task-#{task.id}-description", :onDblClick => remote_function(:url => { :controller => :tasks, :action => :show_edit_task_description_form, :id => task.id, :story => task.story.id})}= h task.description
+  .task-description{ :id => "task-#{task.id}-description", :onDblClick => remote_function(:url => { :controller => :tasks, :action => :show_edit_task_description_form, :id => task.id, :story => task.story.id})}=h task.description
   = image_tag 'task_flip.png', :alt => 'Flip', :class => 'flip-task-image-back image-link-back', :onClick => "javascript:flip('task-#{task.id}','front')", :style => "cursor: pointer;"
   
   / %a#image-link-back{ :href => "javascript:flip('task-#{task.id}','front')" }
