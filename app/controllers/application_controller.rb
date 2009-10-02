@@ -171,9 +171,10 @@ class ApplicationController < ActionController::Base
       session[:return_to] = nil
       redirect_to(return_to)
     else                                                                                                                                                                                                                                         
-      return redirect_to :controller => 'admin/organizations' if current_member.admins_any_organization?
+      session[:return_to] = nil
       return redirect_to :controller => '/taskboard', :action => :show, :id => current_member.projects.first.id if current_member.projects.size == 1 && request.referer == url_for(:controller => 'admin/members', :action => :login, :only_path=>false)
-      redirect_to :controller => 'admin/projects', :action => 'index' if !current_member.admins_any_organization?
+      return redirect_to :controller => 'admin/projects', :action => 'index' if !current_member.admins_any_organization?
+      redirect_to :controller => 'admin/organizations' if current_member.admins_any_organization?
     end
   end
 
