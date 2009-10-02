@@ -5,7 +5,7 @@ element_class = element.class.to_s.downcase
 	<div class="admin-div-element-core admin-div-element">
 		<div id="name-<%= element.id -%>-container">
 			<p id="name-<%= element.id -%>" title="<%= element.name -%>">
-				<%= element.name -%>
+				<%=h element.name -%>
 			</p>
 		</div>
 		<script>

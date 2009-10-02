@@ -23,7 +23,6 @@ class StatustagsControllerTest < ActionController::TestCase
    login_as_organization_admin
    assert_difference('Statustag.count') do
      response = post :create, { :project_id => projects(:find_the_island).id, :statustag => { :task_id => tasks(:in_progress_1).id, :status => "waiting", :relative_position_x => 1, :relative_position_y => 1 }}
-     p response.body
    end
    assert_response :ok
 

@@ -26,10 +26,7 @@ class Admin::OrganizationsController < ApplicationController
     if @organization.save
       render :inline => "<script>location.reload(true)</script>", :status => :created
     else
-      render :partial => 'form',
-      		:object => @organization,
-      		:locals => { :no_refresh => true, :edit => false },
- 		      :status => :internal_server_error
+      render :partial => 'form', :object => @organization, :locals => { :no_refresh => true, :edit => false }, :status => :internal_server_error
     end
   end
 

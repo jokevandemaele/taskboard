@@ -27,9 +27,9 @@ class GuestTeamMembership < ActiveRecord::Base
   end
   
   def self.add_to_project(member,project)
-    @guest_team_member = GuestTeamMembership.new(:project => project, :member => member) 
-    @guest_team_member.save if !project.guest_members.include?(member)
-    return @guest_team_member
+    guest_team_member = GuestTeamMembership.new(:project => project, :member => member) 
+    guest_team_member.save if !project.guest_members.include?(member)
+    return guest_team_member
   end
   
 end

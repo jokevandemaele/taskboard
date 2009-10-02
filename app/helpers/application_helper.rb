@@ -13,12 +13,13 @@ module ApplicationHelper
   
   def admin_form_name(element,edit, f, no_refresh = nil)
     element_class = element.class.to_s
-    name = (element.name) ? element.name : "Click To Edit #{element_class} Name"
+    name = (element.name) ? h(element.name) : "Click To Edit #{element_class} Name"
 		f.text_field :name, 
 			:value => h(name), 
 			:class => "form-name name-field", 
 			:onClick => "if(this.value == 'Click To Edit #{element_class} Name' ) this.clear();" 
   end
+  
   def admin_form_buttons(element)
     element_class = element.class.to_s.downcase
     "<div style='float: right; position:relative; top: 20px;'>

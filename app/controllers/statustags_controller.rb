@@ -35,5 +35,4 @@ class StatustagsController < ApplicationController
       render :inline => "", :status => :bad_request
     end
   end
-  
 end

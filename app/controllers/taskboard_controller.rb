@@ -7,9 +7,8 @@ class TaskboardController < ApplicationController
     @project = Project.find(params[:id])
     @stories_by_priority = @project.stories_in_progress
 
-    @member = @current_member
-    @member.last_project = @project
-    @member.save
+    @current_member.last_project = @project
+    @current_member.save
     
     @member_team = @project.team_including(@member)
     @color = @member_team.color

@@ -3,10 +3,10 @@ class TasksController < ApplicationController
   before_filter :check_permissions
   layout nil
   
-  # GET /tasks
-  def index
-    @tasks = Task.find(:all)
-  end
+  # # GET /tasks
+  # def index
+  #   @tasks = Task.find(:all)
+  # end
 
   # GET /tasks/1
   def show

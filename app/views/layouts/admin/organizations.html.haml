@@ -21,8 +21,7 @@
                 = link_to_remote "new organization" + image_tag('admin/add.png', :alt => 'new'), :url => { :action => :new }, :update => "dummy-for-actions"
               %li
                 = link_to_remote "send invitation" + image_tag('admin/invite.png', :alt => 'invite'), :url => { :action => :invite }, :update => "dummy-for-actions"
-            - image = image_tag 'admin/bug.png', :alt => "bug"
             %li
-              = link_to "report bug #{image}", "/report_bug"
-    #dummy-for-actions{ :stye => "position:absolute; top: 0; left: 0; z-index: 120;" }
+              = link_to "report bug " + image_tag('admin/bug.png', :alt => "bug"), "/report_bug"
+    #dummy-for-actions
     = render :partial => 'layouts/admin/dialog_background_fade'

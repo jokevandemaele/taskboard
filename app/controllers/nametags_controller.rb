@@ -7,13 +7,7 @@ class NametagsController < ApplicationController
     @project = Project.find(params[:project_id])
     @nametag = Nametag.new(params[:nametag])
     if @project.stories.include?(@nametag.task.story) && @nametag.save
-      render :update do |page|
-        @members = @nametag.task.story.project.members
-        @member_team = @nametag.task.story.project.team_including(@member)        
-        @tasks = Task.tasks_by_status(@nametag.task.story, @nametag.task.status)
-        page.replace_html "#{@nametag.task.status}-#{@nametag.task.story_id}", :partial => "tasks/tasks_by_status", :locals => { :tasks => @tasks,:story => @nametag.task.story, :status => @nametag.task.status  } 
-        page.replace_html "menu_nametags", :partial => "taskboard/menu_nametags", :locals => { :team => @member_team, :members => @members }
-      end
+      render :inline => '', :status => :ok
     else
       render :inline => "", :status => :bad_request
     end

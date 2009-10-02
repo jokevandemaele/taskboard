@@ -1,8 +1,8 @@
 class Organization < ActiveRecord::Base
   # Associations
-  has_many :projects
-  has_many :teams
-  has_many :organization_memberships
+  has_many :projects, :dependent => :destroy
+  has_many :teams, :dependent => :destroy
+  has_many :organization_memberships, :dependent => :destroy
   has_many :members, :through => :organization_memberships
   validates_uniqueness_of :name
 

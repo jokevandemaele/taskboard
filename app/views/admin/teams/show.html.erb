@@ -1,4 +1,4 @@
-	<h1 style="font-size: 32px; font-weight: normal; margin: 0; color: #002255"><%= image_tag "admin/admin-logo-teams.png", :alt => "Project", :style => "width: 80px;" -%> <%= @team.name %> (<%= @team.organization.name -%>)</h1>
+	<h1 style="font-size: 32px; font-weight: normal; margin: 0; color: #002255"><%= image_tag "admin/admin-logo-teams.png", :alt => "Project", :style => "width: 80px;" -%> <%=h @team.name %> (<%=h @team.organization.name -%>)</h1>
 
 	<h2 style="font-size: 20px; font-weight: normal; margin: 0; color: #002255"><%= image_tag "admin/admin-logo-members.png", :alt => "Project", :style => "width: 40px;" -%> Organization Members:</h2>
 	
