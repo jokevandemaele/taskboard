@@ -198,7 +198,7 @@ class Admin::OrganizationsControllerTest < ActionController::TestCase
 
     email = MemberMailer.deliver_create(member)
     assert !ActionMailer::Base.deliveries.empty?
-    assert_equal email.from, ['no-reply@agilar.org']
+    assert_equal email.from, ['taskboard@agilar.org']
     assert_equal email.to, ['miles@lost.com']
     assert_equal email.subject, 'Welcome to the Agilar Taskboard!'
     assert_match /Miles/, email.body

@@ -1,4 +1,8 @@
-Hello, <%=h @member.name -%>! If you're reading this, you're in luck - <%=h @member.added_by -%> thinks you're very special and has invited you to use Agilar Taskboard as a member of <%=h @member.organizations.first.name -%>. Welcome aboard!
+Hello, <%=h @member.name -%>!
+
+If you're reading this, you're in luck - <%=h @member.added_by -%> thinks you're very special and has invited you to use the Agilar Taskboard as a member of the organization <%=h @member.organizations.first.name -%>.
+
+Welcome aboard!
 
 This is your login information:
 User name: <%=h @member.username %>
