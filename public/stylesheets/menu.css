@@ -4,9 +4,9 @@ div#menu_report_bug img { border: none; margin:0 auto;}
 
 #menu_expand { position:fixed; top: 0px; left: 0px; z-index: 9;  background: url('/images/menu_collapsed_background.png') left no-repeat transparent; height: 43px; width: 49px;}
 
-#menu_space {background: transparent; height: 77px; width: 100%;}
+#menu_space {background: transparent; height: 95px; width: 100%;}
 #taskboard_menu_logout { height: 60px; position: fixed; right: 10px; top: 17px;}
-#menu_views { width: 50px; position: fixed; right: 85px; top: 10px;}
+#menu_views { width: 50px; position: fixed; right: 75px; top: 10px;}
 #menu_views .true { border: 2px solid rgb(160, 44, 44); padding: 5px 0;}
 #menu_views img { border: 0; vertical-align: middle;}
 #menu_views a { text-decoration: none;}
@@ -20,9 +20,9 @@ div#menu_report_bug img { border: none; margin:0 auto;}
 #menu_add_team_image { float: left; position: relative; left: 54px; height: 85px;}
 /* Taskboard's Menu Specific Style */
 #taskboard_menu_task_add { float: left;	top:7px; left: 34px; height: 85px;}
-#menu_statustags { position: relative; top: 10px; left: 55px; border: none; width: 10px; height: 10px; padding: 0px; margin: 0; }
+#menu_statustags { position: relative; top: 7px; left: 55px; border: none; width: 10px; height: 10px; padding: 0px; margin: 0; }
 #menu_statustags td, #menu_statustags tr, #menu_nametags td, #menu_nametags tr{ border: 2px solid white; margin: 0; 	padding: 0; }
-#menu_nametags { float:left; position: relative; top: 12px; left: 100px; }
+#menu_nametags { float:left; position: relative; top: 12px; left: 75px; }
 .menu_nametag { position: relative; left: 0px; top: 0px; }
 .add_nametag { 	margin-right: 10px; }
 /* end */

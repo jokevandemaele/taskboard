@@ -1,0 +1,3 @@
+- @members.each do |member|
+  = render :partial => "admin/members/show_with_picture",  :locals => { :id_text => "add-nametag",  :class_text => "add_nametag", :member_name_class => "nametag nametag_menu", :member => member, :style => "background-color: ##{ member.color };", :edit => false, :team => team, :highlight_loged_member => true}
+  = draggable_element "add-nametag-#{member.id}", :revert => '"failure"'

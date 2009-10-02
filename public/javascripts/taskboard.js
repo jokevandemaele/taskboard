@@ -288,6 +288,8 @@ var DDM = YAHOO.util.DragDropMgr;
 
 	    YAHOO.extend(YAHOO.DDAddTags, YAHOO.util.DDProxy, { 
 		    endDrag: function(e) { 
+			    var proxy = this.getDragEl(); 
+          Dom.setStyle(proxy, "visibility", ""); 
 	      },
 	       startDrag: function(x, y) { 
 	         // make the proxy look like the source element 
@@ -337,8 +339,8 @@ var DDM = YAHOO.util.DragDropMgr;
 						
 					if((element_name[1] == 'statustag' || element_name[1] == 'nametag') && dest_name[0] == 'task'){
 						// Update database
-						var x = drag_region.left - $(destEl.id).cumulativeOffset().left
-						var y = drag_region.top - $(destEl.id).cumulativeOffset().top
+						var x = drag_region.left - $(destEl.id).cumulativeOffset().left - 4;
+						var y = drag_region.top - $(destEl.id).cumulativeOffset().top;
 						request = new Ajax.Request('/'+element_name[1]+'s/', {
 							asynchronous:true, 
 							evalScripts:true,  
@@ -346,6 +348,7 @@ var DDM = YAHOO.util.DragDropMgr;
 							parameters:'project_id='+ dest_name[3]+'&'+'statustag[task_id]=' + (dest_name[1]) + '&'+'statustag[relative_position_x]='+ x + '&'+'statustag[relative_position_y]='+ y + '&'+specific_parameter+"="+ element_name[2]+ '&authenticity_token=' + getAuthKey(),
 							onSuccess: function(transport) {
 								new Ajax.Updater(destEl.id, '/tasks/'+$(destEl.id).id.split('-')[1], {asynchronous:false, method:'get',evalScripts:true, parameters:'authenticity_token=' + getAuthKey()})
+								Dom.setStyle(dragEl, "visibility", "hidden"); 
 						  },
 						});
 					}

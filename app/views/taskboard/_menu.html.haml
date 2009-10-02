@@ -9,7 +9,7 @@
   = image_tag 'menu_task_add.png' ,  :border => 0 , :id => 'taskboard_menu_task_add',  :class => "task-add"
   = draggable_element "taskboard_menu_task_add", :revert => 'true', :ghosting => 'true'
 
-  %div{ :style => "float: left" }
+  %div{ :style => "float: left;" }
     %table#menu_statustags
       = render :partial => "menu_statustags"
 
