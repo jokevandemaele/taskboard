@@ -108,19 +108,10 @@ class TasksController < ApplicationController
 	    @task.remove_tags
     end
     if @task.save
-      # 
-      # render :inline => '', :status => :ok
+      render :inline => '', :status => :ok
     else
       render :inline => '', :status => :internal_server_error
     end
-    
-    # # This will be necessary for the update
-    # @new_status_tasks = Task.tasks_by_status(@task.story,@task.status)
-    # @old_status_tasks = Task.tasks_by_status(old_story,old_status)
-    # render :update do |page|
-    #     page.replace_html "#{@task.status}-#{@task.story_id}", :partial => "tasks/tasks_by_status", :locals => { :tasks => @new_status_tasks  } 
-    #     page.replace_html "#{old_status}-#{old_story.id}", :partial => "tasks/tasks_by_status", :locals => { :tasks => @old_status_tasks } 
-    # end
   end
 
 end
