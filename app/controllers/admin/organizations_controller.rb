@@ -129,9 +129,8 @@ class Admin::OrganizationsController < ApplicationController
     
     # create member
     candidate_to_username = @invite_info[:name].downcase.gsub(/ /, '.')
-    matching_username = Member.first(:select => '"username"', :conditions => [ "username LIKE ?", "#{candidate_to_username}%" ], :order => 'username DESC')
+    matching_username = Member.first(:select => 'username', :conditions => [ "username LIKE ?", "#{candidate_to_username}%" ], :order => 'username DESC')
     matching_username = matching_username ? matching_username.username : 0
-    logger.error 'blo ' + matching_username.inspect + ' blo'
     candidate_to_username = candidate_to_username + (matching_username.gsub(/\D/, '').to_i + 1).to_s if matching_username != 0
     @member = Member.new(:name => @invite_info[:name], :new_organization => @organization.id, :added_by => @current_member.name, :color => 'ff0000', :username => candidate_to_username, :email => @invite_info[:email])
     
