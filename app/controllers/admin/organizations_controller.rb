@@ -140,7 +140,6 @@ class Admin::OrganizationsController < ApplicationController
     else
       @organization.destroy
       render :partial => 'invitation_form',
-          :object => @organization,
           :locals => { :no_refresh => true, :edit => false, :member => @member, :errors => @errors, :invite_info => @invite_info },
               :status => :internal_server_error
     end
