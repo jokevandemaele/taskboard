@@ -72,7 +72,7 @@ var DDM = YAHOO.util.DragDropMgr;
                   if(status_name[0] == 'finished'){
                     new Ajax.Updater('finished-'+status_name[1], '/stories/tasks_by_status/'+status_name[1]+'?status=finished', {asynchronous:true, evalScripts:true, parameters:'authenticity_token=' + getAuthKey()})
                   }
-                  new Ajax.Updater(thisid, '/tasks/'+$(thisid).id.split('-')[1], {asynchronous:false, method:'get',evalScripts:true, parameters:'authenticity_token=' + getAuthKey()})
+                  // new Ajax.Updater(thisid, '/tasks/'+$(thisid).id.split('-')[1], {asynchronous:false, method:'get',evalScripts:true, parameters:'authenticity_token=' + getAuthKey()})
               }); 
           a.animate();
 	    }, 
@@ -234,7 +234,7 @@ var DDM = YAHOO.util.DragDropMgr;
         var element_name = srcEl.id.split('-');
         var dest_name = destEl.id.split('-');
         
-        if (DDM.interactionInfo.drop.length > 2) { 
+        if (DDM.interactionInfo.drop.length > 1) { 
           // The position of the cursor at the time of the drop (YAHOO.util.Point) 
           var pt = DDM.interactionInfo.point;
           
