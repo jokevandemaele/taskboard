@@ -13,3 +13,4 @@ span.title { font-size: 25px; color: #162d50; margin-bottom: 0px;}
 div#login { background: url('/images/login/login-form-bkg.png') no-repeat; width: 500px; height: 28px; padding: 7px 0px; font-size: 12px; text-align: center; margin-top: 1px;}
 div#login input { color:#162d50; background: url('/images/login/login-form-field.png') no-repeat; border: 0; width: 118px; height: 13px; padding: 5px 8px; margin-right: 10px;}
 input#submit{ background: url('/images/login/login-form-submit.png') no-repeat !important; width: 58px !important; height: 22px !important;}
+div#revision { float: right; margin: 12px;}
