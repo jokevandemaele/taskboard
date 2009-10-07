@@ -210,7 +210,7 @@ class Admin::MembersControllerTest < ActionController::TestCase
     assert_not_equal 'clittleton@blo.org', member.email
     
     # DELETE from organization where member belongs
-    delete :destroy, { :id => member.id }
+    delete :destroy, { :id => member.id, :organization => organizations(:widmore_corporation)}
     assert_response 302
     assert Member.find_by_name(member.name)
     

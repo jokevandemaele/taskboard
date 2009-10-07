@@ -1,4 +1,4 @@
-%td.story-td
+%td.story-td{ :id => "story_card-#{story.id}"}
   .story{ :title => h(story.name), :id => "storycard-#{story.id}" }
     .story-container{ :id => "storycard-#{story.id}-container" }
       .story-name-container{ :id => "storycard-#{story.id}-name-container" }
@@ -37,6 +37,7 @@
     Loading...
   %script= remote_function(:update => "finished-#{story.id}", :url => { :controller => :stories, :action => :tasks_by_status, :id => story.id, :status => 'finished' })
 
+%script= "new YAHOO.util.DDTarget('story_card-#{story.id}');"
 %script= "new YAHOO.util.DDTarget('not_started-#{story.id}');"
 %script= "new YAHOO.util.DDTarget('in_progress-#{story.id}');"
 %script= "new YAHOO.util.DDTarget('finished-#{story.id}');"

@@ -85,6 +85,7 @@ class ApplicationController < ActionController::Base
     return member.admin? if path['action'] == 'index'
 
     if path['action'] == 'edit' or path['action'] == 'update'
+      # A user can always edit and update itself
       return true if (@current_member.id == request.params[:id].to_i)
       memberships = OrganizationMembership.find_all_by_member_id(request.params[:id])
       result = false
@@ -94,7 +95,6 @@ class ApplicationController < ActionController::Base
       return result
     end
     
-    # A user can always edit and update itself
     return member.admins?(Organization.find(request.params[:organization]))
     return false
   end

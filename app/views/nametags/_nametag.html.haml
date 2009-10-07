@@ -1,3 +1,4 @@
-.nametag{ :id => "nametag-project-#{nametag.task.story.project.id}-#{nametag.id}", :title =>"#{nametag.member.name}", :style => "position: absolute; top: #{nametag.relative_position_y}px; left: #{nametag.relative_position_x}px; background-color: ##{nametag.member.color};"}
-	=h nametag.member.formatted_nametag
-%script= "new YAHOO.DDTags('nametag-project-#{nametag.task.story.project.id}-#{nametag.id}')"
+.nametag{ :id => "nametag-project-#{nametag.task.story.project.id}-#{nametag.id}", :title =>"#{nametag.member.name}", :style => "position: absolute; top: #{nametag.relative_position_y}px; left: #{nametag.relative_position_x}px; background-color: ##{nametag.member.color}; display: none;"}
+  =h nametag.member.formatted_nametag
+%script
+  == new YAHOO.DDTags('nametag-project-#{nametag.task.story.project.id}-#{nametag.id}')

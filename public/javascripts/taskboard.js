@@ -80,7 +80,7 @@ var DDM = YAHOO.util.DragDropMgr;
 	    onDragDrop: function(e, id) { 
 	        // If there is one drop interaction, the li was dropped either on the list, 
 	        // or it was dropped on the current location of the source element. 
-	        if (DDM.interactionInfo.drop.length >= 2) { 
+	//        if (DDM.interactionInfo.drop.length >= 2) { 
 	            // The position of the cursor at the time of the drop (YAHOO.util.Point) 
 	            var pt = DDM.interactionInfo.point;  
 	 
@@ -114,7 +114,7 @@ var DDM = YAHOO.util.DragDropMgr;
                   }
 	              }
 	           // } 
-	        } 
+	     //   } 
 	    }, 
 	 
 	    onDrag: function(e) { 
@@ -254,7 +254,7 @@ var DDM = YAHOO.util.DragDropMgr;
 						DDM.refreshCache();
           }
         }else{
-          if(dest_name[0] == 'taskboard'){
+          if(dest_name[0] != 'task'){
           new Ajax.Request('/'+element_name[0]+'s/'+element_name[3], {
           asynchronous:true, 
           evalScripts:true,  
