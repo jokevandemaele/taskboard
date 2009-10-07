@@ -4,30 +4,53 @@
     %meta{ :content => "text/html;charset=UTF-8", "http-equiv" => "content-type" }
     %title
       Agilar Taskboard - Login
-    %script{ :src => "/javascripts/prototype.js?1247682980", :type => "text/javascript" }
-    %script{ :src => "/javascripts/effects.js?1247682980", :type => "text/javascript" }
-    %script{ :src => "/javascripts/dragdrop.js?1247682980", :type => "text/javascript" }
-    %script{ :src => "/javascripts/controls.js?1247682980", :type => "text/javascript" }
-    %script{ :src => "/javascripts/application.js?1250917693", :type => "text/javascript" }
-    %style
-      body {
-      background: #f1f6ff;
-      }
+    = stylesheet_link_tag 'login'
   %body
-    #container{ :style => "position: absolute; top: 0px; left: 0px; width:100%; height:100%;" }
-      #login-container{ :style => "background: url('/images/login/login_background.png') center no-repeat transparent; width: 448px; height: 336px;" }
-        %img{ :src => "/images/login/login_logo.png?1247682979", :alt => "Agilar Taskboard Beta", :style => "position: relative; margin-left: 50%; left: -168px; top: 34px;" }
-        %form{ :method => "post", :action => "/login" }
-          %div{ :style => "margin:0;padding:0" }
-            %input{ :name => "authenticity_token", :type => "hidden", :value => "lzZawHete9Pr9rsz80tdNKdW/skY64n3DPxu0n0MSek=" }
-          %img{ :src => "/images/login/username.png?1247682979", :alt => "Username", :style => "position: absolute; top: 148px; left: 57px;" }
-          %input#member_username{ :name => "member[username]", :size => "20", :type => "text", :style => "font-size: 20px; color: #002255; text-align: left; position: absolute; top: 140px; left: 200px; border: none; background: url('/images/login/login_field.png') no-repeat transparent; width: 160px; height: 38px; padding: 2px 20px 0;" }
-          %br
-          %img{ :src => "/images/login/password.png?1247682979", :alt => "Password", :style => "position: absolute; top: 192px; left: 57px;" }
-          %input#member_password{ :name => "member[password]", :size => "20", :type => "password", :style => "font-size: 20px; color: #002255; text-align: left; position: absolute; top: 192px; left: 200px; border: none; background: url('/images/login/login_field.png') no-repeat transparent; width: 160px; height: 38px; padding: 2px 20px 0;" }
-          %br
-          %input#login-button{ :src => "/images/login/login_button.png", :type => "image", :alt => "Login", :style => "position:absolute; top: 237px; left: 315px;" }
-      %p{ :style => 'position: fixed; bottom: 10px; right: 20px; font-family: tahoma, arial, sans-serif; font-size: 14px;' }= FULL_VERSION
-    %script
-      centerTo($('login-container'),$('container'));
-      window.setTimeout("$('member_username').focus();", 100);
+    #container
+      #about-left
+        = image_tag 'login/login_logo.png', :alt => "Agilar Taskboard Beta"
+        %ul
+          %li
+            %p
+              %span.title Working with Distributed Teams? 
+              %br 
+              Agilar Dev Team uses the taskboard daily and is spread across continents.
+              Distributed enough for you? ;)
+          %li
+            %p
+              %span.title Prioritized Backlog
+              %br
+              Working with SCRUM implies using prioritized backlogs.
+              The Agilar Taskboard has its own built-in Product Backlog manager.
+          %li
+            %p
+              %span.title Team-oriented views
+              %br
+              A team with multiple projects? A project management nightmare? Immerse yourself in the inter-project prioritization with the Team View.
+          %li
+            %p
+              %span.title Multiple Projects
+              %br
+              Do you run multiple projects in your organization? Want a single tool to keep track of them all? The Agilar Taskboard is prepared to handle multiple projects per organization.
+          %li
+            %p
+              %span.title Multiple Teams in Organization
+              %br
+              Working for an organization with lots of teams? Want to assign teams to specific projects? The Agilar Taskboard can do that!
+          %li.new
+            %p
+              %span.title Guest Members
+              %br
+              Do you work with a Product Owner who is not in your organization? Working with consultants? Take a look at the Guest Member feature.
+            
+  #about-right
+    #login
+      - form_tag '/login' do
+        %label{ :for => 'member[username]'} username
+        = text_field_tag 'member[username]'
+        %label{ :for => 'member[password]'} password
+        = password_field_tag 'member[password]'
+        = submit_tag '', :id => 'submit'
+    = image_tag'login/request-membership.png', :alt => 'Request Membership', :style => "cursor: pointer; position: relative; top: 20px;", :onClick => "alert('Beta Memberships are not available right now... keep in touch (oleee)');"
+    = image_tag 'login/screenshot-0.png', :alt => 'Request Membership', :style => 'margin-top: 50px; border: 3px solid #162d50;'
+    = image_tag 'login/screenshot-1.png', :alt => 'Request Membership', :style => 'margin: 20px 0px; border: 3px solid #162d50;'
