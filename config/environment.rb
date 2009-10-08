@@ -10,7 +10,7 @@ RAILS_GEM_VERSION = '2.3.2' unless defined? RAILS_GEM_VERSION
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 
-TASKBOARD_VERSION = '0.1.2' unless defined? TASKBOARD_VERSION
+TASKBOARD_VERSION = '0.1.3' unless defined? TASKBOARD_VERSION
 SVN_REVISION = `svnversion -n`.gsub(/\D/, '') unless defined? SVN_REVISION
 FULL_VERSION = "v#{TASKBOARD_VERSION} rev #{SVN_REVISION}" unless defined? FULL_VERSION
 
