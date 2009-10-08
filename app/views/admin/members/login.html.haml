@@ -43,15 +43,15 @@
               %br
               Do you work with a Product Owner who is not in your organization? Working with consultants? Take a look at the Guest Member feature.
             
-  #about-right
-    #login
-      - form_tag '/login' do
-        %label{ :for => 'member[username]'} username
-        = text_field_tag 'member[username]'
-        %label{ :for => 'member[password]'} password
-        = password_field_tag 'member[password]'
-        = submit_tag '', :id => 'submit'
-      #revision= FULL_VERSION
-    = image_tag'login/request-membership.png', :alt => 'Request Membership', :style => "cursor: pointer; position: relative; top: 10px;", :onClick => "alert('Beta Memberships are not available right now... keep in touch (oleee)');"
-    = image_tag 'login/screenshot-0.png', :alt => 'Request Membership', :style => 'margin-top: 30px; border: 3px solid #162d50;'
-    = image_tag 'login/screenshot-1.png', :alt => 'Request Membership', :style => 'margin: 20px 0px; border: 3px solid #162d50;'
+      #about-right
+        #login
+          - form_tag '/login' do
+            %label{ :for => 'member[username]'} username
+            = text_field_tag 'member[username]'
+            %label{ :for => 'member[password]'} password
+            = password_field_tag 'member[password]'
+            = submit_tag '', :id => 'submit'
+          #revision= FULL_VERSION
+        = image_tag'login/request-membership.png', :alt => 'Request Membership', :style => "cursor: pointer; position: relative; top: 10px;", :onClick => "alert('Beta Memberships are not available right now... keep in touch (oleee)');"
+        = image_tag 'login/screenshot-0.png', :alt => 'Request Membership', :style => 'margin-top: 30px; border: 3px solid #162d50;'
+        = image_tag 'login/screenshot-1.png', :alt => 'Request Membership', :style => 'margin: 20px 0px; border: 3px solid #162d50;'

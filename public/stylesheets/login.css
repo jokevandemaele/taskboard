@@ -1,7 +1,7 @@
 body { font-family: arial; color: #2e5a9e; background: url('/images/login/login_background.png') repeat-x;}
 img { border: none;}
 div#about-left { float: left; width: 500px; margin: 4px 20px; text-align: center;}
-div#about-right { float: right; width: 49%; }
+div#about-right { float: right; width: 45%; }
 h2 { font-size: 16px; font-weight: normal; color: #2e5a9e; margin: 0; }
 h1 { font-size: 50px; color: #162d50; font-weight: normal; margin: 0; line-height: 45px;}
 p { font-size: 12px;}
