@@ -18,12 +18,7 @@ class BacklogController < ApplicationController
       @view = :team
       @member_team = Team.find(params[:id])
       @projects = @member_team.projects
-      @stories = []
-      @projects.each do |project|
-        project.stories.each { |story| @stories << story }
-      end
-      @stories = @stories.sort_by {|story| story.priority }
-      @stories = @stories.reverse
-  end
+      @stories = Story.find_by_team(@member_team)
+   end
 
 end

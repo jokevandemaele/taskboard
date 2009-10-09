@@ -37,4 +37,4 @@ DoneStory:
   description: description
   status: finished
   realid: TS101
-
+  updated_at: <%= Time.now.to_s(:db) %>

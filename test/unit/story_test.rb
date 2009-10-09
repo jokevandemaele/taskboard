@@ -61,5 +61,31 @@ class StoryTest < ActiveSupport::TestCase
     assert story.finished?
     assert_equal -1, story.priority
   end
-
+  # For some weird reason when doing find by team doesn't refreshes the model
+  # test "stories for a team should be returned ordered by priority and date" do
+  #   
+  #   ips = stories(:InProgressStory)
+  #   nss = stories(:NotStartedStory)
+  #   ds = stories(:DoneStory)
+  #   
+  #   stories = Story.find_by_team(teams(:widmore_team))
+  #   assert_equal ips, stories[0]
+  #   assert_equal nss, stories[1]
+  #   assert_equal ds, stories[2]
+  # 
+  #   sleep(2)
+  #   ips.finish
+  #   stories = Story.find_by_team(teams(:widmore_team))
+  # 
+  #   assert_equal nss, stories[0]
+  #   assert_equal ips, stories[1]
+  #   assert_equal ds, stories[2]
+  #   
+  #   sleep(2)
+  #   nss.finish
+  #   stories = Story.find_by_team(teams(:widmore_team))
+  #   assert_equal nss, stories[0]
+  #   assert_equal ips, stories[1]
+  #   assert_equal ds, stories[2]
+  # end
 end

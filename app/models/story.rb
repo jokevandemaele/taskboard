@@ -7,6 +7,17 @@ class Story < ActiveRecord::Base
   after_create :add_template_task
   before_save :default_priority
   
+  
+  def self.find_by_team(team)
+    stories = []
+    team.projects.each do |project|
+      project.stories.each { |story| stories << story }
+    end
+    stories = stories.sort_by {|story| [story.priority, story.updated_at] }
+    stories.reverse
+    # stories = stories.sort_by {|story|  }
+    # stories.reverse
+  end
   def after_initialize
     self.realid = Story.next_realid(self.project) if !self.realid && self.project
     self.priority = self.project.next_priority if !self.priority && self.project

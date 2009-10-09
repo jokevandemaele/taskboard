@@ -18,7 +18,7 @@
 			<%= link_to_remote "Delete", :url => url_for(story), :confirm => 'Are you sure?', :method => :delete, :complete => "location.reload(true);" %>
 			]
 		<% else %>
-		  [ Date Finished: <%= "#{story.updated_at.month}/#{story.updated_at.day}/#{story.updated_at.year}" %> ]
+		  [ Date Finished: <%= "#{story.updated_at.strftime("%d %b %Y")}" %> ]
 		<% end %> 
   </td>
   <td class="priority-cell">
