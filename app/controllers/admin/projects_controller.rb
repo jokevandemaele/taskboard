@@ -76,7 +76,6 @@ class Admin::ProjectsController < ApplicationController
     @project = Project.find(params[:id])
 
     if @project.update_attributes(params[:project])
-
       @project.teams = [Team.find(params[:team_id])]
       render :inline => "<script>location.reload(true);</script>"
     else

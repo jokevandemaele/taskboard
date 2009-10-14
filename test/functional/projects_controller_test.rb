@@ -140,14 +140,14 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
     
     # UPDATE from organization where admin belongs
     project = Project.find_by_name('Find Jacob')
-    put :update, { :id => project.id, :project => {:name => 'Find Jacob.' } }
+    put :update, { :id => project.id, :project => {:name => 'Find Jacob.' }, :team_id => 1 }
     assert_response :ok
     project.reload
     assert_equal 'Find Jacob.', project.name
 
     # UPDATE from organization where admin doesn't
     project_notmine = Project.find_by_name('Destroy the magnetic zone')
-    put :update, { :id => project_notmine.id, :project => {:name => 'Destroy the magnetic zone.' } }
+    put :update, { :id => project_notmine.id, :project => {:name => 'Destroy the magnetic zone.' }, :team_id => 1 }
     assert_response :ok
     project_notmine.reload
     assert_equal 'Destroy the magnetic zone.', project_notmine.name
@@ -175,7 +175,7 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
     
     # UPDATE from organization where admin belongs
     project = Project.find_by_name('Find Jacob')
-    put :update, { :id => project.id, :project => {:name => 'Find Jacob.' } }
+    put :update, { :id => project.id, :project => {:name => 'Find Jacob.' }, :team_id => 1 }
     assert_response :ok
     project.reload
     assert_equal 'Find Jacob.', project.name

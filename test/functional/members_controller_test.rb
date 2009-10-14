@@ -168,7 +168,7 @@ class Admin::MembersControllerTest < ActionController::TestCase
     assert_not_equal 'vincent@peta.org', member.email
     
     # DELETE from organization where admin belongs
-    delete :destroy, { :id => member.id }
+    delete :destroy, { :id => member.id, :organization => organizations(:widmore_corporation).id  }
     assert_response :ok
     assert_nil Member.find_by_name('Vincent')
   end
@@ -189,7 +189,7 @@ class Admin::MembersControllerTest < ActionController::TestCase
     assert_not_equal 'clittleton@blo.org', member.email
     
     # DELETE from organization where admin doesn't belong
-    delete :destroy, { :id => member.id }
+    delete :destroy, { :id => member.id, :organization => organizations(:oceanic_six) }
     assert_response 302
     assert Member.find_by_name(member.name)
   end 
