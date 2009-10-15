@@ -14,7 +14,7 @@
       %td{:style => "vertical-align: top;"}
         = image_tag "expand.png",  :id => "finished_#{story.id}_slider_next", :alt => "Show More", :title => "Show All", :class => "expand", :style => "border: none; display: none;", :onClick => "javascript:finished_#{story.id}_slider.expand();", :style => "cursor: pointer; display: none;"
         = image_tag "collapse.png", :id => "finished_#{story.id}_slider_prev", :alt => "Show Less",:title => "Show First 3", :class => "collapse", :style => "border: none; display: none;", :onClick => "javascript:finished_#{story.id}_slider.collapse();", :style => "cursor: pointer; display: none; position: relative; top: 2px; right: 4px;"
-  %script= "finished_#{story.id}_slider = new Hiddener(#{task_list_slider.to_json},3,'finished_#{story.id}_slider');"
+  %script= "finished_#{story.id}_slider = new Hiddener(#{task_list_slider.to_json},2,'finished_#{story.id}_slider');"
 - else
   - tasks.each do |task|
     %li.task{:id => "task-#{task.id}-project-#{task.story.project.id}-li"}

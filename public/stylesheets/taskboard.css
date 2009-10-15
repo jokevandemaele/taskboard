@@ -3,14 +3,14 @@ table { width: 100%; margin: 0 auto; border-spacing: 0px;}
 a:visited { color: #002255;}
 
 table th{ width: 15%; font-size: 14px; text-align: center; background: white; padding: 7px;}
-table td{ padding: 0px; }
+table td{ padding: 0px; vertical-align: top; }
 
 #container { width: 100%; }
 li { margin: 0; list-style-type: none;}
 ul { margin: 0 auto; }
 
 /* Task Style */
-.task {	background: url(/images/task.png) no-repeat;	width: 126px;	height: 126px; float: left; margin: 5px;}
+.task {	background: url(/images/task.png) no-repeat;	width: 126px;	height: 126px; float: left; margin: 4px;}
 .task-container-table {	display: table;	position:absolute;	top: 0px;	width: 124.6px;	height: 124.6px;	background:transparent;	margin: 0 auto; }
 .task-container-cell { display: table-cell;	vertical-align: middle;	margin: 0 auto; }
 .flip-task-image { position:relative;	left: 106px; top: -23px;	border: none;	z-index:1; }	
