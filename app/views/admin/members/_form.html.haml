@@ -1,0 +1,94 @@
+- if !defined?(no_refresh)
+  %script Effect.Appear($('dialog-background-fade'), { duration: 0.2, to: 0.9 });
+
+#form-add-member.admin-new{ :style => "display: none;" }
+  = image_tag "admin/admin-logo-members.png", :alt => "Member", :style => "position:absolute; top: 0px; left: -120px; "
+  %div{ :style => "clear: both" }
+  = admin_open_div 765
+  .admin-div-organization-top
+    - action = edit ? :update : :create
+    - form_for @member, :url => { :controller => 'admin/members', :action => action, :id => @member }, :html => { :multipart => true, :target => :upload_frame } do |f|
+      #information
+        %iframe#upload_frame{ :name => "upload_frame", :style => "display: none"}
+        = admin_form_name(@member, edit, f)
+        - if @organization
+          = hidden_field_tag "organization", @organization.id
+        - else
+          .admin-div-section{ :style => "margin-bottom: 10px;" }
+            = image_tag 'admin/admin-div-actions-organizations.png', :alt => 'Organization', :style => 'position: relative; top: 10px; margin-left: 10px;'
+            %h2{style="position: relative; top: 10; margin-left: 10px;"} Organization
+            = select_tag "organization", options_from_collection_for_select(current_member.organizations_administered, 'id', 'name'), :style => 'position: relative; top: 10px; margin-left: 10px; width: 500px;'
+           
+        / Member Color Section
+        .admin-div-section{ :style => "margin-bottom: 10px;" }
+          = image_tag "admin/admin-div-actions-color.png", :alt => "Color", :style => "position: relative; left: 10px; top: 2px;"
+          %h2{ :style => "position: relative; top: 0px; margin-left: 20px;" }
+            Color
+          %p{ :style => "color: #04a; font-size: 10px; margin: 0; position:relative; top: -18px; left: 70px;" }
+            (This color will be used to identify the user in the taskboard)
+          = f.text_field :color, :style => "float: right; position: relative; top: -55px; border: none; right: 10px; width: 150px; height: 20px;", :readonly => 'readonly', :onclick => "toggle_color_picker();"
+          %p#admin-member-color-choose{ :onclick => "toggle_color_picker();", :style => "color: #04a; font-size: 12px; float:right; margin: 0; position:relative; left: 140px; top: -35px; cursor: pointer;" }
+            choose
+            
+        / Member Login Section
+        .admin-div-section{ :style => "margin-bottom: 10px; height: 80px;" }
+          %div{ :style => "position: absolute; right: 20px; padding-top: 5px;" }
+            %span{ :style => "color: #162d50;" }
+              username
+            = f.text_field :username, :style => "position: relative; right: 2px; background: url('/images/admin/admin-div-field.png') no-repeat top left; border: none; width: 168px; height: 26px; padding: 5px;"
+            %br
+            %span{ :style => "color: #162d50;" }
+              password
+            = f.password_field :password, :style => "background: url('/images/admin/admin-div-field.png') no-repeat top left; border: none; width: 168px; height: 26px; padding: 5px;", :size => "10"
+          = image_tag "admin/admin-div-actions-login.png", :alt => "Login", :style => "position: relative; left: 10px; top: -2px;"
+          %h2{ :style => "position: relative; top: 0px; margin-left: 10px;" }
+            Login information
+
+        / Member Email Section
+        .admin-div-section{ :style => "margin-bottom: 10px;" }
+          = image_tag "admin/admin-div-actions-email.png", :alt => "Color", :style => "position: relative; left: 10px; top: 2px; width: 50px;"
+          %h2{ :style => "position: relative; top: 0px; margin-left: 20px;" }
+            E-Mail
+          %p{ :style => "color: #04a; font-size: 10px; margin: 0; position:relative; top: -18px; left: 70px;" }
+            (This mail will be used to send taskboard's notifications and invites)
+          = f.text_field :email, :style => "float:right; position: relative; top: -55px; right: 10px; background: url('/images/admin/admin-div-field.png') no-repeat top left; border: none; width: 168px; height: 26px; padding: 5px;"
+        / Member Picture Section
+        .admin-div-section{ :style => "margin-bottom: 10px; height: 60px; " }
+          = image_tag "admin/admin-div-actions-picture.png", :alt => "Picture", :style => "position: relative; left: 0px; top: -5px;"
+          %h2{ :style => "position: relative; top: 0px; margin-left: -5px; top: -10px;" }
+            Picture
+          %p{ :style => "color: #04a; font-size: 10px; margin: 0; position:relative; top: -38px; left: 70px;" }
+            The picture should be a .jpg, .png, or .gif and will be scaled to 88x88 pixels
+          = file_field_tag :picture_file, :style => "float: right; position: relative; right: 5px; top: -75px; background: url('/images/admin/admin-div-field.png') no-repeat top left; border: none; padding: 5px;"
+
+        / Member Admin Section
+        - if(current_member.admin?)
+          .admin-div-section{ :style => "" }
+            %div{ :style => "float: right; position: absolute; right: 40px; margin-top: 15px;" }
+              - if @member.admin?
+                = check_box_tag "member[admin]", true, :checked => 'checked'
+              - else
+                = check_box_tag "member[admin]", true
+              %span{ :style => "position: relative; top: -2px; font-size: 16px; " }
+                User is a System Administrator
+            = image_tag "admin/admin-div-actions-security.png", :alt => "Security", :style => "position: relative; left: 0px; top: 3px;"
+            %h2{ :style => "position: relative; top: 0px; margin-left: -5px; top: 5px;" }
+              Security
+
+      %div{ style='float: right; position:relative; top: 20px;' }
+        = image_submit_tag 'admin/admin-form-submit.png', :alt => 'Submit', :style => "width: 50px;"
+        = image_tag 'admin/admin-form-cancel.png', :alt => 'Cancel', :style => "width: 45px;", :class => 'admin-form-cancel', :onClick => 'cancelForm(\'form-add-member\');'
+
+  %div{ :style => "clear:both; margin: 0; padding: 0;" }
+  #show-errors{ :style => "display:none;" }
+  = admin_close_div 765
+  #admin-div-color-picker{ :style => "display: none; position: absolute; top: 119px; right: 3px;" }
+    = admin_open_div 208
+    #admin-div-color-picker-content
+    = admin_close_div 208
+%script
+  $('admin-div-color-picker-content').innerHTML = generate_color_table('member_color');
+  if($('member_color').value != '') $('member_color').style.backgroundColor = $('member_color').style.color = '#' + $('member_color').value;
+  centerTo($('form-add-member'),$('dialog-background-fade'));
+  Effect.Appear($('form-add-member'), { afterFinish : function() { Form.Element.select($('member_name'))}});
+  / - # render :partial => 'color_picker'

@@ -4,9 +4,10 @@
 					:class => "form-task-task_description",
 					:id => "edit-task-#{task.id}-description",
 					:cols => "15", :rows => "6", 
-					:onFocus => "this.select();"
-				-%>
-				<input type="submit" style="position: relative; top: 95px;" value="Update" >
+					:onFocus => "this.select();",
+					:style => "width: 95%; height: 93px; font-size: 10px; font-family: arial;"
+				-%></textarea>
+				<input type="submit" style="font-size: 10px; width: 50px; height: 20px; position: absolute; bottom: -20px;" value="Update" >
 
 				<%= hidden_field_tag(:story_id, "#{story.id}") %>
 				<%= hidden_field_tag(:status, "#{status}") %>

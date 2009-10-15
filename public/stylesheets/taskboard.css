@@ -13,12 +13,13 @@ ul { margin: 0 auto; }
 .task {	background: url(/images/task.png) no-repeat;	width: 126px;	height: 126px; float: left; margin: 4px;}
 .task-container-table {	display: table;	position:absolute;	top: 0px;	width: 124.6px;	height: 124.6px;	background:transparent;	margin: 0 auto; }
 .task-container-cell { display: table-cell;	vertical-align: middle;	margin: 0 auto; }
-.flip-task-image { position:relative;	left: 106px; top: -23px;	border: none;	z-index:1; }	
-.flip-task-image-back{	border: none;	z-index:1; }
-.image-link-back { position:relative;	left: 106px; top: 11px;	border: none;	z-index:1; }	
-.task-name{ width: 100%; margin-top: 0; font-size: 12.6px; font-weight: bold; text-align: center; }
-.task-name-container{ height: 130px; position:relative; top: 7px; vertical-align: middle; margin: 0 auto; }
+.flip-task-image { position:absolute;	right: 0px; bottom: 0px;	border: none;	z-index:1; }	
+.flip-task-image-back{ border: 1px solid red; z-index:1; }
+.image-link-back { position:absolute; right: 0; bottom: 0; border: none; z-index:1; }	
+.task-name{ width: 100%; margin-top: 0; font-size: 12.6px; font-weight: bold; text-align: center; line-height: 17px; padding: 0;}
+.task-name-container{ height: 100px; margin: 0 auto; position: relative; top: 7px; vertical-align: middle; margin: 0 auto;}
 .task-description{ position: relative; top: 2px; left: 7px; width: 110px; height: 96px; margin: 0; font-size: 9px;}
+.task-description-area { border: none; background: inherit; overflow: hidden;}
 
 /* Menu - Add Task */
 #form-add-task{ position: absolute; margin: 0 auto; z-index: 101; 	background: url('/images/task-new.png') no-repeat left; width: 180px; height: 180px; }
@@ -26,7 +27,7 @@ ul { margin: 0 auto; }
 #form-add-task-task_name { width: 100%; font-size: 18px; font-weight: bold; background: none; border: none; text-align: center; color: #4d4d4d; position: relative; left: 7px; top: 15px; }
 .form-task-task_description{ background: transparent; border: none; font-size: 12px; position: absolute; top:0px; left: 2px; overflow: hidden; }
 #form-add-task-task_description{ background: none; border: none; font-size: 12px; position: absolute; top:0px; left: 2px; }
-#form-add-task-submit{ position:absolute; left: 85px; top: 148px; z-index: 130; }
+#submit{ position:absolute; left: 85px; top: 148px; z-index: 130; }
 #form-add-task-cancel{ position:relative; left: 12px; top: 148px; z-index: 130; }
 .task-container-table-new {	display: table;	position:absolute;	top: 0px;	width: 161px;	height: 124.6px;	background:transparent;	margin: 0 auto; }
 .task-container-cell-new { display: table-cell;	vertical-align: middle;	margin: 0 auto; }
@@ -40,7 +41,7 @@ ul { margin: 0 auto; }
 .story-name-container{ padding: 0; width: 108px; height: 65px; margin: 0;}
 
 .story-field-realid{ font-size: 8px; text-align: right; font-weight: bold;	position: relative;	top: -12px; left: -2px; }
-.story-field-name { float: left; position: relative; top: -10px; margin-left: 50% !important; font-size: 12px; text-align: center; }
+.story-field-name { float: left; position: relative; top: -10px; margin-left: 50% !important; font-size: 12px; line-height: 14px; text-align: center; }
 .storycard-priority{ position: absolute; bottom: 5px; left: 5px; }
 .storycard-size{ position: absolute; bottom: 5px; right: 5px; }
 .story-field-label { margin: 0; text-align: center; font-size: 10px; }

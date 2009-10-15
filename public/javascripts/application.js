@@ -71,13 +71,16 @@ function toggleSelect(id,checkbox){
 
 function resizeFontSizeToFit(element,container){
 		font_size = element.getStyle('font-size').replace('px', '');
+		line_height = element.getStyle('line-height').replace('px', '');
 		elementW = element.offsetWidth;
 		elementH = element.offsetHeight;
 		containerW = container.offsetWidth;
 		containerH = container.offsetHeight;
 		while(elementW > containerW || elementH > containerH){
 			font_size -= 1;
+			line_height -= 1;
 			element.setStyle({fontSize: font_size + 'px'});
+			element.setStyle({lineHeight: line_height + 'px'});
 			elementW = element.offsetWidth;
 			elementH = element.offsetHeight;
 			containerW = container.offsetWidth;

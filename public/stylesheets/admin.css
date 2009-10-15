@@ -90,7 +90,7 @@ p { color: #002255;}
 /* End Admin Div  */
 
 /* Admin Form */
-.admin-new { position: fixed; top: 0px; left: 0px; z-index: 101; }
+.admin-new { position: absolute; z-index: 101; }
 .form-name{ position:relative; font-size: 28px; color: #002255; width: 100%; border: none; background: transparent;}
 .name-field { width: 712px; height: 41px; background: url('/images/admin/admin-div-name-background.png') no-repeat; margin-top: 5px; padding-top: 3px; padding-left: 13px; padding-right: 13px;}
 .admin-form-cancel { position:relative; top: -17px; cursor: pointer; margin-left: 10px; }
