@@ -3,6 +3,7 @@ body { background: url('/images/admin/admin-background.png') repeat-x #f1f6ff; }
 img { border: none; vertical-align: middle; }
 a { text-decoration: none;}
 a:visited { color: #002255;}
+input.text { border: none; background: url('/images/admin/admin-div-field.png') no-repeat top left; width: 168px; height: 16px; padding: 5px; }
 
 h1 { font-size: 28px; color: #002255;}
 p { color: #002255;}

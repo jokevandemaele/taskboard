@@ -35,11 +35,11 @@
           %div{ :style => "position: absolute; right: 20px; padding-top: 5px;" }
             %span{ :style => "color: #162d50;" }
               username
-            = f.text_field :username, :style => "position: relative; right: 2px; background: url('/images/admin/admin-div-field.png') no-repeat top left; border: none; width: 168px; height: 26px; padding: 5px;"
+            = f.text_field :username, :class => 'text', :style => 'position: relative; right: 2px;'
             %br
-            %span{ :style => "color: #162d50;" }
+            %span{ :style => "color: #162d50; margin-top: 10px;" }
               password
-            = f.password_field :password, :style => "background: url('/images/admin/admin-div-field.png') no-repeat top left; border: none; width: 168px; height: 26px; padding: 5px;", :size => "10"
+            = f.password_field :password, :class => 'text', :style => "margin-top: 10px;", :size => "10"
           = image_tag "admin/admin-div-actions-login.png", :alt => "Login", :style => "position: relative; left: 10px; top: -2px;"
           %h2{ :style => "position: relative; top: 0px; margin-left: 10px;" }
             Login information
@@ -51,7 +51,7 @@
             E-Mail
           %p{ :style => "color: #04a; font-size: 10px; margin: 0; position:relative; top: -18px; left: 70px;" }
             (This mail will be used to send taskboard's notifications and invites)
-          = f.text_field :email, :style => "float:right; position: relative; top: -55px; right: 10px; background: url('/images/admin/admin-div-field.png') no-repeat top left; border: none; width: 168px; height: 26px; padding: 5px;"
+          = f.text_field :email, :class => 'text', :style => "float:right; position: relative; top: -55px; right: 10px;"
         / Member Picture Section
         .admin-div-section{ :style => "margin-bottom: 10px; height: 60px; " }
           = image_tag "admin/admin-div-actions-picture.png", :alt => "Picture", :style => "position: relative; left: 0px; top: -5px;"
@@ -75,7 +75,7 @@
             %h2{ :style => "position: relative; top: 0px; margin-left: -5px; top: 5px;" }
               Security
 
-      %div{ style='float: right; position:relative; top: 20px;' }
+      %div{ :style => 'float: right; position: relative; top: 20px;' }
         = image_submit_tag 'admin/admin-form-submit.png', :alt => 'Submit', :style => "width: 50px;"
         = image_tag 'admin/admin-form-cancel.png', :alt => 'Cancel', :style => "width: 45px;", :class => 'admin-form-cancel', :onClick => 'cancelForm(\'form-add-member\');'
 

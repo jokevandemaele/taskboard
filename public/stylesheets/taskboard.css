@@ -1,4 +1,4 @@
-body{margin: 0;}
+body{margin: 0; position: fixed; width: 100%; height: 100%;}
 table { width: 100%; margin: 0 auto; border-spacing: 0px;}
 a:visited { color: #002255;}
 
