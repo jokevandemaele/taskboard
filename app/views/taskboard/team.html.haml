@@ -1,18 +1,6 @@
 = render :partial => "menu" , :locals => { :team => @member_team, :view => @view }
 = render :partial => "adder"
-
-#container
-  %table
-    %tr{ :id => 'taskboard-first-row' }
-      %th{ :style => "width: 190px;" }=h @member_team.name
-      %th{ :style=> "width: 30%; max-width: 50%; #{taskboard_border_style(@color, [ "left", "bottom"])}"}= image_tag "taskboard_not_started.png", :alt => "Not Started"
-      %th{ :style=> "width: 30%; max-width: 50%; #{taskboard_border_style(@color, [ "left", "bottom"])}"}= image_tag "taskboard_in_progress.png", :alt => "In Progress"
-      %th{ :style=> "width: 30%; max-width: 50%; #{taskboard_border_style(@color, [ "left", "right", "bottom"])}"}= image_tag "taskboard_finished.png", :alt => "Finished"
-    - for story in @stories_by_priority
-      - if story.priority != -1
-        %tr{:id => "story-#{story.id}" }
-          = render :partial => "stories/show", :locals => { :story => story, :project => @project }
-  			
+= render :partial => "taskboard_table", :locals => { :name => @member_team.name }
 / %script= "new YAHOO.util.DDTarget('taskboard');"
 %script= "new YAHOO.util.DDTarget('taskboard-first-row');"
 
