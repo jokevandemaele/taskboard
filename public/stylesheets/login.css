@@ -14,3 +14,5 @@ div#login { background: url('/images/login/login-form-bkg.png') no-repeat; width
 div#login input { color:#162d50; background: url('/images/login/login-form-field.png') no-repeat; border: 0; width: 118px; height: 13px; padding: 5px 8px; margin-right: 10px;}
 input#submit{ background: url('/images/login/login-form-submit.png') no-repeat !important; width: 58px !important; height: 22px !important;}
 div#revision { float: right; margin: 12px;}
+#flash { display: inline; color: red; position: relative; left: 150px; top: 13px;}=======
+div#revision { float: right; margin: 12px;}

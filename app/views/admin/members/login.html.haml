@@ -51,7 +51,11 @@
             %label{ :for => 'member[password]'} password
             = password_field_tag 'member[password]'
             = submit_tag '', :id => 'submit'
+          - if flash[:notice]
+            #flash
+              = flash[:notice]
           #revision= FULL_VERSION
-        = image_tag'login/request-membership.png', :alt => 'Request Membership', :style => "cursor: pointer; position: relative; top: 10px;", :onClick => "alert('Beta Memberships are not available right now... keep in touch (oleee)');"
-        = image_tag 'login/screenshot-0.png', :alt => 'Request Membership', :style => 'margin-top: 30px; border: 3px solid #162d50;'
-        = image_tag 'login/screenshot-1.png', :alt => 'Request Membership', :style => 'margin: 20px 0px; border: 3px solid #162d50;'
+        /= image_tag'login/request-membership.png', :alt => 'Request Membership', :style => "cursor: pointer; position: relative; top: 10px;", :onClick => "alert('Beta Memberships are not available right now... keep in touch (oleee)');"
+        = image_tag 'login/screenshot-0.png', :alt => 'Taskboard Screenshot', :style => 'margin: 10px 0; border: 3px solid #162d50;'
+        = image_tag 'login/screenshot-1.png', :alt => 'Backlog Screenshot', :style => 'margin: 10px 0px; border: 3px solid #162d50;'                      
+        = image_tag 'login/screenshot-2.png', :alt => 'Admin Screenshot', :style => 'margin: 10px 0px; border: 3px solid #162d50;'
