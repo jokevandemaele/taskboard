@@ -43,6 +43,7 @@
 	<div style="width: 100px; height: 30px;"></div>
 </div>
 <script>
+  Effect.ScrollTo('header');
 	centerTo($('form-add-project'),$('dialog-background-fade'));
 	Effect.Appear($('form-add-project'), { afterFinish : function() { Form.Element.select($('project_name'))}});	
 </script>

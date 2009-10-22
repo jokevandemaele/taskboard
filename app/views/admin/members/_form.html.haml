@@ -87,6 +87,7 @@
     #admin-div-color-picker-content
     = admin_close_div 208
 %script
+  Effect.ScrollTo('header');
   $('admin-div-color-picker-content').innerHTML = generate_color_table('member_color');
   if($('member_color').value != '') $('member_color').style.backgroundColor = $('member_color').style.color = '#' + $('member_color').value;
   centerTo($('form-add-member'),$('dialog-background-fade'));

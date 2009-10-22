@@ -43,6 +43,7 @@
 	<%= admin_close_div 765 -%>
 </div>
 <script>
+  Effect.ScrollTo('menu');
 	centerTo($('form-add-story'),$('dialog-background-fade'));
 	Effect.Appear($('form-add-story'), { afterFinish : function() { Form.Element.select($('story_name'))}});	
 </script>

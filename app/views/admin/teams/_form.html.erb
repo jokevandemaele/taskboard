@@ -44,7 +44,7 @@
 $('admin-div-color-picker-content').innerHTML = generate_color_table('team_color');
 if($('team_color').value != '')
 $('team_color').style.backgroundColor = $('team_color').style.color = '#' + $('team_color').value;
-
+Effect.ScrollTo('header');
 centerTo($('form-add-team'),$('dialog-background-fade'));
 Effect.Appear($('form-add-team'), { afterFinish : function() { Form.Element.select($('team_name'))}});
 </script>
