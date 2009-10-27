@@ -21,6 +21,7 @@ config.action_controller.allow_forgery_protection    = false
 # ActionMailer::Base.deliveries array.
 config.action_mailer.delivery_method = :test
 
+config.gem "thoughtbot-shoulda", :lib => "shoulda", :source => "http://gems.github.com"
 # config.gem "rspec", :lib => false, :version => ">=1.2.2"
 # config.gem "rspec-rails", :lib => false, :version => ">=1.2.2"
 # config.gem "webrat", :lib => false, :version => ">=0.4.3"
