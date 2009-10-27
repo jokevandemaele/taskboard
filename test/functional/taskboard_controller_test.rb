@@ -74,7 +74,7 @@ class TaskboardControllerTest < ActionController::TestCase
     assert_response :ok
     
     # A taskboard from a project where the user doesn't belong
-    response = get :show, :id => projects(:find_the_island)
+    get :show, :id => projects(:find_the_island)
     assert_response 302
     get :team, :id => teams(:widmore_team)
     assert_response 302

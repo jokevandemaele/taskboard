@@ -38,6 +38,8 @@ class ApplicationController < ActionController::Base
         result = check_projects_controller_perms(@current_member, @path, request)
       when 'admin/teams'
         result = check_teams_controller_perms(@current_member, @path, request)
+      when 'taskboard'
+        result = check_taskboard_perms(@current_member, @path, request)
       when 'backlog'
         result = check_backlog_perms(@current_member, @path, request)
       when 'nametags'
@@ -51,26 +53,7 @@ class ApplicationController < ActionController::Base
     redirect_to :controller => 'admin/members', :action => :access_denied
   end
   
-  def deny_access
-    redirect_to :controller => 'admin/members', :action => :access_denied
-  end
-  
-  def require_belong_to_project
-    project = Project.find(params[:id])
-    if !(current_member.admins?(project.organization) || project.members.include?(current_member))
-      p "BLOOO"
-      redirect_to :controller => 'admin/members', :action => :access_denied
-    else
-      p "blop"
-    end
-  end
-
-  def require_belong_to_team
-    team = Team.find(params[:id]) 
-    return (current_member.admins?(team.organization) || current_member.teams.include?(team))
-  end
-  
-  def check_backlog_perms(member, path, request)
+  def check_taskboard_perms(member, path, request)
     # Taskboard and backlog can be accessible only if the member belogs to the project or if it admins the project organization
     @team = Team.find(params[:id]) if path['action'] == 'team'
     return (@current_member.admins?(@team.organization) || @current_member.teams.include?(@team)) if path['action'] == 'team'
@@ -78,6 +61,10 @@ class ApplicationController < ActionController::Base
     return (@current_member.admins?(@proj.organization) || @current_member.projects.include?(@proj))
   end
   
+  def check_backlog_perms(member, path, request)
+    check_taskboard_perms(member, path, request)
+  end
+
   def check_tag_perms(member, path, request)
     @project = Project.find(params[:project_id])
     return (@current_member.admins?(@project.organization) || @current_member.projects.include?(@project))
@@ -172,7 +159,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_member
-    @current_member ||= Member.find(session[:member])
+    Member.find(session[:member])
   end
 
   def request_controller
