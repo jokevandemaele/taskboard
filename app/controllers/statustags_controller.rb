@@ -1,6 +1,6 @@
 class StatustagsController < ApplicationController
   before_filter :login_required
-  before_filter :check_permissions
+  before_filter :member_belongs_to_project
   
   # POST /statustags
   def create

@@ -22,30 +22,20 @@ class ApplicationController < ActionController::Base
   filter_parameter_logging :password
   
   def check_permissions
-    @current_member = current_member
-    
     # If user is sysadmin allow everything
-    return true if @current_member.admin?
+    return true if current_member.admin?
     
     # If user is not a sysadmin, permissions should be applied
     @path = request.path_parameters
     case @path['controller']
       when 'admin/organizations'
-        result = check_organizations_controller_perms(@current_member, @path, request)
+        result = check_organizations_controller_perms(current_member, @path, request)
       when 'admin/members'
-        result = check_members_controller_perms(@current_member, @path, request)
+        result = check_members_controller_perms(current_member, @path, request)
       when 'admin/projects'
-        result = check_projects_controller_perms(@current_member, @path, request)
+        result = check_projects_controller_perms(current_member, @path, request)
       when 'admin/teams'
-        result = check_teams_controller_perms(@current_member, @path, request)
-      when 'taskboard'
-        result = check_taskboard_perms(@current_member, @path, request)
-      when 'backlog'
-        result = check_backlog_perms(@current_member, @path, request)
-      when 'nametags'
-        result = check_tag_perms(@current_member, @path, request)
-      when 'statustags'
-        result = check_tag_perms(@current_member, @path, request)
+        result = check_teams_controller_perms(current_member, @path, request)
       else
         return true
     end
@@ -53,28 +43,21 @@ class ApplicationController < ActionController::Base
     redirect_to :controller => 'admin/members', :action => :access_denied
   end
   
-  def check_taskboard_perms(member, path, request)
-    # Taskboard and backlog can be accessible only if the member belogs to the project or if it admins the project organization
-    @team = Team.find(params[:id]) if path['action'] == 'team'
-    return (@current_member.admins?(@team.organization) || @current_member.teams.include?(@team)) if path['action'] == 'team'
-    @proj = Project.find(params[:id]) 
-    return (@current_member.admins?(@proj.organization) || @current_member.projects.include?(@proj))
+  def member_belongs_to_project
+    project = (params[:project_id]) ? Project.find(params[:project_id]) : Project.find(params[:id])
+    redirect_to :controller => 'admin/members', :action => :access_denied if !(current_member.admins?(project.organization) || current_member.projects.include?(project))
   end
   
-  def check_backlog_perms(member, path, request)
-    check_taskboard_perms(member, path, request)
+  def team_belongs_to_project
+    # Taskboard and backlog can be accessible only if the member belogs to the project or if it admins the project organization
+    team = Team.find(params[:id])
+    redirect_to :controller => 'admin/members', :action => :access_denied if !(current_member.admins?(team.organization) || current_member.teams.include?(team))
   end
 
-  def check_tag_perms(member, path, request)
-    @project = Project.find(params[:project_id])
-    return (@current_member.admins?(@project.organization) || @current_member.projects.include?(@project))
-  end
-  
+  # Refactor all these
   def check_organizations_controller_perms(member, path, request)
-    return false if path['action'] == 'invite' || path['action'] == 'send_invitation'
+    return false if path['action'] == 'invite' || path['action'] == 'send_invitation' || path['action'] == 'new' || path['action'] == 'create'
     return session[:member] != nil if path['action'] == 'index'
-    return @current_member.admin? if path['action'] == 'new'
-    return @current_member.admin? if path['action'] == 'create'
     return @current_member.admins?(Organization.find(params[:id]))
   end
 
@@ -159,7 +142,8 @@ class ApplicationController < ActionController::Base
   end
 
   def current_member
-    Member.find(session[:member])
+    @current_member = Member.find(session[:member]) if (!@current_member || @current_member.id != session[:member])
+    @current_member
   end
 
   def request_controller

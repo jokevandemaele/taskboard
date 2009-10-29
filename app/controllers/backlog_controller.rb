@@ -1,6 +1,8 @@
 class BacklogController < ApplicationController
   before_filter :login_required
-  before_filter :check_permissions
+  before_filter :member_belongs_to_project, :only => :show
+  before_filter :team_belongs_to_project, :only => :team
+
   def show
       @view = :project
       @project = Project.find(params[:id])
