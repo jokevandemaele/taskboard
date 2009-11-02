@@ -129,10 +129,18 @@ class ApplicationController < ActionController::Base
     return @current_member.admins?(team.organization)
   end
   
+  def member_belongs_to_project_or_auth_guest
+    project = Project.find(request.parameters[:id])
+    return session[:guest] = request.query_parameters[:public_hash] if (project.public? && (project.public_hash == request.query_parameters[:public_hash]))
+    if session[:member]
+      redirect_to :controller => 'admin/members', :action => :access_denied if !(current_member.admins?(project.organization) || current_member.projects.include?(project))
+    else
+      redirect_to :controller => "admin/members", :action => "login" if !@guest
+    end
+  end
   def login_required
     #render :inline => "<center><img src=\"/images/login/login_logo.png\" alt=\"Agilar Taskboard\"/><br /><h1>Site under maintenance, plase come back later.</h1></center>"
     #return false
-    
     if session[:member]
       return true
     end
@@ -142,6 +150,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_member
+    return nil if !session[:member]
     @current_member = Member.find(session[:member]) if (!@current_member || @current_member.id != session[:member])
     @current_member
   end

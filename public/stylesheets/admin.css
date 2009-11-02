@@ -20,6 +20,7 @@ p { color: #002255;}
 
 #dialog-background-fade { position: fixed; top: 0px; left: 0px; background: #0b1728; width: 100%; height: 100%; opacity: 0.9; z-index: 100; }
 #dummy-for-actions {position:absolute; top: 0; left: 0; z-index: 120;}
+.clear{ clear: both }
 /* End General  */
 
 

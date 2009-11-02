@@ -72,8 +72,17 @@
 	<% project.guest_members.each do |guest| -%>
 		<%= render :partial => "element", :locals => {:element => guest, :parent => project} -%>
 	<% end -%>
-	<div style="clear: both;"></div>
 </div>
+<% if project.public? %> 
+<div id="admin-div-project-guest_url-<%= project.id -%>" class="admin-div-organization-teams">
+	<div class="admin-div-section" style="position:relative">
+		<%= image_tag "admin/admin-div-actions-members.png", :alt => "Guest Url", :style => "position: relative; top: 10px" -%>
+		<h2>Public Url (Read Only)</h2>
+    <%= text_field_tag :guest_url, taskboard_url(:id => project.id, :public_hash => project.public_hash), :style => "position: absolute; right: 10px; top: 13px; width: 300px;", :onClick => "this.select();", :readonly => true -%>
+	</div>
+</div>
+<% end %>
+<div style="clear: both;"></div>
 
 <!--<div id="admin-div-project-burndown-<%= project.id -%>" class="admin-div-burndown-members" style="margin:0;">
 	<div class="admin-div-section">

@@ -1,7 +1,9 @@
-= render :partial => "menu" , :locals => { :team => @member_team }
-= render :partial => "adder"
+- if current_member
+  = render :partial => "menu" , :locals => { :team => @member_team }
+  = render :partial => "adder"
 = render :partial => "taskboard_table", :locals => { :name => @project.name }
-/ %script= "new YAHOO.util.DDTarget('taskboard');"
-%script= "new YAHOO.util.DDTarget('taskboard-first-row');"
 
-#dummy-for-actions
+- if current_member
+  %script= "new YAHOO.util.DDTarget('taskboard-first-row');"
+
+  #dummy-for-actions

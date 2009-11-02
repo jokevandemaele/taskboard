@@ -1,3 +1,5 @@
+require 'digest/sha1'
+
 class Project < ActiveRecord::Base
   # Associations
   belongs_to :organization
@@ -11,10 +13,15 @@ class Project < ActiveRecord::Base
   
   #Callbacks
   after_create :add_default_stories
+  before_save :add_hash_if_public
   
   # Named Scopes
   # Free projects are projects that don't have an organization assigned
   named_scope :free, :conditions => { :organization_id => 0 }
+  
+  def add_hash_if_public
+    self.public_hash = self.public? ? Digest::SHA1.hexdigest(self.name + Time.now.to_s) : nil
+  end
   
   # add_default_stories: this function is called when a new project is created, it adds the sample stories to it
   def add_default_stories

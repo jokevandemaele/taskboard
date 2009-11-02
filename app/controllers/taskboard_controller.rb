@@ -1,6 +1,7 @@
 class TaskboardController < ApplicationController
-  before_filter :login_required
-  before_filter :member_belongs_to_project, :only => :show
+  before_filter :member_belongs_to_project_or_auth_guest, :only => :show
+  # before_filter :member_belongs_to_project, :only => :show
+  before_filter :login_required, :only => :team
   before_filter :team_belongs_to_project, :only => :team
 
   def show
@@ -8,8 +9,10 @@ class TaskboardController < ApplicationController
     @project = Project.find(params[:id])
     @stories_by_priority = @project.stories_in_progress
 
-    current_member.last_project = @project
-    @current_member.save
+    if(current_member)
+      current_member.last_project = @project
+      @current_member.save
+    end
     
     @member_team = @project.team_including(@member)
     @color = @member_team.color

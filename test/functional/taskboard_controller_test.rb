@@ -78,7 +78,21 @@ class TaskboardControllerTest < ActionController::TestCase
     assert_response 302
     get :team, :id => teams(:widmore_team)
     assert_response 302
-    
   end
 
+  context "If i'm not logged in" do
+    context "And try to access as a guest with hash" do
+      setup do
+        @project = projects(:come_back_to_the_island)
+        @project.public = true
+        @project.save
+        get :show, :id => @project.id, :public_hash => @project.public_hash
+      end
+      should_respond_with :ok
+      should_assign_to(:project){ @project }
+      should_render_template :show
+    end
+    
+  end
+  
 end

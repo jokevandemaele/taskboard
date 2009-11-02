@@ -51,4 +51,23 @@ class ProjectTest < ActiveSupport::TestCase
 		s = Story.create(:project => project, :realid => "AAB1172", :priority => 0)
 		assert_equal 0, s.priority
   end
+  
+  context "when created" do
+    setup do
+      @project = Project.new(:name => "Test", :organization => organizations(:widmore_corporation))
+    end
+
+    context "with public selected" do
+      setup do
+        @project.public = true
+        @project.save
+      end
+
+      should "create a public hash" do
+        assert_not_nil @project.public_hash 
+      end
+    end
+    
+  end
+  
 end

@@ -1,6 +1,6 @@
 class StoriesController < ApplicationController
-  before_filter :login_required
-  before_filter :check_permissions
+  # before_filter :login_required
+  # before_filter :check_permissions
   layout 'stories', :except => [:tasks_by_status]
   
   # GET /stories/1
