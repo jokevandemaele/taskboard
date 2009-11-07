@@ -13,8 +13,14 @@
 		<% remote_form_for @team, :url => { :controller => 'admin/teams', :action => action, :id => @team.id }, :update => "dummy-for-actions" do |f| %>
 			<%= defined?(@organization) ? hidden_field_tag("team[organization_id]", "#{@organization.id}") : hidden_field_tag("team[organization_id]", "#{@team.organization_id}") -%>
 			<%= hidden_field_tag("project_id", "#{@project.id}") if defined?(@project) -%>
-			<%= admin_form_name(@team, edit, f) -%>
-			
+			<!--
+      <%= admin_form_name(@team, edit, f) -%>
+      -->
+      <div class="admin-div-section" style="margin-bottom: 10px;">
+        <%= image_tag 'admin/admin-div-actions-teams.png', :alt => 'Team name', :style => 'margin: 4px 10px; width: 50px;' -%>
+        <h2 style="position: relative; top: 2px;">Team name</h2>
+        <%= f.text_field :name, :class => 'text', :style => 'float: right; margin: 12px 10px;' -%>
+      </div>
 			<div class="admin-div-section" style="margin-bottom: 10px;">
 				<%= image_tag "admin/admin-div-actions-color.png", :alt => "Color", :style => "position: relative; left: 10px; top: 2px;" -%>
 				<h2 style="position: relative; top: 0px; margin-left: 20px;"><%= f.label :color %></h2>

@@ -10,7 +10,12 @@
     - form_for @member, :url => { :controller => 'admin/members', :action => action, :id => @member }, :html => { :multipart => true, :target => :upload_frame } do |f|
       #information
         %iframe#upload_frame{ :name => "upload_frame", :style => "display: none"}
-        = admin_form_name(@member, edit, f)
+        / = admin_form_name(@member, edit, f)
+        .admin-div-section{ :style => "margin-bottom: 10px;" }
+          = image_tag 'admin/admin-div-actions-members.png', :alt => 'Member name', :style => 'margin: 10px;'
+          %h2{ :style => 'position: relative; top: 2px;' }
+            Member name
+          = f.text_field :name, :class => 'text', :style => 'float: right; margin: 12px 10px;'
         - if @organization
           = hidden_field_tag "organization", @organization.id
         - else

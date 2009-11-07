@@ -9,7 +9,12 @@
   .admin-div-project-top
     - action = edit ? :update : :create
     - remote_form_for @project, :url => { :controller => 'admin/projects', :action => action, :id => @project.id }, :update => "dummy-for-actions" do |f|
-      = admin_form_name(@project, edit, f)
+      / = admin_form_name(@project, edit, f)
+      .admin-div-section
+        = image_tag 'admin/admin-div-actions-projects.png', :alt => 'Project name', :style => 'margin: 10px;'
+        %h2{ :style => 'position: relative; top: 2px;' }
+          Project name
+        = f.text_field :name, :class => 'text', :style => 'float: right; margin: 12px 10px;'
       = hidden_field_tag "project[organization_id]", @organization
       .admin-div-section{ :style => "height: 70px;" }
         = image_tag 'admin/admin-div-actions-teams.png', :alt => 'Team', :style => 'position: relative; top: 10px; margin-left: 10px;'
