@@ -93,5 +93,6 @@ Rails::Initializer.run do |config|
   config.action_mailer.smtp_settings = {
      :address => 'localhost',
      :port => 25,
+     :domain => 'agilar.org',
   }
 end
