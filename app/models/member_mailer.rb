@@ -12,7 +12,7 @@ class MemberMailer < ActionMailer::Base
   def create(member, sent_at = Time.now)
     subject     'Welcome to the Agilar Taskboard!'
     recipients  member.email
-    from        %("Agilar Taskboard" <taskboard@agilar.org>)
+    from        %("Agilar Taskboard" <info@agilar.org>)
     sent_on     sent_at
     
     body        :member => member
@@ -21,7 +21,7 @@ class MemberMailer < ActionMailer::Base
   def add_guest_to_projects(member, added_by, projects, sent_at = Time.now)
     subject     'You have been added as a guest member'
     recipients  member.email
-    from        %("Agilar Taskboard" <taskboard@agilar.org>)
+    from        %("Agilar Taskboard" <info@agilar.org>)
     sent_on     sent_at
 
     project_names = []
