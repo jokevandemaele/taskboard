@@ -11,7 +11,7 @@ class MemberTest < ActiveSupport::TestCase
 
     email = MemberMailer.deliver_create(john)
     assert !ActionMailer::Base.deliveries.empty?
-    assert_equal email.from, ['taskboard@agilar.org']
+    assert_equal email.from, ['info@agilar.org']
     assert_equal email.to, ['john@locke.com']
     assert_equal email.subject, 'Welcome to the Agilar Taskboard!'
     assert_match /John Locke/, email.body
