@@ -7,8 +7,13 @@
 	<%= admin_open_div 765 -%>
 		<% action = edit ? :update : :create -%>
 		<% remote_form_for @story, :url => { :controller => :stories, :action => action, :id => @story.id }, :update => "dummy-for-actions" do |f| %>
+      <!--
 			<%= admin_form_name(@story, edit, f) -%>
-
+      -->
+      <div class="admin-div-section">
+        <h2 style="position: relative; top: 15px; left: 20px;">Story name</h2>
+        <%= f.text_field :name, :class => 'text', :style => 'float: right; margin: 12px 10px;' -%>
+      </div>
 			<%= hidden_field_tag("story[project_id]", "#{project}") if project-%> 
 			<% if !project %>
 				<div class="admin-div-section" style="margin-top: 10px; width: 715px; padding-left: 20px;">
