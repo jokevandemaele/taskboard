@@ -13,7 +13,21 @@ namespace :deploy do
     set :scm_username, "deploy"
     set :scm_password, "dpl.925"
     set :use_sudo, false
-
+    
+    begin 
+      url = URI.parse('http://hudson.dev.agilar.org:8080')
+      res = Net::HTTP.start(url.host, url.port) {|http|
+        http.get('/job/Agilar%20Taskboard%20-%20Continuous%20Integration/lastStableBuild/api/xml')
+      }
+      res.body.match(/<revision>[0-9]*<\/revision>/)
+      
+      revision = $~.to_s.gsub("<revision>",'').gsub("</revision>", '').to_i
+      
+      set :revision, revision
+    rescue
+      raise ProblemAccessingHudson
+    end
+    
     server "dev.agilar.org", :app, :web, :db, :primary => true
 
     set :user, "deploy"
