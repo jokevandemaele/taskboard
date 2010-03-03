@@ -1,4 +1,13 @@
 ActionController::Routing::Routes.draw do |map|
+  # Authlogic routes
+  map.resource :user_session
+  
+  map.login 'login', :controller => "user_session", :action => "new" 
+  map.logout 'logout', :controller => "user_session", :action => "destroy"
+
+  map.resources :users
+  map.resource :account, :controller => "users"
+
   # Sample resource route within a namespace:
   map.namespace :admin do |admin|
    admin.resources :organizations
@@ -28,8 +37,6 @@ ActionController::Routing::Routes.draw do |map|
   # Sample of named route:
   #   map.purchase 'products/:id/purchase', :controller => 'catalog', :action => 'purchase'
   # This route can be invoked with purchase_url(:id => product.id)
-  map.login '/login', :controller => 'admin/members', :action => 'login'
-  map.logout '/logout', :controller => 'admin/members', :action => 'logout'
   map.access_denied '/access_denied', :controller => 'admin/members', :action => "access_denied"
   map.report_bug '/report_bug', :controller => 'admin/members', :action => 'report_bug'
   map.report_bug '/invite', :controller => 'admin/members', :action => 'invite'
