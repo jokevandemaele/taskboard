@@ -5,14 +5,14 @@
 # ENV['RAILS_ENV'] ||= 'production'
 
 # Specifies gem version of Rails to use when vendor/rails is not present
-RAILS_GEM_VERSION = '2.3.4' unless defined? RAILS_GEM_VERSION
+RAILS_GEM_VERSION = '2.3.5' unless defined? RAILS_GEM_VERSION
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 
-TASKBOARD_VERSION = '0.1.5' unless defined? TASKBOARD_VERSION
-SVN_REVISION = `svnversion -n`.gsub(/\D/, '') unless defined? SVN_REVISION
-FULL_VERSION = "v#{TASKBOARD_VERSION} rev #{SVN_REVISION}" unless defined? FULL_VERSION
+TASKBOARD_VERSION = '0.1.6' unless defined? TASKBOARD_VERSION
+TASKBOARD_VERSION_TAG = 'migration to authlogic'
+FULL_VERSION = "v#{TASKBOARD_VERSION} #{TASKBOARD_VERSION_TAG}" unless defined? FULL_VERSION
 
 Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence over those specified here.
@@ -32,6 +32,7 @@ Rails::Initializer.run do |config|
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"
   # config.gem 'rmagick'
+  config.gem 'mysql'
   config.gem 'haml'
   config.gem 'authlogic'
   

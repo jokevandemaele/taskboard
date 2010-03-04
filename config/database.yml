@@ -1,9 +1,10 @@
 development:
-   adapter: sqlite3
-   database: db/development.sqlite3
-   pool: 5
-   timeout: 5000
-
+  adapter: mysql
+  encoding: utf8
+  database: taskboard_development
+  username: root
+  password: 
+  socket: /tmp/mysql.sock
 #development:
 #  adapter: mysql
 #  encoding: utf8
