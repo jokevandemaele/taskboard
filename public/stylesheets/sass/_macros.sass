@@ -1,0 +1,24 @@
+// Use this mixin in every block element that requires to expand to
+// encompass child floated elements without needing a "clear:both"
+// element in the markup
+=clearfix
+  :overflow auto
+  :overflow -moz-scrollbars-none
+  // This makes IE6 get layout
+  :display inline-block
+  // and this puts it back to block
+  &
+    :display block
+
+// Use this mixin to define an element which's width and height
+// are the same
+=square(!side)
+  :width = !side
+  :height = !side
+
+// Use this mixin to define an element with rounded borders
+// by !radius radius
+=rounded(!radius)
+  :-moz-border-radius = !radius
+  :-webkit-border-radius = !radius
+  :border-radius = !radius

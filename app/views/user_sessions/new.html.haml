@@ -1,0 +1,64 @@
+!!!
+%html{ "xml:lang" => "en", :lang => "en", :xmlns => "http://www.w3.org/1999/xhtml" }
+  %head
+    %meta{ :content => "text/html;charset=UTF-8", "http-equiv" => "content-type" }
+    %title
+      Agilar Taskboard - Login
+    = javascript_include_tag :defaults
+    = stylesheet_link_tag 'login'
+  %body
+    #container
+      #about-left
+        = image_tag 'login/login_logo.png', :alt => "Agilar Taskboard Beta"
+        %ul
+          %li
+            .title Inspired on real taskboards
+            The Agilar Taskboard improves your distributed team's ability to follow best practices in visual management. 
+            == Don't miss Xavier Quesada Allue's #{link_to "Visual Management Blog", 'http://www.xqa.com.ar/visualmanagement'}!
+          %li
+            %p
+              %span.title Multiple Project Support
+              %br
+              Do you run multiple projects in your organization? Want a single tool to keep track of them all? 
+              %br
+              The Agilar Taskboard is prepared to handle multiple projects per organization.
+          %li
+            %p
+              %span.title Team Taskboard View
+              %br
+              Does your team works on multiple projects at the same time?
+              %br
+              Check out our exclusive team taskboard and backlog view.
+          %li
+            %p
+              %span.title Multiple Teams in Organization
+              %br
+              Working for an organization with lots of teams? Want to assign teams to specific projects? The Agilar Taskboard can do that too!
+          %li.new
+            %p
+              %span.title Guest Members
+              %br
+              Do you work with a Product Owner who is not in your organization? Working with consultants? Take a look at the Guest Member feature.
+            
+      #login
+        - form_for @user_session do |f| 
+          = f.label :login
+          = f.text_field :login, :class => 'text'
+          = f.label :password
+          = f.password_field :password, :class => 'text'
+          = f.label :remember_me
+          = f.check_box :remember_me, :class => 'checkbox'
+          = f.submit "login", :class => 'submit'
+          #revision= FULL_VERSION
+          - if flash[:notice]
+            #flash
+              = flash[:notice]
+              :javascript
+                Effect.Pulsate('flash', { pulses: 3, duration: 1});
+                
+          
+      #about-right
+        /= image_tag'login/request-membership.png', :alt => 'Request Membership', :style => "cursor: pointer; position: relative; top: 10px;", :onClick => "alert('Beta Memberships are not available right now... keep in touch (oleee)');"
+        .screenshot= image_tag 'login/screenshot-0.png', :alt => 'Taskboard Screenshot'
+        .screenshot= image_tag 'login/screenshot-1.png', :alt => 'Backlog Screenshot'
+        .screenshot= image_tag 'login/screenshot-2.png', :alt => 'Admin Screenshot'

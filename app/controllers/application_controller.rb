@@ -2,6 +2,8 @@
 # Likewise, all the methods added will be available for all controllers.
 
 class ApplicationController < ActionController::Base
+  # Uncomment this if you want to put the taskboard in maintenance mode.
+  # before_filter :disable_taskboard
   
   # Use the ExepctionNotifiable plugin to send a mail when an error is thrown.
   include ExceptionNotifiable
@@ -137,17 +139,16 @@ class ApplicationController < ActionController::Base
     if session[:member]
       redirect_to :controller => 'admin/members', :action => :access_denied if !(current_member.admins?(project.organization) || current_member.projects.include?(project))
     else
-      redirect_to :controller => "admin/members", :action => "login" if !@guest
+      redirect_to login_url if !@guest
     end
   end
+  
   def login_required
-    #render :inline => "<center><img src=\"/images/login/login_logo.png\" alt=\"Agilar Taskboard\"/><br /><h1>Site under maintenance, plase come back later.</h1></center>"
-    #return false
     if session[:member]
       return true
     end
       session[:return_to] = request.request_uri
-      redirect_to :controller => "admin/members", :action => "login"
+      redirect_to login_url
       return false
   end
 
@@ -174,6 +175,11 @@ class ApplicationController < ActionController::Base
   end
 
   private
+    def disable_taskboard
+      render :inline => "<center><img src=\"/images/login/login_logo.png\" alt=\"Agilar Taskboard\"/><br /><h1>Site under maintenance, plase come back later.</h1></center>"
+      return false
+    end
+
     def current_user_session
       return @current_user_session if defined?(@current_user_session)
       @current_user_session = UserSession.find

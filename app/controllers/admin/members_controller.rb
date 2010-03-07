@@ -1,6 +1,6 @@
 class Admin::MembersController < ApplicationController
-  before_filter :login_required, :except => [:login, :logout]
-  before_filter :check_permissions, :except => [:login, :logout, :access_denied, :report_bug]
+  before_filter :login_required, :except => [:login, :logout, :access_denied ]
+  before_filter :check_permissions, :except => [:login, :logout, :access_denied, :report_bug ]
   layout 'admin/members', :except => [:report_bug, :login]
   
   # GET /members
