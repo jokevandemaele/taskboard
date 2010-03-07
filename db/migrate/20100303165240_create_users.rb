@@ -4,7 +4,7 @@ class CreateUsers < ActiveRecord::Migration
       # This is used to identificate the user in the team
       t.string :name
       t.integer :color
-      
+      t.boolean :admin, :null => false, :default => false
       # Login stuff
       t.string    :login, :null => false
       t.string    :email,               :null => false                # optional, you can use login instead, or both

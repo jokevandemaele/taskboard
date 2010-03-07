@@ -22,6 +22,10 @@ namespace :taskboard do
         
         # Save the user
         if @user.save
+          # Set if the user is an admin
+          @user.admin = member.admin?
+          @user.save
+          
           # puts "Adding user teams"
           @user.teams = member.teams
           # puts "Adding organization memberships"

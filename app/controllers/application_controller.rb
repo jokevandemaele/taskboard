@@ -12,8 +12,7 @@ class ApplicationController < ActionController::Base
   ExceptionNotifier.email_prefix = "[TASKBOARD ERROR] "
   
   helper :all # include all helpers, all the time
-  helper_method :request_controller, :current_member
-  helper_method :current_user_session, :current_user
+  helper_method :request_controller, :current_user_session, :current_user
   # See ActionController::RequestForgeryProtection for details
   # Uncomment the :secret if you're not using the cookie session store
   #protect_from_forgery :secret => '5e2fef265e68f375d5902befc545a584'
@@ -143,20 +142,20 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  def login_required
-    if session[:member]
-      return true
-    end
-      session[:return_to] = request.request_uri
-      redirect_to login_url
-      return false
-  end
+  # def login_required
+  #   if session[:member]
+  #     return true
+  #   end
+  #     session[:return_to] = request.request_uri
+  #     redirect_to login_url
+  #     return false
+  # end
 
-  def current_member
-    return nil if !session[:member]
-    @current_member = Member.find(session[:member]) if (!@current_member || @current_member.id != session[:member])
-    @current_member
-  end
+  # def current_member
+  #   return nil if !session[:member]
+  #   @current_member = Member.find(session[:member]) if (!@current_member || @current_member.id != session[:member])
+  #   @current_member
+  # end
 
   def request_controller
     request.path_parameters[:controller]
@@ -193,8 +192,8 @@ class ApplicationController < ActionController::Base
     def require_user
       unless current_user
         store_location
-        flash[:notice] = "You must be logged in to access this page"
-        redirect_to new_user_session_url
+        flash[:notice] = "Please Login"
+        redirect_to new_user_sessions_url
         return false
       end
     end
@@ -202,7 +201,7 @@ class ApplicationController < ActionController::Base
     def require_no_user
       if current_user
         store_location
-        flash[:notice] = "You must be logged out to access this page"
+        flash[:notice] = "Please Logout"
         redirect_to account_url
         return false
       end
