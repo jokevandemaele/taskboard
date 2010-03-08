@@ -1,7 +1,7 @@
 class TaskboardController < ApplicationController
   before_filter :member_belongs_to_project_or_auth_guest, :only => :show
   # before_filter :member_belongs_to_project, :only => :show
-  before_filter :login_required, :only => :team
+  before_filter :require_user, :only => :team
   before_filter :team_belongs_to_project, :only => :team
 
   def show
@@ -11,7 +11,7 @@ class TaskboardController < ApplicationController
 
     if(current_member)
       current_member.last_project = @project
-      @current_member.save
+      current_user.save
     end
     
     @member_team = @project.team_including(@member)

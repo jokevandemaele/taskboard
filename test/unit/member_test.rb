@@ -132,27 +132,27 @@ class MemberTest < ActiveSupport::TestCase
     assert dfaraday.organizations.include?(organizations(:dharma_initiative))
   end
   
-  test "organizations administered should give all the organizations the user admins" do
-    # an organization administrator should have al the organizations it administers
-    assert_equal 1, members(:cwidmore).organizations_administered.size
-    # a normal user should not have any organization
-    assert_equal 0, members(:dfaraday).organizations_administered.size
-    # an admin should have the organizations
-    assert_equal Organization.all.size, members(:clittleton).organizations_administered.size
-  end
+  # test "organizations administered should give all the organizations the user admins" do
+  #   # an organization administrator should have al the organizations it administers
+  #   assert_equal 1, members(:cwidmore).organizations_administered.size
+  #   # a normal user should not have any organization
+  #   assert_equal 0, members(:dfaraday).organizations_administered.size
+  #   # an admin should have the organizations
+  #   assert_equal Organization.all.size, members(:clittleton).organizations_administered.size
+  # end
   
-  test "admins return if i admin a certain organization" do
-    assert members(:clittleton).admins?(organizations(:widmore_corporation))
-    assert members(:clittleton).admins?(organizations(:dharma_initiative))
-    assert members(:cwidmore).admins?(organizations(:widmore_corporation))
-    assert !members(:dfaraday).admins?(organizations(:widmore_corporation))
-  end
+  # test "admins return if i admin a certain organization" do
+  #   assert members(:clittleton).admins?(organizations(:widmore_corporation))
+  #   assert members(:clittleton).admins?(organizations(:dharma_initiative))
+  #   assert members(:cwidmore).admins?(organizations(:widmore_corporation))
+  #   assert !members(:dfaraday).admins?(organizations(:widmore_corporation))
+  # end
   
-  test "admins_any_organization? works as expected" do
-    assert members(:clittleton).admins_any_organization?
-    assert members(:cwidmore).admins_any_organization?
-    assert !members(:dfaraday).admins_any_organization?
-  end
+  # test "admins_any_organization? works as expected" do
+  #   assert members(:clittleton).admins_any_organization?
+  #   assert members(:cwidmore).admins_any_organization?
+  #   assert !members(:dfaraday).admins_any_organization?
+  # end
 
   test "member.administrators should return all the organization admins from the organizations the user belongs to" do
     admins = []
@@ -169,11 +169,11 @@ class MemberTest < ActiveSupport::TestCase
     assert_equal member.last_project, projects(:find_the_island)
   end
   
-  test "projects show all the projects where the user is a member or guest member" do
-    team_membership = GuestTeamMembership.new(:member => members(:dfaraday), :project => projects(:do_weird_experiments), :team => teams(:dharma_team))
-    assert team_membership.save
-    assert teams(:widmore_team).members << members(:dfaraday)
-    assert_equal [projects(:do_weird_experiments)], members(:dfaraday).guest_projects
-    assert_equal teams(:widmore_team).projects + [projects(:do_weird_experiments)], members(:dfaraday).projects
-  end
+  # test "projects show all the projects where the user is a member or guest member" do
+  #   team_membership = GuestTeamMembership.new(:member => members(:dfaraday), :project => projects(:do_weird_experiments), :team => teams(:dharma_team))
+  #   assert team_membership.save
+  #   assert teams(:widmore_team).members << members(:dfaraday)
+  #   assert_equal [projects(:do_weird_experiments)], members(:dfaraday).guest_projects
+  #   assert_equal teams(:widmore_team).projects + [projects(:do_weird_experiments)], members(:dfaraday).projects
+  # end
 end

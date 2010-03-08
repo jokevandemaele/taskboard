@@ -1,5 +1,5 @@
 class Admin::ProjectsController < ApplicationController
-  before_filter :login_required
+  before_filter :require_user
   before_filter :check_permissions
   
   # GET /projects
@@ -123,7 +123,7 @@ class Admin::ProjectsController < ApplicationController
     end
 
     # Send e-mail to the member
-    MemberMailer.deliver_add_guest_to_projects(@member, @current_member.name, @projects) if !@error
+    MemberMailer.deliver_add_guest_to_projects(@member, current_user.name, @projects) if !@error
 
     render :partial => 'guest_team_member_form', :object => @guest_team_member, :locals => { :no_refresh => true, :edit => false, :organization => @organization = Organization.find(params[:organization]), :selected_projects => @projects }, :status => :internal_server_error if @error
     render :inline => "<script>location.reload(true);</script>", :status => :ok if !@error 

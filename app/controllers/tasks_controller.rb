@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_filter :login_required
+  before_filter :require_user
   before_filter :check_permissions
   layout nil
   

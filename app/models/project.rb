@@ -9,8 +9,9 @@ class Project < ActiveRecord::Base
   has_many :guest_members, :through => :guest_team_memberships, :source => :member
   
   # Validations
+  validates_presence_of :organization, :name
   validates_uniqueness_of :name
-  
+
   #Callbacks
   after_create :add_default_stories
   before_save :add_hash_if_public
@@ -18,6 +19,8 @@ class Project < ActiveRecord::Base
   # Named Scopes
   # Free projects are projects that don't have an organization assigned
   named_scope :free, :conditions => { :organization_id => 0 }
+  
+  attr_accessible :name, :organization
   
   def add_hash_if_public
     self.public_hash = self.public? ? Digest::SHA1.hexdigest(self.name + Time.now.to_s) : nil
@@ -40,13 +43,13 @@ class Project < ActiveRecord::Base
   end
  
   # members: returns an array with all the members of the project
-  def members
-    members = Array.new
-    teams.each do |team| 
-      team.members.each { |member| members << member if !members.include?(member)}
+  def users
+    result = []
+    teams.each do |team|
+      team.users.each { |user| result << user if !result.include?(user)}
     end
-    members += guest_members
-    return members
+    result += guest_members
+    return result
   end
 
   def team_including(member)

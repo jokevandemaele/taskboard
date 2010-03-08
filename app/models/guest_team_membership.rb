@@ -1,35 +1,49 @@
 class GuestTeamMembership < ActiveRecord::Base
+  ################################################################################################################
+  #
+  # Validations
+  #
+  ################################################################################################################
+  validates_presence_of :user, :message => ": There is no user with that E-mail."
+  validates_presence_of :project, :message => ": You must select a project"
+
+  ################################################################################################################
+  #
   # Associations
+  #
+  ################################################################################################################
+  belongs_to :user
   belongs_to :member
   belongs_to :project
   belongs_to :team
   
-  # Validations
-  validates_presence_of :member, :message => ": There is no Member with that E-mail."
-  validates_presence_of :project, :message => ": You must select a project"
+  ################################################################################################################
+  #
+  # Attributes Accessible
+  #
+  ################################################################################################################
+  attr_accessible :team, :project, :user
   
   def validate
-    errors.add_to_base("That member belongs to the organization you're administering, there is no need to add it as a guest") if !project.nil? && project.organization.members.include?(member)
-    errors.add_to_base "That member is already a guest member on #{Project.find(project).name}" if GuestTeamMembership.first(:conditions => ["member_id = ? AND project_id = ?", member, project])
+    errors.add_to_base("That user belongs to the organization you're administering, there is no need to add it as a guest") if !project.nil? && project.organization.users.include?(user)
+    errors.add_to_base "That user is already a guest member on #{Project.find(project).name}" if GuestTeamMembership.first(:conditions => ["user_id = ? AND project_id = ?", user, project])
   end
   
-  def self.remove_from_organization(member,organization)
+  def self.remove_from_organization(user,organization)
     organization.projects.each do |project|
-      remove_from_project(member,project)
+      remove_from_project(user,project)
     end
   end
 
-  def self.remove_from_project(member,project)
-    if project.guest_members.include?(member)
-      project.stories.each { |story| story.tasks.each { |task| task.nametags.each { |nametag| nametag.destroy if nametag.member == member } }}
-      project.guest_members.delete(member)
+  def self.remove_from_project(user,project)
+    if project.guest_members.include?(user)
+      project.stories.each { |story| story.tasks.each { |task| task.nametags.each { |nametag| nametag.destroy if nametag.user == user } }}
+      project.guest_members.delete(user)
     end
   end
   
-  def self.add_to_project(member,project)
-    guest_team_member = GuestTeamMembership.new(:project => project, :member => member) 
-    guest_team_member.save if !project.guest_members.include?(member)
-    return guest_team_member
+  def self.add_to_project(user,project)
+    !project.guest_members.include?(user) ? project.guest_team_members.create(:user => user) : false
   end
   
 end

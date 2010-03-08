@@ -1,67 +1,67 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
-dfaraday_widmore:
-    organization_id: 1
-    member_id: 1
-    admin: false
-
-cwidmore_widmore:
-    organization_id: 1
-    member_id: 3
-    admin: true
-
-clittleton_widmore:
-    organization_id: 1
-    member_id: 4
-    admin: true
-
-jburke_dharma:
-    organization_id: 2
-    member_id: 2
-    admin: false
-
-jshephard_dharma:
-    organization: dharma_initiative
-    member: jshephard
-    admin: false
-
-kausten_dharma:
-    organization: dharma_initiative
-    member: kausten
-    admin: false
-
-hreyes_dharma:
-    organization: dharma_initiative
-    member: hreyes
-    admin: false
-
-jshephard_oceanic:
-    organization: oceanic_six
-    member: jshephard
-    admin: true
-
-kausten_oceanic:
-    organization_id: 3
-    member_id: 9
-    admin: false
-
-hreyes_oceanic:
-    organization: oceanic_six
-    member: hreyes
-    admin: false
-
-sjarrah_oceanic:
-    organization: oceanic_six
-    member: sjarrah
-    admin: false
-
-alittleton_oceanic:
-    organization: oceanic_six
-    member: alittleton
-    admin: false
-
-skwon_oceanic:
-    organization: oceanic_six
-    member: skwon
-    admin: false
-
+# # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+# 
+# dfaraday_widmore:
+#     organization_id: 1
+#     member_id: 1
+#     admin: false
+# 
+# cwidmore_widmore:
+#     organization_id: 1
+#     member_id: 3
+#     admin: true
+# 
+# clittleton_widmore:
+#     organization_id: 1
+#     member_id: 4
+#     admin: true
+# 
+# jburke_dharma:
+#     organization_id: 2
+#     member_id: 2
+#     admin: false
+# 
+# jshephard_dharma:
+#     organization: dharma_initiative
+#     member: jshephard
+#     admin: false
+# 
+# kausten_dharma:
+#     organization: dharma_initiative
+#     member: kausten
+#     admin: false
+# 
+# hreyes_dharma:
+#     organization: dharma_initiative
+#     member: hreyes
+#     admin: false
+# 
+# jshephard_oceanic:
+#     organization: oceanic_six
+#     member: jshephard
+#     admin: true
+# 
+# kausten_oceanic:
+#     organization_id: 3
+#     member_id: 9
+#     admin: false
+# 
+# hreyes_oceanic:
+#     organization: oceanic_six
+#     member: hreyes
+#     admin: false
+# 
+# sjarrah_oceanic:
+#     organization: oceanic_six
+#     member: sjarrah
+#     admin: false
+# 
+# alittleton_oceanic:
+#     organization: oceanic_six
+#     member: alittleton
+#     admin: false
+# 
+# skwon_oceanic:
+#     organization: oceanic_six
+#     member: skwon
+#     admin: false
+# 

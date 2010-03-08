@@ -1,10 +1,9 @@
 class Admin::OrganizationsController < ApplicationController
-  before_filter :login_required
-  before_filter :check_permissions
+  before_filter :require_user
   #layout proc{ |controller| controller.request.path_parameters[:action] == 'show' ? nil : "admin/organizations" }
 
   def index
-    @organizations = (@current_member.admin?) ? Organization.all : @current_member.organizations
+    @organizations = (current_user.admin?) ? Organization.all : current_user.organizations
   end
 
   def show
@@ -98,7 +97,7 @@ class Admin::OrganizationsController < ApplicationController
   end
   
   def toggle_admin
-    return render :inline => "", :status => :internal_server_error if @current_member.id == params[:member].to_i
+    return render :inline => "", :status => :internal_server_error if current_user.id == params[:member].to_i
     @membership = OrganizationMembership.first(:conditions => ["member_id = ? and organization_id = ?", params[:member], params[:id]])
     @membership.admin = @membership.admin ? nil : true
     
@@ -132,7 +131,7 @@ class Admin::OrganizationsController < ApplicationController
     matching_username = Member.first(:select => 'username', :conditions => [ "username LIKE ?", "#{candidate_to_username}%" ], :order => 'username DESC')
     matching_username = matching_username ? matching_username.username : 0
     candidate_to_username = candidate_to_username + (matching_username.gsub(/\D/, '').to_i + 1).to_s if matching_username != 0
-    @member = Member.new(:name => @invite_info[:name], :new_organization => @organization.id, :added_by => @current_member.name, :color => 'ff0000', :username => candidate_to_username, :email => @invite_info[:email])
+    @member = Member.new(:name => @invite_info[:name], :new_organization => @organization.id, :added_by => current_user.name, :color => 'ff0000', :username => candidate_to_username, :email => @invite_info[:email])
     
     if @errors.empty? && @member.save
       render :inline => "<script>location.reload(true)</script>", :status => :ok

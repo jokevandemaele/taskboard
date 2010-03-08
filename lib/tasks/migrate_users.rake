@@ -33,6 +33,13 @@ namespace :taskboard do
             om.user = @user
             om.save
           end
+
+          # puts "Adding organization memberships"
+          member.guest_team_memberships.each do |om|
+            om.user = @user
+            om.save
+          end
+
         else
           p "Error adding #{member.id} - #{member.username}:"
           p @user.errors.inspect

@@ -1,5 +1,5 @@
 class NametagsController < ApplicationController
-  before_filter :login_required
+  before_filter :require_user
   before_filter :member_belongs_to_project
   
   # POST /nametags
@@ -9,7 +9,7 @@ class NametagsController < ApplicationController
     if @project.stories.include?(@nametag.task.story) && @nametag.save
      render :update do |page|
        @members = @nametag.task.story.project.members
-       @member_team = @nametag.task.story.project.team_including(@current_member)        
+       @member_team = @nametag.task.story.project.team_including(current_user)        
        page.replace_html "task-#{@nametag.task.id}-project-#{@nametag.task.story.project.id}-li", :partial => "tasks/task", :object => @nametag.task
        page.replace_html "menu_nametags", :partial => "taskboard/menu_nametags", :locals => { :team => @member_team, :members => @members }
      end

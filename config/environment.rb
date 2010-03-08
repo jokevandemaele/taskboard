@@ -35,6 +35,7 @@ Rails::Initializer.run do |config|
   config.gem 'mysql'
   config.gem 'haml'
   config.gem 'authlogic'
+  config.gem "thoughtbot-paperclip", :lib => "paperclip", :source => "http://gems.github.com"
   
   #   
   # Only load the plugins named here, in the order given. By default, all plugins 

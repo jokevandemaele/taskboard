@@ -1,5 +1,5 @@
 class Admin::TeamsController < ApplicationController
-  before_filter :login_required
+  before_filter :require_user
   before_filter :check_permissions
   layout "admin/teams", :except => :display_compact_info
   

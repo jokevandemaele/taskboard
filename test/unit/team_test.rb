@@ -3,10 +3,8 @@ require File.dirname(__FILE__) + '/../test_helper'
 class TeamTest < ActiveSupport::TestCase
   context "Team" do
     setup do
-      @team = Factory(:dharma_team)
+      Factory(:team)
     end
-    subject { @team }
-
     ################################################################################################################
     #
     # Associations

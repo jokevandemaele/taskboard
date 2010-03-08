@@ -22,9 +22,9 @@ class Member < ActiveRecord::Base
   before_create :generate_password_if_missing
   after_create :assign_picture, :add_to_organization_and_send_email_notification
 
-  def assign_picture
-    self.add_picture(self.new_picture) if self.new_picture
-  end
+  # def assign_picture
+  #   self.add_picture(self.new_picture) if self.new_picture
+  # end
 
   def add_to_organization_and_send_email_notification
     self.add_to_organization(self.new_organization)
@@ -50,30 +50,30 @@ class Member < ActiveRecord::Base
     end
   end
   
-  # return all the organizations the user can admin
-  def organizations_administered
-    return Organization.all if self.admin?
-    self.organization_memberships.administered.collect {|membership| membership.organization }
-  end
+  # # return all the organizations the user can admin
+  # def organizations_administered
+  #   return Organization.all if self.admin?
+  #   self.organization_memberships.administered.collect {|membership| membership.organization }
+  # end
+
+  # #see if the user admins an organization
+  # def admins?(organization)
+  #   self.organizations_administered.include?(organization)
+  # end
 
   #see if the user admins an organization
-  def admins?(organization)
-    self.organizations_administered.include?(organization)
-  end
+  # def admins_any_organization?
+  #   !self.organizations_administered.empty?
+  # end
 
-  #see if the user admins an organization
-  def admins_any_organization?
-    !self.organizations_administered.empty?
-  end
-
-  def projects
-    projects = []
-    self.teams.each do |team| 
-      team.projects.each {|project| projects << project if !projects.include?(project) }
-    end
-    projects += self.guest_projects
-    return projects
-  end
+  # def projects
+  #   projects = []
+  #   self.teams.each do |team| 
+  #     team.projects.each {|project| projects << project if !projects.include?(project) }
+  #   end
+  #   projects += self.guest_projects
+  #   return projects
+  # end
   
   # password: this method encrypts the plain text password to store it in the database
   def password=(pass)
@@ -154,8 +154,8 @@ class Member < ActiveRecord::Base
 
 protected
 
-  # Auxiliary Functions
-  def self.encrypt(pass)
-    Digest::SHA1.hexdigest(pass)
-  end
+  # # Auxiliary Functions
+  # def self.encrypt(pass)
+  #   Digest::SHA1.hexdigest(pass)
+  # end
 end

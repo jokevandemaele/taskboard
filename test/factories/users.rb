@@ -1,8 +1,8 @@
-Factory.define :dfaraday, :class => User do |u|
-  u.name 'Daniel Faraday'
+Factory.define :user do |u|
+  u.name 'User'
   u.color 000000
-  u.login 'dfaraday'
-  u.email 'dfaraday@widmore.com'
+  u.sequence(:login) {|n| "user#{n}" }
+  u.sequence(:email) {|n| "user#{n}@agilar.org" }
   u.password 'test'
   u.password_confirmation 'test'
 end

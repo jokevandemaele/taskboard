@@ -32,11 +32,11 @@ module ApplicationHelper
     return image_tag("admin/admin-div-element-sysadmin.png", 
                       :alt => "sysadmin", 
                       :id => "organization-#{parent.id}-member-#{member.id}-admin", 
-                      :class => "admin-div-element-actions-edit-admin#{'-left-aligned' if !current_member.admin?}", :title => "System Administrator") if member.admin?
+                      :class => "admin-div-element-actions-edit-admin#{'-left-aligned' if !current_user.admin?}", :title => "System Administrator") if member.admin?
 
     action = member.admins?(parent) ? "remove" : "make"
 
-    if(current_member.admins?(parent) && (current_member.id != member.id))
+    if(current_user.admins?(parent) && (current_user.id != member.id))
       link_to_remote image_tag("admin/admin-div-element-#{action}-admin.png", 
               :alt => "Toggle admin", 
               :title => "Toggle admin", 
@@ -54,7 +54,7 @@ module ApplicationHelper
               :alt => title, 
               :title => title, 
               :id => "organization-#{parent.id}-member-#{member.id}-admin", 
-              :class => "admin-div-element-actions-edit-admin#{'-left-aligned' if !current_member.admins?(parent)}")
+              :class => "admin-div-element-actions-edit-admin#{'-left-aligned' if !current_user.admins?(parent)}")
     end 
   end
 

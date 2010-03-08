@@ -24,119 +24,119 @@ class ApplicationController < ActionController::Base
   filter_parameter_logging :password, :password_confirmation
 
   
-  def check_permissions
-    # If user is sysadmin allow everything
-    return true if current_member.admin?
-    
-    # If user is not a sysadmin, permissions should be applied
-    @path = request.path_parameters
-    case @path['controller']
-      when 'admin/organizations'
-        result = check_organizations_controller_perms(current_member, @path, request)
-      when 'admin/members'
-        result = check_members_controller_perms(current_member, @path, request)
-      when 'admin/projects'
-        result = check_projects_controller_perms(current_member, @path, request)
-      when 'admin/teams'
-        result = check_teams_controller_perms(current_member, @path, request)
-      else
-        return true
-    end
-    return true if result
-    redirect_to :controller => 'admin/members', :action => :access_denied
-  end
+  # def check_permissions
+  #   # If user is sysadmin allow everything
+  #   return true if current_user.admin?
+  #   
+  #   # If user is not a sysadmin, permissions should be applied
+  #   @path = request.path_parameters
+  #   case @path['controller']
+  #     when 'admin/organizations'
+  #       result = check_organizations_controller_perms(current_user, @path, request)
+  #     when 'admin/members'
+  #       result = check_members_controller_perms(current_user, @path, request)
+  #     when 'admin/projects'
+  #       result = check_projects_controller_perms(current_user, @path, request)
+  #     when 'admin/teams'
+  #       result = check_teams_controller_perms(current_user, @path, request)
+  #     else
+  #       return true
+  #   end
+  #   return true if result
+  #   redirect_to :controller => 'admin/members', :action => :access_denied
+  # end
   
   def member_belongs_to_project
     project = (params[:project_id]) ? Project.find(params[:project_id]) : Project.find(params[:id])
-    redirect_to :controller => 'admin/members', :action => :access_denied if !(current_member.admins?(project.organization) || current_member.projects.include?(project))
+    redirect_to :controller => 'admin/members', :action => :access_denied if !(current_user.admins?(project.organization) || current_user.projects.include?(project))
   end
   
   def team_belongs_to_project
     # Taskboard and backlog can be accessible only if the member belogs to the project or if it admins the project organization
     team = Team.find(params[:id])
-    redirect_to :controller => 'admin/members', :action => :access_denied if !(current_member.admins?(team.organization) || current_member.teams.include?(team))
+    redirect_to :controller => 'admin/members', :action => :access_denied if !(current_user.admins?(team.organization) || current_user.teams.include?(team))
   end
 
-  # Refactor all these
-  def check_organizations_controller_perms(member, path, request)
-    return false if path['action'] == 'invite' || path['action'] == 'send_invitation' || path['action'] == 'new' || path['action'] == 'create'
-    return session[:member] != nil if path['action'] == 'index'
-    return @current_member.admins?(Organization.find(params[:id]))
-  end
-
-  def check_members_controller_perms(member, path, request)
-    # Bug Report Should be accessible if logged in
-    return session[:member] != nil if path['action'] == 'bug_report'
-
-    return member.admin? if path['action'] == 'index'
-
-    if path['action'] == 'edit' or path['action'] == 'update'
-      # A user can always edit and update itself
-      return true if (@current_member.id == request.params[:id].to_i)
-      memberships = OrganizationMembership.find_all_by_member_id(request.params[:id])
-      result = false
-      memberships.each do |membership|
-        result = result || member.admins?(membership.organization)
-      end
-      return result
-    end
-    
-    return member.admins?(Organization.find(request.params[:organization]))
-    return false
-  end
-
-  def check_projects_controller_perms(member, path, request)
-    return session[:member] != nil if path['action'] == 'index'
-
-    if path['action'] == 'new'
-      return member.admins?(Organization.find(request.params[:organization])) if (request.params[:organization])
-      return member.admins_any_organization?
-    end
-    if path['action'] == 'new_guest_team_member' || path['action'] == 'add_guest' || path['action'] == 'update_guest'
-      proj = params[:projects].to_a
-      if !proj.empty?
-        proj.each { |project| return false if !member.admins?(Project.find(project[0]).organization) }
-      end
-      return member.admins?(Organization.find(request.params[:organization]))
-    end
-
-    if path['action'] == 'remove_guest' || path['action'] == 'edit_guest_team_member'
-      return member.admins?(Project.find(request.params[:id]).organization) if request.params[:id]
-      return member.admins?(Organization.find(request.params[:organization])) if request.params[:organization]
-    end
-
-    return member.admins?(Organization.find(request.params[:project][:organization_id])) if path['action'] == 'create'
-    return member.admins?(Project.find(params[:id]).organization)
-  end
-
-  def check_teams_controller_perms(member, path, request)
-    return true if path['action'] == 'display_compact_info'
-    
-    if path['action'] == 'index'
-      return member.admins?(Project.find(params[:project]).organization) if(params[:project])
-      return member.admins_any_organization?
-    end
-        
-    if path['action'] == 'add_member' || path['action'] == 'remove_member'
-      check_member = Member.find(params[:member])
-      check_team = Team.find(params[:team])
-      result = false
-      check_team.projects.each do |project|
-        result = result || member.admins?(project.organization) if(check_member.organizations.include?(project.organization))
-      end
-      return result
-    end
-    return @current_member.admins?(Organization.find(params[:organization])) if path['action'] == 'new'
-    return @current_member.admins?(Organization.find(params[:team][:organization_id])) if path['action'] == 'create' || path['action'] == 'update'
-    team = Team.find(params[:id])
-    return @current_member.admins?(team.organization)
-  end
+  # # Refactor all these
+  # def check_organizations_controller_perms(member, path, request)
+  #   return false if path['action'] == 'invite' || path['action'] == 'send_invitation' || path['action'] == 'new' || path['action'] == 'create'
+  #   return session[:member] != nil if path['action'] == 'index'
+  #   return current_user.admins?(Organization.find(params[:id]))
+  # end
+  # 
+  # def check_members_controller_perms(member, path, request)
+  #   # Bug Report Should be accessible if logged in
+  #   return session[:member] != nil if path['action'] == 'bug_report'
+  # 
+  #   return member.admin? if path['action'] == 'index'
+  # 
+  #   if path['action'] == 'edit' or path['action'] == 'update'
+  #     # A user can always edit and update itself
+  #     return true if (current_user.id == request.params[:id].to_i)
+  #     memberships = OrganizationMembership.find_all_by_member_id(request.params[:id])
+  #     result = false
+  #     memberships.each do |membership|
+  #       result = result || member.admins?(membership.organization)
+  #     end
+  #     return result
+  #   end
+  #   
+  #   return member.admins?(Organization.find(request.params[:organization]))
+  #   return false
+  # end
+  # 
+  # def check_projects_controller_perms(member, path, request)
+  #   return session[:member] != nil if path['action'] == 'index'
+  # 
+  #   if path['action'] == 'new'
+  #     return member.admins?(Organization.find(request.params[:organization])) if (request.params[:organization])
+  #     return member.admins_any_organization?
+  #   end
+  #   if path['action'] == 'new_guest_team_member' || path['action'] == 'add_guest' || path['action'] == 'update_guest'
+  #     proj = params[:projects].to_a
+  #     if !proj.empty?
+  #       proj.each { |project| return false if !member.admins?(Project.find(project[0]).organization) }
+  #     end
+  #     return member.admins?(Organization.find(request.params[:organization]))
+  #   end
+  # 
+  #   if path['action'] == 'remove_guest' || path['action'] == 'edit_guest_team_member'
+  #     return member.admins?(Project.find(request.params[:id]).organization) if request.params[:id]
+  #     return member.admins?(Organization.find(request.params[:organization])) if request.params[:organization]
+  #   end
+  # 
+  #   return member.admins?(Organization.find(request.params[:project][:organization_id])) if path['action'] == 'create'
+  #   return member.admins?(Project.find(params[:id]).organization)
+  # end
+  # 
+  # def check_teams_controller_perms(member, path, request)
+  #   return true if path['action'] == 'display_compact_info'
+  #   
+  #   if path['action'] == 'index'
+  #     return member.admins?(Project.find(params[:project]).organization) if(params[:project])
+  #     return member.admins_any_organization?
+  #   end
+  #       
+  #   if path['action'] == 'add_member' || path['action'] == 'remove_member'
+  #     check_member = Member.find(params[:member])
+  #     check_team = Team.find(params[:team])
+  #     result = false
+  #     check_team.projects.each do |project|
+  #       result = result || member.admins?(project.organization) if(check_member.organizations.include?(project.organization))
+  #     end
+  #     return result
+  #   end
+  #   return current_user.admins?(Organization.find(params[:organization])) if path['action'] == 'new'
+  #   return current_user.admins?(Organization.find(params[:team][:organization_id])) if path['action'] == 'create' || path['action'] == 'update'
+  #   team = Team.find(params[:id])
+  #   return current_user.admins?(team.organization)
+  # end
   
   def member_belongs_to_project_or_auth_guest
     project = Project.find(request.parameters[:id])
     return session[:guest] = request.query_parameters[:public_hash] if (project.public? && (project.public_hash == request.query_parameters[:public_hash]))
     if session[:member]
-      redirect_to :controller => 'admin/members', :action => :access_denied if !(current_member.admins?(project.organization) || current_member.projects.include?(project))
+      redirect_to :controller => 'admin/members', :action => :access_denied if !(current_user.admins?(project.organization) || current_user.projects.include?(project))
     else
       redirect_to login_url if !@guest
     end
@@ -151,10 +151,10 @@ class ApplicationController < ActionController::Base
   #     return false
   # end
 
-  # def current_member
+  # def current_user
   #   return nil if !session[:member]
-  #   @current_member = Member.find(session[:member]) if (!@current_member || @current_member.id != session[:member])
-  #   @current_member
+  #   current_user = Member.find(session[:member]) if (!current_user || current_user.id != session[:member])
+  #   current_user
   # end
 
   def request_controller
@@ -167,9 +167,9 @@ class ApplicationController < ActionController::Base
       redirect_to(return_to)
     else                                                                                                                                                                                                                                         
       session[:return_to] = nil
-      return redirect_to :controller => '/taskboard', :action => :show, :id => current_member.projects.first.id if current_member.projects.size == 1 && request.referer == url_for(:controller => 'admin/members', :action => :login, :only_path=>false)
-      return redirect_to :controller => 'admin/projects', :action => 'index' if !current_member.admins_any_organization?
-      redirect_to :controller => 'admin/organizations' if current_member.admins_any_organization?
+      return redirect_to :controller => '/taskboard', :action => :show, :id => current_user.projects.first.id if current_user.projects.size == 1 && request.referer == url_for(:controller => 'admin/members', :action => :login, :only_path=>false)
+      return redirect_to :controller => 'admin/projects', :action => 'index' if !current_user.admins_any_organization?
+      redirect_to :controller => 'admin/organizations' if current_user.admins_any_organization?
     end
   end
 
@@ -193,7 +193,7 @@ class ApplicationController < ActionController::Base
       unless current_user
         store_location
         flash[:notice] = "Please Login"
-        redirect_to new_user_sessions_url
+        redirect_to login_path
         return false
       end
     end

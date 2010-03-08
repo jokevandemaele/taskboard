@@ -3,7 +3,7 @@
 <%= admin_open_div(700) -%>
 <div id="organization-<%= organization.id %>" class="admin-div-organization-top">
 	<div class="admin-div-organization-top-actions admin-div-top-actions" style="float:right; margin: 0;">
-		<% if current_member.admins?(organization)%>
+		<% if current_user.admins?(organization)%>
 		<%= link_to_remote image_tag("admin/admin-div-actions-edit.png",:alt => "Edit"), :url => edit_admin_organization_url(organization.id), :method => :get, :update => "dummy-for-actions" -%>
 		<%= link_to_remote image_tag("admin/admin-div-actions-remove.png", :alt => "Remove"), 
 				:url => admin_organization_url(organization.id), 
@@ -16,7 +16,7 @@
 		<span class="admin-div-top-actions-counts"><%=h organization.projects.length %></span>
 		<%= image_tag "admin/admin-div-actions-projects.png", :alt => "Projects" -%>
 		<%= image_tag "admin/admin-div-actions-separator.png", :alt => "Separator", :class => "admin-div-top-actions-separator"-%>
-		<span class="admin-div-top-actions-counts"><%=h organization.members.length %></span>
+		<span class="admin-div-top-actions-counts"><%=h organization.users.length %></span>
 		<%= image_tag "admin/admin-div-actions-members.png", :alt => "Members" -%>
 	</div>
 	
@@ -29,7 +29,7 @@
 		<script>
 			ids<%= organization.id %> = new Array('admin-div-organization-projects-<%= organization.id %>', 'admin-div-organization-members-<%= organization.id %>');
 		</script>
-		<h1 id="admin-div-organization-top-name-<%= organization.id -%>-name" class="<%= 'not-mine' if !organization.members.include?(current_member)-%>"><%=h organization.name -%></h1>
+		<h1 id="admin-div-organization-top-name-<%= organization.id -%>-name" class="<%= 'not-mine' if !organization.users.include?(current_user)-%>"><%=h organization.name -%></h1>
 	</div>
 	<script>
 	 resizeFontSizeToFit($('admin-div-organization-top-name-<%= organization.id -%>-name'), $('admin-div-organization-top-name-<%= organization.id -%>'));
@@ -40,15 +40,15 @@
 
 <div id="admin-div-organization-projects-<%= organization.id -%>" class="admin-div-organization-projects">
 	<%= render :partial => "admin_div_section", :locals => {:element => Project, :parent => organization} -%>
-	<% organization.projects_ordered_for_member(@current_member).each do |project| -%>
+	<% organization.projects_ordered_for_user(current_user).each do |project| -%>
 		<%= render :partial => "element", :locals => {:element => project, :parent => organization} -%>
 	<% end -%>
 	<div style="clear: both;"></div>
 </div>
 
 <div id="admin-div-organization-members-<%= organization.id -%>" class="admin-div-organization-members">
-	<%= render :partial => "admin_div_section", :locals => {:element => Member, :parent => organization} -%>
-	<% organization.members_ordered_by_role.each do |memb| -%>
+	<%= render :partial => "admin_div_section", :locals => {:element => User, :parent => organization} -%>
+	<% organization.users_ordered_by_role.each do |memb| -%>
 		<%= render :partial => "element", :locals => { :element => memb, :parent => organization} -%>
 	<% end -%>
 	<div style="clear: both;"></div>
@@ -57,12 +57,12 @@
 <div id="admin-div-organization-teams-<%= organization.id -%>" class="admin-div-organization-teams">
 	<%= render :partial => "admin_div_section", :locals => {:element => Team, :parent => organization} -%>
 
-	<% organization.teams_ordered_for_member(@current_member).each do |team| -%>
+	<% organization.teams_ordered_for_user(current_user).each do |team| -%>
 		<%= render :partial => "element", :locals => {:element => team, :parent => organization} -%>
 	<% end -%>
 	<div style="clear: both;"></div>
 </div>
-<% if !organization.guest_members.empty? || @current_member.admins?(organization)%>
+<% if !organization.guest_members.empty? || current_user.admins?(organization)%>
 <div id="admin-div-organization-guest_team_members-<%= organization.id -%>" class="admin-div-organization-teams">
 	<%= render :partial => "admin_div_section", :locals => {:element => GuestTeamMembership, :parent => organization, :organization => organization } -%>
 

@@ -1,5 +1,5 @@
 class StatustagsController < ApplicationController
-  before_filter :login_required
+  before_filter :require_user
   before_filter :member_belongs_to_project
   
   # POST /statustags

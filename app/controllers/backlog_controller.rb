@@ -1,5 +1,5 @@
 class BacklogController < ApplicationController
-  before_filter :login_required
+  before_filter :require_user
   before_filter :member_belongs_to_project, :only => :show
   before_filter :team_belongs_to_project, :only => :team
 
@@ -9,7 +9,7 @@ class BacklogController < ApplicationController
       @stories = @project.stories_by_priority
       @projects = [@project]
 
-      @member = @current_member
+      @member = current_user
       @member.last_project = @project
       @member.save
 

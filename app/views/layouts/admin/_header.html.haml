@@ -3,7 +3,7 @@
   - if current_user
     #admin-user-info
       #admin-user-info-picture
-        = image_tag current_user.show_picture
+        = image_tag current_user.avatar(:thumb)
 
       #admin-user-info-text
         %p

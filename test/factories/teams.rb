@@ -1,5 +1,5 @@
-Factory.define :dharma_team, :class => Team do |t|
-  t.name   "Dharma Team"
+Factory.define :team do |t|
+  t.sequence(:name) {|n| "Team #{n}" }
   t.color   "0000FF"
-  t.organization { begin Organization.find_by_name('Dharma Initiative') rescue Factory(:dharma_initiative) end }
+  t.association(:organization)
 end

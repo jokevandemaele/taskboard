@@ -5,6 +5,13 @@ class CreateUsers < ActiveRecord::Migration
       t.string :name
       t.integer :color
       t.boolean :admin, :null => false, :default => false
+      
+      # User Avatar
+      t.string :avatar_file_name
+      t.string :avatar_content_type
+      t.integer :avatar_file_size
+      t.datetime :avatar_updated_at
+      
       # Login stuff
       t.string    :login, :null => false
       t.string    :email,               :null => false                # optional, you can use login instead, or both

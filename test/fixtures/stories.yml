@@ -1,40 +1,40 @@
-# Read about fixtures at http://ar.rubyonrails.rg/classes/Fixtures.html
-
-InProgressStory:
-  id: 1
-  name: InProgressStory
-  project_id: 1
-  priority: 100
-  size: 100
-  description: description
-  status: in_progress
-  realid: TS101
-
-story_not_from_widmore_corp:
-  id: 2
-  name: A Story
-  project_id: 3
-  priority: 10
-  size: 100
-  description: description
-  status: not_started
-  realid: EF001
-
-NotStartedStory:
-  name: NotStartedStory
-  project_id: 1
-  priority: 10
-  size: 100
-  description: description
-  status: not_started
-  realid: TS101
-
-DoneStory:
-  name: DoneStory
-  project_id: 1
-  priority: -1
-  size: 100
-  description: description
-  status: finished
-  realid: TS101
-  updated_at: <%= Time.now.to_s(:db) %>
+# # Read about fixtures at http://ar.rubyonrails.rg/classes/Fixtures.html
+# 
+# InProgressStory:
+#   id: 1
+#   name: InProgressStory
+#   project_id: 1
+#   priority: 100
+#   size: 100
+#   description: description
+#   status: in_progress
+#   realid: TS101
+# 
+# story_not_from_widmore_corp:
+#   id: 2
+#   name: A Story
+#   project_id: 3
+#   priority: 10
+#   size: 100
+#   description: description
+#   status: not_started
+#   realid: EF001
+# 
+# NotStartedStory:
+#   name: NotStartedStory
+#   project_id: 1
+#   priority: 10
+#   size: 100
+#   description: description
+#   status: not_started
+#   realid: TS101
+# 
+# DoneStory:
+#   name: DoneStory
+#   project_id: 1
+#   priority: -1
+#   size: 100
+#   description: description
+#   status: finished
+#   realid: TS101
+#   updated_at: <%= Time.now.to_s(:db) %>
