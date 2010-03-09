@@ -1,0 +1,5 @@
+coverage/
+db/schema.rb
+db/test.sqlite3
+log/
+tmp/
