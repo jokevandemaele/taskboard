@@ -27,7 +27,7 @@ testing:
   encoding: utf8
   database: taskboard_testing
   username: taskboard
-  password: tskb.430
+  password: 
   host: 127.0.0.1
 
 staging:
@@ -35,7 +35,7 @@ staging:
   encoding: utf8
   database: taskboard_staging
   username: taskboard
-  password: tskb.430
+  password: 
   host: 127.0.0.1
 
 production:
@@ -43,7 +43,7 @@ production:
   encoding: utf8
   database: taskboard_production
   username: taskboard
-  password: tskb.430
+  password:
   host: 127.0.0.1
         
 # production:
