@@ -1,28 +1,23 @@
 #header
-  = admin_open_div(1000)
-  - if current_user
-    #admin-user-info
-      #admin-user-info-picture
-        = image_tag current_user.avatar(:thumb)
+  .agilar_taskboard_logo
+  #user-info
+    #picture
+      = image_tag current_user.avatar(:thumb)
+    #text
+      Welcome,
+      %span.username=h current_user.name
+      - if current_user.admin?
+        #role You are a System Administrator
+      - else
+        - if current_user.admins_any_organization?
+          #role You are an Organization Administrator
 
-      #admin-user-info-text
-        %p
-          Welcome,
-          %span.admin-user-info-text-user=h current_user.name
-        - if current_user.admin?
-          %p.admin-user-info-text-role You are a System Administrator
-        - else
-          - if current_user.admins_any_organization?
-            %p.admin-user-info-text-role You are an Organization Administrator
-
-        %p#admin-user-info-links.admin-user-info-text-role
+        #links
           == [ #{link_to "logout", :controller => "/logout"} | #{link_to_remote "edit profile", :url => edit_admin_member_url(current_user), :method => :get, :update => "dummy-for-actions"} ]
-        %p#revision= FULL_VERSION
+        #revision= FULL_VERSION
 
-  = image_tag "agilar_logo.png", :alt => "Agilar"
-  = admin_close_div(1000)
-  #admin-menu
-    .admin-menu-element{ :class => "#{'admin-menu-current' if controller == 'admin/organizations'}"}= link_to 'organizations', admin_organizations_path()
-    .admin-menu-element{ :class => "#{'admin-menu-current' if controller == 'admin/projects'}"}= link_to 'projects', admin_projects_path()
-    - if current_user.admin?
-      %div{ :class => "admin-menu-element #{'admin-menu-current' if controller == 'admin/members'}"}= link_to 'people', admin_members_path()
+%ul#admin-menu
+  %li{ :class => "#{'selected' if controller == 'admin/organizations'}"}= link_to 'organizations', admin_organizations_path()
+  %li{ :class => "#{'selected' if controller == 'admin/projects'}"}= link_to 'projects', admin_projects_path()
+  - if current_user.admin?
+    %div{ :class => "admin-menu-element #{'admin-menu-current' if controller == 'admin/members'}"}= link_to 'people', admin_members_path()

@@ -37,6 +37,9 @@ Rails::Initializer.run do |config|
   config.gem 'authlogic'
   config.gem "thoughtbot-paperclip", :lib => "paperclip", :source => "http://gems.github.com"
   
+  # erubis required by rails_xss
+  config.gem "erubis"
+  
   #   
   # Only load the plugins named here, in the order given. By default, all plugins 
   # in vendor/plugins are loaded in alphabetical order.

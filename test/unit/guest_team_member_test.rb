@@ -22,8 +22,8 @@ class GuestTeamMembershipTest < ActiveSupport::TestCase
 
   context "When creating a GuestTeamMembership" do
     setup do
-      @dfaraday = Factory(:dfaraday)
-      @project = Factory(:do_weird_experiments)
+      @dfaraday = Factory(:user)
+      @project = Factory(:project)
       @team_membership = GuestTeamMembership.new(:user => @dfaraday, :project => @project)
     end
 

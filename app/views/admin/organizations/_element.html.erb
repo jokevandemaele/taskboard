@@ -8,14 +8,6 @@ current_member_admins_parent = (element_class == 'member') ? current_user.admin?
 	# If the user admins the organization i should display remove, edit, and change admin settings
 	if current_member_admins_parent
 	-%>
-		<%= # Remove for a project
-			link_to_remote image_tag("admin/admin-div-element-remove.png", :alt => "Remove",
-	                    	:class => "admin-div-element-actions-remove", :title => "Remove"),
-	                    :url => admin_project_url(element.id),
-	                    :method => :delete,
-	                    :confirm => "Are you sure?",
-	                    :success => "Effect.Puff($('organization-#{parent.id}-project-#{element.id}'));" if (element_class == 'project') 
-		-%>
 		<%= # Remove for a team
 			link_to_remote image_tag("admin/admin-div-element-remove.png", :alt => "Remove",
 	                    	:class => "admin-div-element-actions-remove", :title => "Remove"),
@@ -50,16 +42,6 @@ current_member_admins_parent = (element_class == 'member') ? current_user.admin?
 		                 :confirm => 'Are you sure?',
 		                 :success => "Effect.Puff($('#{parent_class}-#{parent.id}-#{element_class}-#{element.id}'));" if (element_class == 'member') && parent.guest_members.include?(element) 
 		-%>
-		<%= # Edit
-			link_to_remote image_tag("admin/admin-div-element-edit.png", :alt => "Edit",
-	                :class => "admin-div-element-actions-edit", :title => "Edit"),
-	              :url => { 
-	                :controller => "admin/#{element_class}s", 
-	                :action => :edit, 
-	                :id => element.id
-	              }, :method => :get, :update => "dummy-for-actions" if !parent.guest_members.include?(element) 
-		
-		-%>
  		<%= # Edit guest team member
 			link_to_remote image_tag("admin/admin-div-element-edit.png", :alt => "Edit",
 	                :class => "admin-div-element-actions-edit", :title => "Edit Guest Member Projects"),
@@ -77,7 +59,7 @@ current_member_admins_parent = (element_class == 'member') ? current_user.admin?
 	            admin_team_url(element.id) if (element_class == 'team') 
 		-%>
 		<%= # Admin info
-			show_admin_info_for element, parent if element_class == 'member' && !parent.guest_members.include?(element) 
+			show_admin_info_for element, parent if element_class == 'user' && !parent.guest_members.include?(element) 
 		-%>
 	<% end -%>
 	<% # Write element name

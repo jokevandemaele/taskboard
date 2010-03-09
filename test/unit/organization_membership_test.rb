@@ -18,7 +18,6 @@ class OrganizationMembershipTest < ActiveSupport::TestCase
     should_belong_to :user
   end
   
-  
   # test "a member created with admin privileges should keep them" do
   #   others = Organization.create(:name => 'The Others')
   #   one_john = Member.create(:name => 'John Locke', :username => 'jlocke', :password => 'secret', :email => 'jlocke@example.com', :new_organization => others.id)

@@ -103,12 +103,6 @@ class OrganizationTest < ActiveSupport::TestCase
     end
   end
 
-  # 
-  # test "projects_ordered_for_user should work as expected" do
-  #   assert_equal [ projects(:find_the_island), projects(:fake_planecrash) ], organizations(:widmore_corporation).projects_ordered_for_member(members(:dfaraday))
-  #   assert_equal [ projects(:fake_planecrash), projects(:find_the_island) ], organizations(:widmore_corporation).projects_ordered_for_member(members(:cwidmore))
-  # end
-  
   context "#guest_members" do
     setup do
       @user = Factory(:user)
@@ -122,10 +116,17 @@ class OrganizationTest < ActiveSupport::TestCase
     end
   end
   
-  # test "guest_members should work" do
-  #   team_membership = GuestTeamMembership.new(:member => members(:dfaraday), :project => projects(:do_weird_experiments), :team => teams(:dharma_team))
-  #   assert team_membership.save
-  #   assert organizations(:dharma_initiative).guest_members.include?(members(:dfaraday))
-  # end
+  context "#admins" do
+    setup do
+      @user = Factory(:user)
+      @organization = Factory(:organization)
+      @user.add_to_organization(@organization)
+    end
 
+    should "return the admins for the organization" do
+      assert_equal [ @user ], @organization.admins
+    end
+  end
+  
+  
 end

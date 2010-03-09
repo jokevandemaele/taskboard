@@ -29,6 +29,9 @@ class CreateUsers < ActiveRecord::Migration
       t.string    :current_login_ip                                   # optional, see Authlogic::Session::MagicColumns
       t.string    :last_login_ip                                      # optional, see Authlogic::Session::MagicColumns
       t.timestamps
+      
+      # Magic column to store the last project the user has been using
+      t.integer :last_project_id
     end
   end
 

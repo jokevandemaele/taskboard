@@ -1,0 +1,226 @@
+@import macros
+
+body
+  :background url('/images/admin/admin-background.png') repeat-x #f1f6ff
+
+img
+  :border none
+  :vertical-align middle
+
+a
+  :text-decoration none
+
+  &:visited
+    :color #002255
+
+input.text
+  border: none
+  background: url('/images/admin/admin-div-field.png') no-repeat top left
+  width: 168px
+  height: 16px
+  padding: 5px
+
+
+p
+  :color #002255
+  :margin 0
+  
+.clear
+  clear: both
+  
+#admin-dummy-container
+  :position relative
+  :margin 0 auto
+  :width 1000px
+  
+  #admin-container
+    :position relative
+    :width 780px
+    :min-height 100px
+    :padding 10px 220px 0 0
+    
+  
+
+/* Header */
+#header
+  +admin_div
+  :position relative
+  :height 88px
+  .agilar_taskboard_logo
+    :position absolute
+    :top 8px
+    :background url('/images/agilar_logo.png')
+    :width 325px
+    :height 88px
+  #user-info
+    :position relative
+    :font-size 10px
+    :text-align right
+    :padding-right 100px
+    #picture
+      :width 88px
+      :height 88px
+      :position absolute
+      :top 0
+      :right 0
+    #text
+      :font-size 16px
+      color: #00112b
+      span.username
+        :color #003380
+      #role
+        :color #00112b
+        :font-size 13px
+      #revision
+        :font-size 9px
+      #links
+        :font-size 12px
+        :color #00112b
+
+      a
+        text-decoration: none
+        color: #00112b
+
+        &:hover
+          color: #2a7fff
+
+
+    #admin-user-info-links
+      position: relative
+
+
+    #admin-user-info #revision
+      position: absolute
+      bottom: 0
+      right: 92px
+      font-size: 12px
+    
+ul#admin-menu
+  :position relative
+  :left 10px
+  :margin 0
+  :padding 0
+  :display inline
+  
+  li
+    +bottom_rounded(10px)
+    :list-style-type none
+    :display inline
+    :margin 0
+    :background #0c82eb
+    :padding 5px 10px
+    
+    a
+      :color white
+      :font-size 14px
+      &:hover
+        :color #ffccaa
+    li.selected
+      a
+        :color #f6c022
+
+/* End Header */
+/* Admin contents */
+.admin_container
+  +admin_div
+  :position relative
+  :margin 0 0 10px 0
+  :padding 10px
+  h2
+    :margin 0 0 2px 0
+    :color #002255
+  h3
+    :color #002255
+    :font-weight normal
+    :margin 0
+    :line-height 35px
+  .admin_actions
+    :position absolute
+    :top 5px
+    :right 5px
+  .section
+    :position relative
+    :padding 0px 0 0 37px
+    :background #afc6e9
+    :margin 5px 0
+    :height 35px
+    a
+      :color #002255
+      :line-height 35px
+      &:hover
+        :color #0c82eb
+    
+    .administration_actions
+      :position absolute
+      :right 5px
+      :top 0
+  .projects
+    :background url('/images/admin/admin-div-actions-projects.png') no-repeat #afc6e9
+  .users
+    :background url('/images/admin/admin-div-actions-users.png') no-repeat #afc6e9
+  .teams
+    :background url('/images/admin/admin-div-actions-teams.png') no-repeat #afc6e9
+  .guest_team_members
+    :background url('/images/admin/admin-div-actions-guest_team_members.png') no-repeat #afc6e9
+  .list
+    :position relative
+    .element
+      :float left
+      +rounded(10px)
+      :padding 5px 5px 5px 10px
+      :width 357px
+      :height 23px
+      :line-height 23px
+      :background #f1f6ff
+      :margin 0px 5px 5px 0px
+      :position relative
+      :color #002255
+      a
+        :color #002255
+        &:hover
+          :text-decoration underline
+      .admin
+        +right_rounded(10px)
+        :padding 5px 10px 5px 10px
+        :position absolute
+        :top 0
+        :right 0
+        :height 23px
+        :line-height 23px
+        :background #afc6e9
+
+  .not-mine
+    :color #AAAAAA !important
+    a
+      :color #AAAAAA !important
+      &:hover
+        :text-decoration underline
+    
+      
+.admin_list
+  
+/* Sidebar */
+#admin-sidebar
+  :position absolute
+  :right 0
+  :top 0
+  :width 220px
+  #admin-sidebar-menu
+    margin: 0
+    padding: 0
+    list-style: none
+    text-align: right
+    color: #00112b
+    font-size: 16px
+
+    a
+      color: #1b51a2
+
+      &:hover
+        color: #2a7fff
+  
+  
+/* End Sidebar */
+
+
+

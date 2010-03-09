@@ -73,7 +73,11 @@ class Organization < ActiveRecord::Base
     end
     return guests
   end
-
+  
+  # returns the administrators for the organization
+  def admins
+    organization_memberships.administered.collect {|membership| membership.user }
+  end
 private
   # adds the default project and team needed when creating an organization
   def add_default_team_and_project

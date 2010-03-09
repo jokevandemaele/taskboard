@@ -22,3 +22,22 @@
   :-moz-border-radius = !radius
   :-webkit-border-radius = !radius
   :border-radius = !radius
+
+// Use this mixin to define an element with rounded bottom borders
+// by !radius radius
+=bottom_rounded(!radius)
+  :-moz-border-radius = 0 0 !radius !radius
+  :-webkit-border-radius = 0 0 !radius !radius
+  :border-radius = 0 0 !radius !radius
+
+=right_rounded(!radius)
+  :-moz-border-radius = 0 !radius !radius 0
+  :-webkit-border-radius = 0 !radius !radius 0
+  :border-radius = 0 !radius !radius 0
+  
+=admin_div
+  +rounded(10px)
+  :background #d7e3f4
+  :border 3px solid #0c82eb
+  :padding 5px
+  

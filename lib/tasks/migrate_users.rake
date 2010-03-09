@@ -39,6 +39,12 @@ namespace :taskboard do
             om.user = @user
             om.save
           end
+          
+          # Migrate all nametags
+          member.nametags.each do |n|
+            n.user = @user
+            n.save
+          end
 
         else
           p "Error adding #{member.id} - #{member.username}:"

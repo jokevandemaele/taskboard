@@ -14,8 +14,11 @@ class UserTest < ActiveSupport::TestCase
     #
     ################################################################################################################
     should_validate_presence_of :email, :login
+    should_validate_uniqueness_of :email, :login
     should_allow_values_for :email, "contacto@basketplace.com", "test@test.com"
     should_not_allow_values_for :email, "blo", "sao@sadf", "asdasdg@sadasdg.asioghd"
+    should_allow_values_for :login, "user"
+    should_not_allow_values_for :login, "x", "", "hugebobhugebobhugebobhugebobhugebobhugebobhugebobhugebobhugebobhugebobhugebobhugebobhugebobhugebobhugebobhugebobhugebobhugebobhugebobhugebobhugebobhugebobhugebobhugebobhugebobhugebobhug"
   
     ################################################################################################################
     #
@@ -26,13 +29,51 @@ class UserTest < ActiveSupport::TestCase
     should_have_many :organization_memberships
     should_have_many :guest_team_memberships
     should_have_many :guest_projects
+    should_belong_to :last_project
+    should_have_many :nametags
+    
+    should "have a getter and setter called 'added_by'" do
+      # This is used to tell the user in the welcome email who added him
+      @user = User.first
+      assert @user.added_by = "Me"
+      assert_equal "Me", @user.added_by
+    end
 
-    # context "If i destroy a user" do
-    #   # ...
-    #   should "destroy all its organization memberships" do
-    #   end
-    # end
   end
+  
+  context "When created" do
+    setup do
+      ActionMailer::Base.deliveries.clear
+      assert ActionMailer::Base.deliveries.empty?
+      @user = Factory(:user)
+    end
+
+    should "send an email" do
+      assert !ActionMailer::Base.deliveries.empty?
+    end
+
+    context "with the :new_organization parameter" do
+      setup do
+        @organization = Factory(:organization)
+        @user = Factory.build(:user)
+        @user.new_organization = @organization
+        @user.save
+        @organization.reload
+      end
+
+      should "add the user to the organization after being created" do
+        assert @organization.users.include?(@user)
+      end
+    end
+  end
+  
+  # test "members should be sent an email after their user has been created" do
+  # 
+  #   john = Member.create(:name => 'John Locke', :username => 'jlocke', :email => 'john@locke.com', :new_organization => 1, :added_by => 'Charles Widmore')
+  # 
+  #   email = MemberMailer.deliver_create(john)
+  # end
+  
   
   ################################################################################################################
   #
@@ -86,6 +127,7 @@ class UserTest < ActiveSupport::TestCase
       @user1 = Factory(:user)
       @user2 = Factory(:user)
       @user2.organization_memberships.create(:organization => @organization)
+      @organization.reload
       @user1.organization_memberships.create(:organization => @organization)
       @organization1 = Factory(:organization)
     end
@@ -124,8 +166,9 @@ class UserTest < ActiveSupport::TestCase
       @organization = Factory(:organization)
       @user1 = Factory(:user)
       @user2 = Factory(:user)
-      @user2.organization_memberships.create(:organization => @organization)
-      @user1.organization_memberships.create(:organization => @organization)
+      @om1 = OrganizationMembership.create(:user => @user2, :organization => @organization)
+      @organization.reload
+      @om2 = OrganizationMembership.create(:user => @user1, :organization => @organization)
     end
     
     context "if the user administers the organization" do
@@ -168,6 +211,20 @@ class UserTest < ActiveSupport::TestCase
     end
   end # End #projects
 
+  context "#add_to_organization" do
+    setup do
+      @organization = Factory(:organization)
+      @user = Factory(:user)
+      @user.add_to_organization(@organization)
+      @organization.reload
+    end
+
+    should "add the user to the organization" do
+      assert @organization.users.include?(@user)
+      assert @user.organizations.include?(@organization)
+    end
+  end
+  
   # context "#guest_projects" do
   #   setup do
   #     @dfaraday = Factory(:dfaraday)
@@ -182,19 +239,65 @@ class UserTest < ActiveSupport::TestCase
   #   end
   # end # End #projects
 
-  # context "When creating a user" do
-  #   setup do
-  #     ActionMailer::Base.deliveries.clear
-  #     assert ActionMailer::Base.deliveries.empty?
-  #     @john = User.create(:name => 'John Locke', :login => 'jlocke', :email => 'john@locke.com', )
-  #   end
-  # 
-  #   should "send a confirmation e-mail" do
-  #     
-  #   end
-  # end
-  # 
-  # test "members should be sent an email after their user has been created" do
-  # end
-  
+  context "#formatted_nametag" do
+    setup do
+      @user = Factory(:user)
+    end
+
+    should "return a capitalized version of the user name" do
+      assert_equal "USER", @user.formatted_nametag
+    end
+    
+    context "When there is more than one user with the same name in a team" do
+      setup do
+        @team = Factory(:team)
+        @user.name = "User Blo"
+        @user.save
+        @user2 = Factory.build(:user)
+        @user2.name = "User Name"
+        @user2.save
+        @team.users << @user
+        @team.users << @user2
+        @team.save
+      end
+
+      should "return a capitalized version of the user name with initial of surname" do
+        assert_equal "USER B", @user.formatted_nametag(@team)
+      end
+
+      should "return a capitalized version of the user name with initial of surname when not giving the team" do
+        assert_equal "USER B", @user.formatted_nametag
+      end
+    end
+  end
+
+  context "#administrators" do
+    setup do
+      @org_admin = Factory(:user)
+      @organization = Factory(:organization)
+      @organization.organization_memberships.build(:user => @org_admin)
+      @organization.save
+      @organization.reload
+
+      @org_admin2 = Factory(:user)
+      @organization2 = Factory(:organization)
+      @organization2.organization_memberships.build(:user => @org_admin2)
+      @organization2.save
+      @organization2.reload
+
+      @user = Factory(:user)
+      @organization.organization_memberships.build(:user => @user)
+      @organization.save
+      @organization.reload
+      
+      @organization2.organization_memberships.build(:user => @user)
+      @organization2.save
+      @organization2.reload
+    end
+
+    should "return the organization admins for the organizations the user belongs to" do
+      assert_equal [@org_admin, @org_admin2], @user.administrators
+    end
+  end
+
 end
