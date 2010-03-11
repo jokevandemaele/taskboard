@@ -1,0 +1,6 @@
+= image_tag "admin/admin-logo-organizations.png"
+%h1 Edit Organization
+.admin_container
+  - form_for @organization do |f| 
+    = render :partial => 'form', :object => f
+    = f.submit

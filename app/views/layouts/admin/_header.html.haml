@@ -17,7 +17,7 @@
       #revision= FULL_VERSION
 
 %ul#admin-menu
-  %li{ :class => "#{'selected' if controller == 'admin/organizations'}"}= link_to 'organizations', admin_organizations_path()
+  %li{ :class => "#{'selected' if controller == 'admin/organizations'}"}= link_to 'organizations', organizations_path()
   %li{ :class => "#{'selected' if controller == 'admin/projects'}"}= link_to 'projects', admin_projects_path()
   - if current_user.admin?
     %li{ :class => ('admin-menu-current' if controller == 'admin/members') }= link_to 'people', admin_members_path()

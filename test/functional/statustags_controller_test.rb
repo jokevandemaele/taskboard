@@ -1,6 +1,34 @@
-require 'test_helper'
+require File.dirname(__FILE__) + '/../test_helper'
 
 class StatustagsControllerTest < ActionController::TestCase
+  context "If i'm a normal user" do
+    setup do
+      @user = Factory(:user)
+    end
+
+  end
+
+  context "If i'm an organization admin" do
+    setup do
+      @organization = Factory(:organization)
+      @user = Factory(:user)
+      @mem = @organization.organization_memberships.build(:user => @user)
+      @mem.admin = true
+      @mem.save
+    end
+    
+    should "admin the organization" do
+      assert @user.organizations_administered.include?(@organization)
+    end
+
+  end
+  
+  context "If I'm an admin" do
+    setup do
+      @user = admin_user
+    end
+    
+  end
   # test "validate that the task id belongs to a story that belongs to the project passed" do
   #   login_as_administrator
   #   post :create, { :project_id => projects(:find_the_island).id, :statustag => { :task_id => tasks(:non_widmore_task).id, :status => "waiting", :relative_position_x => 1, :relative_position_y => 1 }}

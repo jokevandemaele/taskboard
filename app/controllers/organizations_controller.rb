@@ -1,29 +1,30 @@
 class OrganizationsController < ApplicationController
-  # before_filter :require_user
-  # before_filter :require_admin, :only => [ :new, :create ]
+  before_filter :require_user
+  before_filter :require_admin, :only => [ :new, :create ]
   #layout proc{ |controller| controller.request.path_parameters[:action] == 'show' ? nil : "admin/organizations" }
 
-  # def index
-  #   @organizations = (current_user.admin?) ? Organization.all : current_user.organizations
-  # end
+  def index
+    @organizations = (current_user.admin?) ? Organization.all : current_user.organizations
+  end
 
   # def show
   #   @organization = Organization.find(params[:id])
   # end
 
-  # def new
-  #     @organization = Organization.new
-  #   render :partial => 'form', :object => @organization, :locals => { :edit => false }
-  # end
-  # 
-  # def create
-  #   @organization = Organization.new(params[:organization])
-  #   if @organization.save
-  #     render :inline => "<script>location.reload(true)</script>", :status => :created
-  #   else
-  #     render :partial => 'form', :object => @organization, :locals => { :no_refresh => true, :edit => false }, :status => :internal_server_error
-  #   end
-  # end
+  def new
+    @organization = Organization.new
+    render :action => :new
+  end
+
+  def create
+    @organization = Organization.new(params[:organization])
+    if @organization.save
+      flash[:notice] = "Organization created."
+      redirect_to organizations_path
+    else
+      render :action => :new
+    end
+  end
   # 
   # def edit 
   #   @organization = Organization.find(params[:id])

@@ -1,4 +1,4 @@
-require 'test_helper'
+require File.dirname(__FILE__) + '/../test_helper'
 
 class Admin::MembersControllerTest < ActionController::TestCase
   # test "if access denied is shown don't display the sidebar" do

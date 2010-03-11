@@ -16,7 +16,7 @@ module RequireAdminOn
 
     context "A not logged in user" do
       setup do
-        @user = not_logged_user(:user)
+        @user = not_logged_user
       end
 
       actions.each do |action|
@@ -31,13 +31,13 @@ module RequireAdminOn
             end
           end
 
-          should_set_the_flash_to(I18n.t('flash.application.must_login_as_admin'))
+          should_set_the_flash_to('Please Login')
           should_redirect_to('the login page') { login_url }
         end
       end
     end
 
-    context "A logged in regular (non-admin) user" do
+    context "A normal user" do
       setup do
         @user = Factory(:user)
       end
@@ -54,11 +54,39 @@ module RequireAdminOn
             end
           end
 
-          should_set_the_flash_to(I18n.t('flash.application.must_relogin_as_admin'))
+          should_set_the_flash_to("Access Denied")
           should_redirect_to('the root page') { root_url }
         end
       end
     end
+
+    context "An organization admin" do
+      setup do
+        @organization = Factory(:organization)
+        @user = Factory(:user)
+        @mem = @organization.organization_memberships.build(:user => @user)
+        @mem.admin = true
+        @mem.save
+      end
+
+      actions.each do |action|
+        method = action_methods[action] || :get
+
+        context "on #{method.to_s.upcase} to :#{action}" do
+          setup do
+            if need_ids.include?(action)
+              send(method, action, :id => 1)
+            else
+              send(method, action)
+            end
+          end
+
+          should_set_the_flash_to("Access Denied")
+          should_redirect_to('the root page') { root_url }
+        end
+      end
+    end
+
   end
 end
 

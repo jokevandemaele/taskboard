@@ -45,17 +45,17 @@ class ApplicationController < ActionController::Base
   #   return true if result
   #   redirect_to :controller => 'admin/members', :action => :access_denied
   # end
-  
-  def member_belongs_to_project
-    project = (params[:project_id]) ? Project.find(params[:project_id]) : Project.find(params[:id])
-    redirect_to :controller => 'admin/members', :action => :access_denied if !(current_user.admins?(project.organization) || current_user.projects.include?(project))
-  end
-  
-  def team_belongs_to_project
-    # Taskboard and backlog can be accessible only if the member belogs to the project or if it admins the project organization
-    team = Team.find(params[:id])
-    redirect_to :controller => 'admin/members', :action => :access_denied if !(current_user.admins?(team.organization) || current_user.teams.include?(team))
-  end
+    # 
+    # def member_belongs_to_project
+    #   project = (params[:project_id]) ? Project.find(params[:project_id]) : Project.find(params[:id])
+    #   redirect_to :controller => 'admin/members', :action => :access_denied if !(current_user.admins?(project.organization) || current_user.projects.include?(project))
+    # end
+    # 
+    # def team_belongs_to_project
+    #   # Taskboard and backlog can be accessible only if the member belogs to the project or if it admins the project organization
+    #   team = Team.find(params[:id])
+    #   redirect_to :controller => 'admin/members', :action => :access_denied if !(current_user.admins?(team.organization) || current_user.teams.include?(team))
+    # end
 
   # # Refactor all these
   # def check_organizations_controller_perms(member, path, request)
@@ -132,31 +132,16 @@ class ApplicationController < ActionController::Base
   #   return current_user.admins?(team.organization)
   # end
   
-  def member_belongs_to_project_or_auth_guest
-    project = Project.find(request.parameters[:id])
-    return session[:guest] = request.query_parameters[:public_hash] if (project.public? && (project.public_hash == request.query_parameters[:public_hash]))
-    if session[:member]
-      redirect_to :controller => 'admin/members', :action => :access_denied if !(current_user.admins?(project.organization) || current_user.projects.include?(project))
-    else
-      redirect_to login_url if !@guest
-    end
-  end
-  
-  # def login_required
+  # def member_belongs_to_project_or_auth_guest
+  #   project = Project.find(request.parameters[:id])
+  #   return session[:guest] = request.query_parameters[:public_hash] if (project.public? && (project.public_hash == request.query_parameters[:public_hash]))
   #   if session[:member]
-  #     return true
+  #     redirect_to :controller => 'admin/members', :action => :access_denied if !(current_user.admins?(project.organization) || current_user.projects.include?(project))
+  #   else
+  #     redirect_to login_url if !@guest
   #   end
-  #     session[:return_to] = request.request_uri
-  #     redirect_to login_url
-  #     return false
   # end
-
-  # def current_user
-  #   return nil if !session[:member]
-  #   current_user = Member.find(session[:member]) if (!current_user || current_user.id != session[:member])
-  #   current_user
-  # end
-
+  
   def request_controller
     request.path_parameters[:controller]
   end
@@ -175,6 +160,7 @@ class ApplicationController < ActionController::Base
 
   private
     def disable_taskboard
+      # Create a better disabled page
       render :inline => "<center><img src=\"/images/login/login_logo.png\" alt=\"Agilar Taskboard\"/><br /><h1>Site under maintenance, plase come back later.</h1></center>"
       return false
     end
@@ -194,6 +180,15 @@ class ApplicationController < ActionController::Base
         store_location
         flash[:notice] = "Please Login"
         redirect_to login_path
+        return false
+      end
+    end
+
+    def require_admin
+      unless current_user.admin?
+        store_location
+        flash[:notice] = "Access Denied"
+        redirect_to root_url
         return false
       end
     end

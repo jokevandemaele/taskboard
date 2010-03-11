@@ -6,8 +6,8 @@
   / Admin Actions
   - if current_user.admins?(organization)
     .admin_actions
-      = link_to_remote image_tag("admin/admin-div-actions-edit.png",:alt => "Edit"), :url => edit_admin_organization_url(organization.id), :method => :get, :update => "dummy-for-actions"
-      = link_to_remote image_tag("admin/admin-div-actions-remove.png", :alt => "Remove"),  :url => admin_organization_url(organization.id),  :method => :delete,  :confirm => "Are you sure?", :success => "Effect.Puff($('organization-#{organization.id}-container'));"
+      = link_to_remote image_tag("admin/admin-div-actions-edit.png",:alt => "Edit"), :url => edit_organization_url(organization), :method => :get, :update => "dummy-for-actions"
+      = link_to_remote image_tag("admin/admin-div-actions-remove.png", :alt => "Remove"),  :url => organization_url(organization),  :method => :delete,  :confirm => "Are you sure?", :success => "Effect.Puff($('organization-#{organization.id}-container'));"
   
   / Project Section
   .section.projects
