@@ -19,7 +19,7 @@ class UserMailerTest < ActionMailer::TestCase
       should "have the correct subject" do
         assert_equal 'Welcome to the Agilar Taskboard!', @response.subject
       end
-      should "have the correct receiver" do
+      should "have the correct recipients" do
         assert_equal [@user.email], @response.to
       end
       should "have the correct body" do
@@ -39,7 +39,7 @@ class UserMailerTest < ActionMailer::TestCase
       should "have the correct subject" do
         assert_equal 'You have been added as a guest member', @response.subject
       end
-      should "have the correct receiver" do
+      should "have the correct recipients" do
         assert_equal [@user.email], @response.to
       end
       should "have the correct body" do

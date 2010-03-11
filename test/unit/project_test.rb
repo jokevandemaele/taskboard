@@ -220,7 +220,75 @@ class ProjectTest < ActiveSupport::TestCase
         assert_equal 2000, @project.next_priority
       end
     end
-    
-    
   end
+  
+  context "#next_realid" do
+    context "If it's a recently created project" do
+      setup do
+        @project = Factory(:project)
+      end
+
+      should "return the third" do
+        assert_equal "P#{@project.name[/[0-9]/]}003", @project.next_realid
+      end
+      
+      context "and we add a story" do
+        setup do
+          @story = @project.stories.create()
+        end
+
+        should "return the fourth" do
+          assert_equal "P#{@project.name[/[0-9]/]}004", @project.next_realid
+        end
+      end
+      
+      context "and add a story with realid 999" do
+        setup do
+          @story = @project.stories.create( :realid => "P#{@project.name[/[0-9]/]}999" )
+        end
+
+        should "return the 1000th" do
+          assert_equal "P#{(@project.name[/[0-9]/].to_i + 1)}000", @project.next_realid
+        end
+      end
+    end
+  end
+  
+  context "#initials" do
+    context "with a project called Agilar Taskboard" do
+      setup do
+        @project = Factory.build(:project)
+        @project.name = "Agilar Taskboard"
+        @project.save
+      end
+
+      should "return AT" do
+        assert_equal "AT", @project.initials
+      end
+    end
+    context "with a project called Project" do
+      setup do
+        @project = Factory.build(:project)
+        @project.name = "Project"
+        @project.save
+      end
+
+      should "return PR" do
+        assert_equal "PR", @project.initials
+      end
+    end
+    context "with a project called P" do
+      setup do
+        @project = Factory.build(:project)
+        @project.name = "P"
+        @project.save
+      end
+
+      should "return PP" do
+        assert_equal "P", @project.initials
+      end
+    end
+  end
+  
+  
 end

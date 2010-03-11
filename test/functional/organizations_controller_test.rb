@@ -1,6 +1,7 @@
 require 'test_helper'
 
-class Admin::OrganizationsControllerTest < ActionController::TestCase
+class OrganizationsControllerTest < ActionController::TestCase
+  should_require_user :index
   # test "show displays the organization" do
   #   login_as_administrator
   #   result = get :show, :id => organizations(:widmore_corporation).id

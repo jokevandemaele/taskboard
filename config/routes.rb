@@ -8,9 +8,10 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users
   map.resource :account, :controller => "users"
 
+  map.resources :organizations
+  
   # Sample resource route within a namespace:
   map.namespace :admin do |admin|
-   admin.resources :organizations
    admin.resources :members
    admin.resources :teams
    admin.resources :projects

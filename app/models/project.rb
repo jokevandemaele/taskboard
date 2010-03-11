@@ -67,6 +67,36 @@ class Project < ActiveRecord::Base
     return 2000 if !last_priority
   end
 
+  def next_realid
+    if story = stories.first(:order => "realid DESC")
+      number = story.realid[/[0-9]+/].to_i
+      text = story.realid[/[A-Z]+/]
+      number += 1
+      id = (number < 10) ? "#{text}00#{number}" : "#{text}#{number}"
+      id = "#{text}0#{number}" if (number >= 10 && number < 100)
+      return id
+    else 
+      return initials + '001'
+    end
+  end
+  
+  def initials
+    initials = ""
+    words = name.split
+    if words.size == 1
+      if words.first.length > 2
+        initials << words[0][0] << words[0][1]
+      else
+        initials << words[0][0]
+      end	
+    else
+      words.each do |word|
+        initials << word[0]
+      end
+    end
+  return initials.upcase[0..1]
+  end
+  
 private
   # add_default_stories: this function is called when a new project is created, it adds the sample stories to it
   def add_default_stories
