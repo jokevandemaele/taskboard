@@ -1,6 +1,6 @@
 class Admin::ProjectsController < ApplicationController
   before_filter :require_user
-  before_filter :check_permissions
+  # before_filter :check_permissions
   
   # GET /projects
   def index
@@ -105,7 +105,7 @@ class Admin::ProjectsController < ApplicationController
     # Add member to all projects
     @projects.each do |project| 
       if !@error 
-        @guest_team_member = GuestTeamMembership.add_to_project(@member,Project.find(project))
+        @guest_team_member = project.guest_team_memberships.create(:user => @member)
         @error = @guest_team_member.nil? 
       end
     end

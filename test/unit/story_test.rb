@@ -1,6 +1,65 @@
 require 'test_helper'
 
 class StoryTest < ActiveSupport::TestCase
+  context "#in_progress named_scope" do
+    setup do
+      @project = Factory(:project)
+    end
+    
+    should "return the stories in progress" do
+      assert_equal [@project.stories.first], @project.stories.in_progress
+    end
+  end
+
+  context "#not_started named_scope" do
+    setup do
+      @project = Factory(:project)
+    end
+    
+    should "return the not started stories" do
+      assert_equal [@project.stories.second], @project.stories.not_started
+    end
+  end
+
+  context "#finished named_scope" do
+    setup do
+      @project = Factory(:project)
+    end
+    
+    should "return the not started stories" do
+      assert_equal [], @project.stories.finished
+    end
+    
+    context "when finished a story" do
+      setup do
+        @story = @project.stories.first
+        @story.finish
+        @project.reload
+      end
+
+      should "should return that story" do
+        assert_equal [@story], @project.stories.finished
+      end
+    end
+  end
+
+  context "#stories default scope" do
+    setup do
+      @project = Factory(:project)
+      @story1 = @project.stories.first
+      @story2 = @project.stories.second
+      @story1.priority = 10
+      @story1.stop
+      @story1.save
+      @story1.reload
+      @project.reload
+    end
+
+    should "return the stories in order according to the priority" do
+      assert_equal [ @story2, @story1 ], @project.stories
+    end
+  end
+  
   #   test "every story should belong to a project" do
   #     story = Story.new
   #     assert !story.save

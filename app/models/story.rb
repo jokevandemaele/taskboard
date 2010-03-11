@@ -1,4 +1,15 @@
 class Story < ActiveRecord::Base
+  ################################################################################################################
+  #
+  # Named Scopes
+  #
+  ################################################################################################################
+  default_scope :order => "priority DESC, updated_at DESC"
+  named_scope :in_progress, :conditions => {:status => 'in_progress'}
+  named_scope :not_started, :conditions => {:status => 'not_started'}
+  named_scope :finished, :conditions => {:status => 'finished', :priority => -1}
+
+
   belongs_to :project
   has_many :tasks, :dependent => :destroy
 
@@ -7,6 +18,7 @@ class Story < ActiveRecord::Base
   after_create :add_template_task
   before_save :default_priority
   
+  attr_accessible :name, :priority, :size, :description
   
   def self.find_by_team(team)
     stories = []

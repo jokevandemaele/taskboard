@@ -12,12 +12,12 @@
         - if current_user.admins_any_organization?
           #role You are an Organization Administrator
 
-        #links
-          == [ #{link_to "logout", :controller => "/logout"} | #{link_to_remote "edit profile", :url => edit_admin_member_url(current_user), :method => :get, :update => "dummy-for-actions"} ]
-        #revision= FULL_VERSION
+      #links
+        == [ #{link_to "logout", :controller => "/logout"} | #{link_to_remote "edit profile", :url => edit_admin_member_url(current_user), :method => :get, :update => "dummy-for-actions"} ]
+      #revision= FULL_VERSION
 
 %ul#admin-menu
   %li{ :class => "#{'selected' if controller == 'admin/organizations'}"}= link_to 'organizations', admin_organizations_path()
   %li{ :class => "#{'selected' if controller == 'admin/projects'}"}= link_to 'projects', admin_projects_path()
   - if current_user.admin?
-    %div{ :class => "admin-menu-element #{'admin-menu-current' if controller == 'admin/members'}"}= link_to 'people', admin_members_path()
+    %li{ :class => ('admin-menu-current' if controller == 'admin/members') }= link_to 'people', admin_members_path()

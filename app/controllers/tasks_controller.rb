@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_filter :require_user
-  before_filter :check_permissions
+  # before_filter :check_permissions
   layout nil
   
   # # GET /tasks

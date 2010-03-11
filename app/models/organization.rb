@@ -82,11 +82,11 @@ private
   # adds the default project and team needed when creating an organization
   def add_default_team_and_project
     # Add default team
-    team = teams.create(:name => "#{self.name} Team")
+    teams.create(:name => "#{self.name} Team")
     # Add default project
-    project = Project.create(:name => "#{self.name} Project", :organization => self)
+    project = projects.create(:name => "#{name} Project")
     # Add default team to default project
-    project.teams << team
+    projects.first.teams << teams.first
     project.save
   end
   

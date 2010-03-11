@@ -29,10 +29,14 @@ class GuestTeamMembership < ActiveRecord::Base
     errors.add_to_base "That user is already a guest member on #{Project.find(project).name}" if GuestTeamMembership.first(:conditions => ["user_id = ? AND project_id = ?", user, project])
   end
   
+  ################################################################################################################
+  #
+  # Class Methods
+  #
+  ################################################################################################################
+  
   def self.remove_from_organization(user,organization)
-    organization.projects.each do |project|
-      remove_from_project(user,project)
-    end
+    organization.projects.each { |project| remove_from_project(user,project) }
   end
 
   def self.remove_from_project(user,project)
@@ -41,9 +45,4 @@ class GuestTeamMembership < ActiveRecord::Base
       project.guest_members.delete(user)
     end
   end
-  
-  def self.add_to_project(user,project)
-    !project.guest_members.include?(user) ? project.guest_team_members.create(:user => user) : false
-  end
-  
 end

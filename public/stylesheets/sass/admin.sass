@@ -2,13 +2,20 @@
 
 body
   :background url('/images/admin/admin-background.png') repeat-x #f1f6ff
-
+  
+body, p, ol, ul, td
+  :font-family arial, helvetica, sans-serif
+  :font-size   13px
+  :line-height 18px
+  
 img
-  :border none
+  :border none !important
   :vertical-align middle
 
 a
-  :text-decoration none
+  :text-decoration none !important
+  img
+    :border none !important
 
   &:visited
     :color #002255
@@ -223,4 +230,7 @@ ul#admin-menu
 /* End Sidebar */
 
 
-
+#report_bug
+  :position fixed
+  :bottom 0
+  :right 0
