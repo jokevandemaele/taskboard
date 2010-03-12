@@ -143,7 +143,7 @@ class ApplicationController < ActionController::Base
   # end
   
   def request_controller
-    request.path_parameters[:controller]
+    request.path_parameters["controller"]
   end
   
   def redirect_to_stored
@@ -186,6 +186,16 @@ class ApplicationController < ActionController::Base
 
     def require_admin
       unless current_user.admin?
+        store_location
+        flash[:notice] = "Access Denied"
+        redirect_to root_url
+        return false
+      end
+    end
+
+    def require_organization_admin
+      param = (request_controller == 'organizations') ? params[:id] : params[:organization_id]
+      unless current_user.admins?(Organization.find(param))
         store_location
         flash[:notice] = "Access Denied"
         redirect_to root_url

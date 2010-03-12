@@ -1,13 +1,16 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class Admin::ProjectsControllerTest < ActionController::TestCase
-  context "If i'm a normal user" do
-    setup do
-      @user = Factory(:user)
-    end
+class ProjectsControllerTest < ActionController::TestCase
+  should_require_organization_admin_on [ :new, :create] #, :edit, :update, :destroy ]
 
+  context "Organization Routes" do
+    should_route :get, "/organizations/1/projects/new", :action => :new, :organization_id => 1
+    should_route :post, "/organizations/1/projects", :action => :create, :organization_id => 1
+    should_route :get, "/organizations/1/projects/2/edit", :action => :edit, :id => 2, :organization_id => 1
+    should_route :put, "/organizations/1/projects/2", :action => :update, :id => 2, :organization_id => 1
+    should_route :delete, "/organizations/1/projects/2", :action => :destroy, :id => 2, :organization_id => 1
   end
-
+  
   context "If i'm an organization admin" do
     setup do
       @organization = Factory(:organization)
@@ -15,20 +18,233 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
       @mem = @organization.organization_memberships.build(:user => @user)
       @mem.admin = true
       @mem.save
+      @project = @organization.projects.create(:name => "Project Test")
     end
     
     should "admin the organization" do
       assert @user.organizations_administered.include?(@organization)
     end
+    
+    context "and do GET to :new" do
+      setup do
+        get :new, :organization_id => @organization.to_param
+      end
+      should_respond_with :ok
+      should_assign_to(:organization){ @organization }
+      should_assign_to(:project)
+      should_render_template :new
+    end
+    
+    context "and do a POST to :create.json with correct data" do
+      setup do
+        @request.env['HTTP_ACCEPT'] = "application/json"
+        post :create, :project => { :name => "Project" }, :organization_id => @organization.to_param
+        @project = Project.find_by_name("Project")
+      end
+      should_respond_with :created
+      should_not_set_the_flash
+      should_assign_to(:organization){ @organization }
+      should_assign_to(:project)
+      
+      should "create the project" do
+        assert !!@project
+      end
+      
+      should "add the project to the organization" do
+        assert @organization.projects.include?(@project)
+      end
+      
+      should "return the project json" do
+        assert_match @project.to_json, @response.body
+      end
+    end
 
+    context "and do POST to :create.json with incorrect data" do
+      setup do
+        @request.env['HTTP_ACCEPT'] = "application/json"
+        post :create, :organization_id => @organization.to_param, :project => {}
+      end
+      should_respond_with :precondition_failed
+      should_not_set_the_flash
+
+      should "return the errors json" do
+        assert_match /can't be blank/, @response.body
+      end
+    end
+    
+    context "and do GET to :edit" do
+      setup do
+        get :edit, :id => @project.to_param, :organization_id => @organization.to_param
+      end
+      should_respond_with :ok
+      should_not_set_the_flash
+      should_assign_to(:organization){ @organization }
+      should_assign_to(:project)
+      should_render_template :edit
+    end
+    
+    context "and do a PUT to :update.json with correct data" do
+      setup do
+        @request.env['HTTP_ACCEPT'] = "application/json"
+        put :update, :id => @project.to_param, :organization_id => @organization.to_param, :project => { :name => "Project Test 2" }
+        @project = Project.find_by_name("Project Test 2")
+        
+      end
+      should_respond_with :ok
+      should_not_set_the_flash
+
+      should "update the project" do
+        assert !!@project
+      end
+      
+      should "return the project json" do
+        assert_match @project.to_json, @response.body
+      end
+    end
+    
+    context "and do a PUT to :update.json with incorrect data" do
+      setup do
+        @request.env['HTTP_ACCEPT'] = "application/json"
+        put :update, :id => @project.to_param, :organization_id => @organization.to_param, :project => { :name => "" }
+      end
+      should_respond_with :precondition_failed
+      should_not_set_the_flash
+
+      should "return the errors json" do
+        assert_match /can't be blank/, @response.body
+      end
+    end
+    
+    context "and do DELETE to :destroy.json" do
+      setup do
+        @request.env['HTTP_ACCEPT'] = "application/json"
+        delete :destroy, :id => @project.to_param, :organization_id => @organization.to_param
+      end
+      should_respond_with :ok
+      should_not_set_the_flash
+      
+      should "destroy the organization" do
+        assert_raise ActiveRecord::RecordNotFound do
+            @project.reload
+        end
+      end
+    end
   end
   
   context "If I'm an admin" do
     setup do
+      @organization = Factory(:organization)
+      @project = @organization.projects.create(:name => "Project Test")
       @user = admin_user
     end
+
+    context "and do GET to :new" do
+      setup do
+        get :new, :organization_id => @organization.to_param
+      end
+      
+      should_respond_with :ok
+      should_assign_to(:organization){ @organization }
+      should_assign_to(:project)
+      should_render_template :new
+    end
     
+    context "and do a POST to :create.json with correct data" do
+      setup do
+        @request.env['HTTP_ACCEPT'] = "application/json"
+        post :create, :project => { :name => "Project" }, :organization_id => @organization.to_param
+        @project = Project.find_by_name("Project")
+      end
+      should_respond_with :created
+      should_not_set_the_flash
+      should_assign_to(:organization){ @organization }
+      should_assign_to(:project)
+      
+      should "create the project" do
+        assert @project
+      end
+      
+      should "add the project to the organization" do
+        assert @organization.projects.include?(@project)
+      end
+      
+      should "return the project json" do
+        assert_match @project.to_json, @response.body
+      end
+    end
+
+    context "and do POST to :create.json with incorrect data" do
+      setup do
+        @request.env['HTTP_ACCEPT'] = "application/json"
+        post :create, :organization_id => @organization.to_param, :project => {}
+      end
+      should_respond_with :precondition_failed
+      should_not_set_the_flash
+
+      should "return the errors json" do
+        assert_match /can't be blank/, @response.body
+      end
+    end
+    
+    context "and do GET to :edit" do
+      setup do
+        get :edit, :id => @project.to_param, :organization_id => @organization.to_param
+      end
+      should_respond_with :ok
+      should_not_set_the_flash
+      should_assign_to(:organization){ @organization }
+      should_assign_to(:project)
+      should_render_template :edit
+    end
+    
+    context "and do a PUT to :update.json with correct data" do
+      setup do
+        @request.env['HTTP_ACCEPT'] = "application/json"
+        put :update, :id => @project.to_param, :organization_id => @organization.to_param, :project => { :name => "Project Test 2" }
+        @project = Project.find_by_name("Project Test 2")
+        
+      end
+      should_respond_with :ok
+      should_not_set_the_flash
+
+      should "update the project" do
+        assert !!@project
+      end
+      
+      should "return the project json" do
+        assert_match @project.to_json, @response.body
+      end
+    end
+    
+    context "and do a PUT to :update.json with incorrect data" do
+      setup do
+        @request.env['HTTP_ACCEPT'] = "application/json"
+        put :update, :id => @project.to_param, :organization_id => @organization.to_param, :project => { :name => "" }
+      end
+      should_respond_with :precondition_failed
+      should_not_set_the_flash
+
+      should "return the errors json" do
+        assert_match /can't be blank/, @response.body
+      end
+    end
+    
+    context "and do DELETE to :destroy.json" do
+      setup do
+        @request.env['HTTP_ACCEPT'] = "application/json"
+        delete :destroy, :id => @project.to_param, :organization_id => @organization.to_param
+      end
+      should_respond_with :ok
+      should_not_set_the_flash
+      
+      should "destroy the organization" do
+        assert_raise ActiveRecord::RecordNotFound do
+            @project.reload
+        end
+      end
+    end
   end
+  
   # test "index, if logged in as admin i should see all projects" do
   #   login_as_administrator
   #   get :index

@@ -26,9 +26,9 @@ module RequireOrganizationAdminOn
         context "on #{method.to_s.upcase} to :#{action}" do
           setup do
             if need_ids.include?(action)
-              send(method, action, :id => 1, :orgnization_id => @organization.id)
+              send(method, action, :id => 1, :organization_id => @organization.id)
             else
-              send(method, action)
+              send(method, action, :organization_id => @organization.id)
             end
           end
 

@@ -1,65 +1,56 @@
 class OrganizationsController < ApplicationController
   before_filter :require_user
   before_filter :require_admin, :only => [ :new, :create ]
-  #layout proc{ |controller| controller.request.path_parameters[:action] == 'show' ? nil : "admin/organizations" }
-
+  before_filter :require_organization_admin, :only => [ :edit, :update, :destroy ]
+  layout "application", :only => [ :index ]
+  
+  # GET /organizations
   def index
     @organizations = (current_user.admin?) ? Organization.all : current_user.organizations
   end
 
-  # def show
-  #   @organization = Organization.find(params[:id])
-  # end
-
+  # GET /organizations/new
   def new
     @organization = Organization.new
     render :action => :new
   end
 
+  # POST /organizations
   def create
     @organization = Organization.new(params[:organization])
     if @organization.save
-      flash[:notice] = "Organization created."
-      redirect_to organizations_path
+      render :json => @organization, :status => :created
     else
-      render :action => :new
+      render :json => @organization.errors, :status => :precondition_failed
     end
   end
-  # 
-  # def edit 
-  #   @organization = Organization.find(params[:id])
-  #   render :partial => 'form', :object => @organization, :locals => { :edit => true }
-  # end
-  #   
-  # 
-  # def update
-  #   @organization = Organization.find(params[:id])
-  # 
-  #   if @organization.update_attributes(params[:organization])
-  #     render :inline => "
-  #     <script>
-  #       var organization = eval(#{@organization.to_json});
-  #       updateName('admin-div-organization-top-name',organization.organization);
-  #     </script>"
-  #   else
-  #     render :update, :status => :internal_server_error do |page|
-  #         page.replace_html "dummy-for-actions", 
-  #         :partial => 'form',
-  #         :object => @organization,
-  #         :locals => { :no_refresh => true, :edit => true }
-  #     end
-  #   end
-  # end
-  # 
-  # def destroy
-  #   @organization = Organization.find(params[:id])
-  #   if @organization.destroy
-  #     render :inline => "successfully destroyed organization", :status => :ok
-  #   else
-  #     render :inline => "", :status => :internal_server_error
-  #   end
-  # end
-  # 
+  
+  # GET /organizations/1/edit
+  def edit 
+    @organization = Organization.find(params[:id])
+    render :action => :edit
+  end
+
+  # PUT /organizations/1
+  def update
+    @organization = Organization.find(params[:id])
+    if @organization.update_attributes(params[:organization])
+      render :json => @organization, :status => :ok
+    else
+      render :json => @organization.errors, :status => :precondition_failed
+    end
+  end
+  
+  # DELETE /organizations/1
+  def destroy
+    @organization = Organization.find(params[:id])
+    if @organization.destroy
+      render :json => '', :status => :ok
+    else
+      render :json => '', :status => :internal_server_error
+    end
+  end
+  
   # def add_project
   #   @organization = Organization.find(params[:id])
   # 

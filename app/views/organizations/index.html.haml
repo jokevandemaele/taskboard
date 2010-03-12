@@ -1,2 +1,10 @@
 .admin_list
+  - cache do
     = render @organizations
+
+- content_for :sidebar do
+  #admin-sidebar
+    %ul#admin-sidebar-menu
+      - if current_user.admin?
+        %li.new= link_to "new organization", new_organization_path
+        %li.invite= link_to "send invitation", invite_path

@@ -1,6 +1,6 @@
-= image_tag "admin/admin-logo-organizations.png"
-%h1 Create Organization
-.admin_container
-  - form_for @organization do |f| 
-    = render :partial => 'form', :object => f
-    = f.submit
+#form
+  %h1.organization Create Organization
+  .admin_container
+    - form_for @organization do |f| 
+      = render :partial => 'form', :object => f
+      = f.submit

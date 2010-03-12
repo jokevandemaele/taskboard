@@ -8,13 +8,13 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users
   map.resource :account, :controller => "users"
 
-  map.resources :organizations
+
+  map.resources :organizations, :has_many => [ :projects ]
   
   # Sample resource route within a namespace:
   map.namespace :admin do |admin|
    admin.resources :members
    admin.resources :teams
-   admin.resources :projects
   end
 
   map.resources :statustags
@@ -40,7 +40,7 @@ ActionController::Routing::Routes.draw do |map|
   # This route can be invoked with purchase_url(:id => product.id)
   map.access_denied '/access_denied', :controller => 'admin/members', :action => "access_denied"
   map.report_bug '/report_bug', :controller => 'admin/members', :action => 'report_bug'
-  map.report_bug '/invite', :controller => 'admin/members', :action => 'invite'
+  map.invite '/invite', :controller => 'admin/members', :action => 'invite'
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   map.resources :products

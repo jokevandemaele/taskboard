@@ -1,0 +1,30 @@
+#form
+  :color #025
+  .field
+    :position relative
+    :padding 10px
+    :background #AFC6E9
+    :font-size 20px
+    :line-height 20px
+    
+    input
+      :position absolute
+      :right 10px
+      :top 5px
+      &[type="text"]
+        +rounded(10px)
+        :background white
+        :font-size 14px
+        :border none
+        :padding 0 10px
+        :width 200px
+        :height 30px
+      &[type="submit"]:active
+        :width 200px
+        :border none !important
+      
+  h1
+    :color #025
+    &.organization
+      :background url("/images/admin/admin-logo-organizations.png")
+  

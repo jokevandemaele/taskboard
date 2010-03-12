@@ -15,7 +15,7 @@
     - if current_user.admins?(organization)
       / Admin actions
       .administration_actions
-        = link_to_remote "new project" + image_tag("admin/admin-div-elements-add.png", :alt => "Add", :style => "margin-left: 10px; "), :url => new_admin_project_path, :update => "dummy-for-actions"
+        = link_to_remote "new project" + image_tag("admin/admin-div-elements-add.png", :alt => "Add", :style => "margin-left: 10px; "), :url => new_organization_project_path(organization), :update => "dummy-for-actions"
 
   / Project Section List
   .list
@@ -26,8 +26,8 @@
         = project.name if (!project.users.include?(current_user) && !current_user.admins?(organization))
         - if current_user.admins?(organization)
           .admin
-            = link_to_remote image_tag("admin/admin-div-element-edit.png", :alt => "Edit", :title => "Edit"), :url => edit_admin_project_url(project), :method => :get, :update => "dummy-for-actions"
-            = link_to_remote image_tag("admin/admin-div-element-remove.png", :alt => "Remove", :title => "Remove"), :url => admin_project_url(project), :method => :delete, :confirm => "Are you sure?", :success => "location = location"
+            = link_to_remote image_tag("admin/admin-div-element-edit.png", :alt => "Edit", :title => "Edit"), :url => new_organization_project_path(:id => project, :organization_id => organization), :method => :get, :update => "dummy-for-actions"
+            = link_to_remote image_tag("admin/admin-div-element-remove.png", :alt => "Remove", :title => "Remove"), :url => organization_project_path(:id => project, :organization_id => organization), :method => :delete, :confirm => "Are you sure?", :success => "location = location"
             
   .clear
   / End Project Section  
