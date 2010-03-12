@@ -8,3 +8,7 @@
       - if current_user.admin?
         %li.new= link_to "new organization", new_organization_path
         %li.invite= link_to "send invitation", invite_path
+
+- content_for :helpers do
+  = javascript_include_tag 'helpers/organizations.js'
+  
