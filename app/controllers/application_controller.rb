@@ -185,22 +185,13 @@ class ApplicationController < ActionController::Base
     end
 
     def require_admin
-      unless current_user.admin?
-        store_location
-        flash[:notice] = "Access Denied"
-        redirect_to root_url
-        return false
-      end
+      deny_access unless current_user.admin?
     end
 
     def require_organization_admin
       param = (request_controller == 'organizations') ? params[:id] : params[:organization_id]
-      unless current_user.admins?(Organization.find(param))
-        store_location
-        flash[:notice] = "Access Denied"
-        redirect_to root_url
-        return false
-      end
+      return require_user if !current_user
+      deny_access if !param || !current_user.admins?(Organization.find(param))
     end
  
     def require_no_user
@@ -219,5 +210,16 @@ class ApplicationController < ActionController::Base
     def redirect_back_or_default(default)
       redirect_to(session[:return_to] || default)
       session[:return_to] = nil
+    end
+    
+    # Find the organization from organization_id
+    def find_organization
+      @organization = Organization.find(params[:organization_id]) if params[:organization_id]
+    end
+    
+    def deny_access
+      flash[:notice] = "Access Denied"
+      redirect_to root_url
+      return false
     end
 end

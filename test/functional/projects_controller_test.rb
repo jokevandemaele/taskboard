@@ -1,9 +1,10 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class ProjectsControllerTest < ActionController::TestCase
-  should_require_organization_admin_on [ :new, :create] #, :edit, :update, :destroy ]
-
-  context "Organization Routes" do
+  context "Permissions" do
+    should_require_organization_admin_on [ :new, :create , :edit, :update, :destroy ]
+  end
+  context "Project Routes" do
     should_route :get, "/organizations/1/projects/new", :action => :new, :organization_id => 1
     should_route :post, "/organizations/1/projects", :action => :create, :organization_id => 1
     should_route :get, "/organizations/1/projects/2/edit", :action => :edit, :id => 2, :organization_id => 1
@@ -11,20 +12,21 @@ class ProjectsControllerTest < ActionController::TestCase
     should_route :delete, "/organizations/1/projects/2", :action => :destroy, :id => 2, :organization_id => 1
   end
   
+  # ----------------------------------------------------------------------------------------------------------------
+  # Organization Admin
+  # ----------------------------------------------------------------------------------------------------------------
   context "If i'm an organization admin" do
     setup do
       @organization = Factory(:organization)
       @user = Factory(:user)
-      @mem = @organization.organization_memberships.build(:user => @user)
-      @mem.admin = true
-      @mem.save
       @project = @organization.projects.create(:name => "Project Test")
+      @user.add_to_organization(@organization)
     end
     
     should "admin the organization" do
-      assert @user.organizations_administered.include?(@organization)
+      assert @user.admins?(@organization)
     end
-    
+
     context "and do GET to :new" do
       setup do
         get :new, :organization_id => @organization.to_param
@@ -66,6 +68,7 @@ class ProjectsControllerTest < ActionController::TestCase
       end
       should_respond_with :precondition_failed
       should_not_set_the_flash
+      should_assign_to(:organization){ @organization }
 
       should "return the errors json" do
         assert_match /can't be blank/, @response.body
@@ -79,7 +82,7 @@ class ProjectsControllerTest < ActionController::TestCase
       should_respond_with :ok
       should_not_set_the_flash
       should_assign_to(:organization){ @organization }
-      should_assign_to(:project)
+      should_assign_to(:project){ @project }
       should_render_template :edit
     end
     
@@ -92,7 +95,8 @@ class ProjectsControllerTest < ActionController::TestCase
       end
       should_respond_with :ok
       should_not_set_the_flash
-
+      should_assign_to(:organization){ @organization }
+      should_assign_to(:project){ @project }
       should "update the project" do
         assert !!@project
       end
@@ -109,7 +113,9 @@ class ProjectsControllerTest < ActionController::TestCase
       end
       should_respond_with :precondition_failed
       should_not_set_the_flash
-
+      should_assign_to(:organization){ @organization }
+      should_assign_to(:project){ @project }
+      
       should "return the errors json" do
         assert_match /can't be blank/, @response.body
       end
@@ -122,6 +128,8 @@ class ProjectsControllerTest < ActionController::TestCase
       end
       should_respond_with :ok
       should_not_set_the_flash
+      should_assign_to(:organization){ @organization }
+      should_assign_to(:project){ @project }
       
       should "destroy the organization" do
         assert_raise ActiveRecord::RecordNotFound do
@@ -131,6 +139,9 @@ class ProjectsControllerTest < ActionController::TestCase
     end
   end
   
+  # ----------------------------------------------------------------------------------------------------------------
+  # System Admin
+  # ----------------------------------------------------------------------------------------------------------------
   context "If I'm an admin" do
     setup do
       @organization = Factory(:organization)
@@ -179,6 +190,7 @@ class ProjectsControllerTest < ActionController::TestCase
         post :create, :organization_id => @organization.to_param, :project => {}
       end
       should_respond_with :precondition_failed
+      should_assign_to(:organization){ @organization }
       should_not_set_the_flash
 
       should "return the errors json" do
@@ -193,7 +205,7 @@ class ProjectsControllerTest < ActionController::TestCase
       should_respond_with :ok
       should_not_set_the_flash
       should_assign_to(:organization){ @organization }
-      should_assign_to(:project)
+      should_assign_to(:project){ @project }
       should_render_template :edit
     end
     
@@ -206,7 +218,9 @@ class ProjectsControllerTest < ActionController::TestCase
       end
       should_respond_with :ok
       should_not_set_the_flash
-
+      should_assign_to(:organization){ @organization }
+      should_assign_to(:project){ @project }
+      
       should "update the project" do
         assert !!@project
       end
@@ -223,7 +237,9 @@ class ProjectsControllerTest < ActionController::TestCase
       end
       should_respond_with :precondition_failed
       should_not_set_the_flash
-
+      should_assign_to(:organization){ @organization }
+      should_assign_to(:project){ @project }
+      
       should "return the errors json" do
         assert_match /can't be blank/, @response.body
       end
@@ -236,6 +252,7 @@ class ProjectsControllerTest < ActionController::TestCase
       end
       should_respond_with :ok
       should_not_set_the_flash
+      should_assign_to(:project){ @project }
       
       should "destroy the organization" do
         assert_raise ActiveRecord::RecordNotFound do

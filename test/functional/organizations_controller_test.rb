@@ -1,10 +1,11 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class OrganizationsControllerTest < ActionController::TestCase
-  should_require_user_on [:index]
-  should_require_organization_admin_on [ :edit, :update, :destroy ]
-  should_require_admin_on [:new, :create]
-
+  context "Permissions" do
+    should_require_user_on [:index]
+    should_require_organization_admin_on_for_organizations_controller [ :edit, :update, :destroy ]
+    should_require_admin_on [:new, :create]
+  end
   # ----------------------------------------------------------------------------------------------------------------
   # Routes
   # ----------------------------------------------------------------------------------------------------------------
@@ -45,13 +46,11 @@ class OrganizationsControllerTest < ActionController::TestCase
     setup do
       @organization = Factory(:organization)
       @user = Factory(:user)
-      @mem = @organization.organization_memberships.build(:user => @user)
-      @mem.admin = true
-      @mem.save
+      @user.add_to_organization(@organization)
     end
-    
+
     should "admin the organization" do
-      assert @user.organizations_administered.include?(@organization)
+      assert @user.admins?(@organization)
     end
 
     context "and do GET to :index" do

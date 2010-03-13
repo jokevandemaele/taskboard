@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
   # Attributes Accessible
   #
   ################################################################################################################
-  attr_accessible :name, :color, :login, :email, :password, :password_confirmation
+  attr_accessible :name, :color, :login, :email, :password, :password_confirmation, :new_organization
   attr_accessor :added_by, :new_organization
 
   ################################################################################################################
@@ -90,6 +90,14 @@ class User < ActiveRecord::Base
     if organization
       self.organization_memberships.build(:organization => organization) 
       self.save
+    end
+  end
+
+  # remove the user from organization
+  def remove_from_organization(organization)
+    if organization
+      organization_membership = organization_memberships.first(:conditions => ["organization_id = ?", organization.id])
+      organization_membership.destroy
     end
   end
 

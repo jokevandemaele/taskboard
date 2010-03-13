@@ -14,7 +14,7 @@ module RequireAdminOn
 
     need_ids = action_methods.keys + [:show, :edit]
 
-    context "A not logged in user" do
+    context "SRAO: If I'm not logged in" do
       setup do
         @user = not_logged_user
       end
@@ -37,7 +37,7 @@ module RequireAdminOn
       end
     end
 
-    context "A normal user" do
+    context "SRAO: If I'm a normal user" do
       setup do
         @user = Factory(:user)
       end
@@ -60,7 +60,7 @@ module RequireAdminOn
       end
     end
 
-    context "An organization admin" do
+    context "SRAO: If I'm an organization admin" do
       setup do
         @organization = Factory(:organization)
         @user = Factory(:user)

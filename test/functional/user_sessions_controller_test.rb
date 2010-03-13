@@ -12,13 +12,11 @@ class UserSessionsControllerTest < ActionController::TestCase
     setup do
       @organization = Factory(:organization)
       @user = Factory(:user)
-      @mem = @organization.organization_memberships.build(:user => @user)
-      @mem.admin = true
-      @mem.save
+      @user.add_to_organization(@organization)
     end
-    
+
     should "admin the organization" do
-      assert @user.organizations_administered.include?(@organization)
+      assert @user.admins?(@organization)
     end
 
   end

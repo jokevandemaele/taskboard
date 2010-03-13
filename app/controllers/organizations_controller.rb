@@ -46,50 +46,8 @@ class OrganizationsController < ApplicationController
     @organization = Organization.find(params[:id])
     if @organization.destroy
       render :json => '', :status => :ok
-    else
-      render :json => '', :status => :internal_server_error
     end
   end
-  
-  # def add_project
-  #   @organization = Organization.find(params[:id])
-  # 
-  #   if params[:id]
-  #     @project = Project.find(params[:project])
-  #     @organization.projects << @project
-  #     if @organization.save
-  #       render :update do |page|
-  #         page.replace_html "dummy-for-actions", "<script>location.reload(false)</script>"
-  #       end
-  #     end
-  #   end
-  # end
-  # 
-  # def add_member
-  #   @organization = Organization.find(params[:id])
-  #   @member = Member.find(params[:member])
-  #   @membership = OrganizationMembership.new
-  #   @membership.member = @member
-  #   @membership.organization = @organization
-  #   @membership.admin = nil
-  #   if @membership.save
-  #     # TODO: Don't refresh the whole page, just add the user.
-  #     render :inline => "<script>location.reload(true)</script>"
-  #   end
-  # end
-  # 
-  # def remove_member
-  #   @membership = OrganizationMembership.first(:conditions => ["member_id = ? and organization_id = ?", params[:object], params[:id]])
-  #   @member = @membership.member
-  #   @organization = @membership.organization
-  #   @member.teams.each { |team| team.members.delete(@member) if team.projects.each { |project| project.organization == @organization } }
-  #   if @membership.destroy
-  #     render :inline => "", :status => :ok
-  #   else
-  #     render :inline => "", :status => :internal_server_error
-  #   end
-  # end
-  # 
   # def toggle_admin
   #   return render :inline => "", :status => :internal_server_error if current_user.id == params[:member].to_i
   #   @membership = OrganizationMembership.first(:conditions => ["member_id = ? and organization_id = ?", params[:member], params[:id]])

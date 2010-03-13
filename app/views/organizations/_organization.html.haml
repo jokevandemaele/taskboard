@@ -22,7 +22,7 @@
     - organization.projects_ordered_for_user(current_user).each do |project|
       .element.project{ :class => ('not-mine' if !current_user.projects.include?(project))}
         / Element name TODO: RESIZE!!
-        = link_to(project.name, :controller => "/taskboard", :action => :show, :id => project.id) if (project.users.include?(current_user) || current_user.admins?(organization))
+        = link_to(project.name, project_taskboard_index_path(:project_id => project)) if (project.users.include?(current_user) || current_user.admins?(organization))
         = project.name if (!project.users.include?(current_user) && !current_user.admins?(organization))
         - if current_user.admins?(organization)
           .admin
@@ -61,7 +61,7 @@
     - if current_user.admins?(organization)
       / Admin actions
       .administration_actions
-        = link_to_remote "new team" + image_tag("admin/admin-div-elements-add.png", :alt => "Add", :style => "margin-left: 10px; "), :url => new_admin_team_path, :update => "dummy-for-actions"
+        = link_to_remote "new team" + image_tag("admin/admin-div-elements-add.png", :alt => "Add", :style => "margin-left: 10px; "), :url => new_organization_team_path(:organization_id => organization), :update => "dummy-for-actions"
 
   / Project Section List
   .list
@@ -69,15 +69,15 @@
       .element.team{ :class => ('not-mine' if !current_user.teams.include?(team)) }
         / Element name TODO: RESIZE!!
         - if current_user.teams.include?(team) || current_user.admins?(organization)
-          = link_to team.name, admin_team_url(team.id)
+          = link_to team.name, organization_team_url(organization, team)
         - else
           = team.name
           
         - if current_user.admins?(organization)
           .admin
-            = link_to image_tag("admin/admin-div-element-team-members.png", :alt => "Edit Team Members", :class => "admin-div-element-actions-team-members", :title => "Edit Team Members"), admin_team_url(team)
-            = link_to_remote image_tag("admin/admin-div-element-edit.png", :alt => "Edit", :title => "Edit"), :url => edit_admin_team_url(team), :method => :get, :update => "dummy-for-actions"
-            = link_to_remote image_tag("admin/admin-div-element-remove.png", :alt => "Remove", :class => "admin-div-element-actions-remove", :title => "Remove"), :url => admin_team_url(team), :method => :delete, :confirm => "Are you sure?", :success => "location = location"
+            = link_to image_tag("admin/admin-div-element-team-members.png", :alt => "Edit Team Members", :class => "admin-div-element-actions-team-members", :title => "Edit Team Members"), organization_team_url(organization,team)
+            = link_to_remote image_tag("admin/admin-div-element-edit.png", :alt => "Edit", :title => "Edit"), :url => edit_organization_team_url(organization,team), :method => :get, :update => "dummy-for-actions"
+            = link_to_remote image_tag("admin/admin-div-element-remove.png", :alt => "Remove", :class => "admin-div-element-actions-remove", :title => "Remove"), :url => organization_team_url(organization, team), :method => :delete, :confirm => "Are you sure?", :success => "location = location"
 
   .clear
   / End Teams Section  

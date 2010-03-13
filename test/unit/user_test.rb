@@ -224,6 +224,21 @@ class UserTest < ActiveSupport::TestCase
       assert @user.organizations.include?(@organization)
     end
   end
+
+  context "#remove_from_organization" do
+    setup do
+      @organization = Factory(:organization)
+      @user = Factory(:user)
+      @user.add_to_organization(@organization)
+      @organization.reload
+      assert @organization.users.include?(@user)
+      assert @user.organizations.include?(@organization)
+      @user.remove_from_organization(@organization)
+    end
+
+    should "remove the user from organization" do
+    end
+  end
   
   # context "#guest_projects" do
   #   setup do

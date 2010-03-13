@@ -1,5 +1,5 @@
-module RequireOrganizationAdminOn
-  def should_require_organization_admin_on(actions = [])
+module RequireOrganizationAdminOnForOrganizationsController
+  def should_require_organization_admin_on_for_organizations_controller(actions = [])
     if actions == :all
       actions = %w{index show new create edit update destroy}.map(&:to_sym)
     else
@@ -14,7 +14,7 @@ module RequireOrganizationAdminOn
 
     need_ids = action_methods.keys + [:show, :edit]
 
-    context "SROAO: If I'm not logged in" do
+    context "SROAOFOC: If I'm not logged in" do
       setup do
         @organization = Factory(:organization)
       end
@@ -25,9 +25,9 @@ module RequireOrganizationAdminOn
         context "on #{method.to_s.upcase} to :#{action} with organization_id parameter" do
           setup do
             if need_ids.include?(action)
-              send(method, action, :id => 1, :organization_id => @organization.to_param)
+              send(method, action, :id => @organization.to_param)
             else
-              send(method, action, :organization_id => @organization.to_param)
+              send(method, action, :id => @organization.to_param)
             end
           end
 
@@ -41,7 +41,6 @@ module RequireOrganizationAdminOn
       setup do
         @organization = Factory(:organization)
         @user = Factory(:user)
-        @user1 = Factory(:user)
       end
 
       actions.each do |action|
@@ -50,7 +49,7 @@ module RequireOrganizationAdminOn
         context "and do #{method.to_s.upcase} to :#{action}" do
           setup do
             if need_ids.include?(action)
-              send(method, action, :id => @user1.to_param, :organization_id => @organization.to_param)
+              send(method, action, :id => @organization.to_param)
             else
               send(method, action, :organization_id => @organization.to_param)
             end
@@ -65,5 +64,5 @@ module RequireOrganizationAdminOn
 end
 
 class ActiveSupport::TestCase
-  extend RequireOrganizationAdminOn
+  extend RequireOrganizationAdminOnForOrganizationsController
 end

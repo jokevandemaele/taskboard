@@ -2,4 +2,5 @@ log
 db/*.sqlite3
 db/schema.rb
 coverage
+tmpcoverage.data
 tmp
