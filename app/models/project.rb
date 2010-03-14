@@ -25,7 +25,8 @@ class Project < ActiveRecord::Base
   # Attributes Accessible
   #
   ################################################################################################################
-  attr_accessible :name, :organization
+  attr_accessible :name, :organization, :team, :public
+  attr_accessor :team
   
   ################################################################################################################
   #
@@ -33,6 +34,7 @@ class Project < ActiveRecord::Base
   #
   ################################################################################################################
   after_create :add_default_stories
+  after_create :assign_to_team
   before_save :add_hash_if_public
 
   ################################################################################################################
@@ -110,5 +112,8 @@ private
   def add_hash_if_public
     self.public_hash = self.public? ? Digest::SHA1.hexdigest(self.name + Time.now.to_s) : nil
   end
-
+  
+  def assign_to_team
+    self.teams << organization.teams.first(team) if(team)
+  end
 end

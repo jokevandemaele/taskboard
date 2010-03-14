@@ -1,1 +1,6 @@
-/ ToDo
+#form
+  #form-logo= image_tag "logo-projects.png"
+  %h1.organization Create Project
+  - remote_form_for @project, :url => organization_projects_path(@organization, :format => :json), :success => 'Projects.afterCreate(request.responseText);', :failure => 'ModalDialog.displayFormErrors(request.responseJSON);' do |f|
+    = render :partial => 'form', :object => f
+    = f.submit

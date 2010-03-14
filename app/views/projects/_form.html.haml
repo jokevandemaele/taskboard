@@ -1,50 +1,59 @@
-- if !defined?(no_refresh)
-  %script
-    Effect.Appear($('dialog-background-fade'), { duration: 0.2, to: 0.9 });
+= form.error_messages 
+.field
+  = form.label :name
+  = form.text_field :name
 
-#form-add-project.admin-new{ :style => "display:none;" }
-  = image_tag "admin/admin-logo-projects.png", :alt => "Project",:style => "position:absolute; top: 0px; left: -120px; "
-  .clear
-  = admin_open_div 765
-  .admin-div-project-top
-    - action = edit ? :update : :create
-    - remote_form_for @project, :url => { :controller => 'admin/projects', :action => action, :id => @project.id }, :update => "dummy-for-actions" do |f|
-      / = admin_form_name(@project, edit, f)
-      .admin-div-section
-        = image_tag 'admin/admin-div-actions-projects.png', :alt => 'Project name', :style => 'margin: 10px;'
-        %h2{ :style => 'position: relative; top: 2px;' }
-          Project name
-        = f.text_field :name, :class => 'text', :style => 'float: right; margin: 12px 10px;'
-      = hidden_field_tag "project[organization_id]", @organization
-      .admin-div-section{ :style => "height: 70px;" }
-        = image_tag 'admin/admin-div-actions-teams.png', :alt => 'Team', :style => 'position: relative; top: 10px; margin-left: 10px;'
-        %h2{ :style => "position: relative; top: 10; margin-left: 10px;" }
-          Team:
-        = select_tag "team_id", options_from_collection_for_select(@teams, 'id', 'name', :selected => @selected), :style => 'position: relative; top: 10px; margin-left: 10px; width: 500px;'
-      
-        - if !edit
-          %p{ :style => "margin-left: 15px;" }
-            = check_box_tag 'create_team', 'true',false, :onclick => "toggleSelect('team_id','create_team');"
-            - if @teams.empty?
-              %script
-                == if(#{@teams.empty?}) { $('create_team').click(); $('create_team').disable();}
-                = hidden_field_tag "create_team", "true"
-            = label_tag 'create_team', 'Create a new team'
+.field
+  = form.label :team
+  = select("project", "team", @organization.teams.all.collect {|o| [ o.name, o.id ] })
 
-      .admin-div-section{ :style => "height: 70px; position: relative" }
-        = image_tag 'admin/admin-div-actions-members.png', :alt => 'Team', :style => 'position: relative; top: 10px; margin-left: 10px;'
-        %h2{ :style => "position: relative; top: 10; margin-left: 10px;" }
-          Public:
-        %p{ :style => "margin-left: 15px;" }
-          = f.check_box :public
-          = f.label :public, "Make project publicly available"
+.field
+  = form.label :public
+  = form.check_box :public
 
-      = error_messages_for('project', :object => @project) if (defined?(no_refresh) && no_refresh)
-      = admin_form_buttons(@project)
-    .clear
-  = admin_close_div 765
-  %div{ :style => "width: 100px; height: 30px;" }
-%script
-  Effect.ScrollTo('header');
-  centerTo($('form-add-project'),$('dialog-background-fade'));
-  Effect.Appear($('form-add-project'), { afterFinish : function() { Form.Element.select($('project_name'))}});
+/ #form-add-project.admin-new{ :style => "display:none;" }
+/   = image_tag "admin/admin-logo-projects.png", :alt => "Project",:style => "position:absolute; top: 0px; left: -120px; "
+/   .clear
+/   = admin_open_div 765
+/   .admin-div-project-top
+/     - action = edit ? :update : :create
+/     - remote_form_for @project, :url => { :controller => 'admin/projects', :action => action, :id => @project.id }, :update => "dummy-for-actions" do |f|
+/       / = admin_form_name(@project, edit, f)
+/       .admin-div-section
+/         = image_tag 'admin/admin-div-actions-projects.png', :alt => 'Project name', :style => 'margin: 10px;'
+/         %h2{ :style => 'position: relative; top: 2px;' }
+/           Project name
+/         = f.text_field :name, :class => 'text', :style => 'float: right; margin: 12px 10px;'
+/       = hidden_field_tag "project[organization_id]", @organization
+/       .admin-div-section{ :style => "height: 70px;" }
+/         = image_tag 'admin/admin-div-actions-teams.png', :alt => 'Team', :style => 'position: relative; top: 10px; margin-left: 10px;'
+/         %h2{ :style => "position: relative; top: 10; margin-left: 10px;" }
+/           Team:
+/         = select_tag "team_id", options_from_collection_for_select(@teams, 'id', 'name', :selected => @selected), :style => 'position: relative; top: 10px; margin-left: 10px; width: 500px;'
+/       
+/         - if !edit
+/           %p{ :style => "margin-left: 15px;" }
+/             = check_box_tag 'create_team', 'true',false, :onclick => "toggleSelect('team_id','create_team');"
+/             - if @teams.empty?
+/               %script
+/                 == if(#{@teams.empty?}) { $('create_team').click(); $('create_team').disable();}
+/                 = hidden_field_tag "create_team", "true"
+/             = label_tag 'create_team', 'Create a new team'
+/ 
+/       .admin-div-section{ :style => "height: 70px; position: relative" }
+/         = image_tag 'admin/admin-div-actions-members.png', :alt => 'Team', :style => 'position: relative; top: 10px; margin-left: 10px;'
+/         %h2{ :style => "position: relative; top: 10; margin-left: 10px;" }
+/           Public:
+/         %p{ :style => "margin-left: 15px;" }
+/           = f.check_box :public
+/           = f.label :public, "Make project publicly available"
+/ 
+/       = error_messages_for('project', :object => @project) if (defined?(no_refresh) && no_refresh)
+/       = admin_form_buttons(@project)
+/     .clear
+/   = admin_close_div 765
+/   %div{ :style => "width: 100px; height: 30px;" }
+/ %script
+/   Effect.ScrollTo('header');
+/   centerTo($('form-add-project'),$('dialog-background-fade'));
+/   Effect.Appear($('form-add-project'), { afterFinish : function() { Form.Element.select($('project_name'))}});

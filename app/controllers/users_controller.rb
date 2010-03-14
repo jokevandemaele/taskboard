@@ -2,28 +2,41 @@ class UsersController < ApplicationController
   before_filter :find_organization
   before_filter :require_user, :only => [:edit, :update, :destroy]
   before_filter :require_admin_organization_or_no_user, :only => [:new, :create]
-  before_filter :require_organization_admin, :only => [ :toggle_admin ]
+  before_filter :require_organization_admin, :only => [:show, :toggle_admin ]
+  before_filter :require_not_own_account, :only => [:toggle_admin]
   before_filter :require_own_or_organization_admin, :only => [:destroy]
   before_filter :require_own_account, :only => [ :edit, :update]
-  before_filter :find_user, :only => [ :edit, :update, :destroy, :toggle_admin ]
-
-  # Layout should be set to 'application' if the user is logged in and to 'user' if the user is logged out
-  layout :set_layout
+  before_filter :find_user, :only => [:edit, :update, :destroy ]
+  layout nil
   
   # GET /users/new
   def new
     @user = @organization ? @organization.users.build : User.new
   end
-
+  
+  # GET /organizations/[organization_id]/users/1
+  def show
+    @user = User.find(params[:id])
+  end
+  
   # POST /users
   def create
     params[:user][:new_organization] = @organization if @organization
     @user = User.new(params[:user])
     if @user.save
-      flash[:notice] = "Welcome to the Agilar Taskboard!"
-      redirect_back_or_default account_url
+      if @organization
+        @user.new_organization = @organization
+        render :json => { :id => @user.to_param, :organization => @organization.to_param}, :status => :created
+      else
+        flash[:notice] = "Welcome to the Agilar Taskboard!"
+        redirect_back_or_default account_url
+      end
     else
-      render :action => :new
+      if @organization
+        render :json => @user.errors, :status => :precondition_failed
+      else
+        render :action => :new
+      end
     end
   end
   
@@ -53,8 +66,9 @@ class UsersController < ApplicationController
 
   # POST /organizations/:organization_id/users/:user_id/toggle_admin
   def toggle_admin
+    @user = User.find(params[:id])
     @om = @user.organization_memberships.first(:conditions => ['organization_id = ?', @organization.to_param])
-    @om.admin = true
+    @om.admin = !@om.admin
     if @user != current_user && @om.save
       render :json => "", :status => :ok
     else
@@ -64,16 +78,16 @@ class UsersController < ApplicationController
   
    
 private
-  def set_layout
-    current_user ? 'application' : nil
-  end
-
   def require_admin_organization_or_no_user
     @organization ? require_organization_admin : require_no_user
   end
   
   def require_own_account
     require_admin if params[:id] != current_user.to_param
+  end
+
+  def require_not_own_account
+    deny_access if params[:id] == current_user.to_param
   end
   
   def require_own_or_organization_admin

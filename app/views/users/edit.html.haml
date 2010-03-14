@@ -1,4 +1,11 @@
-- form_for @user, :url => account_path do |f|
-  = f.error_messages
-  = render :partial => "form", :object => f
-  = f.submit 'Update', :disable_with => 'Updating...'
+#form
+  #form-logo= image_tag "logo-users.png"
+  %h1.organization Edit User
+  - if @organization
+    - remote_form_for @user, :url => organization_user_path(@organization,@user, :format => :json), :success => 'Users.afterUpdate(request.responseText);', :failure => 'ModalDialog.displayFormErrors(request.responseJSON);' do |f|
+      = render :partial => 'form', :object => f
+      = f.submit
+  - else
+    - form_for @user do |f|
+      = render :partial => 'form', :object => f
+      = f.submit

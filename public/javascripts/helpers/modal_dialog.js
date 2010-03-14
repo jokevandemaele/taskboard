@@ -102,12 +102,31 @@ Application.Helpers.ModalDialog = {
     });
   },
 
+  yes_no: function(text, yes_function, no_function){
+    var container = new Element('div', {id : 'yesNoContainer', 'class' : 'yesNoContainer'});
+    var question = new Element('h1').update(text);
+    container.insert({bottom: question});
+    var yes = new Element('div', {id: 'yes', 'class' : 'yes'});
+    container.insert({bottom: yes});
+    var no = new Element('div', {id: 'no', 'class' : 'no'});
+    container.insert({bottom: no});    
+    var clear = new Element('div', {'class' : 'clear'});
+    
+    // Add listeners
+    yes.observe('click', function(){ ModalDialog.close(); yes_function(); });
+    no.observe('click', function(){ ModalDialog.close(); });
+
+    this.open(container);
+    $('modal_dialog').down('.close_button').hide();
+    
+  },
+  
   displayFormErrors: function(errors) {
     var errorsHTML = new Element('ul');
     var errorLi;
 
     errors.each(function(error) {
-      errorLi = new Element('li').update(error);
+      errorLi = new Element('li').update(error[0] + ' ' + error[1]);
       errorsHTML.appendChild(errorLi);
     });
 
@@ -130,7 +149,7 @@ Application.Helpers.ModalDialog = {
     if (this.contentBox) return;
 
     var container = this.contentBox = new Element('div', {id: 'modal_dialog'});
-
+    container.addClassName('admin_container');
     $w('tl t tr bl b br c close_button').each(function(className) {
       container.insert(new Element('div', {'class': className}));
     });

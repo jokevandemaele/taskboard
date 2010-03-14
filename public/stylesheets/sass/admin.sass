@@ -164,14 +164,22 @@ ul#admin-menu
       :position absolute
       :right 5px
       :top 0
+      .add
+        :line-height 35px
+        :background url('/images/add_small.png') no-repeat center right
+        :padding-right 30px
+        :cursor pointer
+        :color #1b51a2
+        &:hover
+          :color #2a7fff
   .projects
-    :background url('/images/admin/admin-div-actions-projects.png') no-repeat #afc6e9
+    :background url('/images/logo-projects-small.png') no-repeat #afc6e9
   .users
-    :background url('/images/admin/admin-div-actions-users.png') no-repeat #afc6e9
+    :background url('/images/logo-users-small.png') no-repeat #afc6e9
   .teams
-    :background url('/images/admin/admin-div-actions-teams.png') no-repeat #afc6e9
+    :background url('/images/logo-teams-small.png') no-repeat #afc6e9
   .guest_team_members
-    :background url('/images/admin/admin-div-actions-guest_team_members.png') no-repeat #afc6e9
+    :background url('/images/logo-guest_team_members-small.png') no-repeat #afc6e9
   .list
     :position relative
     .element
@@ -191,14 +199,32 @@ ul#admin-menu
           :text-decoration underline
       .admin
         +right_rounded(10px)
-        :padding 5px 10px 5px 10px
+        :padding 5px 0px 5px 10px
         :position absolute
         :top 0
         :right 0
         :height 23px
         :line-height 23px
         :background #afc6e9
-
+        .edit, .remove, .is_admin, .is_org_admin, .is_user
+          :width 20px
+          :height 20px
+          :float right
+          :margin-right 10px
+        .edit, .remove, .toggle_admin
+          :cursor pointer
+        .edit
+          :background url('/images/edit_small.png') no-repeat
+        .remove
+          :background url('/images/remove_small.png') no-repeat
+        .is_admin
+          :background url('/images/is_admin.png') no-repeat
+        .is_org_admin
+          :background url('/images/is_org_admin.png') no-repeat
+        .is_user
+          :background url('/images/is_user.png') no-repeat
+        
+        
   .not-mine
     :color #AAAAAA !important
     a
@@ -216,19 +242,23 @@ ul#admin-menu
   :top 0
   :width 220px
   #admin-sidebar-menu
-    margin: 0
-    padding: 0
-    list-style: none
-    text-align: right
-    color: #00112b
-    font-size: 16px
-
-    a
-      color: #1b51a2
-
+    :margin 0
+    :padding 0
+    :list-style none
+    :text-align right
+    :color #00112b
+    :font-size 16px
+    li
+      :cursor pointer
+      :color #1b51a2
+      :padding-right 66px
+      :line-height 66px
       &:hover
-        color: #2a7fff
-  
+        :color #2a7fff
+      &.new_organization
+        :background url('/images/add.png') no-repeat center right
+      &.new_invitation
+        :background url('/images/invite.png') no-repeat center right
   
 /* End Sidebar */
 
@@ -237,3 +267,6 @@ ul#admin-menu
   :position fixed
   :bottom 0
   :right 0
+
+.remove_organization, .new_organization
+  :cursor pointer

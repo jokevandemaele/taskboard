@@ -9,12 +9,12 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :account, :controller => "users"
 
   map.resources :organizations do |o|
-    o.resources :projects, :only => [ :new, :create, :edit, :update, :destroy] do |p|
+    o.resources :projects, :only => [ :show, :new, :create, :edit, :update, :destroy] do |p|
       p.resources :guest_team_memberships, :only => [ :create, :destroy ] 
     end
     o.resources :guest_team_memberships, :only => [ :new ] 
     o.resources :teams, :only => [ :new, :create, :edit, :update, :destroy]
-    o.resources :users, :only => [ :new, :create, :edit, :update, :destroy]
+    o.resources :users, :only => [ :show, :new, :create, :edit, :update, :destroy]
     o.user_toggle_admin 'users/:id/toggle_admin', :controller => 'users', :action => 'toggle_admin'
   end
   
@@ -23,7 +23,7 @@ ActionController::Routing::Routes.draw do |map|
    admin.resources :members
   end
 
-  map.resources :project do |p|
+  map.resources :project, :only => [] do |p|
     p.resources :taskboard, :only => [:index]
     p.resources :backlog, :only => [:index]
     p.resources :stories do |s|
@@ -40,7 +40,7 @@ ActionController::Routing::Routes.draw do |map|
   map.invite '/invite', :controller => 'admin/members', :action => 'invite'
 
   # Root goes to admin/organizations
-  map.root :controller => :account
+  map.root :controller => :organizations
   
   # Commented the default routes
   # map.connect ':controller/:action/:id'

@@ -2,8 +2,8 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class OrganizationsControllerTest < ActionController::TestCase
   context "Permissions" do
-    should_require_user_on [:index]
-    should_require_organization_admin_on_for_organizations_controller [ :edit, :update, :destroy ]
+    should_require_user_on [ :index, :show ]
+    should_require_organization_admin_on_for_organizations_controller [ :show, :edit, :update, :destroy ]
     should_require_admin_on [:new, :create]
   end
   # ----------------------------------------------------------------------------------------------------------------
@@ -21,11 +21,15 @@ class OrganizationsControllerTest < ActionController::TestCase
   # ----------------------------------------------------------------------------------------------------------------
   # Normal User
   # ----------------------------------------------------------------------------------------------------------------
-  context "If i'm a normal user" do
+  context "If I'm a normal user" do
     setup do
       @organization = Factory(:organization)
       @user = Factory(:user)
       @user.add_to_organization(@organization)
+      @om = @user.organization_memberships.first
+      @om.admin = false
+      @om.save
+      assert !@user.admins?(@organization)
     end
     
     context "and do GET to :index" do
@@ -42,7 +46,7 @@ class OrganizationsControllerTest < ActionController::TestCase
   # ----------------------------------------------------------------------------------------------------------------
   # Organization Admin
   # ----------------------------------------------------------------------------------------------------------------
-  context "If i'm an organization admin" do
+  context "If I'm an organization admin" do
     setup do
       @organization = Factory(:organization)
       @user = Factory(:user)
@@ -116,6 +120,24 @@ class OrganizationsControllerTest < ActionController::TestCase
             @organization.reload
         end
       end
+    end
+    
+    context "and do GET to :show an organization I belong to" do
+      setup do
+        get :show, :id => @organization.to_param
+      end
+      should_respond_with :ok
+      should_assign_to(:organization){ @organization }
+      should_render_template :show
+    end
+    
+    context "and do GET to :show an organization I don't belong to" do
+      setup do
+        @organization2 = Factory(:organization)
+        get :show, :id => @organization2.to_param
+      end
+      should_set_the_flash_to("Access Denied")
+      should_redirect_to("the root page"){ root_url }
     end
     
   end
@@ -219,6 +241,24 @@ class OrganizationsControllerTest < ActionController::TestCase
       end
     end
     
+    context "and do GET to :show an organization I belong to" do
+      setup do
+        get :show, :id => @organization.to_param
+      end
+      should_respond_with :ok
+      should_assign_to(:organization){ @organization }
+      should_render_template :show
+    end
+    
+    context "and do GET to :show an organization I don't belong to" do
+      setup do
+        @organization2 = Factory(:organization)
+        get :show, :id => @organization2.to_param
+      end
+      should_respond_with :ok
+      should_assign_to(:organization){ @organization2 }
+      should_render_template :show
+    end
   end
   
 end

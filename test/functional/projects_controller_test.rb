@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class ProjectsControllerTest < ActionController::TestCase
   context "Permissions" do
-    should_require_organization_admin_on [ :new, :create , :edit, :update, :destroy ]
+    should_require_organization_admin_on [ :show, :new, :create , :edit, :update, :destroy ]
   end
   context "Project Routes" do
     should_route :get, "/organizations/1/projects/new", :action => :new, :organization_id => 1
@@ -137,6 +137,27 @@ class ProjectsControllerTest < ActionController::TestCase
         end
       end
     end
+    
+    context "and do GET to :show an organization I administer" do
+      setup do
+        get :show, :id => @project.to_param, :organization_id => @organization.to_param
+      end
+      should_respond_with :ok
+      should_assign_to(:organization){ @organization }
+      should_assign_to(:project){ @project }
+      should_render_template :show
+    end
+
+    context "and do GET to :show an organization I don't administer" do
+      setup do
+        @organization = Factory(:organization)
+        @project = @organization.projects.first
+        get :show, :id => @project.to_param, :organization_id => @organization.to_param
+      end
+      should_set_the_flash_to("Access Denied")
+      should_redirect_to("the root page"){ root_url }
+    end
+    
   end
   
   # ----------------------------------------------------------------------------------------------------------------
@@ -260,6 +281,29 @@ class ProjectsControllerTest < ActionController::TestCase
         end
       end
     end
+    
+    context "and do GET to :show an organization I belong to" do
+      setup do
+        get :show, :id => @project.to_param, :organization_id => @organization.to_param
+      end
+      should_respond_with :ok
+      should_assign_to(:organization){ @organization }
+      should_assign_to(:project){ @project }
+      should_render_template :show
+    end
+
+    context "and do GET to :show an organization I don't belong to" do
+      setup do
+        @organization = Factory(:organization)
+        @project = @organization.projects.first
+        get :show, :id => @project.to_param, :organization_id => @organization.to_param
+      end
+      should_respond_with :ok
+      should_assign_to(:organization){ @organization }
+      should_assign_to(:project){ @project }
+      should_render_template :show
+    end
+    
   end
   
   # test "index, if logged in as admin i should see all projects" do

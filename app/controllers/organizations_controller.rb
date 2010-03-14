@@ -1,12 +1,17 @@
 class OrganizationsController < ApplicationController
   before_filter :require_user
   before_filter :require_admin, :only => [ :new, :create ]
-  before_filter :require_organization_admin, :only => [ :edit, :update, :destroy ]
+  before_filter :require_organization_admin, :only => [:show, :edit, :update, :destroy ]
   layout "application", :only => [ :index ]
   
   # GET /organizations
   def index
     @organizations = (current_user.admin?) ? Organization.all : current_user.organizations
+  end
+
+  # GET /organizations/1
+  def show
+    @organization = Organization.find(params[:id])
   end
 
   # GET /organizations/new

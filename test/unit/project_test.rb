@@ -106,6 +106,21 @@ class ProjectTest < ActiveSupport::TestCase
         assert_not_nil @project.public_hash 
       end
     end
+    
+    context "with an existing team assigned" do
+      setup do
+        @project = Factory.build(:project)
+        @team = Factory(:team)
+        @project.organization = @team.organization
+        @project.team = @team.id
+        @project.save
+      end
+      
+      should "assing the user to that team" do
+        assert @project.teams.include?(@team)
+      end
+    end
+    
   end # End when created
 
 

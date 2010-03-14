@@ -1,4 +1,10 @@
 #form
+  #form-logo
+    :position absolute
+    :top -10px
+    :right 0
+    :z-index -10
+    :opacity 0.4
   :color #025
   .field
     :position relative
@@ -6,12 +12,12 @@
     :background #AFC6E9
     :font-size 20px
     :line-height 20px
-    
+    :margin 5px 0px
     input
       :position absolute
       :right 10px
       :top 5px
-      &[type="text"]
+      &[type="text"], &[type="password"]
         +rounded(10px)
         :background white
         :font-size 14px
@@ -19,12 +25,33 @@
         :padding 0 10px
         :width 200px
         :height 30px
-      &[type="submit"]:active
-        :width 200px
-        :border none !important
+      &[type="checkbox"]
+        :height 20px
+    select
+      :position absolute
+      :right 10px
+      :top 10px
       
+  input[type="submit"]
+    :background url('/images/yes.png') no-repeat
+    :width 60px
+    :height 60px
+    :border none
+    :cursor pointer
+    :float right
+    :color transparent
   h1
     :color #025
     &.organization
       :background url("/images/admin/admin-logo-organizations.png")
   
+  .form_errors
+    :border 2px solid #800000
+    :background #ffd5d5
+    :padding 5px
+    :color #800000
+
+    ul
+      :list-style-type none
+      :padding 0
+      :margin 0

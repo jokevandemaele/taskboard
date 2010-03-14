@@ -1,14 +1,13 @@
-.admin_list
-  - cache do
-    = render @organizations
+#organizations.admin_list
+  = render @organizations
 
 - content_for :sidebar do
   #admin-sidebar
     %ul#admin-sidebar-menu
       - if current_user.admin?
-        %li.new_organization New Organization
-        %li.invite= link_to "send invitation", invite_path
+        %li.new_organization new organization
+        %li.new_invitation send invitation
 
 - content_for :helpers do
-  = javascript_include_tag 'helpers/organizations.js', 'helpers/modal_dialog.js'
+  = javascript_include_tag 'helpers/organizations.js', 'helpers/projects.js', 'helpers/users.js', 'helpers/modal_dialog.js'
   

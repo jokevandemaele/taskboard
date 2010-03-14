@@ -39,7 +39,7 @@
               %span.title Guest Members
               %br
               Do you work with a Product Owner who is not in your organization? Working with consultants? Take a look at the Guest Member feature.
-            
+          
       #login
         - form_for @user_session do |f| 
           = f.label :login
@@ -55,8 +55,8 @@
               = flash[:notice]
               :javascript
                 Effect.Pulsate('flash', { pulses: 3, duration: 1});
-                
-          
+              
+        
       #about-right
         /= image_tag'login/request-membership.png', :alt => 'Request Membership', :style => "cursor: pointer; position: relative; top: 10px;", :onClick => "alert('Beta Memberships are not available right now... keep in touch (oleee)');"
         .screenshot= image_tag 'login/screenshot-0.png', :alt => 'Taskboard Screenshot'
