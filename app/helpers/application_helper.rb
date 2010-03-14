@@ -42,12 +42,8 @@ module ApplicationHelper
               :title => "Toggle admin", 
               :id => "organization-#{parent.id}-member-#{member.id}-admin", 
               :class => "admin-div-element-actions-edit-admin"),
-            :url => { 
-              :controller => 'admin/organizations', 
-              :action => 'toggle_admin', 
-              :id => parent, 
-              :member => member },
-            :success => "adminToggleImage('organization-#{parent.id}-member-#{member.id}-admin')"
+              organization_user_toggle_admin_path(:organization_id => parent.to_param, :id => member.to_param),
+              :success => "adminToggleImage('organization-#{parent.id}-member-#{member.id}-admin')"
     else
       title = (action == "remove") ? "Organization Admin" : "Normal User"
       image_tag("admin/admin-div-element-#{action}-admin.png", 

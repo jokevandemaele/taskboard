@@ -48,18 +48,6 @@ class OrganizationsController < ApplicationController
       render :json => '', :status => :ok
     end
   end
-  # def toggle_admin
-  #   return render :inline => "", :status => :internal_server_error if current_user.id == params[:member].to_i
-  #   @membership = OrganizationMembership.first(:conditions => ["member_id = ? and organization_id = ?", params[:member], params[:id]])
-  #   @membership.admin = @membership.admin ? nil : true
-  #   
-  #   if @membership.save
-  #     render :inline => "", :status => :ok
-  #   else
-  #     render :inline => "", :status => :internal_server_error
-  #   end
-  # end
-  # 
   # def invite
   #   render :partial => 'invitation_form', :locals => {:errors => []}, :status => :ok
   # end

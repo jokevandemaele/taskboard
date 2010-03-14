@@ -4,7 +4,7 @@ class UsersControllerTest < ActionController::TestCase
   context "Permissions" do
     # should_require_admin_on :invite
     should_require_no_user_on [:new, :create]
-    should_require_organization_admin_on [ :new, :create, :destroy ]
+    should_require_organization_admin_on [ :new, :create, :destroy, :toggle_admin ]
     should_require_user_on [ :edit, :update, :destroy ]
     should_require_own_account_on [ :edit, :update, :destroy ]
   end
@@ -138,11 +138,12 @@ class UsersControllerTest < ActionController::TestCase
   # ----------------------------------------------------------------------------------------------------------------
   # Organization Admin
   # ----------------------------------------------------------------------------------------------------------------
-  context "If i'm an organization admin" do
+  context "If I'm an organization admin" do
     setup do
       @organization = Factory(:organization)
       @user = Factory(:user)
       @user.add_to_organization(@organization)
+      @organization.reload
     end
 
     should "admin the organization" do
@@ -202,6 +203,35 @@ class UsersControllerTest < ActionController::TestCase
         assert @a_user.reload
       end
     end
+    
+    context "and do POST to :toggle_admin" do
+      setup do
+        @future_admin = Factory(:user)
+        @future_admin.add_to_organization(@organization)
+        assert !@future_admin.admins?(@organization)
+        post :toggle_admin, :organization_id => @organization.to_param, :id => @future_admin.to_param
+      end
+      should_respond_with :ok
+      should_assign_to(:organization){ @organization}
+      should_assign_to(:user){ @future_admin }
+      should "make the user admin" do
+        @future_admin.reload
+        assert @future_admin.admins?(@organization)
+      end
+    end
+
+    context "and do POST to :toggle_admin with my own id" do
+      setup do
+        post :toggle_admin, :organization_id => @organization.to_param, :id => @user.to_param
+      end
+      should_respond_with :internal_server_error
+      should_assign_to(:organization){ @organization}
+      should_assign_to(:user){ @future_admin }
+      should "not change my admin status" do
+        assert @user.admins?(@organization)
+      end
+    end
+
   end
 
   # ----------------------------------------------------------------------------------------------------------------

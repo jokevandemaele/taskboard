@@ -12,7 +12,7 @@ module RequireOrganizationAdminOn
       :destroy => :delete
     }
 
-    need_ids = action_methods.keys + [:show, :edit]
+    need_ids = action_methods.keys + [:show, :edit, :toggle_admin]
 
     context "SROAO: If I'm not logged in" do
       setup do

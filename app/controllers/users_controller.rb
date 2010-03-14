@@ -2,9 +2,10 @@ class UsersController < ApplicationController
   before_filter :find_organization
   before_filter :require_user, :only => [:edit, :update, :destroy]
   before_filter :require_admin_organization_or_no_user, :only => [:new, :create]
+  before_filter :require_organization_admin, :only => [ :toggle_admin ]
   before_filter :require_own_or_organization_admin, :only => [:destroy]
   before_filter :require_own_account, :only => [ :edit, :update]
-  before_filter :find_user, :only => [ :edit, :update, :destroy]
+  before_filter :find_user, :only => [ :edit, :update, :destroy, :toggle_admin ]
 
   # Layout should be set to 'application' if the user is logged in and to 'user' if the user is logged out
   layout :set_layout
@@ -47,6 +48,17 @@ class UsersController < ApplicationController
     else
       @user.remove_from_organization(@organization)
       render :json => '', :status => :ok
+    end
+  end
+
+  # POST /organizations/:organization_id/users/:user_id/toggle_admin
+  def toggle_admin
+    @om = @user.organization_memberships.first(:conditions => ['organization_id = ?', @organization.to_param])
+    @om.admin = true
+    if @user != current_user && @om.save
+      render :json => "", :status => :ok
+    else
+      render :json => "", :status => :internal_server_error
     end
   end
   

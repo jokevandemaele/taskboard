@@ -14,7 +14,8 @@ ActionController::Routing::Routes.draw do |map|
     end
     o.resources :guest_team_memberships, :only => [ :new ] 
     o.resources :teams, :only => [ :new, :create, :edit, :update, :destroy]
-    o.resources :users, :only => [ :new, :create, :destroy ]
+    o.resources :users, :only => [ :new, :create, :edit, :update, :destroy]
+    o.user_toggle_admin 'users/:id/toggle_admin', :controller => 'users', :action => 'toggle_admin'
   end
   
   # Sample resource route within a namespace:

@@ -12,7 +12,7 @@
     = yield :helpers
   %body
     #admin-dummy-container
-      = render :partial => 'layouts/admin/header', :locals => { :controller => request_controller() }
+      = render :partial => 'layouts/header', :locals => { :controller => request_controller() }
       #admin-container
         #admin-content
           #flash
@@ -20,8 +20,6 @@
               .flash{:class => status.to_s}= content
           = yield
           = yield :sidebar
-    #dummy-for-actions
-    = render :partial => 'layouts/admin/dialog_background_fade'
     = yield :bottom
     = javascript_include_tag 'startup'
 

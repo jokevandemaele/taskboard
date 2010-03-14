@@ -1,5 +1,5 @@
 = "<script>cancelForm('#{close_dialog}');</script>" if defined? close_dialog
-.admin_container.organization
+.admin_container.organization{ 'data-organization-id' => organization.to_param }
   / Name
   %h2= organization.name
   

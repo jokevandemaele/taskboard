@@ -6,9 +6,9 @@
   #admin-sidebar
     %ul#admin-sidebar-menu
       - if current_user.admin?
-        %li.new= link_to "new organization", new_organization_path
+        %li.new_organization New Organization
         %li.invite= link_to "send invitation", invite_path
 
 - content_for :helpers do
-  = javascript_include_tag 'helpers/organizations.js'
+  = javascript_include_tag 'helpers/organizations.js', 'helpers/modal_dialog.js'
   
