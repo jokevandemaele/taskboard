@@ -1,24 +1,14 @@
 class TeamsController < ApplicationController
   before_filter :require_user
-  before_filter :require_organization_admin, :only => [ :new , :create, :edit, :update, :destroy ]
-  before_filter :find_organization, :only => [ :new, :create, :edit, :update, :destroy]
+  before_filter :require_organization_admin
+  before_filter :find_organization
+  before_filter :find_user, :only => [ :add_user, :remove_user]
+  layout nil
 
-  # layout "application", :only => [ :index ]
-  # layout "admin/teams", :except => :display_compact_info
-  
-  # GET /teams
-  # def index
-  #   @organizations = current_member.organizations_administered
-  #   @teams = []
-  #   @organizations.each do |organization|
-  #     organization.teams.each { |team| @teams << team }
-  #   end
-  # end
-
-  # # GET /teams/1
-  # def show
-  #   @team = Team.find(params[:id])
-  # end
+  # GET /organizations/[organization_id]/teams/1
+  def show
+    @team = @organization.teams.find(params[:id])
+  end
 
   # POST /organizations/[organization_id]/teams/new
   def new
@@ -35,12 +25,12 @@ class TeamsController < ApplicationController
     end
   end
 
-  # GET /organizations/[organization_id]/projects/1/edit
+  # GET /organizations/[organization_id]/teams/1/edit
   def edit
     @team = @organization.teams.find(params[:id])
   end
 
-  # PUT /organizations/[organization_id]/projects/1
+  # PUT /organizations/[organization_id]/teams/1
   def update
     @team = @organization.teams.find(params[:id])
     if @team.update_attributes(params[:team])
@@ -58,33 +48,35 @@ class TeamsController < ApplicationController
     end
   end
 
-  # def add_member
-  #   @team = Team.find(params[:team])
-  #   @member = Member.find(params[:member])
-  #   if !@team.members.exists?(@member)
-  #     @team.members << @member
-  #     @team.save
-  #   end
-  #   render :update do |page|
-  #     page.replace_html "members-list", :partial => "members_list", :locals => { :members => @team.projects.first.organization.members, :project => params[:project] }
-  #     page.replace_html "team_members_list-#{@team.id}", :partial => 'team_members_list', :locals => { :team => @team }, :collection => @team.members, :as => :member
-  #   end
-  # end
-  # 
-  # def remove_member
-  #   @team = Team.find(params[:team])
-  #   @member = Member.find(params[:member])
-  #   if @team.members.exists?(@member)
-  #     @team.members.delete(@member)
-  #     @team.save
-  #   end
-  #   render :update do |page|
-  #     page.replace_html "team_members_list-#{@team.id}", :partial => 'team_members_list', :locals => { :team => @team }, :collection => @team.members, :as => :member
-  #   end
-  # end
-  # 
+  # GET /organizations/[organization_id]/teams/1/users
+  def edit_users
+    @team = @organization.teams.find(params[:id])
+  end
+
+  # POST /organizations/:organization_id/teams/:id/users/:user_id
+  def add_user
+    @team = @organization.teams.find(params[:id])
+    if !@team.users.include?(@user)
+      @team.users << @user
+      render :json => '', :status => :ok
+    else
+      render :json => ['user', 'is already a team member'], :status => :precondition_failed
+    end
+  end
+
+  # delete /organizations/:organization_id/teams/:id/users/:user_id
+  def remove_user
+    @team = @organization.teams.find(params[:id])
+    @team.users.delete(@user)
+    render :json => '', :status => :ok
+  end
+  
+  # GET /organizations/[organization_id]/projects/1/edit
   # def display_compact_info
   #   @team = Team.find(params[:id])
   # end
-
+private 
+  def find_user
+    @user = @organization.users.find(params[:user_id])
+  end
 end

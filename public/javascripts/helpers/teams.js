@@ -1,11 +1,11 @@
-Application.Helpers.Projects = {
+Application.Helpers.Teams = {
   initialize: function(){
     this._setupListeners();
   },
   
   newForm: function(organizationId){
     // Request form
-    new Ajax.Request('/organizations/'+ organizationId + '/projects/new', {
+    new Ajax.Request('/organizations/'+ organizationId + '/teams/new', {
       method: 'get',
         
       onSuccess: function(transport) {
@@ -16,25 +16,25 @@ Application.Helpers.Projects = {
   },
   
   afterCreate: function(response){
-    var project = response.evalJSON().project
-    new Ajax.Request('/organizations/' + project.organization_id + '/projects/' + project.id, {
+    var team = response.evalJSON().team
+    new Ajax.Request('/organizations/' + team.organization_id + '/teams/' + team.id, {
       method: 'get',
         
       onSuccess: function(transport) {
         var container = new Element('div').update(transport.responseText);
-        var project_container = container.down('.project')
+        var team_container = container.down('.team')
         
-        $('organization-'+ project.organization_id).down('.list.projects').insert({bottom: project_container});
-        project_container.highlight({ duration: 0.8 });
+        $('organization-'+ team.organization_id).down('.list.teams').insert({bottom: team_container});
+        team_container.highlight({ duration: 0.8 });
       }
     });
     ModalDialog.close();
   },
   
-  editForm: function(project, organization){
+  editForm: function(team, organization){
     organizationId = organization.readAttribute('data-organization-id');
-    projectId = project.readAttribute('data-project-id');
-    new Ajax.Request('/organizations/'+organizationId+'/projects/'+projectId+'/edit', {
+    teamId = team.readAttribute('data-team-id');
+    new Ajax.Request('/organizations/'+organizationId+'/teams/'+teamId+'/edit', {
       method: 'get',
         
       onSuccess: function(transport) {
@@ -46,22 +46,22 @@ Application.Helpers.Projects = {
   
   afterUpdate: function(response){
     ModalDialog.close();
-    var project = response.evalJSON().project
-    var project_container = $('project-' + project.id)
-    var name = project_container.down('.name')
-    name.innerHTML = project.name;
-    project_container.highlight({ duration: 0.8 });
+    var team = response.evalJSON().team
+    var team_container = $('team-' + team.id)
+    var name = team_container.down('.name')
+    name.innerHTML = team.name;
+    team_container.highlight({ duration: 0.8 });
   },
   
-  deleteProject: function(project, organization){
+  deleteTeam: function(team, organization){
     organizationId = organization.readAttribute('data-organization-id');
-    projectId = project.readAttribute('data-project-id');
-    new Ajax.Request('/organizations/' + organizationId + '/projects/' + projectId, {
+    teamId = team.readAttribute('data-team-id');
+    new Ajax.Request('/organizations/' + organizationId + '/teams/' + teamId, {
       method: 'delete',
         
       onSuccess: function(transport) {
-        project.setStyle({'z-index' : 200});
-        Effect.Fade(project);
+        team.setStyle({'z-index' : 200});
+        Effect.Fade(team);
       }
     });
   },
@@ -76,24 +76,24 @@ Application.Helpers.Projects = {
     $("organizations").observe('click', function(event){
       var target = event.element();
 
-      // Listener for add project
-      if(target.match('.new_project')){
+      // Listener for add team
+      if(target.match('.new_team')){
         organizationId = target.up('.organization').readAttribute('data-organization-id');
-        Projects.newForm(organizationId);
+        Teams.newForm(organizationId);
       }
 
-      // Listener for remove project
-      if(target.match('.remove_project')){
+      // Listener for remove team
+      if(target.match('.remove_team')){
         organization = target.up('.organization');
-        project = target.up('.project');
-        ModalDialog.yes_no("Are you sure?", function() { Projects.deleteProject(project, organization) })
+        team = target.up('.team');
+        ModalDialog.yes_no("Are you sure?", function() { Teams.deleteTeam(team, organization) })
       }
       
-      // Listener for edit project
-      if(target.match('.edit_project')){
+      // Listener for edit team
+      if(target.match('.edit_team')){
         organization = target.up('.organization');
-        project = target.up('.project');
-        Projects.editForm(project, organization);
+        team = target.up('.team');
+        Teams.editForm(team, organization);
       }
       
     });
@@ -101,4 +101,4 @@ Application.Helpers.Projects = {
 };
 
 // Provide a pretty shortcut
-Projects = Application.Helpers.Projects;
+Teams = Application.Helpers.Teams;

@@ -13,9 +13,13 @@ ActionController::Routing::Routes.draw do |map|
       p.resources :guest_team_memberships, :only => [ :create, :destroy ] 
     end
     o.resources :guest_team_memberships, :only => [ :new ] 
-    o.resources :teams, :only => [ :new, :create, :edit, :update, :destroy]
+    o.resources :teams, :only => [ :show, :new, :create, :edit, :update, :destroy] 
+    o.team_users 'teams/:id/users', :controller => 'teams', :action => :edit_users, :conditions => { :method => :get }
+    o.team_add_users 'teams/:id/users/:user_id', :controller => 'teams', :action => :add_user, :conditions => { :method => :post }
+    o.team_add_users 'teams/:id/users/:user_id', :controller => 'teams', :action => :remove_user, :conditions => { :method => :delete }
+
     o.resources :users, :only => [ :show, :new, :create, :edit, :update, :destroy]
-    o.user_toggle_admin 'users/:id/toggle_admin', :controller => 'users', :action => 'toggle_admin'
+    o.user_toggle_admin 'users/:id/toggle_admin', :controller => 'users', :action => 'toggle_admin', :conditions => { :method => :post }
   end
   
   # Sample resource route within a namespace:

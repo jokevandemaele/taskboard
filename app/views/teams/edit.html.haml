@@ -1,0 +1,6 @@
+#form
+  #form-logo= image_tag "logo-teams.png"
+  %h1.team Edit Team
+  - remote_form_for @team, :url => organization_team_path(@organization, @team, :format => :json), :success => 'Teams.afterUpdate(request.responseText);', :failure => 'ModalDialog.displayFormErrors(request.responseJSON);' do |f|
+    = render :partial => 'form', :object => f
+    = f.submit

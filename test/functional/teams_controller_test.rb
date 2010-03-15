@@ -2,18 +2,22 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class TeamsControllerTest < ActionController::TestCase
   context "Permissions" do
-    should_require_organization_admin_on [ :new, :create, :edit, :update, :destroy ]
+    should_require_organization_admin_on [ :show, :new, :create, :edit, :update, :destroy ]
+    should_require_organization_admin_on_with_user_id [ :add_user, :remove_user, :edit_users ]
   end
   # ----------------------------------------------------------------------------------------------------------------
   # Routes
   # ----------------------------------------------------------------------------------------------------------------
   context "Team Routes" do
-    # should_route :get, "/organizations/1/teams", :action => :index
     should_route :get, "/organizations/1/teams/new", :action => :new, :organization_id => 1
     should_route :post, "/organizations/1/teams", :action => :create, :organization_id => 1
     should_route :get, "/organizations/1/teams/2/edit", :action => :edit, :id => 2, :organization_id => 1
     should_route :put, "/organizations/1/teams/2", :action => :update, :id => 2, :organization_id => 1
     should_route :delete, "/organizations/1/teams/2", :action => :destroy, :id => 2, :organization_id => 1
+    # Edit users
+    should_route :get, "/organizations/1/teams/2/users", :action => :edit_users, :organization_id => 1, :id => 2
+    should_route :post, "/organizations/1/teams/2/users/3", :action => :add_user, :organization_id => 1, :id => 2, :user_id => 3
+    should_route :delete, "/organizations/1/teams/2/users/3", :action => :remove_user, :organization_id => 1, :id => 2, :user_id => 3
   end
 
   # ----------------------------------------------------------------------------------------------------------------
@@ -139,6 +143,111 @@ class TeamsControllerTest < ActionController::TestCase
         end
       end
     end
+    
+    context "and do GET to :show an organization I administer" do
+      setup do
+        get :show, :id => @team.to_param, :organization_id => @organization.to_param
+      end
+      should_respond_with :ok
+      should_assign_to(:organization){ @organization }
+      should_assign_to(:team){ @team }
+      should_render_template :show
+    end
+
+    context "and do GET to :show an organization I don't administer" do
+      setup do
+        @organization = Factory(:organization)
+        @team = @organization.teams.first
+        get :show, :id => @team.to_param, :organization_id => @organization.to_param
+      end
+      should_set_the_flash_to("Access Denied")
+      should_redirect_to("the root page"){ root_url }
+    end
+    
+    context "and do GET to :edit_users with a team I admin" do
+      setup do
+        get :edit_users, :id => @team.to_param, :organization_id => @organization.to_param
+      end
+      should_respond_with :ok
+      should_assign_to(:organization){ @organization }
+      should_assign_to(:team){ @team }
+      should_render_template :edit_users
+    end
+    
+    context "and do GET to :edit_users with a team I don't admin" do
+      setup do
+        @team1 = Factory(:team)
+        get :edit_users, :id => @team1.to_param, :organization_id => @team1.organization.to_param
+      end
+      should_set_the_flash_to("Access Denied")
+      should_redirect_to("the root page"){ root_url }
+    end
+
+    context "and do POST to :add_user with a team I admin" do
+      setup do
+        @user2 = Factory(:user)
+        @user2.add_to_organization(@organization)
+        post :add_user, :id => @team.to_param, :organization_id => @organization.to_param, :user_id => @user2.to_param
+      end
+      should_respond_with :ok
+      should_assign_to(:organization){ @organization }
+      should_assign_to(:team){ @team }
+      should "add the user to the team" do
+        assert @team.users.include?(@user2)
+      end
+      context "and add it again" do
+        setup do
+          post :add_user, :id => @team.to_param, :organization_id => @organization.to_param, :user_id => @user2.to_param
+        end
+        should_respond_with :precondition_failed
+        should "give an error" do
+          assert_match 'is already a team member', @response.body
+        end
+      end
+      
+    end
+
+    context "and do POST to :add_user with a team I don't admin" do
+      setup do
+        @organization2 = Factory(:organization)
+        @user2 = Factory(:user)
+        @user2.add_to_organization(@organization2)
+        @team2 = @organization2.teams.first
+        post :add_user, :id => @team2.to_param, :organization_id => @organization2.to_param, :user_id => @user2.id
+      end
+      should_set_the_flash_to("Access Denied")
+      should_redirect_to("the root page"){ root_url }
+    end
+
+    context "and do DELETE to :remove_user with a team I admin" do
+      setup do
+        @user2 = Factory(:user)
+        @user2.add_to_organization(@organization)
+        @team.users << @user2
+        assert @team.users.include?(@user2)
+        delete :remove_user, :id => @team.to_param, :organization_id => @organization.to_param, :user_id => @user2.to_param
+      end
+      should_respond_with :ok
+      should_assign_to(:organization){ @organization }
+      should_assign_to(:team){ @team }
+      should "remove the user from the team" do
+        assert !@team.users.include?(@user2)
+      end
+      
+    end
+
+    context "and do DELETE to :add_user with a team I don't admin" do
+      setup do
+        @organization2 = Factory(:organization)
+        @user2 = Factory(:user)
+        @user2.add_to_organization(@organization2)
+        @team2 = @organization2.teams.first
+        delete :remove_user, :id => @team2.to_param, :organization_id => @organization2.to_param, :user_id => @user2.id
+      end
+      should_set_the_flash_to("Access Denied")
+      should_redirect_to("the root page"){ root_url }
+    end
+    
   end
 
   # ----------------------------------------------------------------------------------------------------------------
@@ -260,195 +369,26 @@ class TeamsControllerTest < ActionController::TestCase
       end
     end
     
-    
+    context "and do GET to :show an organization I belong to" do
+      setup do
+        get :show, :id => @team.to_param, :organization_id => @organization.to_param
+      end
+      should_respond_with :ok
+      should_assign_to(:organization){ @organization }
+      should_assign_to(:team){ @team }
+      should_render_template :show
+    end
+
+    context "and do GET to :show an organization I don't belong to" do
+      setup do
+        @organization = Factory(:organization)
+        @team = @organization.teams.first
+        get :show, :id => @team.to_param, :organization_id => @organization.to_param
+      end
+      should_respond_with :ok
+      should_assign_to(:organization){ @organization }
+      should_assign_to(:team){ @team }
+      should_render_template :show
+    end
   end
-  # ########################## Permissions tests ##########################
-  # test "show should be seen by administrator and organization admin" do 
-  #   login_as_administrator
-  #   get :show, :id => 1
-  #   assert_response :ok
-  # 
-  #   login_as_organization_admin
-  #   get :show, :id => 1
-  #   assert_response :ok
-  # 
-  #   login_as_normal_user
-  #   get :show, :id => 1
-  #   assert_response 302
-  # end
-  # test "new should be seen by administrator and organization admin" do
-  #     login_as_administrator
-  #     get :new, :organization => organizations(:widmore_corporation).id
-  #     assert_response :ok
-  #     
-  #     login_as_organization_admin
-  #     get :new, :organization => organizations(:widmore_corporation).id
-  #     assert_response :ok
-  #     
-  #     # If trying to get form for a organization not administered it shouln't work
-  #     get :new, :organization => organizations(:dharma_initiative).id
-  #     assert_response 302
-  #   
-  #     login_as_normal_user
-  #     get :new, :organization => organizations(:dharma_initiative).id
-  #     assert_response 302
-  #   end
-  # 
-  # test "edit should be seen by administrator and organization admin" do
-  #   login_as_administrator
-  #   get :edit, :id => teams(:widmore_team).id
-  #   assert_response :ok
-  # 
-  #   login_as_organization_admin
-  #   get :edit, :id => teams(:widmore_team).id
-  #   assert_response :ok
-  # 
-  #   login_as_normal_user
-  #   get :edit, :id => teams(:widmore_team).id
-  #   assert_response 302
-  # end
-  # 
-  # test "a system adminsitrator should be able CREATE, UPDATE and DELETE teams for any organization" do
-  #   login_as_administrator
-  #   # CREATE to organization where admin belongs
-  #   post :create,{ :team => { :name => 'Fucault Pendulum Research Team', :organization_id => organizations(:widmore_corporation).id } }
-  #   assert_response :created
-  #   team = Team.find_by_name('Fucault Pendulum Research Team')
-  #   assert team
-  #   assert organizations(:widmore_corporation).teams.include?(team)
-  #   
-  #   # CREATE to organization where admin doesn't belong
-  #   post :create, { :team => {:name => 'Security Team', :organization_id => organizations(:dharma_initiative).id } }
-  #   assert_response :created
-  #   team_not_mine = Team.find_by_name('Security Team')
-  #   assert team_not_mine
-  #   assert organizations(:dharma_initiative).teams.include?(team_not_mine)
-  #   
-  #   # UPDATE from organization where admin belongs
-  #   team = Team.find_by_name('Fucault Pendulum Research Team')
-  #   put :update, { :id => team.id, :team => {:name => 'Fucault Pendulum Research Team.' } }
-  #   assert_response :ok
-  #   team.reload
-  #   assert_equal 'Fucault Pendulum Research Team.', team.name
-  # 
-  #   # UPDATE from organization where admin doesn't
-  #   team_notmine = Team.find_by_name('Security Team')
-  #   put :update, { :id => team_notmine.id, :team => { :name => 'Security Team.' } }
-  #   assert_response :ok
-  #   team_notmine.reload
-  #   assert_equal 'Security Team.', team_notmine.name
-  # 
-  #   # DELETE from organization where admin belongs
-  #   delete :destroy, { :id => team.id }
-  #   assert_response :ok
-  #   assert_nil Team.find_by_name('Fucault Pendulum Research Team.')
-  #   
-  #   # DELETE from organization where admin doesn't belong
-  #   delete :destroy, { :id => team_notmine.id }
-  #   assert_response :ok
-  #   assert_nil Team.find_by_name('Security Team.')
-  # end
-  # 
-  # test "an organization admin should be able CREATE, UPDATE and DELETE teams for its organizations" do
-  #   login_as_organization_admin
-  # 
-  #   # CREATE to organization where admin belongs
-  #   post :create,{ :team => { :name => 'Fucault Pendulum Research Team', :organization_id => organizations(:widmore_corporation).id } }
-  #   assert_response :created
-  #   team = Team.find_by_name('Fucault Pendulum Research Team')
-  #   assert team
-  #   assert organizations(:widmore_corporation).teams.include?(team)
-  #   
-  #   # UPDATE from organization where admin belongs
-  #   team = Team.find_by_name('Fucault Pendulum Research Team')
-  #   put :update, { :id => team.id, :team => {:name => 'Fucault Pendulum Research Team.', :organization_id => organizations(:widmore_corporation).id } }
-  #   assert_response :ok
-  #   team.reload
-  #   assert_equal 'Fucault Pendulum Research Team.', team.name
-  #   
-  #   # DELETE from organization where admin belongs
-  #   delete :destroy, { :id => team.id }
-  #   assert_response :ok
-  #   assert_nil Team.find_by_name('Fucault Pendulum Research Team.')
-  # end
-  # 
-  # test "an organization admin shouldn't be able CREATE, UPDATE and DELETE teams to another organization" do
-  #   login_as_organization_admin
-  #   
-  #   # CREATE to organization where admin doesn't belong
-  #   post :create, { :team => {:name => 'Security Team', :organization_id => organizations(:dharma_initiative).id } }
-  #   assert_response 302
-  #   assert !Team.find_by_name('Security Team')
-  #   
-  #   # UPDATE from organization where admin doesn't
-  #   team_notmine = teams(:oceanic_six)
-  #   put :update, { :id => team_notmine.id, :team => { :name => 'Dead People', :organization_id => organizations(:dharma_initiative).id } }
-  #   assert_response 302
-  #   team_notmine.reload
-  #   assert_not_equal 'Dead People', team_notmine.name
-  #   
-  #   
-  #   # DELETE from organization where admin doesn't belong
-  #   delete :destroy, { :id => team_notmine.id }
-  #   assert_response 302
-  #   assert Team.find(team_notmine.id)
-  # end 
-  # 
-  # test "a normal user shouldn't be able to CREATE, UPDATE and DELETE teams to any organization" do
-  #   login_as_normal_user
-  #   
-  #   # CREATE
-  #   post :create, { :team => {:name => 'Security Team', :organization_id => organizations(:widmore_corporation).id } }
-  #   assert_response 302
-  #   assert !Team.find_by_name('Security Team')
-  #   
-  #   # UPDATE
-  #   team_notmine = teams(:oceanic_six)
-  #   put :update, { :id => team_notmine.id, :team => { :name => 'Dead People', :organization_id => organizations(:widmore_corporation).id } }
-  #   assert_response 302
-  #   team_notmine.reload
-  #   assert_not_equal 'Dead People', team_notmine.name
-  #   
-  #   
-  #   # DELETE
-  #   delete :destroy, { :id => team_notmine.id }
-  #   assert_response 302
-  #   assert Team.find(team_notmine.id)  
-  # end
-  # 
-  # test "an organization admin should be able to add & remove members for teams within its organizations" do
-  #   login_as_organization_admin
-  # 
-  #   # ADD MEMBER with team and member belonging to organization
-  #   post :add_member,{ :team => teams(:widmore_team), :member => members(:cwidmore) }
-  #   assert_response :ok
-  #   assert teams(:widmore_team).members.include?(members(:cwidmore))
-  # 
-  #   # ADD MEMBER with team belonging to organization
-  #   post :add_member,{ :team => teams(:widmore_team), :member => members(:mdawson) }
-  #   assert_response 302
-  #   assert !teams(:widmore_team).members.include?(members(:mdawson))
-  #   
-  #   # ADD MEMBER with member belonging to organization
-  #   post :add_member,{ :team => teams(:oceanic_six), :member => members(:clittleton) }
-  #   assert_response 302
-  #   assert !teams(:oceanic_six).members.include?(members(:clittleton))
-  # 
-  #   # ADD MEMBER with none belonging to organization
-  #   post :add_member,{ :team => teams(:oceanic_six), :member => members(:mdawson) }
-  #   assert_response 302
-  #   assert !teams(:oceanic_six).members.include?(members(:mdawson))
-  # 
-  #   # REMOVE MEMBER with team and member belonging to organization
-  #   post :remove_member,{ :team => teams(:widmore_team), :member => members(:cwidmore) }
-  #   assert_response :ok
-  #   assert !teams(:widmore_team).members.include?(members(:cwidmore))
-  # 
-  #   # REMOVE MEMBER with none belonging to organization
-  #   post :remove_member,{ :team => teams(:oceanic_six), :member => members(:jshephard) }
-  #   assert_response 302
-  #   assert teams(:oceanic_six).members.include?(members(:jshephard))
-  #   
-  # end
-  # 
 end
