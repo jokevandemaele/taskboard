@@ -78,6 +78,11 @@ class Organization < ActiveRecord::Base
   def admins
     organization_memberships.administered.collect {|membership| membership.user }
   end
+
+  # returns the users that don't belong to the team
+  def users_out_of_team(team)
+    users - team.users
+  end
 private
   # adds the default project and team needed when creating an organization
   def add_default_team_and_project

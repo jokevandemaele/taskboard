@@ -5,7 +5,7 @@
 
 .field
   = form.label :team
-  = select("project", "team", @organization.teams.all.collect {|o| [ o.name, o.id ] })
+  = select_tag("project[team]", options_from_collection_for_select(@organization.teams, :id, :name, form.object.teams.first.id))
 
 .field
   = form.label :public, "Make the project Publicly available"

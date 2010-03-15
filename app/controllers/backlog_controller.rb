@@ -3,10 +3,10 @@ class BacklogController < ApplicationController
   before_filter :member_belongs_to_project, :only => :show
   before_filter :team_belongs_to_project, :only => :team
 
-  def show
+  def index
       @view = :project
-      @project = Project.find(params[:id])
-      @stories = @project.stories_by_priority
+      @project = Project.find(params[:project_id])
+      @stories = @project.stories
       @projects = [@project]
 
       @member = current_user

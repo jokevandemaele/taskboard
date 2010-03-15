@@ -2,6 +2,7 @@
 @import forms
 @import flash
 @import modal_dialog
+@import edit_users
 
 body
   :background url('/images/admin/admin-background.png') repeat-x #f1f6ff
@@ -206,13 +207,15 @@ ul#admin-menu
         :height 23px
         :line-height 23px
         :background #afc6e9
-        .edit, .remove, .is_admin, .is_org_admin, .is_user
+        .edit, .remove, .is_admin, .is_org_admin, .is_user, .edit_team_users
           :width 20px
           :height 20px
           :float right
           :margin-right 10px
-        .edit, .remove, .toggle_admin
+        .edit, .remove, .toggle_admin, .edit_team_users
           :cursor pointer
+        .edit_team_users
+          :background url('/images/edit_team_users.png') no-repeat
         .edit
           :background url('/images/edit_small.png') no-repeat
         .remove
@@ -270,3 +273,35 @@ ul#admin-menu
 
 .remove_organization, .new_organization
   :cursor pointer
+
+.team_info
+  :padding 5px
+  h1
+    :background url('/images/logo-teams-small.png') no-repeat center left
+    :line-height 37px
+    :font-size 14px
+    :margin 0
+    :color #002255
+    :padding-left 37px
+  h2
+    :font-size 12px
+    :margin-top 12px
+  p
+    :font-size 11px
+  hr
+    :border-top 3px solid #0C82EB
+    :border-right none
+    :border-bottom none
+    :border-left none
+    :position absolute
+    :left 0
+    :right 0
+  ul
+    :color #002255
+    :margin 0
+    :font-size 11px
+    :padding 0
+    li
+      :list-style-type none
+      :margin 0
+      :padding 0

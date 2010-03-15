@@ -46,7 +46,7 @@ Application.Helpers.Users = {
   
   afterUpdate: function(response){
     ModalDialog.close();
-    var user = response.evalJSON().user
+    var user = response.user
     var user_container = $('user-' + user.id)
     var name = user_container.down('.name')
     name.innerHTML = user.name;

@@ -230,13 +230,19 @@ class UserTest < ActiveSupport::TestCase
       @organization = Factory(:organization)
       @user = Factory(:user)
       @user.add_to_organization(@organization)
+      @organization.teams.first.users << @user
       @organization.reload
       assert @organization.users.include?(@user)
       assert @user.organizations.include?(@organization)
+      assert @organization.teams.first.users.include?(@user)
       @user.remove_from_organization(@organization)
     end
 
     should "remove the user from organization" do
+      assert !@organization.users.include?(@user)
+    end
+    should "remove the user from the organization teams as well" do
+      assert !@organization.teams.first.users.include?(@user)
     end
   end
   

@@ -80,19 +80,19 @@ class StoriesController < ApplicationController
   def start_story
     @story = Story.find(params[:id])
     @story.start
-    redirect_to :controller => :backlog, :action => (params[:project]) ? :show : :team, :id => (params[:project]) ? params[:project] : params[:team]
+    redirect_to :controller => :backlog, :action => (params[:project]) ? :index : :team, :id => (params[:project]) ? params[:project] : params[:team], :project_id => params[:project_id]
   end
 
   def stop_story
     @story = Story.find(params[:id])
     @story.stop
-    redirect_to :controller => :backlog, :action => (params[:project]) ? :show : :team, :id => (params[:project]) ? params[:project] : params[:team]
+    redirect_to :controller => :backlog, :action => (params[:project]) ? :index : :team, :id => (params[:project]) ? params[:project] : params[:team], :project_id => params[:project_id]
   end
 
   def finish_story
     @story = Story.find(params[:id])
     @story.finish
-    redirect_to :controller => :backlog, :action => (params[:project]) ? :show : :team, :id => (params[:project]) ? params[:project] : params[:team]
+    redirect_to :controller => :backlog, :action => (params[:project]) ? :index : :team, :id => (params[:project]) ? params[:project] : params[:team], :project_id => params[:project_id]
   end
 
   def tasks_by_status

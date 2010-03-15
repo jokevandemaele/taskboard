@@ -218,7 +218,7 @@ class ApplicationController < ActionController::Base
     end
     
     def deny_access
-      flash[:notice] = "Access Denied"
+      flash[:error] = "Access Denied"
       redirect_to root_url
       return false
     end

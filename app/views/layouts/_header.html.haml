@@ -13,5 +13,6 @@
           #role You are an Organization Administrator
 
       #links
-        == [ #{link_to "logout", logout_path} | #{link_to_remote "edit profile", :url => edit_admin_member_url(current_user), :method => :get, :update => "dummy-for-actions"} ]
+        - link_to logout_path do
+          .logout logout
       #revision= FULL_VERSION

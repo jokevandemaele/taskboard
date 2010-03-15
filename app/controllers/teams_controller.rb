@@ -1,12 +1,17 @@
 class TeamsController < ApplicationController
   before_filter :require_user
-  before_filter :require_organization_admin
+  before_filter :require_organization_admin, :except => [ :team_info ]
   before_filter :find_organization
   before_filter :find_user, :only => [ :add_user, :remove_user]
-  layout nil
+  layout :set_layout
 
   # GET /organizations/[organization_id]/teams/1
   def show
+    @team = @organization.teams.find(params[:id])
+  end
+
+  # GET /organizations/[organization_id]/teams/1/team_info
+  def team_info
     @team = @organization.teams.find(params[:id])
   end
 
@@ -48,11 +53,6 @@ class TeamsController < ApplicationController
     end
   end
 
-  # GET /organizations/[organization_id]/teams/1/users
-  def edit_users
-    @team = @organization.teams.find(params[:id])
-  end
-
   # POST /organizations/:organization_id/teams/:id/users/:user_id
   def add_user
     @team = @organization.teams.find(params[:id])
@@ -79,4 +79,9 @@ private
   def find_user
     @user = @organization.users.find(params[:user_id])
   end
+  
+  def set_layout
+    request.xhr? ? nil : 'application'
+  end
+  
 end

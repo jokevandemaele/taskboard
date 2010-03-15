@@ -1,0 +1,22 @@
+- content_for :helpers do
+  = javascript_include_tag 'helpers/teams.js'
+#edit_users
+  %h1== Edit Users for #{@team.name}
+
+  %h2 Organization's Users
+  #organization_users
+    - @organization.users_out_of_team(@team).each do |user|
+      .user{ 'data-user-name' => user.name, 'data-user-avatar' => user.avatar(:thumb), 'data-user-nametag' => user.formatted_nametag, 'data-organization-id' => @organization.id, 'data-team-id' => @team.id, 'data-user-id' => user.id}
+        .name= user.name
+        .add add to team
+  .clear
+
+  %h2== #{@team.name}'s Users
+  #team_users
+    - @team.users.each do |user|
+      .user{ 'data-user-name' => user.name, 'data-user-avatar' => user.avatar(:thumb), 'data-user-nametag' => user.formatted_nametag, 'data-organization-id' => @organization.id, 'data-team-id' => @team.id, 'data-user-id' => user.id}
+        .avatar= image_tag user.avatar(:thumb)
+        .name= user.formatted_nametag
+        .remove{ :title => "Remove From Team"}
+  .clear
+  = link_to "Back to dashboard", organizations_url

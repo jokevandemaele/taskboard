@@ -4,6 +4,7 @@
   .admin
     - if current_user.admins?(organization)
       .remove.remove_user{ :title => "Remove from organization"}
+    - if user == current_user || current_user.admins?(organization)
       .edit.edit_user{ :title => "Edit User"}
     - if user.admin?
       .is_admin{ :title => "The user is a System Administrator"}

@@ -3,21 +3,21 @@ class TaskboardController < ApplicationController
   # before_filter :member_belongs_to_project, :only => :show
   before_filter :require_user, :only => :team
   before_filter :team_belongs_to_project, :only => :team
-
-  def show
+  layout 'taskboard'
+  def index
     @view = :project
-    @project = Project.find(params[:id])
-    @stories_by_priority = @project.stories_in_progress
+    @project = Project.find(params[:project_id])
+    @stories_by_priority = @project.stories.in_progress
 
-    if(current_member)
-      current_member.last_project = @project
+    if(current_user)
+      current_user.last_project = @project
       current_user.save
     end
     
-    @member_team = @project.team_including(@member)
+    @member_team = @project.team_including(current_user)
     @color = @member_team.color
     @projects = [@project]
-    @members = @project.members
+    @members = @project.users
   end
 
   def team

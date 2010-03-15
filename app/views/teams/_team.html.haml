@@ -1,12 +1,11 @@
 .element.team{ :class => ('not-mine' if !current_user.teams.include?(team)), :id => "team-#{team.id}", 'data-team-id' => team.id }
 
   / Element name TODO: RESIZE!!
-  - if (team.users.include?(current_user) || current_user.admins?(organization))
-    %span.name= link_to(team.name, edit_organization_team_path(organization,team)) 
-  - else
-    %span.name= team.name
+  %span.name= team.name
     
   - if current_user.admins?(organization)
     .admin
       .remove.remove_team{ :title => "Remove Team"}
       .edit.edit_team{ :title => "Edit Team"}
+      - link_to edit_organization_team_path(organization,team) do
+        .edit_team_users{ :title => "Edit Team Users"}

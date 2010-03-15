@@ -26,6 +26,7 @@ Application.Helpers.Projects = {
         
         $('organization-'+ project.organization_id).down('.list.projects').insert({bottom: project_container});
         project_container.highlight({ duration: 0.8 });
+        
       }
     });
     ModalDialog.close();

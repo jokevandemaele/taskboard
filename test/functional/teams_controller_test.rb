@@ -2,8 +2,9 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class TeamsControllerTest < ActionController::TestCase
   context "Permissions" do
+    should_require_user_on_with_organization_id [ :team_info ]
     should_require_organization_admin_on [ :show, :new, :create, :edit, :update, :destroy ]
-    should_require_organization_admin_on_with_user_id [ :add_user, :remove_user, :edit_users ]
+    should_require_organization_admin_on_with_user_id [ :add_user, :remove_user ]
   end
   # ----------------------------------------------------------------------------------------------------------------
   # Routes
@@ -15,11 +16,39 @@ class TeamsControllerTest < ActionController::TestCase
     should_route :put, "/organizations/1/teams/2", :action => :update, :id => 2, :organization_id => 1
     should_route :delete, "/organizations/1/teams/2", :action => :destroy, :id => 2, :organization_id => 1
     # Edit users
-    should_route :get, "/organizations/1/teams/2/users", :action => :edit_users, :organization_id => 1, :id => 2
     should_route :post, "/organizations/1/teams/2/users/3", :action => :add_user, :organization_id => 1, :id => 2, :user_id => 3
     should_route :delete, "/organizations/1/teams/2/users/3", :action => :remove_user, :organization_id => 1, :id => 2, :user_id => 3
+    # Team Info
+    should_route :get, "/organizations/1/teams/2/team_info", :action => :team_info, :organization_id => 1, :id => 2
+    
   end
 
+  # ----------------------------------------------------------------------------------------------------------------
+  # Normal User
+  # ----------------------------------------------------------------------------------------------------------------
+  context "If I'm a normal user" do
+    setup do
+      @user = Factory(:user)
+      @organization = Factory(:organization)
+      @orgadmin = Factory(:user)
+      @orgadmin.add_to_organization(@organization)
+      @user.add_to_organization(@organization)
+      @team = @organization.teams.first
+      @team.users << @orgadmin
+      @team.users << @user
+    end
+
+    context "and do GET to :team_info" do
+      setup do
+        get :team_info, :id => @team.to_param, :organization_id => @organization.to_param
+      end
+      should_respond_with :ok
+      should_assign_to(:team){@team}
+      should_render_template :team_info
+    end
+    
+  end
+  
   # ----------------------------------------------------------------------------------------------------------------
   # Organization Admin
   # ----------------------------------------------------------------------------------------------------------------
@@ -164,25 +193,6 @@ class TeamsControllerTest < ActionController::TestCase
       should_redirect_to("the root page"){ root_url }
     end
     
-    context "and do GET to :edit_users with a team I admin" do
-      setup do
-        get :edit_users, :id => @team.to_param, :organization_id => @organization.to_param
-      end
-      should_respond_with :ok
-      should_assign_to(:organization){ @organization }
-      should_assign_to(:team){ @team }
-      should_render_template :edit_users
-    end
-    
-    context "and do GET to :edit_users with a team I don't admin" do
-      setup do
-        @team1 = Factory(:team)
-        get :edit_users, :id => @team1.to_param, :organization_id => @team1.organization.to_param
-      end
-      should_set_the_flash_to("Access Denied")
-      should_redirect_to("the root page"){ root_url }
-    end
-
     context "and do POST to :add_user with a team I admin" do
       setup do
         @user2 = Factory(:user)

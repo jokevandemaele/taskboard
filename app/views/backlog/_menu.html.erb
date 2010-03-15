@@ -10,39 +10,30 @@
 	<%= link_to image_tag('menu_taskboard.png', 
 			:border => 0, 
 			:id => "menu_taskboard_image"), 
-		:controller => "taskboard",
-		:action => action,
-		:id => id
-	-%>
+      project_taskboard_index_path(id)	-%>
 	
 	<%= link_to_remote image_tag('menu_story_add.png', :id => "menu_story_add_image"), :url => { :controller => :stories, :action => :new, :project => @project, :team => @member_team }, :update => "dummy-for-actions" 
 	-%>
 	<%= link_to image_tag('menu_admin_section.png', 
 			:border => 0, 
 			:id => "menu_admin_image",
-			:title => "Admin Section"), 
-		:controller => (current_member.admins_any_organization?) ? "admin/organizations" : "admin/projects",
-		:action => "index"
+			:title => "Admin Section"), organizations_path
 	-%>
 
 	<%= link_to (image_tag 'menu_logout.png' , 
 		:border => 0 ,
 		:id => 'taskboard_menu_logout', 
-		:title => "Log out"), :controller => 'admin/members', :action => :logout
+		:title => "Log out"), logout_path
 	-%>
-	<% if (@view == :project && (@project.teams.first.projects.size > 1 && !@project.guest_members.include?(@current_member))) || @view == :team-%>
+	<% if (@view == :project && (@project.teams.first.projects.size > 1 && !@project.guest_members.include?(@current_user))) || @view == :team-%>
 	<div id="menu_views">
 		<% team_selected = (@view == :team) %>
 		<%= link_to image_tag('admin/admin-div-actions-projects.png'),
-			{:action => :show,
-			:id => @current_member.last_project_id},
+			{:action => :index,
+			:id => @current_user.last_project_id},
 			:class => !team_selected
 		-%>
-		<%= link_to image_tag('admin/admin-div-actions-teams.png'),
-			{:action => :team,
-			:id => @member_team.id},
-			:class => team_selected
-		-%><br />		
+		<%= link_to image_tag('admin/admin-div-actions-teams.png'), :class => team_selected -%><br />		
 	</div>
 	<% end %>
 

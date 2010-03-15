@@ -128,5 +128,29 @@ class OrganizationTest < ActiveSupport::TestCase
     end
   end
   
+  context "#users_out_of_team" do
+    setup do
+      @user = Factory(:user)
+      @organization = Factory(:organization)
+      @user.add_to_organization(@organization)
+      @team = @organization.teams.first
+      @team.users.delete(@user)
+    end
+
+    should "return all the users if the team is empty" do
+      assert @organization.users_out_of_team(@team).include?(@user)
+    end
+    
+    context "if there are users in the team" do
+      setup do
+        @team.users << @user
+      end
+
+      should "does't have to show that users" do
+        assert !@organization.users_out_of_team(@team).include?(@user)
+      end
+    end
+    
+  end
   
 end

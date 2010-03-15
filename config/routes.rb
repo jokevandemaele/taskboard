@@ -14,9 +14,9 @@ ActionController::Routing::Routes.draw do |map|
     end
     o.resources :guest_team_memberships, :only => [ :new ] 
     o.resources :teams, :only => [ :show, :new, :create, :edit, :update, :destroy] 
-    o.team_users 'teams/:id/users', :controller => 'teams', :action => :edit_users, :conditions => { :method => :get }
     o.team_add_users 'teams/:id/users/:user_id', :controller => 'teams', :action => :add_user, :conditions => { :method => :post }
-    o.team_add_users 'teams/:id/users/:user_id', :controller => 'teams', :action => :remove_user, :conditions => { :method => :delete }
+    o.team_remove_users 'teams/:id/users/:user_id', :controller => 'teams', :action => :remove_user, :conditions => { :method => :delete }
+    o.team_info 'teams/:id/team_info', :controller => 'teams', :action => :team_info, :conditions => { :method => :get }
 
     o.resources :users, :only => [ :show, :new, :create, :edit, :update, :destroy]
     o.user_toggle_admin 'users/:id/toggle_admin', :controller => 'users', :action => 'toggle_admin', :conditions => { :method => :post }
@@ -47,6 +47,6 @@ ActionController::Routing::Routes.draw do |map|
   map.root :controller => :organizations
   
   # Commented the default routes
-  # map.connect ':controller/:action/:id'
-  # map.connect ':controller/:action/:id.:format'
+  map.connect ':controller/:action/:id'
+  map.connect ':controller/:action/:id.:format'
 end

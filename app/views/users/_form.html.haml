@@ -19,6 +19,7 @@
   = form.label :password_confirmation
   = form.password_field :password_confirmation
 
-.field
-  = form.label :avatar
-  = form.file_field :avatar
+- if form.object.id
+  .field
+    = form.label :avatar
+    = form.file_field :avatar

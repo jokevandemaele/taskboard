@@ -8,14 +8,14 @@
 		<% @action_id = (@view == :project ) ? @project.id : @member_team.id%>
 			[
 			<% if story.status == 'not_started' -%>
-				<%= link_to 'Start', :controller => 'stories', :action => 'start_story', :id => story.id, @view => @action_id -%> |  
+				<%= link_to 'Start', :controller => 'stories', :action => 'start_story', :id => story.id, :project_id => @project.id, @view => @action_id -%> |  
 			<% end %>  
 			<% if story.status == 'in_progress' -%>
-				<%= link_to 'Stop', :controller => 'stories', :action => 'stop_story', :id => story.id, @view => @action_id -%> |  
+				<%= link_to 'Stop', :controller => 'stories', :action => 'stop_story', :id => story.id, :project_id => @project.id, @view => @action_id -%> |  
 			<% end -%>  
-			<%= link_to 'Finish', :controller => 'stories', :action => 'finish_story', :id => story.id, @view => @action_id -%> |
-			<%= link_to_remote "Edit", :url => edit_story_url(story.id), :method => :get, :update => "dummy-for-actions" %> | 
-			<%= link_to_remote "Delete", :url => url_for(story), :confirm => 'Are you sure?', :method => :delete, :complete => "location.reload(true);" %>
+			<%= link_to 'Finish', :controller => 'stories', :action => 'finish_story', :id => story.id, :project_id => @project.id, @view => @action_id -%> |
+			<%= link_to_remote "Edit", :url => edit_project_story_url(@project,story), :method => :get, :update => "dummy-for-actions" %> | 
+			<%= link_to_remote "Delete", :url => project_story_url(@project,story), :confirm => 'Are you sure?', :method => :delete, :complete => "location.reload(true);" %>
 			]
 		<% else %>
 		  [ Date Finished: <%= "#{story.updated_at.strftime("%d %b %Y")}" %> ]
