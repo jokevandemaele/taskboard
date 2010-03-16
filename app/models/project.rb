@@ -35,8 +35,8 @@ class Project < ActiveRecord::Base
   ################################################################################################################
   after_create :add_default_stories
   after_save :assign_to_team
-  before_save :add_hash_if_public, :assign_to_team
-
+  before_save :add_hash_if_public
+  
   ################################################################################################################
   #
   # Named Scopes
@@ -114,10 +114,9 @@ private
   end
   
   def assign_to_team
-    self.teams.delete_all
-    p self.teams
-    p team
-    self.teams << organization.teams.find(team) if(team)
-    p self.teams
+    if(team)
+      self.teams.delete_all 
+      self.teams << organization.teams.find(team)
+    end
   end
 end

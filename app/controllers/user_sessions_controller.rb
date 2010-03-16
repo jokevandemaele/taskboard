@@ -10,8 +10,9 @@ class UserSessionsController < ApplicationController
   def create
     @user_session = UserSession.new(params[:user_session])
     if @user_session.save
+      flash = {}
       flash[:notice] = "Login successful!"
-      redirect_back_or_default account_url
+      redirect_back_or_default organizations_url
     else
       flash[:notice] = "Access Denied"
       render :action => :new
