@@ -32,7 +32,7 @@
       .administration_actions
         .add.new_user new user
 
-  / Project Section List
+  / Users Section List
   .list.users
     = render :partial => 'users/user', :collection => organization.users_ordered_by_role, :locals => { :organization => organization }
 
@@ -40,7 +40,7 @@
   / End Users Section  
 
 
-  / Project Section
+  / Teams Section
   .section.teams
     %h3 Teams
     - if current_user.admins?(organization)
@@ -48,10 +48,23 @@
       .administration_actions
         .add.new_team new team
 
-  / Project Section List
+  / Teams Section List
   .list.teams
     = render :partial => 'teams/team', :collection => organization.teams_ordered_for_user(current_user), :locals => { :organization => organization }
 
   .clear
   / End Teams Section  
-  / Guest members
+  
+  / / Guest Team Members Section
+  / .section.guest_team_members
+  /   %h3 Guest Team Members
+  /   - if current_user.admins?(organization)
+  /     / Admin actions
+  /     .administration_actions
+  /       .add.new_guest_team_member new guest team member
+  / 
+  / .list.guest_team_members
+  /   = render :partial => 'guest_team_memberships/guest_team_member', :collection => organization.guest_members, :locals => { :organization => organization }
+  / 
+  / .clear
+  / / End Guest Team Members Section

@@ -136,6 +136,7 @@ Application.Helpers.ModalDialog = {
       this.contentBox.down('form').insert({top: formErrorsDiv});
     }
     formErrorsDiv.update(errorsHTML);
+    formErrorsDiv.show();
   },
 
   _initializeBackdrop: function() {

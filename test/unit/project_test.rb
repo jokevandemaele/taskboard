@@ -197,7 +197,7 @@ class ProjectTest < ActiveSupport::TestCase
 
     context "with a story with priority = 100" do
       setup do
-        @project.stories.create(:name => "A new story", :priority => 100)
+        @story = @project.stories.create(:name => "A new story", :priority => 100)
       end
 
       should "return 90" do
@@ -244,26 +244,26 @@ class ProjectTest < ActiveSupport::TestCase
       end
 
       should "return the third" do
-        assert_equal "P#{@project.name[/[0-9]/]}003", @project.next_realid
+        assert_equal "#{@project.initials}003", @project.next_realid
       end
       
       context "and we add a story" do
         setup do
-          @story = @project.stories.create()
+          @story = @project.stories.create(:name => "A story")
         end
 
         should "return the fourth" do
-          assert_equal "P#{@project.name[/[0-9]/]}004", @project.next_realid
+          assert_equal "#{@project.initials}004", @project.next_realid
         end
       end
       
       context "and add a story with realid 999" do
         setup do
-          @story = @project.stories.create( :realid => "P#{@project.name[/[0-9]/]}999" )
+          @story = @project.stories.create(:name => "A story", :realid => "#{@project.initials}999" )
         end
 
         should "return the 1000th" do
-          assert_equal "P#{(@project.name[/[0-9]/].to_i + 1)}000", @project.next_realid
+          assert_equal "#{@project.initials}1000", @project.next_realid
         end
       end
     end
@@ -300,7 +300,7 @@ class ProjectTest < ActiveSupport::TestCase
       end
 
       should "return PP" do
-        assert_equal "P", @project.initials
+        assert_equal "PP", @project.initials
       end
     end
   end

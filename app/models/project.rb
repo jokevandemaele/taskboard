@@ -71,8 +71,8 @@ class Project < ActiveRecord::Base
 
   def next_realid
     if story = stories.first(:order => "realid DESC")
-      number = story.realid[/[0-9]+/].to_i
-      text = story.realid[/[A-Z]+/]
+      number = story.realid[2..-1].to_i
+      text = story.realid[0..1]
       number += 1
       id = (number < 10) ? "#{text}00#{number}" : "#{text}#{number}"
       id = "#{text}0#{number}" if (number >= 10 && number < 100)
@@ -89,7 +89,7 @@ class Project < ActiveRecord::Base
       if words.first.length > 2
         initials << words[0][0] << words[0][1]
       else
-        initials << words[0][0]
+        initials << words[0][0] << words[0][0]
       end	
     else
       words.each do |word|
@@ -102,9 +102,9 @@ class Project < ActiveRecord::Base
 private
   # add_default_stories: this function is called when a new project is created, it adds the sample stories to it
   def add_default_stories
-    stories.create(:name => "Sample Started Story", :priority => 2000, :size => 10, :description => "This is a sample story that is started, edit it to begin using this project")
+    stories.create(:name => "Sample Started Story", :size => 10, :description => "This is a sample story that is started, edit it to begin using this project")
     stories.first.start
-    stories.create(:name => "Sample Not Started Story", :priority => 1990, :size => 10, :description => "This is a sample story that is not started, edit it to begin using this project")
+    stories.create(:name => "Sample Not Started Story", :size => 10, :description => "This is a sample story that is not started, edit it to begin using this project")
     save
   end
 

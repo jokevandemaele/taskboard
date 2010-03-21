@@ -12,14 +12,14 @@ class Story < ActiveRecord::Base
   # Validations
   #
   ################################################################################################################
-  validates_presence_of :realid, :project
+  validates_presence_of :realid, :project, :name, :priority
 
   ################################################################################################################
   #
   # Attributes Accessible
   #
   ################################################################################################################
-  attr_accessible :name, :priority, :size, :description, :realid
+  attr_accessible :name, :priority, :size, :description, :realid, :project
 
   ################################################################################################################
   #
@@ -36,20 +36,20 @@ class Story < ActiveRecord::Base
   # CALLBACKS
   #
   ################################################################################################################
-  before_save :default_priority
-  after_create :add_template_task  
+  before_save :set_default_priority, :set_default_realid
+  before_create :set_default_priority, :set_default_realid
+  after_create :add_template_task
 
-
+  def after_initialize
+    set_default_priority if project
+    set_default_realid if project
+  end
+  
   ################################################################################################################
   #
   # Instance Methods
   #
   ################################################################################################################
-  def after_initialize
-    self.realid = project.next_realid if !realid && project
-    self.priority = self.project.next_priority if !self.priority && self.project
-  end
-
   def stopped?
     self.status == 'not_started'
   end
@@ -78,15 +78,23 @@ class Story < ActiveRecord::Base
     return self.save
   end
 
-private  
-  def add_template_task
-    self.tasks << Task.new(:name => "Add tasks")
-  end
-
   def default_priority
     return self.priority = -1 if self.finished?
     return self.priority if self.priority && self.priority >= 0
     return self.priority = 0 if self.priority && self.priority < 0
     return project.next_priority
+  end
+
+private  
+  def add_template_task
+    self.tasks << Task.new(:name => "Add tasks")
+  end
+
+  def set_default_priority
+    self.priority = default_priority if !priority
+  end
+  
+  def set_default_realid
+    self.realid = project.next_realid if !realid
   end
 end

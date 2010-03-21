@@ -10,9 +10,9 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :organizations do |o|
     o.resources :projects, :only => [ :show, :new, :create, :edit, :update, :destroy] do |p|
-      p.resources :guest_team_memberships, :only => [ :create, :destroy ] 
+      # p.resources :guest_team_memberships, :only => [ :create, :destroy ] 
     end
-    o.resources :guest_team_memberships, :only => [ :new ] 
+    # o.resources :guest_team_memberships, :only => [ :new ] 
     o.resources :teams, :only => [ :show, :new, :create, :edit, :update, :destroy] 
     o.team_add_users 'teams/:id/users/:user_id', :controller => 'teams', :action => :add_user, :conditions => { :method => :post }
     o.team_remove_users 'teams/:id/users/:user_id', :controller => 'teams', :action => :remove_user, :conditions => { :method => :delete }
@@ -27,7 +27,7 @@ ActionController::Routing::Routes.draw do |map|
    admin.resources :members
   end
 
-  map.resources :project, :only => [] do |p|
+  map.resources :projects, :only => [] do |p|
     p.resources :taskboard, :only => [:index]
     p.resources :backlog, :only => [:index]
     p.resources :stories do |s|

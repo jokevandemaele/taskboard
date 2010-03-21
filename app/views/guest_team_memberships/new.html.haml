@@ -1,0 +1,27 @@
+/ - if !@user
+/   #form
+/     #form-logo= image_tag "logo-users.png"
+/     %h1.guest_member Add Guest Member
+/     .form_errors{ :style => "display:none"}
+/     .field
+/       = label_tag "email"
+/       = text_field_tag "email"
+/     = submit_tag '', :onClick => "GuestTeamMembers.newFormWithMail(#{@organization.id})"
+/ - else
+/   #form
+/     #form-logo= image_tag "logo-users.png"
+/     %h1.guest_member Add Guest Member
+/     .field
+/       = label_tag "email"
+/       = text_field_tag "email", @user.email, :disabled => true
+/     - remote_form_for @user, :url => organization_user_path(@organization,@user, :format => :json), :success => 'Organizations.afterCreate(request.responseText);', :failure => 'ModalDialog.displayFormErrors(request.responseJSON);' do |f|
+/       .form_errors{ :style => "display:none"}
+/       .field
+/         = label_tag "projects"
+/       - @organization.projects.each do |project|
+/         - f.fields_for @user.guest_team_memberships.build do |guest_team_membership_form|
+/           .list
+/             .element
+/               = guest_team_membership_form.check_box :project, :value => project.to_param
+/               = project.name
+/       = submit_tag

@@ -1,9 +1,9 @@
-require 'test_helper'
+require File.dirname(__FILE__) + '/../test_helper'
 
 class StoryTest < ActiveSupport::TestCase
   context "Story" do
     setup do
-      Factory(:story)
+      @project = Factory(:project)
     end
     
     ################################################################################################################
@@ -21,15 +21,16 @@ class StoryTest < ActiveSupport::TestCase
     ################################################################################################################
     should_validate_presence_of :project
     should_validate_presence_of :realid
+    should_validate_presence_of :name
   end
   
   context "When created" do
     setup do
-      @story = Factory(:story)
+      @project = Factory(:project)
     end
 
     should "have a template task" do
-      assert_equal 1, @story.tasks.size
+      assert_equal 1, @project.stories.first.tasks.size
     end
     
   end
@@ -37,17 +38,18 @@ class StoryTest < ActiveSupport::TestCase
   context "The default story priority" do
     setup do
       @project = Factory(:project)
-      @project.stories.create(:priority => 100)
-      @story = @project.stories.create()
+      @project.stories.create(:name => "A story", :priority => 100)
+      @story = @project.stories.create(:name => "A story 2")
     end
+    
     should "be 10 less thatn the lower one" do
       assert_equal 90, @story.priority
     end
     
     context "if the last priority is > 10" do
       setup do
-        @project.stories.create(:priority => 28)
-        @story = @project.stories.create()
+        @project.stories.create(:name => "A story", :priority => 28)
+        @story = @project.stories.create(:name => "A story")
       end
 
       should "be 10 less than the lower one" do
@@ -57,8 +59,8 @@ class StoryTest < ActiveSupport::TestCase
 
     context "if the last priority is = 10" do
       setup do
-        @project.stories.create(:priority => 10)
-        @story = @project.stories.create()
+        @project.stories.create(:name => "A story", :priority => 10)
+        @story = @project.stories.create(:name => "A story")
       end
 
       should "be 0" do
@@ -68,8 +70,8 @@ class StoryTest < ActiveSupport::TestCase
     
     context "if the last priority is < 10" do
       setup do
-        @project.stories.create(:priority => 5)
-        @story = @project.stories.create()
+        @project.stories.create(:name => "A story", :priority => 5)
+        @story = @project.stories.create(:name => "A story")
       end
 
       should "be 0" do
@@ -79,8 +81,8 @@ class StoryTest < ActiveSupport::TestCase
     
     context "if the last priority is < 0" do
       setup do
-        @project.stories.create(:priority => -5)
-        @story = @project.stories.create()
+        @project.stories.create(:name => "A story", :priority => -5)
+        @story = @project.stories.create(:name => "A story")
       end
 
       should "be 0" do
@@ -90,7 +92,7 @@ class StoryTest < ActiveSupport::TestCase
     
     context "if the task is finished" do
       setup do
-        @story = @project.stories.create(:priority => 10)
+        @story = @project.stories.create(:name => "A story", :priority => 10)
         @story.finish
       end
 
@@ -170,81 +172,83 @@ class StoryTest < ActiveSupport::TestCase
   # Instance Methods
   #
   ################################################################################################################
-  context "#start" do
+  context "Having a project" do
     setup do
       @project = Factory(:project)
-      @story = @project.stories.create()
-      @story.start
     end
 
-    should "should start the story" do
-      assert @project.stories.in_progress.include?(@story)
-      assert !@project.stories.not_started.include?(@story)
-      assert !@project.stories.finished.include?(@story)
+    context "#start" do
+      setup do
+        @story = @project.stories.create(:name => "A story")
+        @story.start
+      end
+
+      should "should start the story" do
+        assert @project.stories.in_progress.include?(@story)
+        assert !@project.stories.not_started.include?(@story)
+        assert !@project.stories.finished.include?(@story)
+      end
+    end
+
+    context "#stop" do
+      setup do
+        @story = @project.stories.in_progress.first
+        @story.stop
+      end
+
+      should "should stop the story" do
+        assert !@project.stories.in_progress.include?(@story)
+        assert @project.stories.not_started.include?(@story)
+        assert !@project.stories.finished.include?(@story)
+      end
+    end
+
+    context "#finish" do
+      setup do
+        @story = @project.stories.in_progress.first
+        @story.finish
+      end
+
+      should "should finish the story" do
+        assert !@project.stories.in_progress.include?(@story)
+        assert !@project.stories.not_started.include?(@story)
+        assert @project.stories.finished.include?(@story)
+        assert_equal -1, @story.priority
+      end
+    end
+
+    context "#started?" do
+      setup do
+        @story = @project.stories.in_progress.first
+      end
+
+      should "should return true" do
+        assert @story.started?
+      end
+    end
+
+    context "#stopped?" do
+      setup do
+        @story = @project.stories.in_progress.first
+        assert @story.started?
+        @story.stop
+      end
+
+      should "should return true" do
+        assert @story.stopped?
+      end
+    end
+
+    context "#finished?" do
+      setup do
+        @story = @project.stories.in_progress.first
+        @story.finish
+      end
+
+      should "should return true" do
+        assert @story.finished?
+      end
     end
   end
-
-  context "#stop" do
-    setup do
-      @project = Factory(:project)
-      @story = @project.stories.in_progress.first
-      @story.stop
-    end
-
-    should "should stop the story" do
-      assert !@project.stories.in_progress.include?(@story)
-      assert @project.stories.not_started.include?(@story)
-      assert !@project.stories.finished.include?(@story)
-    end
-  end
-
-  context "#finish" do
-    setup do
-      @project = Factory(:project)
-      @story = @project.stories.in_progress.first
-      @story.finish
-    end
-
-    should "should finish the story" do
-      assert !@project.stories.in_progress.include?(@story)
-      assert !@project.stories.not_started.include?(@story)
-      assert @project.stories.finished.include?(@story)
-      assert_equal -1, @story.priority
-    end
-  end
-
-  context "#started?" do
-    setup do
-      @story = Factory(:story)
-      @story.start
-    end
-
-    should "should return true" do
-      assert @story.started?
-    end
-  end
-
-  context "#stopped?" do
-    setup do
-      @story = Factory(:story)
-      @story.start
-      assert @story.started?
-      @story.stop
-    end
-
-    should "should return true" do
-      assert @story.stopped?
-    end
-  end
-
-  context "#finished?" do
-    setup do
-      @story = Factory(:story)
-      @story.finish
-    end
-
-    should "should return true" do
-      assert @story.finished?
-    end
-  end
+  
 end
