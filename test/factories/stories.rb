@@ -3,4 +3,5 @@ Factory.define :story do |t|
   t.description "Description"
   t.association(:project)
   t.sequence(:realid) {|n| "PR#{n}"}
+  t.priority 2000
 end

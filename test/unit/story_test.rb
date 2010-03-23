@@ -22,6 +22,8 @@ class StoryTest < ActiveSupport::TestCase
     should_validate_presence_of :project
     should_validate_presence_of :realid
     should_validate_presence_of :name
+    should_validate_presence_of :priority
+    
   end
   
   context "When created" do
