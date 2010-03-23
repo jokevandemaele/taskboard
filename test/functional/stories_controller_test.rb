@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class StoriesControllerTest < ActionController::TestCase
   context "Permissions" do
-    should_require_belong_to_project_or_admin_on [:index, :new, :create, :edit ] # :show, , :update, :destroy
+    should_require_belong_to_project_or_admin_on [:index, :new, :create, :edit, :update, :destroy ]
   end
   
   context "Stories Routes" do
@@ -53,7 +53,7 @@ class StoriesControllerTest < ActionController::TestCase
       should_render_template :new
     end
     
-    context "and do POST to :create in a project I belong to" do
+    context "and do POST to :create in a project I belong to with correct data" do
       setup do
         post :create, :project_id => @project.to_param, :story => { :name => "My Story 1" }
         @story = Story.find_by_name("My Story 1")
@@ -63,6 +63,19 @@ class StoriesControllerTest < ActionController::TestCase
       should_assign_to(:story)
       should "return the story in json format" do
         assert_equal @story.to_json, @response.body
+      end
+    end
+
+    context "and do POST to :create in a project I belong to with wrong data" do
+      setup do
+        post :create, :project_id => @project.to_param, :story => { }
+        @story = Story.find_by_name("My Story 1")
+      end
+      should_respond_with :precondition_failed
+      should_assign_to(:project){ @project }
+      should_assign_to(:story)
+      should "return the errors in json format" do
+        assert_equal [['name', "can't be blank"]].to_json, @response.body
       end
     end
 
@@ -77,8 +90,55 @@ class StoriesControllerTest < ActionController::TestCase
       should_render_template :edit
     end
     
+    context "and do PUT to :update in a project I belong to with correct data" do
+      setup do
+        put :update, :id => @project.stories.first, :project_id => @project.to_param, :story => { :name => "My Story 1" }
+        @story = @project.stories.first
+        @story.reload
+      end
+      should_respond_with :ok
+      should_assign_to(:project){ @project }
+      should_assign_to(:story){ @story }
+      should "return the story in json format" do
+        assert_equal @story.to_json, @response.body
+      end
+      should "update the story" do
+        assert_equal "My Story 1", @story.name
+      end
+    end
+
+    context "and do PUT to :update in a project I belong to with wrong data" do
+      setup do
+        put :update, :id => @project.stories.first, :project_id => @project.to_param, :story => { :name => nil }
+        @story = @project.stories.first
+        @story.reload
+      end
+      should_assign_to(:story){ @story }
+      should_respond_with :precondition_failed
+      should_assign_to(:project){ @project }
+      should "return the errors in json format" do
+        assert_equal [['name', "can't be blank"]].to_json, @response.body
+      end
+    end
+    
+    context "on DELETE to :destroy" do
+      setup do
+        @story = @project.stories.first
+        delete :destroy, :project_id => @project.to_param, :id => @story.to_param
+      end
+      should_respond_with :ok
+      should_not_set_the_flash
+      should_assign_to(:project){ @project }
+      should_assign_to(:story){ @story }
+      
+      should "destroy the story" do
+        assert_raise ActiveRecord::RecordNotFound do
+            @story.reload
+        end
+      end
+      
+    end
   end
-  
   # ----------------------------------------------------------------------------------------------------------------
   # Organization Admin
   # ----------------------------------------------------------------------------------------------------------------
@@ -120,7 +180,7 @@ class StoriesControllerTest < ActionController::TestCase
       should_render_template :new
     end
     
-    context "and do POST to :create in a project from my organization" do
+    context "and do POST to :create in a project from my organization with correct data" do
       setup do
         post :create, :project_id => @project.to_param, :story => { :name => "My Story 1" }
         @story = Story.find_by_name("My Story 1")
@@ -132,6 +192,20 @@ class StoriesControllerTest < ActionController::TestCase
         assert_equal @story.to_json, @response.body
       end
     end
+    
+    context "and do POST to :create in a project I belong to with wrong data" do
+      setup do
+        post :create, :project_id => @project.to_param, :story => { }
+        @story = Story.find_by_name("My Story 1")
+      end
+      should_respond_with :precondition_failed
+      should_assign_to(:project){ @project }
+      should_assign_to(:story)
+      should "return the errors in json format" do
+        assert_equal [['name', "can't be blank"]].to_json, @response.body
+      end
+    end
+    
     
     context "and do GET to :edit in a project I belong to" do
       setup do
@@ -178,7 +252,7 @@ class StoriesControllerTest < ActionController::TestCase
       should_render_template :new
     end
     
-    context "and do POST to :create in a project" do
+    context "and do POST to :create in a project with correct data" do
       setup do
         post :create, :project_id => @project.to_param, :story => { :name => "My Story 1" }
         @story = Story.find_by_name("My Story 1")
@@ -188,6 +262,19 @@ class StoriesControllerTest < ActionController::TestCase
       should_assign_to(:story)
       should "return the story in json format" do
         assert_equal @story.to_json, @response.body
+      end
+    end
+    
+    context "and do POST to :create in a project I belong to with wrong data" do
+      setup do
+        post :create, :project_id => @project.to_param, :story => { }
+        @story = Story.find_by_name("My Story 1")
+      end
+      should_respond_with :precondition_failed
+      should_assign_to(:project){ @project }
+      should_assign_to(:story)
+      should "return the errors in json format" do
+        assert_equal [['name', "can't be blank"]].to_json, @response.body
       end
     end
     

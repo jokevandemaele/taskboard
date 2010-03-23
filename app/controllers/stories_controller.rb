@@ -2,16 +2,19 @@ class StoriesController < ApplicationController
   before_filter :require_user
   before_filter :require_belong_to_project_or_admin
   layout nil
-  
+
+  # GET /projects/:project_id/stories
   def index
     @stories = @project.stories
     render :json => @stories, :status => :ok
   end
   
+  # GET /projects/:project_id/stories/new
   def new
     @story = @project.stories.build
   end
   
+  # POST /projects/:project_id/stories
   def create
     @story = @project.stories.build(params[:story])
     # Don't know why but this is not setting the id and priority automatically
@@ -23,11 +26,28 @@ class StoriesController < ApplicationController
       render :json => @story.errors, :status => :precondition_failed
     end
   end
-  
+
+  # GET /projects/:project_id/stories/:id
   def edit
     @story = @project.stories.find(params[:id])
   end
   
+  # PUT /projects/:project_id/stories
+  def update
+    @story = @project.stories.find(params[:id])
+    if @story.update_attributes(params[:story])
+      render :json => @story, :status => :ok
+    else
+      render :json => @story.errors, :status => :precondition_failed
+    end
+  end
+  
+  # DELETE /projects/:project_id/stories/:id
+  def destroy
+    @story = @project.stories.find(params[:id])
+    @story.destroy
+    render :json => '', :status => :ok
+  end
  #  # GET /stories/1
  #  def show
  #    @story = Story.find(params[:id])
