@@ -177,20 +177,20 @@ class StoriesController < ApplicationController
  #    redirect_to :controller => :backlog, :action => (params[:project]) ? :index : :team, :id => (params[:project]) ? params[:project] : params[:team], :project_id => params[:project_id]
  #  end
  # 
-  # def tasks_by_status
-  #   @story = Story.find(params[:id])
-  #   @status = params[:status]
-  #   case @status
-  #     when "in_progress"
-  #       @tasks = @story.tasks.in_progress
-  #     when "not_started"
-  #       @tasks = @story.tasks.not_started
-  #     when "finished"
-  #       @tasks = @story.tasks.finished
-  #     else
-  #       @tasks = []
-  #   end
-  # end
+  def tasks_by_status
+    @story = Story.find(params[:id])
+    @status = params[:status]
+    case @status
+      when "in_progress"
+        @tasks = @story.tasks.in_progress
+      when "not_started"
+        @tasks = @story.tasks.not_started
+      when "finished"
+        @tasks = @story.tasks.finished
+      else
+        @tasks = []
+    end
+  end
   def find_story
     @story = @project.stories.find(params[:id])
   end

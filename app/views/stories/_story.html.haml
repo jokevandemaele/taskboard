@@ -1,9 +1,9 @@
 %tr{:id => "story-#{story.id}", :class => "#{story.status}" }
   %td.name-cell
     %strong
-      = h story.realid
-    = h story.name
-    = " - " + link_to("#{h story.project.name}", :controller => :backlog, :action => :show, :id => story.project.id) +" - " if @view == :team
+      = story.realid
+    = story.name
+    = " - " + link_to("#{story.project.name}", :controller => :backlog, :action => :show, :id => story.project.id) +" - " if @view == :team
     (
     %span{ :title => "Not Started Tasks" }
       = story.tasks.not_started.size
@@ -35,8 +35,6 @@
           new Ajax.InPlaceEditor('edit_priority_#{story.id}', '/projects/#{@project.to_param}/stories/#{story.to_param}/update_priority', {cancelControl: 'button', onComplete: function(){ location = location }});
       - else
         %p -
-      / = link_to_remote "#{story.priority}", :update => "priority-#{story.id}", :url => {:controller => "stories", :action => 'edit_priority', :id => story.id } %>
-      / = render :partial => 'stories/edit_priority_link', :locals => {:story => story} if story.priority != -1
   %td.size-cell
     %span.in_place_edit{ :id => "size-#{story.id}" }
       - if !story.finished?
@@ -46,4 +44,4 @@
       - else
         %p= story.id
   %td.description-cell
-    = h story.description
+    = story.description
