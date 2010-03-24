@@ -1,6 +1,7 @@
 class StoriesController < ApplicationController
   before_filter :require_user
   before_filter :require_belong_to_project_or_admin
+  before_filter :find_story, :only => [ :edit, :update, :destroy, :start, :stop, :finish, :update_priority, :update_size ]
   layout nil
 
   # GET /projects/:project_id/stories
@@ -29,12 +30,10 @@ class StoriesController < ApplicationController
 
   # GET /projects/:project_id/stories/:id
   def edit
-    @story = @project.stories.find(params[:id])
   end
   
   # PUT /projects/:project_id/stories
   def update
-    @story = @project.stories.find(params[:id])
     if @story.update_attributes(params[:story])
       render :json => @story, :status => :ok
     else
@@ -47,6 +46,44 @@ class StoriesController < ApplicationController
     @story = @project.stories.find(params[:id])
     @story.destroy
     render :json => '', :status => :ok
+  end
+  
+  # POST /projects/:project_id/stories/:id/start
+  def start
+    @story.start
+    render :json => '', :status => :ok
+  end
+
+  # POST /projects/:project_id/stories/:id/stop
+  def stop
+    @story.stop
+    render :json => '', :status => :ok
+  end
+
+  # POST /projects/:project_id/stories/:id/finish
+  def finish
+    @story.finish
+    render :json => '', :status => :ok
+  end
+
+  # POST /projects/:project_id/stories/:id/update_priority
+  def update_priority
+    @story.priority = params[:value]
+    if @story.save
+      render :inline => @story.priority, :status => :ok
+    else
+      render :inline => '', :status => :precondition_failed
+    end
+  end
+
+  # POST /projects/:project_id/stories/:id/update_size
+  def update_size
+    @story.size = params[:value]
+    if @story.save
+      render :inline => @story.size, :status => :ok
+    else
+      render :inline => '', :status => :precondition_failed
+    end
   end
  #  # GET /stories/1
  #  def show
@@ -140,24 +177,21 @@ class StoriesController < ApplicationController
  #    redirect_to :controller => :backlog, :action => (params[:project]) ? :index : :team, :id => (params[:project]) ? params[:project] : params[:team], :project_id => params[:project_id]
  #  end
  # 
- #  def tasks_by_status
- #    @story = Story.find(params[:id])
- #    @status = params[:status]
- #    case @status
- #      when "in_progress"
- #        @tasks = @story.tasks.in_progress
- #      when "not_started"
- #        @tasks = @story.tasks.not_started
- #      when "finished"
- #        @tasks = @story.tasks.finished
- #      else
- #        @tasks = []
- #    end
- #  end
-private
- def require_belong_to_project_or_admin
-   @project = Project.find(params[:project_id])
-   params[:organization_id] = @project.organization.id
-   require_organization_admin if !@project.users.include?(current_user)
- end
+  # def tasks_by_status
+  #   @story = Story.find(params[:id])
+  #   @status = params[:status]
+  #   case @status
+  #     when "in_progress"
+  #       @tasks = @story.tasks.in_progress
+  #     when "not_started"
+  #       @tasks = @story.tasks.not_started
+  #     when "finished"
+  #       @tasks = @story.tasks.finished
+  #     else
+  #       @tasks = []
+  #   end
+  # end
+  def find_story
+    @story = @project.stories.find(params[:id])
+  end
 end

@@ -58,4 +58,16 @@ class Task < ActiveRecord::Base
     save
   end
 
+  def started?
+    status == 'in_progress'
+  end
+
+  def stopped?
+    status == 'not_started'
+  end
+
+  def finished?
+    status == 'finished'
+  end
+
 end

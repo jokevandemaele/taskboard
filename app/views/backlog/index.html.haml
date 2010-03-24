@@ -1,2 +1,5 @@
+- content_for :helpers do
+  = javascript_include_tag 'helpers/stories.js', 'helpers/modal_dialog.js'
+
 = render :partial => "menu", :locals => { :project => @project}
 = render :partial => "backlog_table"

@@ -137,4 +137,79 @@ class TaskTest < ActiveSupport::TestCase
       assert @story.tasks.finished.include?(@task)
     end
   end
+
+  context "#stopped?" do
+    setup do
+      @story = Factory(:story)
+      @task = @story.tasks.create()
+    end
+    context "when the task is stopped" do
+      setup do
+        @task.stop
+      end
+
+      should "return true" do
+        assert @task.stopped?
+      end
+    end
+    context "when the task is not stopped" do
+      setup do
+        @task.start
+      end
+
+      should "return false" do
+        assert !@task.stopped?
+      end
+    end
+  end
+
+  context "#started?" do
+    setup do
+      @story = Factory(:story)
+      @task = @story.tasks.create()
+    end
+    context "when the task is started" do
+      setup do
+        @task.start
+      end
+
+      should "return true" do
+        assert @task.started?
+      end
+    end
+    context "when the task is not started" do
+      setup do
+        @task.stop
+      end
+
+      should "return false" do
+        assert !@task.started?
+      end
+    end
+  end
+  
+  context "#finished?" do
+    setup do
+      @story = Factory(:story)
+      @task = @story.tasks.create()
+    end
+    context "when the task is finished" do
+      setup do
+        @task.finish
+      end
+
+      should "return true" do
+        assert @task.finished?
+      end
+    end
+    context "when the task is not finished" do
+      setup do
+        @task.start
+      end
+
+      should "return false" do
+        assert !@task.finished?
+      end
+    end
+  end
 end

@@ -13,6 +13,12 @@ class StoriesControllerTest < ActionController::TestCase
     should_route :put, "/projects/1/stories/2", :action => :update, :id => 2, :project_id => 1
     should_route :delete, "/projects/1/stories/2", :action => :destroy, :id => 2, :project_id => 1
     should_route :get, "/projects/1/stories/2", :action => :show, :id => 2, :project_id => 1
+    should_route :post, "/projects/1/stories/2/start", :action => :start, :id => 2, :project_id => 1
+    should_route :post, "/projects/1/stories/2/stop", :action => :stop, :id => 2, :project_id => 1
+    should_route :post, "/projects/1/stories/2/finish", :action => :finish, :id => 2, :project_id => 1
+    should_route :post, "/projects/1/stories/2/update_priority", :action => :update_priority, :id => 2, :project_id => 1
+    should_route :post, "/projects/1/stories/2/update_size", :action => :update_size, :id => 2, :project_id => 1
+    
   end
 
   # ----------------------------------------------------------------------------------------------------------------
@@ -29,6 +35,7 @@ class StoriesControllerTest < ActionController::TestCase
       @organization.reload
       @user.add_to_organization(@organization)
       assert @team.users.include?(@user)
+      @story = @project.stories.first
     end
     
     context "and do GET to :index in a project I belong to" do
@@ -81,7 +88,6 @@ class StoriesControllerTest < ActionController::TestCase
 
     context "and do GET to :edit in a project I belong to" do
       setup do
-        @story = @project.stories.first
         get :edit, :id => @story.to_param, :project_id => @project.to_param
       end
       should_respond_with :ok
@@ -92,8 +98,7 @@ class StoriesControllerTest < ActionController::TestCase
     
     context "and do PUT to :update in a project I belong to with correct data" do
       setup do
-        put :update, :id => @project.stories.first, :project_id => @project.to_param, :story => { :name => "My Story 1" }
-        @story = @project.stories.first
+        put :update, :id => @story.to_param, :project_id => @project.to_param, :story => { :name => "My Story 1" }
         @story.reload
       end
       should_respond_with :ok
@@ -109,8 +114,7 @@ class StoriesControllerTest < ActionController::TestCase
 
     context "and do PUT to :update in a project I belong to with wrong data" do
       setup do
-        put :update, :id => @project.stories.first, :project_id => @project.to_param, :story => { :name => nil }
-        @story = @project.stories.first
+        put :update, :id => @story.to_param, :project_id => @project.to_param, :story => { :name => nil }
         @story.reload
       end
       should_assign_to(:story){ @story }
@@ -123,7 +127,6 @@ class StoriesControllerTest < ActionController::TestCase
     
     context "on DELETE to :destroy" do
       setup do
-        @story = @project.stories.first
         delete :destroy, :project_id => @project.to_param, :id => @story.to_param
       end
       should_respond_with :ok
@@ -136,8 +139,77 @@ class StoriesControllerTest < ActionController::TestCase
             @story.reload
         end
       end
-      
     end
+    
+    # Start, Stop and Finish stories
+    context "and do POST to :start in a project I belong to" do
+      setup do
+        @story.stop
+        post :start, :id => @story.to_param, :project_id => @project.to_param
+      end
+      should_respond_with :ok
+      should_assign_to(:project){ @project }
+      should_assign_to(:story){ @story }
+      should "Start the story" do
+        @story.reload
+        assert @story.started?
+      end
+    end
+    
+    context "and do POST to :stop in a project I belong to" do
+      setup do
+        @story.start
+        post :stop, :id => @story.to_param, :project_id => @project.to_param
+      end
+      should_respond_with :ok
+      should_assign_to(:project){ @project }
+      should_assign_to(:story){ @story }
+      should "Stop the story" do
+        @story.reload
+        assert @story.stopped?
+      end
+    end
+    
+    context "and do POST to :finish in a project I belong to" do
+      setup do
+        @story.start
+        post :finish, :id => @story.to_param, :project_id => @project.to_param
+      end
+      should_respond_with :ok
+      should_assign_to(:project){ @project }
+      should_assign_to(:story){ @story }
+      should "Finish the story" do
+        @story.reload
+        assert @story.finished?
+      end
+    end
+
+    context "and do POST to :update_priority in a project I belong to" do
+      setup do
+        post :update_priority, :value => 3000, :id => @story.to_param, :project_id => @project.to_param
+      end
+      should_respond_with :ok
+      should_assign_to(:project){ @project }
+      should_assign_to(:story){ @story }
+      should "update the priority" do
+        @story.reload
+        assert_equal 3000, @story.priority
+      end
+    end
+
+    context "and do POST to :update_size in a project I belong to" do
+      setup do
+        post :update_size, :value => 5, :id => @story.to_param, :project_id => @project.to_param
+      end
+      should_respond_with :ok
+      should_assign_to(:project){ @project }
+      should_assign_to(:story){ @story }
+      should "update the size" do
+        @story.reload
+        assert_equal 5, @story.size
+      end
+    end
+    
   end
   # ----------------------------------------------------------------------------------------------------------------
   # Organization Admin

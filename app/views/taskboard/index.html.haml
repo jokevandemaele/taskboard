@@ -1,5 +1,5 @@
 - if current_user
-  / = render :partial => "menu" , :locals => { :team => @member_team }
+  = render :partial => "menu" , :locals => { :team => @member_team }
   = render :partial => "adder"
 = render :partial => "taskboard_table", :locals => { :name => @project.name }
 

@@ -1,0 +1,8 @@
+%table
+  %tr
+    %th Name
+    %th Priority
+    %th Size
+    %th Description
+    
+  = render :partial => 'stories/backlog_row', :collection => @stories, :as => :story

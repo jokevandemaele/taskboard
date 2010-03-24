@@ -13,7 +13,7 @@ class Story < ActiveRecord::Base
   #
   ################################################################################################################
   validates_presence_of :realid, :project, :name, :priority
-
+  validates_numericality_of :priority
   ################################################################################################################
   #
   # Attributes Accessible

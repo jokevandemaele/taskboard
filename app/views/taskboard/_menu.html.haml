@@ -5,7 +5,7 @@
   - action = (@view == :project) ? 'show' : 'team'
   - id = (@view == :project) ? @project.id : @member_team.id
 
-  = link_to image_tag('menu_product_backlog.png',  :border => 0,  :id => "menu_product_backlog_image"),  :controller => "backlog",  :action => action, :id => id
+  = link_to image_tag('menu_product_backlog.png',  :border => 0,  :id => "menu_product_backlog_image"), project_backlog_index_path(:project_id => @project.to_param)
   = image_tag 'menu_task_add.png' ,  :border => 0 , :id => 'taskboard_menu_task_add',  :class => "task-add"
   = draggable_element "taskboard_menu_task_add", :revert => 'true', :ghosting => 'true'
 
@@ -13,9 +13,9 @@
     %table#menu_statustags
       = render :partial => "menu_statustags"
 
-  #menu_nametags
-    = render :partial => "menu_nametags", :locals => { :team => team } if !team.nil?
-  = link_to image_tag('menu_logout.png' ,  :border => 0 , :id => 'taskboard_menu_logout',  :title => "Log out"), :controller => 'admin/members', :action => :logout
+  / #menu_nametags
+  /   = render :partial => "menu_nametags", :locals => { :team => team } if !team.nil?
+  = link_to image_tag('menu_logout.png' ,  :border => 0 , :id => 'taskboard_menu_logout',  :title => "Log out"), logout_path
 
   - if (@view == :project && (@project.teams.first.projects.size > 1 && !@project.guest_members.include?(@current_member))) || @view == :team
     #menu_views
@@ -23,7 +23,7 @@
       - team_selected = (@view == :team)
       - project_image = image_tag 'admin/admin-div-actions-projects.png'
 
-      = link_to project_image, {:action => :show, :id => @current_member.last_project}, :class => !team_selected, :title => "Project View"
+      = link_to project_image, {:action => :show, :id => current_user.last_project}, :class => !team_selected, :title => "Project View"
       = link_to team_image, {:action => :team, :id => @member_team.id}, :class => team_selected, :title => "Team View"
       %br
 

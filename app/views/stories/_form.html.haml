@@ -1,0 +1,76 @@
+= form.error_messages 
+.field
+  = form.label :name
+  = form.text_field :name
+
+.field
+  = form.label :realid, "Story ID"
+  = form.text_field :realid, :value => @story.realid ? @story.realid : @project.next_realid
+
+.field
+  = form.label :priority
+  = form.text_field :priority, :value => @story.priority ? @story.priority : @project.next_priority
+
+.field
+  = form.label :size
+  = form.text_field :size
+
+.field
+  = form.label :description
+  %br
+  = form.text_area :description
+
+/ <% if !defined?(no_refresh) -%>
+/ <script>
+/   Effect.Appear($('dialog-background-fade'), { duration: 0.2, to: 0.9 });
+/ </script>
+/ <% end -%>
+/ <div id="form-add-story" class="admin-new" style="display:none;">
+/   <%= admin_open_div 765 -%>
+/     <% action = edit ? :update : :create -%>
+/     <% remote_form_for @story, :url => { :controller => :stories, :action => action, :id => @story.id }, :update => "dummy-for-actions" do |f| %>
+/       <!--
+/       <%= admin_form_name(@story, edit, f) -%>
+/       
+/       <div class="admin-div-section">
+/         <h2 style="position: relative; top: 15px; left: 20px;">Story name</h2>
+/         <%= f.text_field :name, :class => 'text', :style => 'float: right; margin: 12px 10px;' -%>
+/       </div>
+/       <%= hidden_field_tag("story[project_id]", "#{project}") if project-%> 
+/       <% if !project %>
+/         <div class="admin-div-section" style="margin-top: 10px; width: 715px; padding-left: 20px;">
+/           <%= image_tag 'admin/admin-div-actions-projects.png', :alt => 'Team', :style => 'position: relative; top: 10px; margin-left: 10px;' -%>
+/           <h2 style="position: relative; top: 10; margin-left: 10px;">Project:</h2>
+/           <%= select_tag "story[project_id]", options_from_collection_for_select(@projects, 'id', 'name'), :style => 'position: relative; top: 10px; margin-left: 10px; width: 500px;', :onChange => "$('story_realid').value = project_realids[$(story_project_id).value]; $('story_priority').value = project_next_priorities[$(story_project_id).value];" -%>
+/           <script>
+/             project_realids = eval('<%= story_ids.to_json -%>');
+/             project_next_priorities = eval('<%= next_priorities.to_json -%>');
+/           </script>
+/         </div>
+/       <% end %>
+/ 
+/       <div class="admin-div-section" style="margin-top: 10px;">
+/         <table id="story-add-fields">
+/           <tr style="border: 0; margin: 0; padding: 0;">
+/             <td style="border: 0; margin: 0; padding: 0; padding-top: 12px; width: 33%;"><%= f.label :realid, "Story ID" %> <%= f.text_field :realid, :value => @story.realid, :class => "field-id" %></td>
+/             <td style="border: 0; margin: 0; padding: 0; padding-top: 12px; width: 33%;"><%= f.label :priority %> <%= f.text_field :priority, :class => "field", :value => edit ? @story.priority : @story.priority  %></td>
+/           <td style="border: 0; margin: 0; padding: 0; padding-top: 12px; width: 33%;"><%= f.label :size %> <%= f.text_field :size, :class => "field" %></td>
+/         </tr>
+/         </table>
+/       </div>
+/ 
+/       <div class="admin-div-section" style="margin-top: 10px; width: 715px; height: 200px; padding-left: 20px;">
+/         <h2 style=" margin-left: 0; margin-bottom: 5px;  "><%= f.label :description %></h2>
+/         <p><%= f.text_area :description, :class => "description"  %></p>
+/       </div>
+/       <%= error_messages_for('story', :object => @story) if (defined?(no_refresh) && no_refresh) -%>
+/       <%= admin_form_buttons(@story) -%>
+/     <% end -%>
+/     <div style="clear: both;"></div>
+/   <%= admin_close_div 765 -%>
+/ </div>
+/ <script>
+/   Effect.ScrollTo('menu');
+/   centerTo($('form-add-story'),$('dialog-background-fade'));
+/   Effect.Appear($('form-add-story'), { afterFinish : function() { Form.Element.select($('story_name'))}});  
+/ </script>

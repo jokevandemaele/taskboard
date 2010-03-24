@@ -1,0 +1,156 @@
+@import macros
+@import common
+@import forms
+@import flash
+@import modal_dialog
+
+body
+  margin: 0
+
+a
+  color: #1b51a2
+
+  &:hover
+    color: #2a7fff
+
+table
+  width: 100%
+  border-right: 4px solid #447821
+  border-top: 4px solid #447821
+  border-bottom: 4px solid #447821
+  margin: 0 auto
+  border-spacing: 0px
+
+#table_footer
+  background: #447821
+  color: white
+
+  td
+    padding-left: 10px
+
+  a
+    color: #ffaaaa
+
+table
+  th
+    color: white
+    font-size: 13px
+    text-align: center
+    background: #447821
+    padding: 10px
+    border-left: 4px solid #447821
+
+  td
+    border-left: 4px solid #447821
+    border-bottom: 4px solid #447821
+    padding: 15px
+
+.priority-cell
+  text-align: center
+  font-size: 20px
+  font-weight: bold
+  width: 1px
+
+
+.size-cell
+  text-align: center
+  font-size: 15px
+  font-weight: bold
+  width: 1px
+
+
+.name-cell
+  min-width: 260px
+  max-width: 300px
+
+
+.description-cell
+  min-width: 300px
+  max-width: 400px
+
+
+#container
+  width: 100%
+
+
+.priority-edit a
+  color: black
+  text-decoration: none
+
+
+#story-add-fields
+  border: 0
+  margin: 0
+  padding: 0
+  text-align: center
+
+  .field
+    padding-top: 10px
+    padding-left: 8px
+    padding-right: 8px
+    border: 0
+    width: 40px
+    height: 23px
+    background: url('/images/story-fields-background.png') no-repeat transparent
+
+  .field-id
+    padding-top: 10px
+    padding-left: 8px
+    padding-right: 8px
+    border: 0
+    width: 80px
+    height: 23px
+    background: url('/images/story-id-background.png') no-repeat transparent
+
+
+.admin-div-section .description
+  position: relative
+  right: 7px
+  top: 10px
+  width: 695px
+  height: 128px
+  background: url('/images/story-description-background.png') no-repeat transparent
+  padding-top: 10px
+  padding-left: 8px
+  padding-right: 8px
+  border: 0
+
+tr
+  &.in_progress
+    background: #ffffa2
+
+
+  &.not_started
+    background: #ffffff
+
+
+  &.finished
+    background: #afc6e9
+  
+.in_place_edit
+  p
+    :font-size 18px
+  form
+    input[type="text"]
+      +rounded(10px)
+      :border 3px solid #447821
+      :background none
+      :font-size 18px
+      :width 50px
+      :text-align middle
+      :display inline
+    input.editor_ok_button
+      :border none
+      :background url('/images/yes_small.png') no-repeat
+      :width 16px
+      :height 16px
+      :color transparent
+      :margin-right 10px
+      :cursor pointer
+    input.editor_cancel_button
+      :border none
+      :background url('/images/no_small.png') no-repeat
+      :width 16px
+      :height 16px
+      :color transparent
+      :cursor pointer
