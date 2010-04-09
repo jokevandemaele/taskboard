@@ -1,4 +1,4 @@
-%tr{:id => "story-#{story.id}", :class => "#{story.status}" }
+%tr.story{:id => "story-#{story.id}", :class => "#{story.status}", 'data-story-id' => story.id, 'data-project-id' => story.project_id}
   %td.name-cell
     %strong
       = story.realid

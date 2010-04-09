@@ -20,7 +20,7 @@ class TasksController < ApplicationController
   def create
     @task = @story.tasks.build(params[:task])
     if @task.save
-      render :json => @task, :status => :created
+      render :json => { :project => @story.project_id, :story => @story.id }, :status => :created
     else
       render :json => @task.errors, :status => :precondition_failed
     end

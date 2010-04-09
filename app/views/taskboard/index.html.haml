@@ -7,3 +7,6 @@
   %script= "new YAHOO.util.DDTarget('taskboard-first-row');"
 
   #dummy-for-actions
+
+- content_for :helpers do
+  = javascript_include_tag 'helpers/tasks.js', 'helpers/modal_dialog.js'

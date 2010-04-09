@@ -69,8 +69,10 @@ var DDM = YAHOO.util.DragDropMgr;
                   }else{
                     var status_name = $(thisid).parentNode.id.split('-');
                   }
+                  var projectId = $(srcEl).up('.story_holder').readAttribute('data-project-id');
+                  
                   if(status_name[0] == 'finished'){
-                    new Ajax.Updater('finished-'+status_name[1], '/stories/tasks_by_status/'+status_name[1]+'?status=finished', {asynchronous:true, evalScripts:true, parameters:'authenticity_token=' + getAuthKey()})
+                    new Ajax.Updater('finished-'+status_name[1], '/stories/tasks_by_status/'+status_name[1]+'?status=finished&project_id='+projectId, {asynchronous:true, evalScripts:true, parameters:'authenticity_token=' + getAuthKey()})
                   }
                   // new Ajax.Updater(thisid, '/tasks/'+$(thisid).id.split('-')[1], {asynchronous:false, method:'get',evalScripts:true, parameters:'authenticity_token=' + getAuthKey()})
               }); 
@@ -107,10 +109,16 @@ var DDM = YAHOO.util.DragDropMgr;
 	                DDM.refreshCache();
 	                // Now we should make the ajax call
 	                var element_name = srcEl.id.split('-');
-                  new Ajax.Request('/tasks/update_task', {asynchronous:true, evalScripts:true, parameters:'task=' + (element_name[1]) + '&status=' + status_name[0] +'&story='+status_name[1] + '&authenticity_token=' + getAuthKey()})
+	                var storyId = $(destEl).up('.story_holder').readAttribute('data-story-id');
+                  var projectId = $(srcEl).up('.story_holder').readAttribute('data-project-id');
+	                var taskId = $(srcEl).readAttribute('data-task-id');
+	                var action = $(destEl).readAttribute('data-action');
+	                
+                  new Ajax.Request('/projects/'+projectId+'/stories/'+storyId+'/tasks/'+taskId+'/'+action, {asynchronous:true, evalScripts:true, parameters:'authenticity_token=' + getAuthKey()})
+                  // new Ajax.Request('/tasks/update_task', {asynchronous:true, evalScripts:true, parameters:'task=' + (element_name[1]) + '&status=' + status_name[0] +'&story='+status_name[1] + '&authenticity_token=' + getAuthKey()})
                   if(refresh){
-                    new Ajax.Updater('finished-'+parent_name[1], '/stories/tasks_by_status/'+parent_name[1]+'?status=finished', {asynchronous:true, evalScripts:true, parameters:'authenticity_token=' + getAuthKey()})
-                    new Ajax.Updater(status_name[0]+'-'+status_name[1], '/stories/tasks_by_status/'+status_name[1]+'?status='+status_name[0], {asynchronous:true, evalScripts:true, parameters:'authenticity_token=' + getAuthKey()})
+                    new Ajax.Updater('finished-'+parent_name[1], '/stories/tasks_by_status/'+parent_name[1]+'?status=finished&project_id='+projectId, {asynchronous:true, evalScripts:true, parameters:'authenticity_token=' + getAuthKey()})
+                    new Ajax.Updater(status_name[0]+'-'+status_name[1], '/stories/tasks_by_status/'+status_name[1]+'?status='+status_name[0]+'&project_id='+projectId, {asynchronous:true, evalScripts:true, parameters:'authenticity_token=' + getAuthKey()})
                   }
 	              }
 	           // } 
