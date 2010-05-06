@@ -38,7 +38,7 @@ namespace :deploy do
   end
 
   task :rake_db_migrate do
-    run "cp /root/.hudson/configurationsForProjects/taskboard_database.yml #{deploy_to}/current/config/database.yml"
+    run "cp /configurationsForProjects/taskboard_database.yml #{deploy_to}/current/config/database.yml"
     run "cd #{current_path}/ && rake RAILS_ENV=\"testing\" db:migrate"
   end
 
