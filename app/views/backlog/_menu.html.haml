@@ -18,7 +18,7 @@
       - team_selected = (@view == :team)
       - project_image = image_tag 'logo-projects-small.png'
 
-      = link_to project_image, project_backlog_index_path(:project_id => current_user.last_project), :class => !team_selected, :title => "Project View"
+      = link_to project_image, project_backlog_index_path(:project_id => current_user.last_project || @team.projects.first), :class => !team_selected, :title => "Project View"
       = link_to team_image, backlog_team_view_path(@team.to_param), :class => team_selected, :title => "Team View"
 
 #menu_expand

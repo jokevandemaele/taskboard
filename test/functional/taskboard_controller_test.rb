@@ -6,12 +6,33 @@ class TaskboardControllerTest < ActionController::TestCase
     should_require_belong_to_project_or_admin_on_with_team_id [:team]
   end
   
-  # context "If i'm a normal user" do
-  #   setup do
-  #     @user = Factory(:user)
-  #   end
-  # 
-  # end
+  context "If i'm a normal user" do
+    setup do
+      @organization = Factory(:organization)
+      @team = @organization.teams.first
+      @project = @organization.projects.first
+      @user = Factory(:user)
+      @admin = Factory(:user)
+      @admin.add_to_organization(@organization)
+      @organization.reload
+      @user.add_to_organization(@organization)
+      assert @team.users.include?(@user)
+    end
+    
+    context "if i do GET to :index in a project i belong to" do
+      setup do
+        get :index, :project_id => @project.to_param
+      end
+      should_render_template :index
+    end
+
+    context "if i do GET to :team in a team i belong to" do
+      setup do
+        get :team, :team_id => @team.to_param
+      end
+      should_render_template :team
+    end
+  end
   # 
   # context "If i'm an organization admin" do
   #   setup do
