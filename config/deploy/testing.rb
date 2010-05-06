@@ -15,7 +15,7 @@ namespace :deploy do
     set :use_sudo, false
     
     begin 
-      revision = `/usr/bin/curl -s -u deploy:agilar.deploy.99 http://hudson.dev.agilar.org:8080/job/agora-0-continuous-integration/lastSuccessfulBuild/api/xml`
+      revision = `/usr/bin/curl -s -u deploy:agilar.deploy.99 http://hudson.dev.agilar.org:8080/job/taskboard-0-continuous-integration/lastSuccessfulBuild/api/xml`
       revision.match(/<lastBuiltRevision><SHA1>[a-z0-9]*<\/SHA1>/)
       revision = $~.to_s.gsub("<lastBuiltRevision><SHA1>",'').gsub("</SHA1>", '')
       set :revision, revision
