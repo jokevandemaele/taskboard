@@ -10,7 +10,7 @@ class TasksControllerTest < ActionController::TestCase
     should_route :get, "/projects/1/stories/2/tasks/new", :action => :new, :project_id => 1, :story_id => 2
     should_route :post, "/projects/1/stories/2/tasks", :action => :create, :project_id => 1, :story_id => 2
     should_route :get, "/projects/1/stories/2/tasks/3/edit", :action => :edit, :id => 3, :project_id => 1, :story_id => 2
-    should_route :put, "/projects/1/stories/2/tasks/3", :action => :update, :id => 3, :project_id => 1, :story_id => 2
+    should_route :post, "/projects/1/stories/2/tasks/3/update_name", :action => :update_name, :id => 3, :project_id => 1, :story_id => 2
     should_route :delete, "/projects/1/stories/2/tasks/3", :action => :destroy, :id => 3, :project_id => 1, :story_id => 2
     should_route :get, "/projects/1/stories/2/tasks/3", :action => :show, :id => 3, :project_id => 1, :story_id => 2
     should_route :post, "/projects/1/stories/2/tasks/3/start", :action => :start, :id => 3, :project_id => 1, :story_id => 2
@@ -41,9 +41,9 @@ class TasksControllerTest < ActionController::TestCase
         get :index, :project_id => @project.to_param, :story_id => @story.to_param
       end
       should_respond_with :ok
-      should_assign_to(:project){ @project }
-      should_assign_to(:story){ @story}
-      should_assign_to(:tasks){ @story.tasks }
+      # should_assign_to(:project){ @project }
+      # should_assign_to(:story){ @story}
+      # should_assign_to(:tasks){ @story.tasks }
       should "return the tasks in json format" do
         assert_equal @story.tasks.to_json, @response.body
       end
@@ -54,9 +54,9 @@ class TasksControllerTest < ActionController::TestCase
         get :new, :project_id => @project.to_param, :story_id => @story.to_param
       end
       should_respond_with :ok
-      should_assign_to(:project){ @project }
-      should_assign_to(:story){ @story }
-      should_assign_to(:task)
+      # should_assign_to(:project){ @project }
+      # should_assign_to(:story){ @story }
+      # should_assign_to(:task)
       should_render_template :new
     end
     
@@ -64,13 +64,14 @@ class TasksControllerTest < ActionController::TestCase
       setup do
         post :create, :project_id => @project.to_param, :story_id => @story.to_param, :task => { :name => "My Task 1" }
         @task = Task.find_by_name("My Task 1")
+        @expected = { :project => @project.id, :story => @story.id }
       end
       should_respond_with :created
-      should_assign_to(:project){ @project }
-      should_assign_to(:story){ @story }
-      should_assign_to(:task)
-      should "return the task in json format" do
-        assert_equal @task.to_json, @response.body
+      # should_assign_to(:project){ @project }
+      # should_assign_to(:story){ @story }
+      # should_assign_to(:task)
+      should "return the project and story in json format" do
+        assert_equal @expected.to_json, @response.body
       end
     end
     
@@ -79,26 +80,43 @@ class TasksControllerTest < ActionController::TestCase
         get :edit, :id => @task.to_param, :project_id => @project.to_param, :story_id => @story.to_param
       end
       should_respond_with :ok
-      should_assign_to(:project){ @project }
-      should_assign_to(:story){ @story }
-      should_assign_to(:task){ @task }
+      # should_assign_to(:project){ @project }
+      # should_assign_to(:story){ @story }
+      # should_assign_to(:task){ @task }
       should_render_template :edit
     end
     
-    context "and do PUT to :update in a project I belong to with correct data" do
+    context "and do POST to :update_name in a project I belong to with correct data" do
       setup do
-        put :update, :id => @story.tasks.first, :project_id => @project.to_param, :story_id => @story.to_param, :task => { :name => "My Task 1" }
+        post :update_name, :id => @story.tasks.first, :project_id => @project.to_param, :story_id => @story.to_param, :value => "My Task 1"
         @task.reload
       end
       should_respond_with :ok
-      should_assign_to(:project){ @project }
-      should_assign_to(:story){ @story }
-      should_assign_to(:task){ @task }
-      should "return the task in json format" do
-        assert_equal @task.to_json, @response.body
+      # should_assign_to(:project){ @project }
+      # should_assign_to(:story){ @story }
+      # should_assign_to(:task){ @task }
+      should "return the name" do
+        assert_equal "My Task 1", @response.body
       end
       should "update the task" do
         assert_equal "My Task 1", @task.name
+      end
+    end
+
+    context "and do POST to :update_description in a project I belong to with correct data" do
+      setup do
+        post :update_description, :id => @story.tasks.first, :project_id => @project.to_param, :story_id => @story.to_param, :value => "My Task Description"
+        @task.reload
+      end
+      should_respond_with :ok
+      # should_assign_to(:project){ @project }
+      # should_assign_to(:story){ @story }
+      # should_assign_to(:task){ @task }
+      should "return the description" do
+        assert_equal "My Task Description", @response.body
+      end
+      should "update the task" do
+        assert_equal "My Task Description", @task.description
       end
     end
   
@@ -107,10 +125,10 @@ class TasksControllerTest < ActionController::TestCase
         delete :destroy, :project_id => @project.to_param, :story_id => @story.to_param, :id => @task.to_param
       end
       should_respond_with :ok
-      should_not_set_the_flash
-      should_assign_to(:project){ @project }
-      should_assign_to(:story){ @story }
-      should_assign_to(:task){ @task }
+      # should_not_set_the_flash
+      # should_assign_to(:project){ @project }
+      # should_assign_to(:story){ @story }
+      # should_assign_to(:task){ @task }
       
       should "destroy the task" do
         assert_raise ActiveRecord::RecordNotFound do
@@ -125,12 +143,28 @@ class TasksControllerTest < ActionController::TestCase
         post :start, :id => @task.to_param, :project_id => @project.to_param, :story_id => @story.to_param
       end
       should_respond_with :ok
-      should_assign_to(:project){ @project }
-      should_assign_to(:story){ @story }
-      should_assign_to(:task){ @task }
+      # should_assign_to(:project){ @project }
+      # should_assign_to(:story){ @story }
+      # should_assign_to(:task){ @task }
       should "Start the task" do
         @task.reload
         assert @task.started?
+      end
+    end
+
+    context "and do POST to :start in a project I belong to and change the story id" do
+      setup do
+        @task.stop
+        post :start, :id => @task.to_param, :project_id => @project.to_param, :story_id => @story.to_param, :new_story_id => @project.stories.second.id
+      end
+      should_respond_with :ok
+      # should_assign_to(:project){ @project }
+      # should_assign_to(:story){ @story }
+      # should_assign_to(:task){ @task }
+      should "Change its story" do
+        @task.reload
+        assert @task.started?
+        assert_equal @project.stories.second, @task.story
       end
     end
     
@@ -140,12 +174,23 @@ class TasksControllerTest < ActionController::TestCase
         post :stop, :id => @task.to_param, :project_id => @project.to_param, :story_id => @story.to_param
       end
       should_respond_with :ok
-      should_assign_to(:project){ @project }
-      should_assign_to(:story){ @story }
-      should_assign_to(:task){ @task }
+      # should_assign_to(:project){ @project }
+      # should_assign_to(:story){ @story }
+      # should_assign_to(:task){ @task }
       should "Stop the task" do
         @task.reload
         assert @task.stopped?
+      end
+    end
+    
+    context "and do POST to :stop in a project I belong to and change the story id" do
+      setup do
+        @task.start
+        post :stop, :id => @task.to_param, :project_id => @project.to_param, :story_id => @story.to_param, :new_story_id => @project.stories.second.id
+      end
+      should "Change its story" do
+        @task.reload
+        assert_equal @project.stories.second, @task.story
       end
     end
     
@@ -155,12 +200,23 @@ class TasksControllerTest < ActionController::TestCase
         post :finish, :id => @task.to_param, :project_id => @project.to_param, :story_id => @story.to_param
       end
       should_respond_with :ok
-      should_assign_to(:project){ @project }
-      should_assign_to(:story){ @story }
-      should_assign_to(:task){ @task }
+      # should_assign_to(:project){ @project }
+      # should_assign_to(:story){ @story }
+      # should_assign_to(:task){ @task }
       should "Finish the task" do
         @task.reload
         assert @task.finished?
+      end
+    end
+    
+    context "and do POST to :finish in a project I belong to and change the story id" do
+      setup do
+        @task.start
+        post :finish, :id => @task.to_param, :project_id => @project.to_param, :story_id => @story.to_param, :new_story_id => @project.stories.second.id
+      end
+      should "Change its story" do
+        @task.reload
+        assert_equal @project.stories.second, @task.story
       end
     end
   end

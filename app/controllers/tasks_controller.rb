@@ -2,7 +2,8 @@ class TasksController < ApplicationController
   before_filter :require_user
   before_filter :require_belong_to_project_or_admin
   before_filter :find_story
-  before_filter :find_task, :only => [ :edit, :update, :destroy, :start, :stop, :finish ]
+  before_filter :find_task, :only => [ :edit, :update, :destroy, :start, :stop, :finish, :update_name, :update_description ]
+  before_filter :update_story, :only => [:start, :stop, :finish]
   layout nil
 
   # GET /projects/:project_id/stories/:story_id/tasks
@@ -31,14 +32,33 @@ class TasksController < ApplicationController
   end
   
   # PUT /projects/:project_id/stories/:story_id/tasks/:id
-  def update
-    if @task.update_attributes(params[:task])
-      render :json => @task, :status => :ok
+  # def update
+  #   if params[:editorId]
+  #     @task.name = params[:value] if params[:editorId].match(/edit_name/)
+  #     render :json => @task, :status => :ok
+  #   else
+  #     render :json => @task.errors, :status => :precondition_failed
+  #   end
+  # end
+
+  def update_name
+    @task.name = params[:value]
+    if @task.save
+      render :json => @task.name, :status => :ok
     else
       render :json => @task.errors, :status => :precondition_failed
     end
   end
-  
+
+  def update_description
+    @task.description = params[:value]
+    if @task.save
+      render :json => @task.description, :status => :ok
+    else
+      render :json => @task.errors, :status => :precondition_failed
+    end
+  end
+
   # DELETE /projects/:project_id/stories/:story_id/tasks/:id
   def destroy
     @task.destroy
@@ -179,5 +199,12 @@ private
   end
   def find_task
     @task = @story.tasks.find(params[:id])
+  end
+  
+  def update_story
+    if params[:new_story_id] && @task.story.id != params[:new_story_id]
+      @task.story = Story.find(params[:new_story_id])
+      @task.save
+    end
   end
 end

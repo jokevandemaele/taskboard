@@ -1,5 +1,5 @@
 class TaskboardController < ApplicationController
-  before_filter :member_belongs_to_project_or_auth_guest, :only => :show
+  #before_filter :user_belongs_to_project_or_auth_guest, :only => :index
   # before_filter :member_belongs_to_project, :only => :show
   before_filter :require_user, :only => :team
   before_filter :team_belongs_to_project, :only => :team

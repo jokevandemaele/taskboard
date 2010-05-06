@@ -1,28 +1,30 @@
-.task-front{:id => "task-#{task.id}", :style => "position:relative; width: 126px; height: 126px;"}
-  = link_to_remote image_tag("task_delete.png", :alt => "Delete Task", :title => "Delete Task", :style => "float:right; position: relative; width: 13px; top: 5px; right: 5px; border: 0; cursor: pointer; z-index: 2;"), :url => { :controller => :tasks, :action=>:destroy, :id => task.id}, :method => :delete, :update => "dummy-for-actions"
+.delete{ :onClick => "Tasks.removeTask(#{task.story.project.id},#{task.story.id},#{task.id})" }
+.task_front{ :id => "task-#{task.id}-front"}
   .task-name-container{ :id => "task-#{task.id}-name-container"}
     .task-container-table
       .task-container-cell
-        %p.task-name{:id => "task-#{task.id}-name", :onDblClick => remote_function(:url => { :controller => :tasks, :action => :show_edit_task_name_form, :id => task.id, :story => task.story.id})}=h task.name
-
+        %p.task-name.in_place_edit{ :id => "edit_name_#{task.id}" }= h task.name
+    :javascript
+      new Ajax.InPlaceEditor('edit_name_#{task.id}', '/projects/#{task.story.project.to_param}/stories/#{task.story.to_param}/tasks/#{task.to_param}/update_name', 
+        { 
+          cancelControl: 'button', 
+          cols : 18, 
+          onComplete: function(){
+            $('edit_name_#{task.id}').setStyle({fontSize: '12px'});
+            $('edit_name_#{task.id}').setStyle({lineHeight: '17px'});
+            resizeFontSizeToFit($('edit_name_#{task.id}'), $('task-#{task.id}-name-container'));} 
+          });
+      $('edit_name_#{task.id}').style.opacity = 0; 
+      resizeFontSizeToFit($('edit_name_#{task.id}'), $('task-#{task.id}-name-container'));
+      $('edit_name_#{task.id}').style.opacity = 1;
+          
   - task.nametags.each do |nametag|
     = render :partial => nametag
   - task.statustags.each do |statustag|
     = render :partial => statustag
-  
-  = image_tag 'task_flip.png', :alt => 'Flip', :class => 'flip-task-image', :onClick => "javascript:flip('task-#{task.id}','back')", :id => "task-#{task.id}-flip", :style => "cursor: pointer;"
 
-  %script= "$('task-#{task.id}-name').style.opacity = 0; resizeFontSizeToFit($('task-#{task.id}-name'), $('task-#{task.id}-name-container')); $('task-#{task.id}-name').style.opacity = 1; "
-  %script
-    - task.nametags.each do |nametag|
-      == $('nametag-project-#{task.story.project.id}-#{nametag.id}').show();
-    - task.statustags.each do |statustag|
-      == $('statustag-project-#{task.story.project.id}-#{statustag.id}').show();
-    
-.task-back{ :id => "task-#{task.id}-back", :style => "display: none; width: 126px; height: 126px; position:relative;" }
-  .task-description{ :id => "task-#{task.id}-description", :onDblClick => remote_function(:url => { :controller => :tasks, :action => :show_edit_task_description_form, :id => task.id, :story => task.story.id})}
-    %textarea.task-description-area{ :style => "width: 95%; height: 105px; font-size: 10px; font-family: arial;", :title => h(task.description)}=h task.description
-  = image_tag 'task_flip.png', :alt => 'Flip', :class => 'flip-task-image-back image-link-back', :onClick => "javascript:flip('task-#{task.id}','front')", :style => "cursor: pointer;"
-  
-  / %a#image-link-back{ :href => "javascript:flip('task-#{task.id}','front')" }
-  /   = image_tag 'task_flip.png', :alt => 'Flip', :class => 'flip-task-image-back'
+.task_back{ :id => "task-#{task.id}-back", :style => "display: none" }
+  %textarea.task-description.in_place_edit{ :id => "edit_description_#{task.id}" }= h task.description
+  :javascript
+    new Ajax.InPlaceEditor('edit_description_#{task.id}', '/projects/#{task.story.project.to_param}/stories/#{task.story.to_param}/tasks/#{task.to_param}/update_description', { cancelControl: 'button', rows: 6, cols : 12, onComplete: null});
+.flip{ :onClick => "Tasks.flip(#{task.id})" }

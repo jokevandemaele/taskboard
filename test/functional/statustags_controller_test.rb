@@ -1,6 +1,11 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class StatustagsControllerTest < ActionController::TestCase
+  context "Permissions" do
+    should_require_belong_to_project_or_admin_on [ :create, :update, :destroy ]
+  end
+  
+
   context "If i'm a normal user" do
     setup do
       @user = Factory(:user)

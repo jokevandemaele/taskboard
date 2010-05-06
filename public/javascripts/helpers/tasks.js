@@ -26,6 +26,26 @@ Application.Helpers.Tasks = {
       }
     });
     ModalDialog.close();
+  },
+
+  removeTask: function(projectId,storyId,taskId){
+    new Ajax.Request('/projects/'+projectId+'/stories/'+storyId+'/tasks/'+taskId, {
+      method: 'delete',
+        
+      onSuccess: function(transport) {
+        $('task-'+taskId+'-project-'+projectId+'-li').fade({ duration : 0.2});
+      }
+    });
+  },
+
+  flip: function(taskId){
+    if($('task-'+taskId+'-front').visible()){
+      $('task-'+taskId+'-front').fade({duration : 0.1});
+      $('task-'+taskId+'-back').appear({duration : 0.1});
+    }else{
+      $('task-'+taskId+'-front').appear({duration : 0.1});
+      $('task-'+taskId+'-back').fade({duration : 0.1});
+    }
   }
   // 
   // editForm: function(Task, organization){

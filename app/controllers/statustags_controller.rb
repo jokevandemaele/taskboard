@@ -1,6 +1,6 @@
 class StatustagsController < ApplicationController
   before_filter :require_user
-  before_filter :member_belongs_to_project
+  before_filter :require_belong_to_project_or_admin
   
   # POST /statustags
   def create

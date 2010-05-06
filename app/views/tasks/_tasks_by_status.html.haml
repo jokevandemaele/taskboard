@@ -6,7 +6,7 @@
     %tr
       %td#table-list
         - tasks.each do |task|
-          %li.task{:id => "task-#{task.id}-project-#{task.story.project.id}-li", 'data-task-id' => task.id}
+          %li.task{:id => "task-#{task.id}-project-#{task.story.project.id}-li", 'data-task-id' => task.id, 'data-story-id' => task.story.id}
             = render :partial => "tasks/finished_task", :locals => { :task => task }
           %script= "new YAHOO.example.DDList('task-#{task.id}-project-#{task.story.project.id}-li')"
       %td{:style => "vertical-align: top;"}
@@ -14,7 +14,7 @@
         = image_tag "collapse.png", :id => "finished_#{story.id}_slider_prev", :alt => "Show Less",:title => "Show First 3", :class => "collapse", :style => "border: none; display: none;", :onClick => "javascript:finished_#{story.id}_slider.collapse();", :style => "cursor: pointer; display: none;"
 - else
   - tasks.each do |task|
-    %li.task{:id => "task-#{task.id}-project-#{task.story.project.id}-li", 'data-task-id' => task.id}
+    %li.task{:id => "task-#{task.id}-project-#{task.story.project.id}-li", 'data-task-id' => task.id, 'data-story-id' => task.story.id}
       = render :partial => "tasks/task", :locals => { :task => task }
     - if current_user
       %script= "new YAHOO.example.DDList('task-#{task.id}-project-#{task.story.project.id}-li')"

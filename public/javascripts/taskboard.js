@@ -111,10 +111,11 @@ var DDM = YAHOO.util.DragDropMgr;
 	                var element_name = srcEl.id.split('-');
 	                var storyId = $(destEl).up('.story_holder').readAttribute('data-story-id');
                   var projectId = $(srcEl).up('.story_holder').readAttribute('data-project-id');
+	                var currentStoryId = $(srcEl).readAttribute('data-story-id');
 	                var taskId = $(srcEl).readAttribute('data-task-id');
 	                var action = $(destEl).readAttribute('data-action');
 	                
-                  new Ajax.Request('/projects/'+projectId+'/stories/'+storyId+'/tasks/'+taskId+'/'+action, {asynchronous:true, evalScripts:true, parameters:'authenticity_token=' + getAuthKey()})
+                  new Ajax.Request('/projects/'+projectId+'/stories/'+currentStoryId+'/tasks/'+taskId+'/'+action, {asynchronous:true, evalScripts:true, parameters: 'new_story_id='+ storyId + '&authenticity_token=' + getAuthKey()})
                   // new Ajax.Request('/tasks/update_task', {asynchronous:true, evalScripts:true, parameters:'task=' + (element_name[1]) + '&status=' + status_name[0] +'&story='+status_name[1] + '&authenticity_token=' + getAuthKey()})
                   if(refresh){
                     new Ajax.Updater('finished-'+parent_name[1], '/stories/tasks_by_status/'+parent_name[1]+'?status=finished&project_id='+projectId, {asynchronous:true, evalScripts:true, parameters:'authenticity_token=' + getAuthKey()})

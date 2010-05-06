@@ -7,7 +7,7 @@ function resizeFontSizeToFit(element,container){
    elementH = element.offsetHeight;
    containerW = container.offsetWidth;
    containerH = container.offsetHeight;
-   while(elementW > containerW || elementH > containerH){
+   while(elementW > containerW || elementH > containerH){
      font_size -= 1;
      line_height -= 1;
      element.setStyle({fontSize: font_size + 'px'});
