@@ -59,7 +59,7 @@ class UsersControllerTest < ActionController::TestCase
         post :create, :user => { }
       end
       # should_assign_to(:user)
-      # should_render_template :new
+      should_render_template :new
     end
   end
   

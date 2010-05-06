@@ -1,7 +1,7 @@
 class BacklogController < ApplicationController
   before_filter :require_user
-  before_filter :member_belongs_to_project, :only => :show
-  before_filter :team_belongs_to_project, :only => :team
+  before_filter :require_belong_to_project_or_admin, :only => :index
+  before_filter :require_belong_to_team, :only => :team
 
   def index
       @view = :project
@@ -13,14 +13,14 @@ class BacklogController < ApplicationController
       @member.last_project = @project
       @member.save
 
-      @member_team = @project.team_including(@member)
+      @team = @project.team_including(@member)
   end
 
   def team
       @view = :team
-      @member_team = Team.find(params[:id])
-      @projects = @member_team.projects
-      @stories = Story.find_by_team(@member_team)
+      @team = Team.find(params[:team_id])
+      @projects = @team.projects
+      @stories = @team.stories
    end
 
 end

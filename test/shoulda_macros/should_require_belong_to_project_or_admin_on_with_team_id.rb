@@ -1,23 +1,20 @@
-module RequireBelongToProjectOrAdmiOn
-  def should_require_belong_to_project_or_admin_on(actions = [])
+module RequireBelongToProjectOrAdmiOnWithTeamId
+  def should_require_belong_to_project_or_admin_on_with_team_id(actions = [])
     if actions == :all
-      actions = %w{index show new create edit update destroy}.map(&:to_sym)
+      actions = %w{team}.map(&:to_sym)
     else
       actions = Array(actions)
     end
 
     action_methods = {
-      :create  => :post,
-      :update  => :put,
-      :destroy => :delete
+      :team  => :get
     }
-
-    need_ids = action_methods.keys + [:show, :edit, :team]
 
     context "A not logged in user" do
       setup do
         @user = not_logged_user
         @project = Factory(:project)
+        @team = @project.teams.first
       end
 
       actions.each do |action|
@@ -25,11 +22,7 @@ module RequireBelongToProjectOrAdmiOn
 
         context "on #{method.to_s.upcase} to :#{action}" do
           setup do
-            if need_ids.include?(action)
-              send(method, action, :project_id => @project.to_param, :id => 1)
-            else
-              send(method, action, :project_id => @project.to_param)
-            end
+            send(method, action, :team_id => @team.to_param)
           end
 
           should_set_the_flash_to("Please Login")
@@ -58,11 +51,7 @@ module RequireBelongToProjectOrAdmiOn
 
         context "on #{method.to_s.upcase} to :#{action}" do
           setup do
-            if need_ids.include?(action)
-              send(method, action, :project_id => @project.to_param, :id => 1)
-            else
-              send(method, action, :project_id => @project.to_param)
-            end
+            send(method, action, :team_id => @team.to_param, :id => 1)
           end
 
           should_set_the_flash_to("Access Denied")
@@ -75,7 +64,7 @@ module RequireBelongToProjectOrAdmiOn
 end
 
 class ActiveSupport::TestCase
-  extend RequireBelongToProjectOrAdmiOn
+  extend RequireBelongToProjectOrAdmiOnWithTeamId
 end
 
 

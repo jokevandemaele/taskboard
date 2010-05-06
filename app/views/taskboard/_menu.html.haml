@@ -3,9 +3,9 @@
   %a{ :href => "#", :onClick => "collapseMenu('taskboard');" }
     = image_tag 'menu_collapse.png', :border => 0, :style => "float:left;"
   - action = (@view == :project) ? 'show' : 'team'
-  - id = (@view == :project) ? @project.id : @member_team.id
+  - id = (@view == :project) ? @project.id : @team.id
 
-  - link_to project_backlog_index_path(:project_id => @project.to_param) do
+  - link_to (@view == :project) ? project_backlog_index_path(:project_id => @project.to_param) :  backlog_team_view_path(@team.to_param) do
     .item.backlog
 
   = image_tag 'menu_task_add.png' ,  :border => 0 , :id => 'taskboard_menu_task_add',  :class => "task-add"
@@ -21,15 +21,14 @@
     .item.logout
 
 
-  / - if (@view == :project && (@project.teams.first.projects.size > 1 && !@project.guest_members.include?(@current_member))) || @view == :team
-  /   #menu_views
-  /     - team_image = image_tag 'admin/admin-div-actions-teams.png'
-  /     - team_selected = (@view == :team)
-  /     - project_image = image_tag 'admin/admin-div-actions-projects.png'
-  / 
-  /     = link_to project_image, {:action => :show, :id => current_user.last_project}, :class => !team_selected, :title => "Project View"
-  /     = link_to team_image, {:action => :team, :id => @member_team.id}, :class => team_selected, :title => "Team View"
-  /     %br
+  - if (@view == :project && (@project.teams.first.projects.size > 1 && !@project.guest_members.include?(@current_member))) || @view == :team
+    #menu_views
+      - team_image = image_tag 'logo-teams-small.png'
+      - team_selected = (@view == :team)
+      - project_image = image_tag 'logo-projects-small.png'
+  
+      = link_to project_image, project_taskboard_index_path(:project_id => current_user.last_project), :class => !team_selected, :title => "Project View"
+      = link_to team_image, taskboard_team_view_path(@team.to_param), :class => team_selected, :title => "Team View"
 
 #menu_expand
   %a{ :href => "#", :onClick => "expandMenu('taskboard');", :style => "position: relative; top: 8px; left: 10px;" }

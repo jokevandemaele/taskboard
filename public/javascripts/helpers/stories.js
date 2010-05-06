@@ -147,7 +147,6 @@ Application.Helpers.Stories = {
           projectId = target.readAttribute('data-project-id');
           Stories.newForm(projectId);
         }
-  
         // // Listener for remove story
         // if(target.match('.remove_story')){
         //   story = target.up('.story');
@@ -163,6 +162,9 @@ Application.Helpers.Stories = {
         // }
   
       });
+      
+      
+    
     }
   }
 };

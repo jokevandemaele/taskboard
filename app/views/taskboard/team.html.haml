@@ -1,7 +1,10 @@
-= render :partial => "menu" , :locals => { :team => @member_team, :view => @view }
+= render :partial => "menu" , :locals => { :team => @team, :view => @view }
 = render :partial => "adder"
-= render :partial => "taskboard_table", :locals => { :name => @member_team.name }
+= render :partial => "taskboard_table", :locals => { :name => @team.name }
 / %script= "new YAHOO.util.DDTarget('taskboard');"
 %script= "new YAHOO.util.DDTarget('taskboard-first-row');"
 
 #dummy-for-actions
+
+- content_for :helpers do
+  = javascript_include_tag 'helpers/tasks.js', 'helpers/modal_dialog.js'

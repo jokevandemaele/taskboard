@@ -204,11 +204,16 @@ class ApplicationController < ActionController::Base
     end
     
     def require_belong_to_project_or_admin
-      @project = Project.find(params[:project_id])
+      @project = @project || Project.find(params[:project_id])
       params[:organization_id] = @project.organization.id
       require_organization_admin if !@project.users.include?(current_user)
     end
-
+    
+    def require_belong_to_team
+      @team = Team.find(params[:team_id])
+      require_admin if !@team.users.include?(current_user)
+    end
+    
     def store_location
       session[:return_to] = request.request_uri
     end

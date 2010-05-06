@@ -1,6 +1,6 @@
 - @users.each do |user|
   %div{ :class => 'add_nametag', :id => "add-nametag-#{user.id}", :style => "float: left; #{"border: 4px solid #a02c2c; top: -4px" if(current_user == user)}"}
-    = image_tag user.avatar.url, :title => user.name
+    = image_tag user.avatar.url(:thumb), :title => user.name
     %br
     - if defined?(team)
       - team_id = team.id

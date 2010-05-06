@@ -4,9 +4,9 @@
 - if status == 'finished' 
   %table
     %tr
-      %td#table-list
-        - tasks.each do |task|
-          %li.task{:id => "task-#{task.id}-project-#{task.story.project.id}-li", 'data-task-id' => task.id, 'data-story-id' => task.story.id}
+      %td.finished_tasks
+        - tasks.each_with_index do |task, index|
+          %li.task{:id => "task-#{task.id}-project-#{task.story.project.id}-li", 'data-task-id' => task.id, 'data-story-id' => task.story.id, :style => ("display: none" if index > 2) }
             = render :partial => "tasks/finished_task", :locals => { :task => task }
           %script= "new YAHOO.example.DDList('task-#{task.id}-project-#{task.story.project.id}-li')"
       %td{:style => "vertical-align: top;"}

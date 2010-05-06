@@ -1,5 +1,6 @@
 Application.Helpers.Tasks = {
   initialize: function(){
+    this.setupListeners();
   },
   
   newForm: function(projectId,storyId){
@@ -46,6 +47,34 @@ Application.Helpers.Tasks = {
       $('task-'+taskId+'-front').appear({duration : 0.1});
       $('task-'+taskId+'-back').fade({duration : 0.1});
     }
+  },
+  
+  toggleTasks: function(tasks){
+    counter = 0;
+    tasks.each(function(element){
+      if(counter < 3){
+        element.show();
+      }else{
+        if(element.visible()){
+          element.fade({duration : 0.3});
+          element.blindUp({duration : 0.2});
+        }else{
+          element.appear({duration : 0.3});
+          element.blindDown({duration : 0.2});
+        }
+      }
+      counter++;
+    });
+  },
+  
+  setupListeners: function(){
+    $('taskboard').observe('click', function(event){
+      var target = event.element();
+      // Listener for hovering finished tasks list
+      if(target.match('.finished_tasks')){
+        Tasks.toggleTasks(target.childElements());
+      }
+    });
   }
   // 
   // editForm: function(Task, organization){
