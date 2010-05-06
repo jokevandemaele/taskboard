@@ -69,11 +69,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @om = @user.organization_memberships.first(:conditions => ['organization_id = ?', @organization.to_param])
     @om.admin = !@om.admin
-    if @user != current_user && @om.save
-      render :json => "", :status => :ok
-    else
-      render :json => "", :status => :internal_server_error
-    end
+    @om.save
+    render :json => "", :status => :ok
   end
   
    
