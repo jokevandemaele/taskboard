@@ -39,7 +39,8 @@ namespace :deploy do
 
   task :rake_db_migrate do
     run "cp /configurationsForProjects/taskboard_database.yml #{deploy_to}/current/config/database.yml"
-    run "cd #{current_path}/ && rake RAILS_ENV=\"testing\" db:migrate"
+    run "cd #{current_path}/ && rake RAILS_ENV=\"testing\" db:migrate:reset"
+    run "cd #{current_path}/ && rake RAILS_ENV=\"testing\" db:seed"
   end
 
   [:start, :stop].each do |t|
