@@ -31,7 +31,7 @@ ActionController::Routing::Routes.draw do |map|
     p.resources :taskboard, :only => [:index]
     p.resources :backlog, :only => [:index]
     p.resources :stories do |s|
-     s.resources :tasks, :has_many => [ :statustags, :nametags ]
+     s.resources :tasks, :has_many => [ :statustags, :nametags ]
      s.task_start 'tasks/:id/start', :controller => :tasks, :action => :start, :conditions => { :method => :post }
      s.task_stop 'tasks/:id/stop', :controller => :tasks, :action => :stop, :conditions => { :method => :post }
      s.task_finish 'tasks/:id/finish', :controller => :tasks, :action => :finish, :conditions => { :method => :post }

@@ -74,18 +74,7 @@ class TasksControllerTest < ActionController::TestCase
         assert_equal @expected.to_json, @response.body
       end
     end
-    
-    context "and do GET to :edit in a project I belong to" do
-      setup do
-        get :edit, :id => @task.to_param, :project_id => @project.to_param, :story_id => @story.to_param
-      end
-      should_respond_with :ok
-      # should_assign_to(:project){ @project }
-      # should_assign_to(:story){ @story }
-      # should_assign_to(:task){ @task }
-      should_render_template :edit
-    end
-    
+
     context "and do POST to :update_name in a project I belong to with correct data" do
       setup do
         post :update_name, :id => @story.tasks.first, :project_id => @project.to_param, :story_id => @story.to_param, :value => "My Task 1"

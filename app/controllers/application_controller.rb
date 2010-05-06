@@ -223,6 +223,14 @@ class ApplicationController < ActionController::Base
       @organization = Organization.find(params[:organization_id]) if params[:organization_id]
     end
     
+    def find_story
+      @story = @project.stories.find(params[:story_id])
+    end
+    
+    def find_task
+      @task = @story.tasks.find(params[:task_id])
+    end
+    
     def deny_access
       flash[:error] = "Access Denied"
       redirect_to root_url

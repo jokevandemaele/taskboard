@@ -20,5 +20,5 @@ class Nametag < ActiveRecord::Base
   # Attributes Accessible
   #
   ################################################################################################################
-  attr_accessible :task, :user
+  attr_accessible :task, :user, :relative_position_x, :relative_position_y
 end

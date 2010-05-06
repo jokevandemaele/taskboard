@@ -257,14 +257,34 @@ var DDM = YAHOO.util.DragDropMgr;
           if (dest_name[0] == 'task'){
             var x = drag_region.left - $(destEl.id).cumulativeOffset().left
             var y = drag_region.top - $(destEl.id).cumulativeOffset().top
-            new Ajax.Request('/'+element_name[0]+'s/'+element_name[3], {asynchronous:true, evalScripts:true,  method:'put', parameters:'project_id='+ element_name[2]+'&'+element_name[0]+'[task_id]=' + (dest_name[1]) + '&'+element_name[0]+'[relative_position_x]='+ x + '&'+element_name[0]+'[relative_position_y]='+ y + '&authenticity_token=' + getAuthKey()})
+            var projectId = srcEl.up('tr').readAttribute('data-project-id');
+            var storyId = srcEl.up('tr').readAttribute('data-story-id');
+            var taskId = srcEl.up('.task').readAttribute('data-task-id');
+            var newTaskId = destEl.readAttribute('data-task-id');
+            
+            new Ajax.Request('/projects/'+projectId+'/stories/'+storyId+'/tasks/'+taskId+'/'+element_name[0]+'s/'+element_name[3], 
+            {
+              asynchronous:true, 
+              method:'put', 
+              parameters: element_name[0]+'[task_id]='+ newTaskId + '&' + element_name[0]+'[relative_position_x]='+ x + '&'+element_name[0]+'[relative_position_y]='+ y + '&authenticity_token=' + getAuthKey(),
+              onSuccess: function(){
+                destEl.down('.task_front').appendChild(srcEl);
+                srcEl.pulsate({pulses: 2, duration : 0.8});
+              }
+            }
+            
+            )
             srcEl.parentNode.removeChild(srcEl);
             destEl.appendChild(srcEl);
 						DDM.refreshCache();
           }
         }else{
+          var projectId = srcEl.up('tr').readAttribute('data-project-id');
+          var storyId = srcEl.up('tr').readAttribute('data-story-id');
+          var taskId = srcEl.up('.task').readAttribute('data-task-id');
+          
           if(dest_name[0] != 'task'){
-          new Ajax.Request('/'+element_name[0]+'s/'+element_name[3], {
+          new Ajax.Request('/projects/'+projectId+'/stories/'+storyId+'/tasks/'+taskId+'/'+element_name[0]+'s/'+element_name[3], {
           asynchronous:true, 
           evalScripts:true,  
           method:'delete',
@@ -284,29 +304,27 @@ var DDM = YAHOO.util.DragDropMgr;
 	  // custom drag and drop implementation for adding tags
 	  ////////////////////////////////////////////////////////////////////////////// 
 
-	       YAHOO.DDAddTags = function(id, sGroup, config) { 
+       YAHOO.DDAddTags = function(id, sGroup, config) { 
 
-	           YAHOO.DDAddTags.superclass.constructor.call(this, id, sGroup, config); 
+           YAHOO.DDAddTags.superclass.constructor.call(this, id, sGroup, config); 
 
-	           this.logger = this.logger || YAHOO; 
-	           var el = this.getDragEl();
+           this.logger = this.logger || YAHOO; 
+           var el = this.getDragEl();
 
-	           this.goingUp = false; 
-	           this.lastY = 0; 
-	       }; 
+           this.goingUp = false; 
+           this.lastY = 0; 
+       }; 
 
 	    YAHOO.extend(YAHOO.DDAddTags, YAHOO.util.DDProxy, { 
 		    endDrag: function(e) { 
-			    var proxy = this.getDragEl(); 
-          Dom.setStyle(proxy, "visibility", ""); 
+			    var proxy = this.getDragEl();
+          Dom.setStyle(proxy, "visibility", "hidden"); 
 	      },
 	       startDrag: function(x, y) { 
 	         // make the proxy look like the source element 
 	         var dragEl = this.getDragEl(); 
 	         var clickEl = this.getEl(); 
-
 	         dragEl.innerHTML = clickEl.innerHTML;
-
 	         if(Dom.hasClass(clickEl,'statustag')){
 	           Dom.removeClass(dragEl, dragEl.className)
 	           if(Dom.hasClass(clickEl, 'statustag-done')){ Dom.addClass(dragEl, 'statustag-done')}
@@ -339,30 +357,35 @@ var DDM = YAHOO.util.DragDropMgr;
 	        var element_name = srcEl.id.split('-');
 	        var dest_name = destEl.id.split('-');
           var drag_region = DDM.interactionInfo.draggedRegion;
-					var specific_parameter = ''
-					
-					if(element_name[1] == 'statustag')
-						specific_parameter = 'statustag[status]';
-					if(element_name[1] == 'nametag')
-						specific_parameter = 'nametag[member_id]';
-						
-					if((element_name[1] == 'statustag' || element_name[1] == 'nametag') && dest_name[0] == 'task'){
-						// Update database
-						var x = drag_region.left - $(destEl.id).cumulativeOffset().left - 4;
-						var y = drag_region.top - $(destEl.id).cumulativeOffset().top;
-						request = new Ajax.Request('/'+element_name[1]+'s/', {
-							asynchronous:true, 
-							evalScripts:true,  
-							method:'post', 
-							parameters:'project_id='+ dest_name[3]+'&'+'statustag[task_id]=' + (dest_name[1]) + '&'+'statustag[relative_position_x]='+ x + '&'+'statustag[relative_position_y]='+ y + '&'+specific_parameter+"="+ element_name[2]+ '&authenticity_token=' + getAuthKey(),
-							onSuccess: function(transport) {
-								new Ajax.Updater(destEl.id, '/tasks/'+$(destEl.id).id.split('-')[1], {asynchronous:false, method:'get',evalScripts:true, parameters:'authenticity_token=' + getAuthKey()})
-								Dom.setStyle(dragEl, "visibility", "hidden"); 
-						  },
-						});
-					}
-	      }, 
-	    });
+          var specific_parameter = ''
+          
+          if(element_name[1] == 'statustag')
+            specific_parameter = 'statustag[status]';
+          if(element_name[1] == 'nametag')
+            specific_parameter = 'nametag[user_id]';
+
+          if((element_name[1] == 'statustag' || element_name[1] == 'nametag') && dest_name[0] == 'task'){
+            // Update database
+            var x = drag_region.left - $(destEl.id).cumulativeOffset().left - 4;
+            var y = drag_region.top - $(destEl.id).cumulativeOffset().top;
+            var projectId = destEl.up('tr').readAttribute('data-project-id');
+            var storyId = destEl.up('tr').readAttribute('data-story-id');
+            var taskId = destEl.readAttribute('data-task-id');
+            
+            new Ajax.Request('/projects/'+projectId+'/stories/'+storyId+'/tasks/'+taskId+'/'+element_name[1]+'s/', {
+              method:'post', 
+              parameters:'statustag[relative_position_x]='+ (x+4) + '&statustag[relative_position_y]='+ y + '&'+specific_parameter+"="+ element_name[2]+ '&authenticity_token=' + getAuthKey(),
+              onSuccess: function(transport) {
+                var tmp = new Element('div').update(transport.responseText);
+                destEl.down('.task_front').appendChild(tmp);
+                tmp.pulsate({pulses: 2, duration : 0.8});
+              },
+            });
+          }else{
+            //Dom.setStyle(dragEl, "visibility", "hidden"); 
+          }
+        }, 
+      });
 
 
   })(); 

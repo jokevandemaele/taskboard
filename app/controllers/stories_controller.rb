@@ -69,21 +69,15 @@ class StoriesController < ApplicationController
   # POST /projects/:project_id/stories/:id/update_priority
   def update_priority
     @story.priority = params[:value]
-    if @story.save
-      render :inline => @story.priority, :status => :ok
-    else
-      render :inline => '', :status => :precondition_failed
-    end
+    @story.save
+    render :inline => @story.priority, :status => :ok
   end
 
   # POST /projects/:project_id/stories/:id/update_size
   def update_size
     @story.size = params[:value]
-    if @story.save
-      render :inline => @story.size, :status => :ok
-    else
-      render :inline => '', :status => :precondition_failed
-    end
+    @story.save
+    render :inline => @story.size, :status => :ok
   end
  #  # GET /stories/1
  #  def show

@@ -5,27 +5,31 @@
   - action = (@view == :project) ? 'show' : 'team'
   - id = (@view == :project) ? @project.id : @member_team.id
 
-  = link_to image_tag('menu_product_backlog.png',  :border => 0,  :id => "menu_product_backlog_image"), project_backlog_index_path(:project_id => @project.to_param)
+  - link_to project_backlog_index_path(:project_id => @project.to_param) do
+    .item.backlog
+
   = image_tag 'menu_task_add.png' ,  :border => 0 , :id => 'taskboard_menu_task_add',  :class => "task-add"
   = draggable_element "taskboard_menu_task_add", :revert => 'true', :ghosting => 'true'
 
-  %div{ :style => "float: left;" }
-    %table#menu_statustags
-      = render :partial => "menu_statustags"
+  %table#menu_statustags
+    = render :partial => "menu_statustags"
 
-  / #menu_nametags
-  /   = render :partial => "menu_nametags", :locals => { :team => team } if !team.nil?
-  = link_to image_tag('menu_logout.png' ,  :border => 0 , :id => 'taskboard_menu_logout',  :title => "Log out"), logout_path
+  #menu_nametags
+    = render :partial => "menu_nametags", :locals => { :team => team } if !team.nil?
 
-  - if (@view == :project && (@project.teams.first.projects.size > 1 && !@project.guest_members.include?(@current_member))) || @view == :team
-    #menu_views
-      - team_image = image_tag 'admin/admin-div-actions-teams.png'
-      - team_selected = (@view == :team)
-      - project_image = image_tag 'admin/admin-div-actions-projects.png'
+  - link_to logout_path do
+    .item.logout
 
-      = link_to project_image, {:action => :show, :id => current_user.last_project}, :class => !team_selected, :title => "Project View"
-      = link_to team_image, {:action => :team, :id => @member_team.id}, :class => team_selected, :title => "Team View"
-      %br
+
+  / - if (@view == :project && (@project.teams.first.projects.size > 1 && !@project.guest_members.include?(@current_member))) || @view == :team
+  /   #menu_views
+  /     - team_image = image_tag 'admin/admin-div-actions-teams.png'
+  /     - team_selected = (@view == :team)
+  /     - project_image = image_tag 'admin/admin-div-actions-projects.png'
+  / 
+  /     = link_to project_image, {:action => :show, :id => current_user.last_project}, :class => !team_selected, :title => "Project View"
+  /     = link_to team_image, {:action => :team, :id => @member_team.id}, :class => team_selected, :title => "Team View"
+  /     %br
 
 #menu_expand
   %a{ :href => "#", :onClick => "expandMenu('taskboard');", :style => "position: relative; top: 8px; left: 10px;" }
@@ -33,4 +37,6 @@
 %script expandMenu('taskboard');
 %script= "new YAHOO.util.DDTarget('menu');"
 
-#menu_report_bug= link_to "#{image_tag('reportbug/menu_reportbug.png', :alt => 'bug', :title => "Report Bug")}", "/report_bug"
+
+#menu_report_bug
+  = link_to "#{image_tag('reportbug/menu_reportbug.png', :alt => 'bug', :title => "Report Bug")}", "/report_bug"

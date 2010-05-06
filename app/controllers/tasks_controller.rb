@@ -20,11 +20,8 @@ class TasksController < ApplicationController
   # POST /projects/:project_id/stories/:story_id/tasks
   def create
     @task = @story.tasks.build(params[:task])
-    if @task.save
-      render :json => { :project => @story.project_id, :story => @story.id }, :status => :created
-    else
-      render :json => @task.errors, :status => :precondition_failed
-    end
+    @task.save
+    render :json => { :project => @story.project_id, :story => @story.id }, :status => :created
   end
 
   # GET /projects/:project_id/stories/:story_id/tasks/:id
@@ -43,20 +40,14 @@ class TasksController < ApplicationController
 
   def update_name
     @task.name = params[:value]
-    if @task.save
-      render :json => @task.name, :status => :ok
-    else
-      render :json => @task.errors, :status => :precondition_failed
-    end
+    @task.save
+    render :json => @task.name, :status => :ok
   end
 
   def update_description
     @task.description = params[:value]
-    if @task.save
-      render :json => @task.description, :status => :ok
-    else
-      render :json => @task.errors, :status => :precondition_failed
-    end
+    @task.save
+    render :json => @task.description, :status => :ok
   end
 
   # DELETE /projects/:project_id/stories/:story_id/tasks/:id
@@ -194,9 +185,6 @@ class TasksController < ApplicationController
   #   end
   # end
 private
-  def find_story
-    @story = @project.stories.find(params[:story_id])
-  end
   def find_task
     @task = @story.tasks.find(params[:id])
   end

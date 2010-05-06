@@ -29,7 +29,7 @@ class UsersController < ApplicationController
         render :json => { :id => @user.to_param, :organization => @organization.to_param}, :status => :created
       else
         flash[:notice] = "Welcome to the Agilar Taskboard!"
-        redirect_back_or_default account_url
+        redirect_back_or_default root_url
       end
     else
       if @organization

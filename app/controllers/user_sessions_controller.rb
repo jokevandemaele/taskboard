@@ -14,8 +14,7 @@ class UserSessionsController < ApplicationController
       flash[:notice] = "Login successful!"
       redirect_back_or_default organizations_url
     else
-      flash[:notice] = "Access Denied"
-      render :action => :new
+      deny_access
     end
   end
   

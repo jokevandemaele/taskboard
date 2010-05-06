@@ -18,5 +18,5 @@ class Statustag < ActiveRecord::Base
   # Attributes Accessible
   #
   ################################################################################################################
-  attr_accessible :task, :status
+  attr_accessible :task, :status, :relative_position_x, :relative_position_y
 end
