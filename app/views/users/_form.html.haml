@@ -23,3 +23,16 @@
   .field
     = form.label :avatar
     = form.file_field :avatar
+
+.field
+  = form.label :color
+  = form.text_field :color, :readonly => 'readonly'
+
+:javascript
+  $('user_color').setStyle({color: '##{@user.color}', background: '##{@user.color}'});
+  $('user_color').observe('mousedown', function(event) {
+    event.stop();
+  });
+  //ColorPicker.attach('modal_dialog', 250, 110, 'user_color');
+  ColorPicker.attach('modal_dialog', 250, 110, 'user_color');
+
