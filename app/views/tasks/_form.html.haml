@@ -3,7 +3,6 @@ $('adder-container').show();
 </script>
 <div id="form-add-task" style="position: fixed; top: 0px; left: 0px; display: none;" >
 	<%	remote_form_for @task, :update => {:success => "#{status}-#{story.id}"} do |f| %>
-		<%= button_to_function "Cancel", "cancel($('form-add-task'));", :id => "form-add-task-cancel"-%>
     <%= submit_tag "Save", :id => "submit", :name => "submit", :class => "form_submit", :disabled => false, :onClick => "this.value = 'Saving...'; $('blocker').show()" %>
 		<div id="form-add-task-fields" style="margin: 0px;">	
 			<a href="#" onClick="flip('form-add-task-fields','back');" >
