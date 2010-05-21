@@ -13,7 +13,8 @@
   %body
     #admin-dummy-container
       #header
-        .agilar_taskboard_logo
+        - link_to root_url do
+          .agilar_taskboard_logo
         #user-info
           #picture
             = image_tag current_user.avatar(:thumb)
@@ -27,8 +28,7 @@
                 #role You are an Organization Administrator
 
             #links
-              - link_to logout_path do
-                .logout logout
+              .logout= link_to 'logout', logout_path
             #revision= FULL_VERSION
       #admin-container
         #admin-content

@@ -503,7 +503,11 @@ Ajax.InPlaceEditor = Class.create({
     this._boundSubmitHandler = this.handleFormSubmission.bind(this);
     this._boundWrapperHandler = this.wrapUp.bind(this);
     this.registerListeners();
+    
+    this.keyBinding = Event.observe(window, 'keydown', (function(event) {if (this.element.visible && event.keyCode == Event.KEY_ESC){ this.handleFormCancellation(event); }}).bind(this));
+    
   },
+  
   checkForEscapeOrReturn: function(e) {
     if (!this._editing || e.ctrlKey || e.altKey || e.shiftKey) return;
     if (Event.KEY_ESC == e.keyCode)

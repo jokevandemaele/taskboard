@@ -1,13 +1,15 @@
 @import common
+@import admin
 @import macros
 @import modal_dialog
-
+@import forms
 body
-  margin: 0
+  :margin 0
   :padding 0
-  position: fixed
-  width: 100%
-  height: 100%
+  :position fixed
+  :width 100%
+  :height 100%
+  :background white
 
 
 table
@@ -47,7 +49,8 @@ ul
 
 .form_container
   
-
+p
+  :color black
 .task
   :cursor move
   :background url(/images/task.png) no-repeat
@@ -119,6 +122,61 @@ ul
     :bottom 0
     :right 0
 
+  form.inplaceeditor-form 
+    +rounded(5px)
+    :width 200px
+    :position relative
+    :border 3px solid #447821
+    :background white
+    :left 110px
+    :min-height 50px
+    :z-index 10
+    
+  form.inplaceeditor-form input[type="text"] 
+    :background #eee
+    :border none
+    :text-align middle
+    :display inline
+    :width 195px
+    :font-size 15px
+    
+  form.inplaceeditor-form textarea
+    :background #eee
+    :border none
+    :text-align middle
+    :display inline
+    :width 195px
+    :font-size 14px
+    :margin-bottom 20px
+    :font-size 12px
+    
+  form.inplaceeditor-form input.editor_ok_button
+    :border none
+    :background url('/images/yes_small.png') no-repeat
+    :width 16px
+    :height 16px
+    :color transparent
+    :margin-right 10px
+    :cursor pointer
+    :position absolute
+    :left 5px
+    :bottom 5px
+  form.inplaceeditor-form input.editor_cancel_button
+    :border none
+    :background url('/images/no_small.png') no-repeat
+    :width 16px
+    :height 16px
+    :color transparent
+    :cursor pointer
+    :position absolute
+    :right 10px
+    :bottom 5px
+
+//  form.inplaceeditor-form textarea { /* Textarea, if multiple rows */
+
+//  f { /* The submit button */
+
+//  form.inplaceeditor-form a { /* The cancel link */
 
 .flip-task-image-back
   border: 1px solid red

@@ -50,7 +50,10 @@ Application.Helpers.Projects = {
     var project = response.evalJSON().project
     var project_container = $('project-' + project.id)
     var name = project_container.down('.name')
-    name.innerHTML = project.name;
+    var nameElement = new Element('a', { href : '/projects/' + project.id + '/taskboard'})
+    nameElement.innerHTML = project.name;
+    name.innerHTML = ''
+    name.appendChild(nameElement);
     project_container.highlight({ duration: 0.8 });
   },
   

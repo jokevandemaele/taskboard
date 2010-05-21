@@ -99,7 +99,7 @@ Application.Helpers.Teams = {
   },
   
   addUser: function(user){
-    user.fade()
+    user.fade({duration: 0.2});
     var organizationId = user.readAttribute('data-organization-id');
     var teamId = user.readAttribute('data-team-id');
     var userId = user.readAttribute('data-user-id');
@@ -127,7 +127,7 @@ Application.Helpers.Teams = {
   },
   
   removeUser: function(user){
-    user.fade()
+    user.fade({duration: 0.2});
     var organizationId = user.readAttribute('data-organization-id');
     var teamId = user.readAttribute('data-team-id');
     var userId = user.readAttribute('data-user-id');
