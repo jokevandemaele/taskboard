@@ -69,13 +69,14 @@ Application.Helpers.ColorPicker = {
   },
 
   _setColor: function(htmlObject, targetObject) {
-    var color = htmlObject.style.backgroundColor;
+    var color = htmlObject.getStyle('background-color');
     if(color.charAt(0) == '#')
       color = color.substr(1);
     else
       color = this._rgb2hex(color);
-    $(targetObject).style.backgroundColor = $(targetObject).style.color = '#' + color;
     $(targetObject).value = color;
+    color = '#' + color;
+    $(targetObject).setStyle({'color': color, 'background-color': color});
   }
 };
 
