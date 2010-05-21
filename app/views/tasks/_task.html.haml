@@ -7,7 +7,8 @@
     :javascript
       new Ajax.InPlaceEditor('edit_name_#{task.id}', '/projects/#{task.story.project.to_param}/stories/#{task.story.to_param}/tasks/#{task.to_param}/update_name', 
         { 
-          cancelControl: 'button', 
+          cancelControl: 'button',
+          highlightColor: 'transparent',
           cols : 18, 
           onComplete: function(){
             $('edit_name_#{task.id}').setStyle({fontSize: '12px'});
@@ -26,5 +27,5 @@
 .task_back{ :id => "task-#{task.id}-back", :style => "display: none" }
   %textarea.task-description.in_place_edit{ :id => "edit_description_#{task.id}" }= h task.description
   :javascript
-    new Ajax.InPlaceEditor('edit_description_#{task.id}', '/projects/#{task.story.project.to_param}/stories/#{task.story.to_param}/tasks/#{task.to_param}/update_description', { cancelControl: 'button', rows: 6, cols : 12, onComplete: null});
+    new Ajax.InPlaceEditor('edit_description_#{task.id}', '/projects/#{task.story.project.to_param}/stories/#{task.story.to_param}/tasks/#{task.to_param}/update_description', { cancelControl: 'button', highlightColor: 'transparent', rows: 6, cols : 12, onComplete: null});
 .flip{ :onClick => "Tasks.flip(#{task.id})" }
