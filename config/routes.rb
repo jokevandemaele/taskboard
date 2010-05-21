@@ -21,6 +21,7 @@ ActionController::Routing::Routes.draw do |map|
     o.resources :users, :only => [ :show, :new, :create, :edit, :update, :destroy]
     o.user_toggle_admin 'users/:id/toggle_admin', :controller => 'users', :action => 'toggle_admin', :conditions => { :method => :post }
   end
+  map.add_user_to_organization 'organizations/:id/add_user', :controller => :organizations, :action => :add_user, :conditions => {:method => :post}
   
   # Sample resource route within a namespace:
   map.namespace :admin do |admin|

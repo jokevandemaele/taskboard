@@ -9,10 +9,11 @@ module RequireAdminOn
     action_methods = {
       :create  => :post,
       :update  => :put,
-      :destroy => :delete
+      :destroy => :delete,
+      :add_user => :post
     }
 
-    need_ids = action_methods.keys + [:show, :edit]
+    need_ids = action_methods.keys + [:show, :edit, :add_user]
 
     context "SRAO: If I'm not logged in" do
       setup do

@@ -1,7 +1,8 @@
 class OrganizationsController < ApplicationController
   before_filter :require_user
-  before_filter :require_admin, :only => [ :new, :create ]
+  before_filter :require_admin, :only => [ :new, :create, :add_user ]
   before_filter :require_organization_admin, :only => [:show, :edit, :update, :destroy ]
+  before_filter :find_organization, :only => [:edit, :update, :destroy, :add_user ]
   layout "application", :only => [ :index ]
   
   # GET /organizations
@@ -32,13 +33,11 @@ class OrganizationsController < ApplicationController
   
   # GET /organizations/1/edit
   def edit 
-    @organization = Organization.find(params[:id])
     render :action => :edit
   end
 
   # PUT /organizations/1
   def update
-    @organization = Organization.find(params[:id])
     if @organization.update_attributes(params[:organization])
       render :json => @organization, :status => :ok
     else
@@ -48,10 +47,19 @@ class OrganizationsController < ApplicationController
   
   # DELETE /organizations/1
   def destroy
-    @organization = Organization.find(params[:id])
     if @organization.destroy
       render :json => '', :status => :ok
     end
+  end
+  
+  def add_user
+    @user = User.find(params[:user_id])
+    @organization.users << @user
+    render :json => { :id => @user.to_param, :organization => @organization.to_param}, :status => :ok
+  end
+  
+  def find_organization
+    @organization = Organization.find(params[:id])
   end
   # def invite
   #   render :partial => 'invitation_form', :locals => {:errors => []}, :status => :ok

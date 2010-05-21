@@ -4,7 +4,7 @@ class OrganizationsControllerTest < ActionController::TestCase
   context "Permissions" do
     should_require_user_on [ :index, :show ]
     should_require_organization_admin_on_for_organizations_controller [ :show, :edit, :update, :destroy ]
-    should_require_admin_on [:new, :create]
+    should_require_admin_on [:new, :create, :add_user]
   end
   # ----------------------------------------------------------------------------------------------------------------
   # Routes
@@ -16,6 +16,7 @@ class OrganizationsControllerTest < ActionController::TestCase
     should_route :get, "/organizations/1/edit", :action => :edit, :id => 1
     should_route :put, "/organizations/1", :action => :update, :id => 1
     should_route :delete, "/organizations/1", :action => :destroy, :id => 1
+    should_route :post, "/organizations/1/add_user", :action => :add_user, :id => 1
   end
   
   # ----------------------------------------------------------------------------------------------------------------
@@ -258,6 +259,18 @@ class OrganizationsControllerTest < ActionController::TestCase
       should_respond_with :ok
       # should_assign_to(:organization){ @organization2 }
       # should_render_template :show
+    end
+    
+    context "and do a POST to :add_user.json with correct data" do
+      setup do
+        @request.env['HTTP_ACCEPT'] = "application/json"
+        @user = Factory(:user)
+        post :add_user, :id => @organization.to_param, :user_id => @user.to_param
+      end
+      should_respond_with :ok
+      should "add the user to the organization" do
+        assert @organization.users.include?(@user)
+      end
     end
   end
   
