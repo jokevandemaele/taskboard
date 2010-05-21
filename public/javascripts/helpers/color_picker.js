@@ -77,6 +77,7 @@ Application.Helpers.ColorPicker = {
     $(targetObject).value = color;
     color = '#' + color;
     $(targetObject).setStyle({'color': color, 'background-color': color});
+    this._hide();
   }
 };
 

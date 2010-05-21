@@ -19,14 +19,14 @@
   = form.label :password_confirmation
   = form.password_field :password_confirmation
 
+.field
+  = form.label :color
+  = form.text_field :color, :readonly => 'readonly'
+
 - if form.object.id
   .field
     = form.label :avatar
     = form.file_field :avatar
-
-.field
-  = form.label :color
-  = form.text_field :color, :readonly => 'readonly'
 
 :javascript
   $('user_color').setStyle({color: '##{@user.color}', background: '##{@user.color}'});
