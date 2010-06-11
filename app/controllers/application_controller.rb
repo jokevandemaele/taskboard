@@ -5,12 +5,6 @@ class ApplicationController < ActionController::Base
   # Uncomment this if you want to put the taskboard in maintenance mode.
   # before_filter :disable_taskboard
   
-  # Use the ExepctionNotifiable plugin to send a mail when an error is thrown.
-  include ExceptionNotifiable
-  ExceptionNotifier.exception_recipients = %w(agilar-dev-team@googlegroups.com)
-  ExceptionNotifier.sender_address = %("Taskboard Error Notification" <no-reply@agilar.org>)
-  ExceptionNotifier.email_prefix = "[TASKBOARD ERROR] "
-  
   helper :all # include all helpers, all the time
   helper_method :request_controller, :current_user_session, :current_user
   # See ActionController::RequestForgeryProtection for details
