@@ -5,13 +5,22 @@
       .task-container-cell
         %p.task-name.in_place_edit{ :id => "edit_name_#{task.id}" }= h task.name
     :javascript
-      new Ajax.InPlaceEditor('edit_name_#{task.id}', '/projects/#{task.story.project.to_param}/stories/#{task.story.to_param}/tasks/#{task.to_param}/update_name', { cancelControl: 'button', cols : 18 });
+      new Ajax.InPlaceEditor('edit_name_#{task.id}', '/projects/#{task.story.project.to_param}/stories/#{task.story.to_param}/tasks/#{task.to_param}/update_name', 
+        { 
+          cancelControl: 'button',
+          highlightColor: 'transparent',
+          cols : 18, 
+          onComplete: function(){
+            $('edit_name_#{task.id}').setStyle({fontSize: '12px'});
+            $('edit_name_#{task.id}').setStyle({lineHeight: '17px'});
+            resizeFontSizeToFit($('edit_name_#{task.id}'), $('task-#{task.id}-name-container'));} 
+          });
       $('edit_name_#{task.id}').style.opacity = 0; 
-      resizeFontSizeToFit($('edit_name_#{task.id}'), $('task-#{task.id}-name-container')); 
+      resizeFontSizeToFit($('edit_name_#{task.id}'), $('task-#{task.id}-name-container'));
       $('edit_name_#{task.id}').style.opacity = 1;
 
 .task_back{ :id => "task-#{task.id}-back", :style => "display: none" }
   %textarea.task-description.in_place_edit{ :id => "edit_description_#{task.id}" }= h task.description
   :javascript
-    new Ajax.InPlaceEditor('edit_description_#{task.id}', '/projects/#{task.story.project.to_param}/stories/#{task.story.to_param}/tasks/#{task.to_param}/update_description', { cancelControl: 'button', rows: 6, cols : 12 });
+    new Ajax.InPlaceEditor('edit_description_#{task.id}', '/projects/#{task.story.project.to_param}/stories/#{task.story.to_param}/tasks/#{task.to_param}/update_description', { cancelControl: 'button', highlightColor: 'transparent', rows: 6, cols : 12, onComplete: null});
 .flip{ :onClick => "Tasks.flip(#{task.id})" }
