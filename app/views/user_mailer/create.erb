@@ -1,0 +1,14 @@
+Hello, <%=h @user.name -%>!
+
+If you're reading this, you're in luck - <%=h @user.added_by -%> thinks you're very special and has invited you to use the Agilar Taskboard<%= " as a member of the organization #{@user.organizations.first.name}" if @user.organizations.first -%>.
+
+Welcome aboard!
+
+This is your login information:
+User name: <%=h @user.login %>
+Password: <%=h @user.password %>
+
+Head over to http://taskboard.agilar.org/ to start living the experience!
+
+
+      the Agilar Taskboard Team

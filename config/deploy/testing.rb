@@ -1,6 +1,5 @@
 namespace :deploy do
     set :application, "taskboard"
-    set :repository,  "http://dev.agilar.org/svn/#{application}/"
 
     # If you aren't deploying to /u/apps/#{application} on the target
     # servers (which is the default), you can specify the actual location
@@ -9,23 +8,19 @@ namespace :deploy do
 
     # If you aren't using Subversion to manage your source code, specify
     # your SCM below:
-    set :scm, :subversion
-    set :scm_username, "deploy"
-    set :scm_password, "dpl.925"
+    set :scm, :git
+    set :repository,  "http://github.com/agilar/taskboard.git"
+    set :branch, "authlogic_migration"
+
     set :use_sudo, false
     
     begin 
-      url = URI.parse('http://hudson.dev.agilar.org:8080')
-      res = Net::HTTP.start(url.host, url.port) {|http|
-        http.get('/job/Agilar%20Taskboard%20-%20Continuous%20Integration/lastStableBuild/api/xml')
-      }
-      res.body.match(/<revision>[0-9]*<\/revision>/)
-      
-      revision = $~.to_s.gsub("<revision>",'').gsub("</revision>", '').to_i
-      
+      revision = `/usr/bin/curl -s -u deploy:agilar.deploy.99 http://hudson.dev.agilar.org:8080/job/taskboard-0-continuous-integration/lastSuccessfulBuild/api/xml`
+      revision.match(/<lastBuiltRevision><SHA1>[a-z0-9]*<\/SHA1>/)
+      revision = $~.to_s.gsub("<lastBuiltRevision><SHA1>",'').gsub("</SHA1>", '')
       set :revision, revision
     rescue
-      raise ProblemAccessingHudson
+      raise "ProblemAccessingHudson"
     end
     
     server "dev.agilar.org", :app, :web, :db, :primary => true
@@ -43,7 +38,9 @@ namespace :deploy do
   end
 
   task :rake_db_migrate do
-    run "cd #{current_path}/ && rake RAILS_ENV=\"testing\" db:migrate"
+    run "cp /configurationsForProjects/taskboard_database.yml #{deploy_to}/current/config/database.yml"
+    run "cd #{current_path}/ && rake RAILS_ENV=\"testing\" db:migrate:reset"
+    run "cd #{current_path}/ && rake RAILS_ENV=\"testing\" db:seed"
   end
 
   [:start, :stop].each do |t|

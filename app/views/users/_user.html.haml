@@ -1,0 +1,16 @@
+.element.user{ :id => "user-#{user.id}", 'data-user-id' => user.id }
+  / Element name TODO: RESIZE!!
+  .name= user.name
+  .admin
+    - if current_user.admins?(organization)
+      .remove.remove_user{ :title => "Remove from organization"}
+    - if user == current_user || current_user.admins?(organization)
+      .edit.edit_user{ :title => "Edit User"}
+    - if user.admin?
+      .is_admin{ :title => "The user is a System Administrator"}
+    - if !user.admin && user.admins?(organization)
+      .is_org_admin{ :class => current_user.admins?(organization) ? 'toggle_admin' : '', :title => current_user.admins?(organization) ? "Remove Organization Admin Privileges" : "Organization Administrator" }
+    - if !user.admin && !user.admins?(organization)
+      .is_user{ :class => current_user.admins?(organization) ? 'toggle_admin' : '', :title => current_user.admins?(organization) ? "Add Organization Admin Privileges" : "Normal User" }
+    
+    

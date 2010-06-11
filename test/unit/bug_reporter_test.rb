@@ -1,13 +1,25 @@
-require 'test_helper'
+require File.dirname(__FILE__) + '/../test_helper'
 
 class BugReporterTest < ActionMailer::TestCase
-  # test "report_bug" do
-  #   @expected.to = 'taskboard@agilar.org'
-  #   @expected.from = 'taskboard@agilar.org'
-  #   @expected.subject = 'BugReporter#report_bug'
-  #   @expected.body    = 'this is a bug report'
-  #   @expected.date    = Time.now
-  #   assert_equal @expected.encoded, BugReporter.create_bug_report(@expected.subject, @expected.body, 'test', @expected.date).encoded
-  # end
-
+  context "#bug_report" do
+    setup do
+      @user = Factory(:user)
+      @response = BugReporter.deliver_bug_report("bug", "message", @user)
+    end
+    should "send the email" do
+      assert !ActionMailer::Base.deliveries.empty? 
+    end
+    should "have the correct subject" do
+      assert_equal "[TASKBOARD-BUG-REPORT] From: #{@user.name} <#{@user.email}> - bug", @response.subject
+    end
+    should "have the correct sender" do
+      assert_equal ["taskboard@agilar.org"], @response.from
+    end
+    should "have the correct recipients" do
+      assert_equal ['agilar-dev-team@googlegroups.com'], @response.to
+    end
+    should "have the correct body" do
+      assert_match /message/, @response.body
+    end
+  end
 end

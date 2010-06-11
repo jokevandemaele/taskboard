@@ -1,0 +1,48 @@
+<script>
+$('adder-container').show();
+</script>
+<div id="form-add-task" style="position: fixed; top: 0px; left: 0px; display: none;" >
+	<%	remote_form_for @task, :update => {:success => "#{status}-#{story.id}"} do |f| %>
+    <%= submit_tag "Save", :id => "submit", :name => "submit", :class => "form_submit", :disabled => false, :onClick => "this.value = 'Saving...'; $('blocker').show()" %>
+		<div id="form-add-task-fields" style="margin: 0px;">	
+			<a href="#" onClick="flip('form-add-task-fields','back');" >
+				<%= image_tag 'task_flip-new.png', 
+					:alt => 'Flip', 
+          :id => 'form-add-task-fields-flip',
+					:class => 'flip-task-image', 
+					:style => "position: absolute; top: 152px; left: 152px;" -%>
+			</a>
+			<div class="task-container-table-new">	
+			<div class="task-container-cell-new">	
+				<%= f.text_field :name, 
+					:value => "Enter Task Here", 
+					:id => "form-add-task-task_name",
+					:onClick => "this.clear();"
+				-%>
+			</div>
+			</div>
+		</div>
+		<div id="form-add-task-fields-back" style="display:none; position: relative; top: -22px; left: 0;  margin: 0px;">
+			<a href="#" onClick="flip('form-add-task-fields','front');">
+				<%= image_tag 'task_flip-new.png', 
+					:alt => 'Flip', :class => 'flip-task-image', 
+					:style => "position: absolute; top: 149px; left: 152px;" -%>
+			</a>
+		<%= f.text_area :description, 
+			:value => "Description", 
+			:id => "form-add-task-task_description", 
+			:cols => "22", :rows => "8", 
+			:onClick => "this.clear();"
+			-%>
+		</div>
+
+		<%= hidden_field_tag(:story_id, "#{story.id}") %>
+		<%= hidden_field_tag(:status, "#{status}") %>
+
+		<% end -%>
+    <div id ="blocker" style="position:absolute; bottom: 0; left: 0px; background: transparent; width: 160px; height: 30px; z-index: 1000; display: none;">
+</div>
+	<script>
+		centerTo($('form-add-task'),$('adder-container'));
+		Effect.Appear($('form-add-task'));
+	</script>

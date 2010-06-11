@@ -1,8 +1,21 @@
 require 'test_helper'
 
 class StatustagTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
+  context "Statustag" do
+    ################################################################################################################
+    #
+    # Associations
+    #
+    ################################################################################################################
+    should_belong_to :task
+    
+    ################################################################################################################
+    #
+    # Validations
+    #
+    ################################################################################################################
+    should_validate_presence_of :task
+    should_validate_presence_of :status
   end
+  
 end

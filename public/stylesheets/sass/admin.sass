@@ -1,0 +1,310 @@
+@import common
+@import macros
+@import forms
+@import flash
+@import modal_dialog
+@import color_picker
+@import edit_users
+
+body
+  :background url('/images/admin/admin-background.png') repeat-x #f1f6ff
+  
+body, p, ol, ul, td
+  :font-family arial, helvetica, sans-serif
+  :font-size   13px
+  :line-height 18px
+  
+img
+  :border none !important
+  :vertical-align middle
+
+a
+  :text-decoration none !important
+  img
+    :border none !important
+
+  &:visited
+    :color #002255
+  
+input.text
+  border: none
+  background: url('/images/admin/admin-div-field.png') no-repeat top left
+  width: 168px
+  height: 16px
+  padding: 5px
+
+
+p
+  :color #002255
+  :margin 0
+  
+.clear
+  clear: both
+  
+#admin-dummy-container
+  :position relative
+  :margin 0 auto
+  :width 1000px
+  
+  #admin-container
+    :position relative
+    :width 780px
+    :min-height 100px
+    :padding 10px 220px 0 0
+    
+  
+
+/* Header */
+#header
+  +admin_div
+  :position relative
+  :height 88px
+  .agilar_taskboard_logo
+    :position absolute
+    :top 8px
+    :background url('/images/agilar_logo.png')
+    :width 325px
+    :height 88px
+  #user-info
+    :position absolute
+    :right 5px
+    :font-size 10px
+    :text-align right
+    :padding-right 100px
+    #picture
+      :width 88px
+      :height 88px
+      :position absolute
+      :top 0
+      :right 0
+    #text
+      :font-size 16px
+      color: #00112b
+      span.username
+        :color #003380
+      #role
+        :color #00112b
+        :font-size 13px
+      #revision
+        :font-size 9px
+      #links
+        :font-size 12px
+        :color #00112b
+
+      a
+        text-decoration: none
+        color: #00112b
+
+        &:hover
+          color: #2a7fff
+
+
+    #admin-user-info-links
+      position: relative
+
+
+    #admin-user-info #revision
+      position: absolute
+      bottom: 0
+      right: 92px
+      font-size: 12px
+    
+ul#admin-menu
+  :position relative
+  :left 10px
+  :margin 0
+  :padding 0
+  :display inline
+  
+  li
+    +bottom_rounded(10px)
+    :list-style-type none
+    :display inline
+    :margin 0
+    :background #0c82eb
+    :padding 5px 10px
+    
+    a
+      :color white
+      :font-size 14px
+      &:hover
+        :color #ffccaa
+    li.selected
+      a
+        :color #f6c022
+
+/* End Header */
+/* Admin contents */
+.admin_container
+  +admin_div
+  :position relative
+  :margin 0 0 10px 0
+  :padding 10px
+  h2
+    :margin 0 0 2px 0
+    :color #002255
+  h3
+    :color #002255
+    :font-weight normal
+    :margin 0
+    :line-height 35px
+  .admin_actions
+    :position absolute
+    :top 5px
+    :right 5px
+  .section
+    :position relative
+    :padding 0px 0 0 37px
+    :background #afc6e9
+    :margin 5px 0
+    :height 35px
+    a
+      :color #002255
+      :line-height 35px
+      &:hover
+        :color #0c82eb
+    
+    .administration_actions
+      :position absolute
+      :right 5px
+      :top 0
+      .add
+        :line-height 35px
+        :background url('/images/add_small.png') no-repeat center right
+        :padding-right 30px
+        :cursor pointer
+        :color #1b51a2
+        &:hover
+          :color #2a7fff
+  .projects
+    :background url('/images/logo-projects-small.png') no-repeat #afc6e9
+  .users
+    :background url('/images/logo-users-small.png') no-repeat #afc6e9
+  .teams
+    :background url('/images/logo-teams-small.png') no-repeat #afc6e9
+  .guest_team_members
+    :background url('/images/logo-users-small.png') no-repeat #afc6e9
+  .list
+    :position relative
+    .element
+      :float left
+      +rounded(10px)
+      :padding 5px 5px 5px 10px
+      :width 357px
+      :height 23px
+      :line-height 23px
+      :background #f1f6ff
+      :margin 0px 5px 5px 0px
+      :position relative
+      :color #002255
+      a
+        :color #002255
+        &:hover
+          :text-decoration underline
+      .admin
+        +right_rounded(10px)
+        :padding 5px 0px 5px 10px
+        :position absolute
+        :top 0
+        :right 0
+        :height 23px
+        :line-height 23px
+        :background #afc6e9
+        .edit, .remove, .is_admin, .is_org_admin, .is_user, .edit_team_users
+          :width 20px
+          :height 20px
+          :float right
+          :margin-right 10px
+        .edit, .remove, .toggle_admin, .edit_team_users
+          :cursor pointer
+        .edit_team_users
+          :background url('/images/edit_team_users.png') no-repeat
+        .edit
+          :background url('/images/edit_small.png') no-repeat
+        .remove
+          :background url('/images/remove_small.png') no-repeat
+        .is_admin
+          :background url('/images/is_admin.png') no-repeat
+        .is_org_admin
+          :background url('/images/is_org_admin.png') no-repeat
+        .is_user
+          :background url('/images/is_user.png') no-repeat
+        
+        
+  .not-mine
+    :color #AAAAAA !important
+    a
+      :color #AAAAAA !important
+      &:hover
+        :text-decoration underline
+    
+      
+.admin_list
+  
+/* Sidebar */
+#admin-sidebar
+  :position absolute
+  :right 0
+  :top 0
+  :width 220px
+  #admin-sidebar-menu
+    :margin 0
+    :padding 0
+    :list-style none
+    :text-align right
+    :color #00112b
+    :font-size 16px
+    li
+      :cursor pointer
+      :color #1b51a2
+      :padding-right 66px
+      :line-height 66px
+      &:hover
+        :color #2a7fff
+      &.new_organization
+        :background url('/images/add.png') no-repeat center right
+      &.new_invitation
+        :background url('/images/invite.png') no-repeat center right
+  
+/* End Sidebar */
+
+
+#report_bug
+  :position fixed
+  :bottom 0
+  :right 0
+
+.remove_organization, .new_organization
+  :cursor pointer
+
+.team_info
+  :padding 5px
+  h1
+    :background url('/images/logo-teams-small.png') no-repeat center left
+    :line-height 37px
+    :font-size 14px
+    :margin 0
+    :color #002255
+    :padding-left 37px
+  h2
+    :font-size 12px
+    :margin-top 12px
+  p
+    :font-size 11px
+  hr
+    :border-top 3px solid #0C82EB
+    :border-right none
+    :border-bottom none
+    :border-left none
+    :position absolute
+    :left 0
+    :right 0
+  ul
+    :color #002255
+    :margin 0
+    :font-size 11px
+    :padding 0
+    li
+      :list-style-type none
+      :margin 0
+      :padding 0

@@ -1,6 +1,6 @@
 class Admin::MembersController < ApplicationController
-  before_filter :login_required, :except => [:login, :logout]
-  before_filter :check_permissions, :except => [:login, :logout, :access_denied, :report_bug]
+  before_filter :require_user, :except => [:login, :logout, :access_denied ]
+  # before_filter :check_permissions, :except => [:login, :logout, :access_denied, :report_bug ]
   layout 'admin/members', :except => [:report_bug, :login]
   
   # GET /members
@@ -41,7 +41,7 @@ class Admin::MembersController < ApplicationController
     @member.new_organization = @params[:organization]
     @member.new_picture = @params[:picture_file]
     if @member.save
-      @member.added_by = @current_member.name
+      @member.added_by = current_user.name
       render :inline => "<script>top.location.reload(true)</script>", :status => :created
     else
       render :partial => "user_form_error", :locals => { :object => @member }, :status => :bad_request
@@ -102,7 +102,6 @@ class Admin::MembersController < ApplicationController
 
   def access_denied
     @hide_sidebar = true
-    @current_member = Member.find(session[:member])
     render :template => "admin/members/access_denied", :status => :forbidden
   end
 

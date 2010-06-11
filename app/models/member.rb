@@ -22,58 +22,58 @@ class Member < ActiveRecord::Base
   before_create :generate_password_if_missing
   after_create :assign_picture, :add_to_organization_and_send_email_notification
 
-  def assign_picture
-    self.add_picture(self.new_picture) if self.new_picture
-  end
+  # def assign_picture
+  #   self.add_picture(self.new_picture) if self.new_picture
+  # end
 
-  def add_to_organization_and_send_email_notification
-    self.add_to_organization(self.new_organization)
-    # Send email notificating the lucky user
-    MemberMailer.deliver_create(self)
-  end
+  # def add_to_organization_and_send_email_notification
+  #   self.add_to_organization(self.new_organization)
+  #   # Send email notificating the lucky user
+  #   MemberMailer.deliver_create(self)
+  # end
 
   def generate_password_if_missing
     salt = Time.now.to_s
     self.password = Digest::SHA1.hexdigest(salt + self.name + self.username + self.email)[0..7] if self.hashed_password.nil?
   end
 
-  # add user to organization
-  def add_to_organization(organization)
-    if organization
-      
-      @membership = OrganizationMembership.new(
-        :member_id => self.id,
-        :organization_id => organization
-      )
-      
-      @membership.save
-    end
-  end
+  # # add user to organization
+  # def add_to_organization(organization)
+  #   if organization
+  #     
+  #     @membership = OrganizationMembership.new(
+  #       :member_id => self.id,
+  #       :organization_id => organization
+  #     )
+  #     
+  #     @membership.save
+  #   end
+  # end
   
-  # return all the organizations the user can admin
-  def organizations_administered
-    return Organization.all if self.admin?
-    self.organization_memberships.administered.collect {|membership| membership.organization }
-  end
+  # # return all the organizations the user can admin
+  # def organizations_administered
+  #   return Organization.all if self.admin?
+  #   self.organization_memberships.administered.collect {|membership| membership.organization }
+  # end
+
+  # #see if the user admins an organization
+  # def admins?(organization)
+  #   self.organizations_administered.include?(organization)
+  # end
 
   #see if the user admins an organization
-  def admins?(organization)
-    self.organizations_administered.include?(organization)
-  end
+  # def admins_any_organization?
+  #   !self.organizations_administered.empty?
+  # end
 
-  #see if the user admins an organization
-  def admins_any_organization?
-    !self.organizations_administered.empty?
-  end
-
-  def projects
-    projects = []
-    self.teams.each do |team| 
-      team.projects.each {|project| projects << project if !projects.include?(project) }
-    end
-    projects += self.guest_projects
-    return projects
-  end
+  # def projects
+  #   projects = []
+  #   self.teams.each do |team| 
+  #     team.projects.each {|project| projects << project if !projects.include?(project) }
+  #   end
+  #   projects += self.guest_projects
+  #   return projects
+  # end
   
   # password: this method encrypts the plain text password to store it in the database
   def password=(pass)
@@ -88,25 +88,25 @@ class Member < ActiveRecord::Base
     return member if Member.encrypt(password)==member.hashed_password
   end
 
-  # formated_nametags: this method is used to return the correct name of a member to display in it's nametag
-  def formatted_nametag(team = nil)
-    if(team)
-      @team = Team.find(team)
-      members = @team.members
-    else
-      members = Member.all()
-    end
-    
-    names = name.split()
-    name = names[0]
-    members = members - [self]
-    members.each do 
-    |member|
-    member_nametag = member.name.split()
-      name = "#{names[0]} #{names[1][0,1]}" if member_nametag[0] == names[0] && names.length > 1
-    end
-    return name.upcase()[0..8]
-  end
+  # # formated_nametags: this method is used to return the correct name of a member to display in it's nametag
+  # def formatted_nametag(team = nil)
+  #   if(team)
+  #     @team = Team.find(team)
+  #     members = @team.members
+  #   else
+  #     members = Member.all()
+  #   end
+  #   
+  #   names = name.split()
+  #   name = names[0]
+  #   members = members - [self]
+  #   members.each do 
+  #   |member|
+  #   member_nametag = member.name.split()
+  #     name = "#{names[0]} #{names[1][0,1]}" if member_nametag[0] == names[0] && names.length > 1
+  #   end
+  #   return name.upcase()[0..8]
+  # end
   
   def add_picture(picture_file)
     # if(picture_file)
@@ -146,16 +146,16 @@ class Member < ActiveRecord::Base
     # end
   end
   
-  def administrators
-    admins = []
-    organizations.each {|organization| OrganizationMembership.all(:conditions => ["organization_id = ? AND admin = ?", organization, true]).collect { |memb| admins << memb.member if !admins.include?(memb.member) } } 
-    return admins
-  end
+  # def administrators
+  #   admins = []
+  #   organizations.each {|organization| OrganizationMembership.all(:conditions => ["organization_id = ? AND admin = ?", organization, true]).collect { |memb| admins << memb.member if !admins.include?(memb.member) } } 
+  #   return admins
+  # end
 
 protected
 
-  # Auxiliary Functions
-  def self.encrypt(pass)
-    Digest::SHA1.hexdigest(pass)
-  end
+  # # Auxiliary Functions
+  # def self.encrypt(pass)
+  #   Digest::SHA1.hexdigest(pass)
+  # end
 end

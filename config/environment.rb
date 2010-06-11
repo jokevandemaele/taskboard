@@ -5,14 +5,14 @@
 # ENV['RAILS_ENV'] ||= 'production'
 
 # Specifies gem version of Rails to use when vendor/rails is not present
-RAILS_GEM_VERSION = '2.3.4' unless defined? RAILS_GEM_VERSION
+RAILS_GEM_VERSION = '2.3.8' unless defined? RAILS_GEM_VERSION
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 
-TASKBOARD_VERSION = '0.1.5' unless defined? TASKBOARD_VERSION
-SVN_REVISION = `svnversion -n`.gsub(/\D/, '') unless defined? SVN_REVISION
-FULL_VERSION = "v#{TASKBOARD_VERSION} rev #{SVN_REVISION}" unless defined? FULL_VERSION
+TASKBOARD_VERSION = '0.1.6' unless defined? TASKBOARD_VERSION
+TASKBOARD_VERSION_TAG = 'migration to authlogic'
+FULL_VERSION = "v#{TASKBOARD_VERSION} #{TASKBOARD_VERSION_TAG}" unless defined? FULL_VERSION
 
 Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence over those specified here.
@@ -29,10 +29,17 @@ Rails::Initializer.run do |config|
   # You have to specify the :lib option for libraries, where the Gem name (sqlite3-ruby) differs from the file itself (sqlite3)
   # config.gem "bj"
   # config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"
-  # config.gem "sqlite3-ruby", :lib => "sqlite3"
+  config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"
   # config.gem 'rmagick'
-  # config.gem 'rcov'
+  # config.gem 'mysql'
+  config.gem 'haml'
+  config.gem 'authlogic'
+  config.gem "thoughtbot-paperclip", :lib => "paperclip", :source => "http://gems.github.com"
+  
+  # erubis required by rails_xss
+  config.gem "erubis"
+  
   #   
   # Only load the plugins named here, in the order given. By default, all plugins 
   # in vendor/plugins are loaded in alphabetical order.
@@ -61,7 +68,7 @@ Rails::Initializer.run do |config|
   # Make sure the secret is at least 30 characters and all random, 
   # no regular words or you'll be exposed to dictionary attacks.
   config.action_controller.session = {
-    :session_key => '_taskboard_session',
+    :key => '_taskboard_session',
     :secret      => '3cd83128b90a6dc2cbaf748b67403769f34ff9beba9e4f46d044699bbc8c59a576a311b79318eb763a44dbc68e1490502c227a2fcf9aab037404f00a23704c55'
   }
 

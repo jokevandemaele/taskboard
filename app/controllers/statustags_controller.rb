@@ -1,38 +1,38 @@
 class StatustagsController < ApplicationController
-  before_filter :login_required
-  before_filter :member_belongs_to_project
+  before_filter :require_user
+  before_filter :require_belong_to_project_or_admin
+  before_filter :find_story
+  before_filter :find_task
+  before_filter :find_tag, :except => [:create]
   
-  # POST /statustags
+  def show
+    render @tag
+  end
+  
   def create
-    @project = Project.find(params[:project_id])
-    @statustag = Statustag.new(params[:statustag])
-    if @project.stories.include?(@statustag.task.story) && @statustag.save
+    @tag = @task.statustags.create(params[:statustag])
+    if @tag.save
+      render @tag, :status => :created
+    else
+      render :inline => '', :status => :precondition_failed
+    end
+  end
+
+  def update
+    @tag.task = Task.find(params[:statustag][:task_id])
+    if @tag.save && @tag.update_attributes(params[:statustag])
       render :inline => '', :status => :ok
     else
-      render :inline => '', :status => :bad_request
+      render :inline => '', :status => :precondition_failed
     end
   end
 
-  # PUT /statustags/1
-  def update
-    @project = Project.find(params[:project_id])
-    @statustag = Statustag.find(params[:id])
-    @statustag.update_attributes(params[:statustag])
-    if @project.stories.include?(@statustag.task.story) && @statustag.save
-      render :inline => "", :status => :ok
-    else
-      render :inline => "", :status => :bad_request
-    end
-  end
-
-  # DELETE /statustags/1?statustag=id
   def destroy
-    @tag = Statustag.find(params[:id])
-    @html_id = "statustag-project-#{@tag.task.story.project.id}-#{@tag.id.to_s}"
-    if @tag.destroy
-      render :inline => "", :status => :ok
-    else
-      render :inline => "", :status => :bad_request
-    end
+    @tag.destroy
+    render :inline => "", :status => :ok
+  end
+  
+  def find_tag
+    @tag = @task.statustags.find(params[:id])
   end
 end

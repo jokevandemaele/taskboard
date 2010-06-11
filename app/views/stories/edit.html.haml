@@ -1,0 +1,6 @@
+#form
+  #form-logo= image_tag "logo-projects.png"
+  %h1.organization Edit Story
+  - remote_form_for @story, :url => project_story_path(@project, @story, :format => :json), :success => 'Stories.afterUpdate(request.responseText);', :failure => 'ModalDialog.displayFormErrors(request.responseJSON);' do |f|
+    = render :partial => 'form', :object => f
+    = f.submit

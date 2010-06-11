@@ -1,0 +1,14 @@
+#form
+  %h1 Create Task
+  - remote_form_for @task, :url => project_story_tasks_path(@project, @story, :format => :json), :success => 'Tasks.afterCreate(request.responseText);', :failure => 'ModalDialog.displayFormErrors(request.responseJSON);' do |form|
+    = form.error_messages 
+    .field
+      = form.label :name
+      = form.text_field :name
+
+    .field
+      = form.label :description
+      = form.text_area :description
+    = form.submit
+    :javascript
+      $('task_name').focus();

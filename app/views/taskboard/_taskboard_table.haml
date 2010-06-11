@@ -7,5 +7,5 @@
       %th{ :style=> "width: 25%; #{taskboard_border_style(@color, [ "left", "right", "bottom"])}"}= image_tag "taskboard_finished.png", :alt => "Finished"
     - for story in @stories_by_priority
       - if story.priority != -1
-        %tr{:id => "story-#{story.id}" }
+        %tr.story_holder{:id => "story-#{story.id}", 'data-story-id' => story.id, 'data-project-id' => story.project_id }
           = render :partial => "stories/show", :locals => { :story => story }

@@ -1,0 +1,6 @@
+/ .element.guest_team_member{ :id => "guest-team-member-#{guest_team_member.id}", 'data-guest-team-member-id' => guest_team_member.id }
+/   %span.name= guest_team_member.name
+/   - if current_user.admins?(organization)
+/     .admin
+/       .remove.remove_guest_team_member{ :title => "Remove from all Projects"}
+/       .edit.edit_guest_team_member{ :title => "Edit Projects for team member"}
