@@ -134,6 +134,7 @@ ul#admin-menu
         :color #f6c022
 
 /* End Header */
+
 /* Admin contents */
 .admin_container
   +admin_div
@@ -210,7 +211,7 @@ ul#admin-menu
         :height 23px
         :line-height 23px
         :background #afc6e9
-        .edit, .remove, .is_admin, .is_org_admin, .is_user, .edit_team_users
+        .edit, .remove, .is_admin, .is_org_admin, .is_user, .edit_team_users, .public_project
           :width 20px
           :height 20px
           :float right
@@ -229,8 +230,13 @@ ul#admin-menu
           :background url('/images/is_org_admin.png') no-repeat
         .is_user
           :background url('/images/is_user.png') no-repeat
+        .public_project
+          :background url('/images/public_project.png') no-repeat
+          :cursor pointer
         
-        
+  .public_hash_container
+    :font-size 20px
+    :margin 30px 10px
   .not-mine
     :color #AAAAAA !important
     a

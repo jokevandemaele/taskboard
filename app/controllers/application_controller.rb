@@ -235,4 +235,16 @@ class ApplicationController < ActionController::Base
       redirect_to root_url
       return false
     end
+
+    def require_belong_to_project_or_auth_guest
+      @project = Project.find(params[:project_id])
+      p @project
+      @public_hash = params[:public_hash]
+      if @project.public?
+        require_belong_to_project_or_admin if @public_hash != @project.public_hash# check if has the correct hash
+      else
+        require_belong_to_project_or_admin
+      end
+    end
+
 end

@@ -26,6 +26,16 @@ class TaskboardControllerTest < ActionController::TestCase
       should_render_template :index
     end
 
+    context "if i do GET to :index in a project i don't belong to" do
+      setup do
+        @project1 = Factory(:project)
+        @project1.public = true
+        @project.save
+        get :index, :project_id => @project.to_param, :public_hash => @project.public_hash
+      end
+      should_render_template :index
+    end
+
     context "if i do GET to :team in a team i belong to" do
       setup do
         get :team, :team_id => @team.to_param

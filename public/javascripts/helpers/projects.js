@@ -69,6 +69,19 @@ Application.Helpers.Projects = {
       }
     });
   },
+  
+  showPublicHash: function(project){
+    var publicHash = project.readAttribute('data-project-public-hash');
+    var projectId = project.readAttribute('data-project-id');
+    if(publicHash){
+      var container = new Element('div');
+      var publicHashText = new Element('p', { 'class' : 'public_hash_container'}).update("Public Hash: <strong>" + publicHash + "</strong>");
+      container.appendChild(publicHashText);
+      var publicHashLink = new Element('p', { 'class' : 'public_hash_container'}).update("<a href='/projects/"+projectId+"/taskboard?public_hash=" + publicHash+"'>Public Link</a>");
+      container.appendChild(publicHashLink);
+      ModalDialog.open(container, { ignoreFormSubmit : true });
+    }
+  },
   // 
   _setupListeners: function(){
     // Organization List Listeners
@@ -82,24 +95,29 @@ Application.Helpers.Projects = {
 
       // Listener for add project
       if(target.match('.new_project')){
-        organizationId = target.up('.organization').readAttribute('data-organization-id');
+        var organizationId = target.up('.organization').readAttribute('data-organization-id');
         Projects.newForm(organizationId);
       }
 
       // Listener for remove project
       if(target.match('.remove_project')){
-        organization = target.up('.organization');
-        project = target.up('.project');
+        var organization = target.up('.organization');
+        var project = target.up('.project');
         ModalDialog.yes_no("Are you sure?", function() { Projects.deleteProject(project, organization) })
       }
       
       // Listener for edit project
       if(target.match('.edit_project')){
-        organization = target.up('.organization');
-        project = target.up('.project');
+        var organization = target.up('.organization');
+        var project = target.up('.project');
         Projects.editForm(project, organization);
       }
-      
+
+      // Listener for public project
+      if(target.match('.public_project')){
+        var project = target.up('.project');
+        Projects.showPublicHash(project);
+      }
     });
   }
 };

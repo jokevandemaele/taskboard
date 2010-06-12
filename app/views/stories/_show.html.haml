@@ -24,21 +24,21 @@
       = image_tag 'waiting.gif', :id => 'waiting-in_progress-#{story.id}', :style => "vertical-align: middle;"
       %br
       Loading...
-  %script= remote_function(:update => "not_started-#{story.id}", :url => { :controller => :stories, :action => :tasks_by_status, :id => story.id, :status => 'not_started', :project_id => story.project.id }) 
+  %script= remote_function(:update => "not_started-#{story.id}", :url => { :controller => :stories, :action => :tasks_by_status, :id => story.id, :status => 'not_started', :project_id => story.project.id, :public_hash => @public_hash }) 
 %td{ :id => "in_progress-#{story.id}", :style => taskboard_border_style(@color, [ 'left', 'bottom']), 'data-action' => 'start' }
   - cache do
     %div{:style => "width: 100%; text-align: center;"}
       = image_tag 'waiting.gif', :id => 'waiting-in_progress-#{story.id}', :style => "vertical-align: middle;"
       %br
       Loading...
-  %script= remote_function(:update => "in_progress-#{story.id}", :url => { :controller => :stories, :action => :tasks_by_status, :id => story.id, :status => 'in_progress', :project_id => story.project.id })
+  %script= remote_function(:update => "in_progress-#{story.id}", :url => { :controller => :stories, :action => :tasks_by_status, :id => story.id, :status => 'in_progress', :project_id => story.project.id, :public_hash => @public_hash })
 %td{ :id => "finished-#{story.id}", :style => taskboard_border_style(@color, [ 'left', 'right', 'bottom']), 'data-action' => 'finish' }
   - cache do
     %div{:style => "width: 100%; text-align: center;"}
       = image_tag 'waiting.gif', :id => 'waiting-in_progress-#{story.id}', :style => "vertical-align: middle;"
       %br
       Loading...
-  %script= remote_function(:update => "finished-#{story.id}", :url => { :controller => :stories, :action => :tasks_by_status, :id => story.id, :status => 'finished', :project_id => story.project.id })
+  %script= remote_function(:update => "finished-#{story.id}", :url => { :controller => :stories, :action => :tasks_by_status, :id => story.id, :status => 'finished', :project_id => story.project.id, :public_hash => @public_hash })
 
 %script= "new YAHOO.util.DDTarget('story_card-#{story.id}');"
 %script= "new YAHOO.util.DDTarget('not_started-#{story.id}');"

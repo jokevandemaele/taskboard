@@ -8,5 +8,9 @@
 
   #dummy-for-actions
 
+- if !current_user && @project.public?
+  .the_disabler
+
 - content_for :helpers do
   = javascript_include_tag 'helpers/tasks.js', 'helpers/modal_dialog.js'
+

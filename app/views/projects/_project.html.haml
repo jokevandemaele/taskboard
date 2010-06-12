@@ -1,4 +1,4 @@
-.element.project{ :class => ('not-mine' if !current_user.projects.include?(project)), :id => "project-#{project.id}", 'data-project-id' => project.id }
+.element.project{ :class => ('not-mine' if !current_user.projects.include?(project)), :id => "project-#{project.id}", 'data-project-id' => project.id, 'data-project-public-hash' => (project.public_hash if project.public?) }
 
   / Element name TODO: RESIZE!!
   - if (project.users.include?(current_user) || current_user.admins?(organization))
@@ -6,7 +6,10 @@
   - else
     %span.name= project.name
     
-  - if current_user.admins?(organization)
+  - if current_user.admins?(organization) || project.public?
     .admin
-      .remove.remove_project{ :title => "Remove Project"}
-      .edit.edit_project{ :title => "Edit Project"}
+      - if current_user.admins?(organization)
+        .remove.remove_project{ :title => "Remove Project"}
+        .edit.edit_project{ :title => "Edit Project"}
+      - if project.public?
+        .public_project{ :title => 'Public Project' }

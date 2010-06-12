@@ -1,6 +1,7 @@
 class StoriesController < ApplicationController
-  before_filter :require_user
-  before_filter :require_belong_to_project_or_admin
+  before_filter :require_user, :except => [:tasks_by_status]
+  before_filter :require_belong_to_project_or_admin, :except => [:tasks_by_status]
+  before_filter :require_belong_to_project_or_auth_guest, :only => [:tasks_by_status]
   before_filter :find_story, :only => [ :edit, :update, :destroy, :start, :stop, :finish, :update_priority, :update_size ]
   layout nil
 
