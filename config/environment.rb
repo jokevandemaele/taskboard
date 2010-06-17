@@ -10,9 +10,8 @@ RAILS_GEM_VERSION = '2.3.8' unless defined? RAILS_GEM_VERSION
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 
-TASKBOARD_VERSION = '0.1.6' unless defined? TASKBOARD_VERSION
-TASKBOARD_VERSION_TAG = 'migration to authlogic'
-FULL_VERSION = "v#{TASKBOARD_VERSION} #{TASKBOARD_VERSION_TAG}" unless defined? FULL_VERSION
+TASKBOARD_VERSION = '0.2' unless defined? TASKBOARD_VERSION
+FULL_VERSION = "v#{TASKBOARD_VERSION}" unless defined? FULL_VERSION
 
 Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence over those specified here.
@@ -30,9 +29,6 @@ Rails::Initializer.run do |config|
   # config.gem "bj"
   # config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"
   config.gem "sqlite3-ruby", :lib => "sqlite3"
-  # config.gem "aws-s3", :lib => "aws/s3"
-  # config.gem 'rmagick'
-  # config.gem 'mysql'
   config.gem 'haml'
   config.gem 'authlogic'
   config.gem "thoughtbot-paperclip", :lib => "paperclip", :source => "http://gems.github.com"
@@ -40,7 +36,6 @@ Rails::Initializer.run do |config|
   # erubis required by rails_xss
   config.gem "erubis"
   
-  #   
   # Only load the plugins named here, in the order given. By default, all plugins 
   # in vendor/plugins are loaded in alphabetical order.
   # :all can be used as a placeholder for all plugins not explicitly named
@@ -58,20 +53,6 @@ Rails::Initializer.run do |config|
   # Run "rake -D time" for a list of tasks for finding time zone names. Comment line to use default local time.
   config.time_zone = 'UTC'
 
-  # The internationalization framework can be changed to have another default locale (standard is :en) or more load paths.
-  # All files from config/locales/*.rb,yml are added automatically.
-  # config.i18n.load_path << Dir[File.join(RAILS_ROOT, 'my', 'locales', '*.{rb,yml}')]
-  # config.i18n.default_locale = :de
-
-  # Your secret key for verifying cookie session data integrity.
-  # If you change this key, all old sessions will become invalid!
-  # Make sure the secret is at least 30 characters and all random, 
-  # no regular words or you'll be exposed to dictionary attacks.
-  config.action_controller.session = {
-    :key => '_taskboard_session',
-    :secret      => '3cd83128b90a6dc2cbaf748b67403769f34ff9beba9e4f46d044699bbc8c59a576a311b79318eb763a44dbc68e1490502c227a2fcf9aab037404f00a23704c55'
-  }
-
   # Use the database for sessions instead of the cookie-based default,
   # which shouldn't be used to store highly confidential information
   # (create the session table with "rake db:sessions:create")
@@ -86,20 +67,32 @@ Rails::Initializer.run do |config|
   # Please note that observers generated using script/generate observer need to have an _observer suffix
   # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
 
-  # ActionMailer
-  #config.action_mailer.delivery_method = :sendmail
-  config.action_mailer.delivery_method = :smtp
+  ##############################################################################################################################################
+  # Mail Configuration
+  ##############################################################################################################################################
+  config.action_mailer.delivery_method = :sendmail
+
+  # Custom SMTP Configuration
+  # config.action_mailer.delivery_method = :smtp
   # config.action_mailer.smtp_settings = {
-  #    :address => 'mail.agilar.org',
+  #    :address => 'mail.example.com',
   #    :port => 25,
-  #    :domain => 'agilar.org',
+  #    :domain => 'example.com',
   #    :authentication => :login,
-  #    :user_name => 'no-reply@agilar.org',
-  #    :password => 'agilarnrp.094'
+  #    :user_name => 'tasboard@example.com',
+  #    :password => 'secret'
   # }
-  config.action_mailer.smtp_settings = {
-     :address => 'localhost',
-     :port => 25,
-     :domain => 'agilar.org',
-  }
+
+  # GoogleApps Configuration
+  # config.action_mailer.smtp_settings = {
+  #   :address  => "smtp.gmail.com" ,
+  #   :port     => 587,
+  #   :domain   => "example.com" ,
+  #   :authentication => :plain,
+  #   :user_name => "admin@example.com" ,
+  #   :password  => "secret",
+  #   :tsl => true,
+  #   :enable_starttls_auto => true
+  # }
+
 end
