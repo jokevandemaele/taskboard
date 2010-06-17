@@ -5,3 +5,4 @@ coverage
 tmpcoverage.data
 tmp
 coverage.data
+config/database.yml

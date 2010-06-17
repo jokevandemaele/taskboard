@@ -1,0 +1,64 @@
+
+############################################################################################
+# Development Environment
+############################################################################################
+
+# MySQL with sock
+# development:
+#   adapter: mysql
+#   encoding: utf8
+#   database: taskboard_development
+#   username: root
+#   password: 
+#   socket: /tmp/mysql.sock
+
+# MySQL with IP
+# development:
+#  adapter: mysql
+#  encoding: utf8
+#  database: taskboard_development
+#  username: taskboard
+#  password: taskboard
+#  host: 127.0.0.1
+
+# sqlite3
+development:
+  adapter: sqlite3
+  database: db/development.sqlite3
+  pool: 5
+  timeout: 5000
+
+############################################################################################
+# Test Environment
+############################################################################################
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+
+# sqlite3 in memory
+test:
+  adapter: sqlite3
+  database: ":memory:"
+  verbosity: quiet
+  #database: db/test.sqlite3
+  #pool: 5
+  #timeout: 5000
+
+# sqlite3 in disk
+# test:
+#  adapter: sqlite3
+#  database: db/test.sqlite3
+#  pool: 5
+#  timeout: 5000
+
+############################################################################################
+# Production Environment
+############################################################################################
+
+production:
+  adapter: mysql
+  encoding: utf8
+  database: taskboard_production
+  username: taskboard
+  password: taskboard
+  host: 127.0.0.1
