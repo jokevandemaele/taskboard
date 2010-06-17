@@ -50,7 +50,7 @@ Rails::Initializer.run do |config|
   # no regular words or you'll be exposed to dictionary attacks.
   config.action_controller.session = {
     :key => '_changeme_session',
-    :secret      => 'some_secret_phrase'
+    :secret      => 'some_secret_phrase698b0285d597682744c30fa7a3aa74dd'
   }
 
 
