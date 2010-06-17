@@ -17,7 +17,7 @@ class UserMailerTest < ActionMailer::TestCase
         assert !ActionMailer::Base.deliveries.empty? 
       end
       should "have the correct subject" do
-        assert_equal 'Welcome to the Agilar Taskboard!', @response.subject
+        assert_equal Configuration['emails']['new_user']['subject'], @response.subject
       end
       should "have the correct recipients" do
         assert_equal [@user.email], @response.to

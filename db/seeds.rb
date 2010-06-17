@@ -10,5 +10,4 @@ default_user_data = {
 }
 
 default_user = User.create(default_user_data)
-p default_user
 default_user.toggle_admin!

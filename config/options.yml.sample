@@ -8,3 +8,6 @@ emails:
     from_email: "taskboard@example.com"
     to: "MyCompany Development Team <dev-team@example.com>"
     subject: "[TASKBOARD-BUG-REPORT]"
+
+application:
+  url: "http://taskboard.example.com"

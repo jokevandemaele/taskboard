@@ -10,13 +10,13 @@ class BugReporterTest < ActionMailer::TestCase
       assert !ActionMailer::Base.deliveries.empty? 
     end
     should "have the correct subject" do
-      assert_equal "[TASKBOARD-BUG-REPORT] From: #{@user.name} <#{@user.email}> - bug", @response.subject
+      assert_equal "#{Configuration['emails']['bug_report']['subject']} From: #{@user.name} <#{@user.email}> - bug", @response.subject
     end
     should "have the correct sender" do
-      assert_equal ["taskboard@agilar.org"], @response.from
+      assert_equal ["#{Configuration['emails']['bug_report']['from_email']}"], @response.from
     end
     should "have the correct recipients" do
-      assert_equal ['agilar-dev-team@googlegroups.com'], @response.to
+      assert_equal ["#{Configuration['emails']['bug_report']['to_email']}"], @response.to
     end
     should "have the correct body" do
       assert_match /message/, @response.body
