@@ -6,7 +6,8 @@ emails:
   bug_report:
     from_name: "MyCompany Taskboard"
     from_email: "taskboard@example.com"
-    to: "MyCompany Development Team <dev-team@example.com>"
+    to_name: "MyCompany Development Team"
+    to_email: "dev@example.com"
     subject: "[TASKBOARD-BUG-REPORT]"
 
 application:
