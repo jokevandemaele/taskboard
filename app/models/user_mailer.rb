@@ -1,11 +1,11 @@
 class UserMailer < ActionMailer::Base
 
   def create(user, sent_at = Time.now)
-    subject     'Welcome to the Agilar Taskboard!'
+    subject     Configuration['emails']['new_user']['subject']
     recipients  user.email
-    from        %("Agilar Taskboard" <info@agilar.org>)
+    from        %("#{Configuration['emails']['new_user']['from_name']}" <#{Configuration['emails']['new_user']['from_email']}>)
     sent_on     sent_at
-    
+
     body        :user => user
   end
 

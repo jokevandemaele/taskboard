@@ -1,4 +1,14 @@
-@organization = Organization.create(:id => 1000, :name => "Default Organization")
-@user = User.new( :name => 'Default Administrator User', :login => 'istraitor', :password => 'pachelbel',:password_confirmation => 'pachelbel', :email => 'fakemail@example.com', :new_organization => @organization )
-@user.save
-@user.toggle_admin!
+default_organization = Organization.create(:id => 1000, :name => "Default Organization")
+
+default_user_data = { 
+  :name => 'Default Administrator User', 
+  :login => 'admin', 
+  :password => 'secret',
+  :password_confirmation => 'secret', 
+  :email => 'fakemail@example.com', 
+  :new_organization => default_organization 
+}
+
+default_user = User.create(default_user_data)
+p default_user
+default_user.toggle_admin!
