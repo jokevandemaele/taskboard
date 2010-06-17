@@ -71,10 +71,6 @@ class TeamsController < ApplicationController
     render :json => '', :status => :ok
   end
   
-  # GET /organizations/[organization_id]/projects/1/edit
-  # def display_compact_info
-  #   @team = Team.find(params[:id])
-  # end
 private 
   def find_user
     @user = @organization.users.find(params[:user_id])

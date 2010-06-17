@@ -2,7 +2,7 @@ class TaskboardController < ApplicationController
   before_filter :require_belong_to_project_or_auth_guest, :only => :index
   before_filter :require_user, :only => :team
   before_filter :require_belong_to_team, :only => :team
-  # before_filter :team_belongs_to_project, :only => :team
+
   layout 'taskboard'
   def index
     @view = :project
