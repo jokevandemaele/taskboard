@@ -1,0 +1,37 @@
+= form.error_messages 
+.field
+  = form.label :name
+  = form.text_field :name
+
+.field
+  = form.label :login
+  = form.text_field :login
+
+.field
+  = form.label :email
+  = form.text_field :email
+
+.field
+  = form.label :password
+  = form.password_field :password
+
+.field
+  = form.label :password_confirmation
+  = form.password_field :password_confirmation
+
+.field
+  = form.label :color
+  = form.text_field :color, :readonly => 'readonly'
+
+- if form.object.id
+  .field
+    = form.label :avatar
+    = form.file_field :avatar
+
+:javascript
+  $('user_color').setStyle({color: '##{@user.color}', background: '##{@user.color}'});
+  $('user_color').observe('mousedown', function(event) {
+    event.stop();
+  });
+  ColorPicker.attach('modal_dialog', '250px', '110px', 'user_color');
+

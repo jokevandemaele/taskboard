@@ -1,45 +1,69 @@
 class Organization < ActiveRecord::Base
+  ################################################################################################################
+  #
+  # Validations
+  #
+  ################################################################################################################
+  validates_presence_of :name
+  validates_uniqueness_of :name
+  
+  ################################################################################################################
+  #
   # Associations
+  #
+  ################################################################################################################
   has_many :projects, :dependent => :destroy
   has_many :teams, :dependent => :destroy
   has_many :organization_memberships, :dependent => :destroy
-  has_many :members, :through => :organization_memberships
-  validates_uniqueness_of :name
+  has_many :users, :through => :organization_memberships
+  has_many :members, :through => :organization_memberships  # Remove after migration
 
+  ################################################################################################################
+  #
+  # Attributes Accessible
+  #
+  ################################################################################################################
+  attr_accessible :name
+  
+  ################################################################################################################
+  #
   # Callbacks
+  #
+  ################################################################################################################
   after_create :add_default_team_and_project
 
-  def add_default_team_and_project
-    team = Team.create(:name => "#{self.name} Team", :organization => self, :color => "3771c8")
-    project = Project.create(:name => "#{self.name} Project", :organization => self, :teams => [team])
-  end
+  ################################################################################################################
+  #
+  # Instance Methods
+  #
+  ################################################################################################################
 
-  def members_ordered_by_role
+  def users_ordered_by_role
     admins = []
     org_admins = []
     normal = []
-    self.members.each do |member|
-      normal << member if !member.admin? && !member.admins?(self)
-      org_admins << member if !member.admin? && member.admins?(self)
-      admins << member if member.admin?
+    users.each do |user|
+      normal << user if !user.admin? && !user.admins?(self)
+      org_admins << user if !user.admin? && user.admins?(self)
+      admins << user if user.admin?
     end
     return admins + org_admins + normal
   end
   
-  def teams_ordered_for_member(member)
+  def teams_ordered_for_user(user)
     teams = self.teams
-    teams_ordered_for_member = []
-    teams.each { |team| teams_ordered_for_member << team if team.members.include?(member) }
-    teams.each { |team| teams_ordered_for_member << team if !team.members.include?(member) }
-    return teams_ordered_for_member
+    teams_ordered_for_user = []
+    teams.each { |team| teams_ordered_for_user << team if team.users.include?(user) }
+    teams.each { |team| teams_ordered_for_user << team if !team.users.include?(user) }
+    return teams_ordered_for_user
   end
 
-  def projects_ordered_for_member(member)
+  def projects_ordered_for_user(user)
     projects = self.projects
-    projects_ordered_for_member = []
-    projects.each { |project| projects_ordered_for_member << project if project.members.include?(member) }
-    projects.each { |project| projects_ordered_for_member << project if !project.members.include?(member) }
-    return projects_ordered_for_member
+    projects_ordered_for_user = []
+    projects.each { |project| projects_ordered_for_user << project if project.users.include?(user) }
+    projects.each { |project| projects_ordered_for_user << project if !project.users.include?(user) }
+    return projects_ordered_for_user
   end
 
   def guest_members
@@ -49,4 +73,27 @@ class Organization < ActiveRecord::Base
     end
     return guests
   end
+  
+  # returns the administrators for the organization
+  def admins
+    organization_memberships.administered.collect {|membership| membership.user }
+  end
+
+  # returns the users that don't belong to the team
+  def users_out_of_team(team)
+    users - team.users
+  end
+private
+  # adds the default project and team needed when creating an organization
+  def add_default_team_and_project
+    # Add default team
+    teams.create(:name => "#{self.name} Team")
+    # Add default project
+    project = projects.create(:name => "#{name} Project")
+    # Add default team to default project
+    projects.first.teams << teams.first
+    project.save
+  end
+  
+
 end

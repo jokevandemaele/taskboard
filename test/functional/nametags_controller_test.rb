@@ -1,97 +1,89 @@
-require 'test_helper'
+require File.dirname(__FILE__) + '/../test_helper'
 
 class NametagsControllerTest < ActionController::TestCase
- test "validate that the task id belongs to a story that belongs to the project passed" do
-   login_as_administrator
-   post :create, { :project_id => projects(:find_the_island).id, :nametag => { :task_id => tasks(:non_widmore_task).id, :member_id => 1, :relative_position_x => 1, :relative_position_y => 1 }}
-   assert_response :bad_request
-
-   login_as_administrator
-   put :update, { :project_id => projects(:find_the_island).id, :id => 1, :id => nametags(:one).id, :nametag => { :task_id => tasks(:non_widmore_task).id, :member_id => 1, :relative_position_x => 1024, :relative_position_y => 1 } }
-   assert_response :bad_request
-
- end
- 
- ########################## Permissions tests ##########################
- test "nametags should be able to be created only if you admin the project or you belong to it" do
-  login_as_administrator
-  assert_difference('Nametag.count') do
-    post :create, { :project_id => projects(:find_the_island).id, :nametag => { :task_id => tasks(:in_progress_1).id, :member_id => 1, :relative_position_x => 1, :relative_position_y => 1 }}
+  context "Permissions" do
+    should_require_belong_to_project_or_admin_on [ :create, :update, :destroy ]
   end
-  assert_response :ok
 
-  login_as_organization_admin
-  assert_difference('Nametag.count') do
-    post :create, { :project_id => projects(:find_the_island).id, :nametag => { :task_id => tasks(:in_progress_1).id, :member_id => 1, :relative_position_x => 1, :relative_position_y => 1 }}
+  context "Statustags Routes" do
+    should_route :post, "/projects/1/stories/2/tasks/3/nametags", :action => :create, :project_id => 1, :story_id => 2, :task_id => 3
+    should_route :put, "/projects/1/stories/2/tasks/3/nametags/4", :action => :update, :id => 4, :project_id => 1, :story_id => 2, :task_id => 3
+    should_route :delete, "/projects/1/stories/2/tasks/3/nametags/4", :action => :destroy, :id => 4, :project_id => 1, :story_id => 2, :task_id => 3
   end
-  assert_response :ok
+  
 
-  login_as_normal_user
-  assert_difference('Nametag.count') do
-    post :create, { :project_id => projects(:find_the_island).id, :nametag => { :task_id => tasks(:in_progress_1).id, :member_id => 1, :relative_position_x => 1, :relative_position_y => 1 }}
+  context "If i'm a normal user" do
+    setup do
+      @organization = Factory(:organization)
+      @team = @organization.teams.first
+      @project = @organization.projects.first
+      @user = Factory(:user)
+      @admin = Factory(:user)
+      @admin.add_to_organization(@organization)
+      @organization.reload
+      @user.add_to_organization(@organization)
+      assert @team.users.include?(@user)
+      @story = @project.stories.first
+      @task = @story.tasks.first
+    end
+    
+    context "and do POST to :create in a project i belong to with correct data" do
+      setup do
+        post :create, :project_id => @project.to_param, :story_id => @story.to_param, :task_id => @task.to_param, :nametag => { :user_id => @user.to_param, :relative_position_x => 10, :relative_position_y => 10  }
+      end
+      should_respond_with :created
+      should "create the statustag" do
+        @task.reload
+        assert_equal @user, @task.nametags.first.user
+      end
+    end
+
+    context "and do PUT to :update in a project i belong to with correct data" do
+      setup do
+        @tag = @task.nametags.create(:user => @user)
+        put :update, :project_id => @project.to_param, :story_id => @story.to_param, :task_id => @task.to_param, :id => @tag.to_param, :nametag => { :relative_position_x => 1, :relative_position_y => 100, :task_id => @task.to_param }
+      end
+      should_respond_with :ok
+      should "update the statustag" do
+        @tag.reload
+        assert_equal 1, @tag.relative_position_x
+        assert_equal 100, @tag.relative_position_y
+      end
+    end
+    
+    context "on DELETE to :destroy" do
+      setup do
+        @tag = @task.nametags.create(:user => @user)
+        delete :destroy, :project_id => @project.to_param, :story_id => @story.to_param, :task_id => @task.to_param, :id => @tag.to_param
+      end
+      should_respond_with :ok
+      should "destroy the tag" do
+        assert_raise ActiveRecord::RecordNotFound do
+            @tag.reload
+        end
+      end
+    end
   end
-  assert_response :ok
 
-  login_as(members(:jburke))
-  assert_no_difference('Nametag.count') do
-    post :create, { :project_id => projects(:find_the_island).id, :nametag => { :task_id => tasks(:in_progress_1).id, :member_id => 1, :relative_position_x => 1, :relative_position_y => 1 }}
-  end
-  assert_response 302
- end
-
- test "nametags should be able to be updated only if you admin the project or you belong to it" do
-    login_as_administrator
-    put :update, { :project_id => projects(:find_the_island).id, :id => 1, :id => nametags(:one).id, :nametag => { :task_id => tasks(:in_progress_1).id, :member_id => 1, :relative_position_x => 1024, :relative_position_y => 1 } }
-    assert_response :ok
-    nametags(:one).reload
-    assert_equal tasks(:in_progress_1), nametags(:one).task
-    assert_equal 1024, nametags(:one).relative_position_x
-
-    login_as_organization_admin
-    put :update, {:project_id => projects(:find_the_island).id, :id => 1, :project_id => projects(:find_the_island).id, :id => nametags(:one).id, :nametag => { :task_id => tasks(:in_progress_1).id, :member_id => 1, :relative_position_x => 1025, :relative_position_y => 1 } }
-    assert_response :ok
-    nametags(:one).reload
-    assert_equal tasks(:in_progress_1), nametags(:one).task
-    assert_equal 1025, nametags(:one).relative_position_x
-
-    login_as_normal_user
-    put :update, {:project_id => projects(:find_the_island).id, :id => 1, :id => nametags(:one).id, :nametag => { :task_id => tasks(:in_progress_1).id, :member_id => 1, :relative_position_x => 1024, :relative_position_y => 1 } }
-    assert_response :ok
-    nametags(:one).reload
-    assert_equal tasks(:in_progress_1), nametags(:one).task
-    assert_equal 1024, nametags(:one).relative_position_x
-
-    login_as(members(:jburke))
-    put :update, {:project_id => projects(:find_the_island).id, :id => 1, :project_id => projects(:find_the_island).id, :id => nametags(:one).id, :nametag => { :task_id => tasks(:not_started_1).id, :member_id => 1, :relative_position_x => 1025, :relative_position_y => 1 } }
-    assert_response 302
-    nametags(:one).reload
-    assert_equal tasks(:in_progress_1), nametags(:one).task
-    assert_equal 1024, nametags(:one).relative_position_x
- end
- 
- test "nametags should be able to be deleted only if you admin the project or you belong to it" do
-   login_as_administrator
-   assert_difference('Nametag.count', -1) do
-     delete :destroy, {:project_id => projects(:find_the_island).id, :id => nametags(:one).id}
-   end
-   assert_response :ok
-
-   login_as_organization_admin
-   assert_difference('Nametag.count', -1) do
-     delete :destroy, {:project_id => projects(:find_the_island).id, :id => nametags(:two).id}
-   end
-   assert_response :ok
-   
-   login_as(members(:jburke))
-   assert_no_difference('Nametag.count', -1) do
-     delete :destroy, {:project_id => projects(:find_the_island).id, :id => nametags(:three).id}
-   end
-   assert_response 302
-   
-   login_as_normal_user
-   assert_difference('Nametag.count', -1) do
-     delete :destroy, {:project_id => projects(:find_the_island).id, :id => nametags(:three).id}
-   end
-   assert_response :ok
- end
+  # context "If i'm an organization admin" do
+  #   setup do
+  #     @organization = Factory(:organization)
+  #     @user = Factory(:user)
+  #     @mem = @organization.organization_memberships.build(:user => @user)
+  #     @mem.admin = true
+  #     @mem.save
+  #   end
+  #   
+  #   should "admin the organization" do
+  #     assert @user.organizations_administered.include?(@organization)
+  #   end
+  # 
+  # end
+  # 
+  # context "If I'm an admin" do
+  #   setup do
+  #     @user = admin_user
+  #   end
+  #   
+  # end
 end

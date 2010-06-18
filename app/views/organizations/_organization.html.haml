@@ -1,0 +1,70 @@
+= "<script>cancelForm('#{close_dialog}');</script>" if defined? close_dialog
+.admin_container.organization{ :id => "organization-#{organization.id}", 'data-organization-id' => organization.to_param }
+  / Name
+  %h2= organization.name
+  
+  / Admin Actions
+  - if current_user.admins?(organization)
+    .admin_actions
+      = image_tag("admin/admin-div-actions-edit.png", :alt => "Edit", :class => "edit_organization")
+      = image_tag("admin/admin-div-actions-remove.png", :alt => "Remove", :class => "remove_organization")
+  
+  / Project Section
+  .section.projects
+    %h3 Projects
+    - if current_user.admins?(organization)
+      / Admin actions
+      .administration_actions
+        .add.new_project new project
+
+  / Project Section List
+  .list.projects
+    = render :partial => 'projects/project', :collection => organization.projects_ordered_for_user(current_user), :locals => { :organization => organization }
+            
+  .clear
+  / End Project Section  
+
+  / Users Section
+  .section.users
+    %h3 Users
+    - if current_user.admins?(organization)
+      / Admin actions
+      .administration_actions
+        .add.new_user new user
+
+  / Users Section List
+  .list.users
+    = render :partial => 'users/user', :collection => organization.users_ordered_by_role, :locals => { :organization => organization }
+
+  .clear
+  / End Users Section  
+
+
+  / Teams Section
+  .section.teams
+    %h3 Teams
+    - if current_user.admins?(organization)
+      / Admin actions
+      .administration_actions
+        .add.new_team new team
+
+  / Teams Section List
+  .list.teams
+    = render :partial => 'teams/team', :collection => organization.teams_ordered_for_user(current_user), :locals => { :organization => organization }
+
+  .clear
+  / End Teams Section  
+  
+  / / Guest Team Members Section
+  / .section.guest_team_members
+  /   %h3 Guest Team Members
+  /   - if current_user.admins?(organization)
+  /     / Admin actions
+  /     .administration_actions
+  /       .add.new_guest_team_member new guest team member
+  / 
+  / .list.guest_team_members
+  /   = render :partial => 'guest_team_memberships/guest_team_member', :collection => organization.guest_members, :locals => { :organization => organization }
+  / 
+  / .clear
+  / / End Guest Team Members Section

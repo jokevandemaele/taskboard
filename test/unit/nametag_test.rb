@@ -1,8 +1,19 @@
 require 'test_helper'
 
 class NametagTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
-  end
+  ################################################################################################################
+  #
+  # Associations
+  #
+  ################################################################################################################
+  should_belong_to :task
+  should_belong_to :user
+  
+  ################################################################################################################
+  #
+  # Validations
+  #
+  ################################################################################################################
+  should_validate_presence_of :task
+  should_validate_presence_of :user
 end

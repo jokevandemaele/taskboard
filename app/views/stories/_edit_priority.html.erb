@@ -1,7 +1,0 @@
-<% remote_form_for story, :url => { :action => 'update_priority', :id => story.id }, :update => {:success => "priority-#{story.id}"} do |f| %>
-	<%= hidden_field_tag :story_id, story.id -%>
-	<%= f.text_field :priority, :id => "priority-edit-#{story.id}", :size => 2, :onFocus => "this.select()" -%>
-<% end %>
-<script>
-$('priority-edit-<%= story.id -%>').focus();
-</script>

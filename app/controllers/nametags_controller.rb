@@ -1,43 +1,35 @@
 class NametagsController < ApplicationController
-  before_filter :login_required
-  before_filter :member_belongs_to_project
+  before_filter :require_user
+  before_filter :require_belong_to_project_or_admin
+  before_filter :find_story
+  before_filter :find_task
+  before_filter :find_tag, :except => [:create]
   
-  # POST /nametags
   def create
-    @project = Project.find(params[:project_id])
-    @nametag = Nametag.new(params[:nametag])
-    if @project.stories.include?(@nametag.task.story) && @nametag.save
-     render :update do |page|
-       @members = @nametag.task.story.project.members
-       @member_team = @nametag.task.story.project.team_including(@current_member)        
-       page.replace_html "task-#{@nametag.task.id}-project-#{@nametag.task.story.project.id}-li", :partial => "tasks/task", :object => @nametag.task
-       page.replace_html "menu_nametags", :partial => "taskboard/menu_nametags", :locals => { :team => @member_team, :members => @members }
-     end
+    @tag = @task.nametags.build(params[:nametag])
+    @tag.user = User.find(params[:nametag][:user_id])
+    if @tag.save
+      render @tag, :status => :created
     else
-      render :inline => "", :status => :bad_request
+      render :inline => '', :status => :precondition_failed
     end
   end
 
-  # PUT /nametags/1
   def update
-    @project = Project.find(params[:project_id])
-    @nametag = Nametag.find(params[:id])
-    @nametag.update_attributes(params[:nametag])
-    if @project.stories.include?(@nametag.task.story) && @nametag.save
-      render :inline => "", :status => :ok
+    @tag.task = Task.find(params[:nametag][:task_id])
+    if @tag.save && @tag.update_attributes(params[:nametag])
+      render :inline => '', :status => :ok
     else
-      render :inline => "", :status => :bad_request
+      render :inline => '', :status => :precondition_failed
     end
   end
 
-  # DELETE /nametags/1?nametag=id
   def destroy
-    @tag = Nametag.find(params[:id])
-    @html_id = "nametag-project-#{@tag.task.story.project.id}-#{@tag.id.to_s}"
-    if @tag.destroy
-      render :inline => "", :status => :ok
-    else
-      render :inline => "", :status => :bad_request
-    end
+    @tag.destroy
+    render :inline => "", :status => :ok
+  end
+  
+  def find_tag
+    @tag = @task.nametags.find(params[:id])
   end
 end

@@ -1,56 +1,65 @@
 ActionController::Routing::Routes.draw do |map|
+  # Authlogic routes
+  map.resource :user_sessions
+  
+  map.login '/login', :controller => "user_sessions", :action => "new" 
+  map.logout '/logout', :controller => "user_sessions", :action => "destroy"
+
+  map.resources :users, :only => [ :new, :create, :edit, :update, :destroy ]
+  map.resource :account, :controller => "users"
+
+  map.resources :organizations do |o|
+    o.resources :projects, :only => [ :show, :new, :create, :edit, :update, :destroy] do |p|
+      # p.resources :guest_team_memberships, :only => [ :create, :destroy ] 
+    end
+    # o.resources :guest_team_memberships, :only => [ :new ] 
+    o.resources :teams, :only => [ :show, :new, :create, :edit, :update, :destroy] 
+    o.team_add_users 'teams/:id/users/:user_id', :controller => 'teams', :action => :add_user, :conditions => { :method => :post }
+    o.team_remove_users 'teams/:id/users/:user_id', :controller => 'teams', :action => :remove_user, :conditions => { :method => :delete }
+    o.team_info 'teams/:id/team_info', :controller => 'teams', :action => :team_info, :conditions => { :method => :get }
+
+    o.resources :users, :only => [ :show, :new, :create, :edit, :update, :destroy]
+    o.user_toggle_admin 'users/:id/toggle_admin', :controller => 'users', :action => 'toggle_admin', :conditions => { :method => :post }
+  end
+  map.add_user_to_organization 'organizations/:id/add_user', :controller => :organizations, :action => :add_user, :conditions => {:method => :post}
+  
   # Sample resource route within a namespace:
   map.namespace :admin do |admin|
-   admin.resources :organizations
    admin.resources :members
-   admin.resources :teams
-   admin.resources :projects
   end
 
-  map.resources :statustags
+  map.resources :projects, :only => [] do |p|
+    p.resources :taskboard, :only => [:index]
+    p.resources :backlog, :only => [:index]
+    p.resources :stories do |s|
+     s.resources :tasks, :has_many => [ :statustags, :nametags ]
+     s.task_start 'tasks/:id/start', :controller => :tasks, :action => :start, :conditions => { :method => :post }
+     s.task_stop 'tasks/:id/stop', :controller => :tasks, :action => :stop, :conditions => { :method => :post }
+     s.task_finish 'tasks/:id/finish', :controller => :tasks, :action => :finish, :conditions => { :method => :post }
+     s.task_update_name 'tasks/:id/update_name', :controller => :tasks, :action => :update_name, :conditions => { :method => :post }
+     s.task_update_description 'tasks/:id/update_description', :controller => :tasks, :action => :update_description, :conditions => { :method => :post }
+    end
+    p.story_start 'stories/:id/start', :controller => :stories, :action => :start, :conditions => { :method => :post }
+    p.story_stop 'stories/:id/stop', :controller => :stories, :action => :stop, :conditions => { :method => :post }
+    p.story_finish 'stories/:id/finish', :controller => :stories, :action => :finish, :conditions => { :method => :post }
+    p.story_update_priority 'stories/:id/update_priority', :controller => :stories, :action => :update_priority, :conditions => { :method => :post }
+    p.story_update_size 'stories/:id/update_size', :controller => :stories, :action => :update_size, :conditions => { :method => :post }
+  end
 
-  map.resources :nametags
-
-  map.resources :tasks
-
-  map.resources :stories
-  
-  map.resources :taskboard
-
-  map.resources :backlog
-
-  # The priority is based upon order of creation: first created -> highest priority.
-
-  # Sample of regular route:
+  map.taskboard_team_view 'teams/:team_id/taskboard', :controller => :taskboard, :action => :team
+  map.backlog_team_view 'teams/:team_id/backlog', :controller => :backlog, :action => :team
+  # Dev Tools
   map.connect 'dev_tools/:action', :controller => 'dev_tools'
-  # Keep in mind you can assign values other than :controller and :action
 
-  # Sample of named route:
-  #   map.purchase 'products/:id/purchase', :controller => 'catalog', :action => 'purchase'
-  # This route can be invoked with purchase_url(:id => product.id)
-  map.login '/login', :controller => 'admin/members', :action => 'login'
-  map.logout '/logout', :controller => 'admin/members', :action => 'logout'
+  # Named routes
   map.access_denied '/access_denied', :controller => 'admin/members', :action => "access_denied"
   map.report_bug '/report_bug', :controller => 'admin/members', :action => 'report_bug'
-  map.report_bug '/invite', :controller => 'admin/members', :action => 'invite'
+  map.invite '/invite', :controller => 'admin/members', :action => 'invite'
 
-  # Sample resource route (maps HTTP verbs to controller actions automatically):
-  #   map.resources :products
-
-  # Sample resource route with options:
-  #   map.resources :products, :member => { :short => :get, :toggle => :post }, :collection => { :sold => :get }
-
-  # Sample resource route with sub-resources:
-  #   map.resources :products, :has_many => [ :comments, :sales ], :has_one => :seller
+  # Root goes to admin/organizations
+  map.root :controller => :organizations
   
-  # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
-  map.root :controller => "admin/organizations"
-  
-  # See how all your routes lay out with "rake routes"
-
-  # Install the default routes as the lowest priority.
-  # Note: These default routes make all actions in every controller accessible via GET requests. You should
-  # consider removing the them or commenting them out if you're using named routes and resources.
+  # Commented the default routes
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
 end

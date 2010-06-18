@@ -1,5 +1,9 @@
-coverage/
+log
+db/*.sqlite3
 db/schema.rb
-db/test.sqlite3
-log/
-tmp/
+coverage
+tmpcoverage.data
+tmp
+coverage.data
+config/database.yml
+config/options.yml

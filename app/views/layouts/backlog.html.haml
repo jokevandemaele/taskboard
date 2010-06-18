@@ -7,7 +7,11 @@
       Agilar Taskboard
       = (@project && @project.name) ? " - #{@project.name} - " : " - "
       Backlog
-    = stylesheet_link_tag 'scaffold', 'backlog', 'menu', 'admin'
+    = stylesheet_link_tag 'admin', 'backlog', 'menu'
     = javascript_include_tag :defaults
+    = yield :helpers
+    
   %body
     = yield
+    = yield :bottom
+    = javascript_include_tag 'startup'

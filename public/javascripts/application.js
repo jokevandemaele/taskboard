@@ -1,172 +1,66 @@
-// Place your application-specific JavaScript functions and classes here
-// This file is automatically included by javascript_include_tag :defaults
+/*
+ * Application acts as a singleton providing a namespace
+ * for all application-specific code plus some basic functionality
+ */
+Application = {
+  // Application settings go here
+  config: {},
 
-(document.getElementById) ? dom = true : dom = false;
+  env: {},
 
-// Admin Section
-function expandCollapseDivs(ids){
-	ids.each(
-		function(elem){ 
-			if($(elem).visible())
-			{
-				Effect.SlideUp(elem, {duration: 0.3});
-			}else{
-				Effect.SlideDown(elem, {duration: 0.3});
-			}
-		})
-}
+  urls: {},
 
-function cancelForm(id){
-	Effect.Fade($(id), { duration: 0.2 }); 
-	Effect.Fade($('dialog-background-fade'), { duration: 0.2 });
-}
+  locales: {},
 
-function updateName(type,object){
-	object_id = type + "-" + object.id + "-name";
-	$(object_id).innerHTML = object.name;
-	
-	Effect.Fade($('dialog-background-fade'), { duration: 0.2 });
-    new Effect.Highlight(object_id, { startcolor: '#ffff99', endcolor: '#d5e5ff' });
-	resizeFontSizeToFit($(object_id), $(type + "-" + object.id));
+  // Application helpers go here
+  Helpers: {},
 
-}
+  // Call #initialize for each defined helper
+  initialize: function(options) {
+    if (options.config) this.addConfig(options.config);
+    if (options.env) this.addEnv(options.env);
+    if (options.urls) this.addUrls(options.urls);
+    if (options.locales) this.addLocales(options.locales);
 
-function display_waiting(id){
-	$(id).innerHTML = '<img src=\'/images/waiting.gif\' alt=\'Waiting\''
-}
+    // Initialize helpers
+    for (helper in Application.Helpers) {
+      // Call #initialize
+      if (Application.Helpers[helper].initialize) {
+        Application.Helpers[helper].initialize();
+      }
 
-function moveToMousePosition(id,element){
-	Event.observe($(id), 'mousemove', function(event){
-		var elt = Event.findElement(event, 'P');
-		if(elt){
-			elt = elt.getOffsetParent();
-			div_height = $('display-info-text-'+element).getHeight();
-			mouseX = (Event.pointerX(event) - elt.cumulativeOffset().left + 10) + 'px';
-			mouseY = (Event.pointerY(event) - elt.cumulativeOffset().top - div_height) + 'px';
-			$('display-info-' + element).setStyle({position:'absolute', top: mouseY, left: mouseX, opacity : 1});
-			$('display-info-' + element).show();
-		}
-	});
-}
+      // Set _moduleName attribute (used in Application#error)
+      Application.Helpers[helper]._moduleName = helper;
+    }
+  },
 
-function adminToggleImage(id){
-	member = $(id);
-	if(member.src.search('/images/admin/admin-div-element-make-admin.png') != -1){
-		member.src = '/images/admin/admin-div-element-remove-admin.png';
-    member.title = 'remove admin';
-	}else{
-		member.src = '/images/admin/admin-div-element-make-admin.png';
-    member.title = 'make admin';
-	}
-}
+  addConfig: function(config) {
+    Object.extend(this.config, config);
+  },
 
-function toggleSelect(id,checkbox){
-	if($(checkbox).checked){
-		$(id).disable();
-	}else{
-		$(id).enable();
-	}
-}
-// End Admin Section
+  addEnv: function(env) {
+    Object.extend(this.env, env);
+  },
 
-function resizeFontSizeToFit(element,container){
-		font_size = element.getStyle('font-size').replace('px', '');
-		line_height = element.getStyle('line-height').replace('px', '');
-		elementW = element.offsetWidth;
-		elementH = element.offsetHeight;
-		containerW = container.offsetWidth;
-		containerH = container.offsetHeight;
-		while(elementW > containerW || elementH > containerH){
-			font_size -= 1;
-			line_height -= 1;
-			element.setStyle({fontSize: font_size + 'px'});
-			element.setStyle({lineHeight: line_height + 'px'});
-			elementW = element.offsetWidth;
-			elementH = element.offsetHeight;
-			containerW = container.offsetWidth;
-			containerH = container.offsetHeight;
-		}
-}
+  addUrls: function(urls) {
+    Object.extend(this.urls, urls);
+  },
 
-function keepDivOnTop(div) {
-	$(div).style.top = window.pageYOffset + "px";
-	$(div).style.left = window.pageXOffset + "px";
+  // Report an error
+  error: function(message, module) {
+    if (Application.config.displayErrors === false) {
+      return false;
+    }
 
-	window.setTimeout("keepDivOnTop('"+div+"')", 10); 
-}
+    var scope;
 
-function expandMenu(){
-	$('menu_expand').hide();
-	$('menu_space').show();
-	Effect.Appear($('menu'), { duration: 0.4 });
-}
+    if (module && module._moduleName) {
+      scope = 'in module ' + module._moduleName;
+    } else {
+      scope = 'unknown scope';
+    }
 
-function collapseMenu(application){
-	Effect.Fade($('menu'), { duration: 0.4 });
-	$('menu_space').hide();
-	Effect.Appear($('menu_expand'), { duration: 0.4 });
-}
-
-function x(element){
-	return $(element).cumulativeOffset().left
-}
-
-function y(element){
-	return $(element).cumulativeOffset().top
-}
-
-function positionCreateX(draggable, droppable){
-	return (x(draggable) - (x(droppable) - window.pageXOffset));
-}
-
-function positionCreateY(draggable, droppable, nametag){
-	if(nametag){
-		image_offset = 58;
-	}else{
-		image_offset = 0;
-	}
-	return (y(draggable)- (y(droppable) - window.pageYOffset) + image_offset);
-}
-
-function positionUpdateX(draggable, droppable){
-	return ((draggable.left + draggable.width) - (x(droppable)));
-}
-
-function positionUpdateY(draggable, droppable){
-	return (draggable.bottom - (y(droppable)));
-}
-
-function timedRefresh(timeoutPeriod) {
-	setTimeout("location.reload(true);",timeoutPeriod);
-}
-
-function flip(id,side){
-	if(side == 'back'){
-		$(id).hide();	
-		$(id+"-flip").hide();
-		$(id + '-back').show();
-	}else{
-		$(id + '-back').hide();
-		$(id).show();
-		$(id+"-flip").show();
-	}
-}
-
-function centerTo(element, center_to){
-	new Effect.Move(element, { x: ((center_to.getWidth() - element.getWidth()) / 2) , y: ((center_to.getHeight() - element.getHeight()) / 2), mode: 'absolute', duration: 0});
-
-}
-
-function cancel(element){
-	Effect.Fade(element, { duration: 0.3 }); 
-	$('adder-container').hide();
-}
-
-function setColor(id,color){
-	$(id).value = color;
-	$(id).setStyle({ background: '#'+color, color: '#'+color});
-}
-
-function droppable_position(){
-(Droppables.drops[0].accept)
-}
+    // Default to Firebug console error, fallback to alert()
+    ((window.console && window.console.error) || window.alert)(['Application error (', scope, '): ', message].join(''));
+  }
+};

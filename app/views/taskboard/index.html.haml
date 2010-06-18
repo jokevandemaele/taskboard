@@ -1,0 +1,16 @@
+- if current_user
+  = render :partial => "menu" , :locals => { :team => @team }
+  = render :partial => "adder"
+= render :partial => "taskboard_table", :locals => { :name => @project.name }
+
+- if current_user
+  %script= "new YAHOO.util.DDTarget('taskboard-first-row');"
+
+  #dummy-for-actions
+
+- if !current_user && @project.public?
+  .the_disabler
+
+- content_for :helpers do
+  = javascript_include_tag 'helpers/tasks.js', 'helpers/modal_dialog.js'
+

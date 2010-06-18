@@ -1,0 +1,21 @@
+= form.error_messages 
+.field
+  = form.label :name
+  = form.text_field :name
+
+.field
+  = form.label :realid, "Story ID"
+  = form.text_field :realid, :value => @story.realid ? @story.realid : @project.next_realid
+
+.field
+  = form.label :priority
+  = form.text_field :priority, :value => @story.priority ? @story.priority : @project.next_priority
+
+.field
+  = form.label :size
+  = form.text_field :size
+
+.field
+  = form.label :description
+  %br
+  = form.text_area :description

@@ -1,9 +1,0 @@
-%div{ :class => class_text, :id => "#{id_text}-#{member.id}", :style => "float: left; #{"border: 4px solid #a02c2c; top: -4px" if(defined?(highlight_loged_member) && highlight_loged_member  && current_member.id == member.id)}"}
-  = image_tag member.show_picture, :style => "position:absolute; top: 0px; left: 0px;", :title => member.name
-  %br
-  - if defined?(team)
-    - team_id = team.id
-  - else
-    - team_id = nil
-  %div{ :class => "#{member_name_class} .slide_item", :title => member.name, :style => "#{style if(defined?(style))}" }
-    =h member.formatted_nametag(team_id)

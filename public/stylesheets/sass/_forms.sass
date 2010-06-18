@@ -1,0 +1,73 @@
+#form
+  #form-logo
+    :position absolute
+    :top -10px
+    :right 0
+    :z-index -10
+    :opacity 0.4
+  :color #025
+  .field
+    :position relative
+    :padding 10px
+    :background #AFC6E9
+    :font-size 20px
+    :line-height 20px
+    :margin 5px 0px
+    input
+      :position absolute
+      :right 10px
+      :top 5px
+      &[type="text"], &[type="password"]
+        +rounded(10px)
+        :background white
+        :font-size 14px
+        :border none
+        :padding 0 10px
+        :width 200px
+        :height 30px
+      &[type="checkbox"]
+        :height 20px
+    select
+      :position absolute
+      :right 10px
+      :top 10px
+      
+  input[type="submit"]
+    :background url('/images/yes.png') no-repeat
+    :width 60px
+    :height 60px
+    :border none
+    :cursor pointer
+    :float right
+    :color transparent
+    
+  textarea
+    +rounded(10px)
+    :border none
+    :width 99%
+    :height 200px
+    :margin 5px 10px 0 0
+  h1
+    :color #025
+    &.organization
+      :background url("/images/admin/admin-logo-organizations.png")
+  .add_user_to_organization_select
+    :right 30px !important
+  .admin_ok_small
+    :background url('/images/yes_small.png') no-repeat !important
+    :position absolute
+    :right 10px !important
+    :top 12px !important
+    :width 16px !important
+    :height 16px !important
+  
+  .form_errors
+    :border 2px solid #800000
+    :background #ffd5d5
+    :padding 5px
+    :color #800000
+
+    ul
+      :list-style-type none
+      :padding 0
+      :margin 0

@@ -1,0 +1,12 @@
+= form.error_messages 
+.field
+  = form.label :name
+  = form.text_field :name
+
+.field
+  = form.label :team
+  = select_tag("project[team]", options_from_collection_for_select(@organization.teams, :id, :name, !form.object.teams.empty? ? form.object.teams.first.id : nil))
+
+.field
+  = form.label :public, "Make the project Publicly available"
+  = form.check_box :public

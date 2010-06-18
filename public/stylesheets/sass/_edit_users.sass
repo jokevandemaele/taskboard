@@ -1,0 +1,51 @@
+#edit_users
+  h1
+    :color #003380
+  #organization_users
+    .user
+      +rounded(10px)
+      :padding 5px 5px 5px 10px
+      :width 357px
+      :height 23px
+      :line-height 23px
+      :background #f1f6ff
+      :margin 0px 5px 5px 0px
+      :position relative
+      :color #002255
+      :float left
+      .add
+        :position absolute
+        :top 0px
+        :right 5px
+        :line-height 35px
+        :padding-right 30px
+        :background url('/images/add_small.png') no-repeat center right
+        :cursor pointer
+        :color #1b51a2
+        &:hover
+          :color #2a7fff
+      
+  #team_users
+    .user
+      +rounded(10px)
+      :padding 10px
+      :background #D7E3F4
+      :border 3px solid #0C82EB
+      :float left
+      :margin 0 10px 10px 0
+      :position relative
+      .name
+        :background #f1f6ff
+        :text-align center
+        :color #002255
+        :font-weight bold
+        :margin 5px 0 0 0
+      .remove
+        :position absolute
+        :top -14px
+        :right -10px
+        :width 30px
+        :height 30px
+        :padding-right 30px
+        :background url('/images/remove_from_team.png') no-repeat center right
+        :cursor pointer

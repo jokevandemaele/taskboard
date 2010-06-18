@@ -1,0 +1,25 @@
+#flash
+  :margin 0
+  .flash
+    +rounded(5px)
+    :position relative
+    :padding 3px 5px 3px 26px
+    :border 3px solid
+    :margin-bottom 5px
+    :background
+      :color white
+      :position 5px 5px
+      :repeat no-repeat
+    :font-size 12px
+
+    &.notice
+      :border-color #0C82EB
+      :background
+        :image url('/images/information.png')
+        :color #D7E3F4
+
+    &.error
+      :border-color #F5614E
+      :background
+        :image url('/images/exclamation.png')
+        :color #F5D8D5

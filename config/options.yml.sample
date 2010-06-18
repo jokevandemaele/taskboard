@@ -1,0 +1,14 @@
+emails:
+  new_user:
+    from_name: "MyCompany Taskboard"
+    from_email: "taskboard@example.com"
+    subject: "Welcome to MyCompany's taskboard!"
+  bug_report:
+    from_name: "MyCompany Taskboard"
+    from_email: "taskboard@example.com"
+    to_name: "MyCompany Development Team"
+    to_email: "dev@example.com"
+    subject: "[TASKBOARD-BUG-REPORT]"
+
+application:
+  url: "http://taskboard.example.com"

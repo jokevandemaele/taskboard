@@ -1,0 +1,93 @@
+<% 
+element_class = element.class.to_s.downcase
+parent_class = parent.class.to_s.downcase
+current_member_admins_parent = (element_class == 'member') ? current_user.admin? || (current_user.admins?(parent) && !element.admin?) : (current_user.admins?(parent))
+%>
+<div id="<%= parent_class -%>-<%= parent.id -%>-<%= element_class -%>-<%= element.id -%>" class="admin-div-element-core admin-div-element<%= '-actions' if current_member_admins_parent || element_class == 'member' -%>">
+	<%
+	# If the user admins the organization i should display remove, edit, and change admin settings
+	if current_member_admins_parent
+	-%>
+		<%= # Remove for a team
+			link_to_remote image_tag("admin/admin-div-element-remove.png", :alt => "Remove",
+	                    	:class => "admin-div-element-actions-remove", :title => "Remove"),
+	                    :url => admin_team_url(element.id),
+	                    :method => :delete,
+	                    :confirm => "Are you sure?",
+	                    :success => "Effect.Puff($('organization-#{parent.id}-team-#{element.id}'));" if (element_class == 'team') 
+		-%>
+		<%= # Remove for a member
+			link_to_remote image_tag("admin/admin-div-element-remove.png", :alt => "Remove", 
+		                  :class => "admin-div-element-actions-remove", :title => "Remove"
+		                 ),
+		                 :url => { 
+		                   :controller => "admin/#{parent_class}s", 
+		                   :action => "remove_#{element_class}", 
+		                   :id => parent.id, 
+		                   :object => element.id 
+		                 },
+		                 :confirm => 'Are you sure?',
+		                 :success => "Effect.Puff($('#{parent_class}-#{parent.id}-#{element_class}-#{element.id}'));" if (element_class == 'member') && !parent.guest_members.include?(element) 
+		-%>
+		<%= # Remove for guest member
+			link_to_remote image_tag("admin/admin-div-element-remove.png", :alt => "Remove Guest Member from all projects", 
+		                  :class => "admin-div-element-actions-remove", :title => "Remove Guest Member from all projects"
+		                 ),
+		                 :url => { 
+							:controller => "admin/projects", 
+							:action => "remove_guest",
+							:member => element.id, 
+							:organization => parent.id
+		                 },
+		                 :confirm => 'Are you sure?',
+		                 :success => "Effect.Puff($('#{parent_class}-#{parent.id}-#{element_class}-#{element.id}'));" if (element_class == 'member') && parent.guest_members.include?(element) 
+		-%>
+ 		<%= # Edit guest team member
+			link_to_remote image_tag("admin/admin-div-element-edit.png", :alt => "Edit",
+	                :class => "admin-div-element-actions-edit", :title => "Edit Guest Member Projects"),
+	              :url => { 
+	                :controller => "admin/projects", 
+	                :action => :edit_guest_team_member,
+	                :member => element.id,
+					:organization => parent.id
+	              }, :method => :post, :update => "dummy-for-actions" if parent.guest_members.include?(element) 
+		
+		-%>
+		<%= # Team Members Edit
+			link_to image_tag("admin/admin-div-element-team-members.png", :alt => "Edit Team Members",
+	                    	:class => "admin-div-element-actions-team-members", :title => "Edit Team Members"),
+	            admin_team_url(element.id) if (element_class == 'team') 
+		-%>
+		<%= # Admin info
+			show_admin_info_for element, parent if element_class == 'user' && !parent.guest_members.include?(element) 
+		-%>
+	<% end -%>
+	<% # Write element name
+	not_mine = ((element_class == 'project' && !current_user.projects.include?(element)) || (element_class == 'team' && !current_user.teams.include?(element))) ? 'not-mine' : ''
+	%>
+	<%= show_admin_info_for element, parent if (element_class == 'user' && !current_member_admins_parent) -%>
+	<div id="name-<%= parent_class%>-<%= parent.id %>-<%= element_class -%>-<%= element.id -%>-container">
+		<p id="name-<%= parent_class%>-<%= parent.id %>-<%= element_class -%>-<%= element.id -%>" title="<%= h(element.name) unless element_class == 'team' -%>" class="<%=  not_mine %>" onmouseover="<%= "moveToMousePosition('name-#{parent_class}-#{parent.id}-#{element_class}-#{element.id}-container', #{element.id});" if element_class == 'team' -%>" onmouseout="<%= "Effect.Fade($('display-info-#{element.id}'), { duration: 0.1 });" if element_class == 'team' %>">
+			<%= link_to(h(element.name), :controller => "/taskboard", :action => :show, :id => element.id) if element_class == 'project' && (element.users.include?(current_user) || current_member_admins_parent) -%>
+			<%=h element.name if (element_class == 'project' && !element.users.include?(current_user) && !current_member_admins_parent) %>
+
+			<%= link_to(h(element.name), :controller => "admin/teams", :action => :show, :id => element.id) if (element_class == 'team' && current_member_admins_parent) %>
+			<%=h element.name if (element_class == 'team' && !current_member_admins_parent) %>
+
+			<% if(element_class == 'team') %>
+				<script>
+					moveToMousePosition('name-<%= parent_class%>-<%= parent.id %>-<%= element_class -%>-<%= element.id -%>-container', <%= element.id -%>)
+				</script>
+			<% end %>
+
+			<%=h element.name if element_class != 'project'  &&  element_class != 'team' -%>
+		</p>
+	</div>
+	<script>
+		resizeFontSizeToFit($('name-<%= parent_class%>-<%= parent.id %>-<%= element_class -%>-<%= element.id -%>'),$('name-<%= parent_class%>-<%= parent.id %>-<%= element_class -%>-<%= element.id -%>-container'));
+<% if !current_member_admins_parent -%>
+		//$('name-<%= parent_class%>-<%= parent.id %>-<%= element_class -%>-<%= element.id -%>').setStyle({ width: '100%' });
+<% end -%>
+	</script>
+</div>
+<%= render :partial => "team_display_info", :locals => { :team => element } if element_class == 'team' -%>

@@ -18,28 +18,38 @@
         %p.story-field-number
           =h story.size
   %script= "resizeFontSizeToFit($('storycard-#{story.id}-name'), $('storycard-#{story.id}-name-container')); $('storycard-#{story.id}-name').setStyle({left: '-' + $('storycard-#{story.id}-name').offsetWidth / 2 + 'px'});"
-%td{ :id => "not_started-#{story.id}", :style => taskboard_border_style(@color, [ 'left', 'bottom']) }
-  %div{:style => "width: 100%; text-align: center;"}
-    = image_tag 'waiting.gif', :id => 'waiting-in_progress-#{story.id}', :style => "vertical-align: middle;"
-    %br
-    Loading...
-  %script= remote_function(:update => "not_started-#{story.id}", :url => { :controller => :stories, :action => :tasks_by_status, :id => story.id, :status => 'not_started' }) 
-%td{ :id => "in_progress-#{story.id}", :style => taskboard_border_style(@color, [ 'left', 'bottom']) }
-  %div{:style => "width: 100%; text-align: center;"}
-    = image_tag 'waiting.gif', :id => 'waiting-in_progress-#{story.id}', :style => "vertical-align: middle;"
-    %br
-    Loading...
-  %script= remote_function(:update => "in_progress-#{story.id}", :url => { :controller => :stories, :action => :tasks_by_status, :id => story.id, :status => 'in_progress' })
-%td{ :id => "finished-#{story.id}", :style => taskboard_border_style(@color, [ 'left', 'right', 'bottom']) }
-  %div{:style => "width: 100%; text-align: center;"}
-    = image_tag 'waiting.gif', :id => 'waiting-in_progress-#{story.id}', :style => "vertical-align: middle;"
-    %br
-    Loading...
-  %script= remote_function(:update => "finished-#{story.id}", :url => { :controller => :stories, :action => :tasks_by_status, :id => story.id, :status => 'finished' })
+%td{ :id => "not_started-#{story.id}", :style => taskboard_border_style(@color, [ 'left', 'bottom']), 'data-action' => 'stop' }
+  - cache do
+    %div{:style => "width: 100%; text-align: center;"}
+      = image_tag 'waiting.gif', :id => 'waiting-in_progress-#{story.id}', :style => "vertical-align: middle;"
+      %br
+      Loading...
+  %script= remote_function(:update => "not_started-#{story.id}", :url => { :controller => :stories, :action => :tasks_by_status, :id => story.id, :status => 'not_started', :project_id => story.project.id, :public_hash => @public_hash }) 
+%td{ :id => "in_progress-#{story.id}", :style => taskboard_border_style(@color, [ 'left', 'bottom']), 'data-action' => 'start' }
+  - cache do
+    %div{:style => "width: 100%; text-align: center;"}
+      = image_tag 'waiting.gif', :id => 'waiting-in_progress-#{story.id}', :style => "vertical-align: middle;"
+      %br
+      Loading...
+  %script= remote_function(:update => "in_progress-#{story.id}", :url => { :controller => :stories, :action => :tasks_by_status, :id => story.id, :status => 'in_progress', :project_id => story.project.id, :public_hash => @public_hash })
+%td{ :id => "finished-#{story.id}", :style => taskboard_border_style(@color, [ 'left', 'right', 'bottom']), 'data-action' => 'finish' }
+  - cache do
+    %div{:style => "width: 100%; text-align: center;"}
+      = image_tag 'waiting.gif', :id => 'waiting-in_progress-#{story.id}', :style => "vertical-align: middle;"
+      %br
+      Loading...
+  %script= remote_function(:update => "finished-#{story.id}", :url => { :controller => :stories, :action => :tasks_by_status, :id => story.id, :status => 'finished', :project_id => story.project.id, :public_hash => @public_hash })
 
 %script= "new YAHOO.util.DDTarget('story_card-#{story.id}');"
 %script= "new YAHOO.util.DDTarget('not_started-#{story.id}');"
 %script= "new YAHOO.util.DDTarget('in_progress-#{story.id}');"
 %script= "new YAHOO.util.DDTarget('finished-#{story.id}');"
 
-= drop_receiving_element("not_started-#{story.id}",  :accept => "task-add",  :with   => "'status=not_started' + '&story=#{story.id}'", :url => { :controller => :tasks, :action=>:show_form})
+/ = drop_receiving_element("not_started-#{story.id}",  :accept => "task-add", :url => new_project_story_task_path(story.project, story))
+:javascript
+  Droppables.add('not_started-#{story.id}', {
+    accept: 'task-add',
+    onDrop: function(element) {
+      Tasks.newForm(#{story.project_id},#{story.id})
+    }
+  });
