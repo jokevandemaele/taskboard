@@ -47,7 +47,7 @@ class UsersController < ApplicationController
   # PUT /users/1
   def update
     if @user.update_attributes(params[:user])
-      render :inline => "<script>top.Users.afterUpdate(#{@user.to_json})</script>", :status => :ok
+      render :inline => "<script>top.Users.afterUpdate(#{{ :id => @user.id, :name => @user.name, :avatar => @user.avatar(:thumb), :is_current => @user == current_user }.to_json})</script>", :status => :ok
     else
       render :inline => "<script>top.ModalDialog.displayFormErrors(#{@user.errors.to_json})</script>", :status => :precondition_failed
     end
