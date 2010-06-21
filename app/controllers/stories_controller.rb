@@ -20,7 +20,7 @@ class StoriesController < ApplicationController
   def create
     @story = @project.stories.build(params[:story])
     # Don't know why but this is not setting the id and priority automatically
-    @story.realid = @project.next_realid
+    @story.realid = @project.next_realid if !@story.realid
     @story.priority = @story.default_priority
     if @story.save
       render :json => @story, :status => :created
