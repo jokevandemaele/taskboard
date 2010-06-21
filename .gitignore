@@ -8,3 +8,4 @@ coverage.data
 config/database.yml
 config/options.yml
 public/system
+public/stylesheets/*.css
