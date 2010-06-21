@@ -96,8 +96,8 @@ class UsersControllerTest < ActionController::TestCase
         assert_equal "my_email@taskboard.com", @user.email
       end
 
-      should "return the user json" do
-        assert_match @user.to_json, @response.body
+      should "return the user data json" do
+        assert_match "<script>top.Users.afterUpdate(#{{ :id => @user.id, :name => @user.name, :avatar => @user.avatar(:thumb), :is_current => true }.to_json})</script>", @response.body
       end
     end
 
@@ -361,7 +361,7 @@ class UsersControllerTest < ActionController::TestCase
       end
 
       should "return the user json" do
-        assert_match @user1.to_json, @response.body
+        assert_match "<script>top.Users.afterUpdate(#{{ :id => @user1.id, :name => @user1.name, :avatar => @user1.avatar(:thumb), :is_current => false }.to_json})</script>", @response.body
       end
     end
     
