@@ -18,11 +18,12 @@
       $('edit_name_#{task.id}').style.opacity = 0; 
       resizeFontSizeToFit($('edit_name_#{task.id}'), $('task-#{task.id}-name-container'));
       $('edit_name_#{task.id}').style.opacity = 1;
-          
-  - task.nametags.each do |nametag|
-    = render nametag
-  - task.statustags.each do |statustag|
-    = render statustag
+
+  - unless task.status == 'finished'
+    - task.nametags.each do |nametag|
+      = render nametag
+    - task.statustags.each do |statustag|
+      = render statustag
 
 .task_back{ :id => "task-#{task.id}-back", :style => "display: none" }
   %textarea.task-description.in_place_edit{ :id => "edit_description_#{task.id}" }= h task.description

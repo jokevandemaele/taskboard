@@ -40,6 +40,7 @@ var DDM = YAHOO.util.DragDropMgr;
           Dom.setStyle(dragEl, "width", "126px");
           Dom.setStyle(dragEl, "height", "126px");
           Dom.setStyle(dragEl, "background-color", clickEl.getStyle('background-color'));
+          Dom.setStyle(dragEl, "background-image", clickEl.getStyle('background-image'));
 	    }, 
 	 
 	    endDrag: function(e) { 

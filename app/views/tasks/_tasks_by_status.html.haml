@@ -6,8 +6,8 @@
     %tr
       %td.finished_tasks
         - tasks.each_with_index do |task, index|
-          %li.task{:id => "task-#{task.id}-project-#{task.story.project.id}-li", 'data-task-id' => task.id, 'data-story-id' => task.story.id, :style => ("display: none" if index > 2), :class => "#{@task.color}" }
-            = render :partial => "tasks/finished_task", :locals => { :task => task }
+          %li.task{:id => "task-#{task.id}-project-#{task.story.project.id}-li", 'data-task-id' => task.id, 'data-story-id' => task.story.id, :style => ("display: none" if index > 2), :class => "#{task.color}" }
+            = render :partial => "tasks/task", :locals => { :task => task }
           %script= "new YAHOO.example.DDList('task-#{task.id}-project-#{task.story.project.id}-li')"
       %td{:style => "vertical-align: top;"}
         = image_tag "expand.png",  :id => "finished_#{story.id}_slider_next", :alt => "Show More", :title => "Show All", :class => "expand", :style => "border: none; display: none;", :onClick => "javascript:finished_#{story.id}_slider.expand();", :style => "cursor: pointer; display: none;"

@@ -230,6 +230,38 @@ class StoriesControllerTest < ActionController::TestCase
       end
     end
     
+    context "and do GET to :tasks_by_status in a project I belong to with not_started" do
+      setup do
+        @task = @story.tasks.create()
+        @task.stop
+        @task.reload
+        post :tasks_by_status, :status => "not_started", :id => @story.to_param, :project_id => @project.to_param
+      end
+      should_respond_with :ok
+
+    end
+
+    context "and do GET to :tasks_by_status in a project I belong to with in_progress" do
+      setup do
+        @task = @story.tasks.create()
+        @task.start
+        @task.reload
+        post :tasks_by_status, :status => "in_progress", :id => @story.to_param, :project_id => @project.to_param
+      end
+      should_respond_with :ok
+    end
+
+    context "and do GET to :tasks_by_status in a project I belong to with finished" do
+      setup do
+        @task = @story.tasks.create()
+        @task.finish
+        @task.reload
+        post :tasks_by_status, :status => "finished", :id => @story.to_param, :project_id => @project.to_param
+      end
+      should_respond_with :ok
+    end
+    
+    
   end
   # ----------------------------------------------------------------------------------------------------------------
   # Organization Admin
