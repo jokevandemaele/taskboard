@@ -73,6 +73,16 @@ class StoriesControllerTest < ActionController::TestCase
       end
     end
 
+    context "and do POST to :create with new realid" do
+      setup do
+        post :create, :project_id => @project.to_param, :story => { :name => "New Realid", :realid => "ASD001" }
+        @story = Story.find_by_name("New Realid")
+      end
+      should "return the story in json format" do
+        assert_equal "ASD001", @story.realid
+      end
+    end
+
     context "and do POST to :create in a project I belong to with wrong data" do
       setup do
         post :create, :project_id => @project.to_param, :story => { }
@@ -109,6 +119,16 @@ class StoriesControllerTest < ActionController::TestCase
       end
       should "update the story" do
         assert_equal "My Story 1", @story.name
+      end
+    end
+
+    context "and do PUT to :update to change the realid" do
+      setup do
+        put :update, :id => @story.to_param, :project_id => @project.to_param, :story => { :realid => "BBB001" }
+        @story.reload
+      end
+      should "update the realid" do
+        assert_equal "BBB001", @story.realid
       end
     end
 

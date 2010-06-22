@@ -46,10 +46,17 @@ Application.Helpers.Users = {
   
   afterUpdate: function(response){
     ModalDialog.close();
-    var user = response.user
+    var user = response
     var user_container = $('user-' + user.id)
     var name = user_container.down('.name')
-    name.innerHTML = user.name;
+    
+	if(user.is_current){
+		// update picture and name from top
+		$('current_user_name').innerHTML = user.name;
+		$('current_user_picture').src = user.avatar;
+	}
+	
+	name.innerHTML = user.name;
     user_container.highlight({ duration: 0.8 });
   },
   

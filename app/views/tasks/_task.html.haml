@@ -1,4 +1,4 @@
-.delete{ :onClick => "Tasks.removeTask(#{task.story.project.id},#{task.story.id},#{task.id})" }
+.delete{ :onClick => "Tasks.removeTask(#{task.story.project.id},#{task.story.id},#{task.id})", :title => "Delete Task"}
 .task_front{ :id => "task-#{task.id}-front"}
   .task-name-container{ :id => "task-#{task.id}-name-container"}
     .task-container-table
@@ -28,4 +28,11 @@
   %textarea.task-description.in_place_edit{ :id => "edit_description_#{task.id}" }= h task.description
   :javascript
     new Ajax.InPlaceEditor('edit_description_#{task.id}', '/projects/#{task.story.project.to_param}/stories/#{task.story.to_param}/tasks/#{task.to_param}/update_description', { cancelControl: 'button', highlightColor: 'transparent', rows: 6, cols : 12, onComplete: null});
-.flip{ :onClick => "Tasks.flip(#{task.id})" }
+  .change_task_color{ :title => "Change Task Color"}
+    .task_color.orange{ 'data-color' => 'orange' }
+    .task_color.violet{ 'data-color' => 'violet' }
+    .task_color.green{ 'data-color' => 'green' }
+    .task_color.blue{ 'data-color' => 'blue' }
+    .task_color.red{ 'data-color' => 'red' }
+    
+.flip{ :onClick => "Tasks.flip(#{task.id})", :title => "Task Description"}

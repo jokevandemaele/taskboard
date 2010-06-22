@@ -17,10 +17,10 @@
           .agilar_taskboard_logo
         #user-info
           #picture
-            = image_tag current_user.avatar(:thumb)
+            = image_tag current_user.avatar(:thumb), :id => 'current_user_picture'
           #text
             Welcome,
-            %span.username=h current_user.name
+            %span#current_user_name.username=h current_user.name
             - if current_user.admin?
               #role You are a System Administrator
             - else
@@ -39,4 +39,6 @@
           = yield :sidebar
     = yield :bottom
     = javascript_include_tag 'startup'
+    #menu_report_bug
+      = link_to image_tag('reportbug/menu_reportbug.png', :alt => 'bug', :title => "Report Bug"), "http://github.com/agilar/taskboard/issues"
 

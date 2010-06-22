@@ -44,3 +44,12 @@
   :border 3px solid #0c82eb
   :padding 5px
   
+=gradient(!first_stop, !second_stop)
+  :background= -webkit-gradient(linear, left top, left bottom, color-stop(0, !first_stop), color-stop(1, !second_stop)) no-repeat !second_stop
+  :background= -moz-linear-gradient(center top, !first_stop 0%, !second_stop 100%) no-repeat !second_stop
+  
+=shadow(!left,!top,!blur,!color)
+  :-moz-box-shadow= !left !top !blur !color
+  :-webkit-box-shadow= !left !top !blur !color
+  :box-shadow= !left !top !blur !color
+  

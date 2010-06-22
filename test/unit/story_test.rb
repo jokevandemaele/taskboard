@@ -103,9 +103,31 @@ class StoryTest < ActiveSupport::TestCase
       should "return -1" do
         assert_equal -1, @story.priority
       end
+      
+      context "if i change the realid" do
+        setup do
+          @story.realid = 'RA001'
+          @story.save
+          @story.reload
+        end
+        should "change it" do
+          assert_equal 'RA001', @story.realid
+        end
+      end
     end
   end
   
+  context "When I create a story with custom realid" do
+    setup do
+      @story = Factory.build(:story)
+      @story.realid = "ASD001"
+      @story.save
+      @story.reload
+    end
+    should "set that realid correctly" do
+      assert_equal "ASD001", @story.realid
+    end
+  end
     
   ################################################################################################################
   #
