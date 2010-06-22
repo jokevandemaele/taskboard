@@ -52,33 +52,49 @@ ul
 p
   :color black
 .task
+  &.orange
+    +gradient(#fffdbe, #ffe482)
+  &.violet
+    +gradient(#ecd4f5, #caaad6)
+  &.green
+    +gradient(#eef7ca, #c2cf90)
+  &.blue
+    +gradient(#c7eaf5, #a8ccf0)
+  &.red
+    +gradient(#ffd6d6, #f59f9f)
+
+  +shadow(2px,2px,5px,gray)
   :cursor move
-  :background url(/images/task.png) no-repeat
   :width 126px
   :height 126px
   :float left
   :margin 3px
   :position relative
   .delete
-    :width 13px
-    :height 13px
+    :width 14px
+    :height 14px
     :cursor pointer
     :z-index 2
     :background url("/images/task_delete.png") no-repeat
     :position absolute
-    :top 5px
-    :right 5px
+    :top 3px
+    :right 3px
+    :opacity 0.2
+    &:hover
+      :opacity 0.6
+    
   .task_back
     :width 126px
     :height 126px
     :position absolute
     :top 5px
     .task-description
+      :resize none
       :border none
       :background transparent
-      :width 105px
-      :height 96px
-      :margin 2px
+      :width 115px
+      :height 84px
+      :margin 14px 2px
       :font-size 9px
     
   .task_front
@@ -116,11 +132,41 @@ p
   .flip
     :background url("/images/task_flip.png") no-repeat
     :cursor pointer
-    :width 19px
-    :height 19px
+    :width 14px
+    :height 14px
     :position absolute
-    :bottom 0
-    :right 0
+    :bottom 3px
+    :right 3px
+    :opacity 0.2
+    &:hover
+      :opacity 0.6
+  .change_task_color
+    :position absolute
+    :bottom 10px
+    :right 19px
+    :height 11px
+    :width 80px
+    .task_color
+      :border 1px solid black
+      :width 10px
+      :height 10px
+      :float right
+      :margin 0 1px
+      :cursor pointer
+      :opacity 0.3
+      &.orange
+        :background #ffd95e
+      &.violet
+        :background #a178b0
+      &.green
+        :background #d3e398
+      &.blue
+        :background #38b3dd
+      &.red
+        :background red
+      &:hover
+        :border 2px solid black
+        :opacity 0.6
 
   form.inplaceeditor-form 
     +rounded(5px)

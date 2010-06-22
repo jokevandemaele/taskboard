@@ -20,7 +20,7 @@ class Task < ActiveRecord::Base
   # Attributes accessible
   #
   ################################################################################################################
-  attr_accessible :story, :name, :description
+  attr_accessible :story, :name, :description, :color
   
 
   ################################################################################################################
@@ -31,6 +31,13 @@ class Task < ActiveRecord::Base
   named_scope :not_started, :conditions => { :status => "not_started" }
   named_scope :in_progress, :conditions => { :status => "in_progress" }
   named_scope :finished, :conditions => { :status => "finished" }
+  
+  ################################################################################################################
+  #
+  # Callbacks
+  #
+  ################################################################################################################
+  before_save :set_default_color
   
   ################################################################################################################
   #
@@ -70,4 +77,9 @@ class Task < ActiveRecord::Base
     status == 'finished'
   end
 
+private
+
+  def set_default_color
+    self.color = 'orange' if !color
+  end
 end

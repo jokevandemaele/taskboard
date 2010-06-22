@@ -67,12 +67,32 @@ Application.Helpers.Tasks = {
     });
   },
   
+  changeTaskColor: function(element){
+    var task = element.up('.task');
+    var color = element.readAttribute('data-color');
+    task.classNames().each(function(className){
+      if(className != 'task'){
+        task.removeClassName(className);
+      }
+    });
+    task.addClassName(color);
+    var taskId = task.readAttribute('data-task-id');
+    var storyId = task.readAttribute('data-story-id');
+    var projectId = $('story-'+ storyId).readAttribute('data-project-id');
+    new Ajax.Request('/projects/'+projectId+'/stories/'+storyId+'/tasks/'+taskId+'/update_color', {asynchronous:true, evalScripts:false, parameters: 'value='+ color})
+    
+  },
+  
   setupListeners: function(){
     $('taskboard').observe('click', function(event){
       var target = event.element();
       // Listener for hovering finished tasks list
       if(target.match('.finished_tasks')){
         Tasks.toggleTasks(target.childElements());
+      }
+      
+      if(target.match('.task_color')){
+        Tasks.changeTaskColor(target);
       }
     });
   }

@@ -3,8 +3,9 @@ require File.dirname(__FILE__) + '/../test_helper'
 class TaskTest < ActiveSupport::TestCase
   context "Task" do
     setup do
-      Factory(:task)
+      @task = Factory(:task)
     end
+    subject { @task }
     ################################################################################################################
     #
     # Validations
@@ -20,6 +21,10 @@ class TaskTest < ActiveSupport::TestCase
     should_belong_to :story
     should_have_many :nametags
     should_have_many :statustags
+    
+    should "have orange as default color" do
+      assert_equal 'orange', @task.color
+    end
   end
   
   ################################################################################################################
@@ -212,4 +217,18 @@ class TaskTest < ActiveSupport::TestCase
       end
     end
   end
+  
+  context "#color" do
+    setup do
+      @task = Factory(:task)
+      @task.color = 'red'
+      @task.save
+      @task.reload
+    end
+
+    should "should return the saved color" do
+      assert_equal 'red', @task.color
+    end
+  end
+  
 end

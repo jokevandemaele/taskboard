@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   before_filter :require_user
   before_filter :require_belong_to_project_or_admin
   before_filter :find_story
-  before_filter :find_task, :only => [ :edit, :update, :destroy, :start, :stop, :finish, :update_name, :update_description ]
+  before_filter :find_task, :only => [ :edit, :update, :destroy, :start, :stop, :finish, :update_name, :update_description, :update_color ]
   before_filter :update_story, :only => [:start, :stop, :finish]
   layout nil
 
@@ -38,6 +38,12 @@ class TasksController < ApplicationController
     @task.description = params[:value]
     @task.save
     render :json => @task.description, :status => :ok
+  end
+
+  def update_color
+    @task.color = params[:value]
+    @task.save
+    render :json => @task.color, :status => :ok
   end
 
   # DELETE /projects/:project_id/stories/:story_id/tasks/:id

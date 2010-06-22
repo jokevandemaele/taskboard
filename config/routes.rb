@@ -38,6 +38,7 @@ ActionController::Routing::Routes.draw do |map|
      s.task_finish 'tasks/:id/finish', :controller => :tasks, :action => :finish, :conditions => { :method => :post }
      s.task_update_name 'tasks/:id/update_name', :controller => :tasks, :action => :update_name, :conditions => { :method => :post }
      s.task_update_description 'tasks/:id/update_description', :controller => :tasks, :action => :update_description, :conditions => { :method => :post }
+     s.task_update_color 'tasks/:id/update_color', :controller => :tasks, :action => :update_color, :conditions => { :method => :post }
     end
     p.story_start 'stories/:id/start', :controller => :stories, :action => :start, :conditions => { :method => :post }
     p.story_stop 'stories/:id/stop', :controller => :stories, :action => :stop, :conditions => { :method => :post }

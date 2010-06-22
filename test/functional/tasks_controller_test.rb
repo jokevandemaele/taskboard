@@ -11,6 +11,8 @@ class TasksControllerTest < ActionController::TestCase
     should_route :post, "/projects/1/stories/2/tasks", :action => :create, :project_id => 1, :story_id => 2
     should_route :get, "/projects/1/stories/2/tasks/3/edit", :action => :edit, :id => 3, :project_id => 1, :story_id => 2
     should_route :post, "/projects/1/stories/2/tasks/3/update_name", :action => :update_name, :id => 3, :project_id => 1, :story_id => 2
+    should_route :post, "/projects/1/stories/2/tasks/3/update_description", :action => :update_description, :id => 3, :project_id => 1, :story_id => 2
+    should_route :post, "/projects/1/stories/2/tasks/3/update_color", :action => :update_color, :id => 3, :project_id => 1, :story_id => 2
     should_route :delete, "/projects/1/stories/2/tasks/3", :action => :destroy, :id => 3, :project_id => 1, :story_id => 2
     should_route :get, "/projects/1/stories/2/tasks/3", :action => :show, :id => 3, :project_id => 1, :story_id => 2
     should_route :post, "/projects/1/stories/2/tasks/3/start", :action => :start, :id => 3, :project_id => 1, :story_id => 2
@@ -106,6 +108,20 @@ class TasksControllerTest < ActionController::TestCase
       end
       should "update the task" do
         assert_equal "My Task Description", @task.description
+      end
+    end
+
+    context "and do POST to :update_color in a project I belong to with correct data" do
+      setup do
+        post :update_color, :id => @story.tasks.first, :project_id => @project.to_param, :story_id => @story.to_param, :value => "red"
+        @task.reload
+      end
+      should_respond_with :ok
+      # should_assign_to(:project){ @project }
+      # should_assign_to(:story){ @story }
+      # should_assign_to(:task){ @task }
+      should "update the task" do
+        assert_equal "red", @task.color
       end
     end
   
