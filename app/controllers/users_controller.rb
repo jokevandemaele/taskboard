@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :find_organization
-  before_filter :require_user, :only => [:edit, :update, :destroy]
+  before_filter :require_user, :only => [:edit, :update, :destroy, :profile]
   before_filter :require_admin_organization_or_no_user, :only => [:new, :create]
   before_filter :require_organization_admin, :only => [:show, :toggle_admin ]
   before_filter :require_not_own_account, :only => [:toggle_admin]
@@ -43,7 +43,13 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
   end
-
+  
+  # GET /users/profile
+  def profile
+    @user = current_user
+    render :action => :edit
+  end
+  
   # PUT /users/1
   def update
     if @user.update_attributes(params[:user])

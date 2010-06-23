@@ -43,6 +43,17 @@ Application.Helpers.Users = {
       }
     });
   },
+
+  editProfile: function(){
+    new Ajax.Request('/users/profile/', {
+      method: 'get',
+        
+      onSuccess: function(transport) {
+        var formContainer = new Element('div', { id : 'form_container'}).update(transport.responseText);
+        ModalDialog.open(formContainer, { ignoreFormSubmit : true });
+      }
+    });
+  },
   
   afterUpdate: function(response){
     ModalDialog.close();
@@ -93,29 +104,39 @@ Application.Helpers.Users = {
 
       // Listener for add
       if(target.match('.new_user')){
-        organizationId = target.up('.organization').readAttribute('data-organization-id');
+        var organizationId = target.up('.organization').readAttribute('data-organization-id');
         Users.newForm(organizationId);
       }
 
       // Listener for remove
       if(target.match('.remove_user')){
-        organization = target.up('.organization');
-        user = target.up('.user');
+        var organization = target.up('.organization');
+        var user = target.up('.user');
         ModalDialog.yes_no("Are you sure?", function() { Users.deleteUser(user, organization) })
       }
       
       // Listener for edit
       if(target.match('.edit_user')){
-        organization = target.up('.organization');
-        user = target.up('.user');
+        var organization = target.up('.organization');
+        var user = target.up('.user');
         Users.editForm(user, organization);
       }
 
       // Listener for toggle_admin
       if(target.match('.toggle_admin')){
-        organization = target.up('.organization');
-        user = target.up('.user');
+        var organization = target.up('.organization');
+        var user = target.up('.user');
         Users.toggleAdmin(user, organization);
+      }
+      
+    });
+    
+    $('links').observe('click', function(event){
+      var target = event.element();
+      
+      // Listener for edit profile
+      if(target.match('.edit_user')){
+        Users.editProfile();
       }
       
     });

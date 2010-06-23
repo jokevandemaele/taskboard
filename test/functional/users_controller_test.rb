@@ -25,6 +25,7 @@ class UsersControllerTest < ActionController::TestCase
     should_route :get, "/users/new", :action => :new
     should_route :post, "/users", :action => :create
     should_route :get, "/users/2/edit", :action => :edit, :id => 2
+    should_route :get, "/users/profile", :action => :profile
     should_route :put, "/users/2", :action => :update, :id => 2
     should_route :delete, "/users/2", :action => :destroy, :id => 2
   end
@@ -75,6 +76,15 @@ class UsersControllerTest < ActionController::TestCase
     context "and do GET to :edit with my id" do
       setup do
         get :edit, :id => @user.to_param
+      end
+      should_respond_with :ok
+      should_assign_to(:user){@user}
+      should_render_template :edit
+    end
+
+    context "and do GET to :edit_profile" do
+      setup do
+        get :profile
       end
       should_respond_with :ok
       should_assign_to(:user){@user}

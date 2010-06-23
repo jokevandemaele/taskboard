@@ -8,6 +8,7 @@
       = render :partial => 'form', :object => f
       = f.submit
   - else
-    - form_for @user, :html => { :multipart => true } do |f|
+    - form_for @user, :html => { :multipart => true, :target => :upload_frame } do |f|
+      %iframe#upload_frame{ :name => "upload_frame", :style => "display: none" }
       = render :partial => 'form', :object => f
       = f.submit

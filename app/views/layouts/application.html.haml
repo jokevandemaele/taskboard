@@ -26,8 +26,8 @@
             - else
               - if current_user.admins_any_organization?
                 #role You are an Organization Administrator
-
             #links
+              .edit_user{ :title => "Edit User"} Edit Profile
               .logout= link_to 'logout', logout_path
             #revision= FULL_VERSION
       #admin-container

@@ -18,6 +18,7 @@ ActionController::Routing::Routes.draw do |map|
     o.team_remove_users 'teams/:id/users/:user_id', :controller => 'teams', :action => :remove_user, :conditions => { :method => :delete }
     o.team_info 'teams/:id/team_info', :controller => 'teams', :action => :team_info, :conditions => { :method => :get }
 
+    o.user_toggle_admin 'users/profile', :controller => 'users', :action => 'edit_profile', :conditions => { :method => :get }
     o.resources :users, :only => [ :show, :new, :create, :edit, :update, :destroy]
     o.user_toggle_admin 'users/:id/toggle_admin', :controller => 'users', :action => 'toggle_admin', :conditions => { :method => :post }
   end
