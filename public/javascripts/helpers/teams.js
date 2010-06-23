@@ -95,7 +95,9 @@ Application.Helpers.Teams = {
   },
 
   hideTeamInfo: function(team){
-    $('team-info-' + teamId).hide();
+    if($('team-info-' + teamId)){
+      $('team-info-' + teamId).hide();
+    }
   },
   
   addUser: function(user){

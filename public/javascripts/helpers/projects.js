@@ -49,11 +49,28 @@ Application.Helpers.Projects = {
     ModalDialog.close();
     var project = response.evalJSON().project
     var project_container = $('project-' + project.id)
+
+    // Update project name
     var name = project_container.down('.name')
     var nameElement = new Element('a', { href : '/projects/' + project.id + '/taskboard'})
     nameElement.innerHTML = project.name;
     name.innerHTML = ''
     name.appendChild(nameElement);
+
+    // Update project public status
+    var adminProject = project_container.down('.admin');
+    if(project.public){
+      project_container.writeAttribute('data-project-public-hash', project.public_hash);
+      if(!adminProject.down('.public_project')){
+        var lock = new Element('div', {'class' : 'public_project', 'title' : 'Public Project'})
+        adminProject.appendChild(lock);
+      }
+    }else{
+      var lock = adminProject.down('.public_project')
+      if(lock){
+        lock.remove();
+      }
+    }
     project_container.highlight({ duration: 0.8 });
   },
   
@@ -77,7 +94,7 @@ Application.Helpers.Projects = {
       var container = new Element('div');
       var publicHashText = new Element('p', { 'class' : 'public_hash_container'}).update("Public Hash: <strong>" + publicHash + "</strong>");
       container.appendChild(publicHashText);
-      var publicHashLink = new Element('p', { 'class' : 'public_hash_container'}).update("<a href='/projects/"+projectId+"/taskboard?public_hash=" + publicHash+"'>Public Link</a>");
+      var publicHashLink = new Element('p', { 'class' : 'public_hash_container'}).update("<a href='/projects/"+projectId+"/taskboard?public_hash=" + publicHash+"'>"+document.domain+"</a>");
       container.appendChild(publicHashLink);
       ModalDialog.open(container, { ignoreFormSubmit : true });
     }
