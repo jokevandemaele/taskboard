@@ -94,7 +94,7 @@ Application.Helpers.Projects = {
       var container = new Element('div');
       var publicHashText = new Element('p', { 'class' : 'public_hash_container'}).update("Public Hash: <strong>" + publicHash + "</strong>");
       container.appendChild(publicHashText);
-      var publicHashLink = new Element('p', { 'class' : 'public_hash_container'}).update("<a href='/projects/"+projectId+"/taskboard?public_hash=" + publicHash+"'>"+document.domain+"</a>");
+      var publicHashLink = new Element('p', { 'class' : 'public_hash_container'}).update("Public Link: <a href='/projects/"+projectId+"/taskboard?public_hash=" + publicHash+"'>Click Here</a>");
       container.appendChild(publicHashLink);
       ModalDialog.open(container, { ignoreFormSubmit : true });
     }
