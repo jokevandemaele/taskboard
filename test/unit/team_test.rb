@@ -38,7 +38,7 @@ class TeamTest < ActiveSupport::TestCase
     end
 
     should "return all the stories for the team (including all its projects)" do
-      assert_equal @project1.stories + @project2.stories, @team.stories
+      assert_equal ((@project1.stories + @project2.stories).sort_by {|story| [story.priority, story.updated_at] }).reverse, @team.stories
     end
   end
   

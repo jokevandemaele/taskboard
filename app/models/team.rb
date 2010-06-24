@@ -30,6 +30,8 @@ class Team < ActiveRecord::Base
   #
   ################################################################################################################
   def stories
-    projects.collect { |project| project.stories }.flatten
+    stories = projects.collect { |project| project.stories }.flatten
+    stories = stories.sort_by {|story| [story.priority, story.updated_at] }
+    stories.reverse
   end
 end
