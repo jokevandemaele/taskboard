@@ -2,54 +2,53 @@
 // encompass child floated elements without needing a "clear:both"
 // element in the markup
 =clearfix
-  :overflow auto
-  :overflow -moz-scrollbars-none
+  overflow: auto
+  overflow: -moz-scrollbars-none
   // This makes IE6 get layout
-  :display inline-block
+  display: inline-block
   // and this puts it back to block
   &
-    :display block
+    display: block
 
 // Use this mixin to define an element which's width and height
 // are the same
-=square(!side)
-  :width = !side
-  :height = !side
+=square($side)
+  width: $side
+  height: $side
 
 // Use this mixin to define an element with rounded borders
 // by !radius radius
-=rounded(!radius)
-  :-moz-border-radius = !radius
-  :-webkit-border-radius = !radius
-  :border-radius = !radius
+=rounded($radius)
+  -moz-border-radius: $radius
+  -webkit-border-radius: $radius
+  border-radius: $radius
 
 // Use this mixin to define an element with rounded bottom borders
 // by !radius radius
-=bottom_rounded(!radius)
-  :-moz-border-radius = 0 0 !radius !radius
-  :-webkit-border-radius = 0 0 !radius !radius
-  :border-radius = 0 0 !radius !radius
+=bottom_rounded($radius)
+  -moz-border-radius: 0 0 $radius $radius
+  -webkit-border-radius: 0 0 $radius $radius
+  border-radius: 0 0 $radius $radius
 
 =clickable
   cursor: pointer
-  
-=right_rounded(!radius)
-  :-moz-border-radius = 0 !radius !radius 0
-  :-webkit-border-radius = 0 !radius !radius 0
-  :border-radius = 0 !radius !radius 0
-  
+
+=right_rounded($radius)
+  -moz-border-radius: 0 $radius $radius 0
+  -webkit-border-radius: 0 $radius $radius 0
+  border-radius: 0 $radius $radius 0
+
 =admin_div
   +rounded(10px)
-  :background #d7e3f4
-  :border 3px solid #0c82eb
-  :padding 5px
-  
-=gradient(!first_stop, !second_stop)
-  :background= -webkit-gradient(linear, left top, left bottom, color-stop(0, !first_stop), color-stop(1, !second_stop)) no-repeat !second_stop
-  :background= -moz-linear-gradient(center top, !first_stop 0%, !second_stop 100%) no-repeat !second_stop
-  
-=shadow(!left,!top,!blur,!color)
-  :-moz-box-shadow= !left !top !blur !color
-  :-webkit-box-shadow= !left !top !blur !color
-  :box-shadow= !left !top !blur !color
-  
+  background: #d7e3f4
+  border: 3px solid #0c82eb
+  padding: 5px
+
+=gradient($first_stop, $second_stop)
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, $first_stop), color-stop(1, $second_stop)) no-repeat $second_stop
+  background: -moz-linear-gradient(center top, $first_stop 0%, $second_stop 100%) no-repeat $second_stop
+
+=shadow($left, $top, $blur, $color)
+  -moz-box-shadow: $left $top $blur $color
+  -webkit-box-shadow: $left $top $blur $color
+  box-shadow: $left $top $blur $color
