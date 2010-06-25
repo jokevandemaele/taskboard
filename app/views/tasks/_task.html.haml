@@ -26,7 +26,7 @@
       = render statustag
 
 .task_back{ :id => "task-#{task.id}-back", :style => "display: none" }
-  %textarea.task-description.in_place_edit{ :id => "edit_description_#{task.id}" }= h task.description
+  %textarea.task-description.in_place_edit{ :id => "edit_description_#{task.id}" }= task.description
   :javascript
     new Ajax.InPlaceEditor('edit_description_#{task.id}', '/projects/#{task.story.project.to_param}/stories/#{task.story.to_param}/tasks/#{task.to_param}/update_description', { cancelControl: 'button', highlightColor: 'transparent', rows: 6, cols : 12, onComplete: null});
   .change_task_color{ :title => "Change Task Color"}
