@@ -30,7 +30,6 @@ var DDM = YAHOO.util.DragDropMgr;
 	        var dragEl = this.getDragEl(); 
 	        var clickEl = this.getEl(); 
 	        Dom.setStyle(clickEl, "visibility", "hidden"); 
-
 	        dragEl.innerHTML = clickEl.innerHTML; 
           // Dom.setStyle(dragEl, "color", Dom.getStyle(clickEl, "color")); 
           // Dom.setStyle(dragEl, "backgroundColor", Dom.getStyle(clickEl, "backgroundColor")); 

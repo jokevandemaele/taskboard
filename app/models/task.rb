@@ -77,9 +77,14 @@ class Task < ActiveRecord::Base
     status == 'finished'
   end
 
+  def color
+    super || 'orange'
+  end
+
 private
 
   def set_default_color
     self.color = 'orange' if !color
   end
+  
 end

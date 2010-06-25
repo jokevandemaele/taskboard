@@ -25,6 +25,16 @@ class TaskTest < ActiveSupport::TestCase
     should "have orange as default color" do
       assert_equal 'orange', @task.color
     end
+    
+    context "having nil as color" do
+      setup do
+        @task.color = nil
+      end
+
+      should "return orange as color" do
+        assert_equal 'orange', @task.color
+      end
+    end
   end
   
   ################################################################################################################

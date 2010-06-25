@@ -32,6 +32,10 @@ Application = {
       // Set _moduleName attribute (used in Application#error)
       Application.Helpers[helper]._moduleName = helper;
     }
+    
+    // Make editing with double click
+    Ajax.InPlaceEditor.Listeners.dblclick = Ajax.InPlaceEditor.Listeners.click
+    delete Ajax.InPlaceEditor.Listeners.click
   },
 
   addConfig: function(config) {

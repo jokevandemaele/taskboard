@@ -3,6 +3,13 @@ Application.Helpers.Tasks = {
     this.setupListeners();
   },
   
+  replaceURLInDescription: function(transport, element){
+    if(transport){
+      var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+      element.innerHTML = transport.responseText.replace(exp,"<a href='$1' target='_blank'>$1</a>"); 
+    }
+  },
+  
   newForm: function(projectId,storyId){
     // Request form
     new Ajax.Request('/projects/'+ projectId + '/stories/'+storyId+'/tasks/new', {

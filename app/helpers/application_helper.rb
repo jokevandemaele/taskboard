@@ -53,5 +53,9 @@ module ApplicationHelper
               :class => "admin-div-element-actions-edit-admin#{'-left-aligned' if !current_user.admins?(parent)}")
     end 
   end
-
+  
+  def parse_urls(text)
+    URI::extract(text).uniq.each{|uri| text.gsub!(uri, "<a href='#{uri}' target='_blank'>#{uri}</a>")}
+    text
+  end
 end
