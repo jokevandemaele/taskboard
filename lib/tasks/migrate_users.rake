@@ -1,3 +1,4 @@
+require File.expand_path(File.dirname(__FILE__) + "/../../config/environment")
 require 'digest/sha1'
 namespace :taskboard do
   namespace :migration do
