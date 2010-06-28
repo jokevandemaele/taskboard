@@ -17,6 +17,7 @@ namespace :taskboard do
           :color => member.color, 
           :login => member.username, 
           :email => member.email ? member.email : "insert#{Digest::SHA1.hexdigest(member.username)}@mail.com", 
+          :avatar => FileTest.exists?(File.join(Rails.root, 'public', 'images', 'members', member.id.to_s + '.png')) ? File.open(File.join(Rails.root, 'public', 'images', 'members', member.id.to_s + '.png')) : nil,
           :password => Digest::SHA1.hexdigest(member.username), 
           :password_confirmation => Digest::SHA1.hexdigest(member.username)
         )
