@@ -36,4 +36,4 @@
     .task_color.blue{ 'data-color' => 'blue' }
     .task_color.red{ 'data-color' => 'red' }
     
-.flip{ :onClick => "Tasks.flip(#{task.id})"}
+.flip{ :class => (!task.description.blank?) ? 'has_description' : '', :onClick => "Tasks.flip(#{task.id})"}

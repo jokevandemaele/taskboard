@@ -13,6 +13,11 @@ Application.Helpers.Tasks = {
       response = transport.responseText.evalJSON();
       element.up('.task_back').writeAttribute('data-description', response.raw)
       element.update(response.replaced);
+      if(response.replaced == ''){
+        element.up('.task').down('.flip').removeClassName('has_description');
+      }else{
+        element.up('.task').down('.flip').addClassName('has_description');
+      }
     }
   },
   
