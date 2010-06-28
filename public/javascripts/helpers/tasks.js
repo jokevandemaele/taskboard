@@ -15,6 +15,7 @@ Application.Helpers.Tasks = {
       element.update(response.replaced);
       if(response.replaced == ''){
         element.up('.task').down('.flip').removeClassName('has_description');
+        element.update("Double Click to Edit!");
       }else{
         element.up('.task').down('.flip').addClassName('has_description');
       }
