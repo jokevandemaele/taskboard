@@ -25,10 +25,10 @@
     - task.statustags.each do |statustag|
       = render statustag
 
-.task_back{ :id => "task-#{task.id}-back", :style => "display: none" }
+.task_back{ :id => "task-#{task.id}-back", :style => "display: none", 'data-description' => "#{task.description}" }
   %pre.task-description.in_place_edit{ :id => "edit_description_#{task.id}" }= raw parse_urls(h(task.description))
   :javascript
-    new Ajax.InPlaceEditor('edit_description_#{task.id}', '/projects/#{task.story.project.to_param}/stories/#{task.story.to_param}/tasks/#{task.to_param}/update_description', { cancelControl: 'button', highlightColor: 'transparent', rows: 6, cols : 12, onComplete: function(transport, element){ Tasks.replaceURLInDescription(transport,element) }});
+    new Ajax.InPlaceEditor('edit_description_#{task.id}', '/projects/#{task.story.project.to_param}/stories/#{task.story.to_param}/tasks/#{task.to_param}/update_description', { cancelControl: 'button', highlightColor: 'transparent', rows: 6, cols : 12, onFormCustomization: function(form, value) { Tasks.replaceDescription(value) }, onComplete: function(transport, element){ Tasks.replaceURLInDescription(transport,element) }});
   .change_task_color{ :title => "Change Task Color"}
     .task_color.orange{ 'data-color' => 'orange' }
     .task_color.violet{ 'data-color' => 'violet' }

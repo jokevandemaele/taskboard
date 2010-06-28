@@ -96,7 +96,7 @@ class TasksControllerTest < ActionController::TestCase
 
     context "and do POST to :update_description in a project I belong to with correct data" do
       setup do
-        post :update_description, :id => @story.tasks.first, :project_id => @project.to_param, :story_id => @story.to_param, :value => "My Task Description"
+        post :update_description, :id => @story.tasks.first, :project_id => @project.to_param, :story_id => @story.to_param, :value => "http://www.example.com My Task Description"
         @task.reload
       end
       should_respond_with :ok
@@ -104,10 +104,10 @@ class TasksControllerTest < ActionController::TestCase
       # should_assign_to(:story){ @story }
       # should_assign_to(:task){ @task }
       should "return the description" do
-        assert_equal "My Task Description", @response.body
+        assert_equal "{\"replaced\":\"<a href='http://www.example.com' target='_blank' title='http://www.example.com'>http://www.exampl...</a> My Task Description\",\"raw\":\"http://www.example.com My Task Description\"}", @response.body
       end
       should "update the task" do
-        assert_equal "My Task Description", @task.description
+        assert_equal "http://www.example.com My Task Description", @task.description
       end
     end
 

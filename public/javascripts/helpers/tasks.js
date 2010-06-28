@@ -3,10 +3,16 @@ Application.Helpers.Tasks = {
     this.setupListeners();
   },
   
+  replaceDescription: function(value){
+    var taskId = value.id.split('-')[0].split('_')[2]; 
+    value.down("textarea").innerHTML = $("task-"+taskId+"-back").readAttribute('data-description');
+  },
+  
   replaceURLInDescription: function(transport, element){
     if(transport){
-      var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
-      element.innerHTML = transport.responseText.replace(exp,"<a href='$1' target='_blank'>$1</a>"); 
+      response = transport.responseText.evalJSON();
+      element.up('.task_back').writeAttribute('data-description', response.raw)
+      element.update(response.replaced);
     }
   },
   
