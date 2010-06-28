@@ -73,9 +73,15 @@ p
     position: absolute
     top: 3px
     right: 3px
-    opacity: 0.1
+    opacity: 0
     &:hover
-      opacity: 0.6
+      opacity: 0.6 !important
+  &:hover
+    .delete, .flip
+      opacity: 0.2
+    .task_color
+      opacity: 0.3 !important
+      
   .task_back
     width: 126px
     height: 126px
@@ -136,7 +142,7 @@ p
     position: absolute
     bottom: 3px
     right: 3px
-    opacity: 0.1
+    opacity: 0
     &:hover
       opacity: 0.7 !important
     &.has_description
@@ -154,7 +160,7 @@ p
       float: right
       margin: 0 1px
       cursor: pointer
-      opacity: 0.3
+      opacity: 0
       &.orange
         background: #ffd95e
       &.violet
@@ -167,7 +173,7 @@ p
         background: red
       &:hover
         border: 2px solid black
-        opacity: 0.6
+        opacity: 0.6 !important
         margin: 0
   form.inplaceeditor-form
     +rounded(5px)
