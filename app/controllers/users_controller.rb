@@ -4,8 +4,7 @@ class UsersController < ApplicationController
   before_filter :require_admin_organization_or_no_user, :only => [:new, :create]
   before_filter :require_organization_admin, :only => [:show, :toggle_admin ]
   before_filter :require_not_own_account, :only => [:toggle_admin]
-  before_filter :require_own_or_organization_admin, :only => [:destroy]
-  before_filter :require_own_account, :only => [ :edit, :update]
+  before_filter :require_own_or_organization_admin, :only => [:edit, :update, :destroy]
   before_filter :find_user, :only => [:edit, :update, :destroy ]
   layout nil
   
@@ -94,9 +93,12 @@ private
   end
   
   def require_own_or_organization_admin
-    find_organization if params[:organization_id]
-    return require_organization_admin if (@organization && @organization.users.include?(User.find(params[:id])))
-    deny_access if (params[:id] != current_user.to_param)
+    if params[:organization_id] 
+      find_organization
+      require_organization_admin if (params[:id] != current_user.to_param)
+    else
+      current_user.admin? if (params[:id] != current_user.to_param)
+    end
   end
   
   def find_user
