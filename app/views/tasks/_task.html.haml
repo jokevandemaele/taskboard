@@ -30,7 +30,7 @@
       = render statustag
 
 .task_back{ :id => "task-#{task.id}-back", :style => "display: none", 'data-description' => "#{task.description}" }
-  %pre.task-description.in_place_edit{ :id => "edit_description_#{task.id}" }= raw parse_urls(task.name.blank? ? "Double Click to Edit!" : h(task.name))
+  %pre.task-description.in_place_edit{ :id => "edit_description_#{task.id}" }= raw parse_urls(task.description.blank? ? "Double Click to Edit!" : h(task.description))
   :javascript
     new Ajax.InPlaceEditor('edit_description_#{task.id}', '/projects/#{task.story.project.to_param}/stories/#{task.story.to_param}/tasks/#{task.to_param}/update_description', 
       { 
