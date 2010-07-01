@@ -6,7 +6,7 @@ class UsersControllerTest < ActionController::TestCase
     should_require_no_user_on [:new, :create]
     should_require_organization_admin_on [ :new, :create, :destroy, :toggle_admin ]
     should_require_user_on [ :edit, :update, :destroy ]
-    should_require_own_account_on [ :edit, :update, :destroy ]
+    # should_require_own_account_on [ :edit, :update ]
   end
   
   
@@ -202,6 +202,29 @@ class UsersControllerTest < ActionController::TestCase
       should_respond_with :precondition_failed
       should "return the errors in json" do
         assert_match "can't be blank", @response.body
+      end
+    end
+    
+    context "and do PUT to :update.json with correct data and with an id from my organization" do
+      setup do
+        @request.env['HTTP_ACCEPT'] = "application/json"
+        @a_user = Factory(:user)
+        @a_user.add_to_organization(@organization)
+        
+        put :update, :id => @a_user.to_param, :user => { :name => "The User", :email => "my_email@example.com"}, :organization_id => @organization.id
+        assert @a_user.reload
+      end
+      should_respond_with :ok
+      should_not_set_the_flash
+      should_assign_to(:user){ @a_user }
+
+      should "update the user" do
+        assert_equal "The User", @a_user.name
+        assert_equal "my_email@example.com", @a_user.email
+      end
+
+      should "return the user data json" do
+        assert_match "<script>top.Users.afterUpdate(#{{ :id => @a_user.id, :name => @a_user.name, :avatar => @a_user.avatar(:thumb), :is_current => false }.to_json})</script>", @response.body
       end
     end
     

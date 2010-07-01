@@ -5,6 +5,8 @@ class TasksController < ApplicationController
   before_filter :find_task, :only => [ :edit, :update, :destroy, :start, :stop, :finish, :update_name, :update_description, :update_color ]
   before_filter :update_story, :only => [:start, :stop, :finish]
   layout nil
+  include ApplicationHelper
+  include ActionView::Helpers::TextHelper
 
   # GET /projects/:project_id/stories/:story_id/tasks
   def index
@@ -37,7 +39,7 @@ class TasksController < ApplicationController
   def update_description
     @task.description = params[:value]
     @task.save
-    render :json => @task.description, :status => :ok
+    render :json => {:replaced => parse_urls(@task.description), :raw => @task.reload.description}, :status => :ok
   end
 
   def update_color

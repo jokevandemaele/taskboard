@@ -1,6 +1,6 @@
 #form
   %h1 Create Task
-  - remote_form_for @task, :url => project_story_tasks_path(@project, @story, :format => :json), :loading => "$('task_submit').hide();", :loaded => "$('task_submit').enable();", :success => 'Tasks.afterCreate(request.responseText);', :failure => 'ModalDialog.displayFormErrors(request.responseJSON);' do |form|
+  - remote_form_for @task, :url => project_story_tasks_path(@project, @story, :format => :json), :before => "$('task_submit').disabled='disabled'", :after => "$('form').remove();", :success => 'Tasks.afterCreate(request.responseText);', :failure => "ModalDialog.displayFormErrors(request.responseJSON); $('task_submit').disabled=''" do |form|
     = form.error_messages 
     .field
       = form.label :name

@@ -3,14 +3,18 @@
   .task-name-container{ :id => "task-#{task.id}-name-container"}
     .task-container-table
       .task-container-cell
-        %p.task-name.in_place_edit{ :id => "edit_name_#{task.id}" }= h task.name
+        %p.task-name.in_place_edit{ :id => "edit_name_#{task.id}" }= task.name.blank? ? "Double Click to Edit!" : h(task.name)
     :javascript
       new Ajax.InPlaceEditor('edit_name_#{task.id}', '/projects/#{task.story.project.to_param}/stories/#{task.story.to_param}/tasks/#{task.to_param}/update_name', 
         { 
+          clickToEditText: "Double Click to edit",
           cancelControl: 'button',
           highlightColor: 'transparent',
           cols : 18, 
           onComplete: function(){
+            if($('edit_name_#{task.id}').innerHTML == ''){
+              $('edit_name_#{task.id}').update("Double Click to Edit!");
+            }
             $('edit_name_#{task.id}').setStyle({fontSize: '12px'});
             $('edit_name_#{task.id}').setStyle({lineHeight: '17px'});
             resizeFontSizeToFit($('edit_name_#{task.id}'), $('task-#{task.id}-name-container'));} 
@@ -25,10 +29,18 @@
     - task.statustags.each do |statustag|
       = render statustag
 
-.task_back{ :id => "task-#{task.id}-back", :style => "display: none" }
-  %pre.task-description.in_place_edit{ :id => "edit_description_#{task.id}" }= raw parse_urls(h(task.description))
+.task_back{ :id => "task-#{task.id}-back", :style => "display: none", 'data-description' => "#{task.description}" }
+  %pre.task-description.in_place_edit{ :id => "edit_description_#{task.id}" }= raw parse_urls(task.description.blank? ? "Double Click to Edit!" : h(task.description))
   :javascript
-    new Ajax.InPlaceEditor('edit_description_#{task.id}', '/projects/#{task.story.project.to_param}/stories/#{task.story.to_param}/tasks/#{task.to_param}/update_description', { cancelControl: 'button', highlightColor: 'transparent', rows: 6, cols : 12, onComplete: function(transport, element){ Tasks.replaceURLInDescription(transport,element) }});
+    new Ajax.InPlaceEditor('edit_description_#{task.id}', '/projects/#{task.story.project.to_param}/stories/#{task.story.to_param}/tasks/#{task.to_param}/update_description', 
+      { 
+      clickToEditText: "Double Click to edit", 
+      cancelControl: 'button', 
+      highlightColor: 'transparent', 
+      rows: 6, 
+      cols : 12, 
+      onFormCustomization: function(form, value) { Tasks.replaceDescription(value) }, 
+      onComplete: function(transport, element){ Tasks.replaceURLInDescription(transport,element) }});
   .change_task_color{ :title => "Change Task Color"}
     .task_color.orange{ 'data-color' => 'orange' }
     .task_color.violet{ 'data-color' => 'violet' }
@@ -36,4 +48,4 @@
     .task_color.blue{ 'data-color' => 'blue' }
     .task_color.red{ 'data-color' => 'red' }
     
-.flip{ :onClick => "Tasks.flip(#{task.id})", :title => "Task Description"}
+.flip{ :class => (!task.description.blank?) ? 'has_description' : '', :onClick => "Tasks.flip(#{task.id})"}
