@@ -305,5 +305,94 @@ class ProjectTest < ActiveSupport::TestCase
     end
   end
   
+  context "#tasks_count" do
+    setup do
+      @project = Factory(:project)
+    end
+    should "return a hash with the count of the tasks" do
+      result = { :not_started => 1, :in_progress => 0, :finished => 0}
+      assert_equal result, @project.tasks_count
+    end
+    context "when having one started" do
+      setup do
+        @project.stories.first.tasks.first.start
+      end
+
+      should "return a hash with the count of the tasks" do
+        result = { :not_started => 0, :in_progress => 1, :finished => 0}
+        assert_equal result, @project.tasks_count
+      end
+    end
+    
+    context "when having one finished" do
+      setup do
+        @project.stories.first.tasks.first.finish
+      end
+
+      should "return a hash with the count of the tasks" do
+        result = { :not_started => 0, :in_progress => 0, :finished => 1}
+        assert_equal result, @project.tasks_count
+      end
+    end
+  end
+
+  context "#statustags_count" do
+    setup do
+      @project = Factory(:project)
+    end
+    should "return a hash with the count of the tasks" do
+      result = {
+        :high_priority => 0,
+        :please_test => 0,
+        :bug => 0,
+        :blocked => 0,
+        :done => 0,
+        :waiting => 0,
+        :please_analyze => 0,
+        :delegated => 0,
+      }
+      assert_equal result, @project.statustags_count
+    end
+    
+    ["high_priority","please_test","bug", "blocked", "done", "waiting","please_analyze", "delegated"].each do |status|
+      context "with one statustag in #{status}" do
+        setup do
+          @task = @project.stories.first.tasks.first
+          @task.statustags.create(:status => status)
+          @task.save
+        end
+        should "return a hash with the count of the tasks" do
+          result = {
+            :high_priority => 0,
+            :please_test => 0,
+            :bug => 0,
+            :blocked => 0,
+            :done => 0,
+            :waiting => 0,
+            :please_analyze => 0,
+            :delegated => 0,
+          }
+          result[status.to_sym] += 1
+          assert_equal result, @project.statustags_count
+        end
+      end
+    end
+  end
+
+  context "#nametags_count" do
+    setup do
+      @organization = Factory(:organization)
+      @user = Factory(:user)
+      @user.add_to_organization(@organization)
+      @project = @organization.projects.first
+      @task = @project.stories.first.tasks.first
+      @task.nametags.create(:user => @user)
+    end
+    should "return the correct count" do
+      result = { @user.id => 1 }
+      assert_equal result, @project.nametags_count
+    end
+  end
+  
   
 end

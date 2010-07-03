@@ -1,8 +1,10 @@
 class ProjectsController < ApplicationController
   before_filter :require_user
-  before_filter :require_organization_admin, :only => [ :show, :new , :create, :edit, :update, :destroy ]
+  before_filter :require_organization_admin, :only => [ :new , :create, :edit, :update, :destroy ]
   before_filter :find_organization, :only => [ :show, :new, :create, :edit, :update, :destroy]
-  layout nil
+  before_filter :require_belong_to_project_or_admin, :only => [:show]
+
+  layout :application_unless_xhr
   # GET /organizations/[organization_id]/projects/new
   def new
     @project = @organization.projects.build()
@@ -11,7 +13,11 @@ class ProjectsController < ApplicationController
   # GET /organizations/[organization_id]/projects/1
   def show
     @project = @organization.projects.find(params[:id])
+    if request.xhr?
+      render :action => "show_ajax", :status => :ok
+    end
   end
+  
   # POST /organizations/[organization_id]/projects
   def create
     # REMEMBER: Add Team logic
@@ -44,5 +50,10 @@ class ProjectsController < ApplicationController
     if @project.destroy
       render :json => '', :status => :ok
     end
+  end
+  
+  private
+  def application_unless_xhr
+    request.xhr? ? nil : 'application'
   end
 end

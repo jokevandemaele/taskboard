@@ -7,19 +7,18 @@
     .item.taskboard
 
   .item.new_story{ 'data-project-id' => @project.to_param }
-  - link_to organizations_path do
-    .item.dashboard
   - link_to logout_path do
     .item.logout
 
+  #menu_links
+    = link_to image_tag('admin_section_small.png'), root_path, :title => "Admin Section"
+    - if (@view == :project)
+      = link_to image_tag('dashboard_small.png'), organization_project_url(:organization_id => @team.organization.to_param, :id => current_user.last_project), :title => "Project Dashboard"
+
   - if (@view == :project && (@project.teams.first.projects.size > 1 && !@project.guest_members.include?(current_user))) || @view == :team
     #menu_views
-      - team_image = image_tag 'logo-teams-small.png'
-      - team_selected = (@view == :team)
-      - project_image = image_tag 'logo-projects-small.png'
-
-      = link_to project_image, project_backlog_index_path(:project_id => current_user.last_project || @team.projects.first), :class => !team_selected, :title => "Project View"
-      = link_to team_image, backlog_team_view_path(@team.to_param), :class => team_selected, :title => "Team View"
+      = link_to image_tag('logo-projects-small.png'), project_backlog_index_path(:project_id => current_user.last_project || @team.projects.first), :class => !(@view == :team), :title => "Project View"
+      = link_to image_tag('logo-teams-small.png'), backlog_team_view_path(@team.to_param), :class => (@view == :team), :title => "Team View"
 
 #menu_expand
   %a{ :href => "#", :onclick => "expandMenu('backlog');", :style => "position: relative; top: 8px; left: 10px;" }

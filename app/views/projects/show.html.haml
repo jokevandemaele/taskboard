@@ -1,1 +1,120 @@
-= render :partial => 'project', :object => @project, :locals => { :organization => @organization }
+#project.admin_container{ 'data-organization-id' => @project.organization_id, 'data-project-id' => @project.id}
+  .title
+    %h1= @project.name
+    %p== From: #{@project.organization.name}
+    .links
+      .link.backlog= link_to image_tag('backlog.png', :alt => "Backlog"), project_backlog_index_path(@project)
+      .link.taskboard= link_to image_tag('taskboard.png', :alt => "Taskboard"), project_taskboard_index_path(@project)
+      .link.admin_section= link_to image_tag('admin_section.png', :alt => "Taskboard"), root_url
+  
+  .section Overview
+  .overview_container
+    - nametags = @project.nametags_count
+    .overview.participation
+      %h3 Participation
+      %table
+        - @project.users.each do |user|
+          %tr
+            %td 
+              .square{ :style => "background-color: ##{user.color}"}
+              = user.name
+            %td.value= nametags[user.id]
+  
+    .overview.stories
+      %h3 Stories
+      %table
+        %tr
+          %td 
+            .square.not_started
+            Not Started
+          %td.value= @project.stories.not_started.size
+        %tr
+          %td 
+            .square.in_progress
+            In Progress
+          %td.value= @project.stories.in_progress.size
+        %tr
+          %td
+            .square.finished
+            Finished
+          %td.value= @project.stories.finished.size
+
+    - tasks = @project.tasks_count
+    .overview.tasks
+      %h3 Tasks
+      %table
+        %tr
+          %td 
+            .square.not_started
+            Not Started
+          %td.value= tasks[:not_started]
+        %tr
+          %td 
+            .square.in_progress
+            In Progress
+          %td.value= tasks[:in_progress]
+        %tr
+          %td
+            .square.finished
+            Finished
+          %td.value= tasks[:finished]
+
+    - statustags = @project.statustags_count
+    .overview.status
+      %h3 Status
+      %table
+        %tr
+          %td 
+            .square.high_priority
+            High Priority
+          %td.value= statustags[:high_priority]
+        %tr
+          %td 
+            .square.please_test
+            Please Test
+          %td.value= statustags[:please_test]
+        %tr
+          %td
+            .square.bug
+            Bug
+          %td.value= statustags[:bug]
+        %tr
+          %td 
+            .square.blocked
+            Blocked
+          %td.value= statustags[:blocked]
+        %tr
+          %td 
+            .square.done
+            Done
+          %td.value= statustags[:done]
+        %tr
+          %td
+            .square.waiting
+            Waiting
+          %td.value= statustags[:waiting]
+        %tr
+          %td 
+            .square.please_analyze
+            Please Analyze
+          %td.value= statustags[:please_analyze]
+        %tr
+          %td
+            .square.delegated
+            Delegated
+          %td.value= statustags[:delegated]
+
+  - if @project.public?
+    .section Public Information
+    %p.public_link
+      %strong Public Taskboard Url:
+      = link_to project_taskboard_index_url(@project, :public_hash => @project.public_hash), project_taskboard_index_url(@project, :public_hash => @project.public_hash)
+    %p.public_link
+      %strong Public Backlog Url:
+      = link_to project_backlog_index_url(@project, :public_hash => @project.public_hash), project_taskboard_index_url(@project, :public_hash => @project.public_hash)
+
+- content_for :helpers do
+  = javascript_include_tag 'helpers/projects.js', 'helpers/modal_dialog.js', 'helpers/color_picker.js'
+
+- content_for :title do
+  == Project Dashboard - #{@project.name} (#{@project.organization.name})

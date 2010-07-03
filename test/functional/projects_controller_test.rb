@@ -2,7 +2,8 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class ProjectsControllerTest < ActionController::TestCase
   context "Permissions" do
-    should_require_organization_admin_on [ :show, :new, :create , :edit, :update, :destroy ]
+    should_require_organization_admin_on [ :new, :create , :edit, :update, :destroy ]
+    should_require_belong_to_project_or_admin_on [:show]
   end
   context "Project Routes" do
     should_route :get, "/organizations/1/projects/new", :action => :new, :organization_id => 1
@@ -10,6 +11,7 @@ class ProjectsControllerTest < ActionController::TestCase
     should_route :get, "/organizations/1/projects/2/edit", :action => :edit, :id => 2, :organization_id => 1
     should_route :put, "/organizations/1/projects/2", :action => :update, :id => 2, :organization_id => 1
     should_route :delete, "/organizations/1/projects/2", :action => :destroy, :id => 2, :organization_id => 1
+    should_route :get, "/organizations/1/projects/2", :action => :show, :id => 2, :organization_id => 1
   end
   
   # ----------------------------------------------------------------------------------------------------------------
@@ -143,9 +145,19 @@ class ProjectsControllerTest < ActionController::TestCase
         get :show, :id => @project.to_param, :organization_id => @organization.to_param
       end
       should_respond_with :ok
-      # should_assign_to(:organization){ @organization }
-      # should_assign_to(:project){ @project }
-      # should_render_template :show
+      should_assign_to(:organization){ @organization }
+      should_assign_to(:project){ @project }
+      should_render_template :show
+    end
+
+    context "and do GET to :show an organization I administer with ajax" do
+      setup do
+        xhr :get, :show, :id => @project.to_param, :organization_id => @organization.to_param
+      end
+      should_respond_with :ok
+      should_assign_to(:organization){ @organization }
+      should_assign_to(:project){ @project }
+      should_render_template :show_ajax
     end
 
     context "and do GET to :show an organization I don't administer" do
@@ -303,4 +315,29 @@ class ProjectsControllerTest < ActionController::TestCase
       # should_render_template :show
     end
   end
+  
+  context "If I'm a normal user" do
+    setup do
+      @organization = Factory(:organization)
+      @admin = not_logged_user
+      @admin.add_to_organization(@organization)
+      @organization.reload
+      @user = Factory(:user)
+      @user.add_to_organization(@organization)
+      @organization.reload
+      @project = @organization.projects.first
+    end
+
+    context "and do GET to :show in a project I belong to" do
+      setup do
+        
+        get :show, :id => @project.to_param, :organization_id => @organization.to_param
+      end
+      should_respond_with :ok
+      should_assign_to(:organization){ @organization }
+      should_assign_to(:project){ @project }
+      should_render_template :show
+    end
+  end
+  
 end

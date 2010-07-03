@@ -95,20 +95,35 @@
   height: 95px
   width: 100%
 
-#menu_views
+#menu_links
   width: 50px
   position: fixed
   right: 75px
   top: 10px
-  .true
-    border: 2px solid rgb(160, 44, 44)
-    padding: 5px 0
   img
     border: 0
     vertical-align: middle
   a
+    :opacity 0.3
     text-decoration: none
-
+    &:hover
+      :opacity 0.7
+  
+#menu_views
+  width: 50px
+  position: fixed
+  right: 115px
+  top: 10px
+  .true
+    :opacity 1 !important
+  img
+    border: 0
+    vertical-align: middle
+  a
+    :opacity 0.3
+    text-decoration: none
+    &:hover
+      :opacity 0.7
 #menu_manage_teams_image
   float: left
   position: relative

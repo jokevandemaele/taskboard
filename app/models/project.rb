@@ -99,6 +99,53 @@ class Project < ActiveRecord::Base
   return initials.upcase[0..1]
   end
   
+  def tasks_count
+    result = { :not_started => 0, :in_progress => 0, :finished => 0}
+    stories.in_progress.each do |story|
+      result[:not_started] += story.tasks.not_started.count
+      result[:in_progress] += story.tasks.in_progress.count
+      result[:finished] += story.tasks.finished.count
+    end
+    result
+  end
+  
+  def statustags_count
+    result = {
+      :high_priority => 0,
+      :please_test => 0,
+      :bug => 0,
+      :blocked => 0,
+      :done => 0,
+      :waiting => 0,
+      :please_analyze => 0,
+      :delegated => 0,
+    }
+    
+    stories.in_progress.each do |story|
+      story.tasks.each do |task|
+        task.statustags.each do |tag|
+          result[tag.status.to_sym] += 1
+        end
+      end
+    end
+    result
+  end
+  
+  def nametags_count
+    result = {}
+    users.each do |user|
+      result[user.id] = 0
+    end
+    stories.in_progress.each do |story|
+      story.tasks.each do |task|
+        task.nametags.each do |nametag|
+          result[nametag.user_id] += 1
+        end
+      end
+    end
+    result
+  end
+  
 private
   # add_default_stories: this function is called when a new project is created, it adds the sample stories to it
   def add_default_stories

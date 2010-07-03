@@ -9,9 +9,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :account, :controller => "users"
 
   map.resources :organizations do |o|
-    o.resources :projects, :only => [ :show, :new, :create, :edit, :update, :destroy] do |p|
-      # p.resources :guest_team_memberships, :only => [ :create, :destroy ] 
-    end
+    o.resources :projects, :only => [ :show, :new, :create, :edit, :update, :destroy]
     # o.resources :guest_team_memberships, :only => [ :new ] 
     o.resources :teams, :only => [ :show, :new, :create, :edit, :update, :destroy] 
     o.team_add_users 'teams/:id/users/:user_id', :controller => 'teams', :action => :add_user, :conditions => { :method => :post }

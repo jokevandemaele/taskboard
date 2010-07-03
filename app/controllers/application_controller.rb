@@ -79,7 +79,8 @@ class ApplicationController < ActionController::Base
     end
     
     def require_belong_to_project_or_admin
-      @project = @project || Project.find(params[:project_id])
+      param = (request_controller == 'projects') ? params[:id] : params[:project_id]
+      @project = @project || Project.find(param)
       params[:organization_id] = @project.organization.id
       require_organization_admin if !@project.users.include?(current_user)
     end
