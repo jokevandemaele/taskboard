@@ -218,8 +218,9 @@ var DDM = YAHOO.util.DragDropMgr;
  
          dragEl.innerHTML = clickEl.innerHTML;
          if(Dom.hasClass(clickEl,'statustag')){
-           Dom.removeClass(dragEl, dragEl.className)
-           if(Dom.hasClass(clickEl, 'statustag-done')){ Dom.addClass(dragEl, 'statustag-done')}
+           Dom.removeClass(dragEl, dragEl.className);
+           
+           if(Dom.hasClass(clickEl, 'statustag-done')){Dom.addClass(dragEl, 'statustag-done') }
            if(Dom.hasClass(clickEl, 'statustag-blocked')){ Dom.addClass(dragEl, 'statustag-blocked')}
            if(Dom.hasClass(clickEl, 'statustag-high_priority')){ Dom.addClass(dragEl, 'statustag-high_priority')}
            if(Dom.hasClass(clickEl, 'statustag-waiting')){ Dom.addClass(dragEl, 'statustag-waiting')}
@@ -230,6 +231,8 @@ var DDM = YAHOO.util.DragDropMgr;
            Dom.setStyle(dragEl, "border", "none"); 
            Dom.setStyle(dragEl, "width", "50px");
            Dom.setStyle(dragEl, "height", "37px");
+           Dom.setStyle(dragEl, "background-color", clickEl.getStyle('background-color'));
+           Dom.setStyle(dragEl, "background-image", clickEl.getStyle('background-image'));
          }else{
            Dom.removeClass(dragEl, dragEl.className);
            Dom.addClass(dragEl, 'nametag')
@@ -247,11 +250,10 @@ var DDM = YAHOO.util.DragDropMgr;
         var srcEl = this.getEl();
         var element_name = srcEl.id.split('-');
         var dest_name = destEl.id.split('-');
-        
-        if (DDM.interactionInfo.drop.length > 1) { 
+        if(destEl.hasClassName('task') && DDM.interactionInfo.drop.length == 3){
           // The position of the cursor at the time of the drop (YAHOO.util.Point) 
           var pt = DDM.interactionInfo.point;
-          
+        
           // The region occupied by the source element at the time of the drop 
           var region = DDM.interactionInfo.sourceRegion;
           var drag_region = DDM.interactionInfo.draggedRegion;
@@ -266,7 +268,7 @@ var DDM = YAHOO.util.DragDropMgr;
             var storyId = srcEl.up('tr').readAttribute('data-story-id');
             var taskId = srcEl.up('.task').readAttribute('data-task-id');
             var newTaskId = destEl.readAttribute('data-task-id');
-            
+          
             new Ajax.Request('/projects/'+projectId+'/stories/'+storyId+'/tasks/'+taskId+'/'+element_name[0]+'s/'+element_name[3], 
             {
               asynchronous:true, 
@@ -274,31 +276,35 @@ var DDM = YAHOO.util.DragDropMgr;
               parameters: element_name[0]+'[task_id]='+ newTaskId + '&' + element_name[0]+'[relative_position_x]='+ x + '&'+element_name[0]+'[relative_position_y]='+ y + '&authenticity_token=' + getAuthKey(),
               onSuccess: function(){
                 destEl.down('.task_front').appendChild(srcEl);
-                srcEl.pulsate({pulses: 2, duration : 0.8});
               }
             }
-            
+          
             )
             srcEl.parentNode.removeChild(srcEl);
             destEl.appendChild(srcEl);
-						DDM.refreshCache();
+            DDM.refreshCache();
           }
         }else{
-          var projectId = srcEl.up('tr').readAttribute('data-project-id');
-          var storyId = srcEl.up('tr').readAttribute('data-story-id');
-          var taskId = srcEl.up('.task').readAttribute('data-task-id');
-          
-          if(dest_name[0] != 'task'){
-          new Ajax.Request('/projects/'+projectId+'/stories/'+storyId+'/tasks/'+taskId+'/'+element_name[0]+'s/'+element_name[3], {
-          asynchronous:true, 
-          evalScripts:true,  
-          method:'delete',
-          parameters:'project_id='+element_name[2]+'&authenticity_token=' + getAuthKey()})
-          var anim = new YAHOO.util.Anim(srcEl.id, { opacity: { to: 0 }, duration: 0.5 });
-          anim.onComplete.subscribe(function(srcEl) { 
-            srcEl.parentNode.removeChild(srcEl);
-          });
-          anim.animate();
+          if(DDM.interactionInfo.drop.length != 3){
+            var srcEl = this.getEl();
+            if(srcEl.parentNode){
+              var projectId = srcEl.up('tr').readAttribute('data-project-id');
+              var storyId = srcEl.up('tr').readAttribute('data-story-id');
+              var taskId = srcEl.up('.task').readAttribute('data-task-id');
+            
+              if(dest_name[0] != 'task'){
+              new Ajax.Request('/projects/'+projectId+'/stories/'+storyId+'/tasks/'+taskId+'/'+element_name[0]+'s/'+element_name[3], {
+              asynchronous:true, 
+              evalScripts:true,  
+              method:'delete',
+              parameters:'project_id='+element_name[2]+'&authenticity_token=' + getAuthKey()})
+              var anim = new YAHOO.util.Anim(srcEl.id, { opacity: { to: 0 }, duration: 0.5 });
+              anim.onComplete.subscribe(function(srcEl) { 
+                srcEl.parentNode.removeChild(srcEl);
+              });
+              anim.animate();
+              }
+            }
           }
         }
       }, 
@@ -320,38 +326,47 @@ var DDM = YAHOO.util.DragDropMgr;
            this.lastY = 0; 
        }; 
 
-	    YAHOO.extend(YAHOO.DDAddTags, YAHOO.util.DDProxy, { 
-		    endDrag: function(e) { 
-			    var proxy = this.getDragEl();
+      YAHOO.extend(YAHOO.DDAddTags, YAHOO.util.DDProxy, { 
+        endDrag: function(e) { 
+          var proxy = this.getDragEl();
           Dom.setStyle(proxy, "visibility", "hidden"); 
-	      },
-	       startDrag: function(x, y) { 
-	         // make the proxy look like the source element 
-	         var dragEl = this.getDragEl(); 
-	         var clickEl = this.getEl(); 
-	         dragEl.innerHTML = clickEl.innerHTML;
-	         if(Dom.hasClass(clickEl,'statustag')){
-	           Dom.removeClass(dragEl, dragEl.className)
-	           if(Dom.hasClass(clickEl, 'statustag-done')){ Dom.addClass(dragEl, 'statustag-done')}
-	           if(Dom.hasClass(clickEl, 'statustag-blocked')){ Dom.addClass(dragEl, 'statustag-blocked')}
-	           if(Dom.hasClass(clickEl, 'statustag-high_priority')){ Dom.addClass(dragEl, 'statustag-high_priority')}
-	           if(Dom.hasClass(clickEl, 'statustag-waiting')){ Dom.addClass(dragEl, 'statustag-waiting')}
-	           if(Dom.hasClass(clickEl, 'statustag-delegated')){ Dom.addClass(dragEl, 'statustag-delegated')}
-	           if(Dom.hasClass(clickEl, 'statustag-bug')){ Dom.addClass(dragEl, 'statustag-bug')}
-	           if(Dom.hasClass(clickEl, 'statustag-please_analyze')){ Dom.addClass(dragEl, 'statustag-please_analyze')}
-	           if(Dom.hasClass(clickEl, 'statustag-please_test')){ Dom.addClass(dragEl, 'statustag-please_test')}
-	           Dom.setStyle(dragEl, "border", "none"); 
-	           Dom.setStyle(dragEl, "width", "50px");
-	           Dom.setStyle(dragEl, "height", "37px");
-	         }else{
-	           Dom.removeClass(dragEl, dragEl.className);
-	           Dom.addClass(dragEl, 'nametag')
-	           Dom.setStyle(dragEl, "border", "none"); 
-	           Dom.setStyle(dragEl, "width", "60px");
-	           Dom.setStyle(dragEl, "height", "12px");
-	           Dom.setStyle(dragEl, "background-color", clickEl.getStyle('background-color'));
-	         }
-	       },
+        },
+        
+        startDrag: function(x, y) { 
+          // make the proxy look like the source element 
+          var dragEl = this.getDragEl(); 
+          var clickEl = this.getEl(); 
+          dragEl.innerHTML = clickEl.innerHTML;
+          if(Dom.hasClass(clickEl,'statustag')){
+            dragEl.classNames().each(function(className){
+            dragEl.removeClassName(className);
+            });
+
+            // Dom.removeClass(dragEl, dragEl.className)
+            if(Dom.hasClass(clickEl, 'statustag-done')){ Dom.addClass(dragEl, 'statustag-done')}
+            if(Dom.hasClass(clickEl, 'statustag-blocked')){ Dom.addClass(dragEl, 'statustag-blocked')}
+            if(Dom.hasClass(clickEl, 'statustag-high_priority')){ Dom.addClass(dragEl, 'statustag-high_priority')}
+            if(Dom.hasClass(clickEl, 'statustag-waiting')){ Dom.addClass(dragEl, 'statustag-waiting')}
+            if(Dom.hasClass(clickEl, 'statustag-delegated')){ Dom.addClass(dragEl, 'statustag-delegated')}
+            if(Dom.hasClass(clickEl, 'statustag-bug')){ Dom.addClass(dragEl, 'statustag-bug')}
+            if(Dom.hasClass(clickEl, 'statustag-please_analyze')){ Dom.addClass(dragEl, 'statustag-please_analyze')}
+            if(Dom.hasClass(clickEl, 'statustag-please_test')){ Dom.addClass(dragEl, 'statustag-please_test')}
+            Dom.setStyle(dragEl, "border", "none"); 
+            Dom.setStyle(dragEl, "width", "50px");
+            Dom.setStyle(dragEl, "height", "37px");
+            Dom.setStyle(dragEl, "background-color", clickEl.getStyle('background-color'));
+            Dom.setStyle(dragEl, "background-image", clickEl.getStyle('background-image'));
+            
+          }else{
+            Dom.removeClass(dragEl, dragEl.className);
+            Dom.addClass(dragEl, 'nametag')
+            Dom.setStyle(dragEl, "border", "none"); 
+            Dom.setStyle(dragEl, "width", "60px");
+            Dom.setStyle(dragEl, "height", "12px");
+            Dom.setStyle(dragEl, "background-color", clickEl.getStyle('background-color'));
+            Dom.setStyle(dragEl, "background-image", clickEl.getStyle('background-image'));
+          }
+        },
 
 	      onDragDrop: function(e, id) {
 	        var destEl = Dom.get(id); 
@@ -383,7 +398,7 @@ var DDM = YAHOO.util.DragDropMgr;
               onSuccess: function(transport) {
                 var tmp = new Element('div').update(transport.responseText);
                 destEl.down('.task_front').appendChild(tmp);
-                tmp.pulsate({pulses: 2, duration : 0.8});
+                tmp.pulsate({pulses: 1, duration : 0.2});
               },
             });
           }else{

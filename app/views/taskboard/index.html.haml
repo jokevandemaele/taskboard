@@ -4,7 +4,7 @@
 = render :partial => "taskboard_table", :locals => { :name => @project.name }
 
 - if current_user
-  %script= "new YAHOO.util.DDTarget('taskboard-first-row');"
+  %script= "new YAHOO.util.DDTarget('taskboard');"
 
   #dummy-for-actions
 
