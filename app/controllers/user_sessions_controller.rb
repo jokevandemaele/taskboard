@@ -12,7 +12,8 @@ class UserSessionsController < ApplicationController
     if @user_session.save
       flash = {}
       flash[:notice] = "Login successful!"
-      redirect_back_or_default organizations_url
+      default_url = (@user_session.user.projects.count == 1 && !@user_session.user.admins_any_organization?) ? project_taskboard_index_url(@user_session.user.projects.first.to_param) : root_url
+      redirect_back_or_default default_url
     else
       deny_access
     end

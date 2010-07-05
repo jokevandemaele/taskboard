@@ -1,38 +1,45 @@
 require File.dirname(__FILE__) + '/../test_helper'
 class ProjectsRedirection < ActionController::IntegrationTest 
-  # test "index, if logging in as normal user and have only one project, i should see the taskboard" do
-  #   get "/login"
-  #   assert_response :ok
-  #   post '/login', {:member => {:username => 'jburke', :password => 'test' }}, {:referer => 'http://www.example.com/login'}
-  #   p @response.body
-  #   assert redirect?
-  #   follow_redirect!
-  #   assert_select "div#menu", :count => 1
-  # end
-  # test "if logging in as administrator sould see admin/organizations" do
-  #   get "/logout"
-  #   assert redirect?
-  #   get "/login"
-  #   assert_response :ok
-  #   post '/login', {:member => {:username => 'clittleton', :password => 'test' }}
-  #   assert_redirected_to :controller => "admin/organizations", :action => "index"
-  # end
-  # 
-  # test "if logging in as organization admin sould see admin/organizations" do
-  #   get "/logout"
-  #   assert redirect?
-  #   get "/login"
-  #   assert_response :ok
-  #   post '/login', {:member => {:username => 'cwidmore', :password => 'test' }}
-  #   assert_redirected_to :controller => "admin/organizations", :action => "index"
-  # end
-  # 
-  # test "if logging in as member with more than one project sould see admin/organizations" do
-  #   get "/logout"
-  #   assert redirect?
-  #   get "/login"
-  #   assert_response :ok
-  #   post '/login', {:member => {:username => 'jshephard', :password => 'test' }}
-  #   assert_redirected_to :controller => "admin/projects", :action => "index"
-  # end
+  context "When logging in" do
+    setup do
+      @organization = Factory(:organization)
+      @admin = Factory(:user)
+      @admin.add_to_organization(@organization)
+      @organization.reload
+      @user = Factory(:user)
+      @user.add_to_organization(@organization)
+    end
+
+    context "having only one project" do
+      setup do
+        post '/user_sessions', {:user_session => {:login => @user.login, :password => 'test' }}, {:referer => 'http://www.example.com/login'}
+      end
+      
+      should_redirect_to("The Project's Taskboard"){ project_taskboard_index_url(@organization.projects.first.to_param) }
+    end
+
+    context "having more than one project" do
+      setup do
+        @project = @organization.projects.build(:name => "Project 2")
+        @team = @organization.teams.first
+        @project.teams << @organization.teams.first
+        @project.save
+        post '/user_sessions', {:user_session => {:login => @user.login, :password => 'test' }}, {:referer => 'http://www.example.com/login'}
+      end
+      should_redirect_to("The dashboard"){ root_url }
+    end
+
+    context "having one project but being organization administrator" do
+      setup do
+        @om = @user.organization_memberships.first
+        @om.admin = true
+        @om.save
+        @organization.reload
+        @user.reload
+        post '/user_sessions', {:user_session => {:login => @user.login, :password => 'test' }}, {:referer => 'http://www.example.com/login'}
+      end
+
+      should_redirect_to("The Project's Taskboard"){ root_url }
+    end
+  end
 end
