@@ -55,7 +55,7 @@ module ApplicationHelper
   end
   
   def parse_urls(text)
-    URI::extract(text).uniq.each{|uri| text.gsub!(uri, "<a href='#{uri}' target='_blank' title='#{uri}'>#{truncate(uri, :length => 20)}</a>")}
+    URI::extract(text, ['http', 'https', 'ftp', 'ftps', 'svn', 'git', 'svn+ssh']).uniq.each{|uri| text.gsub!(uri, "<a href='#{uri}' target='_blank' title='#{uri}'>#{truncate(uri, :length => 20)}</a>")}
     text
   end
 end
