@@ -40,7 +40,7 @@
       rows: 6, 
       cols : 12, 
       onFormCustomization: function(form, value) { Tasks.replaceDescription(value) }, 
-      onComplete: function(transport, element){ Tasks.replaceURLInDescription(transport,element); Tasks.flip(#{task.id});}
+      onComplete: function(transport, element){ if(transport) { Tasks.replaceURLInDescription(transport,element); Tasks.flip(#{task.id}); }}
     });
   .change_task_color{ :title => "Change Task Color"}
     .task_color.orange{ 'data-color' => 'orange' }
