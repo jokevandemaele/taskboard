@@ -6,6 +6,6 @@
       - team_id = team.id
     - else
       - team_id = nil
-    %div{ :class => "nametag nametag_menu", :title => user.name, :style => "background-color: ##{user.color || 'red'}" }
+    .nametag.nametag_menu{ :title => user.name, :class => "#{user.color.blank? ? 'default' : "color-" + user.color }" }
       =h user.formatted_nametag(team_id)
   = draggable_element "add-nametag-#{user.id}", :revert => '"true"'

@@ -374,23 +374,96 @@ p
   font-weight: bold
   text-align: center
 
-.add_nametag
-  width: 60px
-  height: 70px
-  text-align: center
-  background: black
-  img
-    height: 60px
-
 .nametag
-  background: url("/images/tags/nametags-bkg.png") left no-repeat
-  width: 60px
+  +shadow(1px, 1px, 2px, #444)
+  min-width: 58px
   height: 12px
   font-size: 9px
   text-align: center
-  line-height: 10px
+  line-height: 12px
   z-index: 3
+  :font-weight bold
+  &.color-00ff00
+    +gradient(#00ff00 - #333, #00ff00)
+  &.color-32cd32
+    +gradient(#32cd32 - #333, #32cd32)
+  &.color-228b57
+    +gradient(#228b57 - #333, #228b57)
+  &.color-3cb371
+    +gradient(#3cb371 - #333, #3cb371)
+  &.color-00fa9a
+    +gradient(#00fa9a - #333, #00fa9a)
+  &.color-66cdaa
+    +gradient(#66cdaa - #333, #66cdaa)
+  &.color-9acd32
+    +gradient(#9acd32 - #333, #9acd32)
+  &.color-ffd700
+    +gradient(#ffd700 - #333, #ffd700)
+  &.color-ffff00
+    +gradient(#ffff00 - #333, #ffff00)
+  &.color-eee8aa
+    +gradient(#eee8aa - #333, #eee8aa)
+  &.color-f0e68c
+    +gradient(#f0e68c - #333, #f0e68c)
+  &.color-bdb76b
+    +gradient(#bdb76b - #333, #bdb76b)
+  &.color-ff69b4
+    +gradient(#ff69b4 - #333, #ff69b4)
+  &.color-ff1493
+    +gradient(#ff1493 - #333, #ff1493)
+  &.color-ff7f50
+    +gradient(#ff7f50 - #333, #ff7f50)
+  &.color-ff6347
+    +gradient(#ff6347 - #333, #ff6347)
+  &.color-dc143c
+    +gradient(#dc143c - #333, #dc143c)
+  &.color-ff0000
+    +gradient(#ff0000 - #333, #ff0000)
+  &.color-d8bfd8
+    +gradient(#d8bfd8 - #333, #d8bfd8)
+  &.color-da70d6
+    +gradient(#da70d6 - #333, #da70d6)
+  &.color-ff00ff
+    +gradient(#ff00ff - #333, #ff00ff)
+  &.color-ba55d3
+    +gradient(#ba55d3 - #333, #ba55d3)
+  &.color-9966cc
+    +gradient(#9966cc - #333, #9966cc)
+  &.color-800080
+    +gradient(#800080 - #333, #800080)
+  &.color-b0c4de
+    +gradient(#b0c4de - #333, #b0c4de)
+  &.color-add8e6
+    +gradient(#add8e6 - #333, #add8e6)
+  &.color-00bfff
+    +gradient(#00bfff - #333, #00bfff)
+  &.color-1e90ff
+    +gradient(#1e90ff - #333, #1e90ff)
+  &.color-0000ff
+    +gradient(#0000ff - #333, #0000ff)
+  &.color-4682b4
+    +gradient(#4682b4 - #333, #4682b4)
+  &.color-7b68ee
+    +gradient(#7b68ee - #333, #7b68ee)
+  &.color-6a5acd
+    +gradient(#6a5acd - #333, #6a5acd)
+  &.color-483d8b
+    +gradient(#483d8b - #333, #483d8b)
+  &.color-c0c0c0
+    +gradient(#c0c0c0 - #333, #c0c0c0)
+  &.color-a9a9a9
+    +gradient(#a9a9a9 - #333, #a9a9a9)
+  &.color-708090
+    +gradient(#708090 - #333, #708090)
 
+.add_nametag
+  width: 59px
+  height: 70px
+  text-align: center
+  img
+    height: 60px
+    width: 59px
+  
 .statustag
   width: 50px
   height: 37px

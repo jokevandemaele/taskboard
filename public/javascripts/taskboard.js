@@ -234,11 +234,10 @@ var DDM = YAHOO.util.DragDropMgr;
            Dom.removeClass(dragEl, dragEl.className);
            Dom.addClass(dragEl, 'nametag')
            Dom.setStyle(dragEl, "border", "none"); 
-           Dom.setStyle(dragEl, "width", "60px");
+           Dom.setStyle(dragEl, "min-width", "58px");
            Dom.setStyle(dragEl, "height", "12px");
            Dom.setStyle(dragEl, "background-color", clickEl.getStyle('background-color'));
            Dom.setStyle(dragEl, "background-image", clickEl.getStyle('background-image'));
-           
          }
        },
 
