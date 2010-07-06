@@ -386,12 +386,25 @@ class ProjectTest < ActiveSupport::TestCase
       @user.add_to_organization(@organization)
       @project = @organization.projects.first
       @task = @project.stories.first.tasks.first
-      @task.nametags.create(:user => @user)
     end
-    should "return the correct count" do
-      result = { @user.id => 1 }
-      assert_equal result, @project.nametags_count
+    context "with no nametags" do
+      should "return zero" do
+        result = { @user.id => 0 }
+        assert_equal result, @project.nametags_count
+      end
     end
+    
+    context "with one nametag" do
+      setup do
+        @task.nametags.create(:user => @user)
+      end
+
+      should "return the correct count" do
+        result = { @user.id => 1 }
+        assert_equal result, @project.nametags_count
+      end
+    end
+    
   end
   
   

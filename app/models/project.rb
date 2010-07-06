@@ -139,7 +139,7 @@ class Project < ActiveRecord::Base
     stories.in_progress.each do |story|
       story.tasks.each do |task|
         task.nametags.each do |nametag|
-          result[nametag.user_id] += 1
+          result[nametag.user_id] += 1 if(result[nametag.user_id])
         end
       end
     end
