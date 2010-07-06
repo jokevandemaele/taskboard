@@ -25,7 +25,8 @@
 
   - unless task.status == 'finished'
     - task.nametags.each do |nametag|
-      = render nametag
+      - if(!nametag.user.nil?)
+        = render nametag
     - task.statustags.each do |statustag|
       = render statustag
 
