@@ -1,4 +1,4 @@
-- if current_user
+- if @project.users.include?(current_user)
   = render :partial => "menu" , :locals => { :team => @team }
   = render :partial => "adder"
 = render :partial => "taskboard_table", :locals => { :name => @project.name }
@@ -8,7 +8,7 @@
 
   #dummy-for-actions
 
-- if !current_user && @project.public?
+- if @project.public? && (!current_user || (!@project.users.include?(current_user) && !current_user.admins?(@project.organization)))
   .the_disabler
 
 - content_for :helpers do

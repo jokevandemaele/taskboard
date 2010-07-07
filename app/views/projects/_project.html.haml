@@ -1,17 +1,18 @@
-.element.project{ :class => ('not-mine' if !current_user.projects.include?(project)), :id => "project-#{project.id}", 'data-project-id' => project.id, 'data-organization-id' => project.organization_id, 'data-project-public-hash' => (project.public_hash if project.public?) }
+.element.project{ :class => ('not-mine' if !current_user.projects.include?(project) && !project.public), :id => "project-#{project.id}", 'data-project-id' => project.id, 'data-organization-id' => project.organization_id, 'data-project-public-hash' => (project.public_hash if project.public?) }
 
   / Element name TODO: RESIZE!!
   - if (project.users.include?(current_user) || current_user.admins?(organization))
     %span.name
       = image_tag("public_project.png") if project.public
-      = link_to(project.name, organization_project_url(:organization_id => project.organization.to_param, :id => project.to_param))
+      = link_to(project.name, project_taskboard_index_path(project.to_param))
+
+      .admin
+        - if current_user.admins?(organization)
+          .remove.remove_project{ :title => "Remove Project"}
+          .edit.edit_project{ :title => "Edit Project"}
+        = link_to(image_tag("dashboard_small_icon.png", :alt => "Project Dashboard", :title => "Project Dashboard"), organization_project_url(:organization_id => project.organization.to_param, :id => project.to_param))
+
   - else
     %span.name
       = image_tag("public_project.png") if project.public
-      = project.name
-    
-  - if current_user.admins?(organization) || project.public?
-    .admin
-      - if current_user.admins?(organization)
-        .remove.remove_project{ :title => "Remove Project"}
-        .edit.edit_project{ :title => "Edit Project"}
+      = project.public ? link_to(project.name, project_taskboard_index_url(project, :public_hash => project.public_hash)) : project.name
