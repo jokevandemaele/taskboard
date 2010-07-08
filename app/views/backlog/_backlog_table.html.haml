@@ -5,6 +5,4 @@
     %th Size
     %th Description
     
-  = render :partial => 'stories/story', :collection => @stories.in_progress
-  = render :partial => 'stories/story', :collection => @stories.not_started
-  = render :partial => 'stories/story', :collection => @stories.finished
+  = render :partial => 'stories/story', :collection => @stories

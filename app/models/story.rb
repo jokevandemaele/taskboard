@@ -63,6 +63,7 @@ class Story < ActiveRecord::Base
   end
 
   def start
+    self.priority = old_priority if finished?
     self.status = 'in_progress'
     return self.save
   end
@@ -74,6 +75,8 @@ class Story < ActiveRecord::Base
 
   def finish
     self.status = 'finished'
+    self.old_priority = priority
+    self.priority = -1
     return self.save
   end
 

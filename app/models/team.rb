@@ -30,8 +30,7 @@ class Team < ActiveRecord::Base
   #
   ################################################################################################################
   def stories
-    stories = projects.collect { |project| project.stories }.flatten
-    stories = stories.sort_by {|story| [story.priority, story.updated_at] }
-    stories.reverse
+    project_ids = projects.collect { |project| project.id }
+    Story.all(:conditions => {:project_id => project_ids}, :order => "priority DESC, updated_at DESC")
   end
 end

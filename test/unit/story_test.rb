@@ -103,6 +103,10 @@ class StoryTest < ActiveSupport::TestCase
       should "return -1" do
         assert_equal -1, @story.priority
       end
+
+      should "return 10 if calling old_priority" do
+        assert_equal 10, @story.old_priority
+      end
       
       context "if i change the realid" do
         setup do
@@ -235,11 +239,12 @@ class StoryTest < ActiveSupport::TestCase
         @story.finish
       end
 
-      should "should finish the story" do
+      should "finish the story" do
         assert !@project.stories.in_progress.include?(@story)
         assert !@project.stories.not_started.include?(@story)
         assert @project.stories.finished.include?(@story)
         assert_equal -1, @story.priority
+        assert_equal 2000, @story.old_priority
       end
     end
 
