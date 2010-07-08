@@ -27,7 +27,7 @@
         == #{link_to_function "Edit", "Stories.editForm(#{story.id},#{story.project.id})"} /
         == #{link_to_remote "Delete", :url => project_story_url(story.project,story), :confirm => 'Are you sure?', :method => :delete, :complete => "location.reload(true);"} ]
     - else
-      == [ Date Finished: #{story.updated_at.strftime("%d %b %Y")}]
+      == [ #{link_to_remote('Re-open', :url => project_story_start_path(story.project, story), :success => 'location = location')} / Date Finished: #{story.updated_at.strftime("%d %b %Y")}]
   %td.priority-cell
     %span.in_place_edit{ :id => "priority-#{story.id}" }
       - if !story.finished?
