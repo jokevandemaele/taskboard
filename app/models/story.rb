@@ -29,7 +29,7 @@ class Story < ActiveRecord::Base
   default_scope :order => "priority DESC, updated_at DESC"
   named_scope :in_progress, :conditions => {:status => 'in_progress'}
   named_scope :not_started, :conditions => {:status => 'not_started'}
-  named_scope :finished, :conditions => {:status => 'finished', :priority => -1}
+  named_scope :finished, :conditions => {:status => 'finished'}
 
   ################################################################################################################
   #
@@ -74,7 +74,6 @@ class Story < ActiveRecord::Base
 
   def finish
     self.status = 'finished'
-    self.priority = -1
     return self.save
   end
 
