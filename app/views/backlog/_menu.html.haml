@@ -6,7 +6,7 @@
   - link_to @view == :project ? project_taskboard_index_path(@project.to_param) : taskboard_team_view_path(@team.to_param) do
     .item.taskboard
 
-  .item.new_story{ 'data-project-id' => @project.to_param }
+  .item.new_story{ 'data-project-id' => @project.to_param, 'data-team-id' => @team.to_param }
   - link_to logout_path do
     .item.logout
 

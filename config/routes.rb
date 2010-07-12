@@ -45,7 +45,8 @@ ActionController::Routing::Routes.draw do |map|
     p.story_update_priority 'stories/:id/update_priority', :controller => :stories, :action => :update_priority, :conditions => { :method => :post }
     p.story_update_size 'stories/:id/update_size', :controller => :stories, :action => :update_size, :conditions => { :method => :post }
   end
-
+  
+  map.resources :teams, :only => [], :has_many => :stories
   map.taskboard_team_view 'teams/:team_id/taskboard', :controller => :taskboard, :action => :team
   map.backlog_team_view 'teams/:team_id/backlog', :controller => :backlog, :action => :team
   # Dev Tools

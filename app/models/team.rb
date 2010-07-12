@@ -33,4 +33,10 @@ class Team < ActiveRecord::Base
     project_ids = projects.collect { |project| project.id }
     Story.all(:conditions => {:project_id => project_ids}, :order => "priority DESC, updated_at DESC")
   end
+  
+  def next_priority
+    priorities = projects.collect {|p| p.next_priority}
+    priorities.sort!
+    priorities.first
+  end
 end

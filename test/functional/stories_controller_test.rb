@@ -18,6 +18,11 @@ class StoriesControllerTest < ActionController::TestCase
     should_route :post, "/projects/1/stories/2/finish", :action => :finish, :id => 2, :project_id => 1
     should_route :post, "/projects/1/stories/2/update_priority", :action => :update_priority, :id => 2, :project_id => 1
     should_route :post, "/projects/1/stories/2/update_size", :action => :update_size, :id => 2, :project_id => 1
+
+    should_route :get, "/teams/1/stories/new", :action => :new, :team_id => 1
+    should_route :post, "/teams/1/stories", :action => :create, :team_id => 1
+    should_route :get, "/teams/1/stories/2/edit", :action => :edit, :id => 2, :team_id => 1
+    should_route :put, "/teams/1/stories/2", :action => :update, :id => 2, :team_id => 1
     
   end
 
@@ -37,129 +42,183 @@ class StoriesControllerTest < ActionController::TestCase
       assert @team.users.include?(@user)
       @story = @project.stories.first
     end
-    
-    context "and do GET to :index in a project I belong to" do
-      setup do
-        get :index, :project_id => @project.to_param
-      end
-      should_respond_with :ok
-      # should_assign_to(:project){ @project }
-      # should_assign_to(:stories){ @project.stories }
-      should "return the stories in json format" do
-        assert_equal @project.stories.to_json, @response.body
-      end
-    end
-
-    context "and do GET to :new in a project I belong to" do
-      setup do
-        get :new, :project_id => @project.to_param
-      end
-      should_respond_with :ok
-      # should_assign_to(:project){ @project }
-      # should_assign_to(:story)
-      # should_render_template :new
-    end
-    
-    context "and do POST to :create in a project I belong to with correct data" do
-      setup do
-        post :create, :project_id => @project.to_param, :story => { :name => "My Story 1" }
-        @story = Story.find_by_name("My Story 1")
-      end
-      should_respond_with :created
-      # should_assign_to(:project){ @project }
-      # should_assign_to(:story)
-      should "return the story in json format" do
-        assert_equal @story.to_json, @response.body
-      end
-    end
-
-    context "and do POST to :create with new realid" do
-      setup do
-        post :create, :project_id => @project.to_param, :story => { :name => "New Realid", :realid => "ASD001" }
-        @story = Story.find_by_name("New Realid")
-      end
-      should "return the story in json format" do
-        assert_equal "ASD001", @story.realid
-      end
-    end
-
-    context "and do POST to :create in a project I belong to with wrong data" do
-      setup do
-        post :create, :project_id => @project.to_param, :story => { }
-        @story = Story.find_by_name("My Story 1")
-      end
-      should_respond_with :precondition_failed
-      # should_assign_to(:project){ @project }
-      # should_assign_to(:story)
-      should "return the errors in json format" do
-        assert_equal [['name', "can't be blank"]].to_json, @response.body
-      end
-    end
-
-    context "and do GET to :edit in a project I belong to" do
-      setup do
-        get :edit, :id => @story.to_param, :project_id => @project.to_param
-      end
-      should_respond_with :ok
-      # should_assign_to(:project){ @project }
-      # should_assign_to(:story){ @story}
-      # should_render_template :edit
-    end
-    
-    context "and do PUT to :update in a project I belong to with correct data" do
-      setup do
-        put :update, :id => @story.to_param, :project_id => @project.to_param, :story => { :name => "My Story 1" }
-        @story.reload
-      end
-      should_respond_with :ok
-      # should_assign_to(:project){ @project }
-      # should_assign_to(:story){ @story }
-      should "return the story in json format" do
-        assert_equal @story.to_json, @response.body
-      end
-      should "update the story" do
-        assert_equal "My Story 1", @story.name
-      end
-    end
-
-    context "and do PUT to :update to change the realid" do
-      setup do
-        put :update, :id => @story.to_param, :project_id => @project.to_param, :story => { :realid => "BBB001" }
-        @story.reload
-      end
-      should "update the realid" do
-        assert_equal "BBB001", @story.realid
-      end
-    end
-
-    context "and do PUT to :update in a project I belong to with wrong data" do
-      setup do
-        put :update, :id => @story.to_param, :project_id => @project.to_param, :story => { :name => nil }
-        @story.reload
-      end
-      should_respond_with :precondition_failed
-      # should_assign_to(:story){ @story }
-      # should_assign_to(:project){ @project }
-      should "return the errors in json format" do
-        assert_equal [['name', "can't be blank"]].to_json, @response.body
-      end
-    end
-    
-    context "on DELETE to :destroy" do
-      setup do
-        delete :destroy, :project_id => @project.to_param, :id => @story.to_param
-      end
-      should_respond_with :ok
-      # should_not_set_the_flash
-      # should_assign_to(:project){ @project }
-      # should_assign_to(:story){ @story }
-      
-      should "destroy the story" do
-        assert_raise ActiveRecord::RecordNotFound do
-            @story.reload
+    context "accessing a story through a project" do
+      context "and do GET to :index in a project I belong to" do
+        setup do
+          get :index, :project_id => @project.to_param
+        end
+        should_respond_with :ok
+        should_assign_to(:project){ @project }
+        should_assign_to(:stories){ @project.stories }
+        should "return the stories in json format" do
+          assert_equal @project.stories.to_json, @response.body
         end
       end
-    end
+
+      context "and do GET to :new in a project I belong to" do
+        setup do
+          get :new, :project_id => @project.to_param
+        end
+        should_respond_with :ok
+        should_assign_to(:project){ @project }
+        should_assign_to(:story)
+        should_render_template :new
+      end
+
+      context "and do POST to :create in a project I belong to with correct data" do
+        setup do
+          post :create, :project_id => @project.to_param, :story => { :name => "My Story 1" }
+          @story = Story.find_by_name("My Story 1")
+        end
+        should_respond_with :created
+        should_assign_to(:project){ @project }
+        should_assign_to(:story)
+        should "return the story in json format" do
+          assert_equal @story.to_json, @response.body
+        end
+      end
+
+      context "and do POST to :create with new realid" do
+        setup do
+          post :create, :project_id => @project.to_param, :story => { :name => "New Realid", :realid => "ASD001" }
+          @story = Story.find_by_name("New Realid")
+        end
+        should "return the story in json format" do
+          assert_equal "ASD001", @story.realid
+        end
+      end
+
+      context "and do POST to :create in a project I belong to with wrong data" do
+        setup do
+          post :create, :project_id => @project.to_param, :story => { }
+          @story = Story.find_by_name("My Story 1")
+        end
+        should_respond_with :precondition_failed
+        should_assign_to(:project){ @project }
+        should_assign_to(:story)
+        should "return the errors in json format" do
+          assert_equal [['name', "can't be blank"]].to_json, @response.body
+        end
+      end
+
+      context "and do GET to :edit in a project I belong to" do
+        setup do
+          get :edit, :id => @story.to_param, :project_id => @project.to_param
+        end
+        should_respond_with :ok
+        should_assign_to(:project){ @project }
+        should_assign_to(:story){ @story}
+        should_render_template :edit
+      end
+
+      context "and do PUT to :update in a project I belong to with correct data" do
+        setup do
+          put :update, :id => @story.to_param, :project_id => @project.to_param, :story => { :name => "My Story 1" }
+          @story.reload
+        end
+        should_respond_with :ok
+        should_assign_to(:project){ @project }
+        should_assign_to(:story){ @story }
+        should "return the story in json format" do
+          assert_equal @story.to_json, @response.body
+        end
+        should "update the story" do
+          assert_equal "My Story 1", @story.name
+        end
+      end
+
+      context "and do PUT to :update to change the realid" do
+        setup do
+          put :update, :id => @story.to_param, :project_id => @project.to_param, :story => { :realid => "BBB001" }
+          @story.reload
+        end
+        should "update the realid" do
+          assert_equal "BBB001", @story.realid
+        end
+      end
+
+      context "and do PUT to :update in a project I belong to with wrong data" do
+        setup do
+          put :update, :id => @story.to_param, :project_id => @project.to_param, :story => { :name => nil }
+          @story.reload
+        end
+        should_respond_with :precondition_failed
+        should_assign_to(:story){ @story }
+        should_assign_to(:project){ @project }
+        should "return the errors in json format" do
+          assert_equal [['name', "can't be blank"]].to_json, @response.body
+        end
+      end
+
+      context "on DELETE to :destroy" do
+        setup do
+          delete :destroy, :project_id => @project.to_param, :id => @story.to_param
+        end
+        should_respond_with :ok
+        should_not_set_the_flash
+        should_assign_to(:project){ @project }
+        should_assign_to(:story){ @story }
+
+        should "destroy the story" do
+          assert_raise ActiveRecord::RecordNotFound do
+              @story.reload
+          end
+        end
+      end    
+    end # END PROJECT
+    
+    context "accessing a story through my team" do
+      setup do
+        @team = @project.teams.first
+      end
+      context "and do GET to :new in a team I belong to" do
+        setup do
+          get :new, :team_id => @team.to_param
+        end
+        should_respond_with :ok
+        should_assign_to(:projects){ @team.projects }
+        should_assign_to(:story)
+        should_render_template :new
+        should "display the projects combo box" do
+          assert_select "select"
+        end
+      end
+
+      context "and do POST to :create in a team I belong to with correct data" do
+        setup do
+          post :create, :team_id => @team.to_param, :story => { :name => "My Story 1", :project_id => @project.to_param }
+          @story = Story.find_by_name("My Story 1")
+        end
+        should_respond_with :created
+        should_assign_to(:story)
+        should "return the story in json format" do
+          assert_equal @story.to_json, @response.body
+        end
+      end
+
+      context "and do POST to :create with new realid" do
+        setup do
+          post :create, :team_id => @team.to_param, :story => { :name => "New Realid", :realid => "ASD001", :project_id => @project.to_param }
+          @story = Story.find_by_name("New Realid")
+        end
+        should "return the story in json format" do
+          assert_equal "ASD001", @story.realid
+        end
+      end
+
+      context "and do POST to :create in a team I belong to with wrong data" do
+        setup do
+          post :create, :team_id => @team.to_param, :story => { :project_id => @project.to_param}
+          @story = Story.find_by_name("My Story 1")
+        end
+        should_respond_with :precondition_failed
+        should_assign_to(:story)
+        should "return the errors in json format" do
+          assert_equal [['name', "can't be blank"]].to_json, @response.body
+        end
+      end
+    end # END TEAM
+
     
     # Start, Stop and Finish stories
     context "and do POST to :start in a project I belong to" do

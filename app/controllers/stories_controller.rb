@@ -1,6 +1,6 @@
 class StoriesController < ApplicationController
   before_filter :require_user, :except => [:tasks_by_status]
-  before_filter :require_belong_to_project_or_admin, :except => [:tasks_by_status]
+  before_filter :require_belong_to_project_or_team_or_admin, :except => [:tasks_by_status]
   before_filter :require_belong_to_project_or_auth_guest, :only => [:tasks_by_status]
   before_filter :find_story, :only => [ :edit, :update, :destroy, :start, :stop, :finish, :update_priority, :update_size ]
   layout nil
@@ -13,11 +13,15 @@ class StoriesController < ApplicationController
   
   # GET /projects/:project_id/stories/new
   def new
-    @story = @project.stories.build
+    @story = (params[:team_id].blank?) ? @project.stories.build : Story.new
+    @projects = @team.projects if !params[:team_id].blank?
+    @default_realid = @project ? @project.next_realid : @team.projects.first.next_realid
+    @default_priority = @project ? @project.next_priority : @team.next_priority
   end
   
   # POST /projects/:project_id/stories
   def create
+    @project = Project.find(params[:story][:project_id]) if (!params[:team_id].blank?)
     @story = @project.stories.build(params[:story])
     # Don't know why but this is not setting the id and priority automatically
     @story.realid = @project.next_realid if !@story.realid
@@ -98,4 +102,13 @@ class StoriesController < ApplicationController
   def find_story
     @story = @project.stories.find(params[:id])
   end
+  
+  private
+  def require_belong_to_project_or_team_or_admin
+    @team = @team || Team.find(params[:team_id]) if(!params[:team_id].blank?)
+      
+    params[:organization_id] = @team.organization.id if @team
+    require_belong_to_project_or_admin if !(@team && @team.users.include?(current_user))
+  end
+  
 end

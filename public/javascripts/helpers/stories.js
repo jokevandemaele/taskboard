@@ -3,9 +3,14 @@ Application.Helpers.Stories = {
     this._setupListeners();
   },
   
-  newForm: function(projectId){
+  newForm: function(projectId,teamId){
+    if(projectId){
+      var request_url = '/projects/'+ projectId + '/stories/new'
+    }else{
+      var request_url = '/teams/'+ teamId + '/stories/new'
+    }
     // Request form
-    new Ajax.Request('/projects/'+ projectId + '/stories/new', {
+    new Ajax.Request(request_url, {
       method: 'get',
         
       onSuccess: function(transport) {
@@ -145,7 +150,8 @@ Application.Helpers.Stories = {
         // Listener for add story
         if(target.match('.new_story')){
           projectId = target.readAttribute('data-project-id');
-          Stories.newForm(projectId);
+          teamId = target.readAttribute('data-team-id');
+          Stories.newForm(projectId,teamId);
         }
         // // Listener for remove story
         // if(target.match('.remove_story')){

@@ -42,4 +42,34 @@ class TeamTest < ActiveSupport::TestCase
     end
   end
   
+  context "#next_priority" do
+    setup do
+      @project1 = Factory(:project)
+      @project2 = Factory(:project)
+      @team = Factory(:team)
+      @project1.teams << @team
+      @project2.teams << @team
+      @story = @project1.stories.first
+      @story.priority = 60
+      @story.save
+    end
+    
+    should "return 10 less than the smaller story across all projects" do
+      assert_equal 50, @team.next_priority
+    end
+
+    context "with different priorities" do
+      setup do
+        @story = @project2.stories.first
+        @story.priority = 30
+        @story.save
+      end
+
+      should "return 10 less than the smaller story across all projects" do
+         assert_equal 20, @team.next_priority
+       end
+    end
+  end
+  
+  
 end

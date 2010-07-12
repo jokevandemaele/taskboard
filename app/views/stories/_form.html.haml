@@ -1,15 +1,20 @@
 = form.error_messages 
+- if (!params[:team_id].blank?)
+  .field
+    = form.label :project
+    = select_tag "story[project_id]", options_from_collection_for_select(@team.projects, 'id', 'name')
+
 .field
   = form.label :name
   = form.text_field :name
 
 .field
   = form.label :realid, "Story ID"
-  = form.text_field :realid, :value => @story.realid ? @story.realid : @project.next_realid
+  = form.text_field :realid, :value => @story.realid ? @story.realid : @default_realid
 
 .field
   = form.label :priority
-  = form.text_field :priority, :value => @story.priority ? @story.priority : @project.next_priority
+  = form.text_field :priority, :value => @story.priority ? @story.priority : @default_priority
 
 .field
   = form.label :size
