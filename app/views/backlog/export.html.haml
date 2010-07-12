@@ -1,0 +1,18 @@
+%table{ :border => 2}
+  %tr
+    %th{ :bgcolor => "green" } Story Id
+    %th{ :bgcolor => "green" } Name
+    %th{ :bgcolor => "green" } Priority
+    %th{ :bgcolor => "green" } Size
+    %th{ :bgcolor => "green" } Description
+    
+  - @stories.each do |story|
+    - @color = 'lightblue' if story.finished?
+    - @color = 'white' if story.stopped?
+    - @color = 'yellow' if story.started?
+    %tr
+      %td{ :bgcolor => @color}= story.realid
+      %td{ :bgcolor => @color}= story.name
+      %td{ :bgcolor => @color}= !story.finished? ? story.priority : '-'
+      %td{ :bgcolor => @color}= story.size ? story.size : '-'
+      %td{ :bgcolor => @color}= story.description

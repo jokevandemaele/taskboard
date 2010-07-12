@@ -87,7 +87,15 @@ class ApplicationController < ActionController::Base
     
     def require_belong_to_team
       @team = Team.find(params[:team_id])
-      require_admin if !@team.users.include?(current_user)
+      require_organization_admin if !@team.users.include?(current_user)
+    end
+
+    def require_belong_to_project_or_team_or_admin
+      if(!params[:team_id].blank?)
+        require_belong_to_team
+      else
+        require_belong_to_project_or_admin
+      end
     end
     
     def store_location

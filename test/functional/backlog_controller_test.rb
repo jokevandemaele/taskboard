@@ -2,9 +2,17 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class BacklogControllerTest < ActionController::TestCase
   context "Permissions" do
-    should_require_belong_to_project_or_admin_on [:index]
-    should_require_belong_to_project_or_admin_on_with_team_id [:team]
+    should_require_belong_to_project_or_admin_on [:index, :export]
+    should_require_belong_to_project_or_admin_on_with_team_id [:team, :export]
   end
+
+  context "Backlog Routes" do
+    should_route :get, "/projects/1/backlog", :action => :index, :controller => :backlog, :project_id => 1
+    should_route :get, "/projects/1/backlog/export", :action => :export, :controller => :backlog, :project_id => 1
+    should_route :get, "/teams/1/backlog", :action => :team, :controller => :backlog, :team_id => 1
+    should_route :get, "/teams/1/backlog/export", :action => :export, :controller => :backlog, :team_id => 1
+  end
+
   context "If i'm a normal user" do
     setup do
       @organization = Factory(:organization)
@@ -31,15 +39,22 @@ class BacklogControllerTest < ActionController::TestCase
       end
       should_render_template :team
     end
+
+    context "if i do GET to :export in a project i belong to" do
+      setup do
+        get :export, :project_id => @project.to_param
+      end
+      should_render_template :export
+    end
+
+    context "if i do GET to :export in a team i belong to" do
+      setup do
+        get :export, :team_id => @team.to_param
+      end
+      should_render_template :export
+    end
   end
 
-  # context "If i'm a normal user" do
-  #   setup do
-  #     @user = Factory(:user)
-  #   end
-  # 
-  # end
-  # 
   # context "If i'm an organization admin" do
   #   setup do
   #     @organization = Factory(:organization)

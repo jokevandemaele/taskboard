@@ -10,7 +10,7 @@ module RequireBelongToProjectOrAdmiOnWithTeamId
       :team  => :get
     }
 
-    context "A not logged in user" do
+    context "With TeamId: A not logged in user" do
       setup do
         @user = not_logged_user
         @project = Factory(:project)
@@ -31,7 +31,7 @@ module RequireBelongToProjectOrAdmiOnWithTeamId
       end
     end
 
-    context "If I'm a normal user accessing a project i don't belong to" do
+    context "With TeamId: If I'm a normal user accessing a project i don't belong to" do
       setup do
         @organization = Factory(:organization)
         @team = @organization.teams.first

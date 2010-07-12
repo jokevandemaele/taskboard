@@ -30,6 +30,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :projects, :only => [] do |p|
     p.resources :taskboard, :only => [:index]
     p.resources :backlog, :only => [:index]
+    p.backlog_export 'backlog/export', :controller => :backlog, :action => :export
     p.resources :stories do |s|
      s.resources :tasks, :has_many => [ :statustags, :nametags ]
      s.task_start 'tasks/:id/start', :controller => :tasks, :action => :start, :conditions => { :method => :post }
@@ -46,9 +47,12 @@ ActionController::Routing::Routes.draw do |map|
     p.story_update_size 'stories/:id/update_size', :controller => :stories, :action => :update_size, :conditions => { :method => :post }
   end
   
-  map.resources :teams, :only => [], :has_many => :stories
-  map.taskboard_team_view 'teams/:team_id/taskboard', :controller => :taskboard, :action => :team
-  map.backlog_team_view 'teams/:team_id/backlog', :controller => :backlog, :action => :team
+  map.resources :teams, :only => [] do |t|
+    t.taskboard 'taskboard', :controller => :taskboard, :action => :team
+    t.backlog 'backlog', :controller => :backlog, :action => :team
+    t.backlog_export 'backlog/export', :controller => :backlog, :action => :export
+    t.resources :stories
+  end
   # Dev Tools
   map.connect 'dev_tools/:action', :controller => 'dev_tools'
 

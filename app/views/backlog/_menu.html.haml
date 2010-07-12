@@ -3,12 +3,16 @@
   %a{ :href => "#", :onclick => "collapseMenu('backlog');" }
   = image_tag 'menu_collapse.png', :border => 0, :style => "float:left;"
 
-  - link_to @view == :project ? project_taskboard_index_path(@project.to_param) : taskboard_team_view_path(@team.to_param) do
+  - link_to @view == :project ? project_taskboard_index_path(@project.to_param) : team_taskboard_path(@team.to_param) do
     .item.taskboard
 
   .item.new_story{ 'data-project-id' => @project.to_param, 'data-team-id' => @team.to_param }
+  - link_to @view == :project ? project_backlog_export_path(@project.to_param) : team_backlog_export_path(@team.to_param) do
+    .item.export_backlog
+    
   - link_to logout_path do
     .item.logout
+
 
   #menu_links
     = link_to image_tag('admin_section_small.png'), root_path, :title => "Admin Section"
@@ -18,7 +22,7 @@
   - if (@view == :project && (@project.teams.first.projects.size > 1 && !@project.guest_members.include?(current_user))) || @view == :team
     #menu_views
       = link_to image_tag('logo-projects-small.png'), project_backlog_index_path(:project_id => current_user.last_project || @team.projects.first), :class => !(@view == :team), :title => "Project View"
-      = link_to image_tag('logo-teams-small.png'), backlog_team_view_path(@team.to_param), :class => (@view == :team), :title => "Team View"
+      = link_to image_tag('logo-teams-small.png'), team_backlog_path(@team.to_param), :class => (@view == :team), :title => "Team View"
 
 #menu_expand
   %a{ :href => "#", :onclick => "expandMenu('backlog');", :style => "position: relative; top: 8px; left: 10px;" }

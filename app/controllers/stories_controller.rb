@@ -102,13 +102,4 @@ class StoriesController < ApplicationController
   def find_story
     @story = @project.stories.find(params[:id])
   end
-  
-  private
-  def require_belong_to_project_or_team_or_admin
-    @team = @team || Team.find(params[:team_id]) if(!params[:team_id].blank?)
-      
-    params[:organization_id] = @team.organization.id if @team
-    require_belong_to_project_or_admin if !(@team && @team.users.include?(current_user))
-  end
-  
 end
