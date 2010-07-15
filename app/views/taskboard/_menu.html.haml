@@ -5,7 +5,7 @@
   - action = (@view == :project) ? 'show' : 'team'
   - id = (@view == :project) ? @project.id : @team.id
 
-  - link_to (@view == :project) ? project_backlog_index_path(:project_id => @project.to_param) :  team_taskboard_path(@team.to_param) do
+  - link_to (@view == :project) ? project_backlog_index_path(:project_id => @project.to_param) :  team_backlog_path(@team.to_param) do
     .item.backlog
 
   = image_tag 'menu_task_add.png' ,  :border => 0 , :id => 'taskboard_menu_task_add',  :class => "task-add"
